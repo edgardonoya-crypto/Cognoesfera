@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corpus Vivo · Paradigma Aleph</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      color: #18201e;
+      min-height: 100vh;
+      padding: 40px 24px 64px;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(109,188,173,.14), transparent 28%),
+        radial-gradient(circle at 85% 18%, rgba(132,100,205,.10), transparent 24%),
+        radial-gradient(circle at 50% 80%, rgba(83,177,210,.08), transparent 30%),
+        linear-gradient(180deg, #f7f3e8, #efe9da);
+    }
+
+    .container { max-width: 580px; margin: 0 auto; }
+
+    .header { text-align: center; margin-bottom: 32px; }
+    .logo {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(72,170,152,.85), rgba(132,100,205,.75));
+      margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      box-shadow: 0 8px 28px rgba(72,170,152,.25);
+    }
+    .header h1 { font-size: 1.45rem; font-weight: 650; letter-spacing: -0.04em; margin-bottom: 5px; }
+    .header p  { color: #66706d; font-size: 0.88rem; }
+
+    /* Tipo tabs */
+    .tipo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .tipo-btn {
+      padding: 12px 10px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(34,58,54,.10);
+      background: rgba(255,255,255,.55);
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #3a4a46;
+      cursor: pointer;
+      text-align: center;
+      transition: border-color 180ms, background 180ms, color 180ms;
+    }
+    .tipo-btn .icon { display: block; font-size: 1.2rem; margin-bottom: 4px; }
+    .tipo-btn:hover { border-color: rgba(83,177,210,.40); background: rgba(255,255,255,.75); }
+    .tipo-btn.active {
+      border-color: rgba(72,170,152,.55);
+      background: rgba(72,170,152,.10);
+      color: #1a5a4a;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.74), rgba(255,255,255,.54));
+      border: 1px solid rgba(34,58,54,.09);
+      border-radius: 26px;
+      box-shadow: 0 20px 56px rgba(27,42,38,.09);
+      padding: 36px 32px;
+    }
+
+    .section-label {
+      font-size: 0.70rem; font-weight: 600; letter-spacing: 0.10em;
+      text-transform: uppercase; color: #66706d;
+      margin: 24px 0 12px;
+    }
+    .section-label:first-of-type { margin-top: 0; }
+
+    .field { margin-bottom: 13px; }
+
+    label { display: block; font-size: 0.84rem; font-weight: 500; color: #3a4a46; margin-bottom: 5px; }
+
+    input[type="text"], select, textarea {
+      width: 100%; padding: 11px 14px;
+      border-radius: 13px; border: 1px solid rgba(34,58,54,.10);
+      background: rgba(255,255,255,.62);
+      font-family: inherit; font-size: 0.94rem; color: #18201e;
+      outline: none; transition: border-color 200ms, box-shadow 200ms;
+      appearance: none; -webkit-appearance: none;
+    }
+    input[type="text"]:focus, select:focus, textarea:focus {
+      border-color: rgba(83,177,210,.50);
+      box-shadow: 0 0 0 3px rgba(83,177,210,.10);
+    }
+    textarea { resize: vertical; min-height: 120px; line-height: 1.55; }
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2366706d' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center;
+      padding-right: 36px; cursor: pointer;
+    }
+
+    .hint { font-size: 0.77rem; color: #8a9a96; margin-top: 5px; }
+
+    .divider { border: none; border-top: 1px solid rgba(34,58,54,.08); margin: 22px 0; }
+
+    .submit-btn {
+      width: 100%; padding: 13px; border-radius: 14px; border: none;
+      background: linear-gradient(135deg, rgba(72,170,152,.90), rgba(83,177,210,.85));
+      color: #fff; font-family: inherit; font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: opacity 200ms, transform 100ms;
+    }
+    .submit-btn:hover { opacity: 0.88; }
+    .submit-btn:active { transform: scale(0.99); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .status {
+      margin-top: 13px; padding: 10px 14px; border-radius: 10px;
+      font-size: 0.87rem; text-align: center; display: none;
+    }
+    .status.success { display: block; background: rgba(72,170,152,.12); color: rgba(30,100,80,.85); border: 1px solid rgba(72,170,152,.22); }
+    .status.error   { display: block; background: rgba(180,60,60,.07); color: rgba(160,40,40,.85); border: 1px solid rgba(180,60,60,.15); }
+
+    .footer-note { text-align: center; margin-top: 24px; font-size: 0.79rem; color: #8a9a96; }
+
+    @media (max-width: 460px) {
+      .card { padding: 24px 18px; }
+      .tipo-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="logo">✦</div>
+    <h1>Corpus Vivo</h1>
+    <p>Paradigma Aleph · Registro de conocimiento</p>
+  </div>
+
+  <!-- Selector de tipo -->
+  <div class="tipo-grid">
+    <button class="tipo-btn active" data-tipo="concepto">
+      <span class="icon">◈</span>Concepto nuevo
+    </button>
+    <button class="tipo-btn" data-tipo="senal_debil">
+      <span class="icon">◌</span>Señal débil
+    </button>
+    <button class="tipo-btn" data-tipo="pendiente">
+      <span class="icon">◇</span>Pendiente
+    </button>
+    <button class="tipo-btn" data-tipo="actualizacion">
+      <span class="icon">↻</span>Actualización
+    </button>
+  </div>
+
+  <div class="card">
+    <form id="corpusForm">
+      <input type="hidden" id="tipo" name="tipo" value="concepto" />
+
+      <p class="section-label">Identificación</p>
+
+      <div class="field">
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" name="titulo" placeholder="Nombre del concepto, señal o pendiente…" required />
+      </div>
+
+      <div class="field">
+        <label for="autor">Autor / Cognoesfera</label>
+        <input type="text" id="autor" name="autor" placeholder="Nombre o Cognoesfera de origen…" required />
+      </div>
+
+      <hr class="divider" />
+      <p class="section-label" id="contenidoLabel">Desarrollo</p>
+
+      <div class="field">
+        <textarea id="contenido" name="contenido" placeholder="Describí el concepto con la profundidad que tenga hoy…" required></textarea>
+        <p class="hint" id="contenidoHint">No necesita estar completo — el corpus crece con lo que emerge.</p>
+      </div>
+
+      <hr class="divider" />
+
+      <button type="submit" class="submit-btn" id="submitBtn">Registrar en el corpus</button>
+      <div class="status" id="statusMsg"></div>
+    </form>
+  </div>
+
+  <p class="footer-note">Destino automático según tipo · Rama main · edgardonoya-crypto/Cognoesfera</p>
+
+</div>
+
+<script>
+  const TIPOS = {
+    concepto:      { label: 'Desarrollo',    hint: 'No necesita estar completo — el corpus crece con lo que emerge.',       placeholder: 'Describí el concepto con la profundidad que tenga hoy…' },
+    senal_debil:   { label: 'Qué observás',  hint: 'Una señal débil es un patrón que aún no tiene nombre completo.',         placeholder: '¿Qué estás percibiendo? ¿Por qué te parece relevante?…' },
+    pendiente:     { label: 'Descripción',   hint: 'Incluí el contexto necesario para retomarlo en otra sesión.',            placeholder: '¿Qué hay que hacer y por qué importa?…' },
+    actualizacion: { label: 'Qué cambia',    hint: 'Indicá qué concepto o documento se actualiza y en qué sentido.',        placeholder: 'Concepto a actualizar y naturaleza del cambio…' },
+  };
+
+  const tipoInput    = document.getElementById('tipo');
+  const contenido    = document.getElementById('contenido');
+  const label        = document.getElementById('contenidoLabel');
+  const hint         = document.getElementById('contenidoHint');
+  const form         = document.getElementById('corpusForm');
+  const btn          = document.getElementById('submitBtn');
+  const status       = document.getElementById('statusMsg');
+
+  document.querySelectorAll('.tipo-btn').forEach(function(b) {
+    b.addEventListener('click', function() {
+      document.querySelectorAll('.tipo-btn').forEach(function(x) { x.classList.remove('active'); });
+      b.classList.add('active');
+      const t = b.dataset.tipo;
+      tipoInput.value = t;
+      label.textContent = TIPOS[t].label;
+      hint.textContent  = TIPOS[t].hint;
+      contenido.placeholder = TIPOS[t].placeholder;
+    });
+  });
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Registrando…';
+    status.className = 'status';
+
+    const data = {
+      tipo:      tipoInput.value,
+      titulo:    document.getElementById('titulo').value.trim(),
+      autor:     document.getElementById('autor').value.trim(),
+      contenido: contenido.value.trim(),
+    };
+
+    try {
+      const res = await fetch('/api/corpus-commit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        const r = await res.json();
+        status.textContent = '✦ Registrado en ' + r.path;
+        status.className = 'status success';
+        form.reset();
+        document.querySelectorAll('.tipo-btn').forEach(function(x) { x.classList.remove('active'); });
+        document.querySelector('[data-tipo="concepto"]').classList.add('active');
+        tipoInput.value = 'concepto';
+        label.textContent = TIPOS.concepto.label;
+        hint.textContent  = TIPOS.concepto.hint;
+        contenido.placeholder = TIPOS.concepto.placeholder;
+      } else {
+        const r = await res.json().catch(() => ({}));
+        status.textContent = r.error || 'Error al registrar. Intentá de nuevo.';
+        status.className = 'status error';
+      }
+    } catch {
+      status.textContent = 'Sin conexión. Verificá tu red e intentá de nuevo.';
+      status.className = 'status error';
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Registrar en el corpus';
+  });
+</script>
+
+</body>
+</html>
