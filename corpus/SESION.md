@@ -311,3 +311,45 @@ En la economía del conocimiento, la ventaja reside en la capacidad de aprender 
 
 *SESION.md · Paradigma Aleph · Generado por Claude · Marzo 2026*
 *Próxima actualización: al cierre de la sesión, vía Claude Code*
+
+---
+
+# SECCIÓN C — PROTOCOLO DE CIERRE DE SESIÓN
+*Esta sección es para Claude Code. No es contexto de sesión.*
+
+Cuando Edgardo escriba "Actualizá corpus/SESION.md con lo que emergió hoy y hacé commit", hacer exactamente esto:
+
+## C1. Qué actualizar
+
+**1. Encabezado** — actualizar número de versión y fecha.
+
+**2. Sección A2 (Estado actual)** — si el estado vital del paradigma cambió, o si hay nueva información sobre fechas o nomenclatura, actualizarlo.
+
+**3. Sección A6 (Pendientes)** — 
+- Tachar con ~~tachado~~ los pendientes que se resolvieron hoy
+- Agregar al final los pendientes nuevos que emergieron
+- Mantener el orden de prioridad
+
+**4. Sección A8 (Señales vivas)** — agregar las señales nuevas que emergieron en la sesión. Formato:
+```
+- **[Nombre de la señal]** — descripción breve de qué emergió y por qué es relevante. Fecha: DD/MM/YYYY
+```
+
+**5. No tocar** — Sección B (documentos de referencia) y Sección C (este protocolo). Solo se actualizan cuando Edgardo lo pide explícitamente.
+
+## C2. El commit
+
+Después de actualizar el archivo, hacer commit con:
+```
+git add corpus/SESION.md
+git commit -m "Cierre de sesión [DD/MM/YYYY] — [resumen de 5 palabras de lo que emergió]"
+git push origin master:main
+```
+
+## C3. Confirmar
+
+Al terminar, decirle a Edgardo:
+- Qué secciones se actualizaron
+- Cuáles pendientes se tacharon
+- Cuáles señales nuevas se agregaron
+- El mensaje del commit
