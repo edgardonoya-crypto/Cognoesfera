@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v1 · Marzo 2026*
+*Versión actual: v2 · 28 Marzo 2026*
 
 ---
 
@@ -103,6 +103,8 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 - Login real con Supabase auth funcionando
 - Dashboard con Cognoesferas conectadas a Supabase
 - Dos Cognoesferas visibles: Quanam Lab (Arquitecto) y Menthor (Investigador)
+- **`/corpus-form`** — formulario Next.js para registrar conceptos, señales débiles, pendientes y actualizaciones directamente al repo GitHub vía API route segura (`app/api/corpus-commit/route.ts`)
+- **`GITHUB_TOKEN`** configurado en `.env.local` y en Vercel (variable de entorno server-side)
 
 **Sistema B** — aplicación separada con datos reales: usuarios, duendes, 5 roles formados, Cognoesfera en constitución con organizadores IAC 2026. Hay un zip disponible para explorar. **Pendiente de sesión.**
 
@@ -118,6 +120,7 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 6. **Protocolo de registro de conversaciones** — cómo venimos / transformaciones / cómo nos vamos / qué aprendimos
 7. **Limpiar referencias a "Quanam"** en documentos
 8. **Definir estructura del archivo contexto único** — ✅ resuelto: este archivo es ese contexto
+9. **Verificar /corpus-form en producción** — confirmar que el formulario commitea correctamente desde Vercel con GITHUB_TOKEN activo
 
 ---
 
@@ -139,6 +142,7 @@ Actualizá corpus/SESION.md con lo que emergió hoy y hacé commit
 - **Protocolo mínimo de registro de conversación** — cómo venimos / transformaciones / cómo nos vamos / qué aprendimos. Concepto que merece entrar al Corpus Madre.
 - **Inteligencia verdadera de Krishnamurti** — incorporada parcialmente, pendiente de profundizar con más material.
 - **Los tres documentos del conjunto de gramáticas** — solo se completó la introducción.
+- **El corpus como organismo que se alimenta desde la app** — el formulario /corpus-form materializa el ciclo autopoiético: lo que emerge en sesión entra al corpus directamente desde la interfaz, sin fricción técnica. Fecha: 28/03/2026
 
 ---
 
