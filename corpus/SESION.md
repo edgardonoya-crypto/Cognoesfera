@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v5 · 29 Marzo 2026*
+*Versión actual: v6 · 29 Marzo 2026*
 
 ---
 
@@ -112,8 +112,8 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 
 ## A6. Pendientes activos (en orden de prioridad)
 
-1. **Ver el Sistema B** — abrir el zip de la aplicación existente
-2. **Sesión de revisión de arquitectura** de la aplicación antes de seguir construyendo
+1. ~~**Ver el Sistema B**~~ — ✅ explorado: Payload CMS + PostgreSQL, 16 colecciones, schema completo relevado
+2. ~~**Sesión de revisión de arquitectura**~~ — ✅ arquitectura nueva definida: tablas emergencias, pulsos_vitalidad, resonancias + campo vital_state en organizations
 3. **Configurar GitHub Action** — `.github/workflows/corpus-update.yml`
 4. **Configurar n8n** — para automatización del corpus
 5. **Los tres documentos del conjunto de gramáticas** — Documento 1 ontológico, Documento 2 ejemplos, Documento 3 periférico
@@ -126,6 +126,9 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 12. **Crear `relatos_corpus_vivo.md`** — documento para los relatos madre del paradigma
 13. **Construir los relatos madre** — candidatos: el bonsái, el café con Borges/Francisco
 14. **Explorar el origen de la saga** — conversación pendiente sobre las raíces familiares y generacionales que preceden al sobrino. Posiblemente con los abuelos.
+15. **Próxima sesión: antecedentes de EDHUCA y las 3 organizaciones** — contexto para el primer caso real de la nueva arquitectura
+16. **Definir registro mínimo de Fundación Corpus antes del 17 de abril** — fecha límite: sesión con EDHUCA
+17. **Explorar documento Plotino/Alephitos para el corpus** — posible ancla filosófica para la nueva sección ontológica
 
 ---
 
@@ -151,7 +154,7 @@ Esto debe incluir:
 
 *Esta sección tiene tres categorías. Las señales custodiadas viven también en `corpus/documentos/senales_custodiadas.md` con descripción completa.*
 
-### Señales custodiadas (5)
+### Señales custodiadas (9)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
@@ -161,6 +164,10 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **Los instructivos situados como categoría fractal** — cada nivel del paradigma tiene su propio instructivo situado. Es el equivalente fractal del Corpus Madre para los instructivos operativos. Fecha: 29/03/2026
 - **El Corpus como Códice** — el corpus podría ser el *Códice Alephicum*, un objeto vivo que muestra cosas diferentes a cada lector según su historia, rol y momento. Señal custodiada. Fecha: 29/03/2026
 - **La saga narrativa del Paradigma Aleph** — universo narrativo en construcción con cuatro registros: ficción narrativa, prosa poética, ensayo con narrativa, y voz originaria. Múltiples autores posibles. Objetos y personajes recurrentes. Tiene raíces familiares y generacionales que todavía no fueron contadas — el origen no empieza con el sobrino sino antes, posiblemente con los abuelos. Señal custodiada. Fecha: 29/03/2026
+- **Fundación Soma y Fundación Corpus** — nombres para los dos sistemas paralelos: Soma es la red operativa urgente, Corpus es el campo festina lente. Raíz latina compartida, no elegida sino descubierta. Fecha: 29/03/2026
+- **Plotino como ancla ontológica** — el ser humano ES el punto de encuentro entre lo infinito y lo finito. Fundamento filosófico de la dualidad Soma/Corpus. Fecha: 29/03/2026
+- **Capra como fundamento científico** — la red viva autopoiética describe cómo opera la vida. Complementa a Plotino desde la biología sistémica. Fecha: 29/03/2026
+- **Schema de Fundación Soma ya tiene estructura fractal** — groups con parent_group_id en el Sistema B implementa sin saberlo la arquitectura fractal del paradigma. Fecha: 29/03/2026
 
 ### Señales vivas pendientes de desarrollar (3)
 Conceptos o procesos que merecen atención pero todavía no están listos para ser custodiados.
@@ -191,11 +198,16 @@ Momentos significativos del proceso que vale la pena recordar.
 - /corpus-form funcionando para registrar conceptos vía GitHub API
 - Pendiente: verificar /corpus-form en producción
 
-**Sistema B:**
-- Aplicación separada con datos reales: usuarios, duendes, 5 roles formados, Cognoesfera en constitución con organizadores IAC 2026
-- Desarrollado en Payload CMS (Node.js + TypeScript)
-- Disponible como zip — repositorio separado
-- Pendiente de análisis profundo
+**Sistema B (Fundación Soma):**
+- Payload CMS + PostgreSQL + Next.js. 16 colecciones relevadas. Schema completo disponible.
+- Tablas clave: organizations, members, groups (fractal con parent_group_id), meetings, duende_conversations, protocols, initiatives, documents, messages
+- Primer caso real: EDHUCA, sesión ~17 de abril
+
+**Arquitectura nueva — decisiones tomadas:**
+- Tablas nuevas a agregar: `emergencias`, `pulsos_vitalidad`, `resonancias`
+- Campo nuevo en `organizations`: `vital_state` (estado vital de la Cognoesfera)
+- Estas tablas materializan la Matriz de Vitalidad en el schema
+- La estructura fractal ya existe en `groups` — se preserva y extiende
 
 **Objetivo de la próxima fase de desarrollo:**
 Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y el paradigma, incorporando lo aprendido en más de un año de desarrollo del Sistema B. El resultado debe ser coherente con la dualidad humano-digital del paradigma — el barco y el astillero construyéndose mutuamente. La arquitectura debe estar preparada para incorporar MCP, agentes y las innovaciones que emergen en el ecosistema de IAG.
