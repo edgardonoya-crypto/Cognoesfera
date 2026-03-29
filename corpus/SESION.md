@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v2 · 28 Marzo 2026*
+*Versión actual: v3 · 28 Marzo 2026*
 
 ---
 
@@ -33,7 +33,7 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 **Fecha límite clave:** IAC 2026, noviembre, Punta del Este
 
 **Nomenclatura vigente:**
-- **Corpus Madre** — los fundamentos agnósticos (27 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
+- **Corpus Madre** — los fundamentos agnósticos (30 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
 - **Corpus Universal** — el campo total del conocimiento vivo del paradigma en todos sus niveles y expresiones
 - **Duende** — la figura que encarna el metabolismo cognitivo asistido (puede ser una IA, una persona, un protocolo)
 - **IAH** — Inteligencia Aumentada Humanista: composición entre percepción humana y capacidad del Duende
@@ -121,6 +121,7 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 7. **Limpiar referencias a "Quanam"** en documentos
 8. **Definir estructura del archivo contexto único** — ✅ resuelto: este archivo es ese contexto
 9. **Verificar /corpus-form en producción** — confirmar que el formulario commitea correctamente desde Vercel con GITHUB_TOKEN activo
+10. **Actualizar Sección B** — incorporar los 3 nuevos conceptos (Cognobits, Memoria Viva Aumentada, El proceso de transformación) y la reformulación del concepto 29 (inteligencia verdadera)
 
 ---
 
@@ -143,6 +144,8 @@ Actualizá corpus/SESION.md con lo que emergió hoy y hacé commit
 - **Inteligencia verdadera de Krishnamurti** — incorporada parcialmente, pendiente de profundizar con más material.
 - **Los tres documentos del conjunto de gramáticas** — solo se completó la introducción.
 - **El corpus como organismo que se alimenta desde la app** — el formulario /corpus-form materializa el ciclo autopoiético: lo que emerge en sesión entra al corpus directamente desde la interfaz, sin fricción técnica. Fecha: 28/03/2026
+- **El ciclo autopoiético del corpus se completó por primera vez** — en esta sesión el corpus creció de 27 a 30 conceptos usando el propio sistema: conceptos emergidos en conversación fueron incorporados al repo vía Claude Code. El sistema se alimentó a sí mismo. Fecha: 28/03/2026
+- **Señales custodiadas como categoría propia** — El Campo de Inteligencia Aleph y El Gran Campo no entraron al Corpus Madre sino a `senales_custodiadas.md`: conceptos que resuenan pero aún no tienen verificación suficiente. Nueva capa del corpus entre señal débil y concepto consolidado. Fecha: 28/03/2026
 
 ---
 
