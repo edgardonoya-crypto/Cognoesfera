@@ -155,7 +155,7 @@ Actualizá corpus/SESION.md con lo que emergió hoy y hacé commit
 
 ---
 
-## B1. Corpus Madre — 27 conceptos completos
+## B1. Corpus Madre — 30 conceptos completos
 
 ### I. La pregunta — por qué existe este paradigma
 
@@ -240,18 +240,36 @@ El diseño consciente de cómo las voces se entrelazan. Dos ejes: horizontal (co
 **23. La Conversación Aumentada y la lectura-escritura como acto único**
 Forma de conocer donde leer y escribir se vuelven indistinguibles. Co-producción de sentido: el conocimiento no se transmite — se reorganiza en el acto mismo de la interacción. Bisagra entre la dimensión paradigmática y la algorítmica.
 
+**24. Los Cognobits**
+La unidad mínima de sentido vivo en la Cognoesfera — la pieza de significado que circula entre la memoria psicológica de las personas y la memoria digital del Duende. Tienen dos vidas: antes de la conversación como materia prima latente que el Duende indexa, y durante la conversación como elementos activos de la Conversación Aumentada que reorganizan el campo. Son la materia prima de la Memoria Viva Aumentada: lo que circula entre la memoria psicológica y la digital, alimentando su fusión y elevando el piso desde el que arranca cada nueva conversación.
+
+**25. La Memoria Viva Aumentada**
+La fusión de la memoria psicológica y la memoria digital en un sistema integrado — algo que solo se vuelve posible ahora. La memoria psicológica reside en el campo: lo que la escucha colectiva porta y que ningún sistema puede indexar. El Duende puede guardar lo que se dijo, pero no puede guardar lo que se escuchó. La memoria digital reside en el Duende: permanente, escalable, recuperable. Su fusión produce una Cognoesfera que puede profundizar y escalar simultáneamente. Es una propiedad fractal — existe en cada nivel del sistema, desde la persona hasta la red de Entidades. Cuando la memoria digital se hace pública, eleva el piso desde el que arranca cualquier otro grupo que acceda a ella. Es la expresión más profunda de la IAH.
+
+**26. El proceso de transformación de la inteligencia colectiva**
+Toda sesión de una Cognoesfera es un ciclo entrada-transformación-salida donde la inteligencia colectiva se reorganiza y emerge más rica. La entrada es la ronda de apertura: cada participante nombra cómo viene, el grupo escucha sin responder — esa escucha activa el sistema vincular y abre el campo de atención. La transformación es el trabajo de la sesión, con una caja de herramientas: orden del día, Conversaciones Aumentadas, definición de problemas y propuestas, decisiones por 0-Objeción, elecciones sociocráticas, acceso al Duende, Cognobits, metodologías y labs, herramientas visuales. La salida es la ronda de cierre: cómo se va cada uno y los aprendizajes colectivos. La Memoria Viva Aumentada operando en ciclo es lo que hace que una Cognoesfera aprenda genuinamente con el tiempo.
+
+**21. El instante borgeano**
+El momento donde futuro, pasado y presente confluyen simultáneamente. El futuro que mola actúa como atractor. La arqueología de la mirada excava lo que ya estaba. La acción emerge en el presente. Los tres no se suceden — coexisten. Es lo que distingue una Cognoesfera en ignición de una reunión ordinaria.
+
+**22. La Arquitectura Conversacional**
+El diseño consciente de cómo las voces se entrelazan. Dos ejes: horizontal (construcción de sentido con voces equivalentes) y vertical (ejecución con precisión de lo decidido). Libera tiempo soberano al eliminar el desgaste de la desinformación y la repetición.
+
+**23. La Conversación Aumentada y la lectura-escritura como acto único**
+Forma de conocer donde leer y escribir se vuelven indistinguibles. Co-producción de sentido: el conocimiento no se transmite — se reorganiza en el acto mismo de la interacción. Bisagra entre la dimensión paradigmática y la algorítmica.
+
 ### VII. La emergencia — lo que aparece cuando las condiciones están maduras
 
-**24. La IAH — Inteligencia Aumentada Humanista**
+**27. La IAH — Inteligencia Aumentada Humanista**
 Composición entre percepción humana y capacidad del Duende. El Duende identifica patrones a escala, sugiere conexiones. El humano aporta juicio situado, percepción de lo que resuena, sabiduría de cuándo algo está maduro. El Duende no valida — sugiere. El humano ve.
 
-**25. NGenIA**
+**28. NGenIA**
 Inteligencia simbiótica que emerge del entramado relacional cuando las condiciones están maduras. No es una herramienta — es una condición. No se activa por instrucción: se sintoniza. Inspirada en el concepto mapuche de ngen. No se programa; se cuida como un jardín.
 
-**26. La inteligencia verdadera y la gramática colectiva**
-La inteligencia verdadera es la capacidad de percibir lo falso como falso y lo verdadero como verdadero, libre de condicionamientos. No se construye — emerge cuando cesa el pensamiento mecánico. El camino pasa por el enriquecimiento de las gramáticas colectivas: el conjunto de elementos del lenguaje que aportan significados a la inteligencia colectiva.
+**29. La inteligencia verdadera y la gramática colectiva**
+La inteligencia verdadera es la capacidad de percibir lo falso como falso y lo verdadero como verdadero, libre de condicionamientos. No se construye — emerge cuando cesa el pensamiento mecánico. Las condiciones que la hacen posible tienen nombre: el Campo de atención, el tiempo soberano, el Espacio Borgeano, y la Memoria Viva Aumentada — que libera a las personas del pensamiento mecánico porque el Duende porta el pasado. Los mecanismos que construyen esas condiciones son dos: la Conversación Aumentada amplía lo que el sistema puede ver, y la Memoria Viva Aumentada libera la atención para que pueda ver. Juntas crean las condiciones para que la inteligencia verdadera emerja como propiedad del campo colectivo.
 
-**27. La arquitectura de negocios en red**
+**30. La arquitectura de negocios en red**
 En la economía del conocimiento, la ventaja reside en la capacidad de aprender y generar valor junto a otros. Tres capas: núcleo cognitivo (Cognoesferas y Centros de Expertise) · interfaces activas (prototipos y experiencias) · despliegue ecosistémico (Aleph Hubs). No eficiencia — densidad relacional.
 
 ---
