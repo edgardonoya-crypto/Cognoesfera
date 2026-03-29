@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v3 · 28 Marzo 2026*
+*Versión actual: v4 · 29 Marzo 2026*
 
 ---
 
@@ -121,7 +121,8 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 7. **Limpiar referencias a "Quanam"** en documentos
 8. **Definir estructura del archivo contexto único** — ✅ resuelto: este archivo es ese contexto
 9. **Verificar /corpus-form en producción** — confirmar que el formulario commitea correctamente desde Vercel con GITHUB_TOKEN activo
-10. **Actualizar Sección B** — incorporar los 3 nuevos conceptos (Cognobits, Memoria Viva Aumentada, El proceso de transformación) y la reformulación del concepto 29 (inteligencia verdadera)
+10. ~~**Actualizar Sección B**~~ — ✅ incorporados los 3 nuevos conceptos y reformulación del concepto 29
+11. **Incorporar `instructivo_operativo_edgardo.md` al protocolo de sesión** — revisar si alguna instrucción operativa debe subir a A7 o quedar solo en el documento situado
 
 ---
 
@@ -146,6 +147,9 @@ Actualizá corpus/SESION.md con lo que emergió hoy y hacé commit
 - **El corpus como organismo que se alimenta desde la app** — el formulario /corpus-form materializa el ciclo autopoiético: lo que emerge en sesión entra al corpus directamente desde la interfaz, sin fricción técnica. Fecha: 28/03/2026
 - **El ciclo autopoiético del corpus se completó por primera vez** — en esta sesión el corpus creció de 27 a 30 conceptos usando el propio sistema: conceptos emergidos en conversación fueron incorporados al repo vía Claude Code. El sistema se alimentó a sí mismo. Fecha: 28/03/2026
 - **Señales custodiadas como categoría propia** — El Campo de Inteligencia Aleph y El Gran Campo no entraron al Corpus Madre sino a `senales_custodiadas.md`: conceptos que resuenan pero aún no tienen verificación suficiente. Nueva capa del corpus entre señal débil y concepto consolidado. Fecha: 28/03/2026
+- **Transducción de formatos** — el corpus vive en múltiples formatos (conversación, markdown, app, instructivo) y la capacidad de pasar de uno a otro sin perder sentido es una función crítica del sistema. Señal custodiada. Fecha: 29/03/2026
+- **Las dos dimensiones del Cognobit** — antes de la conversación (materia prima latente indexada por el Duende) y durante la conversación (elemento activo que reorganiza el campo). Esta dualidad es más profunda de lo que el concepto 24 captura actualmente. Señal custodiada. Fecha: 29/03/2026
+- **Los instructivos situados como categoría fractal** — `instructivo_operativo_edgardo.md` establece una nueva categoría: el instructivo situado, que vive en el nivel personal pero tiene estructura que puede replicarse en cada Cognoesfera y Entidad. Es el lugar donde viven las instrucciones de cómo hacer cada cosa. Señal custodiada. Fecha: 29/03/2026
 
 ---
 
