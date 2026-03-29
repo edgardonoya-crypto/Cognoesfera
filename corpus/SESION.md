@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v4 · 29 Marzo 2026*
+*Versión actual: v5 · 29 Marzo 2026*
 
 ---
 
@@ -33,7 +33,7 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 **Fecha límite clave:** IAC 2026, noviembre, Punta del Este
 
 **Nomenclatura vigente:**
-- **Corpus Madre** — los fundamentos agnósticos (30 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
+- **Corpus Madre** — los fundamentos agnósticos (31 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
 - **Corpus Universal** — el campo total del conocimiento vivo del paradigma en todos sus niveles y expresiones
 - **Duende** — la figura que encarna el metabolismo cognitivo asistido (puede ser una IA, una persona, un protocolo)
 - **IAH** — Inteligencia Aumentada Humanista: composición entre percepción humana y capacidad del Duende
@@ -123,6 +123,9 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 9. **Verificar /corpus-form en producción** — confirmar que el formulario commitea correctamente desde Vercel con GITHUB_TOKEN activo
 10. ~~**Actualizar Sección B**~~ — ✅ incorporados los 3 nuevos conceptos y reformulación del concepto 29
 11. **Incorporar `instructivo_operativo_edgardo.md` al protocolo de sesión** — revisar si alguna instrucción operativa debe subir a A7 o quedar solo en el documento situado
+12. **Crear `relatos_corpus_vivo.md`** — documento para los relatos madre del paradigma
+13. **Construir los relatos madre** — candidatos: el bonsái, el café con Borges/Francisco
+14. **Explorar el origen de la saga** — conversación pendiente sobre las raíces familiares y generacionales que preceden al sobrino. Posiblemente con los abuelos.
 
 ---
 
@@ -149,8 +152,10 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
 - **El Gran Campo** — la inteligencia que trasciende y precede a todas las redes. Los grupos no la crean — la sintonizan cuando alcanzan suficiente coherencia interna. Fecha: 28/03/2026
 - **Transducción de formatos** — el mecanismo por el cual el corpus se multiplica en distintas expresiones para circular en distintos contextos. Fecha: 29/03/2026
-- **Las dos dimensiones del Cognobit** — humana y digital como naturalezas distintas del mismo concepto. Fecha: 29/03/2026
+- **Las dos dimensiones del Cognobit** — ✅ incorporada dentro del concepto 24. Fecha: 29/03/2026
 - **Los instructivos situados como categoría fractal** — cada nivel del paradigma tiene su propio instructivo situado. Es el equivalente fractal del Corpus Madre para los instructivos operativos. Fecha: 29/03/2026
+- **El Corpus como Códice** — el corpus podría ser el *Códice Alephicum*, un objeto vivo que muestra cosas diferentes a cada lector según su historia, rol y momento. Señal custodiada. Fecha: 29/03/2026
+- **La saga narrativa del Paradigma Aleph** — universo narrativo en construcción con cuatro registros: ficción narrativa, prosa poética, ensayo con narrativa, y voz originaria. Múltiples autores posibles. Objetos y personajes recurrentes. Tiene raíces familiares y generacionales que todavía no fueron contadas — el origen no empieza con el sobrino sino antes, posiblemente con los abuelos. Señal custodiada. Fecha: 29/03/2026
 
 ### Señales vivas pendientes de desarrollar (3)
 Conceptos o procesos que merecen atención pero todavía no están listos para ser custodiados.
