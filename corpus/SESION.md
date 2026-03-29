@@ -139,17 +139,31 @@ Actualizá corpus/SESION.md con lo que emergió hoy y hacé commit
 
 ---
 
-## A8. Señales vivas (pendientes de desarrollar)
+## A8. Señales vivas
+
+*Esta sección tiene tres categorías. Las señales custodiadas viven también en `corpus/documentos/senales_custodiadas.md` con descripción completa.*
+
+### Señales custodiadas (5)
+Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
+
+- **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
+- **El Gran Campo** — la inteligencia que trasciende y precede a todas las redes. Los grupos no la crean — la sintonizan cuando alcanzan suficiente coherencia interna. Fecha: 28/03/2026
+- **Transducción de formatos** — el mecanismo por el cual el corpus se multiplica en distintas expresiones para circular en distintos contextos. Fecha: 29/03/2026
+- **Las dos dimensiones del Cognobit** — humana y digital como naturalezas distintas del mismo concepto. Fecha: 29/03/2026
+- **Los instructivos situados como categoría fractal** — cada nivel del paradigma tiene su propio instructivo situado. Es el equivalente fractal del Corpus Madre para los instructivos operativos. Fecha: 29/03/2026
+
+### Señales vivas pendientes de desarrollar (3)
+Conceptos o procesos que merecen atención pero todavía no están listos para ser custodiados.
 
 - **Protocolo mínimo de registro de conversación** — cómo venimos / transformaciones / cómo nos vamos / qué aprendimos. Concepto que merece entrar al Corpus Madre.
-- **Inteligencia verdadera de Krishnamurti** — incorporada parcialmente, pendiente de profundizar con más material.
-- **Los tres documentos del conjunto de gramáticas** — solo se completó la introducción.
-- **El corpus como organismo que se alimenta desde la app** — el formulario /corpus-form materializa el ciclo autopoiético: lo que emerge en sesión entra al corpus directamente desde la interfaz, sin fricción técnica. Fecha: 28/03/2026
-- **El ciclo autopoiético del corpus se completó por primera vez** — en esta sesión el corpus creció de 27 a 30 conceptos usando el propio sistema: conceptos emergidos en conversación fueron incorporados al repo vía Claude Code. El sistema se alimentó a sí mismo. Fecha: 28/03/2026
-- **Señales custodiadas como categoría propia** — El Campo de Inteligencia Aleph y El Gran Campo no entraron al Corpus Madre sino a `senales_custodiadas.md`: conceptos que resuenan pero aún no tienen verificación suficiente. Nueva capa del corpus entre señal débil y concepto consolidado. Fecha: 28/03/2026
-- **Transducción de formatos** — el corpus vive en múltiples formatos (conversación, markdown, app, instructivo) y la capacidad de pasar de uno a otro sin perder sentido es una función crítica del sistema. Señal custodiada. Fecha: 29/03/2026
-- **Las dos dimensiones del Cognobit** — antes de la conversación (materia prima latente indexada por el Duende) y durante la conversación (elemento activo que reorganiza el campo). Esta dualidad es más profunda de lo que el concepto 24 captura actualmente. Señal custodiada. Fecha: 29/03/2026
-- **Los instructivos situados como categoría fractal** — `instructivo_operativo_edgardo.md` establece una nueva categoría: el instructivo situado, que vive en el nivel personal pero tiene estructura que puede replicarse en cada Cognoesfera y Entidad. Es el lugar donde viven las instrucciones de cómo hacer cada cosa. Señal custodiada. Fecha: 29/03/2026
+- **Inteligencia verdadera** — incorporada parcialmente en el concepto 29, pendiente de profundizar con más material.
+- **Los tres documentos del conjunto de gramáticas** — solo se completó la introducción. Faltan Documento 1 (ontológico), Documento 2 (ejemplos), Documento 3 (periférico).
+
+### Registros históricos (2)
+Momentos significativos del proceso que vale la pena recordar.
+
+- **El corpus como organismo que se alimenta desde la app** — el formulario /corpus-form materializa el ciclo autopoiético. Fecha: 28/03/2026
+- **El ciclo autopoiético del corpus se completó por primera vez** — el corpus creció de 27 a 30 conceptos usando el propio sistema. Fecha: 28/03/2026
 
 ---
 
