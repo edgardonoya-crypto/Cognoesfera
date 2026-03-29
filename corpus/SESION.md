@@ -140,6 +140,11 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 Actualizá corpus/SESION.md con lo que emergió hoy y hacé commit
 ```
 
+Esto debe incluir:
+1. Actualizar `corpus/SESION.md` (versión, pendientes, señales)
+2. Generar `corpus/status/status_[DD-MM-YYYY].md` con el estado del sistema al cierre
+3. Commitear juntos: SESION.md + status + cualquier documento de corpus generado en la sesión
+
 ---
 
 ## A8. Señales vivas
