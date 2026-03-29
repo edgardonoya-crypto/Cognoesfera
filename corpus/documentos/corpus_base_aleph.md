@@ -58,6 +58,7 @@ El corpus mismo es un Espacio Borgeano: puede ser habitado de forma sucesiva o s
 2. La regla mínima del sistema
 3. La Ley de Expansión Adaptativa
 4. La viabilidad organizacional como proceso vivo
+32. El patrón de doble acoplamiento
 
 **II. La unidad viva — qué es una Cognoesfera**
 5. La Cognoesfera
@@ -125,6 +126,16 @@ En entornos de complejidad creciente, la capacidad adaptativa de un sistema depe
 ## 4. La viabilidad organizacional como proceso vivo
 
 Todo sistema que aspira a sostenerse en entornos complejos necesita cinco capacidades simultáneas: unidades que operen con autonomía real, mecanismos que las coordinen sin controlarlas, una capa que genere sinergia entre ellas, una función que escuche el entorno y anticipe futuros, y un campo de identidad y propósito que oriente el conjunto sin imponerlo. Estas cinco capacidades no son departamentos ni jerarquías — son funciones vivas que pueden estar distribuidas en cualquier parte del sistema. Una Entidad Aleph encarna exactamente esta arquitectura. La viabilidad — la capacidad de un sistema de sostenerse y adaptarse sin perder identidad — es la condición mínima. El horizonte del Paradigma Aleph va más lejos: la fertilidad organizacional, la capacidad de un sistema de ampliar la vitalidad del ecosistema que habita y no solo la propia.
+
+---
+
+## 32. El patrón de doble acoplamiento
+
+La realidad opera sobre el paradigma y el paradigma opera sobre la realidad, cambiándola. Una mano dibuja a la otra — ninguna precede, ninguna existe sin la otra. Este patrón no es una metáfora: es la descripción precisa de cómo el paradigma se relaciona con todo lo que toca. El barco y el astillero se construyen a la vez. La app y el paradigma se construyen mutuamente. El corpus crece al ser habitado y quienes lo habitan crecen al habitarlo. Fundación Soma opera en el presente urgente y alimenta a Fundación Corpus; Fundación Corpus madura en festina lente y da sustento a Fundación Soma. Siempre es el mismo patrón: dos naturalezas distintas que se necesitan, se alimentan y se transforman mutuamente sin que ninguna preceda a la otra.
+
+El doble acoplamiento no ocurre como método — ocurre como condición. No se diseña: se reconoce y se cuida. Cuando un sistema lo habita conscientemente, puede leer en qué dirección está fluyendo la influencia en cada momento y actuar en consecuencia. Cuando no lo reconoce, lo vive como tensión o contradicción.
+
+Su fundamento está en Plotino (el ser humano ES el punto de encuentro entre lo infinito y lo finito) y en la autopoiesis de Maturana y Varela (los sistemas vivos se producen a sí mismos al relacionarse con el entorno). La Nota inaugural de este corpus lo encarna antes de nombrarlo: la pregunta y los cuatro párrafos son ellos mismos una instancia del patrón.
 
 ---
 

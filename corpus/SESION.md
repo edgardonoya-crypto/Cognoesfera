@@ -33,7 +33,7 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 **Fecha límite clave:** IAC 2026, noviembre, Punta del Este
 
 **Nomenclatura vigente:**
-- **Corpus Madre** — los fundamentos agnósticos (31 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
+- **Corpus Madre** — los fundamentos agnósticos (32 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
 - **Corpus Universal** — el campo total del conocimiento vivo del paradigma en todos sus niveles y expresiones
 - **Duende** — la figura que encarna el metabolismo cognitivo asistido (puede ser una IA, una persona, un protocolo)
 - **IAH** — Inteligencia Aumentada Humanista: composición entre percepción humana y capacidad del Duende
@@ -154,7 +154,7 @@ Esto debe incluir:
 
 *Esta sección tiene tres categorías. Las señales custodiadas viven también en `corpus/documentos/senales_custodiadas.md` con descripción completa.*
 
-### Señales custodiadas (9)
+### Señales custodiadas (13)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026

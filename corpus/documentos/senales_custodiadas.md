@@ -75,6 +75,61 @@ Las señales se custodian con tres estados posibles:
 
 ---
 
+## Fundación Soma y Fundación Corpus
+
+**Fecha:** 29/03/2026
+**Estado:** Custodiada
+**Descripción:** Nomenclatura para los dos sistemas paralelos del paradigma. Soma: red operativa, urgente, el cuerpo vivo que actúa en el presente. Corpus: campo, festina lente, la memoria viva que madura lentamente. Raíz latina compartida — soma (cuerpo) y corpus (cuerpo también, pero en el sentido de colección, totalidad, texto) — no elegida sino descubierta: emergió de la observación de lo que ya existía. La dualidad Soma/Corpus no es una división sino una composición: dos naturalezas del mismo organismo que se necesitan mutuamente.
+**Impacto probable:** Podría reformular cómo el paradigma nombra sus dos dimensiones operativas. Impacto en conceptos 15 (El tiempo soberano), 12 (La Cognoesfera curadora) y posiblemente en la Arquitectura del Corpus Vivo (A4 del SESION.md).
+**Origen:** Sesión 29/03/2026 — emergió al nombrar los dos sistemas en desarrollo simultáneo.
+**Pregunta abierta:** ¿Soma y Corpus son dos organizaciones distintas, dos modos del mismo sistema, o dos nombres para algo que el paradigma ya tenía pero no había nombrado con esta precisión?
+
+---
+
+## Plotino como ancla ontológica
+
+**Fecha:** 29/03/2026
+**Estado:** Custodiada
+**Descripción:** El ser humano ES el punto de encuentro entre lo infinito y lo finito — no tiene ese punto, no lo busca, no lo alcanza: lo es. Esta proposición de Plotino (Enéadas) es el fundamento filosófico de la dualidad Soma/Corpus y del patrón de doble acoplamiento. Si el ser humano es en sí mismo la composición entre lo infinito y lo finito, entonces toda arquitectura que lo reconozca como tal — y que cree condiciones para que esa composición opere — es coherente con su naturaleza. El paradigma Aleph no impone esa composición: la hace visible y la cultiva.
+**Impacto probable:** Podría fundamentar filosóficamente los conceptos 1 (La inteligencia como atributo de la vida), 24 (Los Cognobits) y 29 (La inteligencia verdadera). Ancla ontológica para el IAC 2026.
+**Origen:** Sesión 29/03/2026 — emergió al explorar los fundamentos filosóficos de la dualidad Soma/Corpus.
+**Pregunta abierta:** ¿Cómo incorporar a Plotino sin hacer del paradigma un sistema filosófico? ¿Es una referencia académica, una ancla conceptual, o algo más?
+
+---
+
+## Capra como fundamento científico
+
+**Fecha:** 29/03/2026
+**Estado:** Custodiada
+**Descripción:** La red viva autopoiética de Capra (La trama de la vida, El punto crucial) describe cómo opera la vida — no como metáfora sino como descripción precisa de los patrones que hacen que un sistema sea vivo. La autopoiesis (Maturana y Varela), la resonancia estructural, el acoplamiento entre sistemas: todo esto está ya en los fundamentos del paradigma (concepto 3, Ley de Expansión Adaptativa; concepto 5, La Cognoesfera) pero la referencia directa a Capra como sustento científico no está explicitada. En el contexto del IAC 2026, donde el paradigma se presenta a organizaciones y comunidades académicas, tener este fundamento explícito es estratégico.
+**Impacto probable:** Enriquecimiento de la Sección B4 (Fundamentos académicos) del SESION.md. Posible incorporación explícita en los conceptos 1, 3 y 5.
+**Origen:** Sesión 29/03/2026 — emergió al preparar el sustento para el IAC 2026.
+**Pregunta abierta:** ¿En qué punto la referencia a Capra enriquece el paradigma y en qué punto lo subordina a un marco académico externo?
+
+---
+
+## Schema de Fundación Soma ya tiene estructura fractal
+
+**Fecha:** 29/03/2026
+**Estado:** Custodiada
+**Descripción:** La tabla `groups` del Sistema B (Fundación Soma) tiene `parent_group_id` — una referencia recursiva que permite anidar grupos dentro de grupos sin límite de profundidad. Esto implementa sin haberlo nombrado así la arquitectura fractal del paradigma: Cognoesfera → Entidad Aleph → red de Entidades. Lo fractal ya estaba construido antes de que el paradigma lo describiera con esa palabra. Es una instancia del patrón de doble acoplamiento: la realidad operó sobre el paradigma (construyendo algo que el paradigma después nombraría) y ahora el paradigma puede operar sobre la realidad (reconociendo y extendiendo lo que ya existe).
+**Impacto probable:** Confirma la viabilidad de la nueva arquitectura. Reduce la fricción de implementación. Impacto en el diseño de las tablas `emergencias`, `pulsos_vitalidad` y `resonancias`.
+**Origen:** Sesión 29/03/2026 — emergió al analizar el schema de la migración baseline del Sistema B.
+**Pregunta abierta:** ¿Cómo extender `groups` para que soporte los distintos niveles del paradigma sin romper lo que ya funciona?
+
+---
+
+## El patrón de doble acoplamiento
+
+**Fecha:** 29/03/2026
+**Estado:** En desarrollo — candidato a Corpus Madre
+**Descripción:** La realidad opera sobre el paradigma y el paradigma opera sobre la realidad, cambiándola. Una mano dibuja a la otra — ninguna precede, ninguna existe sin la otra. Este patrón generativo no es exclusivo de la relación humano-digital: se repite en todas las expresiones del paradigma. Tecnológico: la app y el paradigma se construyen mutuamente. Organizacional: Soma y Corpus se necesitan y se alimentan. Conceptual: el corpus crece al ser habitado y quienes lo habitan crecen al habitarlo. La primera instancia nombrada en esta sesión es Fundación Soma y Fundación Corpus. La Nota inaugural del corpus ya lo encarna sin nombrarlo: "el barco y el astillero se construyen a la vez". Las manos de Escher son su imagen más precisa. Tiene fundamento en Plotino (el ser humano como punto de encuentro entre lo infinito y lo finito) y en la autopoiesis de Maturana y Varela.
+**Impacto probable:** Concepto nuevo en Sección I del Corpus Madre. Meta-patrón que subyace a múltiples conceptos existentes: IAH (24/25/27), Memoria Viva Aumentada, Soma/Corpus, la relación entre el corpus y quien lo habita.
+**Origen:** Sesión 29/03/2026 — emergió al observar que el schema de Fundación Soma ya tenía la estructura fractal que el paradigma describía, antes de que nadie lo diseñara así conscientemente.
+**Pregunta abierta:** ¿Es este patrón una reformulación de la autopoiesis (Maturana/Varela) o un concepto nuevo? ¿Cómo se distingue del acoplamiento estructural ya presente en los fundamentos académicos?
+
+---
+
 ## Señales incorporadas
 
 *Aquí irán las señales que maduraron y entraron al Corpus Madre, preservadas como registro histórico.*
