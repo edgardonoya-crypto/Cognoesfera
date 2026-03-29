@@ -177,6 +177,36 @@ Momentos significativos del proceso que vale la pena recordar.
 
 ---
 
+## A9. Estado técnico — arquitectura y desarrollo
+
+**Stack tecnológico:**
+- Frontend/Full-stack: Next.js + TypeScript
+- Base de datos: Supabase
+- Deploy: Vercel
+- Repositorio principal: edgardonoya-crypto/Cognoesfera (privado)
+
+**Estado de la aplicación principal:**
+- Login real con Supabase auth funcionando
+- Dashboard con Cognoesferas conectadas a Supabase
+- /corpus-form funcionando para registrar conceptos vía GitHub API
+- Pendiente: verificar /corpus-form en producción
+
+**Sistema B:**
+- Aplicación separada con datos reales: usuarios, duendes, 5 roles formados, Cognoesfera en constitución con organizadores IAC 2026
+- Desarrollado en Payload CMS (Node.js + TypeScript)
+- Disponible como zip — repositorio separado
+- Pendiente de análisis profundo
+
+**Objetivo de la próxima fase de desarrollo:**
+Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y el paradigma, incorporando lo aprendido en más de un año de desarrollo del Sistema B. El resultado debe ser coherente con la dualidad humano-digital del paradigma — el barco y el astillero construyéndose mutuamente. La arquitectura debe estar preparada para incorporar MCP, agentes y las innovaciones que emergen en el ecosistema de IAG.
+
+**Archivos clave para sesiones técnicas:**
+- corpus/documentos/arquitectura_digital_corpus_vivo.md
+- corpus/documentos/corpus_base_aleph.md
+- El zip del Sistema B (disponible localmente)
+
+---
+
 # SECCIÓN B — DOCUMENTOS DE REFERENCIA
 
 *Leé estas secciones cuando el trabajo del día las requiera. Si el trabajo es de arquitectura técnica o pendientes generales, la Sección A es suficiente.*
