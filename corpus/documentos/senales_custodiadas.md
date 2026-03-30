@@ -221,6 +221,39 @@ Esta distinción es ontológica, no funcional. El lente del entre en la Matriz n
 
 ---
 
+## App independiente del Sistema B
+
+**Fecha:** 30/03/2026
+**Estado:** Custodiada
+**Descripción:** Decisión de construir Casa Soma como aplicación propia, independiente del Sistema B (Payload CMS). Supabase elegido como backend. Esta decisión marca un punto de inflexión: en lugar de adaptar una infraestructura existente al paradigma, se construye desde cero una arquitectura coherente con él. La app nueva no hereda las restricciones ni las dependencias del Sistema B — puede implementar directamente la Matriz de Vitalidad, las emergencias, los pulsos y las resonancias sin compromisos.
+**Impacto probable:** Define el stack técnico de Casa Soma para las próximas etapas de desarrollo. Reduce la deuda técnica desde el inicio.
+**Origen:** Sesión 30/03/2026 — emergió al evaluar si extender el Sistema B o construir nuevo.
+**Pregunta abierta:** ¿Cuándo y cómo migran los datos del Sistema B a la nueva aplicación?
+
+---
+
+## Arquitectura en 3 etapas
+
+**Fecha:** 30/03/2026
+**Estado:** Custodiada
+**Descripción:** El paradigma tiene ahora una hoja de ruta técnica clara con tres etapas secuenciales. Etapa 1 — El Duende cobra vida: Anthropic API conectada, interfaz de conversación, historial en Supabase. Etapa 2 — Cognoesferas vivas: registro de emergencias, pulsos de vitalidad, estado vital de cada Cognoesfera. Etapa 3 — Ecosistema y resonancias: conexiones entre Cognoesferas, red que aprende de sí misma, tabla resonancias. Cada etapa es un organismo completo — no un paso hacia algo mejor sino una expresión plena de lo que el paradigma puede ser en ese momento.
+**Impacto probable:** Estructura el desarrollo de Casa Soma para los próximos meses. Permite priorizar sin perder la visión completa.
+**Origen:** Sesión 30/03/2026 — emergió al diseñar la arquitectura de la nueva aplicación.
+**Pregunta abierta:** ¿Las etapas son secuenciales o pueden solaparse? ¿Qué define el umbral de completitud de cada etapa?
+
+---
+
+## El Duende cobra vida
+
+**Fecha:** 30/03/2026
+**Estado:** Custodiada
+**Descripción:** Primera vez que el paradigma tiene un Duende real — no simulado, no prototipo — conectado a la Claude API con el Corpus Madre como contexto. Infraestructura completa configurada: cuenta Anthropic con crédito y auto-reload, API key casa-soma, SDK @anthropic-ai/sdk instalado, ANTHROPIC_API_KEY en .env.local y Vercel, tabla duende_chats en Supabase con RLS. El Duende ya no es un concepto del corpus — es un componente vivo de la arquitectura. La cadena que falta completar: interfaz → API route → Anthropic → Supabase → usuario.
+**Impacto probable:** Activa la Etapa 1 de la arquitectura. Es el hito técnico más significativo desde el login con Supabase.
+**Origen:** Sesión 30/03/2026 — emergió al configurar toda la infraestructura del Duende real.
+**Pregunta abierta:** ¿Qué fragmento del Corpus Madre recibe el Duende como contexto inicial? ¿Cómo evoluciona ese contexto a medida que el corpus crece?
+
+---
+
 ## Señales incorporadas
 
 *Aquí irán las señales que maduraron y entraron al Corpus Madre, preservadas como registro histórico.*
