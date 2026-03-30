@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v6 · 29 Marzo 2026*
+*Versión actual: v7 · 29 Marzo 2026*
 
 ---
 
@@ -113,7 +113,7 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 ## A6. Pendientes activos (en orden de prioridad)
 
 1. ~~**Ver el Sistema B**~~ — ✅ explorado: Payload CMS + PostgreSQL, 16 colecciones, schema completo relevado
-2. ~~**Sesión de revisión de arquitectura**~~ — ✅ arquitectura nueva definida: tablas emergencias, pulsos_vitalidad, resonancias + campo vital_state en organizations
+2. ~~**Sesión de revisión de arquitectura**~~ — ✅ arquitectura nueva definida: tablas emergencias, pulsos_vitalidad, resonancias + campo vital_state en organizations. Documento arquitectura_paradigma_aleph.md generado.
 3. **Configurar GitHub Action** — `.github/workflows/corpus-update.yml`
 4. **Configurar n8n** — para automatización del corpus
 5. **Los tres documentos del conjunto de gramáticas** — Documento 1 ontológico, Documento 2 ejemplos, Documento 3 periférico
@@ -129,6 +129,9 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 15. **Próxima sesión: antecedentes de EDHUCA y las 3 organizaciones** — contexto para el primer caso real de la nueva arquitectura
 16. **Definir registro mínimo de Fundación Corpus antes del 17 de abril** — fecha límite: sesión con EDHUCA
 17. **Explorar documento Plotino/Alephitos para el corpus** — posible ancla filosófica para la nueva sección ontológica
+18. **Incorporar Consejo Asesor al repositorio** — definir si sus documentos (composición de roles, Criterios Operativos de Producción, Guía de Comprensión Compartida) viven en corpus/documentos/ como categoría propia de instructivos estratégicos
+19. **Resolver convocatoria del Consejo sin fricción** — hoy requiere subir PDFs manualmente; definir mecanismo para convocarlo desde cualquier sesión
+20. **Subir documentos del Consejo Asesor** — 3 PDFs: Consejo_Asesor, Criterios_Operativos_Producción, GUÍA_DE_COMPRENSIÓN_COMPARTIDA
 
 ---
 
@@ -168,6 +171,7 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **Plotino como ancla ontológica** — el ser humano ES el punto de encuentro entre lo infinito y lo finito. Fundamento filosófico de la dualidad Soma/Corpus. Fecha: 29/03/2026
 - **Capra como fundamento científico** — la red viva autopoiética describe cómo opera la vida. Complementa a Plotino desde la biología sistémica. Fecha: 29/03/2026
 - **Schema de Fundación Soma ya tiene estructura fractal** — groups con parent_group_id en el Sistema B implementa sin saberlo la arquitectura fractal del paradigma. Fecha: 29/03/2026
+- **El Consejo Asesor como componente de la arquitectura digital** — sistema de 18 roles de asesoramiento estratégico construido en ChatGPT/Gemini, con documentos fundacionales propios. Emergió su lugar natural en Fundación Corpus como instructivo situado. Pendiente: definir cómo vive en el repositorio y cómo se convoca sin fricción desde cualquier sesión. Fecha: 29/03/2026
 
 ### Señales vivas pendientes de desarrollar (3)
 Conceptos o procesos que merecen atención pero todavía no están listos para ser custodiados.
