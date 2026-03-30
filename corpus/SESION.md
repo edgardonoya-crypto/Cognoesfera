@@ -138,6 +138,9 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 24. **Trabajar la constelación jesuita** — Casa Soma/Casa Corpus, el contemplativo en la acción, contemplación amorosa como práctica de conocimiento
 25. **Explorar la Unidad Aleph** — su relación con las Cognoesferas, si es un nivel distinto o una expresión del mismo patrón
 26. **Definir protocolo de cierre más robusto** — construir el mensaje de cierre en tiempo real durante la sesión, no solo al final
+27. **[SOMA] Generar `consejo_asesor.html`** — página standalone interactiva similar a `arquitectura_paradigma_aleph.html`, para convocar al Consejo Asesor sin fricción desde cualquier sesión
+28. **[SOMA] Exportar diagrama de arquitectura como SVG descargable** — versión vectorial del diagrama para uso externo y presentaciones
+29. **[CORPUS] Sesión dedicada a adoptar nomenclatura "Casa Soma" / "Casa Corpus"** — revisar todos los documentos que usan "Fundación" y actualizar a la nueva nomenclatura
 
 ---
 
