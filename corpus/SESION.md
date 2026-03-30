@@ -238,6 +238,12 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - corpus/documentos/corpus_base_aleph.md
 - El zip del Sistema B (disponible localmente)
 
+**Documentos generados en sesiones recientes:**
+- corpus/documentos/arquitectura_paradigma_aleph.md — arquitectura completa para NotebookLM · 29/03/2026
+- corpus/documentos/arquitectura_paradigma_aleph.docx — mismo documento en Word · 29/03/2026
+- corpus/documentos/arquitectura_paradigma_aleph.html — diagrama interactivo standalone · 29/03/2026
+- corpus/documentos/protocolos_actos_de_cuidado.md — actualizado con Protocolo 02: El Ritual de Sesión · 30/03/2026
+
 ---
 
 # SECCIÓN B — DOCUMENTOS DE REFERENCIA
