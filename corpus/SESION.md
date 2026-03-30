@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v7 · 29 Marzo 2026*
+*Versión actual: v8 · 29 Marzo 2026*
 
 ---
 
@@ -132,6 +132,8 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 18. **Incorporar Consejo Asesor al repositorio** — definir si sus documentos (composición de roles, Criterios Operativos de Producción, Guía de Comprensión Compartida) viven en corpus/documentos/ como categoría propia de instructivos estratégicos
 19. **Resolver convocatoria del Consejo sin fricción** — hoy requiere subir PDFs manualmente; definir mecanismo para convocarlo desde cualquier sesión
 20. **Subir documentos del Consejo Asesor** — 3 PDFs: Consejo_Asesor, Criterios_Operativos_Producción, GUÍA_DE_COMPRENSIÓN_COMPARTIDA
+21. **Migrar `arquitectura_paradigma_aleph.html` a Next.js** — crear `app/arquitectura/page.tsx` y deployar en Vercel
+22. **Actualizar `arquitectura_paradigma_aleph.md`** — incorporar AI Studio y modelos de video (Veo 3.1, Sora 2, Kling 2.6, Wan 2.6) como capa de transducción audiovisual
 
 ---
 
@@ -157,7 +159,7 @@ Esto debe incluir:
 
 *Esta sección tiene tres categorías. Las señales custodiadas viven también en `corpus/documentos/senales_custodiadas.md` con descripción completa.*
 
-### Señales custodiadas (13)
+### Señales custodiadas (14)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
@@ -172,6 +174,7 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **Capra como fundamento científico** — la red viva autopoiética describe cómo opera la vida. Complementa a Plotino desde la biología sistémica. Fecha: 29/03/2026
 - **Schema de Fundación Soma ya tiene estructura fractal** — groups con parent_group_id en el Sistema B implementa sin saberlo la arquitectura fractal del paradigma. Fecha: 29/03/2026
 - **El Consejo Asesor como componente de la arquitectura digital** — sistema de 18 roles de asesoramiento estratégico construido en ChatGPT/Gemini, con documentos fundacionales propios. Emergió su lugar natural en Fundación Corpus como instructivo situado. Pendiente: definir cómo vive en el repositorio y cómo se convoca sin fricción desde cualquier sesión. Fecha: 29/03/2026
+- **AI Studio y los modelos de video como transducción audiovisual** — Veo 3.1, Sora 2, Kling 2.6, Wan 2.6 generan Cognobits digitales audiovisuales. Amplían el concepto 31 (Transducción de formatos) a la dimensión audiovisual. Junto a NotebookLM forman el ecosistema completo de transducción: texto, audio y video. Pendiente: verificar si merece concepto nuevo o enriquece el 31. Fecha: 29/03/2026
 
 ### Señales vivas pendientes de desarrollar (3)
 Conceptos o procesos que merecen atención pero todavía no están listos para ser custodiados.
