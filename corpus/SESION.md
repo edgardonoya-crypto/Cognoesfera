@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v8 · 29 Marzo 2026*
+*Versión actual: v9 · 29 Marzo 2026*
 
 ---
 
@@ -134,6 +134,10 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 20. **Subir documentos del Consejo Asesor** — 3 PDFs: Consejo_Asesor, Criterios_Operativos_Producción, GUÍA_DE_COMPRENSIÓN_COMPARTIDA
 21. **Migrar `arquitectura_paradigma_aleph.html` a Next.js** — crear `app/arquitectura/page.tsx` y deployar en Vercel
 22. **Actualizar `arquitectura_paradigma_aleph.md`** — incorporar AI Studio y modelos de video (Veo 3.1, Sora 2, Kling 2.6, Wan 2.6) como capa de transducción audiovisual
+23. **Diseñar tablas BD para catálogo de protocolos de actos de cuidado** — `protocolos_cuidado`, `protocolo_actos_cuidado`, `protocolo_estados_vitales`, `protocolo_matriz_dimensiones`, `aplicaciones_protocolo`
+24. **Trabajar la constelación jesuita** — Casa Soma/Casa Corpus, el contemplativo en la acción, contemplación amorosa como práctica de conocimiento
+25. **Explorar la Unidad Aleph** — su relación con las Cognoesferas, si es un nivel distinto o una expresión del mismo patrón
+26. **Definir protocolo de cierre más robusto** — construir el mensaje de cierre en tiempo real durante la sesión, no solo al final
 
 ---
 
@@ -159,7 +163,7 @@ Esto debe incluir:
 
 *Esta sección tiene tres categorías. Las señales custodiadas viven también en `corpus/documentos/senales_custodiadas.md` con descripción completa.*
 
-### Señales custodiadas (14)
+### Señales custodiadas (21)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
@@ -175,6 +179,13 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **Schema de Fundación Soma ya tiene estructura fractal** — groups con parent_group_id en el Sistema B implementa sin saberlo la arquitectura fractal del paradigma. Fecha: 29/03/2026
 - **El Consejo Asesor como componente de la arquitectura digital** — sistema de 18 roles de asesoramiento estratégico construido en ChatGPT/Gemini, con documentos fundacionales propios. Emergió su lugar natural en Fundación Corpus como instructivo situado. Pendiente: definir cómo vive en el repositorio y cómo se convoca sin fricción desde cualquier sesión. Fecha: 29/03/2026
 - **AI Studio y los modelos de video como transducción audiovisual** — Veo 3.1, Sora 2, Kling 2.6, Wan 2.6 generan Cognobits digitales audiovisuales. Amplían el concepto 31 (Transducción de formatos) a la dimensión audiovisual. Junto a NotebookLM forman el ecosistema completo de transducción: texto, audio y video. Pendiente: verificar si merece concepto nuevo o enriquece el 31. Fecha: 29/03/2026
+- **Casa Soma y Casa Corpus** — la tradición jesuita opera con casas: espacios físicos y simbólicos de práctica. Casa Soma es el espacio de acción urgente; Casa Corpus es el espacio de conocimiento lento. La metáfora amplía y ancla las dos fundaciones. Fecha: 29/03/2026
+- **La tradición jesuita como linaje** — los jesuitas inventaron el "contemplativo en la acción": plena presencia mística mientras se actúa en el mundo. Es el antecedente histórico más preciso de la dualidad Soma/Corpus. Un linaje que no fue buscado pero fue descubierto. Fecha: 29/03/2026
+- **La contemplación amorosa como práctica de conocimiento** — modo de percibir donde el amor no interfiere sino que amplía la capacidad cognitiva. El que ama más ve más. Señal con profundidad ontológica y práctica. Fecha: 29/03/2026
+- **La constelación festina lente** — conjunto de figuras que comparten el mismo tempo: Ignacio de Loyola, Plotino, Capra, el bonsái. Todas operan desde la paciencia activa. Una constelación que le da densidad histórica y filosófica al Corpus. Fecha: 29/03/2026
+- **El InterSer** — la condición de ser que sólo existe en relación. No es interdependencia ni interacción: es ontología relacional pura. Candidato a sección propia en el Corpus Madre. Fecha: 29/03/2026
+- **Las tablas BD del catálogo de protocolos de actos de cuidado** — `protocolos_cuidado`, `protocolo_actos_cuidado`, `protocolo_estados_vitales`, `protocolo_matriz_dimensiones`, `aplicaciones_protocolo`. Señal técnica que espera diseño. Fecha: 29/03/2026
+- **La Unidad Aleph** — ¿es un nivel distinto al de la Cognoesfera o una expresión del mismo patrón fractal a mayor escala? Señal abierta que requiere exploración conceptual. Fecha: 29/03/2026
 
 ### Señales vivas pendientes de desarrollar (3)
 Conceptos o procesos que merecen atención pero todavía no están listos para ser custodiados.
