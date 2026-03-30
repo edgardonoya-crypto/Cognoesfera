@@ -216,7 +216,7 @@ cognoesfera/
 │       ├── arquitectura_paradigma_aleph.md     ← arquitectura completa para NotebookLM
 │       ├── arquitectura_paradigma_aleph.docx   ← mismo documento en Word
 │       ├── arquitectura_paradigma_aleph.html   ← diagrama interactivo standalone
-│       ├── protocolos_actos_de_cuidado.md      ← catálogo de protocolos (Protocolo 01)
+│       ├── protocolos_actos_de_cuidado.md      ← catálogo de protocolos (Protocolo 01 + Protocolo 02)
 │       ├── arquitectura_corpus_vivo.md
 │       ├── arquitectura_digital_corpus_vivo.md ← este ecosistema
 │       ├── fundamentos_arquitectura_cognoesfera.md
