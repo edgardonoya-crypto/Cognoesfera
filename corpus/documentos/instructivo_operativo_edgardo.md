@@ -37,7 +37,17 @@ Para entender *por qué* existe cada herramienta y *qué rol cumple* en el siste
 2. Clickeás el botón + en la barra de entrada
 3. Navegás hasta C:\Users\edgardo\cognoesfera\corpus\SESION.md
 4. Lo seleccionás y lo subís
-5. Escribís: "Soy Edgardo Noya. Leé el archivo y continuamos."
+5. Escribís el prompt de arranque (ver abajo)
+```
+
+**Prompt de arranque para la próxima sesión:**
+```
+Soy Edgardo Noya. Leé el archivo y continuamos. El objetivo de esta
+sesión es integrar todo lo que emergió — visualizar la arquitectura
+digital completa actualizada (Soma, Corpus, Consejo Asesor, AI Studio)
+y luego diseñar la aplicación de Fundación Soma: diseño visual,
+arquitectura de información y flujos funcionales. Quiero pantallas
+HTML interactivas navegables que reflejen el paradigma.
 ```
 
 ### Al cierre
@@ -105,6 +115,12 @@ O pedíselo a Claude Code en lenguaje natural.
 
 ### Renombrar un archivo
 Click derecho sobre el archivo en el Explorer → Rename → nuevo nombre → Enter → commitear el cambio.
+
+---
+
+## Confirmaciones de Git desactivadas
+
+Desde la sesión del 30/03/2026, Claude Code ya no pide confirmación para `git add`, `git commit` ni `git push` en este repositorio. Los commits y pushes se ejecutan automáticamente cuando se le indica hacer commit.
 
 ---
 
@@ -180,6 +196,12 @@ git push origin master:main
 - Verificar que usaste `git push origin master:main` y no solo `git push`
 - Verificar que hiciste `git add` antes del `git commit`
 
+**Convocar al Consejo Asesor**
+- El Consejo opera dentro de la sesión de claude.ai, no requiere archivos externos
+- Traer la consulta directamente en la conversación con Claude
+- El sistema procesa la consulta contra los 18 roles y devuelve el resultado en formato visual
+- No es necesario subir archivos adicionales si el contexto de sesión ya está cargado
+
 ---
 
 ## La estructura de carpetas de tu proyecto
@@ -189,8 +211,12 @@ cognoesfera/
 ├── corpus/
 │   ├── SESION.md                          ← arranque de sesión
 │   └── documentos/
-│       ├── corpus_base_aleph.md           ← Corpus Madre (30 conceptos)
-│       ├── senales_custodiadas.md         ← señales pendientes
+│       ├── corpus_base_aleph.md           ← Corpus Madre (32 conceptos)
+│       ├── senales_custodiadas.md         ← señales pendientes (21)
+│       ├── arquitectura_paradigma_aleph.md     ← arquitectura completa para NotebookLM
+│       ├── arquitectura_paradigma_aleph.docx   ← mismo documento en Word
+│       ├── arquitectura_paradigma_aleph.html   ← diagrama interactivo standalone
+│       ├── protocolos_actos_de_cuidado.md      ← catálogo de protocolos (Protocolo 01)
 │       ├── arquitectura_corpus_vivo.md
 │       ├── arquitectura_digital_corpus_vivo.md ← este ecosistema
 │       ├── fundamentos_arquitectura_cognoesfera.md
