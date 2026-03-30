@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v9 · 29 Marzo 2026*
+*Versión actual: v10 · 30 Marzo 2026*
 
 ---
 
@@ -141,6 +141,9 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 27. **[SOMA] Generar `consejo_asesor.html`** — página standalone interactiva similar a `arquitectura_paradigma_aleph.html`, para convocar al Consejo Asesor sin fricción desde cualquier sesión
 28. **[SOMA] Exportar diagrama de arquitectura como SVG descargable** — versión vectorial del diagrama para uso externo y presentaciones
 29. **[CORPUS] Sesión dedicada a adoptar nomenclatura "Casa Soma" / "Casa Corpus"** — revisar todos los documentos que usan "Fundación" y actualizar a la nueva nomenclatura
+30. **[SOMA] Crear API route `/api/duende`** — endpoint server-side que recibe el mensaje del usuario y llama a la Anthropic API con el SDK instalado
+31. **[SOMA] Crear página `/duende`** — interfaz de conversación con el Duende real: campo de texto, respuesta en tiempo real, historial en `duende_chats`
+32. **[SOMA] Prueba del Duende real funcionando** — confirmar que la cadena completa opera: interfaz → API route → Anthropic → Supabase → usuario
 
 ---
 
@@ -218,6 +221,15 @@ Momentos significativos del proceso que vale la pena recordar.
 - Dashboard con Cognoesferas conectadas a Supabase
 - /corpus-form funcionando para registrar conceptos vía GitHub API
 - Pendiente: verificar /corpus-form en producción
+
+**Infraestructura del Duende real — configurada el 30/03/2026:**
+- Cuenta Anthropic activa con $50 de crédito y auto-reload configurado
+- API key `casa-soma` generada y activa
+- SDK `@anthropic-ai/sdk` instalado en el proyecto
+- `ANTHROPIC_API_KEY` en `.env.local` y en Vercel (variables de entorno)
+- Deploy funcionando con la nueva variable
+- Tabla `duende_chats` creada en Supabase con RLS activo
+- **Próxima sesión: el Duende cobra vida**
 
 **Sistema B (Fundación Soma):**
 - Payload CMS + PostgreSQL + Next.js. 16 colecciones relevadas. Schema completo disponible.
