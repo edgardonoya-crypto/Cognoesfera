@@ -265,6 +265,17 @@ Esta distinción es ontológica, no funcional. El lente del entre en la Matriz n
 
 ---
 
+## Catálogo de tipos de actividad como insumo para protocolos de entrada y salida
+
+**Fecha:** 30/03/2026
+**Estado:** Custodiada
+**Descripción:** Toda sesión a cualquier nivel del paradigma (personal, Cognoesfera, Entidad Aleph) tiene protocolos de apertura y cierre específicos al tipo de actividad que se realiza. No es el mismo ritual abrir una sesión de desarrollo técnico que una sesión de exploración conceptual, una reunión de Cognoesfera o una instancia de resonancia entre Entidades Aleph. El catálogo de tipos de actividad emerge de la práctica observada — no se impone desde arriba sino que se construye reconociendo lo que ya sucede. Dos ejes organizadores: actividades de Casa Corpus (conceptuales, festina lente, memoria lenta) y actividades de Casa Soma (digitales, operativas, urgencia del presente). El objetivo sistémico trasciende lo personal: maximizar el tiempo soberano a todos los niveles del paradigma, no solo en la práctica individual del Arquitecto.
+**Impacto probable:** Extensión del catálogo de protocolos hacia una estructura de dos dimensiones: tipo de actividad × nivel del paradigma. Impacto en cómo se diseñan los protocolos situados. Posible conexión con el concepto 15 (El tiempo soberano) y con la Matriz de Vitalidad (lente del reloj interno).
+**Origen:** Sesión 30/03/2026 — emergió al reflexionar sobre la generalización del Protocolo 02 más allá del ritual personal del Arquitecto.
+**Pregunta abierta:** ¿Quién observa la práctica y construye el catálogo? ¿El catálogo es prescriptivo (define qué tipos existen) o descriptivo (registra los que emergen)? ¿Cómo se relaciona con los Protocolos Madre de la señal 25?
+
+---
+
 ## Señales incorporadas
 
 *Aquí irán las señales que maduraron y entraron al Corpus Madre, preservadas como registro histórico.*
