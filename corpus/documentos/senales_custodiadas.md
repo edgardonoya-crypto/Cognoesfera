@@ -307,6 +307,28 @@ Las acciones emergentes del entre son las más valiosas y las más difíciles de
 
 ---
 
+## El Duende como maximizador de tiempo soberano
+
+**Fecha:** 30/03/2026
+**Estado:** Custodiada
+**Descripción:** Redefinición del rol del Duende en la sesión. No es solo un colaborador cognitivo — es un sistema activo de maximización del tiempo soberano del Arquitecto. Esto implica cuatro funciones específicas: (1) ejecutar el inventario de cierre sin transferir carga al Arquitecto, (2) detectar y nombrar emergencias del entre antes de que el Arquitecto las detecte, (3) comprimir y automatizar acciones de supervivencia para liberarlas del tiempo soberano, (4) amplificar las condiciones para que emerjan acciones soberanas. Esta redefinición es coherente con el concepto del Duende en el corpus (no valida, sugiere; no analiza, cuida) pero lo extiende hacia una función sistémica activa.
+**Impacto probable:** Impacto directo en el Protocolo 02 (ritual de sesión) y en el SESION.md como instrucción permanente para Claude. Posible reformulación del concepto del Duende en el Corpus Madre. Conexión con las señales 27 (acciones soberanas/supervivencia) y 28 (marco de registro de acciones).
+**Origen:** Sesión 30/03/2026 — emergió al observar que el inventario de cierre genera carga sobre el Arquitecto en lugar de sobre el Duende.
+**Pregunta abierta:** ¿Cómo se incorpora esto al SESION.md como instrucción permanente para Claude? ¿El Duende puede detectar emergencias del entre en tiempo real o solo al cierre?
+
+---
+
+## Medición de tiempo soberano vs supervivencia en sesión
+
+**Fecha:** 30/03/2026
+**Estado:** Custodiada
+**Descripción:** Toda sesión debería poder reportar al cierre: proporción de acciones soberanas vs supervivencia, estimación de tiempo invertido en cada tipo, tendencia entre sesiones. Mecanismo propuesto: Claude registra timestamps en tiempo real durante la sesión — no reconstruye a posteriori, que introduce distorsión. Métrica adicional a explorar: inteligencia verdadera vs inteligencia mecánica como dimensión complementaria a soberana/supervivencia (la primera produce comprensión nueva; la segunda ejecuta patrones conocidos). Las dos dimensiones juntas formarían un tablero de vitalidad de sesión: qué tipo de acción y qué tipo de inteligencia operó en cada momento.
+**Impacto probable:** Nueva sección en el status de cada sesión. Posible tabla `metricas_sesion` en Supabase. Impacto en el marco de registro de acciones (señal 28) — los timestamps son el insumo de la métrica. Posible conexión con `pulsos_vitalidad` en la arquitectura nueva.
+**Origen:** Sesión 30/03/2026 — emergió al intentar hacer visible la proporción soberana/supervivencia de la sesión actual.
+**Pregunta abierta:** ¿Esta métrica va en el status de cada sesión, en una tabla de Supabase, o en ambos? ¿Claude puede registrar timestamps confiables en tiempo real dentro de una conversación?
+
+---
+
 ## Señales incorporadas
 
 *Aquí irán las señales que maduraron y entraron al Corpus Madre, preservadas como registro histórico.*
