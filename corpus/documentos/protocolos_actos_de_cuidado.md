@@ -197,6 +197,7 @@ Thich Nhat Hanh (El corazón de las enseñanzas de Buda) · Fritjof Capra (La tr
 ---
 
 ## Protocolo 02 — El Ritual de Sesión
+### Protocolo 02-EN — Ritual de Sesión Situado · Edgardo Noya + Claude
 
 ### Descripción general
 
