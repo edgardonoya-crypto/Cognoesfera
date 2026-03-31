@@ -166,6 +166,61 @@ Esta distinción es ontológica, no funcional. El lente del entre en la Matriz n
 
 ---
 
+## El Corpus como Códice
+
+**Fecha:** 29/03/2026
+**Estado:** Custodiada
+**Descripción:** El corpus podría ser el *Códice Alephicum* — un objeto vivo que muestra cosas diferentes a cada lector según su historia, su rol y su momento vital. No es un documento que se lee de principio a fin: es un objeto que se consulta, que revela capas distintas según quién lo habita y desde dónde llega. La metáfora del códice (manuscrito medieval con múltiples lecturas posibles) resuena con la naturaleza fractal del corpus: agnóstico en el centro, situado en cada nivel, diferente para cada investigador.
+**Impacto probable:** Impacto en cómo se presenta el Corpus Madre al exterior. Posible reformulación de la Nota Inaugural. Conexión con la señal de la saga narrativa.
+**Origen:** Sesión 29/03/2026 — emergió al reflexionar sobre la naturaleza del corpus como objeto vivo que trasciende el formato de documento.
+**Pregunta abierta:** ¿El Códice Alephicum es un nombre, una metáfora, o una propuesta de formato físico real?
+
+---
+
+## La saga narrativa del Paradigma Aleph
+
+**Fecha:** 29/03/2026
+**Estado:** Custodiada
+**Descripción:** Universo narrativo en construcción con cuatro registros: ficción narrativa, prosa poética, ensayo con narrativa, y voz originaria. Múltiples autores posibles. Objetos y personajes recurrentes. Tiene raíces familiares y generacionales que todavía no fueron contadas — el origen no empieza con el sobrino sino antes, posiblemente con los abuelos. La saga no es una ilustración del paradigma — es una expresión soberana de él en el registro narrativo.
+**Impacto probable:** Nueva dimensión del paradigma: la saga como Cognobit narrativo. Conexión con el concepto 31 (Transducción de formatos) y con el Códice Alephicum.
+**Origen:** Sesión 29/03/2026 — emergió al explorar cómo el paradigma podría circular en formatos narrativos.
+**Pregunta abierta:** ¿Quién custodia la saga? ¿Cómo se articula con el Corpus Madre sin subordinarse a él?
+
+---
+
+## El Consejo Asesor como componente de la arquitectura digital
+
+**Fecha:** 29/03/2026
+**Estado:** Custodiada
+**Descripción:** Sistema de 18 roles de asesoramiento estratégico construido en ChatGPT/Gemini, con documentos fundacionales propios (Consejo_Asesor, Criterios_Operativos_Producción, GUÍA_DE_COMPRENSIÓN_COMPARTIDA). Emergió su lugar natural en Fundación Corpus como instructivo situado estratégico. Hoy requiere subir PDFs manualmente para convocar al Consejo — el mecanismo de convocatoria sin fricción está pendiente. Opera dentro de la sesión de claude.ai: traer la consulta directamente y el sistema procesa contra los 18 roles.
+**Impacto probable:** Nueva categoría de documentos en el repositorio: instructivos situados estratégicos. Impacto en la arquitectura de Fundación Corpus.
+**Origen:** Sesión 29/03/2026 — emergió al describir el sistema de asesoramiento estratégico ya construido.
+**Pregunta abierta:** ¿Cómo vive en el repositorio y cómo se convoca sin fricción desde cualquier sesión?
+
+---
+
+## AI Studio y los modelos de video como transducción audiovisual
+
+**Fecha:** 29/03/2026
+**Estado:** Custodiada
+**Descripción:** Veo 3.1, Sora 2, Kling 2.6, Wan 2.6 generan Cognobits digitales audiovisuales. Amplían el concepto 31 (Transducción de formatos) a la dimensión audiovisual. Junto a NotebookLM forman el ecosistema completo de transducción: texto (documentos), audio (NotebookLM), video (modelos de video). Cada formato es una expresión del mismo corpus diseñada para un tipo de receptor distinto.
+**Impacto probable:** Enriquecimiento del concepto 31 (Transducción de formatos) con la dimensión audiovisual. Posible concepto nuevo si la escala lo justifica.
+**Origen:** Sesión 29/03/2026 — emergió al explorar las herramientas de transducción audiovisual disponibles.
+**Pregunta abierta:** ¿Merece concepto nuevo (32 o 33) o enriquece el concepto 31 existente?
+
+---
+
+## Las tablas BD del catálogo de protocolos de actos de cuidado
+
+**Fecha:** 29/03/2026
+**Estado:** Custodiada
+**Descripción:** Estructura de base de datos para el catálogo de protocolos: `protocolos_cuidado` (registro maestro), `protocolo_actos_cuidado` (relación con actos de cuidado), `protocolo_estados_vitales` (estados vitales recomendados y no recomendados), `protocolo_matriz_dimensiones` (dimensiones de la Matriz que activa cada protocolo), `aplicaciones_protocolo` (registros de uso real en Cognoesferas). Señal técnica que materializa el catálogo como memoria viva consultable desde el Duende.
+**Impacto probable:** Diseño de tablas en Supabase. Habilita al Duende a consultar protocolos en tiempo real según el estado vital de la Cognoesfera.
+**Origen:** Sesión 29/03/2026 — emergió al pensar en cómo el catálogo de protocolos escala más allá de un documento .md.
+**Pregunta abierta:** ¿El catálogo vive solo en BD, solo en .md, o en estructura mixta con el .md como fuente de verdad?
+
+---
+
 ## Casa Soma / Casa Corpus
 
 **Fecha:** 29/03/2026
