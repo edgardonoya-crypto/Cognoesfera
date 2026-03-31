@@ -340,6 +340,17 @@ Las acciones emergentes del entre son las más valiosas y las más difíciles de
 
 ---
 
+## Identificador de sesión trazable
+
+**Fecha:** 30/03/2026
+**Estado:** Custodiada
+**Descripción:** Cada sesión necesita un código propio que la identifique de forma consistente en todos los sistemas: SESION.md, status_DDMMYYYY.md, tabla de Supabase, y eventualmente la URL del chat de Claude. Formato propuesto: `SESION-YYYYMMDD` (ej: `SESION-20260330`). Claude no puede ver su propio ID de conversación — el identificador lo asigna el Arquitecto o se genera por convención de fecha. La URL del chat de claude.ai tiene un ID único que puede copiarse manualmente como referencia adicional al identificador por fecha. Esto habilita trazabilidad completa en dos direcciones: dado un status, encontrar la sesión de Claude que lo generó; dado un chat de Claude, encontrar el status y las señales que emergieron en esa sesión.
+**Impacto probable:** Campo `sesion_id` en la tabla de status acumulativo de Supabase (señal 31). Campo opcional `claude_chat_url` como referencia cruzada. Impacto en el Protocolo 02 (ritual de sesión) — el identificador se asigna en apertura y se usa en todos los archivos generados durante la sesión.
+**Origen:** Sesión 30/03/2026 — emergió al diseñar la tabla de status acumulativo y preguntarse cómo vincular el registro en Supabase con la conversación de Claude que lo originó.
+**Pregunta abierta:** ¿El identificador por fecha es suficiente si hay múltiples sesiones en el mismo día? ¿Se agrega un sufijo secuencial (SESION-20260330-A, SESION-20260330-B)? ¿La URL de Claude se registra manualmente al cierre o hay forma de capturarla automáticamente?
+
+---
+
 ## Señales incorporadas
 
 *Aquí irán las señales que maduraron y entraron al Corpus Madre, preservadas como registro histórico.*
