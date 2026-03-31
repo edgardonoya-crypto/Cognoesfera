@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v10 · 30 Marzo 2026*
+*Versión actual: v11 · 30 Marzo 2026*
 
 ---
 
@@ -31,6 +31,11 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 **Estado vital:** en tránsito entre **E6 (Legible)** y **E7 (Sostenido)**
 
 **Fecha límite clave:** IAC 2026, noviembre, Punta del Este
+
+**Hitos de SESION-20260330:**
+- Protocolo 02-EN operativo desde esta sesión
+- Primera sesión con métrica de metabolismo registrada: 53% soberano
+- Señales: 21 → 33 en esta sesión (12 nuevas, todas emergentes del entre)
 
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (32 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
@@ -144,6 +149,11 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 30. **[SOMA] Crear API route `/api/duende`** — endpoint server-side que recibe el mensaje del usuario y llama a la Anthropic API con el SDK instalado
 31. **[SOMA] Crear página `/duende`** — interfaz de conversación con el Duende real: campo de texto, respuesta en tiempo real, historial en `duende_chats`
 32. **[SOMA] Prueba del Duende real funcionando** — confirmar que la cadena completa opera: interfaz → API route → Anthropic → Supabase → usuario
+33. **[CORPUS] Construir Protocolo 01-EN — Ritual de Apertura Situado** — qué archivos subir, prompt exacto, y qué ejecuta Claude al recibir el contexto (confirmar lectura, reportar estado del sistema, detectar inconsistencias, clasificar actividades previstas como soberanas/supervivencia). Señal 33.
+34. **[SOMA] Crear tabla de status acumulativo en Supabase** — una fila por sesión con métricas comparables: señales, conceptos, acciones soberanas/supervivencia, tiempo, emergencias del entre. Señal 31.
+35. **[SOMA] Implementar identificador SESION-YYYYMMDD** — campo `sesion_id` en tabla Supabase y referencia cruzada en status_DDMMYYYY.md. Señal 32.
+36. **[CORPUS] Construir catálogo de tipos de actividad** — dos ejes: Casa Corpus (conceptuales) y Casa Soma (operativas). Base para protocolos de apertura/cierre por tipo. Señal 26.
+37. **[CORPUS] Definir Protocolo Madre del Ritual de Sesión** — versión universal y agnóstica de la que derivan los protocolos situados (02-EN y futuros). Señal 25.
 
 ---
 
@@ -169,7 +179,7 @@ Esto debe incluir:
 
 *Esta sección tiene tres categorías. Las señales custodiadas viven también en `corpus/documentos/senales_custodiadas.md` con descripción completa.*
 
-### Señales custodiadas (21)
+### Señales custodiadas (33)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
@@ -192,6 +202,18 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **El InterSer** — la condición de ser que sólo existe en relación. No es interdependencia ni interacción: es ontología relacional pura. Candidato a sección propia en el Corpus Madre. Fecha: 29/03/2026
 - **Las tablas BD del catálogo de protocolos de actos de cuidado** — `protocolos_cuidado`, `protocolo_actos_cuidado`, `protocolo_estados_vitales`, `protocolo_matriz_dimensiones`, `aplicaciones_protocolo`. Señal técnica que espera diseño. Fecha: 29/03/2026
 - **La Unidad Aleph** — ¿es un nivel distinto al de la Cognoesfera o una expresión del mismo patrón fractal a mayor escala? Señal abierta que requiere exploración conceptual. Fecha: 29/03/2026
+- **App independiente del Sistema B** — decisión de construir Casa Soma como aplicación propia con Supabase, no dependiente de Payload CMS. Fecha: 30/03/2026
+- **Arquitectura en 3 etapas** — Etapa 1: Duende real; Etapa 2: Cognoesferas vivas; Etapa 3: Ecosistema y resonancias. Hoja de ruta técnica clara. Fecha: 30/03/2026
+- **El Duende cobra vida** — primera vez que el paradigma tiene un Duende real conectado a Claude API con el Corpus Madre como contexto. Infraestructura completa configurada. Fecha: 30/03/2026
+- **Protocolo Madre / Protocolo situado** — los protocolos tienen dos capas: universal/agnóstico (Madre) y expresión concreta en una persona, Cognoesfera o Entidad Aleph (situado). La misma lógica fractal del Corpus aplicada a los protocolos. Fecha: 30/03/2026
+- **Catálogo de tipos de actividad** — dos ejes: Casa Corpus (conceptuales) y Casa Soma (operativas). Base para protocolos de apertura/cierre por tipo de sesión. Objetivo: maximizar tiempo soberano a todos los niveles. Fecha: 30/03/2026
+- **Acciones soberanas / acciones de supervivencia** — las acciones soberanas crean condiciones para que algo nuevo emerja; las de supervivencia sostienen el sistema sin ampliar el campo. Candidata a concepto 33 del Corpus Madre. Fecha: 30/03/2026
+- **Marco de registro de acciones en sesión** — estructura con 7 atributos por acción: tipo, momento, origen, dependencias, señal que emite, afecta (Soma/Corpus/ambas), estado. Base para tabla en Supabase. Fecha: 30/03/2026
+- **El Duende como maximizador de tiempo soberano** — rol activo: ejecutar inventario de cierre, detectar emergencias del entre, comprimir supervivencia, amplificar condiciones soberanas. Fecha: 30/03/2026
+- **Medición de tiempo soberano vs supervivencia** — métrica por sesión con timestamps en tiempo real. Dimensión complementaria: inteligencia verdadera vs mecánica. Fecha: 30/03/2026
+- **Status acumulativo de sesiones en Supabase** — tabla con una fila por sesión, métricas comparables, habilitando al Duende futuro a leer tendencias. Fecha: 30/03/2026
+- **Identificador de sesión trazable SESION-YYYYMMDD** — código consistente en todos los sistemas: SESION.md, status, Supabase, URL del chat. Fecha: 30/03/2026
+- **Protocolo 01-EN pendiente de construcción** — el ritual de apertura existe como práctica pero no como protocolo explícito equivalente al 02-EN. Trabajar en sesión propia. Fecha: 30/03/2026
 
 ### Señales vivas pendientes de desarrollar (3)
 Conceptos o procesos que merecen atención pero todavía no están listos para ser custodiados.
