@@ -276,6 +276,17 @@ Esta distinción es ontológica, no funcional. El lente del entre en la Matriz n
 
 ---
 
+## Acciones soberanas / acciones de supervivencia
+
+**Fecha:** 30/03/2026
+**Estado:** Custodiada — candidata a Corpus Madre (concepto 33)
+**Descripción:** Distinción operativa nueva: los tipos de acción se clasifican según lo que producen en el sistema. Acciones de supervivencia: necesarias para que el sistema funcione, no amplían el campo cognitivo ni crean condiciones para que algo nuevo emerja — instalar, configurar, commitear, verificar, hacer deploy. Acciones soberanas: crean condiciones para que algo nuevo emerja — nombrar una distinción, diseñar arquitectura, registrar señales, construir protocolos, explorar el corpus. Una sesión bien diseñada maximiza la proporción soberana y comprime, automatiza o delega la supervivencia. La distinción aplica a todos los niveles del paradigma: personal, Cognoesfera, Entidad Aleph. En cada nivel, el objetivo sistémico es el mismo: liberar tiempo y energía de la supervivencia para que el soberano pueda operar.
+**Impacto probable:** Candidata fuerte a concepto 33 del Corpus Madre. Enriquecería el concepto 15 (El tiempo soberano) con una taxonomía operativa concreta. Posible impacto en el diseño de los protocolos de sesión (señales 25 y 26) y en la Matriz de Vitalidad (lente del reloj interno).
+**Origen:** Sesión 30/03/2026 — emergió al observar que commitear, instalar y configurar consumen tiempo de sesión sin ampliar el campo del paradigma.
+**Pregunta abierta:** ¿Merece entrar como concepto 33 del Corpus Madre? ¿Cómo se relaciona con el tiempo soberano (concepto existente) y con festina lente? ¿La automatización de acciones de supervivencia (GitHub Actions, scripts) es en sí misma una acción soberana?
+
+---
+
 ## Señales incorporadas
 
 *Aquí irán las señales que maduraron y entraron al Corpus Madre, preservadas como registro histórico.*
