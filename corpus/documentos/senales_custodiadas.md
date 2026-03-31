@@ -329,6 +329,17 @@ Las acciones emergentes del entre son las más valiosas y las más difíciles de
 
 ---
 
+## Status acumulativo de sesiones en Supabase
+
+**Fecha:** 30/03/2026
+**Estado:** Custodiada
+**Descripción:** Tabla que agrega una fila por sesión con métricas comparables entre sesiones. El archivo `status_DDMMYYYY.md` sigue existiendo como registro narrativo — la tabla es el motor de análisis. Campos mínimos propuestos: `fecha`, `archivo_fuente` (referencia al status_DDMMYYYY.md), `señales_total`, `señales_nuevas`, `conceptos_corpus`, `acciones_soberanas`, `acciones_supervivencia`, `proporcion_soberana`, `tiempo_total_min`, `tiempo_soberano_min`, `tiempo_supervivencia_min`, `emergencias_del_entre`, `notas`. Todas las sesiones van — incluyendo las anteriores retroactivamente cuando sea posible. Esto habilita al Duende futuro a leer tendencias como contexto de sesión: si en las últimas 5 sesiones la proporción soberana cayó, el sistema puede detectarlo y proponer ajustes sin que el Arquitecto lo tenga que observar conscientemente.
+**Impacto probable:** Nueva tabla en Supabase — `sesiones_status` o `metabolismo_sesiones`. Impacto en el diseño del Duende (contexto de sesión enriquecido con historial). Conexión directa con las señales 27 (acciones soberanas/supervivencia), 28 (marco de registro), 29 (Duende como maximizador) y 30 (métrica soberana/supervivencia).
+**Origen:** Sesión 30/03/2026 — emergió al intentar hacer comparables las métricas de metabolismo entre sesiones.
+**Pregunta abierta:** ¿Quién popula la tabla — Claude Code al cierre de sesión, un script, o entrada manual? ¿Cuál es el nivel mínimo de fidelidad de los datos retroactivos?
+
+---
+
 ## Señales incorporadas
 
 *Aquí irán las señales que maduraron y entraron al Corpus Madre, preservadas como registro histórico.*
