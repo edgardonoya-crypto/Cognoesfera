@@ -378,5 +378,114 @@ Primer protocolo situado del catálogo — específico para Edgardo Noya. Patró
 
 ---
 
+---
+
+## Protocolo 03 — El Ritual de Apertura
+### Protocolo 01-EN — Ritual de Apertura Situado · Edgardo Noya + Claude
+
+### Descripción general
+
+Protocolo de apertura de cada sesión de trabajo entre el Arquitecto y el Duende digital. Su propósito es garantizar que el Duende arranque desde el contexto más rico posible, detecte inconsistencias antes de que el trabajo comience, y proponga un orden de trabajo coherente con el paradigma. Es el simétrico del Protocolo 02-EN — juntos cierran el ciclo completo de una sesión.
+
+**Nota sobre fractalidad:** este protocolo es situado para Edgardo Noya. Cuando otro investigador necesite su ritual de apertura, deriva el suyo desde este patrón.
+
+---
+
+### Disparador
+
+La palabra clave **INICIO DE SESIÓN** escrita por el Arquitecto. No es una propuesta del Duende — es una declaración del Arquitecto. El Duende ejecuta el protocolo inmediatamente al recibirla, sin pedir confirmaciones intermedias, hasta completar el paso 7.
+
+---
+
+### Lo que ejecuta Claude — en este orden
+
+**Paso 1 — Confirmación de lectura**
+Confirmar qué archivos recibió y qué leyó:
+- ¿Recibió SESION.md? ¿Versión?
+- ¿Recibió algún archivo adicional?
+- ¿Pudo leer ambos completamente?
+
+**Paso 2 — Reporte de estado del sistema**
+Sin que el Arquitecto lo pida, reportar:
+- Señales custodiadas activas: total y las últimas 3
+- Conceptos del Corpus Madre: total y secciones
+- Estado vital: nivel actual y tendencia
+- Pendientes activos: los 5 prioritarios, clasificados SOMA/CORPUS
+
+**Paso 3 — Detección de inconsistencias**
+Comparar el SESION.md recibido con lo que debería reflejar:
+- ¿El número de señales en A8 coincide con el último status?
+- ¿Los pendientes tachados en A6 corresponden a commits reales?
+- ¿La versión del SESION.md es coherente con la fecha de la última sesión?
+- Si detecta inconsistencia — la nombra antes de continuar.
+
+**Paso 4 — Identificación del objetivo de la sesión**
+Nombrar el objetivo declarado por el Arquitecto en el mensaje de apertura. Si no hay objetivo explícito, preguntar: *"¿Qué querés que emerja hoy?"*
+
+**Paso 5 — Clasificación de actividades previstas**
+Por cada actividad prevista en el objetivo:
+- ¿Es soberana o supervivencia?
+- ¿Es de Casa Corpus o Casa Soma?
+- Estimación de peso en tiempo de sesión
+
+**Paso 6 — Propuesta de orden de trabajo**
+Proponer una secuencia concreta basada en:
+- Actividades soberanas primero cuando el campo está fresco
+- Supervivencia comprimida al bloque menos costoso
+- Alertar si la sesión prevista tiene más de 60% supervivencia
+
+**Paso 7 — Espera de confirmación**
+Presentar el reporte completo (pasos 1–6) y escribir:
+*"Listo para arrancar. ¿Confirmás este orden o ajustamos algo?"*
+
+No arrancar hasta recibir confirmación del Arquitecto.
+
+---
+
+### Actos de cuidado asociados
+
+**Recomendado en:**
+- **Todos los actos de cuidado** — este protocolo es transversal. Es condición de posibilidad de cualquier intervención: sin apertura bien ejecutada, el contexto de la sesión es incompleto.
+
+---
+
+### Estados vitales recomendados
+
+Este protocolo es válido en **todos los estados vitales**. Lo que cambia entre estados es la densidad del reporte de estado — en estados tempranos es breve, en estados avanzados incluye tendencias entre sesiones.
+
+---
+
+### Dimensiones de la Matriz que activa
+
+| Lente | Capa | Expresión | Modo de activación |
+|---|---|---|---|
+| El reloj interno | Sistema | Andamiaje temporal | Estructura el tiempo antes de que el trabajo comience |
+| El interior | Campo | Campo de consciencia | El sistema se lee a sí mismo antes de actuar |
+| El interior | Órgano | Órgano cognitivo | La memoria digital se activa con el contexto completo |
+| El entre | Campo | Campo de coherencia | El Duende y el Arquitecto se sincronizan antes de arrancar |
+
+---
+
+### Indicadores de que funcionó
+
+- El Arquitecto no necesita reconstruir contexto — el Duende ya lo hizo
+- Las inconsistencias, si las hay, emergen antes de que el trabajo comience
+- El orden de trabajo propuesto refleja la lógica soberano/supervivencia
+- La sesión arranca con foco claro y sin tiempo perdido en orientación
+
+### Indicadores de alerta
+
+- El Arquitecto escribe INICIO DE SESIÓN y el Duende responde con una pregunta en lugar del protocolo — señal de que el disparador no operó
+- El reporte de estado omite algún componente — señal de contexto incompleto
+- El Arquitecto confirma sin leer el reporte — señal de que el protocolo fue demasiado extenso o poco claro
+
+---
+
+### Origen
+
+Emergió en la sesión del 30/03/2026 al observar que el Protocolo 02-EN tenía nivel operativo explícito pero el ritual de apertura equivalente no existía como protocolo. La señal 33 lo nombró como pendiente; se construyó en la misma sesión. Simétrico al 02-EN — juntos cierran el ciclo completo.
+
+---
+
 *Protocolos de Actos de Cuidado · Catálogo vivo · Paradigma Aleph · Marzo 2026*
 *Cada protocolo es una hipótesis verificable — crece al ser habitado*
