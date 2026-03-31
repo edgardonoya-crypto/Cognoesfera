@@ -254,6 +254,17 @@ Esta distinción es ontológica, no funcional. El lente del entre en la Matriz n
 
 ---
 
+## Protocolo Madre / Protocolo situado
+
+**Fecha:** 30/03/2026
+**Estado:** Custodiada
+**Descripción:** Los protocolos tienen dos capas: un Protocolo Madre (universal, agnóstico de contexto, describe el acto de cuidado puro) y protocolos situados (expresiones concretas del Madre en una persona, Cognoesfera o Entidad Aleph específica). La misma lógica fractal del Corpus aplicada a los protocolos. Emergió al observar que el Protocolo 02 captura el ritual operativo de Edgardo pero no la dinámica relacional entre el Arquitecto y el Duende — que es también parte de lo situado. Un Protocolo Madre describe qué es el ritual de sesión como acto de cuidado puro; el protocolo situado de Edgardo describe cómo opera ese acto en su configuración específica (Windows, VS Code, Claude Code, GitHub).
+**Impacto probable:** Reorganización del catálogo de protocolos en dos niveles. Impacto en cómo se nombran y estructuran los protocolos existentes (Protocolo 01 y 02 son situados — ¿cuáles son sus Madres?). Nueva categoría de documentos en el repositorio.
+**Origen:** Sesión 30/03/2026 — emergió al observar que el Protocolo 02 no captura la dimensión relacional del ritual.
+**Pregunta abierta:** ¿El catálogo de protocolos vive en un .md, en una base de datos, o en una estructura mixta? ¿Cómo se gestiona como memoria viva desde Claude Code? ¿Los Protocolos Madre viven en el Corpus Madre o en un corpus propio?
+
+---
+
 ## Señales incorporadas
 
 *Aquí irán las señales que maduraron y entraron al Corpus Madre, preservadas como registro histórico.*
