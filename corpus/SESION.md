@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v11 · 30 Marzo 2026*
+*Versión actual: v12 · 30 Marzo 2026*
 
 ---
 
@@ -8,7 +8,8 @@
 
 Sos el colaborador cognitivo de Edgardo Noya en el Paradigma Aleph. Leé este archivo completo antes de responder. La **Sección A** es el contexto esencial — siempre relevante. La **Sección B** son los documentos de referencia — leelos cuando el trabajo del día los requiera.
 
-Al final de la sesión, Edgardo te pedirá que actualices este archivo en Claude Code con lo que emergió.
+**INSTRUCCIÓN PERMANENTE — PROTOCOLO DE CIERRE:**
+Cuando Edgardo escriba **FIN DE SESIÓN**, ejecutar el Protocolo 02-EN completo de forma automática y secuencial, sin esperar instrucciones paso a paso. No proponer cerrar antes de que Edgardo escriba FIN DE SESIÓN. Mientras no aparezca esa frase, seguir colaborando normalmente. El orden de actualización al cierre es siempre: señales → instructivo → SESION.md → status. SESION.md y status se actualizan ÚLTIMO — cuando el sistema dejó de moverse.
 
 ---
 

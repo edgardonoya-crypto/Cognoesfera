@@ -236,7 +236,17 @@ El Duende responde confirmando que leyó el archivo y está ubicado. Si no lo ha
 
 ### Versión B — Ritual de cierre (Edgardo Noya)
 
+**Disparador:** La palabra clave **FIN DE SESIÓN** escrita por el Arquitecto. No es una propuesta del Duende — es una declaración del Arquitecto. Mientras no aparezca FIN DE SESIÓN, el Duende sigue colaborando sin proponer cierre.
+
 **Propósito:** Que nada de lo que emergió en la sesión se pierda. Que el SESION.md, las señales custodiadas, el instructivo y el status queden actualizados y commiteados antes de cerrar.
+
+**Orden de actualización — siempre este orden:**
+1. Señales custodiadas
+2. Instructivo operativo (si algo cambió)
+3. SESION.md
+4. Status del día
+
+SESION.md y status se actualizan ÚLTIMO — cuando el sistema dejó de moverse. Si se actualizan antes, capturan un estado incompleto.
 
 **Duración estimada:** 10-15 minutos.
 
