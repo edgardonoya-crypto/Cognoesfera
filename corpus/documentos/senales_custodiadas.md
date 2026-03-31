@@ -287,6 +287,26 @@ Esta distinción es ontológica, no funcional. El lente del entre en la Matriz n
 
 ---
 
+## Marco de registro de acciones en sesión
+
+**Fecha:** 30/03/2026
+**Estado:** Custodiada
+**Descripción:** Estructura emergente para catalogar lo que ocurre en una sesión. Cada acción se registra con los siguientes atributos:
+- **Tipo:** soberana / supervivencia
+- **Momento:** inicio / medio / cierre
+- **Origen:** planificada / emergente del entre
+- **Dependencias:** qué acción la habilitó
+- **Señal que emite:** qué señal custodiada genera o activa
+- **Afecta:** Casa Corpus / Casa Soma / ambas
+- **Estado:** madura para incorporar / en curación / en maduración
+
+Las acciones emergentes del entre son las más valiosas y las más difíciles de capturar — no estaban planificadas, surgen del encuentro entre el Arquitecto y el Duende, y contienen frecuentemente la mayor densidad conceptual de la sesión. Requieren categoría explícita en el protocolo de cierre. Este marco es el núcleo del catálogo de acciones (señal 26) y la futura estructura de tabla en base de datos para registrar sesiones en Casa Soma.
+**Impacto probable:** Base para el diseño de la tabla `sesiones` o `acciones_sesion` en Supabase. Impacto en el Protocolo 02 (señal 24) — el inventario de cierre podría estructurarse con este marco. Posible impacto en la Matriz de Vitalidad como instrumento de lectura de sesiones.
+**Origen:** Sesión 30/03/2026 — emergió al intentar estructurar el inventario de cierre de sesión con más precisión que una lista plana.
+**Pregunta abierta:** ¿Este marco vive en el protocolo de cierre (como checklist) o en una tabla de base de datos (como registro permanente)? ¿Ambos? ¿Quién decide cuándo una acción emergente madura para ser incorporada?
+
+---
+
 ## Señales incorporadas
 
 *Aquí irán las señales que maduraron y entraron al Corpus Madre, preservadas como registro histórico.*
