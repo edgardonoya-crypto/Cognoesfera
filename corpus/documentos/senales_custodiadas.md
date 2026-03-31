@@ -351,6 +351,17 @@ Las acciones emergentes del entre son las más valiosas y las más difíciles de
 
 ---
 
+## Protocolo 01-EN — Ritual de Apertura Situado pendiente de construcción
+
+**Fecha:** 30/03/2026
+**Estado:** Custodiada
+**Descripción:** Existe como práctica (subir SESION.md + prompt de arranque) pero no como protocolo explícito con nivel operativo equivalente al Protocolo 02-EN. La apertura tiene un nombre y pasos básicos en el instructivo operativo, pero no especifica qué hace Claude al recibir el contexto — que es la mitad más valiosa del ritual. El Protocolo 01-EN debería especificar: qué archivos subir según el tipo de sesión, prompt exacto de arranque, y qué ejecuta Claude al recibir el contexto: confirmar lectura del archivo, reportar estado actual del sistema (señales activas, pendientes prioritarios, último status), detectar inconsistencias antes de arrancar (¿el SESION.md está actualizado al día anterior?), y clasificar las actividades previstas de la sesión como soberanas o supervivencia. Trabajar en sesión propia.
+**Impacto probable:** Cierra la asimetría entre apertura y cierre — hoy el cierre tiene protocolo explícito (02-EN) y la apertura no. Impacto en el instructivo operativo (sección "El ritual de cada sesión"). Conexión con las señales 29 (Duende como maximizador) y 32 (identificador de sesión trazable).
+**Origen:** Sesión 30/03/2026 — emergió al observar que el Protocolo 02-EN tiene nivel operativo explícito pero el ritual de apertura equivalente no existe como protocolo.
+**Pregunta abierta:** ¿La apertura varía según el tipo de sesión (técnica vs conceptual vs cierre) o tiene estructura única? ¿Qué hace Claude si detecta que el SESION.md no está actualizado al arrancar?
+
+---
+
 ## Señales incorporadas
 
 *Aquí irán las señales que maduraron y entraron al Corpus Madre, preservadas como registro histórico.*
