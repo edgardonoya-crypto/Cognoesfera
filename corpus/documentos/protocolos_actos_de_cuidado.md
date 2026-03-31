@@ -281,8 +281,25 @@ actual del paradigma y hacé commit con el mensaje: "Agrega status_[fecha]"
 pendientes activos SOMA/CORPUS, próxima sesión]
 ```
 
-**Paso 6 — Verificación final**
+**Paso 6 — Verificación de consistencia y cierre**
 En el Explorer de VS Code, confirmar que ningún archivo tiene la letra `M`. Si todos están limpios — la sesión está cerrada.
+
+#### Cómo ejecuta Claude el chequeo de consistencia
+
+No le pide nada al Arquitecto. Lo hace con los datos que ya tiene:
+
+1. Toma el inventario de acciones que emergieron en la sesión
+2. Por cada acción que debería haber modificado un archivo, verifica la fecha de modificación en el repositorio comparando con la fecha de la sesión
+3. Si la fecha de un archivo no coincide con el día de la sesión — alerta: falta commitear o el contenido no fue incorporado
+4. Compara los archivos del repositorio con el inventario completo:
+   - `corpus/documentos/` — ¿todos los documentos nuevos están?
+   - `corpus/status/` — ¿el status del día está actualizado?
+   - `corpus/SESION.md` — ¿refleja el estado real al cierre?
+   - `corpus/documentos/senales_custodiadas.md` — ¿tiene todas las señales?
+   - `corpus/documentos/protocolos_actos_de_cuidado.md` — ¿tiene todos los protocolos?
+5. Si encuentra inconsistencia — la resuelve él mismo antes de proponer cerrar. No transfiere la carga al Arquitecto.
+
+Este chequeo es responsabilidad del Duende, no del Arquitecto. El Arquitecto solo confirma — no detecta.
 
 ---
 
