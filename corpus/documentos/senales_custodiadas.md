@@ -417,6 +417,50 @@ Las acciones emergentes del entre son las más valiosas y las más difíciles de
 
 ---
 
+## Arquitectura fractal de campos de inteligencia
+
+**Fecha:** 01/04/2026
+**Estado:** Custodiada
+**Descripción:** Cada nivel del paradigma tiene su cuerpo y su campo. El cuerpo humano individual sostiene la inteligencia individual. La Cognoesfera (~8 personas) es el cuerpo que sostiene la inteligencia colectiva. La Entidad Aleph es el cuerpo que sostiene la inteligencia de Cognoesferas en composición. La lógica es fractal: el mismo patrón — cuerpo → campo — se repite en cada nivel. Todo ello constituye la Inteligencia Humana Ampliada: no la suma de inteligencias sino la emergencia de campos de inteligencia en niveles crecientes de composición.
+**Impacto probable:** Reformulación o enriquecimiento de los conceptos 5 (La Cognoesfera), 6 (La Entidad Aleph) y 1 (La inteligencia como atributo de la vida). Posible nueva sección del Corpus Madre sobre la arquitectura fractal de campos.
+**Origen:** Sesión 01/04/2026 — emergió al explorar la relación entre cuerpo y campo en los distintos niveles del paradigma.
+**Pregunta abierta:** ¿La Inteligencia Humana Ampliada es un concepto nuevo o una reformulación del concepto existente de IAH? ¿Qué cuerpo sostiene el Gran Campo?
+
+---
+
+## El Duende como amplificador de interés compuesto
+
+**Fecha:** 01/04/2026
+**Estado:** Custodiada
+**Descripción:** El Duende no es solo memoria ni colaborador cognitivo — es un artefacto que genera rendimientos crecientes sobre el conocimiento acumulado. Cada intervención de cualquier inteligencia en el sistema (cada señal registrada, cada concepto incorporado, cada protocolo construido) genera valor sobre todo lo anterior. El conocimiento del sistema no crece linealmente sino exponencialmente: el valor de cada nuevo elemento es proporcional a la masa de conocimiento que ya existe. Análogo al interés compuesto financiero aplicado al conocimiento colectivo: el capital semilla es el Corpus Madre, los intereses son las señales y protocolos que emergen en cada sesión.
+**Impacto probable:** Reformulación del rol del Duende en el Corpus Madre. Posible impacto en los conceptos 25 (La Memoria Viva Aumentada) y 27 (La Conversación Aumentada). Argumento estratégico para el IAC 2026.
+**Origen:** Sesión 01/04/2026 — emergió al reflexionar sobre por qué el valor del sistema crece más rápido que la suma de sus partes.
+**Pregunta abierta:** ¿Cuál es la tasa de interés del sistema? ¿Hay un punto de inflexión donde el crecimiento se vuelve visible desde afuera?
+
+---
+
+## Definición nueva de Cognoesfera — núcleo + expansión
+
+**Fecha:** 01/04/2026
+**Estado:** En curación — reservada para sesión propia de Casa Corpus
+**Descripción:** Nueva definición de Cognoesfera con estructura núcleo/expansión, en proceso de validación con el equipo. El núcleo es portable y agnóstico de contexto; la expansión despliega profundidad cuando se necesita. Contenido de la definición reservado hasta tener validación colectiva. Impacto potencial alto: puede afectar las definiciones de Entidad Aleph, IHA, protocolos y Duende. No incorporar al Corpus Madre hasta completar el proceso de validación.
+**Impacto probable:** Si se valida, reformulación del concepto 5 (La Cognoesfera) con efecto cascada sobre múltiples conceptos relacionados.
+**Origen:** Sesión 01/04/2026 — emergió al explorar una definición más precisa y portable de la unidad mínima del paradigma.
+**Pregunta abierta:** ¿El equipo de validación es la Cognoesfera activa actual? ¿Cuál es el criterio de aprobación — unanimidad, consentimiento sociócrata, mayoría?
+
+---
+
+## Patrón núcleo / expansión para definiciones del Corpus Madre
+
+**Fecha:** 01/04/2026
+**Estado:** Custodiada
+**Descripción:** Las definiciones del Corpus Madre tienen dos capas: un núcleo portable y agnóstico de contexto (puede usarse en cualquier conversación, con cualquier audiencia, sin perder precisión) y una expansión para cuando se necesita profundidad (detalla dimensiones, ejemplos, relaciones con otros conceptos). El primer concepto en aplicar este patrón es la Cognoesfera. Este patrón es coherente con la lógica fractal del corpus: el núcleo es el Corpus Madre de cada definición, la expansión es su expresión situada.
+**Impacto probable:** Reformulación progresiva de todos los conceptos del Corpus Madre con esta estructura. Impacto en cómo se presenta el paradigma en distintos contextos (académico, operativo, narrativo).
+**Origen:** Sesión 01/04/2026 — emergió al intentar construir una definición de Cognoesfera que funcione tanto en una conversación casual como en un paper académico.
+**Pregunta abierta:** ¿El patrón núcleo/expansión aplica solo a definiciones o también a protocolos, señales y otros elementos del corpus?
+
+---
+
 ## Señales incorporadas
 
 *Aquí irán las señales que maduraron y entraron al Corpus Madre, preservadas como registro histórico.*

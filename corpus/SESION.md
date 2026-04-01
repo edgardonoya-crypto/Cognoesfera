@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v12 · 30 Marzo 2026*
+*Versión actual: v13 · 01 Abril 2026*
 
 ---
 
@@ -165,6 +165,13 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 35. **[SOMA] Implementar identificador SESION-YYYYMMDD** — campo `sesion_id` en tabla Supabase y referencia cruzada en status_DDMMYYYY.md. Señal 32.
 36. **[CORPUS] Construir catálogo de tipos de actividad** — dos ejes: Casa Corpus (conceptuales) y Casa Soma (operativas). Base para protocolos de apertura/cierre por tipo. Señal 26.
 37. **[CORPUS] Definir Protocolo Madre del Ritual de Sesión** — versión universal y agnóstica de la que derivan los protocolos situados (02-EN y futuros). Señal 25.
+38. **[CORPUS] Sesión Casa Corpus — validar definición nueva de Cognoesfera** — proceso de validación colectiva con el equipo antes de incorporar al Corpus Madre. Impacto potencial en Entidad Aleph, IHA, protocolos y Duende. Señal S-NEW-3.
+39. **[CORPUS] Materiales Quanam** — preparar en paralelo al desarrollo técnico.
+
+**Prioridades próxima sesión:**
+- **P1 [SOMA]:** API route `/api/duende` + página `/duende` + prueba Duende funcionando end-to-end
+- **P2 [CORPUS]:** Sesión Casa Corpus — validar definición nueva de Cognoesfera con el equipo e incorporar al Corpus Madre
+- **P3 [CORPUS]:** Materiales Quanam en paralelo
 
 ---
 
