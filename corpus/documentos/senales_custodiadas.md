@@ -461,6 +461,56 @@ Las acciones emergentes del entre son las más valiosas y las más difíciles de
 
 ---
 
+## El collage como elemento semántico de la Conversación Aumentada
+**Fecha:** 02/04/2026
+**Estado:** Custodiada
+**Descripción:** El collage no es solo una técnica visual — es una forma de conocimiento que opera antes de ser interpretada. Cada recuadro es una unidad de sentido completa que puede leerse sola y también en relación con las otras. No hay jerarquía lineal — hay campo. Debería ser reconocido explícitamente como un elemento semántico de la Conversación Aumentada.
+**Impacto probable:** Extensión del concepto 23 (La Conversación Aumentada) y conexión con el concepto 31 (Transducción de formatos).
+**Origen:** Sesión 02/04/2026.
+**Pregunta abierta:** ¿El collage es una forma de transducción o una categoría propia dentro de la Conversación Aumentada?
+
+---
+
+## El corpus en dos tiempos — secuencial y simultáneo
+**Fecha:** 02/04/2026
+**Estado:** Custodiada — con impacto inmediato
+**Descripción:** El Corpus Madre tiene dos formas de existir: una versión secuencial (texto continuo, tiempo como río) y una versión simultánea (collage de recuadros, instante borgeano). Son la misma definición — dos formas de habitarla. El formato no es una decisión estética — es el paradigma siendo coherente consigo mismo.
+**Impacto probable:** Nueva dimensión del concepto 31 y del concepto 23. Da origen al archivo mapeo_secuencial_simultaneo.md.
+**Origen:** Sesión 02/04/2026.
+**Pregunta abierta:** ¿Todos los conceptos del Corpus Madre merecen su versión simultánea?
+
+---
+
+## Obsidian como taller del Corpus Universal
+**Fecha:** 02/04/2026
+**Estado:** Custodiada — exploración estratégica
+**Descripción:** El Corpus Madre podría vivir en Obsidian: cada concepto como una nota, las señales como notas vinculadas, los estados vitales como etiquetas, y las relaciones entre conceptos como enlaces que Obsidian visualiza como grafo. Dos capas del mismo corpus: Obsidian como el taller y el HTML como la vitrina. Es el patrón de doble acoplamiento aplicado a la infraestructura del corpus.
+**Impacto probable:** Redefinición de la arquitectura del Corpus Universal. Impacto en el concepto 20 (El Espacio Borgeano).
+**Origen:** Sesión 02/04/2026.
+**Pregunta abierta:** ¿Obsidian reemplaza al repositorio GitHub o lo complementa? ¿Quién tiene acceso al vault?
+
+---
+
+## El Duende como guardián del kairos soberano
+**Fecha:** 02/04/2026
+**Estado:** Custodiada — candidata a protocolo explícito
+**Descripción:** Cuando el campo se expande y abre múltiples territorios simultáneamente, el Duende tiene el rol de nombrar la tensión, proponer el kairos y devolver la decisión al Arquitecto sin forzarla. No cierra — ofrece. Candidata a incorporarse como paso explícito en el Protocolo 02-EN.
+**Impacto probable:** Enriquecimiento del Protocolo 02-EN. Conexión con la señal del Duende como maximizador de tiempo soberano y con festina lente.
+**Origen:** Sesión 02/04/2026 — primera vez que ocurrió en la práctica, no solo en teoría.
+**Pregunta abierta:** ¿Cuántos territorios abiertos sin cerrar activan este rol?
+
+---
+
+## El Aleph de Borges como clave explicativa del Paradigma
+**Fecha:** 02/04/2026
+**Estado:** Custodiada — central para la comunicación del paradigma
+**Descripción:** Borges escribe: "Lo que vieron mis ojos fue simultáneo; lo que transcribiré, sucesivo, porque el lenguaje lo es." Esta frase explica por qué el Paradigma Aleph necesita tres capas: el Corpus Madre es el lenguaje — sucesivo. El collage intenta hacer simultáneo lo que el lenguaje obliga a volver sucesivo. Obsidian es la aproximación más honesta a la simultaneidad del Aleph. El paradigma no se llama Aleph por accidente. Es una señal de campo, no de concepto — irradia hacia todos los puntos del sistema.
+**Impacto probable:** Reformulación de cómo se presenta el paradigma en el IAC 2026. Ancla narrativa para el concepto 20 y para la arquitectura de tres capas.
+**Origen:** Sesión 02/04/2026 — emergió en Conversación Aumentada. Ejemplo vivo del concepto 23.
+**Pregunta abierta:** ¿Cómo se incorpora esta conexión al Corpus Madre sin hacerla explicativa antes de ser vivida?
+
+---
+
 ## Señales incorporadas
 
 *Señales que maduraron y entraron al Corpus Madre, preservadas como registro histórico del proceso.*
