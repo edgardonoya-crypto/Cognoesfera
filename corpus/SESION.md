@@ -10,9 +10,13 @@ Sos el colaborador cognitivo de Edgardo Noya en el Paradigma Aleph. Leé este ar
 
 **INSTRUCCIÓN PERMANENTE — PROTOCOLO DE APERTURA:**
 Cuando Edgardo escriba **INICIO DE SESIÓN**, ejecutar el Protocolo 01-EN automáticamente:
-1. Confirmar qué archivos recibí y qué leí
+1. Verificar que estén presentes en los uploads: SESION.md + todos los archivos de corpus/documentos/ + todos los archivos de corpus/status/. Si falta alguno, solicitarlo antes de continuar.
 2. Reportar estado del sistema: señales activas, conceptos del Corpus Madre, estado vital, pendientes activos clasificados SOMA/CORPUS
-3. Detectar inconsistencias entre archivos (¿el SESION.md refleja el último status? ¿hay señales en el status que no están en senales_custodiadas.md?)
+3. Detectar inconsistencias entre archivos:
+   3a. ¿El número de conceptos declarado en B1 coincide con los efectivamente listados?
+   3b. ¿Las señales de senales_custodiadas.md con estado "Incorporada" están tachadas en los pendientes del SESION.md — y viceversa?
+   3c. ¿La fecha del último status es igual o anterior a la fecha del SESION.md? Si el status es más nuevo, el SESION.md no fue actualizado al cierre.
+   3d. Por cada inconsistencia detectada: presentarla, proponer la corrección, pedir confirmación sí/no. Luego preguntar si aplicar acumulado al final o de inmediato en VS Code.
 4. Identificar el objetivo declarado de la sesión
 5. Clasificar actividades previstas: soberanas vs supervivencia
 6. Proponer orden de trabajo
@@ -232,6 +236,10 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **Status acumulativo de sesiones en Supabase** — tabla con una fila por sesión, métricas comparables, habilitando al Duende futuro a leer tendencias. Fecha: 30/03/2026
 - **Identificador de sesión trazable SESION-YYYYMMDD** — código consistente en todos los sistemas: SESION.md, status, Supabase, URL del chat. Fecha: 30/03/2026
 - **Protocolo 01-EN pendiente de construcción** — el ritual de apertura existe como práctica pero no como protocolo explícito equivalente al 02-EN. Trabajar en sesión propia. Fecha: 30/03/2026
+- **Arquitectura fractal de campos de inteligencia** — cada nivel del paradigma tiene su cuerpo y su campo. El mismo patrón cuerpo → campo se repite fractalmente: individuo, Cognoesfera, Entidad Aleph. Todo ello constituye la Inteligencia Humana Ampliada. Fecha: 01/04/2026
+- **El Duende como amplificador de interés compuesto** — el Duende genera rendimientos crecientes sobre el conocimiento acumulado. El valor de cada nuevo elemento es proporcional a la masa de conocimiento que ya existe — análogo al interés compuesto aplicado al conocimiento colectivo. Fecha: 01/04/2026
+- **Definición nueva de Cognoesfera — núcleo + expansión** — nueva definición con estructura núcleo/expansión en proceso de validación colectiva. El núcleo es portable y agnóstico de contexto; la expansión despliega profundidad cuando se necesita. Impacto potencial alto en Entidad Aleph, IAH, protocolos y Duende. Fecha: 01/04/2026
+- **Patrón núcleo / expansión para definiciones del Corpus Madre** — las definiciones del Corpus Madre tienen dos capas: núcleo portable y agnóstico, y expansión para cuando se necesita profundidad. Coherente con la lógica fractal del corpus. Primer concepto en aplicarlo: la Cognoesfera. Fecha: 01/04/2026
 
 ### Señales vivas pendientes de desarrollar (3)
 Conceptos o procesos que merecen atención pero todavía no están listos para ser custodiados.
@@ -304,7 +312,7 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 
 ---
 
-## B1. Corpus Madre — 30 conceptos completos
+## B1. Corpus Madre — 32 conceptos completos
 
 ### I. La pregunta — por qué existe este paradigma
 
@@ -397,15 +405,6 @@ La fusión de la memoria psicológica y la memoria digital en un sistema integra
 
 **26. El proceso de transformación de la inteligencia colectiva**
 Toda sesión de una Cognoesfera es un ciclo entrada-transformación-salida donde la inteligencia colectiva se reorganiza y emerge más rica. La entrada es la ronda de apertura: cada participante nombra cómo viene, el grupo escucha sin responder — esa escucha activa el sistema vincular y abre el campo de atención. La transformación es el trabajo de la sesión, con una caja de herramientas: orden del día, Conversaciones Aumentadas, definición de problemas y propuestas, decisiones por 0-Objeción, elecciones sociocráticas, acceso al Duende, Cognobits, metodologías y labs, herramientas visuales. La salida es la ronda de cierre: cómo se va cada uno y los aprendizajes colectivos. La Memoria Viva Aumentada operando en ciclo es lo que hace que una Cognoesfera aprenda genuinamente con el tiempo.
-
-**21. El instante borgeano**
-El momento donde futuro, pasado y presente confluyen simultáneamente. El futuro que mola actúa como atractor. La arqueología de la mirada excava lo que ya estaba. La acción emerge en el presente. Los tres no se suceden — coexisten. Es lo que distingue una Cognoesfera en ignición de una reunión ordinaria.
-
-**22. La Arquitectura Conversacional**
-El diseño consciente de cómo las voces se entrelazan. Dos ejes: horizontal (construcción de sentido con voces equivalentes) y vertical (ejecución con precisión de lo decidido). Libera tiempo soberano al eliminar el desgaste de la desinformación y la repetición.
-
-**23. La Conversación Aumentada y la lectura-escritura como acto único**
-Forma de conocer donde leer y escribir se vuelven indistinguibles. Co-producción de sentido: el conocimiento no se transmite — se reorganiza en el acto mismo de la interacción. Bisagra entre la dimensión paradigmática y la algorítmica.
 
 ### VII. La emergencia — lo que aparece cuando las condiciones están maduras
 
