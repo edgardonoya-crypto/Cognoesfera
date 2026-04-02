@@ -442,7 +442,7 @@ Las acciones emergentes del entre son las más valiosas y las más difíciles de
 ## Definición nueva de Cognoesfera — núcleo + expansión
 
 **Fecha:** 01/04/2026
-**Estado:** En curación — reservada para sesión propia de Casa Corpus
+**Estado:** Incorporada — concepto 5 actualizado en Corpus Madre el 02/04/2026
 **Descripción:** Nueva definición de Cognoesfera con estructura núcleo/expansión, en proceso de validación con el equipo. El núcleo es portable y agnóstico de contexto; la expansión despliega profundidad cuando se necesita. Contenido de la definición reservado hasta tener validación colectiva. Impacto potencial alto: puede afectar las definiciones de Entidad Aleph, IHA, protocolos y Duende. No incorporar al Corpus Madre hasta completar el proceso de validación.
 **Impacto probable:** Si se valida, reformulación del concepto 5 (La Cognoesfera) con efecto cascada sobre múltiples conceptos relacionados.
 **Origen:** Sesión 01/04/2026 — emergió al explorar una definición más precisa y portable de la unidad mínima del paradigma.
