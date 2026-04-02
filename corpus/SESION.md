@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v13 · 01 Abril 2026*
+*Versión actual: v14 · 02 Abril 2026*
 
 ---
 
@@ -169,8 +169,11 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 35. **[SOMA] Implementar identificador SESION-YYYYMMDD** — campo `sesion_id` en tabla Supabase y referencia cruzada en status_DDMMYYYY.md. Señal 32.
 36. **[CORPUS] Construir catálogo de tipos de actividad** — dos ejes: Casa Corpus (conceptuales) y Casa Soma (operativas). Base para protocolos de apertura/cierre por tipo. Señal 26.
 37. **[CORPUS] Definir Protocolo Madre del Ritual de Sesión** — versión universal y agnóstica de la que derivan los protocolos situados (02-EN y futuros). Señal 25.
-38. **[CORPUS] Sesión Casa Corpus — validar definición nueva de Cognoesfera** — proceso de validación colectiva con el equipo antes de incorporar al Corpus Madre. Impacto potencial en Entidad Aleph, IHA, protocolos y Duende. Señal S-NEW-3.
+38. ~~**[CORPUS] Sesión Casa Corpus — validar definición nueva de Cognoesfera**~~ — ✅ concepto 5 reescrito con patrón núcleo/expansión el 02/04/2026. Señal S-NEW-3 incorporada.
 39. **[CORPUS] Materiales Quanam** — preparar en paralelo al desarrollo técnico.
+40. **[CORPUS] Explorar Obsidian como taller del Corpus Universal** — cada concepto como nota, señales como notas vinculadas, grafo de relaciones. Señal custodiada.
+41. **[CORPUS] Versiones simultáneas de los conceptos del Corpus Madre** — evaluar cuáles merecen su versión collage/simultánea además de la secuencial. Primer caso: concepto 5 (cognoesfera_definicion.html).
+42. **[CORPUS] Incorporar Aleph de Borges al Corpus Madre** — clave explicativa de la arquitectura de tres capas (secuencial/simultáneo/Obsidian). Sin hacerla explicativa antes de ser vivida.
 
 **Prioridades próxima sesión:**
 - **P1 [SOMA]:** API route `/api/duende` + página `/duende` + prueba Duende funcionando end-to-end
@@ -240,6 +243,11 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **El Duende como amplificador de interés compuesto** — el Duende genera rendimientos crecientes sobre el conocimiento acumulado. El valor de cada nuevo elemento es proporcional a la masa de conocimiento que ya existe — análogo al interés compuesto aplicado al conocimiento colectivo. Fecha: 01/04/2026
 - **Definición nueva de Cognoesfera — núcleo + expansión** — nueva definición con estructura núcleo/expansión en proceso de validación colectiva. El núcleo es portable y agnóstico de contexto; la expansión despliega profundidad cuando se necesita. Impacto potencial alto en Entidad Aleph, IAH, protocolos y Duende. Fecha: 01/04/2026
 - **Patrón núcleo / expansión para definiciones del Corpus Madre** — las definiciones del Corpus Madre tienen dos capas: núcleo portable y agnóstico, y expansión para cuando se necesita profundidad. Coherente con la lógica fractal del corpus. Primer concepto en aplicarlo: la Cognoesfera. Fecha: 01/04/2026
+- **El collage como elemento semántico de la Conversación Aumentada** — el collage opera como forma de conocimiento antes de ser interpretado. Cada recuadro es unidad de sentido completa. No hay jerarquía lineal — hay campo. Candidato a elemento explícito del concepto 23. Fecha: 02/04/2026
+- **El corpus en dos tiempos — secuencial y simultáneo** — el Corpus Madre existe en versión secuencial (texto continuo) y simultánea (collage). Son la misma definición habitada de dos formas. El formato es una decisión paradigmática, no estética. Fecha: 02/04/2026
+- **Obsidian como taller del Corpus Universal** — cada concepto como nota, señales como notas vinculadas, grafo de relaciones. Taller vs vitrina (HTML). Patrón de doble acoplamiento aplicado a la infraestructura del corpus. Fecha: 02/04/2026
+- **El Duende como guardián del kairos soberano** — cuando el campo abre múltiples territorios simultáneamente, el Duende nombra la tensión, propone el kairos y devuelve la decisión al Arquitecto sin forzarla. Primera vez que ocurrió en la práctica. Candidata a protocolo. Fecha: 02/04/2026
+- **El Aleph de Borges como clave explicativa del Paradigma** — "Lo que vieron mis ojos fue simultáneo; lo que transcribiré, sucesivo, porque el lenguaje lo es." Explica la arquitectura de tres capas del paradigma. Señal de campo, no de concepto. Fecha: 02/04/2026
 
 ### Señales vivas pendientes de desarrollar (3)
 Conceptos o procesos que merecen atención pero todavía no están listos para ser custodiados.
@@ -303,6 +311,14 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - corpus/documentos/arquitectura_paradigma_aleph.docx — mismo documento en Word · 29/03/2026
 - corpus/documentos/arquitectura_paradigma_aleph.html — diagrama interactivo standalone · 29/03/2026
 - corpus/documentos/protocolos_actos_de_cuidado.md — actualizado con Protocolo 02: El Ritual de Sesión · 30/03/2026
+- corpus/documentos/cognoesfera_definicion.html — primer documento collage HTML del Corpus Madre · 02/04/2026
+- corpus/documentos/mapeo_secuencial_simultaneo.md — registro arquitectural de la relación entre capas secuencial y simultánea · 02/04/2026
+
+**Hitos de SESION-20260402:**
+- Protocolo 01-EN probado exitosamente por primera vez
+- Concepto 5 reescrito con patrón núcleo/expansión — primer concepto del Corpus Madre en este formato
+- Señal S-NEW-3 incorporada al Corpus Madre
+- Decisión: no ir a BD para el mapeo secuencial/simultáneo — vive en archivo .md
 
 ---
 
