@@ -463,7 +463,28 @@ Las acciones emergentes del entre son las más valiosas y las más difíciles de
 
 ## Señales incorporadas
 
-*Aquí irán las señales que maduraron y entraron al Corpus Madre, preservadas como registro histórico.*
+*Señales que maduraron y entraron al Corpus Madre, preservadas como registro histórico del proceso.*
+
+---
+
+## Transducción de formatos
+**Fecha de incorporación:** 29/03/2026
+**Incorporada en:** Concepto 31 del Corpus Madre
+**Estado:** Incorporada
+
+---
+
+## Las dos dimensiones del Cognobit
+**Fecha de incorporación:** 29/03/2026
+**Incorporada en:** Concepto 24 del Corpus Madre
+**Estado:** Incorporada
+
+---
+
+## El patrón de doble acoplamiento
+**Fecha de incorporación:** 29/03/2026
+**Incorporada en:** Concepto 32 del Corpus Madre — Sección I
+**Estado:** Incorporada
 
 ---
 
