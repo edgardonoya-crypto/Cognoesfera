@@ -145,7 +145,13 @@ Su fundamento está en Plotino (el ser humano ES el punto de encuentro entre lo 
 
 ## 5. La Cognoesfera
 
-La Cognoesfera es la unidad mínima de inteligencia colectiva. Es un grupo de aproximadamente ocho personas que, al alcanzar cierta coherencia relacional y cognitiva, se convierte en algo más que la suma de sus partes: un órgano cognitivo emergente con capacidad de aprender, decidir y generar valor de manera colectiva. No se diseña — se cultiva. Tiene una arquitectura interna: un campo relacional que sostiene los vínculos vivos, una membrana epistemológica que regula qué entra y qué sale, un núcleo semiótico donde se produce el sentido compartido, y un espacio de innovación donde emergen ideas que ningún integrante traía solo. Una Cognoesfera viva no es un equipo de trabajo — es un organismo que piensa.
+**Núcleo**
+
+Una Cognoesfera es el cuerpo que sostiene el campo de inteligencia colectiva que emerge cuando aproximadamente ocho personas alcanzan coherencia relacional, cognitiva y de propósito. Así como el cuerpo humano sostiene el campo de inteligencia individual, la Cognoesfera sostiene un campo de otro orden — uno que transforma primero la forma en que el grupo ve la realidad, y desde esa nueva visión actúa sobre ella de maneras que producen universos posibles que antes no existían. Cada persona mantiene su autonomía y su singularidad — la Cognoesfera no las disuelve sino que las amplifica en un plano que ninguna podría alcanzar sola. No se impone ni se diseña desde afuera: se cultiva.
+
+**Expansión**
+
+Este campo no aparece espontáneamente. Requiere condiciones: tiempo disponible para madurar, calidad de vínculo entre las personas, y formas estructuradas de interacción que organicen la palabra, la escucha y la decisión. Se sostiene sobre condiciones que no pueden separarse: cómo el grupo interactúa, con qué herramientas amplifica sus capacidades, y desde qué sentido compartido orienta su acción. Si alguna de estas condiciones se disocia, el fenómeno desaparece. Puede existir en organizaciones, comunidades, redes distribuidas o ecosistemas híbridos — su forma varía según el territorio, pero sus principios permanecen invariantes.
 
 ---
 
