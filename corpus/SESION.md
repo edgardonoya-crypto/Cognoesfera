@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v14 · 02 Abril 2026*
+*Versión actual: v15 · 04 Abril 2026*
 
 ---
 
@@ -52,8 +52,18 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - Primera sesión con métrica de metabolismo registrada: 53% soberano
 - Señales: 21 → 33 en esta sesión (12 nuevas, todas emergentes del entre)
 
+**Hitos de SESION-20260402/04:**
+- Protocolo 01-EN construido y probado exitosamente por primera vez
+- Concepto 5 reescrito con patrón núcleo/expansión — primer concepto del Corpus Madre en este formato
+- Concepto 33 incorporado: La Función HTML Aleph
+- Primer collage HTML del Corpus Madre construido: `cognoesfera_definicion.html`
+- Registro arquitectural de las dos capas: `mapeo_secuencial_simultaneo.md`
+- Convocatoria Quanam "Por este camino 2026" construida con la Función HTML Aleph aplicada
+- 7 señales nuevas custodiadas (37 → 42 activas post S-NEW incorporaciones)
+- Señal de campo: el Aleph de Borges como clave explicativa de la arquitectura de tres capas
+
 **Nomenclatura vigente:**
-- **Corpus Madre** — los fundamentos agnósticos (32 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
+- **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
 - **Corpus Universal** — el campo total del conocimiento vivo del paradigma en todos sus niveles y expresiones
 - **Duende** — la figura que encarna el metabolismo cognitivo asistido (puede ser una IA, una persona, un protocolo)
 - **IAH** — Inteligencia Aumentada Humanista: composición entre percepción humana y capacidad del Duende
@@ -164,21 +174,23 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 30. **[SOMA] Crear API route `/api/duende`** — endpoint server-side que recibe el mensaje del usuario y llama a la Anthropic API con el SDK instalado
 31. **[SOMA] Crear página `/duende`** — interfaz de conversación con el Duende real: campo de texto, respuesta en tiempo real, historial en `duende_chats`
 32. **[SOMA] Prueba del Duende real funcionando** — confirmar que la cadena completa opera: interfaz → API route → Anthropic → Supabase → usuario
-33. **[CORPUS] Construir Protocolo 01-EN — Ritual de Apertura Situado** — qué archivos subir, prompt exacto, y qué ejecuta Claude al recibir el contexto (confirmar lectura, reportar estado del sistema, detectar inconsistencias, clasificar actividades previstas como soberanas/supervivencia). Señal 33.
+33. ~~**[CORPUS] Construir Protocolo 01-EN — Ritual de Apertura Situado**~~ — ✅ construido y probado exitosamente en SESION-20260402. Incorporado como instrucción permanente en SESION.md y como Protocolo 01-EN en protocolos_actos_de_cuidado.md.
 34. **[SOMA] Crear tabla de status acumulativo en Supabase** — una fila por sesión con métricas comparables: señales, conceptos, acciones soberanas/supervivencia, tiempo, emergencias del entre. Señal 31.
 35. **[SOMA] Implementar identificador SESION-YYYYMMDD** — campo `sesion_id` en tabla Supabase y referencia cruzada en status_DDMMYYYY.md. Señal 32.
 36. **[CORPUS] Construir catálogo de tipos de actividad** — dos ejes: Casa Corpus (conceptuales) y Casa Soma (operativas). Base para protocolos de apertura/cierre por tipo. Señal 26.
 37. **[CORPUS] Definir Protocolo Madre del Ritual de Sesión** — versión universal y agnóstica de la que derivan los protocolos situados (02-EN y futuros). Señal 25.
 38. ~~**[CORPUS] Sesión Casa Corpus — validar definición nueva de Cognoesfera**~~ — ✅ concepto 5 reescrito con patrón núcleo/expansión el 02/04/2026. Señal S-NEW-3 incorporada.
-39. **[CORPUS] Materiales Quanam** — preparar en paralelo al desarrollo técnico.
+39. **[CORPUS] Materiales Quanam** — convocatoria "Por este camino 2026" construida con Función HTML Aleph el 04/04/2026. ✅ Pendiente: materiales adicionales para IAC 2026.
 40. **[CORPUS] Explorar Obsidian como taller del Corpus Universal** — cada concepto como nota, señales como notas vinculadas, grafo de relaciones. Señal custodiada.
 41. **[CORPUS] Versiones simultáneas de los conceptos del Corpus Madre** — evaluar cuáles merecen su versión collage/simultánea además de la secuencial. Primer caso: concepto 5 (cognoesfera_definicion.html).
 42. **[CORPUS] Incorporar Aleph de Borges al Corpus Madre** — clave explicativa de la arquitectura de tres capas (secuencial/simultáneo/Obsidian). Sin hacerla explicativa antes de ser vivida.
+43. **[CORPUS] Aplicar patrón núcleo/expansión al concepto 6 (Entidad Aleph)** — segundo concepto del Corpus Madre en adoptar el patrón inaugurado con el concepto 5.
+44. **[CORPUS] Construir versiones simultáneas de más conceptos del Corpus Madre** — evaluar cuáles siguen al concepto 5 (Cognoesfera) con su versión collage HTML. Usar la Función HTML Aleph (concepto 33) como protocolo.
 
 **Prioridades próxima sesión:**
 - **P1 [SOMA]:** API route `/api/duende` + página `/duende` + prueba Duende funcionando end-to-end
-- **P2 [CORPUS]:** Sesión Casa Corpus — validar definición nueva de Cognoesfera con el equipo e incorporar al Corpus Madre
-- **P3 [CORPUS]:** Materiales Quanam en paralelo
+- **P2 [CORPUS]:** Aplicar patrón núcleo/expansión al concepto 6 (Entidad Aleph)
+- **P3 [CORPUS]:** Explorar Obsidian como taller del Corpus Universal
 
 ---
 
@@ -204,7 +216,7 @@ Esto debe incluir:
 
 *Esta sección tiene tres categorías. Las señales custodiadas viven también en `corpus/documentos/senales_custodiadas.md` con descripción completa.*
 
-### Señales custodiadas (33)
+### Señales custodiadas (42)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
@@ -313,12 +325,17 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - corpus/documentos/protocolos_actos_de_cuidado.md — actualizado con Protocolo 02: El Ritual de Sesión · 30/03/2026
 - corpus/documentos/cognoesfera_definicion.html — primer documento collage HTML del Corpus Madre · 02/04/2026
 - corpus/documentos/mapeo_secuencial_simultaneo.md — registro arquitectural de la relación entre capas secuencial y simultánea · 02/04/2026
+- corpus/documentos/temas_pendientes_exploracion.md — registro de temas abiertos y exploraciones futuras del paradigma · 04/04/2026
 
-**Hitos de SESION-20260402:**
-- Protocolo 01-EN probado exitosamente por primera vez
+**Hitos de SESION-20260402/04:**
+- Protocolo 01-EN construido y probado exitosamente por primera vez
 - Concepto 5 reescrito con patrón núcleo/expansión — primer concepto del Corpus Madre en este formato
-- Señal S-NEW-3 incorporada al Corpus Madre
-- Decisión: no ir a BD para el mapeo secuencial/simultáneo — vive en archivo .md
+- Concepto 33 incorporado: La Función HTML Aleph — el proceso de transformar texto secuencial en objeto simultáneo
+- Primer collage HTML del Corpus Madre construido y committeado: `cognoesfera_definicion.html`
+- Conexión Borges/Aleph/arquitectura de tres capas — señal de campo más potente de la sesión
+- Convocatoria Quanam "Por este camino 2026" construida aplicando la Función HTML Aleph
+- Decisión arquitectural: mapeo secuencial/simultáneo vive en .md — Solidificación Prematura evitada
+- 7 señales nuevas custodiadas — 5 emergentes del entre el 02/04 + 2 de la extensión el 04/04
 
 ---
 
