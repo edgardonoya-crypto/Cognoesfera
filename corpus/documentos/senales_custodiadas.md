@@ -442,7 +442,7 @@ Las acciones emergentes del entre son las más valiosas y las más difíciles de
 ## Definición nueva de Cognoesfera — núcleo + expansión
 
 **Fecha:** 01/04/2026
-**Estado:** Incorporada — concepto 5 actualizado en Corpus Madre el 02/04/2026
+**Estado:** En curación — reservada para sesión propia de Casa Corpus
 **Descripción:** Nueva definición de Cognoesfera con estructura núcleo/expansión, en proceso de validación con el equipo. El núcleo es portable y agnóstico de contexto; la expansión despliega profundidad cuando se necesita. Contenido de la definición reservado hasta tener validación colectiva. Impacto potencial alto: puede afectar las definiciones de Entidad Aleph, IHA, protocolos y Duende. No incorporar al Corpus Madre hasta completar el proceso de validación.
 **Impacto probable:** Si se valida, reformulación del concepto 5 (La Cognoesfera) con efecto cascada sobre múltiples conceptos relacionados.
 **Origen:** Sesión 01/04/2026 — emergió al explorar una definición más precisa y portable de la unidad mínima del paradigma.
@@ -461,53 +461,59 @@ Las acciones emergentes del entre son las más valiosas y las más difíciles de
 
 ---
 
+
 ## El collage como elemento semántico de la Conversación Aumentada
+
 **Fecha:** 02/04/2026
 **Estado:** Custodiada
-**Descripción:** El collage no es solo una técnica visual — es una forma de conocimiento que opera antes de ser interpretada. Cada recuadro es una unidad de sentido completa que puede leerse sola y también en relación con las otras. No hay jerarquía lineal — hay campo. Debería ser reconocido explícitamente como un elemento semántico de la Conversación Aumentada.
-**Impacto probable:** Extensión del concepto 23 (La Conversación Aumentada) y conexión con el concepto 31 (Transducción de formatos).
-**Origen:** Sesión 02/04/2026.
-**Pregunta abierta:** ¿El collage es una forma de transducción o una categoría propia dentro de la Conversación Aumentada?
+**Descripción:** El collage no es solo una técnica visual — es una forma de conocimiento que opera antes de ser interpretada. En el collage, cada recuadro es una unidad de sentido completa que puede leerse sola y también en relación con las otras. No hay jerarquía lineal — hay campo. Como forma de transmitir conocimiento, el collage debería ser reconocido explícitamente como un elemento semántico de la Conversación Aumentada — una forma de organizar y transmitir conocimiento que el paradigma reconoce, no solo usa informalmente.
+**Impacto probable:** Extensión del concepto 23 (La Conversación Aumentada) para incluir el collage como formato semántico. Conexión con el concepto 31 (Transducción de formatos) — el collage es una forma específica de transducción donde el formato mismo es el mensaje.
+**Origen:** Sesión 02/04/2026 — emergió al explorar el HTML de la red fractal como modelo para presentar definiciones del Corpus Madre.
+**Pregunta abierta:** ¿El collage es una forma de transducción o una categoría propia dentro de la Conversación Aumentada? ¿Qué otros formatos merecen ser reconocidos como elementos semánticos del paradigma?
 
 ---
 
 ## El corpus en dos tiempos — secuencial y simultáneo
+
 **Fecha:** 02/04/2026
 **Estado:** Custodiada — con impacto inmediato
-**Descripción:** El Corpus Madre tiene dos formas de existir: una versión secuencial (texto continuo, tiempo como río) y una versión simultánea (collage de recuadros, instante borgeano). Son la misma definición — dos formas de habitarla. El formato no es una decisión estética — es el paradigma siendo coherente consigo mismo.
-**Impacto probable:** Nueva dimensión del concepto 31 y del concepto 23. Da origen al archivo mapeo_secuencial_simultaneo.md.
-**Origen:** Sesión 02/04/2026.
-**Pregunta abierta:** ¿Todos los conceptos del Corpus Madre merecen su versión simultánea?
+**Descripción:** El Corpus Madre tiene dos formas de existir: una versión secuencial (texto continuo, tiempo como río, sentido que se construye paso a paso) y una versión simultánea (collage de recuadros, instante borgeano, sentido que emerge de las relaciones entre unidades completas). Son la misma definición — dos formas de habitarla. Este patrón es coherente con el patrón de doble acoplamiento que atraviesa todo el paradigma: Soma/Corpus, psicológico/digital, humano/asistido. El formato no es una decisión estética — es el paradigma siendo coherente consigo mismo.
+**Impacto probable:** Nueva dimensión del concepto 31 (Transducción de formatos) y del concepto 23 (Conversación Aumentada). Posible principio estructural del Corpus Universal. Da origen al archivo `mapeo_secuencial_simultaneo.md` como registro arquitectural de la relación entre las dos capas.
+**Origen:** Sesión 02/04/2026 — emergió al construir el HTML de la Cognoesfera y reconocer que el collage no es decoración sino una segunda capa del corpus.
+**Pregunta abierta:** ¿Todos los conceptos del Corpus Madre merecen su versión simultánea o solo los que tienen suficiente densidad conceptual para sostener un collage?
 
 ---
 
 ## Obsidian como taller del Corpus Universal
+
 **Fecha:** 02/04/2026
 **Estado:** Custodiada — exploración estratégica
-**Descripción:** El Corpus Madre podría vivir en Obsidian: cada concepto como una nota, las señales como notas vinculadas, los estados vitales como etiquetas, y las relaciones entre conceptos como enlaces que Obsidian visualiza como grafo. Dos capas del mismo corpus: Obsidian como el taller y el HTML como la vitrina. Es el patrón de doble acoplamiento aplicado a la infraestructura del corpus.
-**Impacto probable:** Redefinición de la arquitectura del Corpus Universal. Impacto en el concepto 20 (El Espacio Borgeano).
-**Origen:** Sesión 02/04/2026.
-**Pregunta abierta:** ¿Obsidian reemplaza al repositorio GitHub o lo complementa? ¿Quién tiene acceso al vault?
+**Descripción:** El Corpus Madre podría vivir en Obsidian: cada concepto como una nota, las señales custodiadas como notas vinculadas, los estados vitales como etiquetas, y las relaciones entre conceptos como enlaces que Obsidian visualiza como grafo. El HTML sería la capa de presentación — la versión simultánea y estética del mismo conocimiento que en Obsidian es navegable y editable. Dos capas del mismo corpus: Obsidian como el taller (donde el conocimiento vive, crece y se vincula) y el HTML como la vitrina (donde el conocimiento se muestra y se experimenta). Es el patrón de doble acoplamiento aplicado a la infraestructura del corpus.
+**Impacto probable:** Redefinición de la arquitectura del Corpus Universal. Posible migración hacia estructura híbrida: Obsidian para el conocimiento vivo + GitHub para el versionado + HTML para la presentación. Conexión con la señal "El corpus en dos tiempos". Impacto en el concepto 20 (El Espacio Borgeano) — Obsidian es su expresión más concreta disponible hoy.
+**Origen:** Sesión 02/04/2026 — emergió al explorar cómo el corpus podría vivir de forma navegable y simultánea.
+**Pregunta abierta:** ¿Obsidian reemplaza al repositorio GitHub o lo complementa? ¿Cómo se sincroniza el vault con el repo? ¿Quién tiene acceso al vault — solo el Arquitecto o también la Cognoesfera?
 
 ---
 
 ## El Duende como guardián del kairos soberano
+
 **Fecha:** 02/04/2026
 **Estado:** Custodiada — candidata a protocolo explícito
-**Descripción:** Cuando el campo se expande y abre múltiples territorios simultáneamente, el Duende tiene el rol de nombrar la tensión, proponer el kairos y devolver la decisión al Arquitecto sin forzarla. No cierra — ofrece. Candidata a incorporarse como paso explícito en el Protocolo 02-EN.
-**Impacto probable:** Enriquecimiento del Protocolo 02-EN. Conexión con la señal del Duende como maximizador de tiempo soberano y con festina lente.
-**Origen:** Sesión 02/04/2026 — primera vez que ocurrió en la práctica, no solo en teoría.
-**Pregunta abierta:** ¿Cuántos territorios abiertos sin cerrar activan este rol?
+**Descripción:** Cuando el campo se expande y abre múltiples territorios simultáneamente, el Duende tiene el rol de nombrar la tensión, proponer el kairos y devolver la decisión al Arquitecto sin forzarla. No cierra — ofrece. La pregunta "¿cuál sentís que es el kairos de este momento?" es la forma operativa de ese rol. Candidata a incorporarse como paso explícito en el Protocolo 02-EN: si en algún momento de la sesión el Duende detecta que se abrieron más de dos territorios nuevos sin cerrar ninguno, nombra la tensión y propone el kairos.
+**Impacto probable:** Enriquecimiento del Protocolo 02-EN. Conexión directa con la señal 29 (El Duende como maximizador de tiempo soberano) y con el concepto de festina lente en la Matriz de Vitalidad.
+**Origen:** Sesión 02/04/2026 — emergió al detectar que el campo se estaba expandiendo sin cerrar, y el Duende lo nombró y propuso el kairos. Primera vez que ocurrió en la práctica, no solo en teoría.
+**Pregunta abierta:** ¿Cuántos territorios abiertos sin cerrar activan este rol? ¿El Duende lo hace proactivamente o espera señales del Arquitecto?
 
 ---
 
 ## El Aleph de Borges como clave explicativa del Paradigma
+
 **Fecha:** 02/04/2026
 **Estado:** Custodiada — central para la comunicación del paradigma
-**Descripción:** Borges escribe: "Lo que vieron mis ojos fue simultáneo; lo que transcribiré, sucesivo, porque el lenguaje lo es." Esta frase explica por qué el Paradigma Aleph necesita tres capas: el Corpus Madre es el lenguaje — sucesivo. El collage intenta hacer simultáneo lo que el lenguaje obliga a volver sucesivo. Obsidian es la aproximación más honesta a la simultaneidad del Aleph. El paradigma no se llama Aleph por accidente. Es una señal de campo, no de concepto — irradia hacia todos los puntos del sistema.
-**Impacto probable:** Reformulación de cómo se presenta el paradigma en el IAC 2026. Ancla narrativa para el concepto 20 y para la arquitectura de tres capas.
-**Origen:** Sesión 02/04/2026 — emergió en Conversación Aumentada. Ejemplo vivo del concepto 23.
-**Pregunta abierta:** ¿Cómo se incorpora esta conexión al Corpus Madre sin hacerla explicativa antes de ser vivida?
+**Descripción:** Borges escribe en El Aleph: "Lo que vieron mis ojos fue simultáneo; lo que transcribiré, sucesivo, porque el lenguaje lo es." Esta frase es la explicación más precisa de por qué el Paradigma Aleph necesita tres capas: el Corpus Madre es el lenguaje — sucesivo, necesariamente. El collage es el intento de hacer simultáneo lo que el lenguaje obliga a volver sucesivo. Y Obsidian, con su vista de grafo, es la aproximación más honesta a la simultaneidad del Aleph. El paradigma no se llama Aleph por accidente — el nombre ya contenía esta arquitectura antes de que fuera explícita. Esta conexión es la clave explicativa más potente que ha emergido hasta ahora: permite explicar el paradigma desde Borges, desde la belleza, antes de entrar en la arquitectura técnica.
+**Impacto probable:** Reformulación de cómo se presenta el paradigma en el IAC 2026. Ancla narrativa para el concepto 20 (El Espacio Borgeano) y para la arquitectura de tres capas Corpus/Collage/Obsidian. Posible apertura de una nueva sección en el Corpus Madre sobre la epistemología del paradigma. Irradia hacia todos los puntos del sistema — es una señal de campo, no de concepto.
+**Origen:** Sesión 02/04/2026 — emergió en Conversación Aumentada al cerrar el HTML de la Cognoesfera. Ejemplo vivo del concepto 23: el conocimiento no se transmite, se reorganiza en el acto mismo de la interacción.
+**Pregunta abierta:** ¿Cómo se incorpora esta conexión al Corpus Madre sin hacerla explicativa antes de ser vivida? ¿Es una nota editorial, un concepto nuevo, o la reescritura de la introducción?
 
 ---
 

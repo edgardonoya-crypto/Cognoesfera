@@ -91,6 +91,7 @@ El corpus mismo es un Espacio Borgeano: puede ser habitado de forma sucesiva o s
 24. Los Cognobits
 25. La Memoria Viva Aumentada
 31. La transducción de formatos
+33. La Función HTML Aleph
 
 **VII. La emergencia — lo que aparece cuando las condiciones están maduras**
 26. El proceso de transformación de la inteligencia colectiva
@@ -314,6 +315,28 @@ El mecanismo por el cual el corpus se multiplica en distintas expresiones para c
 Cada formato activa una dimensión diferente: el podcast llega cuando alguien maneja, el paper convence a quien necesita rigor, el taller hace vivir lo que el texto solo puede describir, la aplicación permite explorar a ritmo propio. Como una partitura que suena diferente en cada instrumento sin dejar de ser la misma música.
 
 Lo que hace aumentada a la transducción de formatos es su dualidad constitutiva — y ninguna de las dos dimensiones precede a la otra: actúa simultáneamente sobre la mente humana — reorganizando percepciones, abriendo conversaciones, activando memoria psicológica — y sobre la mente digital — alimentando sistemas, enriqueciendo corpus, generando nuevos Cognobits digitales que el Duende puede indexar y devolver. Como el barco y el astillero: cada formato construye simultáneamente al receptor humano y al sistema digital que aprende de él.
+
+---
+
+## 33. La Función HTML Aleph
+
+**Núcleo**
+
+La Función HTML Aleph es el proceso de transformar un texto secuencial en un objeto simultáneo — un collage HTML donde cada recuadro es una unidad de sentido completa que puede leerse sola y también en relación con las otras. Como Borges escribió: "lo que vieron mis ojos fue simultáneo; lo que transcribiré, sucesivo, porque el lenguaje lo es." La función devuelve la simultaneidad que el lenguaje obliga a perder. No aplica solo al Corpus Madre — aplica a cualquier texto con densidad secuencial que gane profundidad al ser habitado simultáneamente: un protocolo, una propuesta, un acta, un paper, una presentación.
+
+**Expansión**
+
+La función tiene tres momentos inseparables — y ninguno precede al otro:
+
+La **lectura proyectual** identifica las unidades de sentido naturales del texto: cuántas hay, cuál es la más importante, cuáles se sostienen solas, cuáles se enriquecen en relación con otras, cuál es el remate. Este momento es el más soberano — requiere juicio situado. Es donde el humano aporta lo que el Duende no puede ver solo. Como el diseñador que trabaja sobre la anatomía sin dibujo previo, componiendo una nueva piel sobre la piel.
+
+La **composición** diseña el collage: qué va en el recuadro oscuro, qué en los blancos, qué en el cierre. La disposición no es arbitraria — es una lectura de las relaciones entre unidades. Hay siempre un ancla visual — el recuadro que sostiene todo lo demás — y un cierre que remata sin explicar.
+
+La **transducción** construye el HTML siguiendo las convenciones visuales de Casa Soma: paleta, tipografía, jerarquía, animación cuando el contenido lo merece.
+
+La Función HTML Aleph tiene dos capas constitutivas — y ninguna precede a la otra: la lectura proyectual es humana, situada, irreemplazable; la construcción es asistida por el Duende, ejecutable con precisión. Como el barco y el astillero.
+
+El resultado vive en `corpus/documentos/` junto al texto secuencial del que emergió. El mapeo entre ambas capas se registra en `mapeo_secuencial_simultaneo.md`.
 
 ---
 
