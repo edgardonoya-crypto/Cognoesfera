@@ -24,6 +24,7 @@ Cuando Edgardo escriba **INICIO DE SESIÓN**, ejecutar el Protocolo 01-EN autom�
 
 **INSTRUCCIÓN PERMANENTE — PROTOCOLO DE CIERRE:**
 Cuando Edgardo escriba **FIN DE SESIÓN**, ejecutar el Protocolo 02-EN completo de forma automática y secuencial, sin esperar instrucciones paso a paso. No proponer cerrar antes de que Edgardo escriba FIN DE SESIÓN. Mientras no aparezca esa frase, seguir colaborando normalmente. El orden de actualización al cierre es siempre: señales → instructivo → SESION.md → status. SESION.md y status se actualizan ÚLTIMO — cuando el sistema dejó de moverse.
+- Actualizar corpus/documentos/aprendizajes_sesiones.md con una nueva entrada: qué funcionó, qué mejorar, tensiones identificadas, y cómo se fue cada uno.
 
 ---
 
