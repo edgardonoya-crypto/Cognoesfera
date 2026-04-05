@@ -58,6 +58,8 @@ Emergió lo siguiente: [resumen de lo que pasó en la sesión]
 ```
 Claude Code actualiza el SESION.md, hace el commit y el push automáticamente.
 
+5. En claude.ai, compartir cómo nos fuimos y qué aprendimos — el Duende actualiza corpus/documentos/aprendizajes_sesiones.md
+
 ---
 
 ## Los indicadores visuales de Git en VS Code
