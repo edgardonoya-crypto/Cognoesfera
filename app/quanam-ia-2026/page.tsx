@@ -88,6 +88,7 @@ export default function QuanamIa2026() {
   const [email, setEmail] = useState('')
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [drawerSec1Open, setDrawerSec1Open] = useState(false)
+  const [drawerSecMidOpen, setDrawerSecMidOpen] = useState(false)
   const [drawerSec2Open, setDrawerSec2Open] = useState(false)
   const [dF1Open, setDF1Open] = useState(false)
   const [dF2Open, setDF2Open] = useState(false)
@@ -822,6 +823,37 @@ export default function QuanamIa2026() {
                       )}
                     </div>
 
+                  </div>
+                )}
+              </div>
+
+              {/* NIVEL 1 — SECCIÓN MID */}
+              <div style={{ borderBottom: '1px solid rgba(139,105,20,0.18)' }}>
+                <div onClick={() => setDrawerSecMidOpen(v => !v)} style={{ padding: '18px 0', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, fontStyle: 'italic', color: '#8B6914', lineHeight: 1.35, margin: 0 }}>Y en cada caso, quedó algo más</p>
+                  <span style={{ fontSize: 16, color: '#C4941A', fontWeight: 300, flexShrink: 0, marginLeft: 12 }}>{drawerSecMidOpen ? '−' : '+'}</span>
+                </div>
+                {drawerSecMidOpen && (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 16, paddingBottom: 24 }}>
+                    {[
+                      {
+                        label: 'Siglo XIX',
+                        text: 'Tolstoi fue a vivir con los campesinos. Los movimientos obreros inventaron nuevas formas de valor colectivo. Las vanguardias crearon lenguajes que antes no existían. La humanidad no encontró las respuestas en los sistemas que colapsaban — las construyó desde el entre.',
+                      },
+                      {
+                        label: '2020',
+                        text: 'Lo que emergió no fue tecnología — fue inteligencia colectiva. Las organizaciones que salieron mejor paradas fueron las que aprendieron a pensar juntas bajo incertidumbre.',
+                      },
+                      {
+                        label: 'Ahora',
+                        text: 'Todavía está emergiendo. Pero el patrón sugiere que lo que quedará no será lo que los agentes puedan hacer solos — sino lo que emerge cuando humanos y agentes piensan juntos. Sin los humanos, los agentes no tienen hacia dónde ir.',
+                      },
+                    ].map(({ label, text }) => (
+                      <div key={label} style={{ paddingLeft: 14, borderLeft: '2px solid rgba(196,148,26,0.35)' }}>
+                        <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#C4941A', fontWeight: 500, margin: '0 0 6px' }}>{label}</p>
+                        <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300, margin: 0 }}>{text}</p>
+                      </div>
+                    ))}
                   </div>
                 )}
               </div>
