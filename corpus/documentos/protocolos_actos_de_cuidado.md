@@ -238,10 +238,10 @@ El Duende responde confirmando que leyó el archivo y está ubicado. Si no lo ha
 
 **Disparador:** La palabra clave **FIN DE SESIÓN** escrita por el Arquitecto. No es una propuesta del Duende — es una declaración del Arquitecto. Mientras no aparezca FIN DE SESIÓN, el Duende sigue colaborando sin proponer cierre.
 
-**Propósito:** Que nada de lo que emergió en la sesión se pierda. Que el SESION.md, las señales custodiadas, el instructivo y el status queden actualizados y commiteados antes de cerrar.
+**Propósito:** Que nada de lo que emergió en la sesión se pierda. Que el SESION.md, las señales activas, el instructivo y el status queden actualizados y commiteados antes de cerrar.
 
 **Orden de actualización — siempre este orden:**
-1. Señales custodiadas
+1. Señales activas
 2. Instructivo operativo (si algo cambió)
 3. SESION.md
 4. Status del día
@@ -253,15 +253,23 @@ SESION.md y status se actualizan ÚLTIMO — cuando el sistema dejó de moverse.
 **Paso 1 — Inventario de lo que emergió**
 Antes de ejecutar ningún commit, pedirle al Duende:
 
-*"Hacé un inventario de todo lo que emergió hoy: conceptos nuevos, señales custodiadas, pendientes nuevos, documentos generados, cambios al instructivo. Clasificá cada item en SOMA o CORPUS."*
+*"Hacé un inventario de todo lo que emergió hoy: conceptos nuevos, señales activas nuevas, pendientes nuevos, documentos generados, cambios al instructivo. Clasificá cada item en SOMA o CORPUS."*
 
 Revisás el inventario y confirmás que está completo. Si falta algo, lo agregás antes de continuar.
 
-**Paso 2 — Actualizar señales custodiadas** (si hay señales nuevas)
+**Paso 1b — Verificar el flujo de maduración**
+El Duende pregunta explícitamente:
+- ¿Algún tema de `temas_pendientes_exploracion.md` maduró lo suficiente para convertirse en señal activa?
+- ¿Alguna señal activa maduró lo suficiente para convertirse en pendiente concreto en `pendientes_soma.md` o `pendientes_corpus.md`?
+- ¿Algún pendiente se completó y debe moverse al archivo histórico?
+
+Registrar los movimientos confirmados por el Arquitecto antes de continuar.
+
+**Paso 2 — Actualizar señales activas** (si hay señales nuevas o movimientos)
 En Claude Code:
 ```
-Agregá estas señales al archivo corpus/documentos/senales_custodiadas.md 
-y hacé commit con el mensaje: "Agrega [N] señales custodiadas — sesión [fecha]"
+Agregá estas señales al archivo corpus/documentos/senales_activas.md 
+y hacé commit con el mensaje: "Agrega [N] señales activas — sesión [fecha]"
 [texto completo de las señales]
 ```
 
@@ -281,6 +289,13 @@ Actualizá corpus/documentos/instructivo_operativo_edgardo.md con
 los siguientes cambios y hacé commit:
 [descripción de los cambios]
 ```
+
+**Paso 4b — Propuesta de nombre de sesión**
+El Duende propone un nombre para la sesión basado en lo que emergió.
+Formato: *"El [sustantivo] — cuando [qué pasó]"*
+Ejemplos: "El InterSer — cuando la arquitectura se volvió organismo", "La reestructura — cuando el sistema se reorganizó para crecer".
+
+El Arquitecto confirma o ajusta. El nombre aprobado se usa en la entrada de `aprendizajes_sesiones.md`, en el `status_DDMMYYYY.md` y en el commit message.
 
 **Paso 5 — Actualizar el status**
 En Claude Code:
@@ -305,7 +320,7 @@ No le pide nada al Arquitecto. Lo hace con los datos que ya tiene:
    - `corpus/documentos/` — ¿todos los documentos nuevos están?
    - `corpus/status/` — ¿el status del día está actualizado?
    - `corpus/SESION.md` — ¿refleja el estado real al cierre?
-   - `corpus/documentos/senales_custodiadas.md` — ¿tiene todas las señales?
+   - `corpus/documentos/senales_activas.md` — ¿tiene todas las señales activas?
    - `corpus/documentos/protocolos_actos_de_cuidado.md` — ¿tiene todos los protocolos?
 5. Si encuentra inconsistencia — la resuelve él mismo antes de proponer cerrar. No transfiere la carga al Arquitecto.
 
@@ -406,18 +421,20 @@ Confirmar qué archivos recibió y qué leyó:
 - ¿Pudo leer ambos completamente?
 
 **Paso 2 — Reporte de estado del sistema**
-Sin que el Arquitecto lo pida, reportar:
-- Señales custodiadas activas: total y las últimas 3
+Sin que el Arquitecto lo pida, reportar desde el **status más reciente** (corpus/status/status_DDMMYYYY.md):
+- Señales activas: total (de `senales_activas.md`)
+- Señales incorporadas acumuladas (de `senales_incorporadas.md`)
 - Conceptos del Corpus Madre: total y secciones
 - Estado vital: nivel actual y tendencia
-- Pendientes activos: los 5 prioritarios, clasificados SOMA/CORPUS
+- Pendientes prioritarios: P1 y P2 de `pendientes_soma.md` y `pendientes_corpus.md`
 
 **Paso 3 — Detección de inconsistencias**
-Comparar el SESION.md recibido con lo que debería reflejar:
-- ¿El número de señales en A8 coincide con el último status?
-- ¿Los pendientes tachados en A6 corresponden a commits reales?
-- ¿La versión del SESION.md es coherente con la fecha de la última sesión?
-- Si detecta inconsistencia — la nombra antes de continuar.
+Verificar el estado del sistema a partir de los archivos subidos:
+- 3a. ¿El número de señales en SESION.md A8 coincide con el total en `senales_activas.md`?
+- 3b. ¿Las señales marcadas como incorporadas en SESION.md están también en `senales_incorporadas.md`?
+- 3c. ¿La fecha del último status es igual o anterior a la fecha del SESION.md? Si el status es más nuevo, el SESION.md no fue actualizado al cierre.
+- 3d. ¿El flujo de maduración está en orden? Verificar que existan: `temas_pendientes_exploracion.md` → `senales_activas.md` → `pendientes_soma.md` + `pendientes_corpus.md`.
+- 3e. Por cada inconsistencia detectada: presentarla, proponer la corrección, pedir confirmación sí/no.
 
 **Paso 4 — Identificación del objetivo de la sesión**
 Nombrar el objetivo declarado por el Arquitecto en el mensaje de apertura. Si no hay objetivo explícito, preguntar: *"¿Qué querés que emerja hoy?"*

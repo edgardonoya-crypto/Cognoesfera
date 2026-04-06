@@ -1,7 +1,7 @@
 # Instructivo Operativo — Edgardo Noya
 *Cómo operar la arquitectura digital del Corpus Vivo*
 *Documento situado · Específico para la configuración de Edgardo*
-*Paradigma Aleph · Marzo 2026*
+*Paradigma Aleph · Actualizado 06/04/2026*
 
 ---
 
@@ -37,6 +37,14 @@ Para entender *por qué* existe cada herramienta y *qué rol cumple* en el siste
 2. Clickeás el botón + en la barra de entrada
 3. Navegás hasta C:\Users\edgardo\cognoesfera\corpus\SESION.md
 4. Lo seleccionás y lo subís
+4b. Si la sesión requiere trabajo con señales, también subís:
+    - corpus/documentos/senales_activas.md
+    - corpus/documentos/senales_incorporadas.md
+4c. Si la sesión requiere trabajo con pendientes, también subís:
+    - corpus/documentos/pendientes_soma.md (si es sesión Soma)
+    - corpus/documentos/pendientes_corpus.md (si es sesión Corpus)
+4d. Para el Protocolo 01-EN completo, subir también el último status:
+    - corpus/status/status_DDMMYYYY.md (el más reciente)
 5. Escribís el prompt de arranque (ver abajo)
 ```
 
@@ -57,6 +65,15 @@ Actualizá corpus/SESION.md con lo que emergió hoy y hacé commit.
 Emergió lo siguiente: [resumen de lo que pasó en la sesión]
 ```
 Claude Code actualiza el SESION.md, hace el commit y el push automáticamente.
+
+Si en la sesión se movieron señales entre activas e incorporadas, o se completaron pendientes,
+agregá esos archivos al commit:
+
+```
+git add corpus/SESION.md corpus/status/status_DDMMYYYY.md corpus/documentos/senales_activas.md
+git commit -m "Cierre SESION-YYYYMMDD — [resumen]"
+git push origin master:main
+```
 
 5. En claude.ai, compartir cómo nos fuimos y qué aprendimos — el Duende actualiza corpus/documentos/aprendizajes_sesiones.md
 
@@ -161,15 +178,26 @@ git push origin master:main
 
 ---
 
-## Agregar una señal custodiada
+## Agregar una señal activa
 
 ```
-1. Subís corpus/documentos/senales_custodiadas.md a claude.ai
-2. Claude agrega la señal con el formato correcto
+1. Subís corpus/documentos/senales_activas.md a claude.ai
+2. Claude agrega la señal con el formato correcto al final del archivo
 3. Descargás el archivo actualizado
 4. Lo reemplazás en VS Code
-5. git add corpus/documentos/senales_custodiadas.md
-   git commit -m "Agrega señal custodiada — [nombre de la señal]"
+5. git add corpus/documentos/senales_activas.md
+   git commit -m "Agrega señal activa — [nombre de la señal]"
+   git push origin master:main
+```
+
+Cuando una señal se incorpora al Corpus Madre:
+```
+1. Subís corpus/documentos/senales_activas.md y corpus/documentos/senales_incorporadas.md a claude.ai
+2. Claude mueve la señal de activas a incorporadas con el formato correcto
+3. Descargás ambos archivos actualizados
+4. Los reemplazás en VS Code
+5. git add corpus/documentos/senales_activas.md corpus/documentos/senales_incorporadas.md
+   git commit -m "Señal incorporada al corpus — [nombre de la señal]"
    git push origin master:main
 ```
 
@@ -211,14 +239,18 @@ git push origin master:main
 ```
 cognoesfera/
 ├── corpus/
-│   ├── SESION.md                          ← arranque de sesión
+│   ├── SESION.md                               ← arranque de sesión
 │   └── documentos/
-│       ├── corpus_base_aleph.md           ← Corpus Madre (32 conceptos)
-│       ├── senales_custodiadas.md         ← señales pendientes (21)
+│       ├── corpus_base_aleph.md                ← Corpus Madre (33 conceptos)
+│       ├── senales_activas.md                  ← señales activas (39)
+│       ├── senales_incorporadas.md             ← historial de señales incorporadas (5)
+│       ├── pendientes_soma.md                  ← pendientes técnicos/operativos
+│       ├── pendientes_corpus.md                ← pendientes conceptuales/documentales
+│       ├── estado_reestructura_05042026.md     ← diagnóstico de reestructura (histórico)
 │       ├── arquitectura_paradigma_aleph.md     ← arquitectura completa para NotebookLM
 │       ├── arquitectura_paradigma_aleph.docx   ← mismo documento en Word
 │       ├── arquitectura_paradigma_aleph.html   ← diagrama interactivo standalone
-│       ├── protocolos_actos_de_cuidado.md      ← catálogo de protocolos (Protocolo 01 + Protocolo 02)
+│       ├── protocolos_actos_de_cuidado.md      ← catálogo de protocolos
 │       ├── arquitectura_corpus_vivo.md
 │       ├── arquitectura_digital_corpus_vivo.md ← este ecosistema
 │       ├── fundamentos_arquitectura_cognoesfera.md
@@ -226,9 +258,9 @@ cognoesfera/
 │       └── matriz_vitalidad_cognoesfera.md
 ├── app/
 │   ├── corpus-form/
-│   │   └── page.tsx                       ← formulario de registro
+│   │   └── page.tsx                            ← formulario de registro
 │   └── api/corpus-commit/
-│       └── route.ts                       ← API segura para commits
+│       └── route.ts                            ← API segura para commits
 └── public/
 ```
 
@@ -246,5 +278,5 @@ cognoesfera/
 
 ---
 
-*Instructivo Operativo · Edgardo Noya · Paradigma Aleph · Marzo 2026*
+*Instructivo Operativo · Edgardo Noya · Paradigma Aleph · Actualizado 06/04/2026*
 *Para entender la arquitectura: ver `arquitectura_digital_corpus_vivo.md`*
