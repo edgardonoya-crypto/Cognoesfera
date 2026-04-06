@@ -203,6 +203,7 @@ Los pendientes viven en dos archivos con schema completo:
 - **P1 [CORPUS]:** Sesión propia para el InterSer Soma/Corpus — determinar si entra al corpus como concepto nuevo o reformulación
 - **P2 [SOMA]:** API route `/api/duende` + página `/duende` + prueba Duende end-to-end
 - **P3 [CORPUS]:** Registrar mínimo de Casa Corpus antes del 17 de abril (EDHUCA)
+- **P4 [SOMA]:** Construir decisiones_arquitecturales.md — reconstruir decisiones de diseño chat por chat antes del 17 de abril (S-IN-05)
 
 ---
 
@@ -358,6 +359,7 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - app/api/quanam-respuesta/route.ts — API route para guardar respuestas en tabla quanam_respuestas · 06/04/2026
 - app/admin/page.tsx — panel de administración con respondentes y contactos · 06/04/2026
 - Tabla aleph_contacto con campo origen — creada en Supabase · 06/04/2026
+- corpus/documentos/pendientes_soma.md actualizado con trazabilidad y S-IN-05 · 06/04/2026
 
 **Hitos de SESION-20260402/04:**
 - Protocolo 01-EN construido y probado exitosamente por primera vez
