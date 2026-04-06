@@ -77,9 +77,9 @@ export default function AdminPage() {
             <h1 style={styles.h1}>Panel de administración</h1>
           </div>
           <button
-            onClick={async () => { await supabase.auth.signOut(); router.push('/login') }}
+            onClick={() => router.push('/dashboard')}
             style={styles.btnSm}
-          >Salir</button>
+          >← Volver</button>
         </div>
 
         {/* SECCIÓN A — Respondentes */}
