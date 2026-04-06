@@ -384,7 +384,7 @@ export default function QuanamIa2026() {
         .cierre-sub { font-size: 17px; color: var(--inklt); line-height: 1.8; font-weight: 300; }
         .cierre-sub strong { font-weight: 500; color: var(--ink); }
         .colophon { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; }
-        .col-marca { font-size: 15px; color: var(--goldlt); }
+        .col-marca { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--goldlt); }
         .col-meta { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--inkxlt); }
         @media (max-width: 640px) {
           header { grid-template-columns: 1fr; gap: 28px 0; }
