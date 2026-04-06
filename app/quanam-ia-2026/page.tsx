@@ -73,13 +73,19 @@ export default function QuanamIa2026() {
   const [nombre, setNombre] = useState('')
   const [email, setEmail] = useState('')
   const [drawerOpen, setDrawerOpen] = useState(false)
-  const [dF1Open, setDF1Open] = useState<FragmentoKey>(null)
-  const [dF2Open, setDF2Open] = useState<FragmentoKey>(null)
-  const [dF3Open, setDF3Open] = useState<FragmentoKey>(null)
+  const [drawerSec1Open, setDrawerSec1Open] = useState(false)
+  const [drawerSec2Open, setDrawerSec2Open] = useState(false)
+  const [dF1Open, setDF1Open] = useState(false)
+  const [dF2Open, setDF2Open] = useState(false)
+  const [dF3Open, setDF3Open] = useState(false)
+  const [dF4Open, setDF4Open] = useState(false)
+  const [dF1Prof, setDF1Prof] = useState(false)
+  const [dF2Prof, setDF2Prof] = useState(false)
+  const [dF3Prof, setDF3Prof] = useState(false)
+  const [dF4Prof, setDF4Prof] = useState(false)
   const [dF1Duende, setDF1Duende] = useState(false)
   const [dF2Duende, setDF2Duende] = useState(false)
   const [dF3Duende, setDF3Duende] = useState(false)
-  const [dF4Open, setDF4Open] = useState<FragmentoKey>(null)
   const [dF4Duende, setDF4Duende] = useState(false)
   const [sec2Open, setSec2Open] = useState(false)
   const [f1Open, setF1Open] = useState<FragmentoKey>(null)
@@ -665,135 +671,147 @@ export default function QuanamIa2026() {
           >
             {/* CABECERA */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '24px 32px 0' }}>
-              <div>
-                <p style={{ fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#C4941A', fontWeight: 500, marginBottom: 4 }}>el mapa del momento</p>
-                <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 18, fontStyle: 'italic', color: '#8B6914', lineHeight: 1.35 }}>Tres veces que el piso se movió</p>
-              </div>
-              <button
-                onClick={() => setDrawerOpen(false)}
-                style={{ background: 'none', border: 'none', fontSize: 22, color: '#C4941A', cursor: 'pointer', lineHeight: 1, padding: '0 0 0 16px', flexShrink: 0 }}
-              >×</button>
+              <p style={{ fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#C4941A', fontWeight: 500, margin: 0 }}>el mapa del momento</p>
+              <button onClick={() => setDrawerOpen(false)} style={{ background: 'none', border: 'none', fontSize: 22, color: '#C4941A', cursor: 'pointer', lineHeight: 1, padding: '0 0 0 16px', flexShrink: 0 }}>×</button>
             </div>
 
             {/* CONTENIDO */}
-            <div style={{ padding: '24px 32px 40px', display: 'flex', flexDirection: 'column', gap: 0 }}>
+            <div style={{ padding: '16px 32px 40px', display: 'flex', flexDirection: 'column' }}>
 
-              {/* FRAGMENTO I */}
-              <div style={{ borderBottom: '1px solid rgba(139,105,20,0.12)' }}>
-                <div
-                  onClick={() => setDF1Open(dF1Open === 'mas' ? null : 'mas')}
-                  style={{ padding: '18px 0', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: 4 }}
-                >
-                  <span style={{ fontFamily: 'Playfair Display, serif', fontSize: 11, fontStyle: 'italic', color: '#C4941A' }}>I</span>
-                  <span style={{ fontSize: 15, fontWeight: 500, color: '#2C2820' }}>El río que cambió de curso</span>
-                  <span style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>En 2020 el mundo cambió en semanas. Las organizaciones que salieron mejor paradas fueron las que podían pensar juntas bajo incertidumbre. Lo que viene con la IA es una transformación de magnitud similar. Más silenciosa. Pero igual de profunda.</span>
-                  <span style={{ fontSize: 12, color: '#C4941A', fontWeight: 500, marginTop: 4 }}>{dF1Open === 'mas' ? '— menos' : '+ profundizar'}</span>
+              {/* NIVEL 1 — SECCIÓN A */}
+              <div style={{ borderBottom: '1px solid rgba(139,105,20,0.18)' }}>
+                <div onClick={() => setDrawerSec1Open(v => !v)} style={{ padding: '18px 0', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, fontStyle: 'italic', color: '#8B6914', lineHeight: 1.35, margin: 0 }}>Tres veces que el piso se movió</p>
+                  <span style={{ fontSize: 16, color: '#C4941A', fontWeight: 300, flexShrink: 0, marginLeft: 12 }}>{drawerSec1Open ? '−' : '+'}</span>
                 </div>
-                {dF1Open === 'mas' && (
-                  <div style={{ paddingBottom: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>El COVID fue el colapso simultáneo de tres certezas: que el trabajo era un lugar físico, que las decisiones importantes requerían presencia, que el ritmo de cambio era predecible. Lo que emergió no fue tecnología — fue inteligencia colectiva.</p>
-                    <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Lo que está llegando con la IA replica ese patrón — pero más lento y más profundo. No colapsa el cómo trabajamos. Colapsa el por qué trabajamos. Cuando los agentes hagan ese trabajo, la respuesta de siempre dejará de ser suficiente.</p>
-                    <p style={{ fontSize: 14, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>¿Cuál será entonces la nueva respuesta?</p>
-                    <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500, marginTop: 4 }}>Pregunta orientadora</p>
-                    <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>La última vez que tomaste una decisión difícil, ¿qué parte podría haber hecho un agente? ¿Y qué parte no?</p>
-                    <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuánto de tu jornada de la semana pasada fue urgente? ¿Cuánto fue importante?</p>
-                    <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué sabés sobre tu cliente que ningún sistema podría saber?</p>
-                    <div style={{ marginTop: 8 }}>
-                      <button
-                        onClick={e => { e.stopPropagation(); setDF1Duende(v => !v) }}
-                        style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '7px 14px', fontSize: 12, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}
-                      >Pedile ayuda al Duende</button>
-                      {dF1Duende && <p style={{ fontSize: 13, color: 'var(--inkxlt)', fontStyle: 'italic', marginTop: 8, lineHeight: 1.65 }}>El Duende está en construcción — pronto vas a poder explorar este fragmento con él.</p>}
+                {drawerSec1Open && (
+                  <div style={{ paddingBottom: 8 }}>
+
+                    {/* SUB F1 */}
+                    <div style={{ borderTop: '1px solid rgba(139,105,20,0.10)' }}>
+                      <div onClick={() => setDF1Open(v => !v)} style={{ padding: '13px 0 8px', cursor: 'pointer', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8 }}>
+                        <span style={{ fontSize: 14, fontWeight: 500, color: '#2C2820' }}>El río que cambió de curso</span>
+                        <span style={{ fontSize: 14, color: '#C4941A', fontWeight: 300, flexShrink: 0 }}>{dF1Open ? '−' : '+'}</span>
+                      </div>
+                      {dF1Open && (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: 16 }}>
+                          <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>En 2020 el mundo cambió en semanas. Las organizaciones que salieron mejor paradas fueron las que podían pensar juntas bajo incertidumbre. Lo que viene con la IA es una transformación de magnitud similar. Más silenciosa. Pero igual de profunda.</p>
+                          <button onClick={e => { e.stopPropagation(); setDF1Prof(v => !v) }} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#C4941A', fontWeight: 500, cursor: 'pointer', letterSpacing: '0.04em' }}>{dF1Prof ? '— menos' : '+ Profundizar'}</button>
+                          {dF1Prof && (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                              <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>El COVID fue el colapso simultáneo de tres certezas: que el trabajo era un lugar físico, que las decisiones importantes requerían presencia, que el ritmo de cambio era predecible. Lo que emergió no fue tecnología — fue inteligencia colectiva.</p>
+                              <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Lo que está llegando con la IA replica ese patrón — pero más lento y más profundo. No colapsa el cómo trabajamos. Colapsa el por qué trabajamos. Cuando los agentes hagan ese trabajo, la respuesta de siempre dejará de ser suficiente.</p>
+                              <p style={{ fontSize: 13, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>¿Cuál será entonces la nueva respuesta?</p>
+                              <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500 }}>Pregunta orientadora</p>
+                              <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>La última vez que tomaste una decisión difícil, ¿qué parte podría haber hecho un agente? ¿Y qué parte no?</p>
+                              <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuánto de tu jornada de la semana pasada fue urgente? ¿Cuánto fue importante?</p>
+                              <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué sabés sobre tu cliente que ningún sistema podría saber?</p>
+                              <div>
+                                <button onClick={e => { e.stopPropagation(); setDF1Duende(v => !v) }} style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '6px 12px', fontSize: 11, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}>Pedile ayuda al Duende</button>
+                                {dF1Duende && <p style={{ fontSize: 12, color: 'var(--inkxlt)', fontStyle: 'italic', marginTop: 8, lineHeight: 1.65 }}>El Duende está en construcción — pronto vas a poder explorar este fragmento con él.</p>}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
+
+                    {/* SUB F2 */}
+                    <div style={{ borderTop: '1px solid rgba(139,105,20,0.10)' }}>
+                      <div onClick={() => setDF2Open(v => !v)} style={{ padding: '13px 0 8px', cursor: 'pointer', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8 }}>
+                        <span style={{ fontSize: 14, fontWeight: 500, color: '#2C2820' }}>Cuando el piso se mueve</span>
+                        <span style={{ fontSize: 14, color: '#C4941A', fontWeight: 300, flexShrink: 0 }}>{dF2Open ? '−' : '+'}</span>
+                      </div>
+                      {dF2Open && (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: 16 }}>
+                          <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Cada vez que la humanidad perdió las certezas que organizaban su mundo, encontró la manera de crear nuevas desde adentro. Siempre. Sin excepción. La pregunta no es si va a pasar — es qué construimos antes de que pase.</p>
+                          <button onClick={e => { e.stopPropagation(); setDF2Prof(v => !v) }} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#C4941A', fontWeight: 500, cursor: 'pointer', letterSpacing: '0.04em' }}>{dF2Prof ? '— menos' : '+ Profundizar'}</button>
+                          {dF2Prof && (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                              <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>En el siglo XIX colapsaron tres pilares simultáneamente: la religión perdió autoridad con Darwin, la filosofía iluminista prometía progreso pero las revoluciones industriales mostraron miseria, y los vínculos comunitarios se disolvieron con la urbanización. Nietzsche lo documentó como diagnóstico, no catástrofe.</p>
+                              <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Tolstoi fue a vivir con los campesinos. Los movimientos obreros inventaron nuevas formas de valor colectivo. Las vanguardias artísticas crearon lenguajes completamente nuevos.<br /><br />Lo que colapsa ahora es la centralidad del trabajo como fuente de identidad.</p>
+                              <p style={{ fontSize: 13, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>Si los agentes hacen lo que hacías, ¿desde dónde construís tu valor?</p>
+                              <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500 }}>Pregunta orientadora</p>
+                              <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuándo fue la última vez que tu equipo llegó a algo que ninguno traía solo?</p>
+                              <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué conversaciones importantes nunca quedan registradas en Quanam?</p>
+                              <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>Si mañana un agente hiciera el 80% de tu trabajo, ¿en qué usarías el tiempo liberado?</p>
+                              <div>
+                                <button onClick={e => { e.stopPropagation(); setDF2Duende(v => !v) }} style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '6px 12px', fontSize: 11, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}>Pedile ayuda al Duende</button>
+                                {dF2Duende && <p style={{ fontSize: 12, color: 'var(--inkxlt)', fontStyle: 'italic', marginTop: 8, lineHeight: 1.65 }}>El Duende está en construcción — pronto vas a poder explorar este fragmento con él.</p>}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* SUB F3 */}
+                    <div style={{ borderTop: '1px solid rgba(139,105,20,0.10)', marginBottom: 8 }}>
+                      <div onClick={() => setDF3Open(v => !v)} style={{ padding: '13px 0 8px', cursor: 'pointer', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8 }}>
+                        <span style={{ fontSize: 14, fontWeight: 500, color: '#2C2820' }}>Lo que está por encima</span>
+                        <span style={{ fontSize: 14, color: '#C4941A', fontWeight: 300, flexShrink: 0 }}>{dF3Open ? '−' : '+'}</span>
+                      </div>
+                      {dF3Open && (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: 16 }}>
+                          <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Hay algo en cada persona que sabe antes de calcular. Antes de que ningún sistema pueda procesarlo. Eso es exactamente lo que la IA no puede tener.</p>
+                          <button onClick={e => { e.stopPropagation(); setDF3Prof(v => !v) }} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#C4941A', fontWeight: 500, cursor: 'pointer', letterSpacing: '0.04em' }}>{dF3Prof ? '— menos' : '+ Profundizar'}</button>
+                          {dF3Prof && (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                              <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Kant decía que había dos cosas que lo sorprendían: el orden del cielo, y algo dentro de cada persona que sabe cuándo un acto es ético antes de calcularlo. Los neurólogos lo llaman supraconciencia — no intuición vaga, sino una capacidad que opera por encima de la conciencia ordinaria.</p>
+                              <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>El médico que sabe que algo está mal antes de que los estudios lo confirmen. El vendedor que percibe que un cliente necesita ser escuchado antes de ser resuelto. El responsable que siente que el momento no está maduro aunque todos los indicadores digan que sí.</p>
+                              <p style={{ fontSize: 13, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>Eso no es dato. Es juicio situado. Y vive en cada persona y equipo de Quanam — distribuido, latente, esperando las condiciones correctas para volverse visible.</p>
+                              <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500 }}>Pregunta orientadora</p>
+                              <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuándo fue la última vez que una conversación cambió genuinamente tu forma de ver un problema?</p>
+                              <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Para qué te llamaría tu cliente si pudiera llamarle a un agente para todo lo demás?</p>
+                              <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué es lo que hacés que no podrías explicarle a un sistema?</p>
+                              <div>
+                                <button onClick={e => { e.stopPropagation(); setDF3Duende(v => !v) }} style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '6px 12px', fontSize: 11, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}>Pedile ayuda al Duende</button>
+                                {dF3Duende && <p style={{ fontSize: 12, color: 'var(--inkxlt)', fontStyle: 'italic', marginTop: 8, lineHeight: 1.65 }}>El Duende está en construcción — pronto vas a poder explorar este fragmento con él.</p>}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+
                   </div>
                 )}
               </div>
 
-              {/* FRAGMENTO II */}
-              <div style={{ borderBottom: '1px solid rgba(139,105,20,0.12)' }}>
-                <div
-                  onClick={() => setDF2Open(dF2Open === 'mas' ? null : 'mas')}
-                  style={{ padding: '18px 0', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: 4 }}
-                >
-                  <span style={{ fontFamily: 'Playfair Display, serif', fontSize: 11, fontStyle: 'italic', color: '#C4941A' }}>II</span>
-                  <span style={{ fontSize: 15, fontWeight: 500, color: '#2C2820' }}>Cuando el piso se mueve</span>
-                  <span style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Cada vez que la humanidad perdió las certezas que organizaban su mundo, encontró la manera de crear nuevas desde adentro. Siempre. Sin excepción. La pregunta no es si va a pasar — es qué construimos antes de que pase.</span>
-                  <span style={{ fontSize: 12, color: '#C4941A', fontWeight: 500, marginTop: 4 }}>{dF2Open === 'mas' ? '— menos' : '+ profundizar'}</span>
+              {/* NIVEL 1 — SECCIÓN B */}
+              <div style={{ borderBottom: '1px solid rgba(139,105,20,0.18)' }}>
+                <div onClick={() => setDrawerSec2Open(v => !v)} style={{ padding: '18px 0', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, fontStyle: 'italic', color: '#8B6914', lineHeight: 1.35, margin: 0 }}>¿Desde dónde se diseñó esto?</p>
+                  <span style={{ fontSize: 16, color: '#C4941A', fontWeight: 300, flexShrink: 0, marginLeft: 12 }}>{drawerSec2Open ? '−' : '+'}</span>
                 </div>
-                {dF2Open === 'mas' && (
-                  <div style={{ paddingBottom: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>En el siglo XIX colapsaron tres pilares simultáneamente: la religión perdió autoridad con Darwin, la filosofía iluminista prometía progreso pero las revoluciones industriales mostraron miseria, y los vínculos comunitarios se disolvieron con la urbanización. Nietzsche lo documentó como diagnóstico, no catástrofe.</p>
-                    <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Tolstoi fue a vivir con los campesinos. Los movimientos obreros inventaron nuevas formas de valor colectivo. Las vanguardias artísticas crearon lenguajes completamente nuevos.<br /><br />Lo que colapsa ahora es la centralidad del trabajo como fuente de identidad.</p>
-                    <p style={{ fontSize: 14, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>Si los agentes hacen lo que hacías, ¿desde dónde construís tu valor?</p>
-                    <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500, marginTop: 4 }}>Pregunta orientadora</p>
-                    <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuándo fue la última vez que tu equipo llegó a algo que ninguno traía solo?</p>
-                    <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué conversaciones importantes nunca quedan registradas en Quanam?</p>
-                    <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>Si mañana un agente hiciera el 80% de tu trabajo, ¿en qué usarías el tiempo liberado?</p>
-                    <div style={{ marginTop: 8 }}>
-                      <button
-                        onClick={e => { e.stopPropagation(); setDF2Duende(v => !v) }}
-                        style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '7px 14px', fontSize: 12, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}
-                      >Pedile ayuda al Duende</button>
-                      {dF2Duende && <p style={{ fontSize: 13, color: 'var(--inkxlt)', fontStyle: 'italic', marginTop: 8, lineHeight: 1.65 }}>El Duende está en construcción — pronto vas a poder explorar este fragmento con él.</p>}
-                    </div>
-                  </div>
-                )}
-              </div>
+                {drawerSec2Open && (
+                  <div style={{ paddingBottom: 8 }}>
 
-              {/* FRAGMENTO III */}
-              <div style={{ borderBottom: '1px solid rgba(139,105,20,0.12)' }}>
-                <div
-                  onClick={() => setDF3Open(dF3Open === 'mas' ? null : 'mas')}
-                  style={{ padding: '18px 0', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: 4 }}
-                >
-                  <span style={{ fontFamily: 'Playfair Display, serif', fontSize: 11, fontStyle: 'italic', color: '#C4941A' }}>III</span>
-                  <span style={{ fontSize: 15, fontWeight: 500, color: '#2C2820' }}>Lo que está por encima</span>
-                  <span style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Hay algo en cada persona que sabe antes de calcular. Antes de que ningún sistema pueda procesarlo. Eso es exactamente lo que la IA no puede tener.</span>
-                  <span style={{ fontSize: 12, color: '#C4941A', fontWeight: 500, marginTop: 4 }}>{dF3Open === 'mas' ? '— menos' : '+ profundizar'}</span>
-                </div>
-                {dF3Open === 'mas' && (
-                  <div style={{ paddingBottom: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Kant decía que había dos cosas que lo sorprendían: el orden del cielo, y algo dentro de cada persona que sabe cuándo un acto es ético antes de calcularlo. Los neurólogos lo llaman supraconciencia — no intuición vaga, sino una capacidad que opera por encima de la conciencia ordinaria.</p>
-                    <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>El médico que sabe que algo está mal antes de que los estudios lo confirmen. El vendedor que percibe que un cliente necesita ser escuchado antes de ser resuelto. El responsable que siente que el momento no está maduro aunque todos los indicadores digan que sí.</p>
-                    <p style={{ fontSize: 14, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>Eso no es dato. Es juicio situado. Y vive en cada persona y equipo de Quanam — distribuido, latente, esperando las condiciones correctas para volverse visible.</p>
-                    <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500, marginTop: 4 }}>Pregunta orientadora</p>
-                    <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuándo fue la última vez que una conversación cambió genuinamente tu forma de ver un problema?</p>
-                    <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Para qué te llamaría tu cliente si pudiera llamarle a un agente para todo lo demás?</p>
-                    <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué es lo que hacés que no podrías explicarle a un sistema?</p>
-                    <div style={{ marginTop: 8 }}>
-                      <button
-                        onClick={e => { e.stopPropagation(); setDF3Duende(v => !v) }}
-                        style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '7px 14px', fontSize: 12, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}
-                      >Pedile ayuda al Duende</button>
-                      {dF3Duende && <p style={{ fontSize: 13, color: 'var(--inkxlt)', fontStyle: 'italic', marginTop: 8, lineHeight: 1.65 }}>El Duende está en construcción — pronto vas a poder explorar este fragmento con él.</p>}
+                    {/* SUB F4 */}
+                    <div style={{ borderTop: '1px solid rgba(139,105,20,0.10)', marginBottom: 8 }}>
+                      <div onClick={() => setDF4Open(v => !v)} style={{ padding: '13px 0 8px', cursor: 'pointer', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8 }}>
+                        <span style={{ fontSize: 14, fontWeight: 500, color: '#2C2820' }}>El Paradigma Aleph</span>
+                        <span style={{ fontSize: 14, color: '#C4941A', fontWeight: 300, flexShrink: 0 }}>{dF4Open ? '−' : '+'}</span>
+                      </div>
+                      {dF4Open && (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: 16 }}>
+                          <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva, desarrollado a lo largo de más de una década.</p>
+                          <button onClick={e => { e.stopPropagation(); setDF4Prof(v => !v) }} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#C4941A', fontWeight: 500, cursor: 'pointer', letterSpacing: '0.04em' }}>{dF4Prof ? '— menos' : '+ Profundizar'}</button>
+                          {dF4Prof && (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                              <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>El Paradigma Aleph no es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos — y qué condiciones hacen falta para que eso ocurra. El paradigma es agnóstico de organizaciones: emergió en múltiples redes. Quanam lo aplica, no es su origen.</p>
+                              <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500 }}>Pregunta orientadora</p>
+                              <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué condiciones harían falta en Quanam para que la inteligencia colectiva emerja como propiedad del sistema?</p>
+                              <div>
+                                <button onClick={e => { e.stopPropagation(); setDF4Duende(v => !v) }} style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '6px 12px', fontSize: 11, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}>Pedile ayuda al Duende</button>
+                                {dF4Duende && <p style={{ fontSize: 12, color: 'var(--inkxlt)', fontStyle: 'italic', marginTop: 8, lineHeight: 1.65 }}>Quiero entender mejor el Paradigma Aleph. ¿Qué es y cómo se relaciona con lo que Quanam está construyendo?</p>}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
-                  </div>
-                )}
-              </div>
 
-              {/* FRAGMENTO IV */}
-              <div style={{ borderBottom: '1px solid rgba(139,105,20,0.12)' }}>
-                <div
-                  onClick={() => setDF4Open(dF4Open === 'mas' ? null : 'mas')}
-                  style={{ padding: '18px 0', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: 4 }}
-                >
-                  <span style={{ fontFamily: 'Playfair Display, serif', fontSize: 11, fontStyle: 'italic', color: '#C4941A' }}>IV</span>
-                  <span style={{ fontSize: 15, fontWeight: 500, color: '#2C2820' }}>¿Desde dónde se diseñó esto?</span>
-                  <span style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva, desarrollado a lo largo de más de una década.</span>
-                  <span style={{ fontSize: 12, color: '#C4941A', fontWeight: 500, marginTop: 4 }}>{dF4Open === 'mas' ? '— menos' : '+ profundizar'}</span>
-                </div>
-                {dF4Open === 'mas' && (
-                  <div style={{ paddingBottom: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>El Paradigma Aleph no es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos — y qué condiciones hacen falta para que eso ocurra. El paradigma es agnóstico de organizaciones: emergió en múltiples redes. Quanam lo aplica, no es su origen.</p>
-                    <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500, marginTop: 4 }}>Pregunta orientadora</p>
-                    <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué sería posible si tu organización aprendiera a pensar como un organismo vivo?</p>
-                    <div style={{ marginTop: 8 }}>
-                      <button
-                        onClick={e => { e.stopPropagation(); setDF4Duende(v => !v) }}
-                        style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '7px 14px', fontSize: 12, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}
-                      >Pedile ayuda al Duende</button>
-                      {dF4Duende && <p style={{ fontSize: 13, color: 'var(--inkxlt)', fontStyle: 'italic', marginTop: 8, lineHeight: 1.65 }}>Quiero entender mejor el Paradigma Aleph. ¿Qué es y cómo se relaciona con lo que Quanam está construyendo?</p>}
-                    </div>
                   </div>
                 )}
               </div>
