@@ -620,8 +620,14 @@ export default function QuanamIa2026() {
         </div>
 
         <div className="colophon">
-          <span className="col-marca">Por este camino 2026</span>
-          <span className="col-meta">Quanam · Inteligencia Colectiva + IA</span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            <span className="col-marca">Quanam</span>
+            <span className="col-meta">Por este camino 2026</span>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4, textAlign: 'right' }}>
+            <span className="col-meta">Inteligencia Humana Aumentada</span>
+            <span className="col-meta">Inteligencia Colectiva potenciada por la IA</span>
+          </div>
         </div>
 
       </div>
