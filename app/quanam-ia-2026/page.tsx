@@ -21,8 +21,8 @@ const LENTES = [
     id: 'intuicion',
     nombre: 'La intuición central',
     frase: '"Tengo la corazonada de que el valor real está en…"',
-    desc: 'Una corazonada sobre dónde está el valor real. No hace falta demostrarla — hace falta nombrarla.',
-    ejemplo: '"El valor de la IA no está en la eficiencia sino en la posibilidad de liberar tiempo para las interrelaciones…"',
+    desc: 'Hay algo en cada persona que sabe antes de calcular. Antes de que ningún sistema pueda procesarlo. Eso es exactamente lo que la IA no puede tener.',
+    ejemplo: '',
   },
   {
     id: 'hilo',
@@ -804,9 +804,10 @@ export default function QuanamIa2026() {
                           <button onClick={e => { e.stopPropagation(); setDF3Prof(v => !v) }} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#C4941A', fontWeight: 500, cursor: 'pointer', letterSpacing: '0.04em' }}>{dF3Prof ? '— menos' : '+ Profundizar'}</button>
                           {dF3Prof && (
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                              <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Kant decía que había dos cosas que lo sorprendían: el orden del cielo, y algo dentro de cada persona que sabe cuándo un acto es ético antes de calcularlo. Los neurólogos lo llaman supraconciencia — no intuición vaga, sino una capacidad que opera por encima de la conciencia ordinaria.</p>
-                              <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>El médico que sabe que algo está mal antes de que los estudios lo confirmen. El vendedor que percibe que un cliente necesita ser escuchado antes de ser resuelto. El responsable que siente que el momento no está maduro aunque todos los indicadores digan que sí.</p>
-                              <p style={{ fontSize: 13, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>Eso no es dato. Es juicio situado. Y vive en cada persona y equipo de Quanam — distribuido, latente, esperando las condiciones correctas para volverse visible.</p>
+                              <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Kant decía que había dos cosas que lo sorprendían: el orden del cielo, y algo dentro de cada persona que sabe cuándo un acto es ético antes de calcularlo.</p>
+                              <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Hoy la neurociencia lo describe como un procesamiento no consciente e integrado, en el que múltiples sistemas —cerebrales y corporales— participan en la toma de decisiones antes de que aparezca el pensamiento deliberativo.</p>
+                              <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>El médico que percibe que algo no está bien antes de que los estudios lo confirmen. El vendedor que siente que un cliente necesita ser escuchado antes de ser resuelto. El responsable que reconoce que el momento no está maduro, aunque todos los indicadores digan que sí.</p>
+                              <p style={{ fontSize: 13, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>Eso no es dato: es juicio situado. Un tipo de procesamiento integrado, presente en cada persona y equipo de Quanam — distribuido, latente, esperando las condiciones adecuadas para hacerse visible.</p>
                               <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500 }}>Pregunta orientadora</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuándo fue la última vez que una conversación cambió genuinamente tu forma de ver un problema?</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Para qué te llamaría tu cliente si pudiera llamarle a un agente para todo lo demás?</p>
