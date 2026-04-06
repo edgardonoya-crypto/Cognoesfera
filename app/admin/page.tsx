@@ -1,0 +1,354 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { supabase } from '@/app/lib/supabase'
+
+const ARQUITECTO_EMAIL = 'edgardo.noya@gmail.com'
+
+const LENTES_ORDEN = [
+  'El ángulo propio',
+  'La pregunta viva',
+  'La intuición central',
+  'El hilo conector',
+  'El experimento pendiente',
+]
+
+type Respuesta = { id: string; nombre: string; email: string; lente: string; respuesta: string; created_at: string }
+type Contacto  = { id: string; nombre: string; email: string; mensaje: string; created_at: string }
+type Respondente = { nombre: string; email: string; lentes: string[]; primera: string; respuestas: Respuesta[] }
+
+function fmt(iso: string) {
+  return new Date(iso).toLocaleDateString('es-UY', { day: 'numeric', month: 'short', year: 'numeric' })
+}
+
+export default function AdminPage() {
+  const router = useRouter()
+  const [status, setStatus] = useState<'loading' | 'unauth' | 'forbidden' | 'ok'>('loading')
+  const [respondentes, setRespondentes] = useState<Respondente[]>([])
+  const [contactos, setContactos] = useState<Contacto[]>([])
+  const [selected, setSelected] = useState<Respondente | null>(null)
+
+  useEffect(() => {
+    async function load() {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session) { router.push('/login'); return }
+      if (session.user.email !== ARQUITECTO_EMAIL) { setStatus('forbidden'); return }
+
+      const [{ data: rData }, { data: cData }] = await Promise.all([
+        supabase.from('quanam_respuestas').select('id, nombre, email, lente, respuesta, created_at').order('created_at', { ascending: true }),
+        supabase.from('aleph_contacto').select('id, nombre, email, mensaje, created_at').order('created_at', { ascending: false }),
+      ])
+
+      if (rData) {
+        const map = new Map<string, Respondente>()
+        for (const r of rData as Respuesta[]) {
+          const key = `${r.nombre}||${r.email}`
+          if (!map.has(key)) map.set(key, { nombre: r.nombre, email: r.email, lentes: [], primera: r.created_at, respuestas: [] })
+          const entry = map.get(key)!
+          if (!entry.lentes.includes(r.lente)) entry.lentes.push(r.lente)
+          entry.respuestas.push(r)
+          if (r.created_at < entry.primera) entry.primera = r.created_at
+        }
+        setRespondentes(Array.from(map.values()))
+      }
+
+      if (cData) setContactos(cData as Contacto[])
+      setStatus('ok')
+    }
+    load()
+  }, [router])
+
+  if (status === 'loading') return (
+    <div style={styles.center}>Cargando…</div>
+  )
+  if (status === 'forbidden') return (
+    <div style={styles.center}>Acceso no autorizado</div>
+  )
+
+  return (
+    <div style={styles.page}>
+      <div style={styles.container}>
+
+        {/* Header */}
+        <div style={styles.header}>
+          <div>
+            <div style={styles.eyebrow}>Cognoesfera · Admin</div>
+            <h1 style={styles.h1}>Panel de administración</h1>
+          </div>
+          <button
+            onClick={async () => { await supabase.auth.signOut(); router.push('/login') }}
+            style={styles.btnSm}
+          >Salir</button>
+        </div>
+
+        {/* SECCIÓN A — Respondentes */}
+        <section style={styles.section}>
+          <h2 style={styles.h2}>Quanam IA 2026 · Respondentes</h2>
+          <p style={styles.meta}>{respondentes.length} persona{respondentes.length !== 1 ? 's' : ''} respondieron</p>
+
+          {respondentes.length === 0 ? (
+            <p style={styles.empty}>Todavía no hay respuestas.</p>
+          ) : (
+            <div style={styles.tableWrap}>
+              <table style={styles.table}>
+                <thead>
+                  <tr>
+                    {['Nombre', 'Email', 'Lentes', 'Primera respuesta'].map(h => (
+                      <th key={h} style={styles.th}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {respondentes.map((r, i) => (
+                    <tr
+                      key={i}
+                      onClick={() => setSelected(selected?.email === r.email && selected?.nombre === r.nombre ? null : r)}
+                      style={{ ...styles.tr, background: selected?.email === r.email ? 'rgba(78,170,152,.08)' : undefined }}
+                    >
+                      <td style={styles.td}>{r.nombre}</td>
+                      <td style={{ ...styles.td, color: '#66706d' }}>{r.email || '—'}</td>
+                      <td style={styles.td}>{r.lentes.length}</td>
+                      <td style={{ ...styles.td, color: '#66706d' }}>{fmt(r.primera)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Detalle del respondente seleccionado */}
+          {selected && (
+            <div style={styles.detail}>
+              <div style={styles.detailHeader}>
+                <div>
+                  <div style={styles.detailName}>{selected.nombre}</div>
+                  <div style={styles.detailEmail}>{selected.email || 'Sin email'}</div>
+                </div>
+                <button onClick={() => setSelected(null)} style={styles.closeBtn}>×</button>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                {LENTES_ORDEN.map(lente => {
+                  const rows = selected.respuestas.filter(r => r.lente === lente)
+                  if (rows.length === 0) return null
+                  return (
+                    <div key={lente}>
+                      <div style={styles.lenteName}>{lente}</div>
+                      {rows.map((r, i) => (
+                        <div key={i} style={styles.respuesta}>
+                          <p style={styles.respuestaText}>{r.respuesta}</p>
+                          <p style={styles.respuestaDate}>{fmt(r.created_at)}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* SECCIÓN B — Contactos Aleph */}
+        <section style={styles.section}>
+          <h2 style={styles.h2}>Contactos Aleph</h2>
+          <p style={styles.meta}>{contactos.length} mensaje{contactos.length !== 1 ? 's' : ''}</p>
+
+          {contactos.length === 0 ? (
+            <p style={styles.empty}>Todavía no hay mensajes.</p>
+          ) : (
+            <div style={styles.tableWrap}>
+              <table style={styles.table}>
+                <thead>
+                  <tr>
+                    {['Nombre', 'Email', 'Mensaje', 'Fecha'].map(h => (
+                      <th key={h} style={styles.th}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {contactos.map((c, i) => (
+                    <tr key={i} style={styles.tr}>
+                      <td style={styles.td}>{c.nombre || '—'}</td>
+                      <td style={{ ...styles.td, color: '#66706d' }}>{c.email || '—'}</td>
+                      <td style={{ ...styles.td, maxWidth: 320, whiteSpace: 'pre-wrap' }}>{c.mensaje}</td>
+                      <td style={{ ...styles.td, color: '#66706d', whiteSpace: 'nowrap' }}>{fmt(c.created_at)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </section>
+
+      </div>
+    </div>
+  )
+}
+
+const styles = {
+  page: {
+    minHeight: '100vh',
+    background: 'linear-gradient(180deg,#f7f3e8,#efe9da)',
+    fontFamily: 'Inter,ui-sans-serif,system-ui,sans-serif',
+    color: '#18201e',
+    padding: '0 0 64px',
+  } as React.CSSProperties,
+  center: {
+    minHeight: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontFamily: 'Inter,sans-serif',
+    color: '#66706d',
+    background: 'linear-gradient(180deg,#f7f3e8,#efe9da)',
+  } as React.CSSProperties,
+  container: {
+    maxWidth: 900,
+    margin: '0 auto',
+    padding: '0 24px',
+  } as React.CSSProperties,
+  header: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    padding: '40px 0 32px',
+    borderBottom: '1px solid rgba(34,58,54,.10)',
+    marginBottom: 40,
+  } as React.CSSProperties,
+  eyebrow: {
+    fontSize: 11,
+    letterSpacing: '0.22em',
+    textTransform: 'uppercase' as const,
+    color: '#4eaa98',
+    fontWeight: 600,
+    marginBottom: 6,
+  },
+  h1: {
+    margin: 0,
+    fontSize: '1.6rem',
+    fontWeight: 650,
+    letterSpacing: '-.04em',
+  } as React.CSSProperties,
+  h2: {
+    margin: '0 0 4px',
+    fontSize: '1.1rem',
+    fontWeight: 650,
+    letterSpacing: '-.02em',
+    color: '#18201e',
+  } as React.CSSProperties,
+  btnSm: {
+    background: 'rgba(34,58,54,.08)',
+    border: '1px solid rgba(34,58,54,.12)',
+    borderRadius: 8,
+    padding: '7px 14px',
+    fontSize: '0.8rem',
+    color: '#18201e',
+    cursor: 'pointer',
+    fontFamily: 'inherit',
+  } as React.CSSProperties,
+  section: {
+    marginBottom: 48,
+  } as React.CSSProperties,
+  meta: {
+    fontSize: '0.8rem',
+    color: '#66706d',
+    margin: '0 0 16px',
+  } as React.CSSProperties,
+  empty: {
+    fontSize: '0.875rem',
+    color: '#66706d',
+    fontStyle: 'italic',
+    margin: 0,
+  } as React.CSSProperties,
+  tableWrap: {
+    overflowX: 'auto' as const,
+    borderRadius: 12,
+    border: '1px solid rgba(34,58,54,.10)',
+    background: 'rgba(255,255,255,.72)',
+  },
+  table: {
+    width: '100%',
+    borderCollapse: 'collapse' as const,
+    fontSize: '0.85rem',
+  } as React.CSSProperties,
+  th: {
+    padding: '12px 16px',
+    textAlign: 'left' as const,
+    fontSize: '0.75rem',
+    fontWeight: 600,
+    letterSpacing: '0.06em',
+    textTransform: 'uppercase' as const,
+    color: '#66706d',
+    borderBottom: '1px solid rgba(34,58,54,.10)',
+    background: 'rgba(34,58,54,.03)',
+  } as React.CSSProperties,
+  tr: {
+    cursor: 'pointer',
+    transition: 'background 0.15s',
+    borderBottom: '1px solid rgba(34,58,54,.06)',
+  } as React.CSSProperties,
+  td: {
+    padding: '12px 16px',
+    color: '#18201e',
+    verticalAlign: 'top',
+  } as React.CSSProperties,
+  detail: {
+    marginTop: 20,
+    background: 'rgba(255,255,255,.85)',
+    border: '1px solid rgba(78,170,152,.25)',
+    borderRadius: 14,
+    padding: '24px 24px 28px',
+  } as React.CSSProperties,
+  detailHeader: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+    paddingBottom: 16,
+    borderBottom: '1px solid rgba(34,58,54,.08)',
+  } as React.CSSProperties,
+  detailName: {
+    fontSize: '1rem',
+    fontWeight: 650,
+    color: '#18201e',
+  } as React.CSSProperties,
+  detailEmail: {
+    fontSize: '0.8rem',
+    color: '#66706d',
+    marginTop: 2,
+  } as React.CSSProperties,
+  closeBtn: {
+    background: 'none',
+    border: 'none',
+    fontSize: 20,
+    color: '#66706d',
+    cursor: 'pointer',
+    lineHeight: 1,
+    padding: 0,
+  } as React.CSSProperties,
+  lenteName: {
+    fontSize: '0.78rem',
+    fontWeight: 600,
+    letterSpacing: '0.06em',
+    textTransform: 'uppercase' as const,
+    color: '#4eaa98',
+    marginBottom: 8,
+  },
+  respuesta: {
+    borderLeft: '3px solid rgba(78,170,152,.30)',
+    paddingLeft: 14,
+    marginBottom: 10,
+  } as React.CSSProperties,
+  respuestaText: {
+    fontSize: '0.875rem',
+    color: '#2c3830',
+    lineHeight: 1.7,
+    margin: 0,
+    fontWeight: 300,
+  } as React.CSSProperties,
+  respuestaDate: {
+    fontSize: '0.72rem',
+    color: '#8a9e98',
+    margin: '4px 0 0',
+  } as React.CSSProperties,
+}

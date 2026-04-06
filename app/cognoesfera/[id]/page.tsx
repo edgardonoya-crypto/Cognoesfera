@@ -119,7 +119,7 @@ function initials(name: string) {
 
 // ─── tipos ───────────────────────────────────────────────────────────────────
 
-type Mode = 'field' | 'session' | 'explore'
+type Mode = 'field' | 'session' | 'explore' | 'resonancias'
 
 type Indicadores = { i1: number; i2: number; i3: number; i4: number }
 
@@ -145,6 +145,13 @@ export default function CognoesferaPage({ params }: { params: { id: string } }) 
   const fieldRef = useRef<HTMLDivElement>(null)
   const afldRef = useRef<HTMLDivElement>(null)
 
+  type ResonRow = { respuesta: string; created_at: string }
+  const [resonancias, setResonancias] = useState<Record<string, ResonRow[]>>({})
+  const [resonOpen, setResonOpen] = useState<string | null>(null)
+  const [resonLoaded, setResonLoaded] = useState(false)
+
+  const LENTES_ORDEN = ['El ángulo propio', 'La pregunta viva', 'La intuición central', 'El hilo conector', 'El experimento pendiente']
+
   useEffect(() => {
     async function load() {
       const { data: { session } } = await supabase.auth.getSession()
@@ -160,6 +167,20 @@ export default function CognoesferaPage({ params }: { params: { id: string } }) 
     }
     load()
   }, [params.id, rolId, router])
+
+  useEffect(() => {
+    if (mode !== 'resonancias' || resonLoaded) return
+    supabase.from('quanam_respuestas').select('lente, respuesta, created_at').order('created_at', { ascending: true }).then(({ data }) => {
+      if (!data) return
+      const grouped: Record<string, ResonRow[]> = {}
+      for (const row of data) {
+        if (!grouped[row.lente]) grouped[row.lente] = []
+        grouped[row.lente].push({ respuesta: row.respuesta, created_at: row.created_at })
+      }
+      setResonancias(grouped)
+      setResonLoaded(true)
+    })
+  }, [mode, resonLoaded])
 
   const activateNode = useCallback((idx: number) => {
     setActiveIdx(idx)
@@ -197,13 +218,16 @@ export default function CognoesferaPage({ params }: { params: { id: string } }) 
         <div className="tb-right">
           <Link href="/dashboard" className="btn-sm" style={{ textDecoration: 'none' }}>⌂ Inicio</Link>
           <div className="mode-tabs">
-            {(['field','session','explore'] as Mode[]).map(m => (
+            {([
+              'field', 'session', 'explore',
+              ...(cogno.name === 'Quanam Lab' ? ['resonancias'] : []),
+            ] as Mode[]).map(m => (
               <button
                 key={m}
                 className={`mode-tab${mode === m ? ' active' : ''}`}
                 onClick={() => setMode(m)}
               >
-                {m === 'field' ? '🗺 Campo' : m === 'session' ? '🔴 Sesión' : '📖 Explorar'}
+                {m === 'field' ? '🗺 Campo' : m === 'session' ? '🔴 Sesión' : m === 'explore' ? '📖 Explorar' : '◎ Resonancias'}
               </button>
             ))}
           </div>
@@ -403,6 +427,54 @@ export default function CognoesferaPage({ params }: { params: { id: string } }) 
       {mode === 'explore' && (
         <div className="mode-content" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#66706d', fontSize: '0.95rem' }}>
           Modo Explorar — próximamente
+        </div>
+      )}
+
+      {/* ── Modo Resonancias ── */}
+      {mode === 'resonancias' && (
+        <div className="mode-content" style={{ padding: '32px 24px', maxWidth: 720, margin: '0 auto', width: '100%' }}>
+          <div style={{ marginBottom: 28 }}>
+            <div style={{ fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#4eaa98', fontWeight: 600, marginBottom: 6 }}>Quanam IA 2026</div>
+            <h2 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 650, letterSpacing: '-.03em', color: '#18201e' }}>Resonancias</h2>
+            <p style={{ margin: '8px 0 0', fontSize: '0.875rem', color: '#66706d' }}>Respuestas recibidas, agrupadas por lente. Los nombres no se muestran.</p>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            {LENTES_ORDEN.map(lente => {
+              const rows = resonancias[lente] ?? []
+              const isOpen = resonOpen === lente
+              return (
+                <div key={lente} style={{ background: 'rgba(255,255,255,.72)', borderRadius: 12, overflow: 'hidden', border: '1px solid rgba(34,58,54,.08)' }}>
+                  <button
+                    onClick={() => setResonOpen(isOpen ? null : lente)}
+                    style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}
+                  >
+                    <div>
+                      <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#18201e' }}>{lente}</div>
+                      <div style={{ fontSize: '0.75rem', color: '#66706d', marginTop: 2 }}>{rows.length} {rows.length === 1 ? 'resonancia' : 'resonancias'}</div>
+                    </div>
+                    <span style={{ fontSize: 18, color: '#4eaa98', lineHeight: 1, fontWeight: 300 }}>{isOpen ? '−' : '+'}</span>
+                  </button>
+                  {isOpen && (
+                    <div style={{ borderTop: '1px solid rgba(34,58,54,.08)', padding: '12px 20px 16px' }}>
+                      {rows.length === 0 ? (
+                        <p style={{ fontSize: '0.85rem', color: '#66706d', fontStyle: 'italic', margin: 0 }}>Todavía no hay resonancias en esta lente</p>
+                      ) : (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                          {rows.map((r, i) => (
+                            <div key={i} style={{ borderLeft: '3px solid rgba(78,170,152,.35)', paddingLeft: 14 }}>
+                              <p style={{ fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.7, margin: 0, fontWeight: 300 }}>{r.respuesta}</p>
+                              <p style={{ fontSize: '0.72rem', color: '#8a9e98', margin: '4px 0 0' }}>{new Date(r.created_at).toLocaleDateString('es-UY', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
         </div>
       )}
     </div>
