@@ -63,11 +63,25 @@ function DuendeContextoBtn() {
   )
 }
 
+function getCookie(name: string): string {
+  if (typeof document === 'undefined') return ''
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return decodeURIComponent(parts.pop()!.split(';').shift() ?? '')
+  return ''
+}
+
+function setCookie(name: string, value: string, days: number) {
+  const expires = new Date(Date.now() + days * 864e5).toUTCString()
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`
+}
+
 type FragmentoKey = 'mas' | 'preguntas' | null
 
 export default function QuanamIa2026() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animRef = useRef<number>(0)
+  const emailRef = useRef<HTMLInputElement>(null)
 
   const [bienvenida, setBienvenida] = useState(true)
   const [nombre, setNombre] = useState('')
@@ -97,6 +111,20 @@ export default function QuanamIa2026() {
       LENTES.map(l => [l.id, { open: false, respuesta: '', status: 'idle', errorMsg: '', showDuende: false }])
     )
   )
+
+  useEffect(() => {
+    const savedNombre = getCookie('quanam_nombre')
+    const savedEmail = getCookie('quanam_email')
+    if (savedNombre) setNombre(savedNombre)
+    if (savedEmail) setEmail(savedEmail)
+  }, [])
+
+  function ingresar() {
+    if (!nombre.trim()) return
+    setCookie('quanam_nombre', nombre.trim(), 30)
+    if (email.trim()) setCookie('quanam_email', email.trim(), 30)
+    setBienvenida(false)
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -240,19 +268,22 @@ export default function QuanamIa2026() {
                 type="text"
                 value={nombre}
                 onChange={e => setNombre(e.target.value)}
+                onKeyDown={e => { if (e.key === 'Enter') emailRef.current?.focus() }}
                 placeholder="Tu nombre"
                 style={{ width: '100%', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(196,148,26,0.5)', borderRadius: 10, padding: '14px 18px', fontSize: 16, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#fff', outline: 'none', textAlign: 'center' }}
               />
               <p style={{ fontSize: 12, letterSpacing: '0.28em', textTransform: 'uppercase', color: '#C4941A', fontWeight: 500, fontFamily: 'Karla, sans-serif', marginTop: 4 }}>Tu email</p>
               <input
+                ref={emailRef}
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
+                onKeyDown={e => { if (e.key === 'Enter') ingresar() }}
                 placeholder="Para poder contactarte si queremos profundizar (opcional)"
                 style={{ width: '100%', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(196,148,26,0.3)', borderRadius: 10, padding: '14px 18px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: 'rgba(255,255,255,0.8)', outline: 'none', textAlign: 'center' }}
               />
               <button
-                onClick={() => { if (nombre.trim()) setBienvenida(false) }}
+                onClick={ingresar}
                 disabled={!nombre.trim()}
                 style={{ marginTop: 4, background: nombre.trim() ? '#8B6914' : 'rgba(139,105,20,0.35)', color: '#F5EDD8', border: 'none', borderRadius: 10, padding: '14px 32px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.08em', cursor: nombre.trim() ? 'pointer' : 'default', transition: 'background 0.2s' }}
               >
