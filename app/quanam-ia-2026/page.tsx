@@ -640,7 +640,7 @@ export default function QuanamIa2026() {
               borderTop: '1px solid rgba(139,105,20,0.15)',
               borderBottom: '1px solid rgba(139,105,20,0.15)',
               borderRadius: '8px 0 0 8px',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              alignItems: 'center', justifyContent: 'center',
               cursor: 'pointer',
               display: drawerOpen ? 'none' : 'flex',
             }}
