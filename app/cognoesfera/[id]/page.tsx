@@ -221,7 +221,7 @@ function CognoesferaPageInner() {
           <div className="mode-tabs">
             {([
               'field', 'session', 'explore',
-              ...(cogno.name === 'Quanam Lab' ? ['resonancias'] : []),
+              ...(cogno.name === 'Quanam Lab' || cogno.name === 'Cognoesfera 1 — Quanam Lab' || cogno.name?.includes('Quanam Lab') ? ['resonancias'] : []),
             ] as Mode[]).map(m => (
               <button
                 key={m}
