@@ -15,7 +15,7 @@ const LENTES_ORDEN = [
 ]
 
 type Respuesta = { id: string; nombre: string; email: string; lente: string; respuesta: string; created_at: string }
-type Contacto  = { id: string; nombre: string; email: string; mensaje: string; created_at: string }
+type Contacto  = { id: string; nombre: string; email: string; mensaje: string; origen: string | null; created_at: string }
 type Respondente = { nombre: string; email: string; lentes: string[]; primera: string; respuestas: Respuesta[] }
 
 function fmt(iso: string) {
@@ -37,7 +37,7 @@ export default function AdminPage() {
 
       const [{ data: rData }, { data: cData }] = await Promise.all([
         supabase.from('quanam_respuestas').select('id, nombre, email, lente, respuesta, created_at').order('created_at', { ascending: true }),
-        supabase.from('aleph_contacto').select('id, nombre, email, mensaje, created_at').order('created_at', { ascending: false }),
+        supabase.from('aleph_contacto').select('id, nombre, email, mensaje, origen, created_at').order('created_at', { ascending: false }),
       ])
 
       if (rData) {
@@ -160,7 +160,7 @@ export default function AdminPage() {
               <table style={styles.table}>
                 <thead>
                   <tr>
-                    {['Nombre', 'Email', 'Mensaje', 'Fecha'].map(h => (
+                    {['Nombre', 'Email', 'Mensaje', 'Origen', 'Fecha'].map(h => (
                       <th key={h} style={styles.th}>{h}</th>
                     ))}
                   </tr>
@@ -170,7 +170,8 @@ export default function AdminPage() {
                     <tr key={i} style={styles.tr}>
                       <td style={styles.td}>{c.nombre || '—'}</td>
                       <td style={{ ...styles.td, color: '#66706d' }}>{c.email || '—'}</td>
-                      <td style={{ ...styles.td, maxWidth: 320, whiteSpace: 'pre-wrap' }}>{c.mensaje}</td>
+                      <td style={{ ...styles.td, maxWidth: 280, whiteSpace: 'pre-wrap' }}>{c.mensaje}</td>
+                      <td style={{ ...styles.td, color: '#66706d', fontSize: '0.78rem' }}>{c.origen || '—'}</td>
                       <td style={{ ...styles.td, color: '#66706d', whiteSpace: 'nowrap' }}>{fmt(c.created_at)}</td>
                     </tr>
                   ))}

@@ -938,7 +938,7 @@ export default function QuanamIa2026() {
                                     const res = await fetch('/api/aleph-contacto', {
                                       method: 'POST',
                                       headers: { 'Content-Type': 'application/json' },
-                                      body: JSON.stringify({ nombre, email, mensaje: contactMsg.trim() }),
+                                      body: JSON.stringify({ nombre, email, mensaje: contactMsg.trim(), origen: 'Líneas de exploración abiertas' }),
                                     })
                                     setContactStatus(res.ok ? 'sent' : 'error')
                                   } catch {

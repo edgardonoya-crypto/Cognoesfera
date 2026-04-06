@@ -7,7 +7,7 @@ const supabase = createClient(
 )
 
 export async function POST(request: Request) {
-  const { nombre, email, mensaje } = await request.json()
+  const { nombre, email, mensaje, origen } = await request.json()
 
   if (!mensaje) {
     return NextResponse.json({ error: 'Falta el mensaje' }, { status: 400 })
@@ -15,7 +15,7 @@ export async function POST(request: Request) {
 
   const { error } = await supabase
     .from('aleph_contacto')
-    .insert({ nombre: nombre || null, email: email || null, mensaje })
+    .insert({ nombre: nombre || null, email: email || null, mensaje, origen: origen || null })
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 })
