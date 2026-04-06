@@ -121,6 +121,10 @@ export default function QuanamIa2026() {
     const savedEmail = getCookie('quanam_email')
     if (savedNombre) setNombre(savedNombre)
     if (savedEmail) setEmail(savedEmail)
+    if (savedNombre) {
+      // nombre pre-cargado → foco en email para que Enter funcione de inmediato
+      setTimeout(() => emailRef.current?.focus(), 0)
+    }
   }, [])
 
   function ingresar() {
