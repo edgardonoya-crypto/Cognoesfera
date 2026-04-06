@@ -51,6 +51,14 @@ El equilibrio entre cerrar temas sin postergar vs no ramificar es genuinamente d
 - La reestructura quedó definida pero no ejecutada — quedó como primer pendiente de la próxima sesión
 - Hubo momentos donde el kairos de cerrar llegó tarde
 
+### Aprendizaje operativo del cierre
+El cierre requirió intervención activa del Arquitecto para detectar archivos faltantes, commits incompletos y entradas abreviadas. El Protocolo 02-EN necesita ser más explícito en tres puntos:
+- Lista verificable de archivos a commitear al cierre
+- Confirmación explícita de que cada archivo llegó al repositorio
+- Verificación de que el contenido commiteado es la versión completa
+
+Pendiente para la sesión de reestructura.
+
 ### Tensión identificada
 Entre cerrar la reestructura y dejar que lo conceptual siguiera madurando. Tiene nombre ahora: festina lente aplicado a la arquitectura. No tiene solución perfecta — sí tiene protocolo: la reestructura se hace completa en una sola sesión o no se hace.
 
