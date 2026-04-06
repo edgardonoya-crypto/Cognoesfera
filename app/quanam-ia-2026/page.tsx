@@ -101,6 +101,10 @@ export default function QuanamIa2026() {
   const [dF2Duende, setDF2Duende] = useState(false)
   const [dF3Duende, setDF3Duende] = useState(false)
   const [dF4Duende, setDF4Duende] = useState(false)
+  const [dF5Open, setDF5Open] = useState(false)
+  const [dF5Duende, setDF5Duende] = useState(false)
+  const [contactMsg, setContactMsg] = useState('')
+  const [contactStatus, setContactStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const [sec2Open, setSec2Open] = useState(false)
   const [f1Open, setF1Open] = useState<FragmentoKey>(null)
   const [f2Open, setF2Open] = useState<FragmentoKey>(null)
@@ -845,6 +849,70 @@ export default function QuanamIa2026() {
                               </div>
                             </div>
                           )}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* SUB F5 — Líneas de exploración */}
+                    <div style={{ borderTop: '1px solid rgba(139,105,20,0.10)', marginBottom: 8 }}>
+                      <div onClick={() => setDF5Open(v => !v)} style={{ padding: '13px 0 8px', cursor: 'pointer', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8 }}>
+                        <span style={{ fontSize: 14, fontWeight: 500, color: '#2C2820' }}>Líneas de exploración abiertas</span>
+                        <span style={{ fontSize: 14, color: '#C4941A', fontWeight: 300, flexShrink: 0 }}>{dF5Open ? '−' : '+'}</span>
+                      </div>
+                      {dF5Open && (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, paddingBottom: 16 }}>
+                          <ul style={{ margin: 0, paddingLeft: 18, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                            {[
+                              'Varios equipos de Quanam',
+                              'En una ONG',
+                              'En una institución educativa que presentará la Inteligencia Humana Aumentada en el Congreso Mundial IAC 2026 (Punta del Este)',
+                              'Diversos grupos de trabajo internacionales que exploran la Inteligencia Colectiva',
+                              'Existen en este momento varias propuestas para la implementación de esta IHA',
+                            ].map((item, i) => (
+                              <li key={i} style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300 }}>{item}</li>
+                            ))}
+                          </ul>
+
+                          <div>
+                            <button onClick={e => { e.stopPropagation(); setDF5Duende(v => !v) }} style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '6px 12px', fontSize: 11, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}>Pedile ayuda al Duende</button>
+                            {dF5Duende && <p style={{ fontSize: 12, color: 'var(--inkxlt)', fontStyle: 'italic', marginTop: 8, lineHeight: 1.65 }}>Quiero saber más sobre las líneas de exploración del Paradigma Aleph y cómo podría participar.</p>}
+                          </div>
+
+                          <div style={{ borderTop: '1px solid rgba(139,105,20,0.10)', marginTop: 4, paddingTop: 14, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                            <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.65, fontWeight: 300 }}>Si querés conversar sobre estas iniciativas, dejá tu mensaje acá</p>
+                            <textarea
+                              value={contactMsg}
+                              onChange={e => setContactMsg(e.target.value)}
+                              placeholder="Tu mensaje…"
+                              rows={3}
+                              style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 8, padding: '10px 12px', fontSize: 12, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#2C2820', background: 'rgba(245,240,232,0.4)', resize: 'vertical', outline: 'none', lineHeight: 1.6 }}
+                            />
+                            {contactStatus !== 'sent' && (
+                              <button
+                                onClick={async e => {
+                                  e.stopPropagation()
+                                  if (!contactMsg.trim() || contactStatus === 'sending') return
+                                  setContactStatus('sending')
+                                  try {
+                                    const res = await fetch('/api/aleph-contacto', {
+                                      method: 'POST',
+                                      headers: { 'Content-Type': 'application/json' },
+                                      body: JSON.stringify({ nombre, email, mensaje: contactMsg.trim() }),
+                                    })
+                                    setContactStatus(res.ok ? 'sent' : 'error')
+                                  } catch {
+                                    setContactStatus('error')
+                                  }
+                                }}
+                                disabled={!contactMsg.trim() || contactStatus === 'sending'}
+                                style={{ alignSelf: 'flex-start', background: contactMsg.trim() ? '#8B6914' : 'rgba(139,105,20,0.3)', color: '#F5EDD8', border: 'none', borderRadius: 8, padding: '8px 16px', fontSize: 11, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.06em', cursor: contactMsg.trim() ? 'pointer' : 'default', transition: 'background 0.2s' }}
+                              >
+                                {contactStatus === 'sending' ? 'Enviando…' : 'Enviar mensaje'}
+                              </button>
+                            )}
+                            {contactStatus === 'sent' && <p style={{ fontSize: 12, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65 }}>Tu mensaje fue enviado. Gracias.</p>}
+                            {contactStatus === 'error' && <p style={{ fontSize: 12, color: '#c0392b', lineHeight: 1.65 }}>Hubo un error. Intentá de nuevo.</p>}
+                          </div>
                         </div>
                       )}
                     </div>
