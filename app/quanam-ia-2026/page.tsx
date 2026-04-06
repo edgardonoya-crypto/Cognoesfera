@@ -531,7 +531,7 @@ export default function QuanamIa2026() {
                     <span className="fragmento-num">III</span>
                     <div className="fragmento-titulo">Lo que está por encima</div>
                     <div style={{ fontSize: 12, color: '#8A7E70', fontWeight: 300, marginTop: 2 }}>2 min · 5 min con profundidad</div>
-                    <p className="fragmento-intro">Hay algo en cada persona que sabe antes de calcular. Antes de que ningún sistema pueda procesarlo. Eso es exactamente lo que la IA no puede tener.</p>
+                    <p className="fragmento-intro">Antes de que cualquier sistema procese la información, algo en vos ya sabe. No es intuición mágica — es un tipo de inteligencia que la neurociencia empieza a describir y que la IA, por ahora, no puede tener.</p>
                     <div className="fragmento-links">
                       <span className="flink" onClick={() => toggleFragmento(setF3Open, 'mas', f3Open)}>más...</span>
                       <span className="flink" onClick={() => toggleFragmento(setF3Open, 'preguntas', f3Open)}>preguntas</span>
@@ -800,7 +800,7 @@ export default function QuanamIa2026() {
                       </div>
                       {dF3Open && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: 16 }}>
-                          <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Hay algo en cada persona que sabe antes de calcular. Antes de que ningún sistema pueda procesarlo. Eso es exactamente lo que la IA no puede tener.</p>
+                          <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Antes de que cualquier sistema procese la información, algo en vos ya sabe. No es intuición mágica — es un tipo de inteligencia que la neurociencia empieza a describir y que la IA, por ahora, no puede tener.</p>
                           <button onClick={e => { e.stopPropagation(); setDF3Prof(v => !v) }} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#C4941A', fontWeight: 500, cursor: 'pointer', letterSpacing: '0.04em' }}>{dF3Prof ? '— menos' : '+ Profundizar'}</button>
                           {dF3Prof && (
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
