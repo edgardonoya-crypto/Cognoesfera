@@ -900,19 +900,17 @@ export default function QuanamIa2026() {
                       </div>
                       {dF5Open && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 12, paddingBottom: 16 }}>
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                            <p style={{ margin: 0, fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300 }}>Existen en este momento varias propuestas para la implementación de esta IHA</p>
-                            <ul style={{ margin: 0, paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                              {[
-                                'Varios equipos de Quanam',
-                                'En una ONG',
-                                'En una institución educativa que presentará la Inteligencia Humana Aumentada en el Congreso Mundial IAC 2026 (Punta del Este)',
-                                'Diversos grupos de trabajo internacionales que exploran la Inteligencia Colectiva',
-                              ].map((item, i) => (
-                                <li key={i} style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300 }}>{item}</li>
-                              ))}
-                            </ul>
-                          </div>
+                          <ul style={{ margin: 0, paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                            {[
+                              'Varios equipos de Quanam',
+                              'En una ONG',
+                              'En una institución educativa que presentará la Inteligencia Humana Aumentada en el Congreso Mundial IAC 2026 (Punta del Este)',
+                              'Diversos grupos de trabajo internacionales que exploran la Inteligencia Colectiva',
+                              'Existen en este momento varias propuestas para la implementación de esta IHA',
+                            ].map((item, i) => (
+                              <li key={i} style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300 }}>{item}</li>
+                            ))}
+                          </ul>
 
                           <div>
                             <button onClick={e => { e.stopPropagation(); setDF5Duende(v => !v) }} style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '6px 12px', fontSize: 11, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}>Pedile ayuda al Duende</button>
