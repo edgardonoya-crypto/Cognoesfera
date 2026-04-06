@@ -107,6 +107,17 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
+**S-IN-05**
+**Título:** Construir corpus/documentos/decisiones_arquitecturales.md
+**Descripción:** Reconstruir las decisiones de diseño tomadas chat por chat, desde el inicio del proyecto. Para cada decisión: qué se decidió, por qué, y qué alternativas se descartaron. Luego mantener al cierre de cada sesión técnica. Garantiza que cualquier Duende futuro pueda entender el criterio detrás del código, no solo el código.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 06/04/2026
+**Fecha límite:** 17/04/2026 (EDHUCA)
+**Dependencias:** Ninguna
+
+---
+
 **S-IN-01**
 **Título:** Configurar GitHub Action
 **Descripción:** `.github/workflows/corpus-update.yml` para automatización del corpus. Reduce la fricción de commitear archivos manualmente.
