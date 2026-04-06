@@ -79,6 +79,8 @@ export default function QuanamIa2026() {
   const [dF1Duende, setDF1Duende] = useState(false)
   const [dF2Duende, setDF2Duende] = useState(false)
   const [dF3Duende, setDF3Duende] = useState(false)
+  const [dF4Open, setDF4Open] = useState<FragmentoKey>(null)
+  const [dF4Duende, setDF4Duende] = useState(false)
   const [sec2Open, setSec2Open] = useState(false)
   const [f1Open, setF1Open] = useState<FragmentoKey>(null)
   const [f2Open, setF2Open] = useState<FragmentoKey>(null)
@@ -764,6 +766,33 @@ export default function QuanamIa2026() {
                         style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '7px 14px', fontSize: 12, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}
                       >Pedile ayuda al Duende</button>
                       {dF3Duende && <p style={{ fontSize: 13, color: 'var(--inkxlt)', fontStyle: 'italic', marginTop: 8, lineHeight: 1.65 }}>El Duende está en construcción — pronto vas a poder explorar este fragmento con él.</p>}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* FRAGMENTO IV */}
+              <div style={{ borderBottom: '1px solid rgba(139,105,20,0.12)' }}>
+                <div
+                  onClick={() => setDF4Open(dF4Open === 'mas' ? null : 'mas')}
+                  style={{ padding: '18px 0', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: 4 }}
+                >
+                  <span style={{ fontFamily: 'Playfair Display, serif', fontSize: 11, fontStyle: 'italic', color: '#C4941A' }}>IV</span>
+                  <span style={{ fontSize: 15, fontWeight: 500, color: '#2C2820' }}>¿Desde dónde se diseñó esto?</span>
+                  <span style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva, desarrollado a lo largo de más de una década.</span>
+                  <span style={{ fontSize: 12, color: '#C4941A', fontWeight: 500, marginTop: 4 }}>{dF4Open === 'mas' ? '— menos' : '+ profundizar'}</span>
+                </div>
+                {dF4Open === 'mas' && (
+                  <div style={{ paddingBottom: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                    <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>El Paradigma Aleph no es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos — y qué condiciones hacen falta para que eso ocurra. El paradigma es agnóstico de organizaciones: emergió en múltiples redes. Quanam lo aplica, no es su origen.</p>
+                    <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500, marginTop: 4 }}>Pregunta orientadora</p>
+                    <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué sería posible si tu organización aprendiera a pensar como un organismo vivo?</p>
+                    <div style={{ marginTop: 8 }}>
+                      <button
+                        onClick={e => { e.stopPropagation(); setDF4Duende(v => !v) }}
+                        style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '7px 14px', fontSize: 12, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}
+                      >Pedile ayuda al Duende</button>
+                      {dF4Duende && <p style={{ fontSize: 13, color: 'var(--inkxlt)', fontStyle: 'italic', marginTop: 8, lineHeight: 1.65 }}>Quiero entender mejor el Paradigma Aleph. ¿Qué es y cómo se relaciona con lo que Quanam está construyendo?</p>}
                     </div>
                   </div>
                 )}
