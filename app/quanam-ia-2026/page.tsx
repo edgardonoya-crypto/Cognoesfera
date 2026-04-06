@@ -22,14 +22,14 @@ const LENTES = [
     nombre: 'La intuición central',
     frase: '"Tengo la corazonada de que el valor real está en…"',
     desc: 'Una corazonada sobre dónde está el valor real. No hace falta demostrarla — hace falta nombrarla.',
-    ejemplo: '"El valor de la IA no está en la eficiencia sino en liberar tiempo para la relación…"',
+    ejemplo: '"El valor de la IA no está en la eficiencia sino en la posibilidad de liberar tiempo para las interrelaciones…"',
   },
   {
     id: 'hilo',
     nombre: 'El hilo conector',
     frase: '"¿Qué pasaría si dos áreas que nunca dialogaron pudieran construir algo juntas?"',
-    desc: 'Una conexión que nadie hizo todavía entre dos cosas que parecen separadas dentro de Quanam.',
-    ejemplo: '"¿Qué pasaría si dos áreas de Quanam que nunca dialogaron pudieran construir algo juntas?"',
+    desc: 'Una conexión que nadie hizo todavía entre dos "cosas" que parecen separadas dentro de Quanam. La conversación es un acto relacional; la activación de una red de inteligencia colectiva',
+    ejemplo: '"¿Qué pasaría si dos áreas de Quanam que actualmente no tienen diálogo fluido pudieran construir algo juntas?"',
   },
   {
     id: 'experimento',
@@ -721,7 +721,7 @@ export default function QuanamIa2026() {
                 {dF2Open === 'mas' && (
                   <div style={{ paddingBottom: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
                     <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>En el siglo XIX colapsaron tres pilares simultáneamente: la religión perdió autoridad con Darwin, la filosofía iluminista prometía progreso pero las revoluciones industriales mostraron miseria, y los vínculos comunitarios se disolvieron con la urbanización. Nietzsche lo documentó como diagnóstico, no catástrofe.</p>
-                    <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Tolstoi fue a vivir con los campesinos. Los movimientos obreros inventaron nuevas formas de valor colectivo. Las vanguardias artísticas crearon lenguajes completamente nuevos. Lo que colapsa ahora es la centralidad del trabajo como fuente de identidad.</p>
+                    <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Tolstoi fue a vivir con los campesinos. Los movimientos obreros inventaron nuevas formas de valor colectivo. Las vanguardias artísticas crearon lenguajes completamente nuevos.<br /><br />Lo que colapsa ahora es la centralidad del trabajo como fuente de identidad.</p>
                     <p style={{ fontSize: 14, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>Si los agentes hacen lo que hacías, ¿desde dónde construís tu valor?</p>
                     <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500, marginTop: 4 }}>Pregunta orientadora</p>
                     <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuándo fue la última vez que tu equipo llegó a algo que ninguno traía solo?</p>
