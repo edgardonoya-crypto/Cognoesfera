@@ -27,9 +27,9 @@ const LENTES = [
   {
     id: 'hilo',
     nombre: 'El hilo conector',
-    frase: '"¿Qué pasaría si dos áreas que nunca dialogaron pudieran construir algo juntas?"',
-    desc: 'Una conexión que nadie hizo todavía entre dos "cosas" que parecen separadas dentro de Quanam. La conversación es un acto relacional; la activación de una red de inteligencia colectiva',
-    ejemplo: '"¿Qué pasaría si dos áreas de Quanam que actualmente no tienen diálogo fluido pudieran construir algo juntas?"',
+    frase: '"La activación de una red de inteligencia colectiva"',
+    desc: 'Una conexión que nadie hizo todavía entre dos "cosas" que parecen separadas dentro de Quanam.',
+    ejemplo: '"¿Qué pasaría si dos áreas que generalmente no dialogan pudieran construir algo juntas?"',
   },
   {
     id: 'experimento',
@@ -384,7 +384,7 @@ export default function QuanamIa2026() {
         .cierre-sub { font-size: 17px; color: var(--inklt); line-height: 1.8; font-weight: 300; }
         .cierre-sub strong { font-weight: 500; color: var(--ink); }
         .colophon { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; }
-        .col-marca { font-family: 'Playfair Display', serif; font-size: 15px; font-style: italic; color: var(--goldlt); }
+        .col-marca { font-size: 15px; color: var(--goldlt); }
         .col-meta { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--inkxlt); }
         @media (max-width: 640px) {
           header { grid-template-columns: 1fr; gap: 28px 0; }
@@ -840,7 +840,7 @@ export default function QuanamIa2026() {
                           <button onClick={e => { e.stopPropagation(); setDF4Prof(v => !v) }} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#C4941A', fontWeight: 500, cursor: 'pointer', letterSpacing: '0.04em' }}>{dF4Prof ? '— menos' : '+ Profundizar'}</button>
                           {dF4Prof && (
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                              <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>El Paradigma Aleph no es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos — y qué condiciones hacen falta para que eso ocurra. El paradigma es agnóstico de organizaciones: emergió en múltiples redes. Quanam lo aplica, no es su origen.</p>
+                              <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>El Paradigma Aleph no es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos — y qué condiciones hacen falta para que eso ocurra. El paradigma tiene un origen distribuido: emergió en múltiples redes. Quanam lo integra, siendo parte de su evolución desde los inicios.</p>
                               <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500 }}>Pregunta orientadora</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué condiciones harían falta en Quanam para que la inteligencia colectiva emerja como propiedad del sistema?</p>
                               <div>
@@ -861,17 +861,19 @@ export default function QuanamIa2026() {
                       </div>
                       {dF5Open && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 12, paddingBottom: 16 }}>
-                          <ul style={{ margin: 0, paddingLeft: 18, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                            {[
-                              'Varios equipos de Quanam',
-                              'En una ONG',
-                              'En una institución educativa que presentará la Inteligencia Humana Aumentada en el Congreso Mundial IAC 2026 (Punta del Este)',
-                              'Diversos grupos de trabajo internacionales que exploran la Inteligencia Colectiva',
-                              'Existen en este momento varias propuestas para la implementación de esta IHA',
-                            ].map((item, i) => (
-                              <li key={i} style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300 }}>{item}</li>
-                            ))}
-                          </ul>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                            <p style={{ margin: 0, fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300 }}>Existen en este momento varias propuestas para la implementación de esta IHA</p>
+                            <ul style={{ margin: 0, paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                              {[
+                                'Varios equipos de Quanam',
+                                'En una ONG',
+                                'En una institución educativa que presentará la Inteligencia Humana Aumentada en el Congreso Mundial IAC 2026 (Punta del Este)',
+                                'Diversos grupos de trabajo internacionales que exploran la Inteligencia Colectiva',
+                              ].map((item, i) => (
+                                <li key={i} style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300 }}>{item}</li>
+                              ))}
+                            </ul>
+                          </div>
 
                           <div>
                             <button onClick={e => { e.stopPropagation(); setDF5Duende(v => !v) }} style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '6px 12px', fontSize: 11, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}>Pedile ayuda al Duende</button>
