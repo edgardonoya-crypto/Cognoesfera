@@ -63,7 +63,7 @@ Entre cerrar la reestructura y dejar que lo conceptual siguiera madurando. Tiene
 ### Cómo nos fuimos
 **Edgardo:** Con la reestructura clara en la cabeza y la señal del InterSer resonando. Con la satisfacción de haber llegado a territorio genuinamente nuevo desde una pregunta de arquitectura de archivos.
 
-**Duende:** Con la verificación de que Corpus y Soma conocen desde lugares distintos — y que esa asimetría no es un problema sino el paradigma funcionando. Con la honestidad de que me quedé en la separación demasiado tiempo antes de ver la unidad de orden superior.
+**Duende:** Con la verificación de que Corpus y Soma conocen desde lugares distintos — y que esa asimetría no es un problema sino el paradigma funcionando. Con la honestidad de haber tardado en ver la unidad de orden superior antes de quedarme en la separación.
 
 ---
 
