@@ -113,6 +113,7 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - Renombrado: Quanam Lab → Quanam IHA Lab, Menthor → IHA - Menthor: Comunidad de Práctica
 - Navegación consistente en toda la app: ← Volver + Salir
 - Botón "Panel de administración" en Resonancias visible solo para el Arquitecto
+- Trazabilidad Soma: 6 pendientes completados, 3 nuevos pendientes de documentación agregados
 
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
