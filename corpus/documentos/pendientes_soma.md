@@ -87,6 +87,26 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
+**S-IN-03**
+**Título:** Documentar schema completo de Supabase
+**Descripción:** Registro de tablas, columnas, tipos y propósito de cada una. Base para que el Duende y futuras sesiones puedan operar con contexto completo del schema sin exploración manual.
+**Prioridad:** P3
+**Estado:** Activo
+**Fecha:** 06/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**S-IN-04**
+**Título:** Documentar variables de entorno activas
+**Descripción:** Registro completo de variables en `.env.local` y en Vercel: nombre, propósito, dónde se usa. Evita pérdida de contexto entre sesiones.
+**Prioridad:** P3
+**Estado:** Activo
+**Fecha:** 06/04/2026
+**Dependencias:** Ninguna
+
+---
+
 **S-IN-01**
 **Título:** Configurar GitHub Action
 **Descripción:** `.github/workflows/corpus-update.yml` para automatización del corpus. Reduce la fricción de commitear archivos manualmente.
@@ -141,6 +161,16 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
+**S-AP-05**
+**Título:** Documentar mapa de rutas de la aplicación
+**Descripción:** Tabla con todas las rutas activas: ruta, propósito, tipo de acceso (público / autenticado / solo Arquitecto). Referencia rápida para sesiones técnicas y para el Duende.
+**Prioridad:** P3
+**Estado:** Activo
+**Fecha:** 06/04/2026
+**Dependencias:** Ninguna
+
+---
+
 **S-AP-04**
 **Título:** Materiales adicionales Quanam para IAC 2026
 **Descripción:** Materiales adicionales a partir del collage `quanam_ia_collage.html` ya construido. Definir qué más se necesita para la convocatoria "Por este camino 2026".
@@ -168,6 +198,24 @@ Diagrama interactivo standalone navegable. Commiteado al repositorio.
 
 **S-HIS-04 — Reestructura arquitectural ejecutada** · Completado 06/04/2026
 Las tres propuestas aprobadas implementadas: `senales_activas.md` + `senales_incorporadas.md` + `pendientes_soma.md` + `pendientes_corpus.md` + nuevo template status + SESION.md actualizado + protocolos actualizados.
+
+**S-HIS-05 — Pestaña Resonancias Quanam IHA Lab 2026** · Completado 06/04/2026
+Pestaña visible solo en Quanam IHA Lab, mostrando respuestas agrupadas por lente sin nombre ni email. Funcionando con datos reales (Leonardo y Ana).
+
+**S-HIS-06 — Panel /admin con respondentes y contactos** · Completado 06/04/2026
+Página protegida por auth + email del Arquitecto. Sección A: respondentes con detalle expandible por persona. Sección B: contactos Aleph con columna origen.
+
+**S-HIS-07 — Fix Cognoesfera cargando infinito** · Completado 06/04/2026
+En Next.js 16, `params` es una Promise. `params.id` devolvía `undefined` → query Supabase sin resultado → estado loading permanente. Fix: `useParams()` hook + `<Suspense>` para `useSearchParams`.
+
+**S-HIS-08 — Cookie y Enter en bienvenida Quanam** · Completado 06/04/2026
+Campos nombre/email precargados desde cookie al montar. Focus automático en email cuando nombre ya está cargado, para que Enter funcione sin interacción previa.
+
+**S-HIS-09 — Navegación consistente ← Volver + Salir** · Completado 06/04/2026
+Todas las páginas interiores tienen "← Volver" (→ /dashboard) y "Salir" (signOut → /login) en posición consistente.
+
+**S-HIS-10 — Renombrado de Cognoesferas** · Completado 06/04/2026
+Quanam Lab → Quanam IHA Lab (código + Supabase). Menthor → IHA - Menthor: Comunidad de Práctica (Supabase).
 
 ---
 
