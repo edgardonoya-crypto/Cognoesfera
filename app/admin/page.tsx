@@ -94,56 +94,59 @@ export default function AdminPage() {
               <table style={styles.table}>
                 <thead>
                   <tr>
-                    {['Nombre', 'Email', 'Lentes', 'Primera respuesta'].map(h => (
+                    {['Nombre', 'Email', 'Lentes', 'Primera respuesta', ''].map(h => (
                       <th key={h} style={styles.th}>{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
-                  {respondentes.map((r, i) => (
-                    <tr
-                      key={i}
-                      onClick={() => setSelected(selected?.email === r.email && selected?.nombre === r.nombre ? null : r)}
-                      style={{ ...styles.tr, background: selected?.email === r.email ? 'rgba(78,170,152,.08)' : undefined }}
-                    >
-                      <td style={styles.td}>{r.nombre}</td>
-                      <td style={{ ...styles.td, color: '#66706d' }}>{r.email || '—'}</td>
-                      <td style={styles.td}>{r.lentes.length}</td>
-                      <td style={{ ...styles.td, color: '#66706d' }}>{fmt(r.primera)}</td>
-                    </tr>
-                  ))}
+                  {respondentes.map((r, i) => {
+                    const isOpen = selected?.email === r.email && selected?.nombre === r.nombre
+                    return (
+                      <>
+                        <tr
+                          key={i}
+                          style={{ ...styles.tr, background: isOpen ? 'rgba(78,170,152,.08)' : undefined }}
+                        >
+                          <td style={styles.td}>{r.nombre}</td>
+                          <td style={{ ...styles.td, color: '#66706d' }}>{r.email || '—'}</td>
+                          <td style={styles.td}>{r.lentes.length}</td>
+                          <td style={{ ...styles.td, color: '#66706d' }}>{fmt(r.primera)}</td>
+                          <td style={{ ...styles.td, textAlign: 'right', width: 40 }}>
+                            <button
+                              onClick={() => setSelected(isOpen ? null : r)}
+                              style={{ background: 'none', border: '1px solid rgba(78,170,152,.4)', borderRadius: 6, width: 26, height: 26, cursor: 'pointer', fontSize: 16, color: '#4eaa98', lineHeight: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 300 }}
+                            >{isOpen ? '−' : '+'}</button>
+                          </td>
+                        </tr>
+                        {isOpen && (
+                          <tr key={`${i}-detail`} style={{ background: 'rgba(78,170,152,.04)' }}>
+                            <td colSpan={5} style={{ padding: '16px 20px 20px' }}>
+                              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                                {LENTES_ORDEN.map(lente => {
+                                  const rows = r.respuestas.filter(rr => rr.lente === lente)
+                                  if (rows.length === 0) return null
+                                  return (
+                                    <div key={lente}>
+                                      <div style={styles.lenteName}>{lente}</div>
+                                      {rows.map((rr, j) => (
+                                        <div key={j} style={styles.respuesta}>
+                                          <p style={styles.respuestaText}>{rr.respuesta}</p>
+                                          <p style={styles.respuestaDate}>{fmt(rr.created_at)}</p>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  )
+                                })}
+                              </div>
+                            </td>
+                          </tr>
+                        )}
+                      </>
+                    )
+                  })}
                 </tbody>
               </table>
-            </div>
-          )}
-
-          {/* Detalle del respondente seleccionado */}
-          {selected && (
-            <div style={styles.detail}>
-              <div style={styles.detailHeader}>
-                <div>
-                  <div style={styles.detailName}>{selected.nombre}</div>
-                  <div style={styles.detailEmail}>{selected.email || 'Sin email'}</div>
-                </div>
-                <button onClick={() => setSelected(null)} style={styles.closeBtn}>×</button>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                {LENTES_ORDEN.map(lente => {
-                  const rows = selected.respuestas.filter(r => r.lente === lente)
-                  if (rows.length === 0) return null
-                  return (
-                    <div key={lente}>
-                      <div style={styles.lenteName}>{lente}</div>
-                      {rows.map((r, i) => (
-                        <div key={i} style={styles.respuesta}>
-                          <p style={styles.respuestaText}>{r.respuesta}</p>
-                          <p style={styles.respuestaDate}>{fmt(r.created_at)}</p>
-                        </div>
-                      ))}
-                    </div>
-                  )
-                })}
-              </div>
             </div>
           )}
         </section>
