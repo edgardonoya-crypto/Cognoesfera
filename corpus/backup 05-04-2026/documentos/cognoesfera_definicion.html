@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Cognoesfera · Paradigma Aleph</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:      #F5F0E8;
+  --card-w:  rgba(255,255,255,0.97);
+  --card-m:  rgba(245,240,232,0.92);
+  --card-d:  #2C1F08;
+  --ink:     #2C2820;
+  --inklt:   #7A6E5F;
+  --inkxlt:  #A89E8E;
+  --gold:    #8B6914;
+  --goldlt:  #C4941A;
+  --goldxlt: #E8C96A;
+  --cream:   #F5EDD8;
+  --rule:    rgba(139,105,20,0.13);
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  font-family: 'Karla', sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+.wrap {
+  position: relative; z-index: 1;
+  max-width: 960px; margin: 0 auto; padding: 0 32px 80px;
+}
+
+/* HEADER */
+header {
+  padding: 52px 0 0;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  grid-template-rows: auto auto;
+  gap: 0 40px;
+  align-items: start;
+}
+.header-left { grid-column: 1; grid-row: 1; padding-bottom: 28px; }
+.header-anim { grid-column: 2; grid-row: 1 / 3; display: flex; align-items: center; justify-content: center; }
+.header-bajada { grid-column: 1; grid-row: 2; padding-bottom: 32px; }
+
+.eyebrow {
+  font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--goldlt); margin-bottom: 14px;
+}
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(40px, 5.5vw, 64px);
+  font-weight: 400; line-height: 1.05; letter-spacing: -0.02em; color: var(--gold);
+}
+h1 em { font-style: italic; color: var(--goldlt); }
+
+.bajada {
+  font-size: 15px; color: var(--inklt); line-height: 1.85; font-weight: 300;
+  max-width: 560px;
+}
+.bajada strong { font-weight: 500; color: var(--ink); }
+
+canvas#cog-canvas { display: block; width: 180px; height: 180px; }
+
+/* COLLAGE */
+.collage {
+  margin-top: 40px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule); border-radius: 16px; overflow: hidden;
+}
+.bloque {
+  padding: 36px 32px;
+  display: flex; flex-direction: column; gap: 16px;
+  transition: background 0.3s;
+}
+.b-dark { background: var(--card-d); grid-column: 1 / -1; }
+.b-white { background: var(--card-w); }
+.b-white:hover { background: rgba(255,255,255,1); }
+.b-mid { background: var(--card-m); }
+.b-mid:hover { background: rgba(238,233,222,0.98); }
+.ancho { grid-column: 1 / -1; }
+
+.bloque-etiqueta {
+  font-size: 9.5px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--goldlt); font-weight: 500;
+}
+.b-dark .bloque-etiqueta { color: var(--goldxlt); opacity: 0.65; }
+
+.bloque-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; font-weight: 400; font-style: italic;
+  color: var(--gold); line-height: 1.2;
+}
+.b-dark .bloque-titulo { font-size: 28px; color: var(--cream); }
+
+.bloque-cuerpo {
+  font-size: 15px; color: var(--inklt); line-height: 1.85; font-weight: 300;
+}
+.b-dark .bloque-cuerpo { color: rgba(245,237,216,0.72); max-width: 540px; }
+
+.bloque-acento {
+  font-size: 14px; color: var(--inklt); line-height: 1.8;
+  border-left: 2px solid var(--goldxlt); padding-left: 16px;
+  font-style: italic; font-weight: 300;
+}
+.bloque-cierre {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-weight: 400; font-style: italic;
+  color: var(--gold); line-height: 1.6;
+}
+
+/* PRINCIPIOS */
+.principios { margin-top: 56px; }
+.principios-header {
+  display: flex; align-items: center; gap: 20px; margin-bottom: 28px;
+}
+.principios-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; font-weight: 400;
+  color: var(--gold); white-space: nowrap; flex-shrink: 0;
+}
+.principios-linea { flex: 1; height: 1px; background: var(--rule); }
+
+.principios-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule); border-radius: 12px; overflow: hidden;
+}
+.principio {
+  background: var(--card-w);
+  padding: 24px 20px; display: flex; flex-direction: column; gap: 8px;
+  transition: background 0.3s;
+}
+.principio:hover { background: rgba(255,255,255,1); }
+.principio-num {
+  font-family: 'Playfair Display', serif; font-size: 32px;
+  font-weight: 400; color: var(--goldxlt); line-height: 1; opacity: 0.45;
+}
+.principio-nombre { font-size: 15px; font-weight: 500; color: var(--gold); line-height: 1.3; }
+.principio-desc { font-size: 14px; color: var(--inkxlt); line-height: 1.7; font-weight: 300; }
+.arrow { font-size: 12px; color: rgba(196,148,26,0.45); letter-spacing: 0.08em; margin-top: 3px; }
+
+/* COLOPHON */
+.colophon {
+  margin-top: 52px; padding-top: 24px; border-top: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.col-marca { font-family: 'Playfair Display', serif; font-size: 14px; font-style: italic; color: var(--goldlt); }
+.col-meta { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--inkxlt); }
+
+@media (max-width: 640px) {
+  header { grid-template-columns: 1fr; grid-template-rows: auto auto auto; }
+  .header-anim { grid-column: 1; grid-row: 2; justify-content: flex-start; }
+  .header-bajada { grid-column: 1; grid-row: 3; }
+  .collage { grid-template-columns: 1fr; }
+  .ancho, .b-dark { grid-column: 1; }
+  .principios-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="header-left">
+      <div class="eyebrow">Paradigma Aleph · Corpus Madre · Concepto 5</div>
+      <h1>La <em>Cognoesfera</em></h1>
+    </div>
+    <div class="header-anim">
+      <canvas id="cog-canvas"></canvas>
+    </div>
+    <div class="header-bajada">
+      <p class="bajada">Definición núcleo · versión simultánea. Cada recuadro es una unidad completa de sentido. <strong>El sentido emerge de sus relaciones.</strong></p>
+    </div>
+  </header>
+
+  <div class="collage">
+
+    <div class="bloque b-dark">
+      <span class="bloque-etiqueta">qué es</span>
+      <p class="bloque-titulo">El cuerpo que sostiene el campo</p>
+      <p class="bloque-cuerpo">Una Cognoesfera es el cuerpo que sostiene el campo de inteligencia colectiva que emerge cuando aproximadamente ocho personas alcanzan coherencia relacional, cognitiva y de propósito. Así como el cuerpo humano sostiene el campo de inteligencia individual, la Cognoesfera sostiene un campo de otro orden.</p>
+    </div>
+
+    <div class="bloque b-white">
+      <span class="bloque-etiqueta">qué produce</span>
+      <p class="bloque-titulo">Universos posibles</p>
+      <p class="bloque-cuerpo">Un campo que transforma primero la forma en que el grupo ve la realidad, y desde esa nueva visión actúa sobre ella de maneras que producen universos posibles que antes no existían.</p>
+      <p class="bloque-acento">Cada persona mantiene su autonomía y su singularidad — la Cognoesfera no las disuelve sino que las amplifica en un plano que ninguna podría alcanzar sola.</p>
+    </div>
+
+    <div class="bloque b-white">
+      <span class="bloque-etiqueta">qué la hace emerger</span>
+      <p class="bloque-titulo">Las condiciones</p>
+      <p class="bloque-cuerpo">Tiempo disponible para madurar, calidad de vínculo entre las personas, y formas estructuradas de interacción que organicen la palabra, la escucha y la decisión. Cuando una persona habla, las demás escuchan. Todas hablan en su momento.</p>
+      <p class="bloque-acento">La estructura no limita — hace posible que el campo emerja.</p>
+    </div>
+
+    <div class="bloque b-white">
+      <span class="bloque-etiqueta">qué la sostiene</span>
+      <p class="bloque-titulo">Capas inseparables</p>
+      <p class="bloque-cuerpo">Cómo el grupo interactúa, con qué herramientas amplifica sus capacidades, y desde qué sentido compartido orienta su acción.</p>
+      <p class="bloque-acento">Si alguna de estas condiciones se disocia, el fenómeno desaparece.</p>
+    </div>
+
+    <div class="bloque b-white">
+      <span class="bloque-etiqueta">dónde existe</span>
+      <p class="bloque-titulo">Agnóstica de contexto</p>
+      <p class="bloque-cuerpo">Puede existir en organizaciones, comunidades, redes distribuidas o ecosistemas híbridos — su forma varía según el territorio, pero sus principios permanecen invariantes.</p>
+    </div>
+
+    <div class="bloque ancho b-mid">
+      <p class="bloque-cierre">No se impone ni se diseña desde afuera: se cultiva.</p>
+    </div>
+
+  </div>
+
+  <div class="principios">
+    <div class="principios-header">
+      <div class="principios-linea"></div>
+      <div class="principios-titulo">Los 9 principios fundantes</div>
+      <div class="principios-linea"></div>
+    </div>
+    <div class="principios-grid">
+      <div class="principio"><div class="principio-num">1</div><div class="principio-nombre">Emergencia</div><div class="principio-desc">No puede ser impuesta desde afuera, solo habilitada.</div><div class="arrow">→ se habilita</div></div>
+      <div class="principio"><div class="principio-num">2</div><div class="principio-nombre">Coherencia</div><div class="principio-desc">Relacional · cognitivo · de propósito. La ausencia en cualquier plano debilita el campo.</div><div class="arrow">→ tres planos simultáneos</div></div>
+      <div class="principio"><div class="principio-num">3</div><div class="principio-nombre">Simultaneidad individuo–colectivo</div><div class="principio-desc">No reemplaza la inteligencia individual: la amplifica en un plano colectivo.</div><div class="arrow">→ amplifica, no disuelve</div></div>
+      <div class="principio"><div class="principio-num">4</div><div class="principio-nombre">Estructuración del flujo</div><div class="principio-desc">Sin estructura, no hay Cognoesfera. Los protocolos regulan la palabra, la escucha y la decisión.</div><div class="arrow">→ estructura que libera</div></div>
+      <div class="principio"><div class="principio-num">5</div><div class="principio-nombre">Desarrollo cognitivo integrado</div><div class="principio-desc">El conocimiento no se acumula: se reconfigura en cada interacción.</div><div class="arrow">→ progresivo y reconfigurativo</div></div>
+      <div class="principio"><div class="principio-num">6</div><div class="principio-nombre">Indivisibilidad estructural</div><div class="principio-desc">Metodológica · tecnológica · simbólica. Si se disocian, el fenómeno desaparece.</div><div class="arrow">→ tres capas inseparables</div></div>
+      <div class="principio"><div class="principio-num">7</div><div class="principio-nombre">Umbral</div><div class="principio-desc">No todo grupo constituye una Cognoesfera. El umbral es cualitativo, no numérico.</div><div class="arrow">→ condición de existencia</div></div>
+      <div class="principio"><div class="principio-num">8</div><div class="principio-nombre">Cultivo</div><div class="principio-desc">No puede ser controlada directamente: solo pueden gestionarse sus condiciones de posibilidad.</div><div class="arrow">→ se cultiva, no se dirige</div></div>
+      <div class="principio"><div class="principio-num">9</div><div class="principio-nombre">Adaptación contextual</div><div class="principio-desc">Adopta formas distintas según el territorio. Sus principios permanecen invariantes.</div><div class="arrow">→ forma variable, esencia invariante</div></div>
+    </div>
+  </div>
+
+  <div class="colophon">
+    <span class="col-marca">Paradigma Aleph</span>
+    <span class="col-meta">Corpus Madre · Concepto 5 · Abril 2026</span>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  const canvas = document.getElementById('cog-canvas');
+  const ctx = canvas.getContext('2d');
+  const W = 180, H = 180;
+  canvas.width = W; canvas.height = H;
+  const cx = W/2, cy = H/2;
+  const N = 8;
+  let t = 0, phase = 'dispersed', phaseT = 0, animId;
+  let nodes = [];
+
+  function initNodes(){
+    nodes = Array.from({length: N}, (_, i) => {
+      const angle = (i/N)*Math.PI*2;
+      return {
+        x: cx + Math.cos(angle+(Math.random()-0.5)*1.5)*(55+Math.random()*20),
+        y: cy + Math.sin(angle+(Math.random()-0.5)*1.5)*(45+Math.random()*15),
+        vx: (Math.random()-0.5)*0.5,
+        vy: (Math.random()-0.5)*0.5,
+        baseAngle: angle,
+        phase: i*0.8,
+        size: 5+Math.random()*3,
+      };
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    phaseT++;
+    const DUR = 160;
+    if(phase==='dispersed'&&phaseT>DUR){phase='attracting';phaseT=0;}
+    else if(phase==='attracting'&&phaseT>DUR){phase='coalesced';phaseT=0;}
+    else if(phase==='coalesced'&&phaseT>DUR*1.8){phase='dispersed';phaseT=0;initNodes();}
+
+    const coalesced=phase==='coalesced';
+    const attracting=phase==='attracting';
+    const progress=Math.min(phaseT/DUR,1);
+
+    nodes.forEach(n=>{
+      if(attracting||coalesced){
+        const tr=coalesced?58+3*Math.sin(t*0.03+n.phase):75-progress*17;
+        const tx=cx+Math.cos(n.baseAngle)*tr;
+        const ty=cy+Math.sin(n.baseAngle)*tr*0.75;
+        n.vx+=(tx-n.x)*0.045; n.vy+=(ty-n.y)*0.045;
+        n.vx*=0.82; n.vy*=0.82;
+      } else {
+        n.vx+=(Math.random()-0.5)*0.12;
+        n.vy+=(Math.random()-0.5)*0.12;
+        n.vx*=0.97; n.vy*=0.97;
+      }
+      n.x+=n.vx; n.y+=n.vy;
+    });
+
+    if(coalesced){
+      const pulse=0.5+0.5*Math.sin(t*0.025);
+      const gr=ctx.createRadialGradient(cx,cy,0,cx,cy,52);
+      gr.addColorStop(0,`rgba(139,105,20,${0.10+pulse*0.06})`);
+      gr.addColorStop(0.6,`rgba(139,105,20,${0.04+pulse*0.02})`);
+      gr.addColorStop(1,'rgba(139,105,20,0)');
+      ctx.beginPath();ctx.arc(cx,cy,52,0,Math.PI*2);
+      ctx.fillStyle=gr;ctx.fill();
+    }
+
+    for(let i=0;i<N;i++){
+      for(let j=i+1;j<N;j++){
+        const d=Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y);
+        const maxD=coalesced?130:attracting?140-progress*20:90;
+        if(d<maxD){
+          const alpha=coalesced?0.18+0.10*Math.sin(t*0.02+i*0.5):(1-d/maxD)*0.15*progress;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x,nodes[i].y);
+          ctx.lineTo(nodes[j].x,nodes[j].y);
+          ctx.strokeStyle=`rgba(139,105,20,${alpha})`;
+          ctx.lineWidth=0.7;ctx.stroke();
+        }
+      }
+    }
+
+    nodes.forEach(n=>{
+      const pulse=0.5+0.5*Math.sin(t*0.025+n.phase);
+      const r=n.size*(coalesced?1.0+pulse*0.6:0.8+pulse*0.5);
+      ctx.beginPath();ctx.arc(n.x,n.y,r,0,Math.PI*2);
+      const alpha=coalesced?0.55+pulse*0.3:0.25+pulse*0.2;
+      ctx.fillStyle=`rgba(139,105,20,${alpha})`;ctx.fill();
+    });
+
+    t++;animId=requestAnimationFrame(draw);
+  }
+
+  initNodes();draw();
+})();
+</script>
+</body>
+</html>

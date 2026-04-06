@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arquitectura Digital — Paradigma Aleph</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0e0f11;
+    --surface: #16181c;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.18);
+    --text: #e8e6e0;
+    --muted: #7a7870;
+    --soma: #c0714a;
+    --soma-dim: rgba(192,113,74,0.12);
+    --soma-border: rgba(192,113,74,0.35);
+    --corpus: #4a7fa8;
+    --corpus-dim: rgba(74,127,168,0.12);
+    --corpus-border: rgba(74,127,168,0.35);
+    --consejo: #7c6db5;
+    --consejo-dim: rgba(124,109,181,0.12);
+    --consejo-border: rgba(124,109,181,0.35);
+    --teal: #3d9e80;
+    --teal-dim: rgba(61,158,128,0.12);
+    --amber: #c49a3c;
+    --amber-dim: rgba(196,154,60,0.12);
+    --dialog-bg: rgba(14,15,17,0.97);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Header */
+  header {
+    padding: 2.5rem 2rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  header p {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+  }
+  .estado-badge {
+    margin-left: auto;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* Layout principal */
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Fundaciones */
+  .fundacion {
+    background: var(--bg);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .fundacion-header {
+    margin-bottom: 6px;
+  }
+  .fundacion-label {
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 4px;
+  }
+  .soma .fundacion-label { color: var(--soma); }
+  .corpus .fundacion-label { color: var(--corpus); }
+  .fundacion-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .fundacion-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* Nodos */
+  .nodo {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    position: relative;
+  }
+  .nodo:hover { border-color: var(--border-hover); background: rgba(255,255,255,0.03); }
+  .nodo-title { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+  .nodo-sub { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+  .nodo.amber { border-color: var(--amber-dim); background: var(--amber-dim); }
+  .nodo.amber:hover { border-color: var(--amber); }
+  .nodo.amber .nodo-title { color: #e8c070; }
+
+  .nodo.teal { border-color: var(--teal-dim); background: var(--teal-dim); }
+  .nodo.teal:hover { border-color: var(--teal); }
+  .nodo.teal .nodo-title { color: #5dc8a0; }
+
+  .nodo.corpus-color { border-color: var(--corpus-dim); background: var(--corpus-dim); }
+  .nodo.corpus-color:hover { border-color: var(--corpus); }
+  .nodo.corpus-color .nodo-title { color: #7ab8e0; }
+
+  .nodo.consejo-color { border-color: var(--consejo-dim); background: var(--consejo-dim); }
+  .nodo.consejo-color:hover { border-color: var(--consejo); }
+  .nodo.consejo-color .nodo-title { color: #b0a0e0; }
+
+  .nodo.gray { border-color: var(--border); background: rgba(255,255,255,0.02); }
+  .nodo.gray .nodo-title { color: var(--muted); font-size: 11px; font-family: 'DM Mono', monospace; }
+
+  /* Grid de nodos dobles */
+  .nodo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* Zona de diálogo */
+  .dialogo {
+    grid-column: 1 / -1;
+    background: var(--bg);
+    padding: 1.75rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
+  .dialogo-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .dialogo-card:hover { border-color: var(--border-hover); }
+  .dialogo-card-label { font-size: 10px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+  .soma-card .dialogo-card-label { color: var(--soma); }
+  .corpus-card .dialogo-card-label { color: var(--corpus); }
+  .dialogo-card-text { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  .dialogo-centro {
+    text-align: center;
+    padding: 0 1rem;
+  }
+  .dialogo-centro-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+  .dialogo-centro-title:hover { color: var(--consejo); }
+  .flechas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .flecha-linea { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+
+  /* Consejo Asesor */
+  .consejo-section {
+    grid-column: 1 / -1;
+    background: var(--bg);
+    padding: 1.75rem;
+    border-top: 1px solid var(--border);
+  }
+  .consejo-header { margin-bottom: 1rem; }
+  .consejo-label {
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--consejo);
+    margin-bottom: 4px;
+  }
+  .consejo-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+  }
+  .consejo-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+    margin-top: 1rem;
+  }
+  .rol-card {
+    border: 1px solid var(--consejo-border);
+    background: var(--consejo-dim);
+    border-radius: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .rol-card:hover { border-color: var(--consejo); background: rgba(124,109,181,0.2); }
+  .rol-nivel {
+    font-size: 9px;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--consejo);
+    margin-bottom: 4px;
+  }
+  .rol-nombre { font-size: 12px; font-weight: 500; color: #c0b0f0; margin-bottom: 2px; }
+  .rol-funcion { font-size: 11px; color: var(--muted); }
+
+  .roles-mas {
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+  .roles-mas:hover { border-color: var(--consejo); color: var(--consejo); }
+
+  /* Footer */
+  footer {
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+
+  /* Dialog modal */
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .overlay.active { display: flex; }
+  .dialog {
+    background: var(--surface);
+    border: 1px solid var(--border-hover);
+    border-radius: 12px;
+    padding: 1.75rem;
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+  }
+  .dialog-label {
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .dialog-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  .dialog-text { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 1.25rem; }
+  .dialog-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+  }
+  .dialog-close:hover { border-color: var(--border-hover); color: var(--text); }
+
+  @media (max-width: 640px) {
+    .main { grid-template-columns: 1fr; }
+    .dialogo { grid-template-columns: 1fr; }
+    .dialogo-centro { order: -1; }
+    .roles-grid { grid-template-columns: 1fr 1fr; }
+    header { flex-direction: column; gap: 8px; }
+    .estado-badge { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Arquitectura Digital — Paradigma Aleph</h1>
+    <p>Fundación Soma · Fundación Corpus · Consejo Asesor · Marzo 2026</p>
+  </div>
+  <span class="estado-badge">E6 → E7 · IAC 2026 · Punta del Este</span>
+</header>
+
+<div class="main">
+
+  <!-- SOMA -->
+  <div class="fundacion soma">
+    <div class="fundacion-header">
+      <div class="fundacion-label">Fundación Soma</div>
+      <div class="fundacion-title">El cuerpo que actúa</div>
+      <div class="fundacion-sub">Red operativa · Ritmo urgente · Presente</div>
+    </div>
+
+    <div class="nodo amber" onclick="abrirDialog('Payload CMS', 'Motor de la plataforma. Gestiona el contenido y la lógica de la aplicación. Stack: Payload CMS + PostgreSQL + Next.js. Al 29/03/2026: 16 colecciones, 77 tablas.')">
+      <div class="nodo-title">Payload CMS</div>
+      <div class="nodo-sub">Motor de la plataforma · 16 colecciones · 77 tablas</div>
+    </div>
+
+    <div class="nodo-grid">
+      <div class="nodo amber" onclick="abrirDialog('organizations', 'Es la Cognoesfera — la unidad mínima de inteligencia colectiva. Tiene un campo vital_state que registra su estado: latente, posible, activado, emergente, expresivo, legible, sostenido o ecosistémico.')">
+        <div class="nodo-title">organizations</div>
+        <div class="nodo-sub">La Cognoesfera · vital_state</div>
+      </div>
+      <div class="nodo amber" onclick="abrirDialog('groups', 'Implementa la fractalidad del paradigma. El campo parent_group_id permite anidar grupos sin límite de profundidad: Cognoesfera → Entidad Aleph → subgrupos. Esta estructura existía antes de que el paradigma la nombrara con esa palabra.')">
+        <div class="nodo-title">groups</div>
+        <div class="nodo-sub">Fractal · parent_group_id</div>
+      </div>
+      <div class="nodo amber" onclick="abrirDialog('users', 'Es la persona — portadora de la memoria psicológica, la dimensión humana del Cognobit. Un usuario existe independientemente de su rol en cada Cognoesfera.')">
+        <div class="nodo-title">users</div>
+        <div class="nodo-sub">La persona</div>
+      </div>
+      <div class="nodo amber" onclick="abrirDialog('members', 'La bisagra entre persona y Cognoesfera. Registra el rol socrático de cada persona en cada organización. Es el punto donde el individuo y el colectivo se articulan.')">
+        <div class="nodo-title">members</div>
+        <div class="nodo-sub">Bisagra persona-org</div>
+      </div>
+    </div>
+
+    <div class="nodo teal" onclick="abrirDialog('El Duende', 'La figura que encarna el metabolismo cognitivo asistido. Cada conversación queda registrada en duende_conversations. Los documentos indexados al vector store son la materia prima de la Memoria Viva Aumentada. El Duende no valida — sugiere. El humano ve.')">
+      <div class="nodo-title">El Duende</div>
+      <div class="nodo-sub">duende_conversations · documents · pages</div>
+    </div>
+
+    <div class="nodo-grid">
+      <div class="nodo amber" onclick="abrirDialog('meetings', 'Registra el ciclo completo de cada sesión: grabación, transcripción, diarización (quién dijo qué) y minutas automáticas. Cada reunión es una instancia del proceso de transformación de la inteligencia colectiva.')">
+        <div class="nodo-title">meetings</div>
+        <div class="nodo-sub">Sesiones · transcripción · diarización</div>
+      </div>
+      <div class="nodo amber" onclick="abrirDialog('protocols', 'Las decisiones acordadas por 0-Objeción — lo que ningún miembro puede objetar con fundamento razonado avanza. Cada protocolo tiene historial de cambios: fecha, autor, descripción.')">
+        <div class="nodo-title">protocols</div>
+        <div class="nodo-sub">Decisiones · 0-Objeción</div>
+      </div>
+    </div>
+
+    <div class="nodo consejo-color" onclick="abrirDialog('Matriz de Vitalidad — tablas nuevas', 'Tres tablas que materializan la Matriz de Vitalidad en el sistema:\n\nemergencias: momentos donde algo aparece en el campo colectivo.\n\npulsos_vitalidad: mediciones periódicas de las 12 dimensiones de la Matriz.\n\nresonancias: conexiones entre emergencias de distintas Cognoesferas — la red que aprende de sí misma.\n\nPrimer caso real: EDHUCA · 17/04/2026.')">
+      <div class="nodo-title">Matriz de Vitalidad — tablas nuevas</div>
+      <div class="nodo-sub">emergencias · pulsos_vitalidad · resonancias · EDHUCA 17/04</div>
+    </div>
+
+    <div class="nodo gray" onclick="abrirDialog('Comunicación multicanal', 'messages, message_templates y users_contact_methods. Permite enviar mensajes por WhatsApp, Telegram, email y SMS desde cualquier flujo de la aplicación.')">
+      <div class="nodo-title">Comunicación · messages · templates</div>
+    </div>
+  </div>
+
+  <!-- CORPUS -->
+  <div class="fundacion corpus">
+    <div class="fundacion-header">
+      <div class="fundacion-label">Fundación Corpus</div>
+      <div class="fundacion-title">El campo que madura</div>
+      <div class="fundacion-sub">Memoria viva · Festina lente · Largo plazo</div>
+    </div>
+
+    <div class="nodo teal" onclick="abrirDialog('claude.ai', 'Espacio de co-producción de sentido. Los conceptos del Corpus Madre no se escriben solos — emergen en conversación. Claude redacta, el Arquitecto valida. Esa composición es la IAH operando: el Duende produce la forma, el Arquitecto cuida el fondo. No tiene memoria entre sesiones — por eso existe el SESION.md.')">
+      <div class="nodo-title">claude.ai</div>
+      <div class="nodo-sub">Co-producción de sentido · Conversaciones Aumentadas</div>
+    </div>
+
+    <div class="nodo teal" onclick="abrirDialog('VS Code + Claude Code', 'El taller de ejecución. Claude Code es el Duende del taller: habla en lenguaje natural, sabe qué archivo tocar, dónde ubicar cada concepto, cómo escribir el mensaje del commit. Reduce la fricción técnica para que el Arquitecto habite el presente sin cargar la ejecución.')">
+      <div class="nodo-title">VS Code + Claude Code</div>
+      <div class="nodo-sub">Taller de ejecución · Duende del taller</div>
+    </div>
+
+    <div class="nodo corpus-color" onclick="abrirDialog('GitHub', 'La memoria digital oficial del corpus. Cada commit es una foto con fecha y descripción de qué cambió y por qué. El corpus no solo contiene los conceptos actuales — contiene la trayectoria completa de cómo llegó hasta ahí. Es el único organismo del que se puede leer la historia completa hacia atrás.')">
+      <div class="nodo-title">GitHub</div>
+      <div class="nodo-sub">Memoria digital oficial · Historia de commits</div>
+    </div>
+
+    <div class="nodo-grid">
+      <div class="nodo corpus-color" onclick="abrirDialog('Corpus Madre', '32 conceptos en 7 secciones. Los fundamentos agnósticos del paradigma — válidos para cualquier persona, Cognoesfera o Entidad Aleph en cualquier contexto. Evoluciona lentamente. Los dos conceptos más recientes: concepto 31 (Transducción de formatos) y concepto 32 (El patrón de doble acoplamiento).')">
+        <div class="nodo-title">Corpus Madre</div>
+        <div class="nodo-sub">32 conceptos · 7 secciones</div>
+      </div>
+      <div class="nodo corpus-color" onclick="abrirDialog('Señales custodiadas', '13 señales custodiadas activas y 1 en desarrollo. Son disonancias o conceptos emergentes que resuenan con el paradigma pero que todavía no están en condiciones de ser incorporados al Corpus Madre. No se descartan ni se fuerzan — se custodian hasta que el corpus madura para recibirlas.')">
+        <div class="nodo-title">Señales custodiadas</div>
+        <div class="nodo-sub">13 activas · 1 en desarrollo</div>
+      </div>
+    </div>
+
+    <div class="nodo teal" onclick="abrirDialog('Vercel + /corpus-form', 'Vercel convierte el repositorio en una aplicación web accesible. Cada push a GitHub redespliega automáticamente. El formulario /corpus-form es el gesto mínimo de registro: algo emerge en una conversación, se completan los campos, el commit se hace automáticamente. Sin fricción técnica, desde cualquier dispositivo.')">
+      <div class="nodo-title">Vercel + /corpus-form</div>
+      <div class="nodo-sub">Membrana con el mundo · Gesto mínimo de registro</div>
+    </div>
+
+    <div class="nodo-grid">
+      <div class="nodo teal" onclick="abrirDialog('NotebookLM', 'Motor de transducción de formatos. Convierte el corpus en podcasts, resúmenes, guías y preguntas frecuentes. Cada formato es un Cognobit digital diseñado para un tipo específico de receptor y conversación. Audio y texto.')">
+        <div class="nodo-title">NotebookLM</div>
+        <div class="nodo-sub">Audio · texto · Cognobits digitales</div>
+      </div>
+      <div class="nodo teal" onclick="abrirDialog('AI Studio — modelos de video', 'Veo 3.1, Sora 2, Kling 2.6, Wan 2.6. Generan Cognobits digitales audiovisuales — unidades de sentido en formato video que el texto y el audio no pueden alcanzar. Amplían el concepto 31 (Transducción de formatos) a la dimensión audiovisual. Habilitan tipos de Conversaciones Aumentadas nuevos.')">
+        <div class="nodo-title">AI Studio · modelos de video</div>
+        <div class="nodo-sub">Veo · Sora · Kling · Wan · Cognobits audiovisuales</div>
+      </div>
+    </div>
+
+    <div class="nodo gray" onclick="abrirDialog('SESION.md', 'El puente entre conversaciones. claude.ai no tiene memoria entre sesiones — el SESION.md porta el contexto de una sesión a la siguiente. Al inicio de cada sesión se sube. Al cierre, Claude Code lo actualiza con lo que emergió, los pendientes y las señales nuevas.')">
+      <div class="nodo-title">SESION.md · puente entre conversaciones</div>
+    </div>
+  </div>
+
+  <!-- DIÁLOGO -->
+  <div class="dialogo">
+    <div class="dialogo-card soma-card" onclick="abrirDialog('Soma aporta al Corpus', 'Realidad operativa vivida — lo que realmente ocurre en las Cognoesferas. Emergencias concretas — momentos donde algo aparece que el corpus todavía no podía nombrar. Estados vitales reales. Y la fractalidad implementada antes de ser conceptualizada: la realidad que enseña al paradigma.')">
+      <div class="dialogo-card-label">Soma aporta</div>
+      <div class="dialogo-card-text">Realidad operativa vivida · emergencias · estados vitales reales · fractalidad antes de ser nombrada</div>
+    </div>
+
+    <div class="dialogo-centro">
+      <div class="dialogo-centro-title" onclick="abrirDialog('El patrón de doble acoplamiento', 'La realidad opera sobre el paradigma y el paradigma opera sobre la realidad — cambiándola. Una mano dibuja a la otra. Ninguna precede, ninguna existe sin la otra.\n\nSe repite en todas las expresiones del sistema: tecnológico (la app y el corpus se construyen mutuamente), organizacional (Soma y Corpus se alimentan), conceptual (el corpus crece al ser habitado y quienes lo habitan crecen al habitarlo).\n\nLa imagen más precisa: las manos de Escher.')">Una mano<br>dibuja a la otra</div>
+      <div class="flechas">
+        <div class="flecha-linea">Soma ——→ Corpus</div>
+        <div class="flecha-linea">Corpus ——→ Soma</div>
+      </div>
+    </div>
+
+    <div class="dialogo-card corpus-card" onclick="abrirDialog('Corpus aporta a Soma', 'El marco conceptual que hace legible lo que Soma vive. El lenguaje compartido que permite que distintas Cognoesferas se reconozcan entre sí. Las señales custodiadas — lo que todavía no puede incorporarse pero que no se pierde. La Matriz de Vitalidad — el instrumento que Soma necesita para leer su propio estado.')">
+      <div class="dialogo-card-label">Corpus aporta</div>
+      <div class="dialogo-card-text">Marco conceptual · lenguaje compartido · señales custodiadas · Matriz de Vitalidad</div>
+    </div>
+  </div>
+
+  <!-- CONSEJO ASESOR -->
+  <div class="consejo-section">
+    <div class="consejo-header">
+      <div class="consejo-label">Consejo Asesor Digital</div>
+      <div class="consejo-title">18 roles · Activación selectiva</div>
+      <div class="consejo-sub">Vive en Fundación Corpus como instructivo situado de transición · Se convoca cuando algo requiere asesoramiento</div>
+    </div>
+
+    <div class="roles-grid">
+      <div class="rol-card" onclick="abrirDialog('Filósofo de Paradigmas', 'Custodia del núcleo del paradigma, coherencia ontológica, límites entre adopción genuina y apropiación superficial. Protege la integridad del paradigma como sistema de sentido y evita su reducción a metodología, producto o tendencia.')">
+        <div class="rol-nivel">Alto impacto</div>
+        <div class="rol-nombre">Filósofo de Paradigmas</div>
+        <div class="rol-funcion">Coherencia ontológica</div>
+      </div>
+      <div class="rol-card" onclick="abrirDialog('Narrador Sistémico', 'Arquitecturas narrativas, traducción de praxis en relatos comprensibles y no didácticos. Vela por la Ley del Suelo: narrar la transformación, no la guerra. No construir enemigos. Convierte el paradigma en experiencia compartida, no en discurso explicativo.')">
+        <div class="rol-nivel">Alto impacto</div>
+        <div class="rol-nombre">Narrador Sistémico</div>
+        <div class="rol-funcion">Arquitectura narrativa · Ley del Suelo</div>
+      </div>
+      <div class="rol-card" onclick="abrirDialog('Custodio del Borde Vivo', 'Cuida el límite entre experiencia viva y discurso. Detector de juicios: frena cualquier comunicación que intente validar a Aleph invalidando al otro. Opera en dupla con el Narrador Sistémico. No produce contenido — señala cuando un texto cruza el umbral de cierre o violencia.')">
+        <div class="rol-nivel">Sensor transversal</div>
+        <div class="rol-nombre">Custodio del Borde Vivo</div>
+        <div class="rol-funcion">Ley del Suelo · detector de juicios</div>
+      </div>
+      <div class="rol-card" onclick="abrirDialog('Curador de Visibilidad', 'Capas de exposición (cerrada, semiabierta, pública). Decisiones de qué mostrar y cuándo. Alineación de narrativa pública con estado vital real del sistema. Evita que el éxito narrativo erosione la coherencia sistémica.')">
+        <div class="rol-nivel">Gobernanza</div>
+        <div class="rol-nombre">Curador de Visibilidad</div>
+        <div class="rol-funcion">Gobernanza de exposición</div>
+      </div>
+      <div class="rol-card" onclick="abrirDialog('Guardián del Cuerpo del Sistema', 'Señales tempranas de agotamiento individual y colectivo. Decisiones de foco y retirada. Cuidado del equipo impulsor. Prescribe el festina lente como criterio operativo del proceso de preparación.')">
+        <div class="rol-nivel">Cuidado</div>
+        <div class="rol-nombre">Guardián del Cuerpo</div>
+        <div class="rol-funcion">Sostenibilidad humana</div>
+      </div>
+      <div class="rol-card" onclick="abrirDialog('Arquitecto de Umbrales', 'Diseño de onboarding que produce transformación real, no solo comprensión intelectual. Hitos claros de antes/después. Convierte experiencias dispersas en recorridos legibles y replicables. Acelera el tiempo de adopción y hace visible el valor del tránsito vivido.')">
+        <div class="rol-nivel">Diseño</div>
+        <div class="rol-nombre">Arquitecto de Umbrales</div>
+        <div class="rol-funcion">Onboarding transformador</div>
+      </div>
+      <div class="roles-mas" onclick="abrirDialog('Los 18 roles del Consejo Asesor', 'Los 18 roles completos:\n\n1. Filósofo de Paradigmas — coherencia ontológica\n2. Antropólogo del Presente — lectura cultural\n3. Arquitecto de Umbrales — onboarding transformador\n4. Narrador Sistémico — arquitectura narrativa\n5. Neurodiseñador de Aprendizaje — aceleración cognitiva\n6. Diseñador de Ambientes Autodidactas — aprendizaje emergente\n7. Ingeniero de Autopoiesis — sostenibilidad estructural\n8. Estratega de Valor y Contratos Vivos — captura de valor coherente\n9. Cartógrafo de Mundos Posibles — imaginario simbólico\n10. Arquitecto de Narrativas de Vida — transformación en el tiempo\n11. Guardián del Cuerpo del Sistema — sostenibilidad humana\n12. Historiador de las Transiciones — profundidad histórica\n13. Curador de Visibilidad — gobernanza de exposición\n14. Arquitecto de Escala Viva — crecimiento sin pérdida de alma\n15. Estratega de Poder y Asimetrías — economía política\n16. Diseñador de Marcos Jurídicos Vivos — arquitectura legal\n17. Custodio del Borde Vivo — detector de juicios\n18. Sensor de Vida Colectiva — lectura de ritmos sistémicos')">
+        + 12 roles más — hacer click para ver los 18 completos
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>Paradigma Aleph · Edgardo Noya · Marzo 2026</span>
+  <span>Cada elemento es interactivo · hacer click para profundizar</span>
+</footer>
+
+<!-- Dialog -->
+<div class="overlay" id="overlay" onclick="cerrarDialog(event)">
+  <div class="dialog">
+    <button class="dialog-close" onclick="cerrarDialog()">cerrar</button>
+    <div class="dialog-label" id="dialog-label">componente</div>
+    <div class="dialog-title" id="dialog-title"></div>
+    <div class="dialog-text" id="dialog-text"></div>
+  </div>
+</div>
+
+<script>
+function abrirDialog(titulo, texto) {
+  document.getElementById('dialog-title').textContent = titulo;
+  document.getElementById('dialog-text').textContent = texto;
+  document.getElementById('overlay').classList.add('active');
+}
+function cerrarDialog(e) {
+  if (!e || e.target === document.getElementById('overlay')) {
+    document.getElementById('overlay').classList.remove('active');
+  }
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarDialog(); });
+</script>
+</body>
+</html>

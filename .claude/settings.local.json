@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -v \"^\\\\s*[0-9]*→\\\\s*//\")",
+      "Bash(node -e \":*)",
+      "Bash(mkdir -p \"C:/Users/edgardo/cognoesfera/corpus/documentos\")",
+      "Bash(cp \"C:/Users/edgardo/iCloudDrive/Documents/Cognoesferas/Corpus/Sesiones/\"*.md \"C:/Users/edgardo/cognoesfera/corpus/documentos/\")",
+      "Read(//c/Users/edgardo/Downloads/cognoesferas-payload/**)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(npm install:*)",
+      "Bash(ls:*)",
+      "Bash(code:*)",
+      "Bash(start:*)",
+      "Bash(npm run:*)"
+    ]
+  }
+}
