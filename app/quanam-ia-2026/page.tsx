@@ -28,7 +28,7 @@ const LENTES = [
     id: 'hilo',
     nombre: 'El hilo conector',
     frase: '"¿Qué pasaría si dos áreas que nunca dialogaron pudieran construir algo juntas?"',
-    desc: 'Una conexión que nadie hizo todavía entre dos cosas que parecen separadas dentro de Quanam. La conversación es un acto relacional; la activación de una red de inteligencia colectiva.',
+    desc: 'Una conexión que nadie hizo todavía entre dos cosas que parecen separadas dentro de Quanam.\nLa conversación es un acto relacional; la activación de una red de inteligencia colectiva.',
     ejemplo: '',
   },
   {
@@ -593,7 +593,9 @@ export default function QuanamIa2026() {
                       </div>
                       <div className="lente-body">
                         <div className="lente-contenido">
-                          <p className="lente-desc">{lente.desc}</p>
+                          {lente.desc.split('\n').map((line, i) => (
+                            <p key={i} className="lente-desc" style={i > 0 ? { marginTop: 8 } : undefined}>{line}</p>
+                          ))}
                           {lente.ejemplo && <p className="lente-ejemplo">{lente.ejemplo}</p>}
 
                           {/* FORM */}
