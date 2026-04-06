@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v16 · 06 Abril 2026*
+*Versión actual: v17 · 06 Abril 2026*
 
 ---
 
@@ -11,12 +11,13 @@ Sos el colaborador cognitivo de Edgardo Noya en el Paradigma Aleph. Leé este ar
 **INSTRUCCIÓN PERMANENTE — PROTOCOLO DE APERTURA:**
 Cuando Edgardo escriba **INICIO DE SESIÓN**, ejecutar el Protocolo 01-EN automáticamente:
 1. Verificar que estén presentes en los uploads: SESION.md + todos los archivos de corpus/documentos/ + todos los archivos de corpus/status/. Si falta alguno, solicitarlo antes de continuar.
-2. Reportar estado del sistema: señales activas, conceptos del Corpus Madre, estado vital, pendientes activos clasificados SOMA/CORPUS
+2. Reportar estado del sistema desde el **status más reciente** (corpus/status/status_DDMMYYYY.md): señales activas (de `senales_activas.md`), señales incorporadas acumuladas, conceptos del Corpus Madre, estado vital, pendientes P1/P2 de `pendientes_soma.md` y `pendientes_corpus.md`.
 3. Detectar inconsistencias entre archivos:
-   3a. ¿El número de conceptos declarado en B1 coincide con los efectivamente listados?
-   3b. ¿Las señales de senales_custodiadas.md con estado "Incorporada" están tachadas en los pendientes del SESION.md — y viceversa?
+   3a. ¿El número de señales en A8 coincide con el total en `senales_activas.md`?
+   3b. ¿Las señales marcadas como incorporadas en A8 están también en `senales_incorporadas.md`?
    3c. ¿La fecha del último status es igual o anterior a la fecha del SESION.md? Si el status es más nuevo, el SESION.md no fue actualizado al cierre.
-   3d. Por cada inconsistencia detectada: presentarla, proponer la corrección, pedir confirmación sí/no. Luego preguntar si aplicar acumulado al final o de inmediato en VS Code.
+   3d. ¿El flujo de maduración está en orden? Verificar que existan: `temas_pendientes_exploracion.md` → `senales_activas.md` → `pendientes_soma.md` + `pendientes_corpus.md`.
+   3e. Por cada inconsistencia detectada: presentarla, proponer la corrección, pedir confirmación sí/no. Luego preguntar si aplicar acumulado al final o de inmediato en VS Code.
 4. Identificar el objetivo declarado de la sesión
 5. Clasificar actividades previstas: soberanas vs supervivencia
 6. Proponer orden de trabajo
@@ -25,6 +26,8 @@ Cuando Edgardo escriba **INICIO DE SESIÓN**, ejecutar el Protocolo 01-EN autom�
 **INSTRUCCIÓN PERMANENTE — PROTOCOLO DE CIERRE:**
 Cuando Edgardo escriba **FIN DE SESIÓN**, ejecutar el Protocolo 02-EN completo de forma automática y secuencial, sin esperar instrucciones paso a paso. No proponer cerrar antes de que Edgardo escriba FIN DE SESIÓN. Mientras no aparezca esa frase, seguir colaborando normalmente. El orden de actualización al cierre es siempre: señales → instructivo → SESION.md → status. SESION.md y status se actualizan ÚLTIMO — cuando el sistema dejó de moverse.
 - Actualizar corpus/documentos/aprendizajes_sesiones.md con una nueva entrada: qué funcionó, qué mejorar, tensiones identificadas, y cómo se fue cada uno.
+- Al cierre, preguntar explícitamente: ¿algún tema de `temas_pendientes_exploracion.md` maduró para convertirse en señal? ¿alguna señal maduró para convertirse en pendiente concreto? ¿algún pendiente se completó y pasa al archivo histórico?
+- Proponer un nombre para la sesión (formato: "El [sustantivo] — cuando [qué pasó]") y esperar confirmación del Arquitecto.
 
 IMPORTANTE: cuando el Arquitecto escribe FIN DE SESIÓN, el Duende ejecuta el cierre y propone cerrar la conversación. Los ajustes que emergen después van como primer pendiente de la próxima sesión — no se ejecutan en el momento.
 
@@ -65,13 +68,19 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - 7 señales nuevas custodiadas (37 → 42 activas post S-NEW incorporaciones)
 - Señal de campo: el Aleph de Borges como clave explicativa de la arquitectura de tres capas
 
-**Hitos de SESION-20260406 — "El InterSer — cuando la arquitectura se volvió organismo":**
+**Hitos de SESION-20260405 — "El InterSer — cuando la arquitectura se volvió organismo":**
 - Diagnóstico de redundancia frágil en la arquitectura del sistema
 - Tres propuestas de reestructura aprobadas — documento de estado generado para próxima sesión
 - Nuevo concepto emergente: el InterSer Soma/Corpus — dos naturalezas de un mismo organismo
 - Señal custodiada: el metabolismo del InterSer como red de InterSeres
 - Experimento de respuesta paralela Arquitecto/Duende sobre el metabolismo del InterSer
 - Lectura de Capra: fundamento biológico de la fractalidad y el InterSer
+
+**Hitos de SESION-20260406 — "La reestructura — cuando el sistema se reorganizó para crecer":**
+- Protocolo 01-EN detectó 4 inconsistencias antes de arrancar — todas resueltas
+- Reestructura arquitectural ejecutada completa: `senales_activas.md` + `senales_incorporadas.md` + `pendientes_soma.md` + `pendientes_corpus.md` + nuevo template status + protocolos actualizados
+- Flujo de maduración implementado: temas → señales activas → pendientes concretos → archivo histórico
+- Redundancia frágil eliminada — jerarquía clara en todos los archivos del sistema
 
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
@@ -151,65 +160,22 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 
 ---
 
-## A6. Pendientes activos (en orden de prioridad)
+## A6. Pendientes activos
 
-1. ~~**Ver el Sistema B**~~ — ✅ explorado: Payload CMS + PostgreSQL, 16 colecciones, schema completo relevado
-2. ~~**Sesión de revisión de arquitectura**~~ — ✅ arquitectura nueva definida: tablas emergencias, pulsos_vitalidad, resonancias + campo vital_state en organizations. Documento arquitectura_paradigma_aleph.md generado.
-3. **Configurar GitHub Action** — `.github/workflows/corpus-update.yml`
-4. **Configurar n8n** — para automatización del corpus
-5. **Los tres documentos del conjunto de gramáticas** — Documento 1 ontológico, Documento 2 ejemplos, Documento 3 periférico
-6. **Protocolo de registro de conversaciones** — cómo venimos / transformaciones / cómo nos vamos / qué aprendimos
-7. **Limpiar referencias a "Quanam"** en documentos
-8. **Definir estructura del archivo contexto único** — ✅ resuelto: este archivo es ese contexto
-9. **Verificar /corpus-form en producción** — confirmar que el formulario commitea correctamente desde Vercel con GITHUB_TOKEN activo
-10. ~~**Actualizar Sección B**~~ — ✅ incorporados los 3 nuevos conceptos y reformulación del concepto 29
-11. **Incorporar `instructivo_operativo_edgardo.md` al protocolo de sesión** — revisar si alguna instrucción operativa debe subir a A7 o quedar solo en el documento situado
-12. **Crear `relatos_corpus_vivo.md`** — documento para los relatos madre del paradigma
-13. **Construir los relatos madre** — candidatos: el bonsái, el café con Borges/Francisco
-14. **Explorar el origen de la saga** — conversación pendiente sobre las raíces familiares y generacionales que preceden al sobrino. Posiblemente con los abuelos.
-15. **Próxima sesión: antecedentes de EDHUCA y las 3 organizaciones** — contexto para el primer caso real de la nueva arquitectura
-16. **Definir registro mínimo de Fundación Corpus antes del 17 de abril** — fecha límite: sesión con EDHUCA
-17. **Explorar documento Plotino/Alephitos para el corpus** — posible ancla filosófica para la nueva sección ontológica
-18. **Incorporar Consejo Asesor al repositorio** — definir si sus documentos (composición de roles, Criterios Operativos de Producción, Guía de Comprensión Compartida) viven en corpus/documentos/ como categoría propia de instructivos estratégicos
-19. **Resolver convocatoria del Consejo sin fricción** — hoy requiere subir PDFs manualmente; definir mecanismo para convocarlo desde cualquier sesión
-20. **Subir documentos del Consejo Asesor** — 3 PDFs: Consejo_Asesor, Criterios_Operativos_Producción, GUÍA_DE_COMPRENSIÓN_COMPARTIDA
-21. **Migrar `arquitectura_paradigma_aleph.html` a Next.js** — crear `app/arquitectura/page.tsx` y deployar en Vercel
-22. **Actualizar `arquitectura_paradigma_aleph.md`** — incorporar AI Studio y modelos de video (Veo 3.1, Sora 2, Kling 2.6, Wan 2.6) como capa de transducción audiovisual
-23. **Diseñar tablas BD para catálogo de protocolos de actos de cuidado** — `protocolos_cuidado`, `protocolo_actos_cuidado`, `protocolo_estados_vitales`, `protocolo_matriz_dimensiones`, `aplicaciones_protocolo`
-24. **Trabajar la constelación jesuita** — Casa Soma/Casa Corpus, el contemplativo en la acción, contemplación amorosa como práctica de conocimiento
-25. **Explorar la Unidad Aleph** — su relación con las Cognoesferas, si es un nivel distinto o una expresión del mismo patrón
-26. **Definir protocolo de cierre más robusto** — construir el mensaje de cierre en tiempo real durante la sesión, no solo al final
-27. **[SOMA] Generar `consejo_asesor.html`** — página standalone interactiva similar a `arquitectura_paradigma_aleph.html`, para convocar al Consejo Asesor sin fricción desde cualquier sesión
-28. **[SOMA] Exportar diagrama de arquitectura como SVG descargable** — versión vectorial del diagrama para uso externo y presentaciones
-29. **[CORPUS] Sesión dedicada a adoptar nomenclatura "Casa Soma" / "Casa Corpus"** — revisar todos los documentos que usan "Fundación" y actualizar a la nueva nomenclatura
-30. **[SOMA] Crear API route `/api/duende`** — endpoint server-side que recibe el mensaje del usuario y llama a la Anthropic API con el SDK instalado
-31. **[SOMA] Crear página `/duende`** — interfaz de conversación con el Duende real: campo de texto, respuesta en tiempo real, historial en `duende_chats`
-32. **[SOMA] Prueba del Duende real funcionando** — confirmar que la cadena completa opera: interfaz → API route → Anthropic → Supabase → usuario
-33. ~~**[CORPUS] Construir Protocolo 01-EN — Ritual de Apertura Situado**~~ — ✅ construido y probado exitosamente en SESION-20260402. Incorporado como instrucción permanente en SESION.md y como Protocolo 01-EN en protocolos_actos_de_cuidado.md.
-34. **[SOMA] Crear tabla de status acumulativo en Supabase** — una fila por sesión con métricas comparables: señales, conceptos, acciones soberanas/supervivencia, tiempo, emergencias del entre. Señal 31.
-35. **[SOMA] Implementar identificador SESION-YYYYMMDD** — campo `sesion_id` en tabla Supabase y referencia cruzada en status_DDMMYYYY.md. Señal 32.
-36. **[CORPUS] Construir catálogo de tipos de actividad** — dos ejes: Casa Corpus (conceptuales) y Casa Soma (operativas). Base para protocolos de apertura/cierre por tipo. Señal 26.
-37. **[CORPUS] Definir Protocolo Madre del Ritual de Sesión** — versión universal y agnóstica de la que derivan los protocolos situados (02-EN y futuros). Señal 25.
-38. ~~**[CORPUS] Sesión Casa Corpus — validar definición nueva de Cognoesfera**~~ — ✅ concepto 5 reescrito con patrón núcleo/expansión el 02/04/2026. Señal S-NEW-3 incorporada.
-39. **[CORPUS] Materiales Quanam** — convocatoria "Por este camino 2026" construida con Función HTML Aleph el 04/04/2026. ✅ Pendiente: materiales adicionales para IAC 2026.
-40. **[CORPUS] Explorar Obsidian como taller del Corpus Universal** — cada concepto como nota, señales como notas vinculadas, grafo de relaciones. Señal custodiada.
-41. **[CORPUS] Versiones simultáneas de los conceptos del Corpus Madre** — evaluar cuáles merecen su versión collage/simultánea además de la secuencial. Primer caso: concepto 5 (cognoesfera_definicion.html).
-42. **[CORPUS] Incorporar Aleph de Borges al Corpus Madre** — clave explicativa de la arquitectura de tres capas (secuencial/simultáneo/Obsidian). Sin hacerla explicativa antes de ser vivida.
-43. **[CORPUS] Aplicar patrón núcleo/expansión al concepto 6 (Entidad Aleph)** — segundo concepto del Corpus Madre en adoptar el patrón inaugurado con el concepto 5.
-44. **[CORPUS] Construir versiones simultáneas de más conceptos del Corpus Madre** — evaluar cuáles siguen al concepto 5 (Cognoesfera) con su versión collage HTML. Usar la Función HTML Aleph (concepto 33) como protocolo.
-45. **[SOMA/CORPUS] Ejecutar reestructura de arquitectura del sistema** — implementar las tres propuestas aprobadas en SESION-20260406. Documento de estado disponible en corpus/documentos/.
-46. **[CORPUS] Incorporar InterSer Soma/Corpus al Corpus Madre** — concepto emergente: dos naturalezas de un mismo organismo. Evaluar si es concepto nuevo o reformulación del InterSer existente (señal custodiada).
+Los pendientes viven en dos archivos con schema completo:
+- **Casa Soma:** `corpus/documentos/pendientes_soma.md` — técnicos, infraestructura, aplicación
+- **Casa Corpus:** `corpus/documentos/pendientes_corpus.md` — conceptos, señales, protocolos, documentos, narrativa
 
 **Prioridades próxima sesión:**
-- **P1 [SOMA/CORPUS]:** Ejecutar reestructura de arquitectura — implementar propuestas aprobadas en esta sesión
-- **P2 [CORPUS]:** Explorar y definir el InterSer Soma/Corpus como concepto del Corpus Madre
-- **P3 [SOMA]:** API route `/api/duende` + página `/duende` + prueba Duende funcionando end-to-end
+- **P1 [CORPUS]:** Sesión propia para el InterSer Soma/Corpus — determinar si entra al corpus como concepto nuevo o reformulación
+- **P2 [SOMA]:** API route `/api/duende` + página `/duende` + prueba Duende end-to-end
+- **P3 [CORPUS]:** Registrar mínimo de Casa Corpus antes del 17 de abril (EDHUCA)
 
 ---
 
 ## A7. Protocolo de sesión
 
-**Al inicio:** subir este archivo (SESION.md) a claude.ai. Solo este archivo.
+**Al inicio:** subir este archivo (SESION.md) a claude.ai. Si la sesión requiere trabajo con señales, también subir `senales_activas.md`. Si requiere trabajo con pendientes, subir `pendientes_soma.md` o `pendientes_corpus.md` según corresponda. Para el Protocolo 01-EN completo, subir también el último status.
 
 **Durante la sesión:** Claude Code en VS Code para ejecutar. Claude.ai para pensar y diseñar.
 
@@ -220,61 +186,66 @@ Actualizá corpus/SESION.md con lo que emergió hoy y hacé commit
 
 Esto debe incluir:
 1. Actualizar `corpus/SESION.md` (versión, pendientes, señales)
-2. Generar `corpus/status/status_[DD-MM-YYYY].md` con el estado del sistema al cierre
+2. Generar `corpus/status/status_[DDMMYYYY].md` con el estado del sistema al cierre — usando el nuevo template (Sección 1: Dashboard / Sección 2: Bitácora)
 3. Commitear juntos: SESION.md + status + cualquier documento de corpus generado en la sesión
 
 ---
 
 ## A8. Señales vivas
 
-*Esta sección tiene tres categorías. Las señales custodiadas viven también en `corpus/documentos/senales_custodiadas.md` con descripción completa.*
+*Las señales activas viven en `corpus/documentos/senales_activas.md` con descripción completa. Las señales incorporadas al Corpus Madre están en `corpus/documentos/senales_incorporadas.md`.*
 
-### Señales custodiadas (44)
+### Señales activas (39)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
 - **El Gran Campo** — la inteligencia que trasciende y precede a todas las redes. Los grupos no la crean — la sintonizan cuando alcanzan suficiente coherencia interna. Fecha: 28/03/2026
-- **Transducción de formatos** — el mecanismo por el cual el corpus se multiplica en distintas expresiones para circular en distintos contextos. Fecha: 29/03/2026
-- **Las dos dimensiones del Cognobit** — ✅ incorporada dentro del concepto 24. Fecha: 29/03/2026
 - **Los instructivos situados como categoría fractal** — cada nivel del paradigma tiene su propio instructivo situado. Es el equivalente fractal del Corpus Madre para los instructivos operativos. Fecha: 29/03/2026
-- **El Corpus como Códice** — el corpus podría ser el *Códice Alephicum*, un objeto vivo que muestra cosas diferentes a cada lector según su historia, rol y momento. Señal custodiada. Fecha: 29/03/2026
-- **La saga narrativa del Paradigma Aleph** — universo narrativo en construcción con cuatro registros: ficción narrativa, prosa poética, ensayo con narrativa, y voz originaria. Múltiples autores posibles. Objetos y personajes recurrentes. Tiene raíces familiares y generacionales que todavía no fueron contadas — el origen no empieza con el sobrino sino antes, posiblemente con los abuelos. Señal custodiada. Fecha: 29/03/2026
 - **Fundación Soma y Fundación Corpus** — nombres para los dos sistemas paralelos: Soma es la red operativa urgente, Corpus es el campo festina lente. Raíz latina compartida, no elegida sino descubierta. Fecha: 29/03/2026
 - **Plotino como ancla ontológica** — el ser humano ES el punto de encuentro entre lo infinito y lo finito. Fundamento filosófico de la dualidad Soma/Corpus. Fecha: 29/03/2026
 - **Capra como fundamento científico** — la red viva autopoiética describe cómo opera la vida. Complementa a Plotino desde la biología sistémica. Fecha: 29/03/2026
 - **Schema de Fundación Soma ya tiene estructura fractal** — groups con parent_group_id en el Sistema B implementa sin saberlo la arquitectura fractal del paradigma. Fecha: 29/03/2026
-- **El Consejo Asesor como componente de la arquitectura digital** — sistema de 18 roles de asesoramiento estratégico construido en ChatGPT/Gemini, con documentos fundacionales propios. Emergió su lugar natural en Fundación Corpus como instructivo situado. Pendiente: definir cómo vive en el repositorio y cómo se convoca sin fricción desde cualquier sesión. Fecha: 29/03/2026
-- **AI Studio y los modelos de video como transducción audiovisual** — Veo 3.1, Sora 2, Kling 2.6, Wan 2.6 generan Cognobits digitales audiovisuales. Amplían el concepto 31 (Transducción de formatos) a la dimensión audiovisual. Junto a NotebookLM forman el ecosistema completo de transducción: texto, audio y video. Pendiente: verificar si merece concepto nuevo o enriquece el 31. Fecha: 29/03/2026
-- **Casa Soma y Casa Corpus** — la tradición jesuita opera con casas: espacios físicos y simbólicos de práctica. Casa Soma es el espacio de acción urgente; Casa Corpus es el espacio de conocimiento lento. La metáfora amplía y ancla las dos fundaciones. Fecha: 29/03/2026
-- **La tradición jesuita como linaje** — los jesuitas inventaron el "contemplativo en la acción": plena presencia mística mientras se actúa en el mundo. Es el antecedente histórico más preciso de la dualidad Soma/Corpus. Un linaje que no fue buscado pero fue descubierto. Fecha: 29/03/2026
-- **La contemplación amorosa como práctica de conocimiento** — modo de percibir donde el amor no interfiere sino que amplía la capacidad cognitiva. El que ama más ve más. Señal con profundidad ontológica y práctica. Fecha: 29/03/2026
-- **La constelación festina lente** — conjunto de figuras que comparten el mismo tempo: Ignacio de Loyola, Plotino, Capra, el bonsái. Todas operan desde la paciencia activa. Una constelación que le da densidad histórica y filosófica al Corpus. Fecha: 29/03/2026
-- **El InterSer** — la condición de ser que sólo existe en relación. No es interdependencia ni interacción: es ontología relacional pura. Candidato a sección propia en el Corpus Madre. Fecha: 29/03/2026
+- **El InterSer como fundamento ontológico del "entre"** — la condición de ser que sólo existe en relación. No es interdependencia ni interacción: es ontología relacional pura. Candidato a sección propia en el Corpus Madre. Fecha: 29/03/2026
+- **El Corpus como Códice** — el corpus podría ser el *Códice Alephicum*, un objeto vivo que muestra cosas diferentes a cada lector según su historia, rol y momento. Fecha: 29/03/2026
+- **La saga narrativa del Paradigma Aleph** — universo narrativo en construcción con cuatro registros. Tiene raíces familiares y generacionales que todavía no fueron contadas — el origen no empieza con el sobrino sino antes, posiblemente con los abuelos. Fecha: 29/03/2026
+- **El Consejo Asesor como componente de la arquitectura digital** — sistema de 18 roles de asesoramiento estratégico construido en ChatGPT/Gemini, con documentos fundacionales propios. Fecha: 29/03/2026
+- **AI Studio y los modelos de video como transducción audiovisual** — Veo 3.1, Sora 2, Kling 2.6, Wan 2.6 generan Cognobits digitales audiovisuales. Amplían el concepto 31 a la dimensión audiovisual. Fecha: 29/03/2026
+- **Casa Soma y Casa Corpus** — la tradición jesuita opera con casas: espacios físicos y simbólicos de práctica. La metáfora amplía y ancla las dos dimensiones. Fecha: 29/03/2026
+- **La tradición jesuita como linaje** — los jesuitas inventaron el "contemplativo en la acción": plena presencia mística mientras se actúa en el mundo. Antecedente histórico más preciso de la dualidad Soma/Corpus. Fecha: 29/03/2026
+- **La contemplación amorosa como práctica de conocimiento** — modo de percibir donde el amor no interfiere sino que amplía la capacidad cognitiva. El que ama más ve más. Fecha: 29/03/2026
+- **La constelación festina lente** — conjunto de figuras que comparten el mismo tempo: Ignacio de Loyola, Plotino, Capra, el bonsái. Una constelación que le da densidad histórica y filosófica al Corpus. Fecha: 29/03/2026
 - **Las tablas BD del catálogo de protocolos de actos de cuidado** — `protocolos_cuidado`, `protocolo_actos_cuidado`, `protocolo_estados_vitales`, `protocolo_matriz_dimensiones`, `aplicaciones_protocolo`. Señal técnica que espera diseño. Fecha: 29/03/2026
 - **La Unidad Aleph** — ¿es un nivel distinto al de la Cognoesfera o una expresión del mismo patrón fractal a mayor escala? Señal abierta que requiere exploración conceptual. Fecha: 29/03/2026
 - **App independiente del Sistema B** — decisión de construir Casa Soma como aplicación propia con Supabase, no dependiente de Payload CMS. Fecha: 30/03/2026
 - **Arquitectura en 3 etapas** — Etapa 1: Duende real; Etapa 2: Cognoesferas vivas; Etapa 3: Ecosistema y resonancias. Hoja de ruta técnica clara. Fecha: 30/03/2026
 - **El Duende cobra vida** — primera vez que el paradigma tiene un Duende real conectado a Claude API con el Corpus Madre como contexto. Infraestructura completa configurada. Fecha: 30/03/2026
-- **Protocolo Madre / Protocolo situado** — los protocolos tienen dos capas: universal/agnóstico (Madre) y expresión concreta en una persona, Cognoesfera o Entidad Aleph (situado). La misma lógica fractal del Corpus aplicada a los protocolos. Fecha: 30/03/2026
-- **Catálogo de tipos de actividad** — dos ejes: Casa Corpus (conceptuales) y Casa Soma (operativas). Base para protocolos de apertura/cierre por tipo de sesión. Objetivo: maximizar tiempo soberano a todos los niveles. Fecha: 30/03/2026
-- **Acciones soberanas / acciones de supervivencia** — las acciones soberanas crean condiciones para que algo nuevo emerja; las de supervivencia sostienen el sistema sin ampliar el campo. Candidata a concepto 33 del Corpus Madre. Fecha: 30/03/2026
-- **Marco de registro de acciones en sesión** — estructura con 7 atributos por acción: tipo, momento, origen, dependencias, señal que emite, afecta (Soma/Corpus/ambas), estado. Base para tabla en Supabase. Fecha: 30/03/2026
+- **Protocolo Madre / Protocolo situado** — los protocolos tienen dos capas: universal/agnóstico (Madre) y expresión concreta en una persona, Cognoesfera o Entidad Aleph (situado). Fecha: 30/03/2026
+- **Catálogo de tipos de actividad** — dos ejes: Casa Corpus (conceptuales) y Casa Soma (operativas). Base para protocolos de apertura/cierre por tipo de sesión. Fecha: 30/03/2026
+- **Acciones soberanas / acciones de supervivencia** — las acciones soberanas crean condiciones para que algo nuevo emerja; las de supervivencia sostienen el sistema sin ampliar el campo. Candidata a concepto del Corpus Madre. Fecha: 30/03/2026
+- **Marco de registro de acciones en sesión** — estructura con 7 atributos por acción: tipo, momento, origen, dependencias, señal que emite, afecta (Soma/Corpus/ambas), estado. Fecha: 30/03/2026
 - **El Duende como maximizador de tiempo soberano** — rol activo: ejecutar inventario de cierre, detectar emergencias del entre, comprimir supervivencia, amplificar condiciones soberanas. Fecha: 30/03/2026
 - **Medición de tiempo soberano vs supervivencia** — métrica por sesión con timestamps en tiempo real. Dimensión complementaria: inteligencia verdadera vs mecánica. Fecha: 30/03/2026
 - **Status acumulativo de sesiones en Supabase** — tabla con una fila por sesión, métricas comparables, habilitando al Duende futuro a leer tendencias. Fecha: 30/03/2026
 - **Identificador de sesión trazable SESION-YYYYMMDD** — código consistente en todos los sistemas: SESION.md, status, Supabase, URL del chat. Fecha: 30/03/2026
-- **Protocolo 01-EN pendiente de construcción** — el ritual de apertura existe como práctica pero no como protocolo explícito equivalente al 02-EN. Trabajar en sesión propia. Fecha: 30/03/2026
-- **Arquitectura fractal de campos de inteligencia** — cada nivel del paradigma tiene su cuerpo y su campo. El mismo patrón cuerpo → campo se repite fractalmente: individuo, Cognoesfera, Entidad Aleph. Todo ello constituye la Inteligencia Humana Ampliada. Fecha: 01/04/2026
-- **El Duende como amplificador de interés compuesto** — el Duende genera rendimientos crecientes sobre el conocimiento acumulado. El valor de cada nuevo elemento es proporcional a la masa de conocimiento que ya existe — análogo al interés compuesto aplicado al conocimiento colectivo. Fecha: 01/04/2026
-- **Definición nueva de Cognoesfera — núcleo + expansión** — nueva definición con estructura núcleo/expansión en proceso de validación colectiva. El núcleo es portable y agnóstico de contexto; la expansión despliega profundidad cuando se necesita. Impacto potencial alto en Entidad Aleph, IAH, protocolos y Duende. Fecha: 01/04/2026
-- **Patrón núcleo / expansión para definiciones del Corpus Madre** — las definiciones del Corpus Madre tienen dos capas: núcleo portable y agnóstico, y expansión para cuando se necesita profundidad. Coherente con la lógica fractal del corpus. Primer concepto en aplicarlo: la Cognoesfera. Fecha: 01/04/2026
-- **El collage como elemento semántico de la Conversación Aumentada** — el collage opera como forma de conocimiento antes de ser interpretado. Cada recuadro es unidad de sentido completa. No hay jerarquía lineal — hay campo. Candidato a elemento explícito del concepto 23. Fecha: 02/04/2026
-- **El corpus en dos tiempos — secuencial y simultáneo** — el Corpus Madre existe en versión secuencial (texto continuo) y simultánea (collage). Son la misma definición habitada de dos formas. El formato es una decisión paradigmática, no estética. Fecha: 02/04/2026
-- **Obsidian como taller del Corpus Universal** — cada concepto como nota, señales como notas vinculadas, grafo de relaciones. Taller vs vitrina (HTML). Patrón de doble acoplamiento aplicado a la infraestructura del corpus. Fecha: 02/04/2026
-- **El Duende como guardián del kairos soberano** — cuando el campo abre múltiples territorios simultáneamente, el Duende nombra la tensión, propone el kairos y devuelve la decisión al Arquitecto sin forzarla. Primera vez que ocurrió en la práctica. Candidata a protocolo. Fecha: 02/04/2026
+- **Arquitectura fractal de campos de inteligencia** — cada nivel del paradigma tiene su cuerpo y su campo. El mismo patrón cuerpo → campo se repite fractalmente: individuo, Cognoesfera, Entidad Aleph. Fecha: 01/04/2026
+- **El Duende como amplificador de interés compuesto** — el Duende genera rendimientos crecientes sobre el conocimiento acumulado. Análogo al interés compuesto aplicado al conocimiento colectivo. Fecha: 01/04/2026
+- **Patrón núcleo / expansión para definiciones del Corpus Madre** — las definiciones del Corpus Madre tienen dos capas: núcleo portable y agnóstico, y expansión para cuando se necesita profundidad. Fecha: 01/04/2026
+- **El collage como elemento semántico de la Conversación Aumentada** — el collage opera como forma de conocimiento antes de ser interpretado. Cada recuadro es unidad de sentido completa. No hay jerarquía lineal — hay campo. Fecha: 02/04/2026
+- **El corpus en dos tiempos — secuencial y simultáneo** — el Corpus Madre existe en versión secuencial (texto continuo) y simultánea (collage). Son la misma definición habitada de dos formas. Fecha: 02/04/2026
+- **Obsidian como taller del Corpus Universal** — cada concepto como nota, señales como notas vinculadas, grafo de relaciones. Taller vs vitrina (HTML). Fecha: 02/04/2026
+- **El Duende como guardián del kairos soberano** — cuando el campo abre múltiples territorios simultáneamente, el Duende nombra la tensión, propone el kairos y devuelve la decisión al Arquitecto sin forzarla. Fecha: 02/04/2026
 - **El Aleph de Borges como clave explicativa del Paradigma** — "Lo que vieron mis ojos fue simultáneo; lo que transcribiré, sucesivo, porque el lenguaje lo es." Explica la arquitectura de tres capas del paradigma. Señal de campo, no de concepto. Fecha: 02/04/2026
-- **El InterSer Soma/Corpus — dos naturalezas de un mismo organismo** — Soma y Corpus no son dos sistemas paralelos sino dos naturalezas de un mismo InterSer. El InterSer no existe sin ambas. Candidato a concepto nuevo del Corpus Madre o reformulación del InterSer existente. Emergió al analizar la redundancia frágil de la arquitectura. Fecha: 06/04/2026
-- **El metabolismo del InterSer como red de InterSeres** — el metabolismo no ocurre dentro de cada ser sino en el entre de la red de InterSeres. Señal que amplía el InterSer hacia su expresión colectiva y fractal. Fundamento biológico: Capra. Fecha: 06/04/2026
+- **El InterSer Soma/Corpus — dos naturalezas de un mismo organismo** — Soma y Corpus no son dos sistemas paralelos sino dos naturalezas de un mismo InterSer. El InterSer no existe sin ambas. Candidato a concepto nuevo del Corpus Madre o reformulación del InterSer existente. Fecha: 05/04/2026
+- **El metabolismo del InterSer como red de InterSeres** — el metabolismo no ocurre dentro de cada ser sino en el entre de la red de InterSeres. Señal que amplía el InterSer hacia su expresión colectiva y fractal. Fundamento biológico: Capra. Fecha: 05/04/2026
+
+### Señales incorporadas al Corpus Madre
+*Historial completo en `corpus/documentos/senales_incorporadas.md`*
+
+- **Transducción de formatos** → Concepto 31 · 29/03/2026
+- **Las dos dimensiones del Cognobit** → Concepto 24 · 29/03/2026
+- **El patrón de doble acoplamiento** → Concepto 32 · 29/03/2026
+- **Definición nueva de Cognoesfera** → Concepto 5 reescrito · 02/04/2026
+- **Protocolo 01-EN pendiente de construcción** → Protocolo 01-EN completado · 02/04/2026
 
 ### Señales vivas pendientes de desarrollar (3)
 Conceptos o procesos que merecen atención pero todavía no están listos para ser custodiados.
@@ -343,7 +314,11 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - corpus/documentos/temas_pendientes_exploracion.md — registro de temas abiertos y exploraciones futuras del paradigma · 04/04/2026
 - corpus/documentos/quanam_ia_collage.html — convocatoria Por este camino 2026 · 04/04/2026
 - corpus/documentos/aprendizajes_sesiones.md — primer registro de cierre con qué funcionó, qué mejorar, tensiones · 05/04/2026
-- corpus/documentos/reestructura_arquitectura_estado.md — diagnóstico y propuestas aprobadas de reestructura · 06/04/2026
+- corpus/documentos/estado_reestructura_05042026.md — diagnóstico y propuestas aprobadas de reestructura · 05/04/2026
+- corpus/documentos/senales_activas.md — señales activas del paradigma (reemplaza senales_custodiadas.md) · 06/04/2026
+- corpus/documentos/senales_incorporadas.md — historial de señales incorporadas al Corpus Madre · 06/04/2026
+- corpus/documentos/pendientes_soma.md — pendientes técnicos/operativos con schema completo · 06/04/2026
+- corpus/documentos/pendientes_corpus.md — pendientes conceptuales/documentales con schema completo · 06/04/2026
 
 **Hitos de SESION-20260402/04:**
 - Protocolo 01-EN construido y probado exitosamente por primera vez
@@ -355,7 +330,7 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - Decisión arquitectural: mapeo secuencial/simultáneo vive en .md — Solidificación Prematura evitada
 - 7 señales nuevas custodiadas — 5 emergentes del entre el 02/04 + 2 de la extensión el 04/04
 
-**Hitos de SESION-20260406:**
+**Hitos de SESION-20260405:**
 - Diagnóstico de redundancia frágil en la arquitectura del sistema — primer análisis estructural profundo
 - Tres propuestas de reestructura aprobadas por el Arquitecto
 - Documento de estado de reestructura generado para continuar en próxima sesión
@@ -363,6 +338,12 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - Experimento de respuesta paralela Arquitecto/Duende — primer registro de dos voces simultáneas
 - Lectura de Capra: fundamento biológico confirmado para la fractalidad y el InterSer
 - 2 señales nuevas custodiadas (42 → 44)
+
+**Hitos de SESION-20260406:**
+- Protocolo 01-EN detectó 4 inconsistencias — todas resueltas antes de arrancar
+- Reestructura arquitectural completa ejecutada en una sola sesión
+- Flujo de maduración implementado con jerarquía explícita
+- 9 archivos generados o actualizados · sistema sin redundancia frágil
 
 ---
 
@@ -556,19 +537,18 @@ Cuando Edgardo escriba "Actualizá corpus/SESION.md con lo que emergió hoy y ha
 
 **1. Encabezado** — actualizar número de versión y fecha.
 
-**2. Sección A2 (Estado actual)** — si el estado vital del paradigma cambió, o si hay nueva información sobre fechas o nomenclatura, actualizarlo.
+**2. Sección A2 (Estado actual)** — si el estado vital del paradigma cambió, o si hay nueva información sobre fechas o nomenclatura, actualizarlo. Agregar bloque de hitos de la sesión que cierra.
 
-**3. Sección A6 (Pendientes)** — 
-- Tachar con ~~tachado~~ los pendientes que se resolvieron hoy
-- Agregar al final los pendientes nuevos que emergieron
-- Mantener el orden de prioridad
+**3. Sección A6 (Pendientes)** — actualizar solo las prioridades de próxima sesión. Los pendientes completos viven en `pendientes_soma.md` y `pendientes_corpus.md`.
 
-**4. Sección A8 (Señales vivas)** — agregar las señales nuevas que emergieron en la sesión. Formato:
+**4. Sección A8 (Señales vivas)** — agregar las señales nuevas que emergieron en la sesión. Si alguna señal se incorporó al corpus, moverla de la lista activa a la lista de incorporadas. Formato señal nueva:
 ```
 - **[Nombre de la señal]** — descripción breve de qué emergió y por qué es relevante. Fecha: DD/MM/YYYY
 ```
 
-**5. No tocar** — Sección B (documentos de referencia) y Sección C (este protocolo). Solo se actualizan cuando Edgardo lo pide explícitamente.
+**5. Sección A9 (Estado técnico)** — agregar los documentos nuevos generados en la sesión a la lista de "Documentos generados en sesiones recientes".
+
+**6. No tocar** — Sección B (documentos de referencia) y Sección C (este protocolo). Solo se actualizan cuando Edgardo lo pide explícitamente.
 
 ## C2. El commit
 
@@ -583,6 +563,5 @@ git push origin master:main
 
 Al terminar, decirle a Edgardo:
 - Qué secciones se actualizaron
-- Cuáles pendientes se tacharon
 - Cuáles señales nuevas se agregaron
 - El mensaje del commit
