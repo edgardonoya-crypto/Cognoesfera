@@ -27,7 +27,7 @@ const LENTES = [
   {
     id: 'hilo',
     nombre: 'El hilo conector',
-    frase: '"¿Qué pasaría si dos áreas que nunca dialogaron pudieran construir algo juntas?"',
+    frase: '"¿Qué pasaría si dos áreas que no dialogan frecuentemente pudieran construir algo juntas?"',
     desc: 'Una conexión que nadie hizo todavía entre dos cosas que parecen separadas dentro de Quanam.\nLa conversación es un acto relacional; la activación de una red de inteligencia colectiva.',
     ejemplo: '',
   },
@@ -571,7 +571,7 @@ export default function QuanamIa2026() {
             <div className="seccion-header" onClick={() => setSec2Open(v => !v)}>
               <div className="seccion-header-left">
                 <span className="seccion-etiqueta">la convocatoria</span>
-                <span className="seccion-titulo">¿Te sumás?</span>
+                <span className="seccion-titulo">¿Qué ves vos desde donde estás?</span>
               </div>
               <span className="seccion-flecha">›</span>
             </div>
