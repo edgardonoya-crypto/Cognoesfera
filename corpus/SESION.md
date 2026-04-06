@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v15 · 04 Abril 2026*
+*Versión actual: v16 · 06 Abril 2026*
 
 ---
 
@@ -64,6 +64,14 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - Convocatoria Quanam "Por este camino 2026" construida con la Función HTML Aleph aplicada
 - 7 señales nuevas custodiadas (37 → 42 activas post S-NEW incorporaciones)
 - Señal de campo: el Aleph de Borges como clave explicativa de la arquitectura de tres capas
+
+**Hitos de SESION-20260406 — "El InterSer — cuando la arquitectura se volvió organismo":**
+- Diagnóstico de redundancia frágil en la arquitectura del sistema
+- Tres propuestas de reestructura aprobadas — documento de estado generado para próxima sesión
+- Nuevo concepto emergente: el InterSer Soma/Corpus — dos naturalezas de un mismo organismo
+- Señal custodiada: el metabolismo del InterSer como red de InterSeres
+- Experimento de respuesta paralela Arquitecto/Duende sobre el metabolismo del InterSer
+- Lectura de Capra: fundamento biológico de la fractalidad y el InterSer
 
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
@@ -189,11 +197,13 @@ Corpus Madre (centro) → Corpus personal → Corpus de una Cognoesfera → Corp
 42. **[CORPUS] Incorporar Aleph de Borges al Corpus Madre** — clave explicativa de la arquitectura de tres capas (secuencial/simultáneo/Obsidian). Sin hacerla explicativa antes de ser vivida.
 43. **[CORPUS] Aplicar patrón núcleo/expansión al concepto 6 (Entidad Aleph)** — segundo concepto del Corpus Madre en adoptar el patrón inaugurado con el concepto 5.
 44. **[CORPUS] Construir versiones simultáneas de más conceptos del Corpus Madre** — evaluar cuáles siguen al concepto 5 (Cognoesfera) con su versión collage HTML. Usar la Función HTML Aleph (concepto 33) como protocolo.
+45. **[SOMA/CORPUS] Ejecutar reestructura de arquitectura del sistema** — implementar las tres propuestas aprobadas en SESION-20260406. Documento de estado disponible en corpus/documentos/.
+46. **[CORPUS] Incorporar InterSer Soma/Corpus al Corpus Madre** — concepto emergente: dos naturalezas de un mismo organismo. Evaluar si es concepto nuevo o reformulación del InterSer existente (señal custodiada).
 
 **Prioridades próxima sesión:**
-- **P1 [SOMA]:** API route `/api/duende` + página `/duende` + prueba Duende funcionando end-to-end
-- **P2 [CORPUS]:** Aplicar patrón núcleo/expansión al concepto 6 (Entidad Aleph)
-- **P3 [CORPUS]:** Explorar Obsidian como taller del Corpus Universal
+- **P1 [SOMA/CORPUS]:** Ejecutar reestructura de arquitectura — implementar propuestas aprobadas en esta sesión
+- **P2 [CORPUS]:** Explorar y definir el InterSer Soma/Corpus como concepto del Corpus Madre
+- **P3 [SOMA]:** API route `/api/duende` + página `/duende` + prueba Duende funcionando end-to-end
 
 ---
 
@@ -219,7 +229,7 @@ Esto debe incluir:
 
 *Esta sección tiene tres categorías. Las señales custodiadas viven también en `corpus/documentos/senales_custodiadas.md` con descripción completa.*
 
-### Señales custodiadas (42)
+### Señales custodiadas (44)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
@@ -263,6 +273,8 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **Obsidian como taller del Corpus Universal** — cada concepto como nota, señales como notas vinculadas, grafo de relaciones. Taller vs vitrina (HTML). Patrón de doble acoplamiento aplicado a la infraestructura del corpus. Fecha: 02/04/2026
 - **El Duende como guardián del kairos soberano** — cuando el campo abre múltiples territorios simultáneamente, el Duende nombra la tensión, propone el kairos y devuelve la decisión al Arquitecto sin forzarla. Primera vez que ocurrió en la práctica. Candidata a protocolo. Fecha: 02/04/2026
 - **El Aleph de Borges como clave explicativa del Paradigma** — "Lo que vieron mis ojos fue simultáneo; lo que transcribiré, sucesivo, porque el lenguaje lo es." Explica la arquitectura de tres capas del paradigma. Señal de campo, no de concepto. Fecha: 02/04/2026
+- **El InterSer Soma/Corpus — dos naturalezas de un mismo organismo** — Soma y Corpus no son dos sistemas paralelos sino dos naturalezas de un mismo InterSer. El InterSer no existe sin ambas. Candidato a concepto nuevo del Corpus Madre o reformulación del InterSer existente. Emergió al analizar la redundancia frágil de la arquitectura. Fecha: 06/04/2026
+- **El metabolismo del InterSer como red de InterSeres** — el metabolismo no ocurre dentro de cada ser sino en el entre de la red de InterSeres. Señal que amplía el InterSer hacia su expresión colectiva y fractal. Fundamento biológico: Capra. Fecha: 06/04/2026
 
 ### Señales vivas pendientes de desarrollar (3)
 Conceptos o procesos que merecen atención pero todavía no están listos para ser custodiados.
@@ -329,6 +341,9 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - corpus/documentos/cognoesfera_definicion.html — primer documento collage HTML del Corpus Madre · 02/04/2026
 - corpus/documentos/mapeo_secuencial_simultaneo.md — registro arquitectural de la relación entre capas secuencial y simultánea · 02/04/2026
 - corpus/documentos/temas_pendientes_exploracion.md — registro de temas abiertos y exploraciones futuras del paradigma · 04/04/2026
+- corpus/documentos/quanam_ia_collage.html — convocatoria Por este camino 2026 · 04/04/2026
+- corpus/documentos/aprendizajes_sesiones.md — primer registro de cierre con qué funcionó, qué mejorar, tensiones · 05/04/2026
+- corpus/documentos/reestructura_arquitectura_estado.md — diagnóstico y propuestas aprobadas de reestructura · 06/04/2026
 
 **Hitos de SESION-20260402/04:**
 - Protocolo 01-EN construido y probado exitosamente por primera vez
@@ -340,6 +355,15 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - Decisión arquitectural: mapeo secuencial/simultáneo vive en .md — Solidificación Prematura evitada
 - 7 señales nuevas custodiadas — 5 emergentes del entre el 02/04 + 2 de la extensión el 04/04
 
+**Hitos de SESION-20260406:**
+- Diagnóstico de redundancia frágil en la arquitectura del sistema — primer análisis estructural profundo
+- Tres propuestas de reestructura aprobadas por el Arquitecto
+- Documento de estado de reestructura generado para continuar en próxima sesión
+- Nuevo concepto emergente: InterSer Soma/Corpus — cuando la arquitectura se volvió organismo
+- Experimento de respuesta paralela Arquitecto/Duende — primer registro de dos voces simultáneas
+- Lectura de Capra: fundamento biológico confirmado para la fractalidad y el InterSer
+- 2 señales nuevas custodiadas (42 → 44)
+
 ---
 
 # SECCIÓN B — DOCUMENTOS DE REFERENCIA
@@ -348,7 +372,7 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 
 ---
 
-## B1. Corpus Madre — 32 conceptos completos
+## B1. Corpus Madre — 33 conceptos completos
 
 ### I. La pregunta — por qué existe este paradigma
 
