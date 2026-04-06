@@ -76,10 +76,10 @@ export default function AdminPage() {
             <div style={styles.eyebrow}>Cognoesfera · Admin</div>
             <h1 style={styles.h1}>Panel de administración</h1>
           </div>
-          <button
-            onClick={() => router.push('/dashboard')}
-            style={styles.btnSm}
-          >← Volver</button>
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button onClick={() => router.push('/dashboard')} style={styles.btnSm}>← Volver</button>
+            <button onClick={async () => { await supabase.auth.signOut(); router.push('/login') }} style={styles.btnSm}>Salir</button>
+          </div>
         </div>
 
         {/* SECCIÓN A — Respondentes */}

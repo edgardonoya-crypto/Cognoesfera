@@ -217,7 +217,7 @@ function CognoesferaPageInner() {
           <span className="tb-cog">{cogno.name}</span>
         </div>
         <div className="tb-right">
-          <Link href="/dashboard" className="btn-sm" style={{ textDecoration: 'none' }}>⌂ Inicio</Link>
+          <Link href="/dashboard" className="btn-sm" style={{ textDecoration: 'none' }}>← Volver</Link>
           <div className="mode-tabs">
             {([
               'field', 'session', 'explore',
