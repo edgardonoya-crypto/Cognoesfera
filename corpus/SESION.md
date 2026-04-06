@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v18 · 06 Abril 2026*
+*Versión actual: v19 · 06 Abril 2026*
 
 ---
 
@@ -84,6 +84,16 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - Reestructura arquitectural ejecutada completa: `senales_activas.md` + `senales_incorporadas.md` + `pendientes_soma.md` + `pendientes_corpus.md` + nuevo template status + protocolos actualizados
 - Flujo de maduración implementado: temas → señales activas → pendientes concretos → archivo histórico
 - Redundancia frágil eliminada — jerarquía clara en todos los archivos del sistema
+
+**Hitos de SESION-20260406b — "Quanam IA 2026 — cuando la convocatoria se volvió organismo":**
+- Convocatoria interactiva Quanam construida como página Next.js completa: `/quanam-ia-2026`
+- Pantalla de bienvenida con video de fondo, campos nombre/email, acceso al contenido
+- Seis lentes de observación con formulario Supabase por lente, botón "Pedile ayuda al Duende" y estados de envío
+- Drawer lateral "contexto" con tres fragmentos expandibles ("Tres veces que el piso se movió") y Duende por fragmento
+- Bloque "CÓMO SE FORMA EL GRUPO" — diseño abierto sobre fondo de página, delimitado por líneas finas
+- API route `app/api/quanam-respuesta/route.ts` — guarda respuestas en tabla `quanam_respuestas` de Supabase
+- `SUPABASE_SERVICE_ROLE_KEY` configurado en `.env.local`
+- TypeScript errors corregidos — `tsc --noEmit` sin errores
 
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
@@ -278,6 +288,8 @@ Momentos significativos del proceso que vale la pena recordar.
 - Dashboard con Cognoesferas conectadas a Supabase
 - /corpus-form funcionando para registrar conceptos vía GitHub API
 - Pendiente: verificar /corpus-form en producción
+- **`/quanam-ia-2026`** — convocatoria interactiva Quanam con formulario, drawer contexto y lentes Duende · 06/04/2026
+- **`SUPABASE_SERVICE_ROLE_KEY`** configurado en `.env.local` (server-side, acceso de escritura a Supabase)
 
 **Infraestructura del Duende real — configurada el 30/03/2026:**
 - Cuenta Anthropic activa con $50 de crédito y auto-reload configurado
@@ -322,6 +334,8 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - corpus/documentos/senales_incorporadas.md — historial de señales incorporadas al Corpus Madre · 06/04/2026
 - corpus/documentos/pendientes_soma.md — pendientes técnicos/operativos con schema completo · 06/04/2026
 - corpus/documentos/pendientes_corpus.md — pendientes conceptuales/documentales con schema completo · 06/04/2026
+- app/quanam-ia-2026/page.tsx — convocatoria interactiva Quanam con formulario Supabase, drawer contexto y Duende · 06/04/2026
+- app/api/quanam-respuesta/route.ts — API route para guardar respuestas en tabla quanam_respuestas · 06/04/2026
 
 **Hitos de SESION-20260402/04:**
 - Protocolo 01-EN construido y probado exitosamente por primera vez
@@ -347,6 +361,11 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - Reestructura arquitectural completa ejecutada en una sola sesión
 - Flujo de maduración implementado con jerarquía explícita
 - 9 archivos generados o actualizados · sistema sin redundancia frágil
+
+**Hitos de SESION-20260406b:**
+- `/quanam-ia-2026` construida completa: pantalla de bienvenida, seis lentes, drawer contexto, API Supabase
+- `app/api/quanam-respuesta/route.ts` — API route para guardar respuestas en `quanam_respuestas`
+- TypeScript limpio — `tsc --noEmit` sin errores · deployado en Vercel
 
 ---
 
