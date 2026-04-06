@@ -21,7 +21,7 @@ const LENTES = [
     id: 'intuicion',
     nombre: 'La intuición central',
     frase: '"Tengo la corazonada de que el valor real está en…"',
-    desc: 'Hay algo en cada persona que sabe antes de calcular. Antes de que ningún sistema pueda procesarlo. Eso es exactamente lo que la IA no puede tener.',
+    desc: 'Antes de que cualquier sistema procese la información, algo en vos ya sabe. No es intuición mágica — es un tipo de inteligencia que la neurociencia empieza a describir y que la IA, por ahora, no puede tener.',
     ejemplo: '',
   },
   {
