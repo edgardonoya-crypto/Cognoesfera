@@ -336,7 +336,7 @@ export default function QuanamIa2026() {
         .pregunta-central .bloque-etiqueta { color: var(--goldlt); }
         .pregunta-texto { font-family: 'Playfair Display', serif; font-size: clamp(20px,3vw,32px); font-style: italic; font-weight: 400; color: var(--gold); line-height: 1.55; }
         .pregunta-quanam { font-size: 15px; color: var(--inkxlt); font-style: italic; }
-        .cierre { margin-top: 12px; background: var(--cream); border: 1px solid var(--rule); border-radius: 20px; padding: 40px; display: flex; flex-direction: column; gap: 16px; }
+        .cierre { margin-top: 12px; background: #EDE8DC; border: 1px solid var(--rule); border-radius: 20px; padding: 40px; display: flex; flex-direction: column; gap: 16px; }
         .cierre-texto { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 400; font-style: italic; color: var(--gold); line-height: 1.65; }
         .cierre-sub { font-size: 17px; color: var(--inklt); line-height: 1.8; font-weight: 300; }
         .cierre-sub strong { font-weight: 500; color: var(--ink); }
@@ -685,14 +685,14 @@ export default function QuanamIa2026() {
                   <span style={{ fontFamily: 'Playfair Display, serif', fontSize: 11, fontStyle: 'italic', color: '#C4941A' }}>I</span>
                   <span style={{ fontSize: 15, fontWeight: 500, color: '#2C2820' }}>El río que cambió de curso</span>
                   <span style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>En 2020 el mundo cambió en semanas. Las organizaciones que salieron mejor paradas fueron las que podían pensar juntas bajo incertidumbre. Lo que viene con la IA es una transformación de magnitud similar. Más silenciosa. Pero igual de profunda.</span>
-                  <span style={{ fontSize: 12, color: '#C4941A', fontWeight: 500, marginTop: 4 }}>{dF1Open === 'mas' ? '— menos' : '+ profundidad'}</span>
+                  <span style={{ fontSize: 12, color: '#C4941A', fontWeight: 500, marginTop: 4 }}>{dF1Open === 'mas' ? '— menos' : '+ profundizar'}</span>
                 </div>
                 {dF1Open === 'mas' && (
                   <div style={{ paddingBottom: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
                     <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>El COVID fue el colapso simultáneo de tres certezas: que el trabajo era un lugar físico, que las decisiones importantes requerían presencia, que el ritmo de cambio era predecible. Lo que emergió no fue tecnología — fue inteligencia colectiva.</p>
                     <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Lo que está llegando con la IA replica ese patrón — pero más lento y más profundo. No colapsa el cómo trabajamos. Colapsa el por qué trabajamos. Cuando los agentes hagan ese trabajo, la respuesta de siempre dejará de ser suficiente.</p>
                     <p style={{ fontSize: 14, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>¿Cuál será entonces la nueva respuesta?</p>
-                    <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500, marginTop: 4 }}>Preguntas</p>
+                    <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500, marginTop: 4 }}>Pregunta orientadora</p>
                     <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>La última vez que tomaste una decisión difícil, ¿qué parte podría haber hecho un agente? ¿Y qué parte no?</p>
                     <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuánto de tu jornada de la semana pasada fue urgente? ¿Cuánto fue importante?</p>
                     <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué sabés sobre tu cliente que ningún sistema podría saber?</p>
@@ -716,14 +716,14 @@ export default function QuanamIa2026() {
                   <span style={{ fontFamily: 'Playfair Display, serif', fontSize: 11, fontStyle: 'italic', color: '#C4941A' }}>II</span>
                   <span style={{ fontSize: 15, fontWeight: 500, color: '#2C2820' }}>Cuando el piso se mueve</span>
                   <span style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Cada vez que la humanidad perdió las certezas que organizaban su mundo, encontró la manera de crear nuevas desde adentro. Siempre. Sin excepción. La pregunta no es si va a pasar — es qué construimos antes de que pase.</span>
-                  <span style={{ fontSize: 12, color: '#C4941A', fontWeight: 500, marginTop: 4 }}>{dF2Open === 'mas' ? '— menos' : '+ profundidad'}</span>
+                  <span style={{ fontSize: 12, color: '#C4941A', fontWeight: 500, marginTop: 4 }}>{dF2Open === 'mas' ? '— menos' : '+ profundizar'}</span>
                 </div>
                 {dF2Open === 'mas' && (
                   <div style={{ paddingBottom: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
                     <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>En el siglo XIX colapsaron tres pilares simultáneamente: la religión perdió autoridad con Darwin, la filosofía iluminista prometía progreso pero las revoluciones industriales mostraron miseria, y los vínculos comunitarios se disolvieron con la urbanización. Nietzsche lo documentó como diagnóstico, no catástrofe.</p>
                     <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Tolstoi fue a vivir con los campesinos. Los movimientos obreros inventaron nuevas formas de valor colectivo. Las vanguardias artísticas crearon lenguajes completamente nuevos. Lo que colapsa ahora es la centralidad del trabajo como fuente de identidad.</p>
                     <p style={{ fontSize: 14, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>Si los agentes hacen lo que hacías, ¿desde dónde construís tu valor?</p>
-                    <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500, marginTop: 4 }}>Preguntas</p>
+                    <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500, marginTop: 4 }}>Pregunta orientadora</p>
                     <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuándo fue la última vez que tu equipo llegó a algo que ninguno traía solo?</p>
                     <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué conversaciones importantes nunca quedan registradas en Quanam?</p>
                     <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>Si mañana un agente hiciera el 80% de tu trabajo, ¿en qué usarías el tiempo liberado?</p>
@@ -747,14 +747,14 @@ export default function QuanamIa2026() {
                   <span style={{ fontFamily: 'Playfair Display, serif', fontSize: 11, fontStyle: 'italic', color: '#C4941A' }}>III</span>
                   <span style={{ fontSize: 15, fontWeight: 500, color: '#2C2820' }}>Lo que está por encima</span>
                   <span style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Hay algo en cada persona que sabe antes de calcular. Antes de que ningún sistema pueda procesarlo. Eso es exactamente lo que la IA no puede tener.</span>
-                  <span style={{ fontSize: 12, color: '#C4941A', fontWeight: 500, marginTop: 4 }}>{dF3Open === 'mas' ? '— menos' : '+ profundidad'}</span>
+                  <span style={{ fontSize: 12, color: '#C4941A', fontWeight: 500, marginTop: 4 }}>{dF3Open === 'mas' ? '— menos' : '+ profundizar'}</span>
                 </div>
                 {dF3Open === 'mas' && (
                   <div style={{ paddingBottom: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
                     <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>Kant decía que había dos cosas que lo sorprendían: el orden del cielo, y algo dentro de cada persona que sabe cuándo un acto es ético antes de calcularlo. Los neurólogos lo llaman supraconciencia — no intuición vaga, sino una capacidad que opera por encima de la conciencia ordinaria.</p>
                     <p style={{ fontSize: 14, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>El médico que sabe que algo está mal antes de que los estudios lo confirmen. El vendedor que percibe que un cliente necesita ser escuchado antes de ser resuelto. El responsable que siente que el momento no está maduro aunque todos los indicadores digan que sí.</p>
                     <p style={{ fontSize: 14, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>Eso no es dato. Es juicio situado. Y vive en cada persona y equipo de Quanam — distribuido, latente, esperando las condiciones correctas para volverse visible.</p>
-                    <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500, marginTop: 4 }}>Preguntas</p>
+                    <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500, marginTop: 4 }}>Pregunta orientadora</p>
                     <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuándo fue la última vez que una conversación cambió genuinamente tu forma de ver un problema?</p>
                     <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Para qué te llamaría tu cliente si pudiera llamarle a un agente para todo lo demás?</p>
                     <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué es lo que hacés que no podrías explicarle a un sistema?</p>
