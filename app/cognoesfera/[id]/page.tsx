@@ -227,7 +227,7 @@ export default function CognoesferaPage({ params }: { params: { id: string } }) 
                 className={`mode-tab${mode === m ? ' active' : ''}`}
                 onClick={() => setMode(m)}
               >
-                {m === 'field' ? '🗺 Campo' : m === 'session' ? '🔴 Sesión' : m === 'explore' ? '📖 Explorar' : '◎ Resonancias'}
+                {m === 'field' ? '🗺 Campo' : m === 'session' ? '🔴 Sesión' : m === 'explore' ? '📖 Explorar' : 'Resonancias Quanam IA 2026'}
               </button>
             ))}
           </div>
