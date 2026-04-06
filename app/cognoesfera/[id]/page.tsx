@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useRef, useState, useCallback } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useRef, useState, useCallback, Suspense } from 'react'
+import { useRouter, useSearchParams, useParams } from 'next/navigation'
 import Link from 'next/link'
 import { supabase } from '@/app/lib/supabase'
 
@@ -132,9 +132,10 @@ type CognoData = {
 
 // ─── página ───────────────────────────────────────────────────────────────────
 
-export default function CognoesferaPage({ params }: { params: { id: string } }) {
+function CognoesferaPageInner() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const { id } = useParams<{ id: string }>()
   const rolId = searchParams.get('rol_id') ?? ''
 
   const [mode, setMode] = useState<Mode>('field')
@@ -159,14 +160,14 @@ export default function CognoesferaPage({ params }: { params: { id: string } }) 
       setUserEmail(session.user.email ?? '')
 
       const [{ data: cData }, { data: rData }] = await Promise.all([
-        supabase.from('cognoesferas').select('id, name, descripcion, indicadores').eq('id', params.id).single(),
+        supabase.from('cognoesferas').select('id, name, descripcion, indicadores').eq('id', id).single(),
         supabase.from('roles').select('name').eq('id', rolId).single(),
       ])
       if (cData) setCogno(cData)
       if (rData) setRolName(rData.name)
     }
     load()
-  }, [params.id, rolId, router])
+  }, [id, rolId, router])
 
   useEffect(() => {
     if (mode !== 'resonancias' || resonLoaded) return
@@ -478,6 +479,18 @@ export default function CognoesferaPage({ params }: { params: { id: string } }) 
         </div>
       )}
     </div>
+  )
+}
+
+export default function CognoesferaPage() {
+  return (
+    <Suspense fallback={
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(180deg,#f7f3e8,#efe9da)', fontFamily: 'Inter,sans-serif', color: '#66706d' }}>
+        Cargando…
+      </div>
+    }>
+      <CognoesferaPageInner />
+    </Suspense>
   )
 }
 
