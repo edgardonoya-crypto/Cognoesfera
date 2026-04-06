@@ -228,7 +228,7 @@ function CognoesferaPageInner() {
                 className={`mode-tab${mode === m ? ' active' : ''}`}
                 onClick={() => setMode(m)}
               >
-                {m === 'field' ? '🗺 Campo' : m === 'session' ? '🔴 Sesión' : m === 'explore' ? '📖 Explorar' : 'Resonancias Quanam IA 2026'}
+                {m === 'field' ? '🗺 Campo' : m === 'session' ? '🔴 Sesión' : m === 'explore' ? '📖 Explorar' : 'Resonancias Quanam IHA Lab 2026'}
               </button>
             ))}
           </div>
@@ -435,8 +435,19 @@ function CognoesferaPageInner() {
       {mode === 'resonancias' && (
         <div className="mode-content" style={{ padding: '32px 24px', maxWidth: 720, margin: '0 auto', width: '100%' }}>
           <div style={{ marginBottom: 28 }}>
-            <div style={{ fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#4eaa98', fontWeight: 600, marginBottom: 6 }}>Quanam IA 2026</div>
-            <h2 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 650, letterSpacing: '-.03em', color: '#18201e' }}>Resonancias</h2>
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16 }}>
+              <div>
+                <div style={{ fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#4eaa98', fontWeight: 600, marginBottom: 6 }}>Quanam IHA Lab 2026</div>
+                <h2 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 650, letterSpacing: '-.03em', color: '#18201e' }}>Resonancias</h2>
+              </div>
+              {userEmail === 'edgardo.noya@gmail.com' && (
+                <Link href="/admin" style={{ textDecoration: 'none', flexShrink: 0 }}>
+                  <button style={{ background: 'rgba(34,58,54,.08)', border: '1px solid rgba(34,58,54,.12)', borderRadius: 8, padding: '7px 14px', fontSize: '0.78rem', color: '#18201e', cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>
+                    Panel de administración
+                  </button>
+                </Link>
+              )}
+            </div>
             <p style={{ margin: '8px 0 0', fontSize: '0.875rem', color: '#66706d' }}>Respuestas recibidas, agrupadas por lente. Los nombres no se muestran.</p>
           </div>
 
