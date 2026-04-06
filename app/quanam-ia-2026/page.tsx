@@ -15,7 +15,7 @@ const LENTES = [
     nombre: 'La pregunta viva',
     frase: '"Mi gran pregunta es…"',
     desc: 'Algo que te intriga y todavía no tiene respuesta. Una incomodidad productiva que el grupo podría explorar juntos.',
-    ejemplo: '"¿Cómo hacemos para que el conocimiento de los que se van no desaparezca?"',
+    ejemplo: '"¿Qué queda vivo en la organización de cada persona que estuvo?"',
   },
   {
     id: 'intuicion',
