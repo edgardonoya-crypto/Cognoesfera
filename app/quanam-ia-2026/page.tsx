@@ -141,6 +141,96 @@ function DuendeChat({ lente, respuestaUsuario }: DuendeChatProps) {
   )
 }
 
+type DuendeFragmentoProps = {
+  fragmentoId: string
+  titulo: string
+  contexto: string
+}
+
+function DuendeFragmento({ titulo, contexto }: DuendeFragmentoProps) {
+  const [open, setOpen] = useState(false)
+  const [msgs, setMsgs] = useState<DuendeMsg[]>([])
+  const [sesionId, setSesionId] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [input, setInput] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  async function callDuende(mensaje: string, historial: DuendeMsg[], sid: string | null) {
+    setLoading(true)
+    try {
+      const res = await fetch('/api/duende', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mensaje, historial, sesion_id: sid, modo: 'convocatoria' }),
+      })
+      const data = await res.json()
+      if (data.respuesta) {
+        setMsgs(prev => [...prev, { role: 'assistant', content: data.respuesta }])
+        if (data.sesion_id) setSesionId(data.sesion_id)
+      }
+    } catch {
+      setMsgs(prev => [...prev, { role: 'assistant', content: '(El Duende no pudo responder en este momento.)' }])
+    } finally {
+      setLoading(false)
+      setTimeout(() => inputRef.current?.focus(), 50)
+    }
+  }
+
+  function toggleOpen(e: React.MouseEvent) {
+    e.stopPropagation()
+    if (!open && msgs.length === 0) {
+      setOpen(true)
+      const inicial = `El usuario está explorando el fragmento "${titulo}". Contexto: ${contexto}. Respondé desde ese territorio con brevedad. Abrí una pregunta que invite a pensar.`
+      callDuende(inicial, [], null)
+    } else {
+      setOpen(v => !v)
+    }
+  }
+
+  function enviarInput(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key !== 'Enter' || !input.trim() || loading) return
+    const msg = input.trim()
+    setInput('')
+    const newMsgs: DuendeMsg[] = [...msgs, { role: 'user', content: msg }]
+    setMsgs(newMsgs)
+    callDuende(msg, msgs, sesionId)
+  }
+
+  return (
+    <div>
+      <button onClick={toggleOpen} style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '6px 12px', fontSize: 11, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}>
+        {open ? 'Cerrar el Duende' : 'Pedile ayuda al Duende'}
+      </button>
+      {open && (
+        <div style={{ marginTop: 8 }}>
+          {loading && msgs.length === 0 && (
+            <p style={{ fontSize: 12, color: '#8A7E70', fontStyle: 'italic', lineHeight: 1.65 }}>El Duende está pensando…</p>
+          )}
+          {msgs.map((m, i) => (
+            <p key={i} style={{ fontSize: 12, color: m.role === 'assistant' ? '#8A7E70' : '#2C2820', fontStyle: m.role === 'assistant' ? 'italic' : 'normal', lineHeight: 1.65, marginBottom: 6 }}>
+              {m.role === 'user' ? `Vos: ${m.content}` : m.content}
+            </p>
+          ))}
+          {loading && msgs.length > 0 && (
+            <p style={{ fontSize: 12, color: '#8A7E70', fontStyle: 'italic', lineHeight: 1.65 }}>El Duende está pensando…</p>
+          )}
+          {msgs.length > 0 && (
+            <input
+              ref={inputRef}
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              onKeyDown={enviarInput}
+              placeholder="Seguí la conversación… (Enter para enviar)"
+              disabled={loading}
+              style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 6, padding: '6px 10px', fontSize: 12, fontFamily: 'Karla, sans-serif', color: '#2C2820', background: 'rgba(245,240,232,0.5)', outline: 'none', marginTop: 6, boxSizing: 'border-box' }}
+            />
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
 function getCookie(name: string): string {
   if (typeof document === 'undefined') return ''
   const value = `; ${document.cookie}`
@@ -176,12 +266,7 @@ export default function QuanamIa2026() {
   const [dF2Prof, setDF2Prof] = useState(false)
   const [dF3Prof, setDF3Prof] = useState(false)
   const [dF4Prof, setDF4Prof] = useState(false)
-  const [dF1Duende, setDF1Duende] = useState(false)
-  const [dF2Duende, setDF2Duende] = useState(false)
-  const [dF3Duende, setDF3Duende] = useState(false)
-  const [dF4Duende, setDF4Duende] = useState(false)
   const [dF5Open, setDF5Open] = useState(false)
-  const [dF5Duende, setDF5Duende] = useState(false)
   const [contactMsg, setContactMsg] = useState('')
   const [contactStatus, setContactStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const [sec2Open, setSec2Open] = useState(false)
@@ -824,10 +909,7 @@ export default function QuanamIa2026() {
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>La última vez que tomaste una decisión difícil, ¿qué parte podría haber hecho un agente? ¿Y qué parte no?</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuánto de tu jornada de la semana pasada fue urgente? ¿Cuánto fue importante?</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué sabés sobre tu cliente que ningún sistema podría saber?</p>
-                              <div>
-                                <button onClick={e => { e.stopPropagation(); setDF1Duende(v => !v) }} style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '6px 12px', fontSize: 11, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}>Pedile ayuda al Duende</button>
-                                {dF1Duende && <p style={{ fontSize: 12, color: 'var(--inkxlt)', fontStyle: 'italic', marginTop: 8, lineHeight: 1.65 }}>El Duende está en construcción — pronto vas a poder explorar este fragmento con él.</p>}
-                              </div>
+                              <DuendeFragmento fragmentoId="f1" titulo="El río que cambió de curso" contexto="En 2020 el mundo cambió en semanas. Lo que viene con la IA replica ese patrón — más lento y más profundo. No colapsa el cómo trabajamos. Colapsa el por qué trabajamos. Cuando los agentes hagan ese trabajo, la respuesta de siempre dejará de ser suficiente." />
                             </div>
                           )}
                         </div>
@@ -853,10 +935,7 @@ export default function QuanamIa2026() {
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuándo fue la última vez que tu equipo llegó a algo que ninguno traía solo?</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué conversaciones importantes nunca quedan registradas en Quanam?</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>Si mañana un agente hiciera el 80% de tu trabajo, ¿en qué usarías el tiempo liberado?</p>
-                              <div>
-                                <button onClick={e => { e.stopPropagation(); setDF2Duende(v => !v) }} style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '6px 12px', fontSize: 11, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}>Pedile ayuda al Duende</button>
-                                {dF2Duende && <p style={{ fontSize: 12, color: 'var(--inkxlt)', fontStyle: 'italic', marginTop: 8, lineHeight: 1.65 }}>El Duende está en construcción — pronto vas a poder explorar este fragmento con él.</p>}
-                              </div>
+                              <DuendeFragmento fragmentoId="f2" titulo="Cuando el piso se mueve" contexto="Cada vez que la humanidad perdió las certezas que organizaban su mundo, encontró la manera de crear nuevas desde adentro. Lo que colapsa ahora es la centralidad del trabajo como fuente de identidad. Si los agentes hacen lo que hacías, ¿desde dónde construís tu valor?" />
                             </div>
                           )}
                         </div>
@@ -883,10 +962,7 @@ export default function QuanamIa2026() {
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuándo fue la última vez que una conversación cambió genuinamente tu forma de ver un problema?</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Para qué te llamaría tu cliente si pudiera llamarle a un agente para todo lo demás?</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué es lo que hacés que no podrías explicarle a un sistema?</p>
-                              <div>
-                                <button onClick={e => { e.stopPropagation(); setDF3Duende(v => !v) }} style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '6px 12px', fontSize: 11, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}>Pedile ayuda al Duende</button>
-                                {dF3Duende && <p style={{ fontSize: 12, color: 'var(--inkxlt)', fontStyle: 'italic', marginTop: 8, lineHeight: 1.65 }}>El Duende está en construcción — pronto vas a poder explorar este fragmento con él.</p>}
-                              </div>
+                              <DuendeFragmento fragmentoId="f3" titulo="Lo que está por encima" contexto="Antes de que cualquier sistema procese la información, algo en vos ya sabe. No es intuición mágica — es juicio situado. Un tipo de procesamiento integrado que la IA, por ahora, no puede tener. El médico que percibe que algo no está bien antes de que los estudios lo confirmen." />
                             </div>
                           )}
                         </div>
@@ -952,10 +1028,7 @@ export default function QuanamIa2026() {
                               <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>El Paradigma Aleph no es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos — y qué condiciones hacen falta para que eso ocurra. El paradigma tiene un origen distribuido: emergió en múltiples redes. Quanam lo integra, siendo parte de su evolución desde los inicios.</p>
                               <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500 }}>Pregunta orientadora</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué condiciones harían falta en Quanam para que la inteligencia colectiva emerja como propiedad del sistema?</p>
-                              <div>
-                                <button onClick={e => { e.stopPropagation(); setDF4Duende(v => !v) }} style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '6px 12px', fontSize: 11, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}>Pedile ayuda al Duende</button>
-                                {dF4Duende && <p style={{ fontSize: 12, color: 'var(--inkxlt)', fontStyle: 'italic', marginTop: 8, lineHeight: 1.65 }}>Quiero entender mejor el Paradigma Aleph. ¿Qué es y cómo se relaciona con lo que Quanam está construyendo?</p>}
-                              </div>
+                              <DuendeFragmento fragmentoId="f4" titulo="El Paradigma Aleph" contexto="Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva. No es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos y qué condiciones hacen falta para que eso ocurra." />
                             </div>
                           )}
                         </div>
@@ -982,10 +1055,7 @@ export default function QuanamIa2026() {
                             ))}
                           </ul>
 
-                          <div>
-                            <button onClick={e => { e.stopPropagation(); setDF5Duende(v => !v) }} style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '6px 12px', fontSize: 11, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}>Pedile ayuda al Duende</button>
-                            {dF5Duende && <p style={{ fontSize: 12, color: 'var(--inkxlt)', fontStyle: 'italic', marginTop: 8, lineHeight: 1.65 }}>Quiero saber más sobre las líneas de exploración del Paradigma Aleph y cómo podría participar.</p>}
-                          </div>
+                          <DuendeFragmento fragmentoId="f5" titulo="Líneas de exploración abiertas" contexto="El Paradigma Aleph se está aplicando en este momento en varios equipos de Quanam, una ONG, una institución educativa que presentará en el Congreso Mundial IAC 2026, y grupos internacionales que exploran la Inteligencia Colectiva." />
 
                           <div style={{ borderTop: '1px solid rgba(139,105,20,0.10)', marginTop: 4, paddingTop: 14, display: 'flex', flexDirection: 'column', gap: 10 }}>
                             <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.65, fontWeight: 300 }}>Si querés conversar sobre estas iniciativas, dejá tu mensaje acá</p>
