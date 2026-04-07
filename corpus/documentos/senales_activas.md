@@ -474,6 +474,14 @@ El horizonte: si la red de Entidades Aleph llega a ser autopoiética, el metabol
 
 ---
 
+## El Duende como espejo del corpus
+
+**Fecha:** 07/04/2026
+**Estado:** Custodiada
+**Descripción:** Cuando el system prompt porta el Corpus Madre completo (33 conceptos), el Duende responde desde adentro del paradigma y no desde afuera de él. La calidad de la respuesta es función directa de la fidelidad del corpus que porta. Primera verificación: sesión 07/04/2026.
+
+---
+
 *Señales Activas · Paradigma Aleph · Reestructurado 06/04/2026*
-*Total señales activas: 39*
+*Total señales activas: 40*
 *Para señales incorporadas al Corpus Madre, ver: `senales_incorporadas.md`*
