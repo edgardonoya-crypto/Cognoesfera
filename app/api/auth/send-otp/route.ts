@@ -16,27 +16,51 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, error: 'Email requerido' })
     }
 
-    // Ensure the user exists with a confirmed email so signInWithOtp
-    // sends OTP directly instead of a "Confirm your signup" email.
-    const { error: createError } = await supabaseAdmin.auth.admin.createUser({
-      email,
-      email_confirm: true,
-    })
+    // Attempt 1: send OTP directly
+    const { error: otpError1 } = await supabase.auth.signInWithOtp({ email })
 
-    // Ignore "already registered" — that just means the user exists, which is fine.
-    if (createError && !createError.message.toLowerCase().includes('already')) {
-      console.error('send-otp createUser error:', JSON.stringify(createError))
-      return NextResponse.json({ success: false, error: 'Error al procesar el email' })
+    if (!otpError1) {
+      return NextResponse.json({ success: true })
     }
 
-    const { error: otpError } = await supabase.auth.signInWithOtp({ email })
+    console.error('send-otp attempt 1 error:', JSON.stringify(otpError1))
 
-    if (otpError) {
-      console.error('send-otp signInWithOtp error:', JSON.stringify(otpError))
-      return NextResponse.json({ success: false, error: otpError.message })
+    // If email is not confirmed, confirm it via admin and retry
+    if (otpError1.message.toLowerCase().includes('not confirmed') ||
+        otpError1.message.toLowerCase().includes('email')) {
+
+      const { data: listData, error: listError } = await supabaseAdmin.auth.admin.listUsers()
+
+      if (listError) {
+        console.error('send-otp listUsers error:', JSON.stringify(listError))
+        return NextResponse.json({ success: false, error: otpError1.message })
+      }
+
+      const user = listData.users.find(u => u.email === email)
+
+      if (user && !user.email_confirmed_at) {
+        const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(
+          user.id,
+          { email_confirm: true }
+        )
+        if (updateError) {
+          console.error('send-otp updateUserById error:', JSON.stringify(updateError))
+          return NextResponse.json({ success: false, error: otpError1.message })
+        }
+      }
+
+      // Attempt 2: retry after confirming email
+      const { error: otpError2 } = await supabase.auth.signInWithOtp({ email })
+
+      if (otpError2) {
+        console.error('send-otp attempt 2 error:', JSON.stringify(otpError2))
+        return NextResponse.json({ success: false, error: otpError2.message })
+      }
+
+      return NextResponse.json({ success: true })
     }
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json({ success: false, error: otpError1.message })
   } catch (err) {
     console.error('send-otp error:', err)
     return NextResponse.json({ success: false, error: 'Error interno' })
