@@ -69,7 +69,7 @@ function DuendeChat({ lente, respuestaUsuario }: DuendeChatProps) {
       const res = await fetch('/api/duende', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mensaje, historial, sesion_id: sid }),
+        body: JSON.stringify({ mensaje, historial, sesion_id: sid, modo: 'convocatoria' }),
       })
       const data = await res.json()
       if (data.respuesta) {

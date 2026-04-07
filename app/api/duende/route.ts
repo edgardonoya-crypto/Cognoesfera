@@ -119,11 +119,15 @@ type Message = { role: 'user' | 'assistant'; content: string }
 
 export async function POST(request: Request) {
   try {
-    const { mensaje, historial = [], sesion_id } = await request.json() as { mensaje: string; historial?: Message[]; sesion_id?: string }
+    const { mensaje, historial = [], sesion_id, modo } = await request.json() as { mensaje: string; historial?: Message[]; sesion_id?: string; modo?: 'convocatoria' | 'corpus' }
 
     if (!mensaje?.trim()) {
       return NextResponse.json({ error: 'Falta el mensaje' }, { status: 400 })
     }
+
+    const systemPrompt = modo === 'convocatoria'
+      ? SYSTEM_PROMPT + '\n\nIMPORTANTE: Estás hablando con un participante de una convocatoria. Respondé en 2-3 líneas máximo. Tono cálido y conversacional — como alguien que escucha con genuino interés. Sin jerga técnica ni conceptos del paradigma. Terminá siempre con una sola pregunta breve que abra territorio. No explicás — abrís.'
+      : SYSTEM_PROMPT
 
     const messages: Message[] = [
       ...historial,
@@ -133,7 +137,7 @@ export async function POST(request: Request) {
     const response = await anthropic.messages.create({
       model: 'claude-sonnet-4-6',
       max_tokens: 1024,
-      system: SYSTEM_PROMPT,
+      system: systemPrompt,
       messages,
     })
 
