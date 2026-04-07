@@ -6,29 +6,57 @@ import { supabase } from '@/app/lib/supabase'
 
 export default function LoginPage() {
   const router = useRouter()
+  const [step, setStep] = useState<'email' | 'otp'>('email')
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [token, setToken] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  async function handleLogin(e: React.FormEvent) {
+  async function handleSendOtp(e: React.FormEvent) {
     e.preventDefault()
     setError('')
     setLoading(true)
 
-    const { error: authError } = await supabase.auth.signInWithPassword({
+    const { error: otpError } = await supabase.auth.signInWithOtp({
       email,
-      password,
+      options: { shouldCreateUser: false },
     })
 
     setLoading(false)
 
-    if (authError) {
-      setError('Credenciales incorrectas. Consultá al Arquitecto.')
+    if (otpError) {
+      setError('No pudimos enviar el código. Verificá el email.')
+      return
+    }
+
+    setStep('otp')
+  }
+
+  async function handleVerifyOtp(e: React.FormEvent) {
+    e.preventDefault()
+    setError('')
+    setLoading(true)
+
+    const { error: verifyError } = await supabase.auth.verifyOtp({
+      email,
+      token,
+      type: 'email',
+    })
+
+    setLoading(false)
+
+    if (verifyError) {
+      setError('Código incorrecto o expirado.')
       return
     }
 
     router.push('/dashboard')
+  }
+
+  function handleResend() {
+    setToken('')
+    setError('')
+    setStep('email')
   }
 
   return (
@@ -38,39 +66,59 @@ export default function LoginPage() {
         <h2 style={styles.title}>Cognoesfera</h2>
         <p style={styles.subtitle}>Paradigma Aleph · Sistema de Inteligencia Colectiva</p>
 
-        <form onSubmit={handleLogin} style={{ width: '100%' }}>
-          <input
-            style={styles.input}
-            type="email"
-            placeholder="Tu email…"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            autoComplete="email"
-            required
-            onFocus={(e) => (e.target.style.borderColor = 'rgba(83,177,210,.50)')}
-            onBlur={(e) => (e.target.style.borderColor = 'rgba(34,58,54,.10)')}
-          />
-          <input
-            style={styles.input}
-            type="password"
-            placeholder="Contraseña…"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-            required
-            onFocus={(e) => (e.target.style.borderColor = 'rgba(83,177,210,.50)')}
-            onBlur={(e) => (e.target.style.borderColor = 'rgba(34,58,54,.10)')}
-          />
-          <button
-            type="submit"
-            style={styles.button}
-            disabled={loading}
-            onMouseOver={(e) => ((e.target as HTMLButtonElement).style.opacity = '0.88')}
-            onMouseOut={(e) => ((e.target as HTMLButtonElement).style.opacity = '1')}
-          >
-            {loading ? 'Ingresando…' : 'Ingresar'}
-          </button>
-        </form>
+        {step === 'email' ? (
+          <form onSubmit={handleSendOtp} style={{ width: '100%' }}>
+            <input
+              style={styles.input}
+              type="email"
+              placeholder="Tu email…"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
+              required
+              onFocus={(e) => (e.target.style.borderColor = 'rgba(83,177,210,.50)')}
+              onBlur={(e) => (e.target.style.borderColor = 'rgba(34,58,54,.10)')}
+            />
+            <button
+              type="submit"
+              style={styles.button}
+              disabled={loading}
+              onMouseOver={(e) => ((e.target as HTMLButtonElement).style.opacity = '0.88')}
+              onMouseOut={(e) => ((e.target as HTMLButtonElement).style.opacity = '1')}
+            >
+              {loading ? 'Enviando…' : 'Enviar código'}
+            </button>
+          </form>
+        ) : (
+          <form onSubmit={handleVerifyOtp} style={{ width: '100%' }}>
+            <p style={styles.hint}>Ingresá el código que enviamos a <strong>{email}</strong></p>
+            <input
+              style={styles.input}
+              type="text"
+              placeholder="Código de 6 dígitos…"
+              value={token}
+              onChange={(e) => setToken(e.target.value.replace(/\D/g, '').slice(0, 6))}
+              autoComplete="one-time-code"
+              inputMode="numeric"
+              required
+              autoFocus
+              onFocus={(e) => (e.target.style.borderColor = 'rgba(83,177,210,.50)')}
+              onBlur={(e) => (e.target.style.borderColor = 'rgba(34,58,54,.10)')}
+            />
+            <button
+              type="submit"
+              style={styles.button}
+              disabled={loading || token.length < 6}
+              onMouseOver={(e) => ((e.target as HTMLButtonElement).style.opacity = '0.88')}
+              onMouseOut={(e) => ((e.target as HTMLButtonElement).style.opacity = '1')}
+            >
+              {loading ? 'Verificando…' : 'Ingresar'}
+            </button>
+            <button type="button" onClick={handleResend} style={styles.resend}>
+              Reenviar código
+            </button>
+          </form>
+        )}
 
         {error && <p style={styles.error}>{error}</p>}
       </div>
@@ -123,6 +171,12 @@ const styles: Record<string, React.CSSProperties> = {
     color: '#66706d',
     fontSize: '0.95rem',
   },
+  hint: {
+    margin: '0 0 16px',
+    fontSize: '0.88rem',
+    color: '#66706d',
+    lineHeight: 1.5,
+  },
   input: {
     width: '100%',
     padding: '12px 16px',
@@ -147,6 +201,16 @@ const styles: Record<string, React.CSSProperties> = {
     fontWeight: 600,
     cursor: 'pointer',
     transition: 'opacity 200ms',
+  },
+  resend: {
+    marginTop: '14px',
+    background: 'none',
+    border: 'none',
+    color: '#66706d',
+    fontSize: '0.85rem',
+    cursor: 'pointer',
+    textDecoration: 'underline',
+    padding: 0,
   },
   error: {
     marginTop: '10px',
