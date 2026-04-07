@@ -20,6 +20,7 @@ export default function DuendePage() {
   const router = useRouter()
   const [loading, setLoading] = useState(true)
   const [historial, setHistorial] = useState<Message[]>([])
+  const [sesionId, setSesionId] = useState<string | null>(null)
   const [input, setInput] = useState('')
   const [sending, setSending] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
@@ -51,11 +52,13 @@ export default function DuendePage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           mensaje,
-          historial: historial, // historial previo, sin el mensaje actual
+          historial,
+          sesion_id: sesionId,
         }),
       })
       const data = await res.json()
       if (data.respuesta) {
+        if (data.sesion_id) setSesionId(data.sesion_id)
         setHistorial(prev => [...prev, { role: 'assistant', content: data.respuesta }])
       } else {
         setHistorial(prev => [...prev, { role: 'assistant', content: '(El Duende no pudo responder en este momento.)' }])

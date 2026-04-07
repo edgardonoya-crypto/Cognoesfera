@@ -119,7 +119,7 @@ type Message = { role: 'user' | 'assistant'; content: string }
 
 export async function POST(request: Request) {
   try {
-    const { mensaje, historial = [] } = await request.json() as { mensaje: string; historial?: Message[] }
+    const { mensaje, historial = [], sesion_id } = await request.json() as { mensaje: string; historial?: Message[]; sesion_id?: string }
 
     if (!mensaje?.trim()) {
       return NextResponse.json({ error: 'Falta el mensaje' }, { status: 400 })
@@ -139,15 +139,46 @@ export async function POST(request: Request) {
 
     const respuesta = response.content[0].type === 'text' ? response.content[0].text : ''
 
-    // Guardar en Supabase (best-effort — no bloquea si el schema no coincide)
-    await supabase
-      .from('duende_chats')
-      .insert({ user_message: mensaje, duende_response: respuesta })
-      .then(({ error }) => {
-        if (error) console.warn('duende_chats insert error:', error.message)
-      })
+    // Guardar en duende_chats usando schema real: mensajes es jsonb[]
+    const timestamp = new Date().toISOString()
+    const nuevosPares = [
+      { role: 'user', content: mensaje, timestamp },
+      { role: 'assistant', content: respuesta, timestamp: new Date().toISOString() },
+    ]
 
-    return NextResponse.json({ respuesta })
+    let sesion_id_out = sesion_id ?? null
+
+    if (sesion_id) {
+      // Sesión existente: recuperar mensajes actuales y agregar los nuevos
+      const { data: row, error: fetchErr } = await supabase
+        .from('duende_chats')
+        .select('mensajes')
+        .eq('id', sesion_id)
+        .single()
+
+      if (fetchErr) {
+        console.warn('duende_chats fetch error:', fetchErr.message)
+      } else {
+        const mensajesActuales: object[] = Array.isArray(row?.mensajes) ? row.mensajes : []
+        const { error: updateErr } = await supabase
+          .from('duende_chats')
+          .update({ mensajes: [...mensajesActuales, ...nuevosPares], updated_at: new Date().toISOString() })
+          .eq('id', sesion_id)
+        if (updateErr) console.warn('duende_chats update error:', updateErr.message)
+      }
+    } else {
+      // Nueva sesión: crear fila con los primeros dos mensajes
+      const { data: newRow, error: insertErr } = await supabase
+        .from('duende_chats')
+        .insert({ mensajes: nuevosPares })
+        .select('id')
+        .single()
+
+      if (insertErr) console.warn('duende_chats insert error:', insertErr.message)
+      else sesion_id_out = newRow?.id ?? null
+    }
+
+    return NextResponse.json({ respuesta, sesion_id: sesion_id_out })
   } catch (err) {
     console.error('Duende API error:', err)
     return NextResponse.json({ error: 'Error al contactar al Duende' }, { status: 500 })
