@@ -92,7 +92,7 @@ export default function AdminPage() {
 
         {/* SECCIÓN A — Respondentes */}
         <section style={styles.section}>
-          <h2 style={styles.h2}>Quanam IA 2026 · Respondentes</h2>
+          <h2 style={styles.h2}>Quanam IHA Lab 2026 · Respondentes</h2>
           <p style={styles.meta}>{respondentes.length} persona{respondentes.length !== 1 ? 's' : ''} respondieron</p>
 
           {respondentes.length === 0 ? (
@@ -153,6 +153,39 @@ export default function AdminPage() {
                       </>
                     )
                   })}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </section>
+
+        {/* SECCIÓN B — Contactos Aleph */}
+        <section style={styles.section}>
+          <h2 style={styles.h2}>Contactos Aleph</h2>
+          <p style={styles.meta}>{contactos.length} mensaje{contactos.length !== 1 ? 's' : ''}</p>
+
+          {contactos.length === 0 ? (
+            <p style={styles.empty}>Todavía no hay mensajes.</p>
+          ) : (
+            <div style={styles.tableWrap}>
+              <table style={styles.table}>
+                <thead>
+                  <tr>
+                    {['Nombre', 'Email', 'Mensaje', 'Origen', 'Fecha'].map(h => (
+                      <th key={h} style={styles.th}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {contactos.map((c, i) => (
+                    <tr key={i} style={styles.tr}>
+                      <td style={styles.td}>{c.nombre || '—'}</td>
+                      <td style={{ ...styles.td, color: '#66706d' }}>{c.email || '—'}</td>
+                      <td style={{ ...styles.td, maxWidth: 280, whiteSpace: 'pre-wrap' }}>{c.mensaje}</td>
+                      <td style={{ ...styles.td, color: '#66706d', fontSize: '0.78rem' }}>{c.origen || '—'}</td>
+                      <td style={{ ...styles.td, color: '#66706d', whiteSpace: 'nowrap' }}>{fmt(c.created_at)}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -222,39 +255,6 @@ export default function AdminPage() {
                       </>
                     )
                   })}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </section>
-
-        {/* SECCIÓN B — Contactos Aleph */}
-        <section style={styles.section}>
-          <h2 style={styles.h2}>Contactos Aleph</h2>
-          <p style={styles.meta}>{contactos.length} mensaje{contactos.length !== 1 ? 's' : ''}</p>
-
-          {contactos.length === 0 ? (
-            <p style={styles.empty}>Todavía no hay mensajes.</p>
-          ) : (
-            <div style={styles.tableWrap}>
-              <table style={styles.table}>
-                <thead>
-                  <tr>
-                    {['Nombre', 'Email', 'Mensaje', 'Origen', 'Fecha'].map(h => (
-                      <th key={h} style={styles.th}>{h}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {contactos.map((c, i) => (
-                    <tr key={i} style={styles.tr}>
-                      <td style={styles.td}>{c.nombre || '—'}</td>
-                      <td style={{ ...styles.td, color: '#66706d' }}>{c.email || '—'}</td>
-                      <td style={{ ...styles.td, maxWidth: 280, whiteSpace: 'pre-wrap' }}>{c.mensaje}</td>
-                      <td style={{ ...styles.td, color: '#66706d', fontSize: '0.78rem' }}>{c.origen || '—'}</td>
-                      <td style={{ ...styles.td, color: '#66706d', whiteSpace: 'nowrap' }}>{fmt(c.created_at)}</td>
-                    </tr>
-                  ))}
                 </tbody>
               </table>
             </div>
