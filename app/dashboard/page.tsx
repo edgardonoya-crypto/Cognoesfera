@@ -71,14 +71,14 @@ export default function DashboardPage() {
 
         const { data: created, error: cErr } = await supabase
           .from('usuarios')
-          .insert({
+          .upsert({
             id,
             auth_id: null,   // se vincula en el paso siguiente
             nombre,
             email,
             area: '',
             color: '#4eaa98',
-          })
+          }, { onConflict: 'id', ignoreDuplicates: true })
           .select('id')
           .single()
 
