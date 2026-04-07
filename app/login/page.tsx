@@ -17,6 +17,20 @@ export default function LoginPage() {
     setError('')
     setLoading(true)
 
+    // Pre-confirm the user server-side so signInWithOtp sends OTP directly
+    // instead of a "Confirm your signup" email for new users.
+    const preRes = await fetch('/api/auth/send-otp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    })
+
+    if (!preRes.ok) {
+      setLoading(false)
+      setError('No pudimos enviar el código. Verificá el email.')
+      return
+    }
+
     const { error: otpError } = await supabase.auth.signInWithOtp({ email })
 
     setLoading(false)
