@@ -2,7 +2,7 @@
 *Pendientes conceptuales, documentales y narrativos del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes CORPUS*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 07/04/2026: 22*
+*Pendientes activos al 07/04/2026: 23*
 
 ---
 
@@ -144,6 +144,16 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 **Prioridad:** P3
 **Estado:** Activo
 **Fecha:** 02/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**C-PR-04**
+**Título:** Ajuste al Protocolo 01-EN — paso 2d
+**Descripción:** Agregar paso 2d al Protocolo 01-EN: por cada inconsistencia detectada, proponer corrección y esperar decisión del Arquitecto (resolver ahora / diferir al cierre / descartar). No avanzar al paso 3 hasta que cada inconsistencia tenga una decisión.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 07/04/2026
 **Dependencias:** Ninguna
 
 ---

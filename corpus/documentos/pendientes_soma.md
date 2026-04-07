@@ -2,7 +2,7 @@
 *Pendientes técnicos, operativos e infraestructura del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes SOMA*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 07/04/2026: 14*
+*Pendientes activos al 07/04/2026: 19*
 
 ---
 
@@ -173,6 +173,64 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 **Prioridad:** P3
 **Estado:** Activo
 **Fecha:** 04/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**S-SE-02**
+**Título:** Migrar id "edgardo" al UUID correcto en usuarios y membresias
+**Descripción:** El UPDATE quedó incompleto en SESION-20260407b. El SQL correcto es:
+DO $$
+DECLARE new_id uuid;
+BEGIN
+  SELECT id INTO new_id FROM auth.users WHERE email = 'edgardo.noya@quanam.com';
+  UPDATE usuarios SET id = new_id WHERE id = 'edgardo';
+  UPDATE membresias SET user_id = new_id WHERE user_id = 'edgardo';
+END $$;
+Ejecutar en Supabase SQL Editor antes de cualquier otra tarea técnica.
+**Prioridad:** P1
+**Estado:** Activo
+**Fecha:** 07/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**S-SE-03**
+**Título:** Aplicar flujo OTP a la convocatoria Quanam
+**Descripción:** El login OTP funciona en /login. Extender el mismo mecanismo para verificar email en la convocatoria /quanam-ia-2026 antes de que escale.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 07/04/2026
+**Dependencias:** S-SE-02
+
+---
+
+**S-SE-04**
+**Título:** Verificar middleware /admin con usuario no-Arquitecto
+**Descripción:** El middleware server-side fue implementado pero no pudo ser probado porque el OTP para otros usuarios no estaba funcionando durante la sesión.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 07/04/2026
+**Dependencias:** S-SE-02
+
+---
+
+**S-IN-06**
+**Título:** Consolidar clientes Supabase públicos
+**Descripción:** Hay dos clientes públicos de Supabase: lib/supabase.ts y app/lib/supabase.ts. Ambos hacen lo mismo. Consolidar en uno para evitar confusión.
+**Prioridad:** P3
+**Estado:** Activo
+**Fecha:** 07/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**S-IN-07**
+**Título:** Redis para rate limiting en producción
+**Descripción:** El rate limiting actual usa un Map en memoria que se resetea con cada cold start de Vercel. Para producción a escala usar Upstash Redis.
+**Prioridad:** P4
+**Estado:** Activo
+**Fecha:** 07/04/2026
 **Dependencias:** Ninguna
 
 ---
