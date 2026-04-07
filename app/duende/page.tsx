@@ -117,8 +117,7 @@ export default function DuendePage() {
             <div style={{ textAlign: 'center', paddingTop: 60 }}>
               <div style={{ fontSize: 32, marginBottom: 12 }}>◈</div>
               <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.65, maxWidth: 420, margin: '0 auto' }}>
-                El Duende custodia el metabolismo cognitivo del Paradigma Aleph.<br />
-                Sugerís. El humano ve.
+                El Duende no valida — sugiere. La mente humana ve.
               </p>
             </div>
           )}
