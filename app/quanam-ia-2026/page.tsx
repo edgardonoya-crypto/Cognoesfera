@@ -51,11 +51,13 @@ type LenteState = {
 type DuendeChatProps = {
   lente: { id: string; nombre: string; frase: string; desc: string }
   respuestaUsuario?: string
+  nombre?: string
+  email?: string
 }
 
 type DuendeMsg = { role: 'user' | 'assistant'; content: string }
 
-function DuendeChat({ lente, respuestaUsuario }: DuendeChatProps) {
+function DuendeChat({ lente, respuestaUsuario, nombre, email }: DuendeChatProps) {
   const [open, setOpen] = useState(false)
   const [msgs, setMsgs] = useState<DuendeMsg[]>([])
   const [sesionId, setSesionId] = useState<string | null>(null)
@@ -69,7 +71,7 @@ function DuendeChat({ lente, respuestaUsuario }: DuendeChatProps) {
       const res = await fetch('/api/duende', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mensaje, historial, sesion_id: sid, modo: 'convocatoria' }),
+        body: JSON.stringify({ mensaje, historial, sesion_id: sid, modo: 'convocatoria', nombre, email, contexto_origen: lente.nombre }),
       })
       const data = await res.json()
       if (data.respuesta) {
@@ -145,9 +147,11 @@ type DuendeFragmentoProps = {
   fragmentoId: string
   titulo: string
   contexto: string
+  nombre?: string
+  email?: string
 }
 
-function DuendeFragmento({ titulo, contexto }: DuendeFragmentoProps) {
+function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoProps) {
   const [open, setOpen] = useState(false)
   const [msgs, setMsgs] = useState<DuendeMsg[]>([])
   const [sesionId, setSesionId] = useState<string | null>(null)
@@ -161,7 +165,7 @@ function DuendeFragmento({ titulo, contexto }: DuendeFragmentoProps) {
       const res = await fetch('/api/duende', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mensaje, historial, sesion_id: sid, modo: 'convocatoria' }),
+        body: JSON.stringify({ mensaje, historial, sesion_id: sid, modo: 'convocatoria', nombre, email, contexto_origen: titulo }),
       })
       const data = await res.json()
       if (data.respuesta) {
@@ -772,7 +776,7 @@ export default function QuanamIa2026() {
                               style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 8, padding: '12px 14px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#2C2820', background: 'rgba(245,240,232,0.5)', resize: 'vertical', outline: 'none', lineHeight: 1.7 }}
                             />
                             <div>
-                              <DuendeChat lente={lente} respuestaUsuario={ls.respuesta} />
+                              <DuendeChat lente={lente} respuestaUsuario={ls.respuesta} nombre={nombre} email={email} />
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                               <button
@@ -909,7 +913,7 @@ export default function QuanamIa2026() {
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>La última vez que tomaste una decisión difícil, ¿qué parte podría haber hecho un agente? ¿Y qué parte no?</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuánto de tu jornada de la semana pasada fue urgente? ¿Cuánto fue importante?</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué sabés sobre tu cliente que ningún sistema podría saber?</p>
-                              <DuendeFragmento fragmentoId="f1" titulo="El río que cambió de curso" contexto="En 2020 el mundo cambió en semanas. Lo que viene con la IA replica ese patrón — más lento y más profundo. No colapsa el cómo trabajamos. Colapsa el por qué trabajamos. Cuando los agentes hagan ese trabajo, la respuesta de siempre dejará de ser suficiente." />
+                              <DuendeFragmento fragmentoId="f1" titulo="El río que cambió de curso" contexto="En 2020 el mundo cambió en semanas. Lo que viene con la IA replica ese patrón — más lento y más profundo. No colapsa el cómo trabajamos. Colapsa el por qué trabajamos. Cuando los agentes hagan ese trabajo, la respuesta de siempre dejará de ser suficiente." nombre={nombre} email={email} />
                             </div>
                           )}
                         </div>
@@ -935,7 +939,7 @@ export default function QuanamIa2026() {
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuándo fue la última vez que tu equipo llegó a algo que ninguno traía solo?</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué conversaciones importantes nunca quedan registradas en Quanam?</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>Si mañana un agente hiciera el 80% de tu trabajo, ¿en qué usarías el tiempo liberado?</p>
-                              <DuendeFragmento fragmentoId="f2" titulo="Cuando el piso se mueve" contexto="Cada vez que la humanidad perdió las certezas que organizaban su mundo, encontró la manera de crear nuevas desde adentro. Lo que colapsa ahora es la centralidad del trabajo como fuente de identidad. Si los agentes hacen lo que hacías, ¿desde dónde construís tu valor?" />
+                              <DuendeFragmento fragmentoId="f2" titulo="Cuando el piso se mueve" contexto="Cada vez que la humanidad perdió las certezas que organizaban su mundo, encontró la manera de crear nuevas desde adentro. Lo que colapsa ahora es la centralidad del trabajo como fuente de identidad. Si los agentes hacen lo que hacías, ¿desde dónde construís tu valor?" nombre={nombre} email={email} />
                             </div>
                           )}
                         </div>
@@ -962,7 +966,7 @@ export default function QuanamIa2026() {
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Cuándo fue la última vez que una conversación cambió genuinamente tu forma de ver un problema?</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Para qué te llamaría tu cliente si pudiera llamarle a un agente para todo lo demás?</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué es lo que hacés que no podrías explicarle a un sistema?</p>
-                              <DuendeFragmento fragmentoId="f3" titulo="Lo que está por encima" contexto="Antes de que cualquier sistema procese la información, algo en vos ya sabe. No es intuición mágica — es juicio situado. Un tipo de procesamiento integrado que la IA, por ahora, no puede tener. El médico que percibe que algo no está bien antes de que los estudios lo confirmen." />
+                              <DuendeFragmento fragmentoId="f3" titulo="Lo que está por encima" contexto="Antes de que cualquier sistema procese la información, algo en vos ya sabe. No es intuición mágica — es juicio situado. Un tipo de procesamiento integrado que la IA, por ahora, no puede tener. El médico que percibe que algo no está bien antes de que los estudios lo confirmen." nombre={nombre} email={email} />
                             </div>
                           )}
                         </div>
@@ -1028,7 +1032,7 @@ export default function QuanamIa2026() {
                               <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.75, fontWeight: 300 }}>El Paradigma Aleph no es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos — y qué condiciones hacen falta para que eso ocurra. El paradigma tiene un origen distribuido: emergió en múltiples redes. Quanam lo integra, siendo parte de su evolución desde los inicios.</p>
                               <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#8A7E70', fontWeight: 500 }}>Pregunta orientadora</p>
                               <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300, paddingLeft: 12, borderLeft: '2px solid rgba(232,201,106,0.4)' }}>¿Qué condiciones harían falta en Quanam para que la inteligencia colectiva emerja como propiedad del sistema?</p>
-                              <DuendeFragmento fragmentoId="f4" titulo="El Paradigma Aleph" contexto="Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva. No es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos y qué condiciones hacen falta para que eso ocurra." />
+                              <DuendeFragmento fragmentoId="f4" titulo="El Paradigma Aleph" contexto="Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva. No es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos y qué condiciones hacen falta para que eso ocurra." nombre={nombre} email={email} />
                             </div>
                           )}
                         </div>
@@ -1055,7 +1059,7 @@ export default function QuanamIa2026() {
                             ))}
                           </ul>
 
-                          <DuendeFragmento fragmentoId="f5" titulo="Líneas de exploración abiertas" contexto="El Paradigma Aleph se está aplicando en este momento en varios equipos de Quanam, una ONG, una institución educativa que presentará en el Congreso Mundial IAC 2026, y grupos internacionales que exploran la Inteligencia Colectiva." />
+                          <DuendeFragmento fragmentoId="f5" titulo="Líneas de exploración abiertas" contexto="El Paradigma Aleph se está aplicando en este momento en varios equipos de Quanam, una ONG, una institución educativa que presentará en el Congreso Mundial IAC 2026, y grupos internacionales que exploran la Inteligencia Colectiva." nombre={nombre} email={email} />
 
                           <div style={{ borderTop: '1px solid rgba(139,105,20,0.10)', marginTop: 4, paddingTop: 14, display: 'flex', flexDirection: 'column', gap: 10 }}>
                             <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.65, fontWeight: 300 }}>Si querés conversar sobre estas iniciativas, dejá tu mensaje acá</p>

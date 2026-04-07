@@ -17,6 +17,8 @@ const LENTES_ORDEN = [
 type Respuesta = { id: string; nombre: string; email: string; lente: string; respuesta: string; created_at: string }
 type Contacto  = { id: string; nombre: string; email: string; mensaje: string; origen: string | null; created_at: string }
 type Respondente = { nombre: string; email: string; lentes: string[]; primera: string; respuestas: Respuesta[] }
+type DuendeMensaje = { role: 'user' | 'assistant'; content: string; timestamp?: string }
+type DuendeConv = { id: string; nombre_participante: string | null; email_participante: string | null; contexto_origen: string | null; mensajes: DuendeMensaje[]; created_at: string }
 
 function fmt(iso: string) {
   return new Date(iso).toLocaleDateString('es-UY', { day: 'numeric', month: 'short', year: 'numeric' })
@@ -27,7 +29,9 @@ export default function AdminPage() {
   const [status, setStatus] = useState<'loading' | 'unauth' | 'forbidden' | 'ok'>('loading')
   const [respondentes, setRespondentes] = useState<Respondente[]>([])
   const [contactos, setContactos] = useState<Contacto[]>([])
+  const [conversaciones, setConversaciones] = useState<DuendeConv[]>([])
   const [selected, setSelected] = useState<Respondente | null>(null)
+  const [selectedConv, setSelectedConv] = useState<string | null>(null)
 
   useEffect(() => {
     async function load() {
@@ -35,9 +39,10 @@ export default function AdminPage() {
       if (!session) { router.push('/login'); return }
       if (session.user.email !== ARQUITECTO_EMAIL) { setStatus('forbidden'); return }
 
-      const [{ data: rData }, { data: cData }] = await Promise.all([
+      const [{ data: rData }, { data: cData }, { data: dData }] = await Promise.all([
         supabase.from('quanam_respuestas').select('id, nombre, email, lente, respuesta, created_at').order('created_at', { ascending: true }),
         supabase.from('aleph_contacto').select('id, nombre, email, mensaje, origen, created_at').order('created_at', { ascending: false }),
+        supabase.from('duende_chats').select('id, nombre_participante, email_participante, contexto_origen, mensajes, created_at').order('created_at', { ascending: false }),
       ])
 
       if (rData) {
@@ -54,6 +59,7 @@ export default function AdminPage() {
       }
 
       if (cData) setContactos(cData as Contacto[])
+      if (dData) setConversaciones((dData as DuendeConv[]).filter(d => Array.isArray(d.mensajes) && d.mensajes.length > 0))
       setStatus('ok')
     }
     load()
@@ -138,6 +144,75 @@ export default function AdminPage() {
                                     </div>
                                   )
                                 })}
+                              </div>
+                            </td>
+                          </tr>
+                        )}
+                      </>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </section>
+
+        {/* SECCIÓN C — Conversaciones Duende */}
+        <section style={styles.section}>
+          <h2 style={styles.h2}>Conversaciones Duende</h2>
+          <p style={styles.meta}>{conversaciones.length} conversación{conversaciones.length !== 1 ? 'es' : ''}</p>
+
+          {conversaciones.length === 0 ? (
+            <p style={styles.empty}>Todavía no hay conversaciones.</p>
+          ) : (
+            <div style={styles.tableWrap}>
+              <table style={styles.table}>
+                <thead>
+                  <tr>
+                    {['Nombre', 'Email', 'Contexto', 'Intercambios', 'Fecha', ''].map(h => (
+                      <th key={h} style={styles.th}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {conversaciones.map((conv) => {
+                    const isOpen = selectedConv === conv.id
+                    const intercambios = Math.floor(conv.mensajes.length / 2)
+                    return (
+                      <>
+                        <tr key={conv.id} style={{ ...styles.tr, background: isOpen ? 'rgba(139,105,20,.06)' : undefined }}>
+                          <td style={styles.td}>{conv.nombre_participante || '—'}</td>
+                          <td style={{ ...styles.td, color: '#66706d' }}>{conv.email_participante || '—'}</td>
+                          <td style={{ ...styles.td, color: '#66706d', fontSize: '0.8rem' }}>{conv.contexto_origen || '—'}</td>
+                          <td style={{ ...styles.td, color: '#66706d' }}>{intercambios}</td>
+                          <td style={{ ...styles.td, color: '#66706d', whiteSpace: 'nowrap' }}>{fmt(conv.created_at)}</td>
+                          <td style={{ ...styles.td, textAlign: 'right', width: 40 }}>
+                            <button
+                              onClick={() => setSelectedConv(isOpen ? null : conv.id)}
+                              style={{ background: 'none', border: '1px solid rgba(139,105,20,.4)', borderRadius: 6, width: 26, height: 26, cursor: 'pointer', fontSize: 16, color: '#8B6914', lineHeight: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 300 }}
+                            >{isOpen ? '−' : '+'}</button>
+                          </td>
+                        </tr>
+                        {isOpen && (
+                          <tr key={`${conv.id}-detail`} style={{ background: 'rgba(139,105,20,.03)' }}>
+                            <td colSpan={6} style={{ padding: '16px 20px 20px' }}>
+                              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                                {conv.mensajes.map((m, i) => (
+                                  <div key={i} style={{
+                                    padding: '10px 14px',
+                                    borderRadius: 8,
+                                    background: m.role === 'user' ? 'rgba(34,58,54,.06)' : 'transparent',
+                                    borderLeft: m.role === 'assistant' ? '3px solid rgba(139,105,20,.35)' : 'none',
+                                    paddingLeft: m.role === 'assistant' ? 14 : 14,
+                                  }}>
+                                    <p style={{ fontSize: '0.72rem', fontWeight: 600, color: m.role === 'user' ? '#4eaa98' : '#8B6914', margin: '0 0 4px', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                                      {m.role === 'user' ? (conv.nombre_participante || 'Usuario') : 'Duende'}
+                                    </p>
+                                    <p style={{ fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.65, margin: 0, fontStyle: m.role === 'assistant' ? 'italic' : 'normal', fontWeight: 300 }}>
+                                      {m.content}
+                                    </p>
+                                  </div>
+                                ))}
                               </div>
                             </td>
                           </tr>

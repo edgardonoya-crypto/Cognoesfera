@@ -119,7 +119,7 @@ type Message = { role: 'user' | 'assistant'; content: string }
 
 export async function POST(request: Request) {
   try {
-    const { mensaje, historial = [], sesion_id, modo } = await request.json() as { mensaje: string; historial?: Message[]; sesion_id?: string; modo?: 'convocatoria' | 'corpus' }
+    const { mensaje, historial = [], sesion_id, modo, nombre, email, contexto_origen } = await request.json() as { mensaje: string; historial?: Message[]; sesion_id?: string; modo?: 'convocatoria' | 'corpus'; nombre?: string; email?: string; contexto_origen?: string }
 
     if (!mensaje?.trim()) {
       return NextResponse.json({ error: 'Falta el mensaje' }, { status: 400 })
@@ -174,7 +174,12 @@ export async function POST(request: Request) {
       // Nueva sesión: crear fila con los primeros dos mensajes
       const { data: newRow, error: insertErr } = await supabase
         .from('duende_chats')
-        .insert({ mensajes: nuevosPares })
+        .insert({
+          mensajes: nuevosPares,
+          nombre_participante: nombre || null,
+          email_participante: email || null,
+          contexto_origen: contexto_origen || null,
+        })
         .select('id')
         .single()
 
