@@ -350,7 +350,7 @@ Momentos significativos del proceso que vale la pena recordar.
 - Dashboard con Cognoesferas conectadas a Supabase
 - /corpus-form funcionando para registrar conceptos vía GitHub API
 - Pendiente: verificar /corpus-form en producción
-- **`/quanam-ia-2026`** — convocatoria interactiva Quanam con formulario, drawer contexto y lentes Duende · 06/04/2026
+- **`/quanam-ia-2026`** — convocatoria interactiva Quanam con formulario, drawer contexto, lentes Duende y DuendeFragmento en fragmentos del drawer · 07/04/2026
 - **`SUPABASE_SERVICE_ROLE_KEY`** configurado en `.env.local` (server-side, acceso de escritura a Supabase)
 
 **Infraestructura del Duende real — configurada el 30/03/2026:**
