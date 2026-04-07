@@ -45,4 +45,4 @@ La diferencia con `senales_custodiadas.md`: las señales custodiadas ya tienen f
 ---
 
 *Temas Pendientes de Exploración · Paradigma Aleph · Iniciado Abril 2026*
-*Para señales con forma suficiente, ver: `senales_custodiadas.md`*
+*Para señales con forma suficiente, ver: `senales_activas.md`*

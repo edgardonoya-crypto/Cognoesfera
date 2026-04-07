@@ -115,6 +115,14 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - Botón "Panel de administración" en Resonancias visible solo para el Arquitecto
 - Trazabilidad Soma: 6 pendientes completados, 3 nuevos pendientes de documentación agregados
 
+**Hitos de SESION-20260406c:**
+- Enunciación explícita del Paradigma Aleph en drawer de contexto — arquitectura de tres niveles
+- Acordeones "¿Desde dónde se diseñó esto?" y "Y en cada caso, quedó algo más" agregados a la convocatoria
+- Panel /admin construido: respondentes + contactos Aleph + detalle expandible + columna origen
+- Fix crítico: Cognoesfera quedaba en "Cargando..." por params.id como Promise
+- Tabla aleph_contacto con campo origen — Supabase
+- 6 pendientes Soma completados (S-HIS-05 a S-HIS-10) · 4 nuevos agregados
+
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
 - **Corpus Universal** — el campo total del conocimiento vivo del paradigma en todos sus niveles y expresiones

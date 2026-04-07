@@ -2,6 +2,7 @@
 *Pendientes técnicos, operativos e infraestructura del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes SOMA*
 *Paradigma Aleph · Reestructurado 06/04/2026*
+*Pendientes activos al 07/04/2026: 13*
 
 ---
 
@@ -16,36 +17,6 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 ---
 
 ## Subcategoría: Duende
-
----
-
-**S-DU-01**
-**Título:** Crear API route `/api/duende`
-**Descripción:** Endpoint server-side que recibe el mensaje del usuario y llama a la Anthropic API con el SDK instalado. El Duende cobra vida en la aplicación.
-**Prioridad:** P2
-**Estado:** Activo
-**Fecha:** 30/03/2026
-**Dependencias:** Infraestructura Anthropic ✅ configurada (API key, SDK, ANTHROPIC_API_KEY en Vercel)
-
----
-
-**S-DU-02**
-**Título:** Crear página `/duende`
-**Descripción:** Interfaz de conversación con el Duende real: campo de texto, respuesta en tiempo real, historial en `duende_chats`.
-**Prioridad:** P2
-**Estado:** Activo
-**Fecha:** 30/03/2026
-**Dependencias:** S-DU-01
-
----
-
-**S-DU-03**
-**Título:** Prueba end-to-end del Duende real
-**Descripción:** Confirmar que la cadena completa opera: interfaz → API route → Anthropic → Supabase → usuario.
-**Prioridad:** P2
-**Estado:** Activo
-**Fecha:** 30/03/2026
-**Dependencias:** S-DU-01 · S-DU-02
 
 ---
 
@@ -227,6 +198,9 @@ Todas las páginas interiores tienen "← Volver" (→ /dashboard) y "Salir" (si
 
 **S-HIS-10 — Renombrado de Cognoesferas** · Completado 06/04/2026
 Quanam Lab → Quanam IHA Lab (código + Supabase). Menthor → IHA - Menthor: Comunidad de Práctica (Supabase).
+
+**S-HIS-11 — Duende real activado** · Completado 07/04/2026
+API route `app/api/duende/route.ts` + página `app/duende/page.tsx`. Cadena completa: interfaz → Anthropic claude-sonnet-4-6 → Supabase duende_chats → usuario. System prompt con Corpus Madre condensado. Build limpio, sin errores TS.
 
 ---
 
