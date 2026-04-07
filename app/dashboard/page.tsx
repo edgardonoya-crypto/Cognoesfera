@@ -69,25 +69,16 @@ export default function DashboardPage() {
         const id = email.split('@')[0].split('.')[0]   // "edgardo" de "edgardo.noya@gmail.com"
         const nombre = id.charAt(0).toUpperCase() + id.slice(1)
 
-        const { data: created, error: cErr } = await supabase
+        const { error: cErr } = await supabase
           .from('usuarios')
-          .upsert({
-            id,
-            auth_id: null,   // se vincula en el paso siguiente
-            nombre,
-            email,
-            area: '',
-            color: '#4eaa98',
-          }, { onConflict: 'id', ignoreDuplicates: true })
-          .select('id')
-          .single()
+          .insert({ id, auth_id: null, nombre, email, area: '', color: '#4eaa98' })
 
         if (cErr) {
           setError(`No se pudo crear tu perfil: ${cErr.message}`)
           setLoading(false)
           return
         }
-        usuarioData = created
+        usuarioData = { id }
       }
 
       // 3. Vincular auth_id si aún no está guardado
