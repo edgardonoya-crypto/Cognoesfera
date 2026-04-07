@@ -1,4 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createClient } from '@supabase/supabase-js'
+
+const ARQUITECTO_EMAIL = 'edgardo.noya@gmail.com'
+
+const supabasePublic = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
 
 const REPO = 'edgardonoya-crypto/Cognoesfera'
 const BRANCH = 'main'
@@ -11,6 +19,15 @@ const DESTINOS: Record<string, string> = {
 }
 
 export async function POST(req: NextRequest) {
+  const authHeader = req.headers.get('Authorization')
+  if (!authHeader?.startsWith('Bearer ')) {
+    return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+  }
+  const { data: { user }, error: authError } = await supabasePublic.auth.getUser(authHeader.slice(7))
+  if (authError || !user || user.email !== ARQUITECTO_EMAIL) {
+    return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+  }
+
   const token = process.env.GITHUB_TOKEN
   if (!token) {
     return NextResponse.json({ error: 'Token no configurado.' }, { status: 500 })

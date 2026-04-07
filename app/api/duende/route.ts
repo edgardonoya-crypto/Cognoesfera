@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
+import { checkRateLimit } from '@/app/api/_lib/rate-limit'
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
@@ -118,6 +119,11 @@ POSTURA en esta conversación:
 type Message = { role: 'user' | 'assistant'; content: string }
 
 export async function POST(request: Request) {
+  const ip = request.headers.get('x-forwarded-for') ?? 'unknown'
+  if (!checkRateLimit(ip)) {
+    return NextResponse.json({ error: 'Demasiadas solicitudes' }, { status: 429 })
+  }
+
   try {
     const { mensaje, historial = [], sesion_id, modo, nombre, email, contexto_origen } = await request.json() as { mensaje: string; historial?: Message[]; sesion_id?: string; modo?: 'convocatoria' | 'corpus'; nombre?: string; email?: string; contexto_origen?: string }
 
