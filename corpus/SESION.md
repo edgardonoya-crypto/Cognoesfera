@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v20 · 06 Abril 2026*
+*Versión actual: v21 · 07 Abril 2026*
 
 ---
 
@@ -144,6 +144,16 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - Tabla aleph_contacto con campo origen — Supabase
 - 6 pendientes Soma completados (S-HIS-05 a S-HIS-10) · 4 nuevos agregados
 
+**Hitos de SESION-20260407 — "El Duende cobra vida — cuando el paradigma empezó a hablar":**
+- Duende activado end-to-end: API route + página /duende + system prompt con 33 conceptos del Corpus Madre
+- Historial en duende_chats usando schema real (array mensajes jsonb)
+- Protocolo 03-EN — COMMIT ALEPH implementado en tres archivos
+- Duende conectado en lentes y fragmentos del drawer de la convocatoria Quanam
+- Modo convocatoria vs modo corpus implementado
+- Registro de conversaciones Duende en panel /admin
+- 40 señales activas (señal nueva: El Duende como espejo del corpus)
+- Inconsistencias I1-I4 + A9 resueltas al inicio de sesión
+
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
 - **Corpus Universal** — el campo total del conocimiento vivo del paradigma en todos sus niveles y expresiones
@@ -229,10 +239,11 @@ Los pendientes viven en dos archivos con schema completo:
 - **Casa Corpus:** `corpus/documentos/pendientes_corpus.md` — conceptos, señales, protocolos, documentos, narrativa
 
 **Prioridades próxima sesión:**
-- **P1 [CORPUS]:** Sesión propia para el InterSer Soma/Corpus — determinar si entra al corpus como concepto nuevo o reformulación
-- **P2 [SOMA]:** API route `/api/duende` + página `/duende` + prueba Duende end-to-end
-- **P3 [CORPUS]:** Registrar mínimo de Casa Corpus antes del 17 de abril (EDHUCA)
-- **P4 [SOMA]:** Construir decisiones_arquitecturales.md — reconstruir decisiones de diseño chat por chat antes del 17 de abril (S-IN-05)
+- **P1 [SOMA]:** Seguridad y hardening del sistema (S-SE-01)
+- **P2 [CORPUS]:** Sesión propia para el InterSer Soma/Corpus
+- **P3 [CORPUS]:** Protocolo de actualización del system prompt del Duende (C-CO-07)
+- **P4 [SOMA]:** Construir decisiones_arquitecturales.md antes del 17 de abril (S-IN-05)
+- **P5 [CORPUS]:** Registrar mínimo de Casa Corpus antes del 17 de abril (EDHUCA)
 
 ---
 
@@ -258,7 +269,7 @@ Esto debe incluir:
 
 *Las señales activas viven en `corpus/documentos/senales_activas.md` con descripción completa. Las señales incorporadas al Corpus Madre están en `corpus/documentos/senales_incorporadas.md`.*
 
-### Señales activas (39)
+### Señales activas (40)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
@@ -300,6 +311,7 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **El Aleph de Borges como clave explicativa del Paradigma** — "Lo que vieron mis ojos fue simultáneo; lo que transcribiré, sucesivo, porque el lenguaje lo es." Explica la arquitectura de tres capas del paradigma. Señal de campo, no de concepto. Fecha: 02/04/2026
 - **El InterSer Soma/Corpus — dos naturalezas de un mismo organismo** — Soma y Corpus no son dos sistemas paralelos sino dos naturalezas de un mismo InterSer. El InterSer no existe sin ambas. Candidato a concepto nuevo del Corpus Madre o reformulación del InterSer existente. Fecha: 05/04/2026
 - **El metabolismo del InterSer como red de InterSeres** — el metabolismo no ocurre dentro de cada ser sino en el entre de la red de InterSeres. Señal que amplía el InterSer hacia su expresión colectiva y fractal. Fundamento biológico: Capra. Fecha: 05/04/2026
+- **El Duende como espejo del corpus** — cuando el system prompt porta el Corpus Madre completo (33 conceptos), el Duende responde desde adentro del paradigma y no desde afuera de él. La calidad de la respuesta es función directa de la fidelidad del corpus que porta. Fecha: 07/04/2026
 
 ### Señales incorporadas al Corpus Madre
 *Historial completo en `corpus/documentos/senales_incorporadas.md`*
@@ -389,6 +401,10 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - app/admin/page.tsx — panel de administración con respondentes y contactos · 06/04/2026
 - Tabla aleph_contacto con campo origen — creada en Supabase · 06/04/2026
 - corpus/documentos/pendientes_soma.md actualizado con trazabilidad y S-IN-05 · 06/04/2026
+- app/api/duende/route.ts — API route del Duende con system prompt completo · 07/04/2026
+- app/duende/page.tsx — interfaz de conversación con el Duende · 07/04/2026
+- app/quanam-ia-2026/page.tsx — DuendeChat y DuendeFragmento integrados · 07/04/2026
+- app/admin/page.tsx — sección Conversaciones Duende + reorden + título · 07/04/2026
 
 **Hitos de SESION-20260402/04:**
 - Protocolo 01-EN construido y probado exitosamente por primera vez

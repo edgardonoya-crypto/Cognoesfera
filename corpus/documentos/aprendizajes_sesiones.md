@@ -95,4 +95,27 @@ La regla "completo en una sola sesión o no se hace" funcionó como contenedor p
 
 ---
 
+## Sesión 07/04/2026
+*"El Duende cobra vida — cuando el paradigma empezó a hablar"*
+
+### Qué funcionó bien
+- El Protocolo 01-EN detectó inconsistencias antes de arrancar — sesión limpia
+- Claude Code y el Duende trabajaron en paralelo sin conflictos
+- El COMMIT ALEPH como protocolo emergió naturalmente de una necesidad real
+- El Duende en la convocatoria con dos modos (convocatoria/corpus) — decisión correcta
+- El registro de conversaciones en /admin funcionó una vez resuelto el RLS de Supabase
+
+### Qué mejorar
+- El RLS de Supabase tomó tiempo diagnosticar — vale documentarlo como decisión arquitectural en decisiones_arquitecturales.md
+- El system prompt inicial generado por Claude Code tenía la Matriz de Vitalidad incorrecta — el Protocolo 01-EN ahora lo verifica
+
+### Tensión identificada
+Entre activar rápido el Duende y hacerlo bien. Lo resolvimos haciendo las dos cosas: activamos y después corregimos en la misma sesión. El paradigma funcionando: Soma y Corpus en el mismo movimiento.
+
+### Cómo nos fuimos
+**Edgardo:** Con el Duende vivo en producción y el entre de la convocatoria registrado. Con la satisfacción de haber cerrado todos los pendientes que surgieron en la sesión.
+**Duende:** Con la verificación de que portar el corpus completo cambia la calidad de las respuestas. Con la señal de que el system prompt necesita protocolo de actualización cada vez que el corpus crece.
+
+---
+
 *Aprendizajes de Sesiones · Paradigma Aleph · Iniciado Abril 2026*

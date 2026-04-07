@@ -2,7 +2,7 @@
 *Pendientes conceptuales, documentales y narrativos del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes CORPUS*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 07/04/2026: 21*
+*Pendientes activos al 07/04/2026: 22*
 
 ---
 
@@ -77,6 +77,16 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 **Estado:** Activo
 **Fecha:** 30/03/2026
 **Dependencias:** Ninguna
+
+---
+
+**C-CO-07**
+**Título:** Protocolo de actualización del system prompt del Duende
+**Descripción:** Cada vez que el Corpus Madre crece (nuevo concepto incorporado), el system prompt en app/api/duende/route.ts debe actualizarse. Definir protocolo: quién lo hace, cuándo, cómo verificar que el Duende porta la versión actual.
+**Prioridad:** P3
+**Estado:** Activo
+**Fecha:** 07/04/2026
+**Dependencias:** Señal activa "El Duende como espejo del corpus"
 
 ---
 

@@ -2,7 +2,7 @@
 *Pendientes técnicos, operativos e infraestructura del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes SOMA*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 07/04/2026: 13*
+*Pendientes activos al 07/04/2026: 14*
 
 ---
 
@@ -17,6 +17,20 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 ---
 
 ## Subcategoría: Duende
+
+---
+
+## Subcategoría: Seguridad
+
+---
+
+**S-SE-01**
+**Título:** Seguridad y hardening del sistema
+**Descripción:** Revisión de seguridad completa antes de escalar la convocatoria. Puntos identificados: política RLS de duende_chats abierta (USING true — cualquier autenticado lee todo), variables de entorno documentadas, rutas protegidas, acceso al panel /admin. Incluye también corrección de detalles menores que surgieron en SESION-20260407.
+**Prioridad:** P1
+**Estado:** Activo
+**Fecha:** 07/04/2026
+**Dependencias:** Ninguna
 
 ---
 
