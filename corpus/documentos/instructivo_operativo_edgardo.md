@@ -1,7 +1,7 @@
 # Instructivo Operativo — Edgardo Noya
 *Cómo operar la arquitectura digital del Corpus Vivo*
 *Documento situado · Específico para la configuración de Edgardo*
-*Paradigma Aleph · Actualizado 06/04/2026*
+*Paradigma Aleph · Actualizado 07/04/2026*
 
 ---
 
@@ -259,8 +259,17 @@ cognoesfera/
 ├── app/
 │   ├── corpus-form/
 │   │   └── page.tsx                            ← formulario de registro
-│   └── api/corpus-commit/
-│       └── route.ts                            ← API segura para commits
+│   ├── quanam-ia-2026/
+│   │   └── page.tsx                            ← convocatoria interactiva Quanam IA 2026
+│   ├── duende/
+│   │   └── page.tsx                            ← interfaz de conversación con el Duende
+│   └── api/
+│       ├── corpus-commit/
+│       │   └── route.ts                        ← API segura para commits
+│       ├── quanam-respuesta/
+│       │   └── route.ts                        ← API route para guardar respuestas en quanam_respuestas
+│       └── duende/
+│           └── route.ts                        ← API route del Duende real (Anthropic)
 └── public/
 ```
 
@@ -278,5 +287,5 @@ cognoesfera/
 
 ---
 
-*Instructivo Operativo · Edgardo Noya · Paradigma Aleph · Actualizado 06/04/2026*
+*Instructivo Operativo · Edgardo Noya · Paradigma Aleph · Actualizado 07/04/2026*
 *Para entender la arquitectura: ver `arquitectura_digital_corpus_vivo.md`*
