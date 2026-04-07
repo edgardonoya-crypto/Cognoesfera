@@ -161,17 +161,18 @@ export async function POST(request: Request) {
         .single()
 
       if (fetchErr) {
-        console.warn('duende_chats fetch error:', fetchErr.message)
+        console.error('duende_chats fetch error completo:', JSON.stringify(fetchErr))
       } else {
         const mensajesActuales: object[] = Array.isArray(row?.mensajes) ? row.mensajes : []
         const { error: updateErr } = await supabase
           .from('duende_chats')
           .update({ mensajes: [...mensajesActuales, ...nuevosPares], updated_at: new Date().toISOString() })
           .eq('id', sesion_id)
-        if (updateErr) console.warn('duende_chats update error:', updateErr.message)
+        if (updateErr) console.error('duende_chats update error completo:', JSON.stringify(updateErr))
       }
     } else {
       // Nueva sesión: crear fila con los primeros dos mensajes
+      // Campos opcionales: user_id, cognoesfera, titulo (nullable o con default en la tabla)
       const { data: newRow, error: insertErr } = await supabase
         .from('duende_chats')
         .insert({
@@ -183,7 +184,7 @@ export async function POST(request: Request) {
         .select('id')
         .single()
 
-      if (insertErr) console.warn('duende_chats insert error:', insertErr.message)
+      if (insertErr) console.error('duende_chats insert error completo:', JSON.stringify(insertErr))
       else sesion_id_out = newRow?.id ?? null
     }
 
