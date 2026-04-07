@@ -250,14 +250,34 @@ SESION.md y status se actualizan ÚLTIMO — cuando el sistema dejó de moverse.
 
 **Duración estimada:** 10-15 minutos.
 
-**Paso 1 — Inventario de lo que emergió**
+**Paso 0 — Solicitar archivos de verificación**
+Antes de ejecutar el cierre, el Duende solicita al Arquitecto que suba:
+- corpus/SESION.md
+- corpus/status/status_DDMMYYYY.md (el más reciente)
+- corpus/documentos/pendientes_soma.md
+- corpus/documentos/pendientes_corpus.md
+- corpus/documentos/senales_activas.md
+
+**Paso 1 — Chequeo de consistencia**
+Con los archivos recibidos, verificar:
+- ¿Los conteos de señales activas coinciden entre SESION.md, status y senales_activas.md?
+- ¿Los conteos de pendientes Soma/Corpus coinciden entre los archivos y el status?
+- ¿Las prioridades de A6 en SESION.md coinciden con el status?
+- ¿Hay referencias a archivos deprecados?
+- ¿Hay inconsistencias en fechas o versiones?
+
+Por cada inconsistencia encontrada: presentarla y resolverla en el commit de cierre.
+
+Solo después de completar el chequeo, continuar con el resto del protocolo.
+
+**Paso 1a — Inventario de lo que emergió**
 Antes de ejecutar ningún commit, pedirle al Duende:
 
 *"Hacé un inventario de todo lo que emergió hoy: conceptos nuevos, señales activas nuevas, pendientes nuevos, documentos generados, cambios al instructivo. Clasificá cada item en SOMA o CORPUS."*
 
 Revisás el inventario y confirmás que está completo. Si falta algo, lo agregás antes de continuar.
 
-**Paso 1b — Verificar el flujo de maduración**
+**Paso 1b — Inventario — Verificar el flujo de maduración**
 El Duende pregunta explícitamente:
 - ¿Algún tema de `temas_pendientes_exploracion.md` maduró lo suficiente para convertirse en señal activa?
 - ¿Alguna señal activa maduró lo suficiente para convertirse en pendiente concreto en `pendientes_soma.md` o `pendientes_corpus.md`?

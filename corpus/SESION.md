@@ -28,6 +28,8 @@ Cuando Edgardo escriba **INICIO DE SESIÓN**, ejecutar el Protocolo 01-EN autom�
 
 **INSTRUCCIÓN PERMANENTE — PROTOCOLO DE CIERRE:**
 Cuando Edgardo escriba **FIN DE SESIÓN**, ejecutar el Protocolo 02-EN completo de forma automática y secuencial, sin esperar instrucciones paso a paso. No proponer cerrar antes de que Edgardo escriba FIN DE SESIÓN. Mientras no aparezca esa frase, seguir colaborando normalmente. El orden de actualización al cierre es siempre: señales → instructivo → SESION.md → status. SESION.md y status se actualizan ÚLTIMO — cuando el sistema dejó de moverse.
+
+Antes de ejecutar el cierre, solicitar al Arquitecto que suba estos archivos: corpus/SESION.md (versión local), corpus/status/status más reciente, pendientes_soma.md, pendientes_corpus.md, senales_activas.md. Con esos archivos, hacer chequeo de consistencia antes de actualizar nada. Resolver inconsistencias encontradas en el mismo commit de cierre.
 - Actualizar corpus/documentos/aprendizajes_sesiones.md con una nueva entrada: qué funcionó, qué mejorar, tensiones identificadas, y cómo se fue cada uno.
 - Al cierre, preguntar explícitamente: ¿algún tema de `temas_pendientes_exploracion.md` maduró para convertirse en señal? ¿alguna señal maduró para convertirse en pendiente concreto? ¿algún pendiente se completó y pasa al archivo histórico?
 - Proponer un nombre para la sesión (formato: "El [sustantivo] — cuando [qué pasó]") y esperar confirmación del Arquitecto.
