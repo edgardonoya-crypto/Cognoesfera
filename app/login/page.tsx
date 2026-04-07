@@ -26,17 +26,9 @@ export default function LoginPage() {
     })
     const preData = await preRes.json() as { success: boolean; error?: string }
 
-    if (!preData.success) {
-      setLoading(false)
-      setError('No pudimos enviar el código. Verificá el email.')
-      return
-    }
-
-    const { error: otpError } = await supabase.auth.signInWithOtp({ email })
-
     setLoading(false)
 
-    if (otpError) {
+    if (!preData.success) {
       setError('No pudimos enviar el código. Verificá el email.')
       return
     }

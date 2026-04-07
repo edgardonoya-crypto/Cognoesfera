@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
+import { supabase } from '@/lib/supabase'
 
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -26,6 +27,13 @@ export async function POST(request: Request) {
     if (createError && !createError.message.toLowerCase().includes('already')) {
       console.error('send-otp createUser error:', JSON.stringify(createError))
       return NextResponse.json({ success: false, error: 'Error al procesar el email' })
+    }
+
+    const { error: otpError } = await supabase.auth.signInWithOtp({ email })
+
+    if (otpError) {
+      console.error('send-otp signInWithOtp error:', JSON.stringify(otpError))
+      return NextResponse.json({ success: false, error: otpError.message })
     }
 
     return NextResponse.json({ success: true })
