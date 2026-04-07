@@ -39,11 +39,13 @@ export default function AdminPage() {
       if (!session) { router.push('/login'); return }
       if (session.user.email !== ARQUITECTO_EMAIL) { setStatus('forbidden'); return }
 
-      const [{ data: rData }, { data: cData }, { data: dData }] = await Promise.all([
+      const [{ data: rData }, { data: cData }, { data: dData, error: dError }] = await Promise.all([
         supabase.from('quanam_respuestas').select('id, nombre, email, lente, respuesta, created_at').order('created_at', { ascending: true }),
         supabase.from('aleph_contacto').select('id, nombre, email, mensaje, origen, created_at').order('created_at', { ascending: false }),
-        supabase.from('duende_chats').select('id, nombre_participante, email_participante, contexto_origen, mensajes, created_at').order('created_at', { ascending: false }),
+        supabase.from('duende_chats').select('id, mensajes, created_at, nombre_participante, email_participante, contexto_origen').order('created_at', { ascending: false }),
       ])
+
+      if (dError) console.error('duende_chats admin query error:', JSON.stringify(dError))
 
       if (rData) {
         const map = new Map<string, Respondente>()
