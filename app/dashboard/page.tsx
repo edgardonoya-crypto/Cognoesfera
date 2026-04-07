@@ -56,14 +56,14 @@ export default function DashboardPage() {
 
       setUserEmail(session.user.email ?? '')
 
-      // 1. Resolver el id interno del usuario por email
+      // 1. Resolver el id interno del usuario por auth_id (UUID de Supabase auth)
       let { data: usuarioData } = await supabase
         .from('usuarios')
         .select('id')
-        .eq('email', session.user.email)
-        .single()
+        .eq('auth_id', session.user.id)
+        .maybeSingle()
 
-      // 2. Si no existe, crear automáticamente
+      // 2. Si no existe por auth_id, crear automáticamente
       if (!usuarioData) {
         const email = session.user.email ?? ''
         const id = email.split('@')[0].split('.')[0]   // "edgardo" de "edgardo.noya@gmail.com"
@@ -71,9 +71,10 @@ export default function DashboardPage() {
 
         const { error: cErr } = await supabase
           .from('usuarios')
-          .insert({ id, auth_id: null, nombre, email, area: '', color: '#4eaa98' })
+          .insert({ id, auth_id: session.user.id, nombre, email, area: '', color: '#4eaa98' })
 
         if (cErr) {
+          console.error('insert usuario error:', JSON.stringify(cErr))
           setError(`No se pudo crear tu perfil: ${cErr.message}`)
           setLoading(false)
           return
