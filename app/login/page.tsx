@@ -24,8 +24,9 @@ export default function LoginPage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email }),
     })
+    const preData = await preRes.json() as { success: boolean; error?: string }
 
-    if (!preRes.ok) {
+    if (!preData.success) {
       setLoading(false)
       setError('No pudimos enviar el código. Verificá el email.')
       return

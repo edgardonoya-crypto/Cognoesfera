@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     const { email } = await request.json() as { email: string }
 
     if (!email?.trim()) {
-      return NextResponse.json({ error: 'Email requerido' }, { status: 400 })
+      return NextResponse.json({ success: false, error: 'Email requerido' })
     }
 
     // Ensure the user exists with a confirmed email so signInWithOtp
@@ -25,12 +25,12 @@ export async function POST(request: Request) {
     // Ignore "already registered" — that just means the user exists, which is fine.
     if (createError && !createError.message.toLowerCase().includes('already')) {
       console.error('send-otp createUser error:', JSON.stringify(createError))
-      return NextResponse.json({ error: 'Error al procesar el email' }, { status: 500 })
+      return NextResponse.json({ success: false, error: 'Error al procesar el email' })
     }
 
-    return NextResponse.json({ ok: true })
+    return NextResponse.json({ success: true })
   } catch (err) {
     console.error('send-otp error:', err)
-    return NextResponse.json({ error: 'Error interno' }, { status: 500 })
+    return NextResponse.json({ success: false, error: 'Error interno' })
   }
 }
