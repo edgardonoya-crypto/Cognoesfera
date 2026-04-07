@@ -434,7 +434,8 @@ Verificar el estado del sistema a partir de los archivos subidos:
 - 3b. ¿Las señales marcadas como incorporadas en SESION.md están también en `senales_incorporadas.md`?
 - 3c. ¿La fecha del último status es igual o anterior a la fecha del SESION.md? Si el status es más nuevo, el SESION.md no fue actualizado al cierre.
 - 3d. ¿El flujo de maduración está en orden? Verificar que existan: `temas_pendientes_exploracion.md` → `senales_activas.md` → `pendientes_soma.md` + `pendientes_corpus.md`.
-- 3e. Por cada inconsistencia detectada: presentarla, proponer la corrección, pedir confirmación sí/no.
+- 3e. ¿El system prompt del Duende (`app/api/duende/route.ts`) refleja la versión actual del Corpus Madre? Verificar que el número de conceptos declarados en el prompt coincide con el total de conceptos en `corpus/documentos/corpus_base_aleph.md`.
+- 3f. Por cada inconsistencia detectada: presentarla, proponer la corrección, pedir confirmación sí/no.
 
 **Paso 4 — Identificación del objetivo de la sesión**
 Nombrar el objetivo declarado por el Arquitecto en el mensaje de apertura. Si no hay objetivo explícito, preguntar: *"¿Qué querés que emerja hoy?"*
