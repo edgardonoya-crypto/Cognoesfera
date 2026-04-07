@@ -48,17 +48,95 @@ type LenteState = {
   showDuende: boolean
 }
 
-function DuendeContextoBtn() {
-  const [msg, setMsg] = useState(false)
+type DuendeChatProps = {
+  lente: { id: string; nombre: string; frase: string; desc: string }
+  respuestaUsuario?: string
+}
+
+type DuendeMsg = { role: 'user' | 'assistant'; content: string }
+
+function DuendeChat({ lente, respuestaUsuario }: DuendeChatProps) {
+  const [open, setOpen] = useState(false)
+  const [msgs, setMsgs] = useState<DuendeMsg[]>([])
+  const [sesionId, setSesionId] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [input, setInput] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  async function callDuende(mensaje: string, historial: DuendeMsg[], sid: string | null) {
+    setLoading(true)
+    try {
+      const res = await fetch('/api/duende', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mensaje, historial, sesion_id: sid }),
+      })
+      const data = await res.json()
+      if (data.respuesta) {
+        setMsgs(prev => [...prev, { role: 'assistant', content: data.respuesta }])
+        if (data.sesion_id) setSesionId(data.sesion_id)
+      }
+    } catch {
+      setMsgs(prev => [...prev, { role: 'assistant', content: '(El Duende no pudo responder en este momento.)' }])
+    } finally {
+      setLoading(false)
+      setTimeout(() => inputRef.current?.focus(), 50)
+    }
+  }
+
+  function toggleOpen() {
+    if (!open && msgs.length === 0) {
+      setOpen(true)
+      const inicial = `El usuario está explorando el lente "${lente.nombre}". La propuesta de este lente es: ${lente.frase}.${respuestaUsuario?.trim() ? ` El usuario escribió: "${respuestaUsuario}".` : ''} Respondé desde el paradigma en relación con este lente. Sé breve y abrí territorio — no cerrés.`
+      callDuende(inicial, [], null)
+    } else {
+      setOpen(v => !v)
+    }
+  }
+
+  function enviarInput(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key !== 'Enter' || !input.trim() || loading) return
+    const msg = input.trim()
+    setInput('')
+    const newMsgs: DuendeMsg[] = [...msgs, { role: 'user', content: msg }]
+    setMsgs(newMsgs)
+    callDuende(msg, msgs, sesionId)
+  }
+
   return (
     <div>
       <button
-        onClick={() => setMsg(v => !v)}
-        style={{ background: 'transparent', border: '1px solid rgba(139,105,20,0.4)', borderRadius: 8, padding: '8px 16px', fontSize: 12, fontFamily: 'Karla, sans-serif', fontWeight: 500, color: '#8B6914', letterSpacing: '0.04em', cursor: 'pointer' }}
+        onClick={toggleOpen}
+        style={{ background: 'transparent', border: '1px solid rgba(139,105,20,0.4)', borderRadius: 8, padding: '7px 14px', fontSize: 12, fontFamily: 'Karla, sans-serif', fontWeight: 500, color: '#8B6914', letterSpacing: '0.04em', cursor: 'pointer' }}
       >
-        Pedile ayuda al Duende
+        {open ? 'Cerrar el Duende' : 'Pedile ayuda al Duende'}
       </button>
-      {msg && <p style={{ marginTop: 10, fontSize: 13, color: '#8A7E70', fontStyle: 'italic', lineHeight: 1.65 }}>El Duende está en construcción — pronto vas a poder explorar el contexto con él.</p>}
+      {open && (
+        <div style={{ marginTop: 10 }}>
+          {loading && msgs.length === 0 && (
+            <p style={{ fontSize: 13, color: '#8A7E70', fontStyle: 'italic', lineHeight: 1.65 }}>El Duende está pensando…</p>
+          )}
+          {msgs.map((m, i) => (
+            <p key={i} style={{ fontSize: 13, color: m.role === 'assistant' ? '#8A7E70' : '#2C2820', fontStyle: m.role === 'assistant' ? 'italic' : 'normal', lineHeight: 1.65, marginBottom: 8 }}>
+              {m.role === 'user' ? `Vos: ${m.content}` : m.content}
+            </p>
+          ))}
+          {loading && msgs.length > 0 && (
+            <p style={{ fontSize: 13, color: '#8A7E70', fontStyle: 'italic', lineHeight: 1.65 }}>El Duende está pensando…</p>
+          )}
+          {msgs.length > 0 && (
+            <input
+              ref={inputRef}
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              onKeyDown={enviarInput}
+              placeholder="Seguí la conversación… (Enter para enviar)"
+              disabled={loading}
+              style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 6, padding: '8px 10px', fontSize: 13, fontFamily: 'Karla, sans-serif', color: '#2C2820', background: 'rgba(245,240,232,0.5)', outline: 'none', marginTop: 8, boxSizing: 'border-box' }}
+            />
+          )}
+        </div>
+      )}
     </div>
   )
 }
@@ -609,15 +687,7 @@ export default function QuanamIa2026() {
                               style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 8, padding: '12px 14px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#2C2820', background: 'rgba(245,240,232,0.5)', resize: 'vertical', outline: 'none', lineHeight: 1.7 }}
                             />
                             <div>
-                              <button
-                                onClick={() => setLenteStates(prev => ({ ...prev, [lente.id]: { ...prev[lente.id], showDuende: !prev[lente.id].showDuende } }))}
-                                style={{ background: 'transparent', border: '1px solid rgba(139,105,20,0.4)', borderRadius: 8, padding: '7px 14px', fontSize: 12, fontFamily: 'Karla, sans-serif', fontWeight: 500, color: '#8B6914', letterSpacing: '0.04em', cursor: 'pointer' }}
-                              >
-                                Pedile ayuda al Duende
-                              </button>
-                              {ls.showDuende && (
-                                <p style={{ marginTop: 8, fontSize: 13, color: '#8A7E70', fontStyle: 'italic', lineHeight: 1.65 }}>El Duende está en construcción — pronto vas a poder explorar este lente con él.</p>
-                              )}
+                              <DuendeChat lente={lente} respuestaUsuario={ls.respuesta} />
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                               <button
