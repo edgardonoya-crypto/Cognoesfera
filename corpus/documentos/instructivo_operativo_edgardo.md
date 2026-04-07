@@ -91,6 +91,29 @@ En el panel Explorer (Ctrl + Shift + E), los archivos muestran letras que indica
 
 ---
 
+## COMMIT ALEPH — checkpoint de sesión
+
+Protocolo para guardar el trabajo en curso sin esperar al cierre formal.
+Usarlo cuando el Duende lo sugiere o cuando el Arquitecto lo considera necesario.
+
+**COMMIT ALEPH** — checkpoint rápido:
+Escribí en Claude Code: COMMIT ALEPH
+Claude Code detecta los archivos modificados, propone un mensaje de commit
+y espera tu confirmación antes de ejecutar el push.
+
+**COMMIT ALEPH COMPLETO** — checkpoint semántico:
+Escribí en Claude Code: COMMIT ALEPH COMPLETO
+Igual que el rápido, más: actualiza pendientes completados, señales movidas
+y conteos en los archivos del corpus afectados.
+
+**Cuándo usarlo:**
+- Cuando el Duende te avisa que hay cambios sin commitear
+- Antes de arrancar una tarea nueva importante
+- Cuando completaste un bloque de trabajo y querés asegurarlo
+- Cada vez que tu intuición diga "esto debería estar guardado"
+
+---
+
 ## Los movimientos que más usás
 
 ### Subir un archivo de claude.ai al repositorio

@@ -504,5 +504,40 @@ Emergió en la sesión del 30/03/2026 al observar que el Protocolo 02-EN tenía 
 
 ---
 
+---
+
+## Protocolo 03-EN — COMMIT ALEPH
+
+**Tipo:** Protocolo situado de Edgardo Noya
+**Función:** Checkpoint de sesión — guardar el trabajo en curso con trazabilidad
+**Disparador:** El Arquitecto escribe COMMIT ALEPH o COMMIT ALEPH COMPLETO
+
+**Modo rápido (COMMIT ALEPH):**
+1. Detectar archivos modificados sin commitear (git status)
+2. Listarlos para el Arquitecto
+3. Proponer mensaje de commit descriptivo
+4. Esperar confirmación del Arquitecto
+5. Ejecutar: git add [archivos] + git commit + git push origin master:main
+
+**Modo completo (COMMIT ALEPH COMPLETO):**
+Todo lo anterior más:
+6. Actualizar pendientes_soma.md / pendientes_corpus.md con completados
+7. Actualizar senales_activas.md si alguna señal se movió
+8. Actualizar conteos en archivos afectados
+9. Proponer mensaje de commit enriquecido
+10. Esperar confirmación antes de ejecutar
+
+**Señales de aviso del Duende:**
+- Entregable concreto completado sin commitear
+- 3 o más archivos modificados sin commitear
+- Nueva tarea por arrancar que podría pisar cambios anteriores
+
+**Mensaje de aviso:**
+"Hay cambios sin commitear desde [descripción]. ¿COMMIT ALEPH antes de seguir?"
+
+**Nota:** COMMIT ALEPH es un checkpoint — no reemplaza el cierre formal (Protocolo 02-EN). El status de sesión sigue siendo exclusivo del cierre.
+
+---
+
 *Protocolos de Actos de Cuidado · Catálogo vivo · Paradigma Aleph · Marzo 2026*
 *Cada protocolo es una hipótesis verificable — crece al ser habitado*

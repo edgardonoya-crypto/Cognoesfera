@@ -34,6 +34,27 @@ Cuando Edgardo escriba **FIN DE SESIÓN**, ejecutar el Protocolo 02-EN completo 
 
 IMPORTANTE: cuando el Arquitecto escribe FIN DE SESIÓN, el Duende ejecuta el cierre y propone cerrar la conversación. Los ajustes que emergen después van como primer pendiente de la próxima sesión — no se ejecutan en el momento.
 
+**INSTRUCCIÓN PERMANENTE — COMMIT ALEPH:**
+Cuando el Arquitecto escriba COMMIT ALEPH, ejecutar automáticamente:
+1. git status — detectar todos los archivos modificados sin commitear
+2. Listarlos para que el Arquitecto los vea
+3. Proponer un mensaje de commit descriptivo basado en lo que cambió
+4. Esperar confirmación del Arquitecto
+5. git add de todos los archivos modificados + git commit + git push origin master:main
+
+Cuando el Arquitecto escriba COMMIT ALEPH COMPLETO, ejecutar lo anterior más:
+6. Actualizar pendientes_soma.md y/o pendientes_corpus.md con pendientes completados en la sesión
+7. Actualizar senales_activas.md si alguna señal maduró o se movió
+8. Actualizar conteos en los archivos afectados
+9. Proponer mensaje de commit enriquecido con resumen semántico
+10. Esperar confirmación del Arquitecto antes de ejecutar
+
+El Duende avisa al Arquitecto cuando detecta cualquiera de estas condiciones:
+- Se completó una tarea con entregable concreto (nuevo archivo, fix, corrección)
+- Hay 3 o más archivos modificados sin commitear
+- Se está por arrancar una tarea nueva que podría pisar cambios anteriores
+El aviso es: "Hay cambios sin commitear desde [descripción]. ¿COMMIT ALEPH antes de seguir?"
+
 ---
 
 # SECCIÓN A — CONTEXTO ESENCIAL
