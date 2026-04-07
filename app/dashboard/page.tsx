@@ -56,17 +56,27 @@ export default function DashboardPage() {
 
       setUserEmail(session.user.email ?? '')
 
-      // 1. Resolver el id interno del usuario por auth_id (UUID de Supabase auth)
+      // 1a. Buscar perfil por auth_id
       let { data: usuarioData } = await supabase
         .from('usuarios')
         .select('id')
         .eq('auth_id', session.user.id)
         .maybeSingle()
 
-      // 2. Si no existe por auth_id, crear automáticamente
+      // 1b. Fallback: buscar por email
+      if (!usuarioData) {
+        const { data: byEmail } = await supabase
+          .from('usuarios')
+          .select('id')
+          .eq('email', session.user.email)
+          .maybeSingle()
+        usuarioData = byEmail
+      }
+
+      // 2. Si no encontramos perfil por ninguna vía, intentar crear
       if (!usuarioData) {
         const email = session.user.email ?? ''
-        const id = email.split('@')[0].split('.')[0]   // "edgardo" de "edgardo.noya@gmail.com"
+        const id = email.split('@')[0].split('.')[0]
         const nombre = id.charAt(0).toUpperCase() + id.slice(1)
 
         const { error: cErr } = await supabase
@@ -75,9 +85,12 @@ export default function DashboardPage() {
 
         if (cErr) {
           console.error('insert usuario error:', JSON.stringify(cErr))
-          setError(`No se pudo crear tu perfil: ${cErr.message}`)
-          setLoading(false)
-          return
+          // Duplicate key: el perfil existe pero no lo encontramos — continuar
+          if (!cErr.message.includes('duplicate key')) {
+            setError(`No se pudo crear tu perfil: ${cErr.message}`)
+            setLoading(false)
+            return
+          }
         }
         usuarioData = { id }
       }
