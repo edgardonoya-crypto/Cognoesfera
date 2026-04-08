@@ -198,7 +198,7 @@ function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoPro
   return (
     <div>
       <button onClick={toggleOpen} style={{ background: 'none', border: '1px solid #C4941A', borderRadius: 6, padding: '6px 12px', fontSize: 11, color: '#8B6914', cursor: 'pointer', letterSpacing: '0.04em' }}>
-        {open ? 'Cerrar el Duende' : 'Pedile ayuda al Duende'}
+        {open ? 'Cerrar el Duende' : 'Conversá con el Duende'}
       </button>
       {open && (
         <div style={{ marginTop: 8 }}>
