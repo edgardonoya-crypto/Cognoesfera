@@ -14,7 +14,12 @@
       "Bash(code:*)",
       "Bash(start:*)",
       "Bash(npm run:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(claude:*)",
+      "Bash(git log:*)",
+      "Bash(git fetch:*)",
+      "Bash(node:*)",
+      "Bash(curl:*)"
     ]
   }
 }
