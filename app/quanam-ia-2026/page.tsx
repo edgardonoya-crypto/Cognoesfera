@@ -182,6 +182,9 @@ function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir }: DuendeC
               style={{ flex: 1, border: '1px solid rgba(139,105,20,0.2)', borderRadius: 6, padding: '8px 10px', fontSize: 13, fontFamily: 'Karla, sans-serif', color: '#2C2820', background: 'rgba(245,240,232,0.5)', outline: 'none', boxSizing: 'border-box' }}
             />
           </div>
+          {!archivoNombre && (
+            <p style={{ margin: '4px 0 0', fontSize: 11, color: '#8A7E70', fontStyle: 'italic' }}>Si deseás adjuntar un archivo presioná el +</p>
+          )}
           {archivoNombre && (
             <div style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 8, padding: '4px 8px', background: 'rgba(139,105,20,0.08)', borderRadius: 4, border: '1px solid rgba(139,105,20,0.15)' }}>
               {archivoTipo?.startsWith('image/') && archivoBase64 && (
@@ -347,6 +350,9 @@ function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoPro
                   style={{ flex: 1, border: '1px solid rgba(139,105,20,0.2)', borderRadius: 6, padding: '6px 10px', fontSize: 12, fontFamily: 'Karla, sans-serif', color: '#2C2820', background: 'rgba(245,240,232,0.5)', outline: 'none', boxSizing: 'border-box' }}
                 />
               </div>
+              {!archivoNombre && (
+                <p style={{ margin: '4px 0 0', fontSize: 11, color: '#8A7E70', fontStyle: 'italic' }}>Si deseás adjuntar un archivo presioná el +</p>
+              )}
               {archivoNombre && (
                 <div style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 8, padding: '4px 8px', background: 'rgba(139,105,20,0.08)', borderRadius: 4, border: '1px solid rgba(139,105,20,0.15)' }}>
                   {archivoTipo?.startsWith('image/') && archivoBase64 && (
