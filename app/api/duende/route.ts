@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk'
+import type { MessageParam, ImageBlockParam, DocumentBlockParam } from '@anthropic-ai/sdk/resources'
 import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
 import { checkRateLimit } from '@/app/api/_lib/rate-limit'
@@ -118,6 +119,9 @@ POSTURA en esta conversación:
 
 type Message = { role: 'user' | 'assistant'; content: string }
 
+type ImageMediaType = 'image/jpeg' | 'image/png' | 'image/gif' | 'image/webp'
+const IMAGE_TYPES: string[] = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
+
 export async function POST(request: Request) {
   const ip = request.headers.get('x-forwarded-for') ?? 'unknown'
   if (!checkRateLimit(ip)) {
@@ -125,7 +129,14 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { mensaje, historial = [], sesion_id, modo, nombre, email, contexto_origen } = await request.json() as { mensaje: string; historial?: Message[]; sesion_id?: string; modo?: 'convocatoria' | 'corpus'; nombre?: string; email?: string; contexto_origen?: string }
+    const {
+      mensaje, historial = [], sesion_id, modo, nombre, email, contexto_origen,
+      archivo_base64, archivo_tipo, archivo_nombre,
+    } = await request.json() as {
+      mensaje: string; historial?: Message[]; sesion_id?: string; modo?: 'convocatoria' | 'corpus';
+      nombre?: string; email?: string; contexto_origen?: string;
+      archivo_base64?: string; archivo_tipo?: string; archivo_nombre?: string;
+    }
 
     if (!mensaje?.trim()) {
       return NextResponse.json({ error: 'Falta el mensaje' }, { status: 400 })
@@ -135,9 +146,32 @@ export async function POST(request: Request) {
       ? SYSTEM_PROMPT + '\n\nIMPORTANTE: Estás hablando con un participante de una convocatoria. Respondé en 2-3 líneas máximo. Tono cálido y conversacional — como alguien que escucha con genuino interés. Sin jerga técnica ni conceptos del paradigma. Terminá siempre con una sola pregunta breve que abra territorio. No explicás — abrís.'
       : SYSTEM_PROMPT
 
-    const messages: Message[] = [
+    // Build content for the last user message
+    let userContent: MessageParam['content']
+    if (archivo_base64 && archivo_tipo) {
+      if (IMAGE_TYPES.includes(archivo_tipo)) {
+        const imageBlock: ImageBlockParam = {
+          type: 'image',
+          source: { type: 'base64', media_type: archivo_tipo as ImageMediaType, data: archivo_base64 },
+        }
+        userContent = [imageBlock, { type: 'text', text: mensaje }]
+      } else if (archivo_tipo === 'application/pdf') {
+        const docBlock: DocumentBlockParam = {
+          type: 'document',
+          source: { type: 'base64', media_type: 'application/pdf', data: archivo_base64 },
+        }
+        userContent = [docBlock, { type: 'text', text: mensaje }]
+      } else {
+        // Tipo no soportado — ignorar archivo, enviar solo texto
+        userContent = mensaje
+      }
+    } else {
+      userContent = mensaje
+    }
+
+    const messages: MessageParam[] = [
       ...historial,
-      { role: 'user', content: mensaje },
+      { role: 'user', content: userContent },
     ]
 
     const response = await anthropic.messages.create({
@@ -148,6 +182,22 @@ export async function POST(request: Request) {
     })
 
     const respuesta = response.content[0].type === 'text' ? response.content[0].text : ''
+
+    // Guardar archivo en archivos_curaduria si viene adjunto
+    if (archivo_base64 && archivo_tipo) {
+      const { error: archivoErr } = await supabase
+        .from('archivos_curaduria')
+        .insert({
+          email_participante: email || null,
+          contexto_origen: contexto_origen || null,
+          nombre_archivo: archivo_nombre || null,
+          tipo_archivo: archivo_tipo,
+          contenido_base64: archivo_base64,
+          mensaje_asociado: mensaje,
+          estado: 'pendiente',
+        })
+      if (archivoErr) console.error('archivos_curaduria insert error:', JSON.stringify(archivoErr))
+    }
 
     // Guardar en duende_chats usando schema real: mensajes es jsonb[]
     const timestamp = new Date().toISOString()

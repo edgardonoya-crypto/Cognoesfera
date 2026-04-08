@@ -21,6 +21,7 @@ type DuendeMensaje = { role: 'user' | 'assistant'; content: string; timestamp?: 
 type AccesoConvocatoria = { id: string; email: string; created_at: string }
 type LoginLog = { id: string; email: string; created_at: string }
 type DuendeConv = { id: string; nombre_participante: string | null; email_participante: string | null; contexto_origen: string | null; mensajes: DuendeMensaje[]; created_at: string }
+type ArchivoCuraduria = { id: string; created_at: string; email_participante: string | null; contexto_origen: string | null; nombre_archivo: string | null; tipo_archivo: string | null; contenido_base64: string | null; mensaje_asociado: string | null; estado: 'pendiente' | 'aprobado' | 'descartado' | 'señal'; notas_curador: string | null }
 
 function fmt(iso: string) {
   return new Date(iso).toLocaleDateString('es-UY', { day: 'numeric', month: 'short', year: 'numeric' })
@@ -36,6 +37,8 @@ export default function AdminPage() {
   const [selectedConv, setSelectedConv] = useState<string | null>(null)
   const [loginLogs, setLoginLogs] = useState<LoginLog[]>([])
   const [accesosConv, setAccesosConv] = useState<AccesoConvocatoria[]>([])
+  const [archivos, setArchivos] = useState<ArchivoCuraduria[]>([])
+  const [notasCurador, setNotasCurador] = useState<Record<string, string>>({})
 
   useEffect(() => {
     async function load() {
@@ -74,10 +77,43 @@ export default function AdminPage() {
       if (lData) setLoginLogs(lData as LoginLog[])
       const { data: aData } = await supabase.from('convocatoria_accesos').select('id, email, created_at').order('created_at', { ascending: false }).limit(100)
       if (aData) setAccesosConv(aData as AccesoConvocatoria[])
+
+      const archivosRes = await fetch('/api/admin/archivos-curaduria', { headers: { Authorization: `Bearer ${accessToken}` } }).then(r => r.json())
+      if (archivosRes?.data) {
+        const arch = archivosRes.data as ArchivoCuraduria[]
+        setArchivos(arch)
+        const notas: Record<string, string> = {}
+        for (const a of arch) notas[a.id] = a.notas_curador ?? ''
+        setNotasCurador(notas)
+      }
+
       setStatus('ok')
     }
     load()
   }, [router])
+
+  async function actualizarEstado(id: string, estado: ArchivoCuraduria['estado']) {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) return
+    const res = await fetch('/api/admin/archivos-curaduria', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
+      body: JSON.stringify({ id, estado }),
+    })
+    if (res.ok) setArchivos(prev => prev.map(a => a.id === id ? { ...a, estado } : a))
+  }
+
+  async function guardarNotas(id: string) {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) return
+    const notas_curador = notasCurador[id] ?? ''
+    const res = await fetch('/api/admin/archivos-curaduria', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
+      body: JSON.stringify({ id, notas_curador }),
+    })
+    if (res.ok) setArchivos(prev => prev.map(a => a.id === id ? { ...a, notas_curador } : a))
+  }
 
   if (status === 'loading') return (
     <div style={styles.center}>Cargando…</div>
@@ -297,6 +333,90 @@ export default function AdminPage() {
                   ))}
                 </tbody>
               </table>
+            </div>
+          )}
+        </section>
+
+        {/* SECCIÓN F — Archivos pendientes de curación */}
+        <section style={styles.section}>
+          <h2 style={styles.h2}>Archivos pendientes de curación</h2>
+          <p style={styles.meta}>{archivos.length} archivo{archivos.length !== 1 ? 's' : ''}</p>
+          {archivos.length === 0 ? (
+            <p style={styles.empty}>Todavía no hay archivos enviados.</p>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              {archivos.map(a => {
+                const estadoColor: Record<string, string> = {
+                  pendiente: '#C4941A',
+                  aprobado: '#4eaa98',
+                  descartado: '#66706d',
+                  señal: '#8B6914',
+                }
+                const esImagen = a.tipo_archivo?.startsWith('image/')
+                const esPdf = a.tipo_archivo === 'application/pdf'
+                return (
+                  <div key={a.id} style={{ background: 'rgba(255,255,255,.72)', border: '1px solid rgba(34,58,54,.10)', borderRadius: 12, padding: '18px 20px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                    {/* Header */}
+                    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12 }}>
+                      <div>
+                        <span style={{ fontSize: '0.8rem', color: '#66706d' }}>{a.email_participante || '—'}</span>
+                        {a.contexto_origen && <span style={{ fontSize: '0.78rem', color: '#8a9e98', marginLeft: 10 }}>· {a.contexto_origen}</span>}
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+                        <span style={{ fontSize: '0.72rem', background: estadoColor[a.estado] + '22', color: estadoColor[a.estado], border: `1px solid ${estadoColor[a.estado]}55`, borderRadius: 4, padding: '2px 8px', fontWeight: 600, letterSpacing: '0.04em' }}>
+                          {a.estado}
+                        </span>
+                        <span style={{ fontSize: '0.72rem', color: '#8a9e98' }}>
+                          {new Date(a.created_at).toLocaleDateString('es-UY', { day: 'numeric', month: 'short' })} {new Date(a.created_at).toLocaleTimeString('es-UY', { hour: '2-digit', minute: '2-digit' })}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Preview + info de archivo */}
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+                      {esImagen && a.contenido_base64 && (
+                        <img
+                          src={`data:${a.tipo_archivo};base64,${a.contenido_base64}`}
+                          alt={a.nombre_archivo ?? 'imagen'}
+                          style={{ maxHeight: 120, maxWidth: 160, borderRadius: 6, objectFit: 'contain', border: '1px solid rgba(34,58,54,.10)', flexShrink: 0 }}
+                        />
+                      )}
+                      {esPdf && (
+                        <div style={{ width: 60, height: 60, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(196,148,26,.1)', borderRadius: 8, border: '1px solid rgba(196,148,26,.25)', flexShrink: 0 }}>
+                          <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#C4941A', letterSpacing: '0.06em' }}>PDF</span>
+                        </div>
+                      )}
+                      <div style={{ minWidth: 0 }}>
+                        <p style={{ margin: '0 0 4px', fontSize: '0.78rem', color: '#66706d', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                          {a.nombre_archivo || '—'} {a.tipo_archivo && <span style={{ color: '#8a9e98' }}>· {a.tipo_archivo}</span>}
+                        </p>
+                        {a.mensaje_asociado && (
+                          <p style={{ margin: 0, fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.65, fontWeight: 300 }}>
+                            {a.mensaje_asociado}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Notas curador */}
+                    <textarea
+                      value={notasCurador[a.id] ?? ''}
+                      onChange={e => setNotasCurador(prev => ({ ...prev, [a.id]: e.target.value }))}
+                      placeholder="Notas del curador…"
+                      rows={2}
+                      style={{ width: '100%', border: '1px solid rgba(34,58,54,.12)', borderRadius: 6, padding: '8px 10px', fontSize: '0.8rem', fontFamily: 'inherit', color: '#18201e', background: 'rgba(247,243,232,.6)', outline: 'none', resize: 'vertical', boxSizing: 'border-box' }}
+                    />
+
+                    {/* Botones */}
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                      <button onClick={() => actualizarEstado(a.id, 'aprobado')} style={{ ...styles.btnSm, borderColor: 'rgba(78,170,152,.4)', color: '#4eaa98' }}>Aprobar</button>
+                      <button onClick={() => actualizarEstado(a.id, 'descartado')} style={{ ...styles.btnSm, borderColor: 'rgba(102,112,109,.3)', color: '#66706d' }}>Descartar</button>
+                      <button onClick={() => actualizarEstado(a.id, 'señal')} style={{ ...styles.btnSm, borderColor: 'rgba(139,105,20,.4)', color: '#8B6914' }}>Custodiar como señal</button>
+                      <button onClick={() => guardarNotas(a.id)} style={{ ...styles.btnSm, marginLeft: 'auto' }}>Guardar notas</button>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           )}
         </section>

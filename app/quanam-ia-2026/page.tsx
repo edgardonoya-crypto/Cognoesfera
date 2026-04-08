@@ -64,7 +64,11 @@ function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir }: DuendeC
   const [sesionId, setSesionId] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [input, setInput] = useState('')
+  const [archivoBase64, setArchivoBase64] = useState<string | null>(null)
+  const [archivoTipo, setArchivoTipo] = useState<string | null>(null)
+  const [archivoNombre, setArchivoNombre] = useState<string | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const iniciado = useRef(false)
 
   useEffect(() => {
@@ -78,13 +82,46 @@ function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir }: DuendeC
     }
   }, [autoAbrir, mensajeInicial])
 
-  async function callDuende(mensaje: string, historial: DuendeMsg[], sid: string | null) {
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      const result = reader.result as string
+      setArchivoBase64(result.split(',')[1])
+      setArchivoTipo(file.type)
+      setArchivoNombre(file.name)
+    }
+    reader.readAsDataURL(file)
+    e.target.value = ''
+  }
+
+  function limpiarArchivo() {
+    setArchivoBase64(null)
+    setArchivoTipo(null)
+    setArchivoNombre(null)
+  }
+
+  async function callDuende(
+    mensaje: string,
+    historial: DuendeMsg[],
+    sid: string | null,
+    archivo?: { base64: string; tipo: string; nombre: string },
+  ) {
     setLoading(true)
     try {
+      const body: Record<string, unknown> = {
+        mensaje, historial, sesion_id: sid, modo: 'convocatoria', nombre, email, contexto_origen: lente.nombre,
+      }
+      if (archivo) {
+        body.archivo_base64 = archivo.base64
+        body.archivo_tipo = archivo.tipo
+        body.archivo_nombre = archivo.nombre
+      }
       const res = await fetch('/api/duende', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mensaje, historial, sesion_id: sid, modo: 'convocatoria', nombre, email, contexto_origen: lente.nombre }),
+        body: JSON.stringify(body),
       })
       const data = await res.json()
       if (data.respuesta) {
@@ -103,9 +140,13 @@ function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir }: DuendeC
     if (e.key !== 'Enter' || !input.trim() || loading) return
     const msg = input.trim()
     setInput('')
+    const archivo = archivoBase64 && archivoTipo && archivoNombre
+      ? { base64: archivoBase64, tipo: archivoTipo, nombre: archivoNombre }
+      : undefined
+    limpiarArchivo()
     const newMsgs: DuendeMsg[] = [...msgs, { role: 'user', content: msg }]
     setMsgs(newMsgs)
-    callDuende(msg, msgs, sesionId)
+    callDuende(msg, msgs, sesionId, archivo)
   }
 
   if (!abierto) return null
@@ -124,15 +165,49 @@ function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir }: DuendeC
         <p style={{ fontSize: 13, color: '#8A7E70', fontStyle: 'italic', lineHeight: 1.65 }}>El Duende está pensando…</p>
       )}
       {msgs.length > 0 && (
-        <input
-          ref={inputRef}
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          onKeyDown={enviarInput}
-          placeholder="Seguí la conversación… (Enter para enviar)"
-          disabled={loading}
-          style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 6, padding: '8px 10px', fontSize: 13, fontFamily: 'Karla, sans-serif', color: '#2C2820', background: 'rgba(245,240,232,0.5)', outline: 'none', marginTop: 8, boxSizing: 'border-box' }}
-        />
+        <div style={{ marginTop: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              disabled={loading}
+              style={{ flexShrink: 0, width: 28, height: 28, border: '1px solid rgba(139,105,20,0.3)', borderRadius: 6, background: 'rgba(245,240,232,0.5)', color: '#8B6914', cursor: loading ? 'not-allowed' : 'pointer', fontSize: 18, lineHeight: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
+            >+</button>
+            <input
+              ref={inputRef}
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              onKeyDown={enviarInput}
+              placeholder="Seguí la conversación… (Enter para enviar)"
+              disabled={loading}
+              style={{ flex: 1, border: '1px solid rgba(139,105,20,0.2)', borderRadius: 6, padding: '8px 10px', fontSize: 13, fontFamily: 'Karla, sans-serif', color: '#2C2820', background: 'rgba(245,240,232,0.5)', outline: 'none', boxSizing: 'border-box' }}
+            />
+          </div>
+          {archivoNombre && (
+            <div style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 8, padding: '4px 8px', background: 'rgba(139,105,20,0.08)', borderRadius: 4, border: '1px solid rgba(139,105,20,0.15)' }}>
+              {archivoTipo?.startsWith('image/') && archivoBase64 && (
+                <img
+                  src={`data:${archivoTipo};base64,${archivoBase64}`}
+                  alt={archivoNombre}
+                  style={{ maxHeight: 60, maxWidth: 80, borderRadius: 3, objectFit: 'contain' }}
+                />
+              )}
+              <span style={{ fontSize: 12, color: '#8B6914', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {archivoNombre}
+              </span>
+              <button
+                onClick={limpiarArchivo}
+                style={{ flexShrink: 0, background: 'none', border: 'none', color: '#C4941A', cursor: 'pointer', fontSize: 16, lineHeight: 1, padding: 2 }}
+              >×</button>
+            </div>
+          )}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*,application/pdf"
+            onChange={handleFileChange}
+            style={{ display: 'none' }}
+          />
+        </div>
       )}
     </div>
   )
@@ -152,15 +227,52 @@ function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoPro
   const [sesionId, setSesionId] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [input, setInput] = useState('')
+  const [archivoBase64, setArchivoBase64] = useState<string | null>(null)
+  const [archivoTipo, setArchivoTipo] = useState<string | null>(null)
+  const [archivoNombre, setArchivoNombre] = useState<string | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
-  async function callDuende(mensaje: string, historial: DuendeMsg[], sid: string | null) {
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      const result = reader.result as string
+      setArchivoBase64(result.split(',')[1])
+      setArchivoTipo(file.type)
+      setArchivoNombre(file.name)
+    }
+    reader.readAsDataURL(file)
+    e.target.value = ''
+  }
+
+  function limpiarArchivo() {
+    setArchivoBase64(null)
+    setArchivoTipo(null)
+    setArchivoNombre(null)
+  }
+
+  async function callDuende(
+    mensaje: string,
+    historial: DuendeMsg[],
+    sid: string | null,
+    archivo?: { base64: string; tipo: string; nombre: string },
+  ) {
     setLoading(true)
     try {
+      const body: Record<string, unknown> = {
+        mensaje, historial, sesion_id: sid, modo: 'convocatoria', nombre, email, contexto_origen: titulo,
+      }
+      if (archivo) {
+        body.archivo_base64 = archivo.base64
+        body.archivo_tipo = archivo.tipo
+        body.archivo_nombre = archivo.nombre
+      }
       const res = await fetch('/api/duende', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mensaje, historial, sesion_id: sid, modo: 'convocatoria', nombre, email, contexto_origen: titulo }),
+        body: JSON.stringify(body),
       })
       const data = await res.json()
       if (data.respuesta) {
@@ -190,9 +302,13 @@ function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoPro
     if (e.key !== 'Enter' || !input.trim() || loading) return
     const msg = input.trim()
     setInput('')
+    const archivo = archivoBase64 && archivoTipo && archivoNombre
+      ? { base64: archivoBase64, tipo: archivoTipo, nombre: archivoNombre }
+      : undefined
+    limpiarArchivo()
     const newMsgs: DuendeMsg[] = [...msgs, { role: 'user', content: msg }]
     setMsgs(newMsgs)
-    callDuende(msg, msgs, sesionId)
+    callDuende(msg, msgs, sesionId, archivo)
   }
 
   return (
@@ -214,15 +330,49 @@ function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoPro
             <p style={{ fontSize: 12, color: '#8A7E70', fontStyle: 'italic', lineHeight: 1.65 }}>El Duende está pensando…</p>
           )}
           {msgs.length > 0 && (
-            <input
-              ref={inputRef}
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyDown={enviarInput}
-              placeholder="Seguí la conversación… (Enter para enviar)"
-              disabled={loading}
-              style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 6, padding: '6px 10px', fontSize: 12, fontFamily: 'Karla, sans-serif', color: '#2C2820', background: 'rgba(245,240,232,0.5)', outline: 'none', marginTop: 6, boxSizing: 'border-box' }}
-            />
+            <div style={{ marginTop: 6 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={loading}
+                  style={{ flexShrink: 0, width: 26, height: 26, border: '1px solid rgba(139,105,20,0.3)', borderRadius: 6, background: 'rgba(245,240,232,0.5)', color: '#8B6914', cursor: loading ? 'not-allowed' : 'pointer', fontSize: 17, lineHeight: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
+                >+</button>
+                <input
+                  ref={inputRef}
+                  value={input}
+                  onChange={e => setInput(e.target.value)}
+                  onKeyDown={enviarInput}
+                  placeholder="Seguí la conversación… (Enter para enviar)"
+                  disabled={loading}
+                  style={{ flex: 1, border: '1px solid rgba(139,105,20,0.2)', borderRadius: 6, padding: '6px 10px', fontSize: 12, fontFamily: 'Karla, sans-serif', color: '#2C2820', background: 'rgba(245,240,232,0.5)', outline: 'none', boxSizing: 'border-box' }}
+                />
+              </div>
+              {archivoNombre && (
+                <div style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 8, padding: '4px 8px', background: 'rgba(139,105,20,0.08)', borderRadius: 4, border: '1px solid rgba(139,105,20,0.15)' }}>
+                  {archivoTipo?.startsWith('image/') && archivoBase64 && (
+                    <img
+                      src={`data:${archivoTipo};base64,${archivoBase64}`}
+                      alt={archivoNombre}
+                      style={{ maxHeight: 60, maxWidth: 80, borderRadius: 3, objectFit: 'contain' }}
+                    />
+                  )}
+                  <span style={{ fontSize: 12, color: '#8B6914', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {archivoNombre}
+                  </span>
+                  <button
+                    onClick={limpiarArchivo}
+                    style={{ flexShrink: 0, background: 'none', border: 'none', color: '#C4941A', cursor: 'pointer', fontSize: 16, lineHeight: 1, padding: 2 }}
+                  >×</button>
+                </div>
+              )}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*,application/pdf"
+                onChange={handleFileChange}
+                style={{ display: 'none' }}
+              />
+            </div>
           )}
         </div>
       )}
