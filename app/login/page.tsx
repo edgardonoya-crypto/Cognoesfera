@@ -44,6 +44,12 @@ export default function LoginPage() {
       setError('Código incorrecto o expirado.')
       return
     }
+    // Registrar login
+    try {
+      const { createBrowserClient } = await import('@supabase/ssr')
+      const sb = createBrowserClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
+      await sb.from('login_log').insert({ email })
+    } catch {}
     router.push('/dashboard')
   }
 
