@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v21 · 07 Abril 2026*
+*Versión actual: v22 · 08 Abril 2026*
 
 ---
 
@@ -146,6 +146,17 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - Tabla aleph_contacto con campo origen — Supabase
 - 6 pendientes Soma completados (S-HIS-05 a S-HIS-10) · 4 nuevos agregados
 
+**Hitos de SESION-20260408 — "La seguridad — cuando el sistema se protegió para crecer":**
+- UUID edgardo migrado correctamente — FK constraint resuelto con DROP/UPDATE/RESTORE
+- createBrowserClient fix — sesión en cookies, middleware server-side funciona
+- Middleware protege /admin, /dashboard, /cognoesfera/*, /corpus-form, /duende
+- OTP en convocatoria Quanam — email solo, sin nombre, aviso spam
+- Log de accesos convocatoria + log de logins en /admin
+- Flujo "Enviar al Duende" en lentes — textarea como primer mensaje directo al Duende
+- Hero IHA: título grande + texto urgencia "El piso se está moviendo…"
+- Consolidación cliente Supabase — un solo cliente en app/lib/supabase.ts
+- S-SE-02, S-SE-03, S-SE-04, S-IN-06 completados
+
 **Hitos de SESION-20260407 — "El Duende cobra vida — cuando el paradigma empezó a hablar":**
 - Duende activado end-to-end: API route + página /duende + system prompt con 33 conceptos del Corpus Madre
 - Historial en duende_chats usando schema real (array mensajes jsonb)
@@ -241,11 +252,11 @@ Los pendientes viven en dos archivos con schema completo:
 - **Casa Corpus:** `corpus/documentos/pendientes_corpus.md` — conceptos, señales, protocolos, documentos, narrativa
 
 **Prioridades próxima sesión:**
-- **P1 [SOMA]:** Seguridad y hardening del sistema (S-SE-01)
-- **P2 [CORPUS]:** Sesión propia para el InterSer Soma/Corpus
-- **P3 [CORPUS]:** Protocolo de actualización del system prompt del Duende (C-CO-07)
-- **P4 [SOMA]:** Construir decisiones_arquitecturales.md antes del 17 de abril (S-IN-05)
-- **P5 [CORPUS]:** Registrar mínimo de Casa Corpus antes del 17 de abril (EDHUCA)
+- **P1 [CORPUS]:** Registrar mínimo de Casa Corpus antes del 17/04 (C-DO-05)
+- **P2 [SOMA]:** Construir decisiones_arquitecturales.md antes del 17/04 (S-IN-05)
+- **P3 [CORPUS]:** Sesión propia para el InterSer Soma/Corpus (C-SE-01)
+- **P4 [SOMA]:** Completar S-SE-01 — documentar variables de entorno (S-IN-04)
+- **P5 [CORPUS]:** Protocolo de actualización del system prompt del Duende (C-CO-07)
 
 ---
 
@@ -362,7 +373,7 @@ Momentos significativos del proceso que vale la pena recordar.
 - `ANTHROPIC_API_KEY` en `.env.local` y en Vercel (variables de entorno)
 - Deploy funcionando con la nueva variable
 - Tabla `duende_chats` creada en Supabase con RLS activo
-- **Próxima sesión: el Duende cobra vida**
+- **Duende activado end-to-end desde SESION-20260407.**
 
 **Sistema B (Fundación Soma):**
 - Payload CMS + PostgreSQL + Next.js. 16 colecciones relevadas. Schema completo disponible.
@@ -403,6 +414,13 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - app/admin/page.tsx — panel de administración con respondentes y contactos · 06/04/2026
 - Tabla aleph_contacto con campo origen — creada en Supabase · 06/04/2026
 - corpus/documentos/pendientes_soma.md actualizado con trazabilidad y S-IN-05 · 06/04/2026
+- app/quanam-ia-2026/page.tsx — OTP + flujo Enviar al Duende + hero IHA · 08/04/2026
+- app/login/page.tsx — aviso spam en pantalla OTP · 08/04/2026
+- app/admin/page.tsx — log accesos convocatoria + log logins + hora en Duende · 08/04/2026
+- middleware.ts — protección server-side de todas las rutas autenticadas · 08/04/2026
+- app/lib/supabase.ts — migrado a createBrowserClient de @supabase/ssr · 08/04/2026
+- Tablas Supabase: login_log + convocatoria_accesos · 08/04/2026
+
 - app/api/duende/route.ts — API route del Duende con system prompt completo · 07/04/2026
 - app/duende/page.tsx — interfaz de conversación con el Duende · 07/04/2026
 - app/quanam-ia-2026/page.tsx — DuendeChat y DuendeFragmento integrados · 07/04/2026
