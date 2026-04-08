@@ -16,23 +16,17 @@ export default function LoginPage() {
     e.preventDefault()
     setError('')
     setLoading(true)
-
-    // Pre-confirm the user server-side so signInWithOtp sends OTP directly
-    // instead of a "Confirm your signup" email for new users.
     const preRes = await fetch('/api/auth/send-otp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email }),
     })
     const preData = await preRes.json() as { success: boolean; error?: string }
-
     setLoading(false)
-
     if (!preData.success) {
       setError('No pudimos enviar el código. Verificá el email.')
       return
     }
-
     setStep('otp')
   }
 
@@ -40,20 +34,16 @@ export default function LoginPage() {
     e.preventDefault()
     setError('')
     setLoading(true)
-
     const { error: verifyError } = await supabase.auth.verifyOtp({
       email,
       token,
       type: 'email',
     })
-
     setLoading(false)
-
     if (verifyError) {
       setError('Código incorrecto o expirado.')
       return
     }
-
     router.push('/dashboard')
   }
 
@@ -96,6 +86,7 @@ export default function LoginPage() {
         ) : (
           <form onSubmit={handleVerifyOtp} style={{ width: '100%' }}>
             <p style={styles.hint}>Ingresá el código que enviamos a <strong>{email}</strong></p>
+            <p style={styles.spam}>Si no llegó en unos segundos, revisá tu carpeta de spam.</p>
             <input
               style={styles.input}
               type="text"
@@ -137,8 +128,7 @@ const styles: Record<string, React.CSSProperties> = {
     justifyContent: 'center',
     minHeight: '100vh',
     padding: '24px',
-    background:
-      'radial-gradient(circle at 12% 16%, rgba(109,188,173,.12), transparent 24%), radial-gradient(circle at 85% 18%, rgba(132,100,205,.10), transparent 22%), linear-gradient(180deg, #f7f3e8, #efe9da)',
+    background: 'radial-gradient(circle at 12% 16%, rgba(109,188,173,.12), transparent 24%), radial-gradient(circle at 85% 18%, rgba(132,100,205,.10), transparent 22%), linear-gradient(180deg, #f7f3e8, #efe9da)',
     fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif',
     color: '#18201e',
   },
@@ -164,23 +154,10 @@ const styles: Record<string, React.CSSProperties> = {
     fontSize: '1.6rem',
     boxShadow: '0 8px 32px rgba(72,170,152,.25)',
   },
-  title: {
-    margin: '0 0 6px',
-    fontSize: '1.6rem',
-    fontWeight: 650,
-    letterSpacing: '-0.04em',
-  },
-  subtitle: {
-    margin: '0 0 28px',
-    color: '#66706d',
-    fontSize: '0.95rem',
-  },
-  hint: {
-    margin: '0 0 16px',
-    fontSize: '0.88rem',
-    color: '#66706d',
-    lineHeight: 1.5,
-  },
+  title: { margin: '0 0 6px', fontSize: '1.6rem', fontWeight: 650, letterSpacing: '-0.04em' },
+  subtitle: { margin: '0 0 28px', color: '#66706d', fontSize: '0.95rem' },
+  hint: { margin: '0 0 8px', fontSize: '0.88rem', color: '#66706d', lineHeight: 1.5 },
+  spam: { margin: '0 0 16px', fontSize: '0.78rem', color: '#8a9e98', lineHeight: 1.5 },
   input: {
     width: '100%',
     padding: '12px 16px',
@@ -206,19 +183,6 @@ const styles: Record<string, React.CSSProperties> = {
     cursor: 'pointer',
     transition: 'opacity 200ms',
   },
-  resend: {
-    marginTop: '14px',
-    background: 'none',
-    border: 'none',
-    color: '#66706d',
-    fontSize: '0.85rem',
-    cursor: 'pointer',
-    textDecoration: 'underline',
-    padding: 0,
-  },
-  error: {
-    marginTop: '10px',
-    fontSize: '0.85rem',
-    color: 'rgba(180,60,60,.85)',
-  },
+  resend: { marginTop: '14px', background: 'none', border: 'none', color: '#66706d', fontSize: '0.85rem', cursor: 'pointer', textDecoration: 'underline', padding: 0 },
+  error: { marginTop: '10px', fontSize: '0.85rem', color: 'rgba(180,60,60,.85)' },
 }
