@@ -284,21 +284,50 @@ export default function QuanamIa2026() {
     )
   )
 
+  const [otpStep, setOtpStep] = useState<'email' | 'otp'>('email')
+  const [otpToken, setOtpToken] = useState('')
+  const [otpError, setOtpError] = useState('')
+  const [otpLoading, setOtpLoading] = useState(false)
+
   useEffect(() => {
-    const savedNombre = getCookie('quanam_nombre')
     const savedEmail = getCookie('quanam_email')
-    if (savedNombre) setNombre(savedNombre)
     if (savedEmail) setEmail(savedEmail)
-    if (savedNombre) {
-      // nombre pre-cargado → foco en email para que Enter funcione de inmediato
-      setTimeout(() => emailRef.current?.focus(), 0)
-    }
   }, [])
 
-  function ingresar() {
-    if (!nombre.trim()) return
-    setCookie('quanam_nombre', nombre.trim(), 30)
-    if (email.trim()) setCookie('quanam_email', email.trim(), 30)
+  async function handleSendOtp() {
+    if (!email.trim()) return
+    setOtpError('')
+    setOtpLoading(true)
+    const res = await fetch('/api/auth/send-otp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email.trim() }),
+    })
+    const data = await res.json() as { success: boolean; error?: string }
+    setOtpLoading(false)
+    if (!data.success) {
+      setOtpError('No pudimos enviar el código. Verificá el email.')
+      return
+    }
+    setOtpStep('otp')
+  }
+
+  async function handleVerifyOtp() {
+    if (otpToken.length < 6) return
+    setOtpError('')
+    setOtpLoading(true)
+    const { createBrowserClient } = await import('@supabase/ssr')
+    const sb = createBrowserClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    )
+    const { error } = await sb.auth.verifyOtp({ email: email.trim(), token: otpToken, type: 'email' })
+    setOtpLoading(false)
+    if (error) {
+      setOtpError('Código incorrecto o expirado.')
+      return
+    }
+    setCookie('quanam_email', email.trim(), 30)
     setBienvenida(false)
   }
 
@@ -392,10 +421,6 @@ export default function QuanamIa2026() {
   }
 
   async function enviar(lente: typeof LENTES[0]) {
-    if (!nombre.trim()) {
-      setLenteStates(prev => ({ ...prev, [lente.id]: { ...prev[lente.id], status: 'error', errorMsg: 'Completá tu nombre arriba antes de responder.' } }))
-      return
-    }
     const respuesta = lenteStates[lente.id].respuesta
     if (!respuesta.trim()) {
       setLenteStates(prev => ({ ...prev, [lente.id]: { ...prev[lente.id], status: 'error', errorMsg: 'Escribí tu respuesta antes de enviar.' } }))
@@ -440,31 +465,60 @@ export default function QuanamIa2026() {
             </h1>
             <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.80)', fontWeight: 300, fontFamily: 'Karla, sans-serif', lineHeight: 1.7, textAlign: 'center' }}>Entre 5 y 8 semanas. Un grupo de entre 15 y 20 personas. Encuentros que no gestionan el presente — exploran el futuro.</p>
             <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8 }}>
-              <input
-                type="text"
-                value={nombre}
-                onChange={e => setNombre(e.target.value)}
-                onKeyDown={e => { if (e.key === 'Enter') emailRef.current?.focus() }}
-                placeholder="Tu nombre"
-                style={{ width: '100%', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(196,148,26,0.5)', borderRadius: 10, padding: '14px 18px', fontSize: 16, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#fff', outline: 'none', textAlign: 'center' }}
-              />
-              <p style={{ fontSize: 12, letterSpacing: '0.28em', textTransform: 'uppercase', color: '#C4941A', fontWeight: 500, fontFamily: 'Karla, sans-serif', marginTop: 4 }}>Tu email</p>
-              <input
-                ref={emailRef}
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                onKeyDown={e => { if (e.key === 'Enter') ingresar() }}
-                placeholder="Para poder contactarte si queremos profundizar (opcional)"
-                style={{ width: '100%', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(196,148,26,0.3)', borderRadius: 10, padding: '14px 18px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: 'rgba(255,255,255,0.8)', outline: 'none', textAlign: 'center' }}
-              />
-              <button
-                onClick={ingresar}
-                disabled={!nombre.trim()}
-                style={{ marginTop: 4, background: nombre.trim() ? '#8B6914' : 'rgba(139,105,20,0.35)', color: '#F5EDD8', border: 'none', borderRadius: 10, padding: '14px 32px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.08em', cursor: nombre.trim() ? 'pointer' : 'default', transition: 'background 0.2s' }}
-              >
-                Ingresar
-              </button>
+              {otpStep === 'email' ? (
+                <>
+                  <input
+                    ref={emailRef}
+                    type="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    onKeyDown={e => { if (e.key === 'Enter') handleSendOtp() }}
+                    placeholder="Tu email…"
+                    style={{ width: '100%', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(196,148,26,0.5)', borderRadius: 10, padding: '14px 18px', fontSize: 16, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#fff', outline: 'none', textAlign: 'center' }}
+                  />
+                  <button
+                    onClick={handleSendOtp}
+                    disabled={!email.trim() || otpLoading}
+                    style={{ marginTop: 4, background: email.trim() ? '#8B6914' : 'rgba(139,105,20,0.35)', color: '#F5EDD8', border: 'none', borderRadius: 10, padding: '14px 32px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.08em', cursor: email.trim() ? 'pointer' : 'default', transition: 'background 0.2s' }}
+                  >
+                    {otpLoading ? 'Enviando…' : 'Enviar código'}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)', fontFamily: 'Karla, sans-serif', fontWeight: 300, lineHeight: 1.6 }}>
+                    Ingresá el código que enviamos a <strong style={{ color: '#C4941A' }}>{email}</strong>
+                  </p>
+                  <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.50)', fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>
+                    Si no llegó, revisá tu carpeta de spam.
+                  </p>
+                  <input
+                    type="text"
+                    value={otpToken}
+                    onChange={e => setOtpToken(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    onKeyDown={e => { if (e.key === 'Enter') handleVerifyOtp() }}
+                    placeholder="Código de 6 dígitos…"
+                    inputMode="numeric"
+                    autoComplete="one-time-code"
+                    autoFocus
+                    style={{ width: '100%', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(196,148,26,0.5)', borderRadius: 10, padding: '14px 18px', fontSize: 16, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#fff', outline: 'none', textAlign: 'center', letterSpacing: '0.2em' }}
+                  />
+                  <button
+                    onClick={handleVerifyOtp}
+                    disabled={otpToken.length < 6 || otpLoading}
+                    style={{ marginTop: 4, background: otpToken.length >= 6 ? '#8B6914' : 'rgba(139,105,20,0.35)', color: '#F5EDD8', border: 'none', borderRadius: 10, padding: '14px 32px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.08em', cursor: otpToken.length >= 6 ? 'pointer' : 'default', transition: 'background 0.2s' }}
+                  >
+                    {otpLoading ? 'Verificando…' : 'Ingresar'}
+                  </button>
+                  <button
+                    onClick={() => { setOtpStep('email'); setOtpToken(''); setOtpError('') }}
+                    style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.45)', fontSize: 12, fontFamily: 'Karla, sans-serif', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}
+                  >
+                    Volver a ingresar el email
+                  </button>
+                </>
+              )}
+              {otpError && <p style={{ fontSize: 13, color: '#ffb3b3', fontFamily: 'Karla, sans-serif' }}>{otpError}</p>}
             </div>
           </div>
         </div>
