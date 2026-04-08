@@ -211,7 +211,7 @@ export default function AdminPage() {
               <table style={styles.table}>
                 <thead>
                   <tr>
-                    {['Nombre', 'Email', 'Contexto', 'Intercambios', 'Fecha', ''].map(h => (
+                    {['Nombre', 'Email', 'Contexto', 'Intercambios', 'Fecha', 'Hora', ''].map(h => (
                       <th key={h} style={styles.th}>{h}</th>
                     ))}
                   </tr>
@@ -228,6 +228,7 @@ export default function AdminPage() {
                           <td style={{ ...styles.td, color: '#66706d', fontSize: '0.8rem' }}>{conv.contexto_origen || '—'}</td>
                           <td style={{ ...styles.td, color: '#66706d' }}>{intercambios}</td>
                           <td style={{ ...styles.td, color: '#66706d', whiteSpace: 'nowrap' }}>{fmt(conv.created_at)}</td>
+                          <td style={{ ...styles.td, color: '#66706d', whiteSpace: 'nowrap' }}>{new Date(conv.created_at).toLocaleTimeString('es-UY', {hour: '2-digit', minute: '2-digit'})}</td>
                           <td style={{ ...styles.td, textAlign: 'right', width: 40 }}>
                             <button
                               onClick={() => setSelectedConv(isOpen ? null : conv.id)}
