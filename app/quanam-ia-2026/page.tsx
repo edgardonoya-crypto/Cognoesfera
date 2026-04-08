@@ -328,6 +328,12 @@ export default function QuanamIa2026() {
       return
     }
     setCookie('quanam_email', email.trim(), 30)
+    // Registrar acceso a la convocatoria
+    try {
+      const { createBrowserClient } = await import('@supabase/ssr')
+      const sb = createBrowserClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
+      await sb.from('convocatoria_accesos').insert({ email: email.trim() })
+    } catch {}
     setBienvenida(false)
   }
 

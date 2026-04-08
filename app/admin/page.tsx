@@ -18,6 +18,7 @@ type Respuesta = { id: string; nombre: string; email: string; lente: string; res
 type Contacto  = { id: string; nombre: string; email: string; mensaje: string; origen: string | null; created_at: string }
 type Respondente = { nombre: string; email: string; lentes: string[]; primera: string; respuestas: Respuesta[] }
 type DuendeMensaje = { role: 'user' | 'assistant'; content: string; timestamp?: string }
+type AccesoConvocatoria = { id: string; email: string; created_at: string }
 type LoginLog = { id: string; email: string; created_at: string }
 type DuendeConv = { id: string; nombre_participante: string | null; email_participante: string | null; contexto_origen: string | null; mensajes: DuendeMensaje[]; created_at: string }
 
@@ -34,6 +35,7 @@ export default function AdminPage() {
   const [selected, setSelected] = useState<Respondente | null>(null)
   const [selectedConv, setSelectedConv] = useState<string | null>(null)
   const [loginLogs, setLoginLogs] = useState<LoginLog[]>([])
+  const [accesosConv, setAccesosConv] = useState<AccesoConvocatoria[]>([])
 
   useEffect(() => {
     async function load() {
@@ -48,6 +50,7 @@ export default function AdminPage() {
         supabase.from('aleph_contacto').select('id, nombre, email, mensaje, origen, created_at').order('created_at', { ascending: false }),
         fetch('/api/admin/duende-chats', { headers: { Authorization: `Bearer ${accessToken}` } }).then(r => r.json()),
         supabase.from('login_log').select('id, email, created_at').order('created_at', { ascending: false }).limit(50),
+        supabase.from('convocatoria_accesos').select('id, email, created_at').order('created_at', { ascending: false }).limit(100),
       ])
 
       const dData: DuendeConv[] | null = duendeRes?.data ?? null
@@ -69,6 +72,8 @@ export default function AdminPage() {
       if (cData) setContactos(cData as Contacto[])
       if (dData) setConversaciones((dData as DuendeConv[]).filter(d => Array.isArray(d.mensajes) && d.mensajes.length > 0))
       if (lData) setLoginLogs(lData as LoginLog[])
+      const { data: aData } = await supabase.from('convocatoria_accesos').select('id, email, created_at').order('created_at', { ascending: false }).limit(100)
+      if (aData) setAccesosConv(aData as AccesoConvocatoria[])
       setStatus('ok')
     }
     load()
@@ -270,7 +275,33 @@ export default function AdminPage() {
         </section>
 
 
-        {/* SECCIÓN D — Log de accesos */}
+        {/* SECCIÓN D — Accesos convocatoria */}
+        <section style={styles.section}>
+          <h2 style={styles.h2}>Accesos a la convocatoria</h2>
+          <p style={styles.meta}>{accesosConv.length} acceso{accesosConv.length !== 1 ? 's' : ''}</p>
+          {accesosConv.length === 0 ? (
+            <p style={styles.empty}>Todavía no hay accesos registrados.</p>
+          ) : (
+            <div style={styles.tableWrap}>
+              <table style={styles.table}>
+                <thead>
+                  <tr>{['Email', 'Fecha', 'Hora'].map(h => (<th key={h} style={styles.th}>{h}</th>))}</tr>
+                </thead>
+                <tbody>
+                  {accesosConv.map((a, i) => (
+                    <tr key={i} style={styles.tr}>
+                      <td style={styles.td}>{a.email}</td>
+                      <td style={{...styles.td, color: '#66706d'}}>{fmt(a.created_at)}</td>
+                      <td style={{...styles.td, color: '#66706d'}}>{new Date(a.created_at).toLocaleTimeString('es-UY', {hour: '2-digit', minute: '2-digit'})}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </section>
+
+        {/* SECCIÓN E — Log de accesos */}
         <section style={styles.section}>
           <h2 style={styles.h2}>Log de accesos</h2>
           <p style={styles.meta}>{loginLogs.length} acceso{loginLogs.length !== 1 ? 's' : ''} registrado{loginLogs.length !== 1 ? 's' : ''}</p>
