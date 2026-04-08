@@ -30,7 +30,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
-  if (user.email !== ARQUITECTO_EMAIL) {
+  if (request.nextUrl.pathname.startsWith('/admin') && user.email !== ARQUITECTO_EMAIL) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
@@ -38,5 +38,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin'],
+  matcher: ['/admin', '/dashboard', '/cognoesfera/:path*', '/corpus-form', '/duende'],
 }
