@@ -1,6 +1,12 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
-import { supabase } from '@/app/lib/supabase'
+
+// Anon client para operaciones de auth estándar (server-side, sin browser APIs)
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  { auth: { autoRefreshToken: false, persistSession: false } }
+)
 
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
