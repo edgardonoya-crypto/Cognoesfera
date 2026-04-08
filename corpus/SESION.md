@@ -146,6 +146,16 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - Tabla aleph_contacto con campo origen — Supabase
 - 6 pendientes Soma completados (S-HIS-05 a S-HIS-10) · 4 nuevos agregados
 
+**Hitos de SESION-20260407 — "El Duende cobra vida — cuando el paradigma empezó a hablar":**
+- Duende activado end-to-end: API route + página /duende + system prompt con 33 conceptos del Corpus Madre
+- Historial en duende_chats usando schema real (array mensajes jsonb)
+- Protocolo 03-EN — COMMIT ALEPH implementado en tres archivos
+- Duende conectado en lentes y fragmentos del drawer de la convocatoria Quanam
+- Modo convocatoria vs modo corpus implementado
+- Registro de conversaciones Duende en panel /admin
+- 40 señales activas (señal nueva: El Duende como espejo del corpus)
+- Inconsistencias I1-I4 + A9 resueltas al inicio de sesión
+
 **Hitos de SESION-20260408 — "La seguridad — cuando el sistema se protegió para crecer":**
 - UUID edgardo migrado correctamente — FK constraint resuelto con DROP/UPDATE/RESTORE
 - createBrowserClient fix — sesión en cookies, middleware server-side funciona
@@ -156,16 +166,6 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - Hero IHA: título grande + texto urgencia "El piso se está moviendo…"
 - Consolidación cliente Supabase — un solo cliente en app/lib/supabase.ts
 - S-SE-02, S-SE-03, S-SE-04, S-IN-06 completados
-
-**Hitos de SESION-20260407 — "El Duende cobra vida — cuando el paradigma empezó a hablar":**
-- Duende activado end-to-end: API route + página /duende + system prompt con 33 conceptos del Corpus Madre
-- Historial en duende_chats usando schema real (array mensajes jsonb)
-- Protocolo 03-EN — COMMIT ALEPH implementado en tres archivos
-- Duende conectado en lentes y fragmentos del drawer de la convocatoria Quanam
-- Modo convocatoria vs modo corpus implementado
-- Registro de conversaciones Duende en panel /admin
-- 40 señales activas (señal nueva: El Duende como espejo del corpus)
-- Inconsistencias I1-I4 + A9 resueltas al inicio de sesión
 
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
