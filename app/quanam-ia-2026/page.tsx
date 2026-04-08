@@ -50,20 +50,33 @@ type LenteState = {
 
 type DuendeChatProps = {
   lente: { id: string; nombre: string; frase: string; desc: string }
-  respuestaUsuario?: string
+  mensajeInicial?: string
   nombre?: string
   email?: string
+  autoAbrir?: boolean
 }
 
 type DuendeMsg = { role: 'user' | 'assistant'; content: string }
 
-function DuendeChat({ lente, respuestaUsuario, nombre, email }: DuendeChatProps) {
-  const [open, setOpen] = useState(false)
+function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir }: DuendeChatProps) {
+  const [abierto, setAbierto] = useState(false)
   const [msgs, setMsgs] = useState<DuendeMsg[]>([])
   const [sesionId, setSesionId] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [input, setInput] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
+  const iniciado = useRef(false)
+
+  useEffect(() => {
+    if (autoAbrir && mensajeInicial?.trim() && !iniciado.current) {
+      iniciado.current = true
+      setAbierto(true)
+      const userMsg = mensajeInicial.trim()
+      setMsgs([{ role: 'user', content: userMsg }])
+      const prompt = `El usuario está explorando el lente "${lente.nombre}". La propuesta es: ${lente.frase}. El usuario escribió: "${userMsg}". Respondé desde el paradigma. Sé breve y abrí territorio — no cerrés.`
+      callDuende(prompt, [], null)
+    }
+  }, [autoAbrir, mensajeInicial])
 
   async function callDuende(mensaje: string, historial: DuendeMsg[], sid: string | null) {
     setLoading(true)
@@ -86,16 +99,6 @@ function DuendeChat({ lente, respuestaUsuario, nombre, email }: DuendeChatProps)
     }
   }
 
-  function toggleOpen() {
-    if (!open && msgs.length === 0) {
-      setOpen(true)
-      const inicial = `El usuario está explorando el lente "${lente.nombre}". La propuesta de este lente es: ${lente.frase}.${respuestaUsuario?.trim() ? ` El usuario escribió: "${respuestaUsuario}".` : ''} Respondé desde el paradigma en relación con este lente. Sé breve y abrí territorio — no cerrés.`
-      callDuende(inicial, [], null)
-    } else {
-      setOpen(v => !v)
-    }
-  }
-
   function enviarInput(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key !== 'Enter' || !input.trim() || loading) return
     const msg = input.trim()
@@ -105,39 +108,31 @@ function DuendeChat({ lente, respuestaUsuario, nombre, email }: DuendeChatProps)
     callDuende(msg, msgs, sesionId)
   }
 
+  if (!abierto) return null
+
   return (
-    <div>
-      <button
-        onClick={toggleOpen}
-        style={{ background: 'transparent', border: '1px solid rgba(139,105,20,0.4)', borderRadius: 8, padding: '7px 14px', fontSize: 12, fontFamily: 'Karla, sans-serif', fontWeight: 500, color: '#8B6914', letterSpacing: '0.04em', cursor: 'pointer' }}
-      >
-        {open ? 'Cerrar el Duende' : 'Pedile ayuda al Duende'}
-      </button>
-      {open && (
-        <div style={{ marginTop: 10 }}>
-          {loading && msgs.length === 0 && (
-            <p style={{ fontSize: 13, color: '#8A7E70', fontStyle: 'italic', lineHeight: 1.65 }}>El Duende está pensando…</p>
-          )}
-          {msgs.map((m, i) => (
-            <p key={i} style={{ fontSize: 13, color: m.role === 'assistant' ? '#8A7E70' : '#2C2820', fontStyle: m.role === 'assistant' ? 'italic' : 'normal', lineHeight: 1.65, marginBottom: 8 }}>
-              {m.role === 'user' ? `Vos: ${m.content}` : m.content}
-            </p>
-          ))}
-          {loading && msgs.length > 0 && (
-            <p style={{ fontSize: 13, color: '#8A7E70', fontStyle: 'italic', lineHeight: 1.65 }}>El Duende está pensando…</p>
-          )}
-          {msgs.length > 0 && (
-            <input
-              ref={inputRef}
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyDown={enviarInput}
-              placeholder="Seguí la conversación… (Enter para enviar)"
-              disabled={loading}
-              style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 6, padding: '8px 10px', fontSize: 13, fontFamily: 'Karla, sans-serif', color: '#2C2820', background: 'rgba(245,240,232,0.5)', outline: 'none', marginTop: 8, boxSizing: 'border-box' }}
-            />
-          )}
-        </div>
+    <div style={{ marginTop: 10 }}>
+      {loading && msgs.filter(m => m.role === 'assistant').length === 0 && (
+        <p style={{ fontSize: 13, color: '#8A7E70', fontStyle: 'italic', lineHeight: 1.65 }}>El Duende está pensando…</p>
+      )}
+      {msgs.map((m, i) => (
+        <p key={i} style={{ fontSize: 13, color: m.role === 'assistant' ? '#8A7E70' : '#2C2820', fontStyle: m.role === 'assistant' ? 'italic' : 'normal', lineHeight: 1.65, marginBottom: 8 }}>
+          {m.role === 'user' ? `Vos: ${m.content}` : m.content}
+        </p>
+      ))}
+      {loading && msgs.filter(m => m.role === 'assistant').length > 0 && (
+        <p style={{ fontSize: 13, color: '#8A7E70', fontStyle: 'italic', lineHeight: 1.65 }}>El Duende está pensando…</p>
+      )}
+      {msgs.length > 0 && (
+        <input
+          ref={inputRef}
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          onKeyDown={enviarInput}
+          placeholder="Seguí la conversación… (Enter para enviar)"
+          disabled={loading}
+          style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 6, padding: '8px 10px', fontSize: 13, fontFamily: 'Karla, sans-serif', color: '#2C2820', background: 'rgba(245,240,232,0.5)', outline: 'none', marginTop: 8, boxSizing: 'border-box' }}
+        />
       )}
     </div>
   )
@@ -465,11 +460,12 @@ export default function QuanamIa2026() {
           />
           <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.55)' }} />
           <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24, padding: '0 24px', maxWidth: 480, width: '100%', textAlign: 'center' }}>
-            <p style={{ fontSize: 12, letterSpacing: '0.28em', textTransform: 'uppercase', color: '#C4941A', fontWeight: 500, fontFamily: 'Karla, sans-serif' }}>Convocatoria · Por este camino 2026</p>
-            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(28px,5vw,44px)', fontWeight: 400, lineHeight: 1.18, letterSpacing: '-0.02em', color: '#C4941A', margin: 0 }}>
-              Lo que se va.<br />Lo que permanece.<br />Lo que podemos construir.
+            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(48px,8vw,80px)', fontWeight: 400, lineHeight: 1.1, letterSpacing: '-0.02em', color: '#C4941A', margin: 0 }}>
+              IHA
             </h1>
-            <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.80)', fontWeight: 300, fontFamily: 'Karla, sans-serif', lineHeight: 1.7, textAlign: 'center' }}>Entre 5 y 8 semanas. Un grupo de entre 15 y 20 personas. Encuentros que no gestionan el presente — exploran el futuro.</p>
+            <p style={{ fontSize: 'clamp(18px,3vw,28px)', color: '#C4941A', fontFamily: 'Karla, sans-serif', fontWeight: 300, letterSpacing: '0.06em', margin: 0 }}>Inteligencia Humana Aumentada</p>
+            <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.82)', fontWeight: 300, fontFamily: 'Karla, sans-serif', lineHeight: 1.75, textAlign: 'center', margin: 0 }}>El piso se está moviendo. La IA está reconfigurando lo que hacemos más rápido de lo que podemos nombrarlo. Las organizaciones que van a salir bien paradas son las que empiezan a pensar juntas hoy.<br /><br /><em style={{ color: '#E8C96A', fontStyle: 'italic', fontSize: 17 }}>¿Qué señales te entusiasman… o te inquietan?</em></p>
+            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.40)', fontWeight: 300, fontFamily: 'Karla, sans-serif', lineHeight: 1.6, textAlign: 'center', marginTop: 6 }}>Entre 5 y 8 semanas · Un grupo de entre 15 y 20 personas · Encuentros que no gestionan el presente — exploran el futuro.</p>
             <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8 }}>
               {otpStep === 'email' ? (
                 <>
@@ -828,31 +824,29 @@ export default function QuanamIa2026() {
 
                           {/* FORM */}
                           <div style={{ marginTop: 8, display: 'flex', flexDirection: 'column', gap: 10 }} onClick={e => e.stopPropagation()}>
-                            <textarea
-                              value={ls.respuesta}
-                              onChange={e => setRespuesta(lente.id, e.target.value)}
-                              placeholder={`Tu respuesta desde "${lente.nombre}"…`}
-                              rows={4}
-                              style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 8, padding: '12px 14px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#2C2820', background: 'rgba(245,240,232,0.5)', resize: 'vertical', outline: 'none', lineHeight: 1.7 }}
-                            />
-                            <div>
-                              <DuendeChat lente={lente} respuestaUsuario={ls.respuesta} nombre={nombre} email={email} />
-                            </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                              <button
-                                onClick={() => enviar(lente)}
-                                disabled={ls.status === 'sending'}
-                                style={{ background: '#8B6914', color: '#F5EDD8', border: 'none', borderRadius: 8, padding: '10px 22px', fontSize: 13, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.06em', cursor: ls.status === 'sending' ? 'default' : 'pointer', opacity: ls.status === 'sending' ? 0.7 : 1, transition: 'opacity 0.2s' }}
-                              >
-                                {ls.status === 'sending' ? 'Enviando…' : 'Enviar respuesta'}
-                              </button>
-                              {ls.status === 'sent' && (
-                                <span style={{ fontSize: 14, color: '#4A8C5C', fontWeight: 500 }}>✓ Respuesta enviada</span>
-                              )}
-                              {ls.status === 'error' && (
-                                <span style={{ fontSize: 13, color: '#B85C38', fontWeight: 400 }}>{ls.errorMsg}</span>
-                              )}
-                            </div>
+                            {!ls.showDuende ? (
+                              <>
+                                <textarea
+                                  value={ls.respuesta}
+                                  onChange={e => setRespuesta(lente.id, e.target.value)}
+                                  placeholder={`Tu respuesta desde "${lente.nombre}"…`}
+                                  rows={4}
+                                  style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 8, padding: '12px 14px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#2C2820', background: 'rgba(245,240,232,0.5)', resize: 'vertical', outline: 'none', lineHeight: 1.7 }}
+                                />
+                                <button
+                                  onClick={() => {
+                                    if (!ls.respuesta.trim()) return
+                                    setLenteStates(prev => ({ ...prev, [lente.id]: { ...prev[lente.id], showDuende: true } }))
+                                  }}
+                                  disabled={!ls.respuesta.trim()}
+                                  style={{ alignSelf: 'flex-start', background: ls.respuesta.trim() ? '#8B6914' : 'rgba(139,105,20,0.3)', color: '#F5EDD8', border: 'none', borderRadius: 8, padding: '10px 22px', fontSize: 13, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.06em', cursor: ls.respuesta.trim() ? 'pointer' : 'default', transition: 'background 0.2s' }}
+                                >
+                                  Enviar al Duende
+                                </button>
+                              </>
+                            ) : (
+                              <DuendeChat lente={lente} mensajeInicial={ls.respuesta} nombre={nombre} email={email} autoAbrir={true} />
+                            )}
                           </div>
                         </div>
                       </div>
