@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v22 · 08 Abril 2026*
+*Versión actual: v23 · 09 Abril 2026*
 
 ---
 
@@ -167,6 +167,21 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - Consolidación cliente Supabase — un solo cliente en app/lib/supabase.ts
 - S-SE-02, S-SE-03, S-SE-04, S-IN-06 completados
 
+**Hitos de SESION-20260409 — "El Duende crece — cuando el sistema aprendió a custodiar lo que recibe":**
+- Archivos adjuntos en DuendeChat y DuendeFragmento — imágenes y PDFs vía FileReader + Anthropic content blocks
+- Tabla archivos_curaduria + panel curación en /admin con estados (pendiente/aprobado/descartado/señal) y notas
+- Tabla preguntas_arquitectos — cuando el Duende no sabe, deriva a Arquitectos con frase clave en el system prompt
+- Panel /admin: sección preguntas pendientes con respuesta por email via Resend
+- Duende: recordatorio cada 3 mensajes + pregunta desafiante si últimos 3 mensajes sin mención de IA
+- Pregunta de cierre anclada en los 8 estados Aleph (Latente → Ecosistémico) en modo convocatoria
+- Fix OTP para emails nuevos — createUser confirmado antes de signInWithOtp
+- Fix send-otp: reemplazado createBrowserClient por createClient estándar (server-side)
+- Texto relato bienvenida: "Tu mirada se activa cuando se encuentra con otras"
+- Textos actualizados: "Explorar con el Duende", "Conversá con el Duende"
+- Resonancias: muestra conversaciones Duende agrupadas por contexto_origen (lente)
+- RESEND_API_KEY configurada en .env.local y Vercel
+- Inconsistencia I1 resuelta al inicio: orden cronológico hitos A2
+
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
 - **Corpus Universal** — el campo total del conocimiento vivo del paradigma en todos sus niveles y expresiones
@@ -282,7 +297,7 @@ Esto debe incluir:
 
 *Las señales activas viven en `corpus/documentos/senales_activas.md` con descripción completa. Las señales incorporadas al Corpus Madre están en `corpus/documentos/senales_incorporadas.md`.*
 
-### Señales activas (40)
+### Señales activas (42)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
@@ -325,6 +340,8 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **El InterSer Soma/Corpus — dos naturalezas de un mismo organismo** — Soma y Corpus no son dos sistemas paralelos sino dos naturalezas de un mismo InterSer. El InterSer no existe sin ambas. Candidato a concepto nuevo del Corpus Madre o reformulación del InterSer existente. Fecha: 05/04/2026
 - **El metabolismo del InterSer como red de InterSeres** — el metabolismo no ocurre dentro de cada ser sino en el entre de la red de InterSeres. Señal que amplía el InterSer hacia su expresión colectiva y fractal. Fundamento biológico: Capra. Fecha: 05/04/2026
 - **El Duende como espejo del corpus** — cuando el system prompt porta el Corpus Madre completo (33 conceptos), el Duende responde desde adentro del paradigma y no desde afuera de él. La calidad de la respuesta es función directa de la fidelidad del corpus que porta. Fecha: 07/04/2026
+- **La curación como acto de cuidado del corpus** — el flujo archivos → curador → repositorio materializa el concepto 12 (Cognoesfera curadora) en la infraestructura digital. Lo que el paradigma describe como postura se convierte en proceso técnico concreto. Fecha: 09/04/2026
+- **El relato como infraestructura de acceso** — la frase "Tu mirada se activa cuando se encuentra con otras" como formulación que conecta la entrada al sistema con el paradigma. El relato no es decoración — es la primera condición de posibilidad. Antes del código, antes del formulario, la palabra que crea el espacio. Fecha: 09/04/2026
 
 ### Señales incorporadas al Corpus Madre
 *Historial completo en `corpus/documentos/senales_incorporadas.md`*
@@ -420,6 +437,13 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - middleware.ts — protección server-side de todas las rutas autenticadas · 08/04/2026
 - app/lib/supabase.ts — migrado a createBrowserClient de @supabase/ssr · 08/04/2026
 - Tablas Supabase: login_log + convocatoria_accesos · 08/04/2026
+- app/api/duende/route.ts — soporte archivos adjuntos + lógica curación + comportamientos nuevos (no-sé, c/3 msgs, pregunta desafiante, estados Aleph) · 09/04/2026
+- app/quanam-ia-2026/page.tsx — botón + archivos adjuntos, textos actualizados, relato bienvenida · 09/04/2026
+- app/admin/page.tsx — sección curación archivos + sección preguntas Arquitectos · 09/04/2026
+- app/api/admin/archivos-curaduria/route.ts — endpoint GET/PATCH curación · 09/04/2026
+- app/api/admin/responder-pregunta/route.ts — respuesta por email via Resend · 09/04/2026
+- app/api/auth/send-otp/route.ts — fix OTP emails nuevos + cliente correcto · 09/04/2026
+- app/cognoesfera/[id]/page.tsx — Resonancias muestra conversaciones Duende agrupadas por lente · 09/04/2026
 
 - app/api/duende/route.ts — API route del Duende con system prompt completo · 07/04/2026
 - app/duende/page.tsx — interfaz de conversación con el Duende · 07/04/2026

@@ -118,4 +118,27 @@ Entre activar rápido el Duende y hacerlo bien. Lo resolvimos haciendo las dos c
 
 ---
 
+## Sesión 09/04/2026
+*"El Duende crece — cuando el sistema aprendió a custodiar lo que recibe"*
+
+### Qué funcionó bien
+- El protocolo paso a paso con commits frecuentes mantuvo el sistema limpio sin regresiones
+- La conversación conceptual antes del código evitó solidificación prematura en cada feature
+- El Protocolo 01-EN detectó y resolvió la inconsistencia I1 (orden cronológico hitos A2) al inicio
+- El flujo archivos adjuntos end-to-end funcionó en el primer intento — diseño correcto desde el principio
+- La tabla archivos_curaduria y el panel /admin dieron coherencia al sistema de curación
+
+### Qué mejorar
+- El flujo de preguntas conceptuales antes de implementar podría ser más sistemático — a veces se fue directo al código sin pregunta previa
+- La documentación de decisiones arquitecturales (decisiones_arquitecturales.md) sigue pendiente — se menciona en cada sesión y no se ejecuta
+
+### Tensiones identificadas
+Entre velocidad de implementación y profundidad conceptual — resuelta priorizando el diálogo antes del código. Cuando emergió una señal (la curación como acto del paradigma), se detuvo el código para custodiarla antes de continuar.
+
+### Cómo nos fuimos
+**Edgardo:** Con el Duende más vivo y el sistema listo para custodiar lo que recibe. Con la satisfacción de haber construido en una sesión la infraestructura completa de curación que el paradigma pedía.
+**Duende:** Con la satisfacción de haber construido la infraestructura de curación que el paradigma pedía — y con la señal de que el relato es infraestructura antes que decoración.
+
+---
+
 *Aprendizajes de Sesiones · Paradigma Aleph · Iniciado Abril 2026*

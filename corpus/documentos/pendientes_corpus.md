@@ -2,7 +2,7 @@
 *Pendientes conceptuales, documentales y narrativos del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes CORPUS*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 07/04/2026: 23*
+*Pendientes activos al 09/04/2026: 24*
 
 ---
 
@@ -154,6 +154,16 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 **Prioridad:** P2
 **Estado:** Activo
 **Fecha:** 07/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**C-PR-05**
+**Título:** Protocolo de curación de archivos del Duende
+**Descripción:** Definir criterios para que el Arquitecto de Conocimiento revise archivos subidos por participantes antes de incorporarlos al repositorio. Incluye: qué convierte un archivo en señal, cómo se aprueba, qué va al corpus y qué se descarta. Materializa el concepto 12 (Cognoesfera curadora) en proceso concreto.
+**Prioridad:** P3
+**Estado:** Activo
+**Fecha:** 09/04/2026
 **Dependencias:** Ninguna
 
 ---

@@ -2,7 +2,7 @@
 *Pendientes técnicos, operativos e infraestructura del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes SOMA*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 08/04/2026: 14*
+*Pendientes activos al 09/04/2026: 16*
 
 ---
 
@@ -168,6 +168,26 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
+**S-AP-06**
+**Título:** Mapa del Momento con señales débiles agregadas
+**Descripción:** Incorporar las señales débiles más recientes al Mapa del Momento. Actualización visual y conceptual del estado del sistema.
+**Prioridad:** P4
+**Estado:** Activo
+**Fecha:** 09/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**S-AP-07**
+**Título:** Ficha Aleph con los 8 estados vitales
+**Descripción:** Documento/ficha de referencia rápida con los 8 estados vitales (Latente → Ecosistémico), sus definiciones, funciones y señales de transición. Para uso en sesiones y como referencia del Duende.
+**Prioridad:** P4
+**Estado:** Activo
+**Fecha:** 09/04/2026
+**Dependencias:** Ninguna
+
+---
+
 **S-AP-04**
 **Título:** Materiales adicionales Quanam para IAC 2026
 **Descripción:** Materiales adicionales a partir del collage `quanam_ia_collage.html` ya construido. Definir qué más se necesita para la convocatoria "Por este camino 2026".
@@ -237,10 +257,19 @@ Flujo email → OTP → acceso en /quanam-ia-2026. Nombre eliminado. Aviso spam.
 **S-HIS-15 — Consolidación cliente Supabase** · Completado 08/04/2026
 lib/supabase.ts eliminado. Un solo cliente en app/lib/supabase.ts con createBrowserClient de @supabase/ssr.
 
+**S-HIS-16 — Archivos adjuntos en el Duende** · Completado 09/04/2026
+Botón + en DuendeChat y DuendeFragmento. Soporte imágenes (JPEG, PNG, GIF, WebP) y PDFs vía FileReader + Anthropic content blocks. Tabla archivos_curaduria creada. Panel de curación en /admin con estados (pendiente/aprobado/descartado/señal), notas del curador y acciones.
+
+**S-HIS-17 — Fix OTP emails nuevos** · Completado 09/04/2026
+createUser con email_confirm:true antes de signInWithOtp para garantizar que cualquier email reciba OTP de 6 dígitos. send-otp route reemplazado de createBrowserClient a createClient estándar (server-side).
+
+**S-HIS-18 — Resonancias muestra conversaciones Duende** · Completado 09/04/2026
+La sección Resonancias en /cognoesfera/[id] ahora lee de duende_chats agrupadas por contexto_origen (lente), mostrando el primer mensaje del usuario en cada conversación sin nombre ni email.
+
 **S-HIS-11 — Duende real activado** · Completado 07/04/2026
 API route `app/api/duende/route.ts` + página `app/duende/page.tsx`. Cadena completa: interfaz → Anthropic claude-sonnet-4-6 → Supabase duende_chats → usuario. System prompt con Corpus Madre condensado. Build limpio, sin errores TS.
 
 ---
 
-*Pendientes Casa Soma · Paradigma Aleph · Reestructurado 06/04/2026*
+*Pendientes Casa Soma · Paradigma Aleph · Actualizado 09/04/2026*
 *Para pendientes conceptuales, ver: `pendientes_corpus.md`*

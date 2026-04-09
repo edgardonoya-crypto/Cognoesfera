@@ -482,6 +482,36 @@ El horizonte: si la red de Entidades Aleph llega a ser autopoiética, el metabol
 
 ---
 
-*Señales Activas · Paradigma Aleph · Reestructurado 06/04/2026*
-*Total señales activas: 40*
+---
+
+## La curación como acto de cuidado del corpus
+
+**Fecha:** 09/04/2026
+**Estado:** Custodiada
+**Descripción:** El flujo archivos → curador → repositorio materializa el concepto 12 (Cognoesfera curadora) en la infraestructura digital. Lo que el paradigma describe como postura se convierte en proceso técnico concreto: el curador no solo revisa — cuida el campo de lo que puede entrar al corpus.
+
+**Lo que la generó:** La implementación de la tabla archivos_curaduria y el panel de curación en /admin reveló que la decisión técnica de quién puede aprobar qué es en sí misma una decisión del paradigma. El Arquitecto de Conocimiento como rol de curación es la expresión digital del concepto 12.
+
+**Impacto probable:** Protocolo de curación como documento vivo del paradigma. Posible concepto nuevo o expansión del concepto 12. El sistema aprende a custodiar lo que recibe antes de incorporarlo.
+**Origen:** Sesión 09/04/2026 — emergió de la implementación del sistema de curación de archivos adjuntos.
+**Pregunta abierta:** ¿Qué criterios distinguen un archivo que enriquece el corpus de uno que solo lo acumula? ¿Cómo la Cognoesfera curadora mantiene la coherencia del campo sin volverse rígida?
+
+---
+
+## El relato como infraestructura de acceso
+
+**Fecha:** 09/04/2026
+**Estado:** Custodiada
+**Descripción:** La frase "Tu mirada se activa cuando se encuentra con otras" como formulación que conecta la entrada al sistema con el paradigma. El relato no es decoración — es la primera condición de posibilidad. Antes del código, antes del formulario, la palabra que crea el espacio donde algo puede ocurrir.
+
+**Lo que la generó:** La decisión de agregar un texto narrativo antes del campo de email en la pantalla de bienvenida reveló que el momento de acceso es también un momento de activación. La frase no describe el sistema — lo inaugura.
+
+**Impacto probable:** Principio de diseño para todas las entradas al sistema: cada punto de acceso necesita un relato que active antes de pedir. Posible expansión del concepto 23 (Conversación Aumentada) o del concepto 22 (Arquitectura Conversacional).
+**Origen:** Sesión 09/04/2026 — emergió de la decisión de texto en la pantalla de bienvenida de /quanam-ia-2026.
+**Pregunta abierta:** ¿En qué otros puntos del sistema el relato podría preceder a la acción? ¿Hay una "arquitectura narrativa de acceso" que espera ser nombrada?
+
+---
+
+*Señales Activas · Paradigma Aleph · Actualizado 09/04/2026*
+*Total señales activas: 42*
 *Para señales incorporadas al Corpus Madre, ver: `senales_incorporadas.md`*
