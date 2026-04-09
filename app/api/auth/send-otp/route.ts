@@ -80,13 +80,7 @@ export async function POST(request: Request) {
     })
 
     if (otpError) {
-      const otpErrAny = otpError as unknown as Record<string, unknown>
-      console.error('[send-otp] signInWithOtp error:', JSON.stringify({
-        message: otpError.message,
-        status: otpError.status,
-        code: otpErrAny.code,
-        name: otpError.name,
-      }))
+      console.error('[send-otp] signInWithOtp error completo:', JSON.stringify(otpError, null, 2))
       return NextResponse.json({ success: false, error: otpError.message })
     }
 

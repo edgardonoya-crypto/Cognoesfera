@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/app/lib/supabase'
 
@@ -182,11 +182,8 @@ export default function AdminPage() {
                   {respondentes.map((r, i) => {
                     const isOpen = selected?.email === r.email && selected?.nombre === r.nombre
                     return (
-                      <>
-                        <tr
-                          key={i}
-                          style={{ ...styles.tr, background: isOpen ? 'rgba(78,170,152,.08)' : undefined }}
-                        >
+                      <React.Fragment key={i}>
+                        <tr style={{ ...styles.tr, background: isOpen ? 'rgba(78,170,152,.08)' : undefined }}>
                           <td style={styles.td}>{r.nombre}</td>
                           <td style={{ ...styles.td, color: '#66706d' }}>{r.email || '—'}</td>
                           <td style={styles.td}>{r.lentes.length}</td>
@@ -199,7 +196,7 @@ export default function AdminPage() {
                           </td>
                         </tr>
                         {isOpen && (
-                          <tr key={`${i}-detail`} style={{ background: 'rgba(78,170,152,.04)' }}>
+                          <tr style={{ background: 'rgba(78,170,152,.04)' }}>
                             <td colSpan={5} style={{ padding: '16px 20px 20px' }}>
                               <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                                 {LENTES_ORDEN.map(lente => {
@@ -221,7 +218,7 @@ export default function AdminPage() {
                             </td>
                           </tr>
                         )}
-                      </>
+                      </React.Fragment>
                     )
                   })}
                 </tbody>
@@ -285,8 +282,8 @@ export default function AdminPage() {
                     const isOpen = selectedConv === conv.id
                     const intercambios = Math.floor(conv.mensajes.length / 2)
                     return (
-                      <>
-                        <tr key={conv.id} style={{ ...styles.tr, background: isOpen ? 'rgba(139,105,20,.06)' : undefined }}>
+                      <React.Fragment key={conv.id}>
+                        <tr style={{ ...styles.tr, background: isOpen ? 'rgba(139,105,20,.06)' : undefined }}>
                           <td style={styles.td}>{conv.nombre_participante || '—'}</td>
                           <td style={{ ...styles.td, color: '#66706d' }}>{conv.email_participante || '—'}</td>
                           <td style={{ ...styles.td, color: '#66706d', fontSize: '0.8rem' }}>{conv.contexto_origen || '—'}</td>
@@ -301,7 +298,7 @@ export default function AdminPage() {
                           </td>
                         </tr>
                         {isOpen && (
-                          <tr key={`${conv.id}-detail`} style={{ background: 'rgba(139,105,20,.03)' }}>
+                          <tr style={{ background: 'rgba(139,105,20,.03)' }}>
                             <td colSpan={6} style={{ padding: '16px 20px 20px' }}>
                               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                                 {conv.mensajes.map((m, i) => (
@@ -324,7 +321,7 @@ export default function AdminPage() {
                             </td>
                           </tr>
                         )}
-                      </>
+                      </React.Fragment>
                     )
                   })}
                 </tbody>
