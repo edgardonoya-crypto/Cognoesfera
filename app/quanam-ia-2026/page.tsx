@@ -783,25 +783,26 @@ export default function QuanamIa2026() {
         .lentes-intro { padding: 28px 40px 20px; border-top: 1px solid var(--rule); display: flex; flex-direction: column; gap: 12px; }
         .lentes-sub { font-size: 16px; color: var(--inklt); line-height: 1.75; font-weight: 300; }
         .lentes-sub em { font-style: italic; color: var(--gold); }
-        .lentes-lista { border-top: 1px solid var(--rule); }
-        .lente { border-bottom: 1px solid var(--rule); background: var(--card-w); cursor: pointer; -webkit-tap-highlight-color: transparent; transition: background 0.2s; }
+        .lentes-lista { display: flex; flex-direction: column; gap: 2px; padding: 8px 0 16px; }
+        .lente { background: var(--card-w); border-left: 2px solid rgba(201,168,76,0.22); border-radius: 0 8px 8px 0; transition: border-color 0.2s; }
+        .lente-num { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 400; color: #C9A84C; opacity: 0.28; line-height: 1; flex-shrink: 0; min-width: 52px; user-select: none; }
         .lente:last-child { border-bottom: none; }
-        .lente:hover { background: rgba(250,248,244,1); }
-        .lente-header { padding: 0 32px 0 40px; min-height: 64px; display: flex; align-items: center; justify-content: space-between; }
-        .lente-header-left { display: flex; flex-direction: column; gap: 4px; flex: 1; padding-right: 12px; }
-        .lente-nombre { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--goldlt); font-weight: 500; }
-        .lente-frase { font-family: 'Playfair Display', serif; font-size: 16px; font-style: italic; color: var(--ink); line-height: 1.4; }
+        .lente:hover { border-color: rgba(201,168,76,0.5); }
+        .lente-header { padding: 20px 32px 16px 24px; display: flex; align-items: center; gap: 16px; }
+        .lente-header-left { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+        .lente-nombre { font-family: 'Karla', sans-serif; font-size: 20px; letter-spacing: 0.01em; text-transform: none; color: #C9A84C; font-weight: 500; line-height: 1.2; }
+        .lente-frase { font-family: 'Playfair Display', serif; font-size: 15px; font-style: italic; color: var(--inklt); line-height: 1.45; }
         .lente-body { display: block; }
-        .lente-contenido { padding: 4px 40px 24px 40px; display: flex; flex-direction: column; gap: 10px; }
-        .lente-desc { font-size: 16px; color: var(--inklt); line-height: 1.8; font-weight: 300; }
+        .lente-contenido { padding: 0 32px 28px 92px; display: flex; flex-direction: column; gap: 12px; }
+        .lente-desc { font-size: 14px; color: #888; line-height: 1.85; font-weight: 300; }
         .lente-ejemplo { font-size: 15px; color: var(--goldlt); font-style: italic; line-height: 1.65; }
-        .pregunta-central { margin-top: 12px; padding: 44px 8px 40px; border-top: 1px solid var(--rule); display: flex; flex-direction: column; gap: 16px; }
+        .pregunta-central { margin-top: 12px; padding: 60px 8px 56px; border-top: 1px solid var(--rule); display: flex; flex-direction: column; gap: 20px; }
         .pregunta-central .bloque-etiqueta { color: var(--goldlt); }
-        .pregunta-texto { font-family: 'Playfair Display', serif; font-size: clamp(20px,3vw,32px); font-style: italic; font-weight: 400; color: var(--gold); line-height: 1.55; }
+        .pregunta-texto { font-family: 'Playfair Display', serif; font-size: clamp(22px,3vw,32px); font-style: italic; font-weight: 400; color: #C9A84C; line-height: 1.6; }
         .pregunta-quanam { font-size: 15px; color: var(--inkxlt); font-style: italic; }
-        .cierre { margin-top: 12px; background: #EDE8DC; border: 1px solid var(--rule); border-radius: 20px; padding: 40px; display: flex; flex-direction: column; gap: 16px; }
-        .cierre-texto { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 400; font-style: italic; color: var(--gold); line-height: 1.65; }
-        .cierre-sub { font-size: 17px; color: var(--inklt); line-height: 1.8; font-weight: 300; }
+        .cierre { margin-top: 12px; background: #EDE8DC; border: 1px solid var(--rule); border-top: 2px solid rgba(201,168,76,0.4); border-radius: 20px; padding: 56px 48px; display: flex; flex-direction: column; gap: 20px; }
+        .cierre-texto { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 400; font-style: italic; color: var(--gold); line-height: 1.7; }
+        .cierre-sub { font-size: 18px; color: var(--inklt); line-height: 1.85; font-weight: 300; font-style: italic; }
         .cierre-sub strong { font-weight: 500; color: var(--ink); }
         .colophon { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; }
         .col-marca { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--goldlt); }
@@ -813,11 +814,12 @@ export default function QuanamIa2026() {
           .seccion-header { padding: 0 24px; }
           .fragmento-visible { padding: 20px 24px 16px 28px; }
           .fragmento-contenido { padding: 0 28px 24px 28px; }
-          .lentes-intro { padding: 24px 28px 18px; }
-          .lente-header { padding: 0 24px 0 28px; }
-          .lente-contenido { padding: 4px 28px 24px 28px; }
-          .cierre { padding: 32px 28px; }
-          .pregunta-central { padding: 36px 0 32px; }
+          .lentes-intro { padding: 24px 20px 16px; }
+          .lente-header { padding: 18px 20px 14px 16px; gap: 12px; }
+          .lente-num { font-size: 36px; min-width: 40px; }
+          .lente-contenido { padding: 0 20px 24px 68px; }
+          .cierre { padding: 40px 28px; }
+          .pregunta-central { padding: 48px 0 40px; }
         }
       `}</style>
 
@@ -1005,11 +1007,12 @@ export default function QuanamIa2026() {
                 <p className="lentes-sub">Elegí uno o varios lentes y describí lo que ves — o lo que imaginarías ver — desde ahí.</p>
               </div>
               <div className="lentes-lista">
-                {LENTES.map(lente => {
+                {LENTES.map((lente, idx) => {
                   const ls = lenteStates[lente.id]
                   return (
                     <div key={lente.id} className="lente">
                       <div className="lente-header">
+                        <span className="lente-num">{String(idx + 1).padStart(2, '0')}</span>
                         <div className="lente-header-left">
                           <span className="lente-nombre">{lente.nombre}</span>
                           <span className="lente-frase">{lente.frase}</span>
@@ -1036,9 +1039,9 @@ export default function QuanamIa2026() {
                                     el.style.height = Math.min(el.scrollHeight, maxH) + 'px'
                                     el.style.overflowY = el.scrollHeight > maxH ? 'scroll' : 'hidden'
                                   }}
-                                  placeholder={`Tu respuesta desde "${lente.nombre}"…`}
+                                  placeholder={`Tu perspectiva desde "${lente.nombre}"…`}
                                   rows={1}
-                                  style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 8, padding: '12px 14px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#2C2820', background: 'rgba(245,240,232,0.5)', resize: 'none', outline: 'none', lineHeight: 1.7, overflowY: 'hidden' }}
+                                  style={{ width: '100%', border: '1px solid rgba(201,168,76,0.27)', borderRadius: 8, padding: '13px 15px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#2C2820', background: '#F5F0E8', resize: 'none', outline: 'none', lineHeight: 1.7, overflowY: 'hidden' }}
                                 />
                                 <button
                                   onClick={() => {
@@ -1046,7 +1049,7 @@ export default function QuanamIa2026() {
                                     setLenteStates(prev => ({ ...prev, [lente.id]: { ...prev[lente.id], showDuende: true } }))
                                   }}
                                   disabled={!ls.respuesta.trim()}
-                                  style={{ alignSelf: 'flex-start', background: ls.respuesta.trim() ? '#8B6914' : 'rgba(139,105,20,0.3)', color: '#F5EDD8', border: 'none', borderRadius: 8, padding: '10px 22px', fontSize: 13, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.06em', cursor: ls.respuesta.trim() ? 'pointer' : 'default', transition: 'background 0.2s' }}
+                                  style={{ width: '100%', background: ls.respuesta.trim() ? '#C9A84C' : 'rgba(201,168,76,0.28)', color: ls.respuesta.trim() ? '#fff' : 'rgba(255,255,255,0.6)', border: 'none', borderRadius: 8, padding: '14px 22px', fontSize: 14, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.06em', cursor: ls.respuesta.trim() ? 'pointer' : 'default', transition: 'background 0.2s' }}
                                 >
                                   Explorar con el Duende
                                 </button>
