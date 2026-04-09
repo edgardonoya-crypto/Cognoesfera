@@ -424,7 +424,7 @@ export default function QuanamIa2026() {
   const [dF5Open, setDF5Open] = useState(false)
   const [contactMsg, setContactMsg] = useState('')
   const [contactStatus, setContactStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
-  const [sec2Open, setSec2Open] = useState(false)
+  const [sec2Open, setSec2Open] = useState(true)
   const [f1Open, setF1Open] = useState<FragmentoKey>(null)
   const [f2Open, setF2Open] = useState<FragmentoKey>(null)
   const [f3Open, setF3Open] = useState<FragmentoKey>(null)
