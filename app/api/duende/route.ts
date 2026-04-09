@@ -115,12 +115,16 @@ POSTURA en esta conversación:
 - Usás el español de Argentina/Uruguay, sin tecnicismos innecesarios
 - Respuestas concisas y densas — una idea bien dicha vale más que tres diluidas
 - Si algo resuena con una señal o concepto del paradigma, lo nombrás sin forzarlo
-- Cuando el campo abre múltiples territorios simultáneamente, nombrás la tensión y proponés el kairos — devolvés la decisión al humano`
+- Cuando el campo abre múltiples territorios simultáneamente, nombrás la tensión y proponés el kairos — devolvés la decisión al humano
+- Cuando no tenés información suficiente para responder algo, usás exactamente esta frase (sin agregarle nada antes ni después en la misma oración): "Esta pregunta va a llegar a quienes cuidan el paradigma — por ahora no tengo esa información. Tu pregunta ya está nutriendo el sistema."`
 
 type Message = { role: 'user' | 'assistant'; content: string }
 
 type ImageMediaType = 'image/jpeg' | 'image/png' | 'image/gif' | 'image/webp'
 const IMAGE_TYPES: string[] = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
+
+const FRASE_NO_SABE = 'Esta pregunta va a llegar a quienes cuidan el paradigma'
+const PALABRAS_IA = ['ia', 'inteligencia artificial', 'ai', 'tecnología', 'digital', 'agente', 'modelo']
 
 export async function POST(request: Request) {
   const ip = request.headers.get('x-forwarded-for') ?? 'unknown'
@@ -142,9 +146,24 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Falta el mensaje' }, { status: 400 })
     }
 
-    const systemPrompt = modo === 'convocatoria'
+    // B2: contar mensajes del usuario (historial + el actual)
+    const totalUserMsgs = historial.filter(m => m.role === 'user').length + 1
+
+    // B3: últimos 3 mensajes del usuario sin mención de IA/tecnología
+    const todosUserMsgs = [...historial.filter(m => m.role === 'user').map(m => m.content), mensaje]
+    const ultimos3 = todosUserMsgs.slice(-3)
+    const mencionaIA = ultimos3.some(txt =>
+      PALABRAS_IA.some(p => txt.toLowerCase().includes(p))
+    )
+    const agregarPreguntaDesafiante = ultimos3.length >= 3 && !mencionaIA
+
+    let systemPrompt = modo === 'convocatoria'
       ? SYSTEM_PROMPT + '\n\nIMPORTANTE: Estás hablando con un participante de una convocatoria. Respondé en 2-3 líneas máximo. Tono cálido y conversacional — como alguien que escucha con genuino interés. Sin jerga técnica ni conceptos del paradigma. Terminá siempre con una sola pregunta breve que abra territorio. No explicás — abrís.'
       : SYSTEM_PROMPT
+
+    if (agregarPreguntaDesafiante) {
+      systemPrompt += '\n\nINSTRUCCIÓN ESPECIAL: Al final de tu respuesta, en una línea separada, incluí una pregunta desafiante anclada en el corpus del paradigma, relacionada con lo que se estuvo hablando. Formato exacto (sin texto adicional antes del →): → [tu pregunta]'
+    }
 
     // Build content for the last user message
     let userContent: MessageParam['content']
@@ -183,6 +202,25 @@ export async function POST(request: Request) {
 
     const respuesta = response.content[0].type === 'text' ? response.content[0].text : ''
 
+    // B1: el Duende no sabe — guardar pregunta en preguntas_arquitectos
+    if (respuesta.includes(FRASE_NO_SABE)) {
+      const { error: preguntaErr } = await supabase
+        .from('preguntas_arquitectos')
+        .insert({
+          email_participante: email || null,
+          contexto_origen: contexto_origen || null,
+          pregunta: mensaje,
+          estado: 'pendiente',
+        })
+      if (preguntaErr) console.error('preguntas_arquitectos insert error:', JSON.stringify(preguntaErr))
+    }
+
+    // B2: cada 3 mensajes del usuario — agregar línea de memoria viva
+    let respuestaFinal = respuesta
+    if (totalUserMsgs % 3 === 0) {
+      respuestaFinal += '\n\nTu conversación está construyendo algo — cada intercambio nutre la memoria viva del sistema.'
+    }
+
     // Guardar archivo en archivos_curaduria si viene adjunto
     if (archivo_base64 && archivo_tipo) {
       const { error: archivoErr } = await supabase
@@ -203,7 +241,7 @@ export async function POST(request: Request) {
     const timestamp = new Date().toISOString()
     const nuevosPares = [
       { role: 'user', content: mensaje, timestamp },
-      { role: 'assistant', content: respuesta, timestamp: new Date().toISOString() },
+      { role: 'assistant', content: respuestaFinal, timestamp: new Date().toISOString() },
     ]
 
     let sesion_id_out = sesion_id ?? null
@@ -244,7 +282,7 @@ export async function POST(request: Request) {
       else sesion_id_out = newRow?.id ?? null
     }
 
-    return NextResponse.json({ respuesta, sesion_id: sesion_id_out })
+    return NextResponse.json({ respuesta: respuestaFinal, sesion_id: sesion_id_out })
   } catch (err) {
     console.error('Duende API error:', err)
     return NextResponse.json({ error: 'Error al contactar al Duende' }, { status: 500 })
