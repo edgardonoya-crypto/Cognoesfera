@@ -625,6 +625,7 @@ export default function QuanamIa2026() {
             <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8 }}>
               {otpStep === 'email' ? (
                 <>
+                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', fontStyle: 'italic', textAlign: 'center', marginBottom: 16, margin: '0 0 16px' }}>Tu mirada se activa cuando se encuentra con otras. Ingresá tu email para acceder.</p>
                   <input
                     ref={emailRef}
                     type="email"
