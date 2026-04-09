@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 const LENTES = [
   {
@@ -59,22 +60,42 @@ type DuendeChatProps = {
 type DuendeMsg = { role: 'user' | 'assistant'; content: string }
 
 function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir }: DuendeChatProps) {
-  const [abierto, setAbierto] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
   const [msgs, setMsgs] = useState<DuendeMsg[]>([])
   const [sesionId, setSesionId] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [input, setInput] = useState('')
-  const [archivoBase64, setArchivoBase64] = useState<string | null>(null)
-  const [archivoTipo, setArchivoTipo] = useState<string | null>(null)
-  const [archivoNombre, setArchivoNombre] = useState<string | null>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
-  const fileInputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLTextAreaElement>(null)
+  const msgsEndRef = useRef<HTMLDivElement>(null)
   const iniciado = useRef(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => { setMounted(true) }, [])
+
+  // Auto-scroll al último mensaje
+  useEffect(() => {
+    msgsEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [msgs, loading])
+
+  // ESC para cerrar
+  useEffect(() => {
+    if (!modalOpen) return
+    function onKey(e: KeyboardEvent) { if (e.key === 'Escape') setModalOpen(false) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [modalOpen])
+
+  // Bloquear scroll del body cuando el modal está abierto
+  useEffect(() => {
+    if (!modalOpen) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = prev }
+  }, [modalOpen])
 
   useEffect(() => {
     if (autoAbrir && mensajeInicial?.trim() && !iniciado.current) {
       iniciado.current = true
-      setAbierto(true)
       const userMsg = mensajeInicial.trim()
       setMsgs([{ role: 'user', content: userMsg }])
       const prompt = `El usuario está explorando el lente "${lente.nombre}". La propuesta es: ${lente.frase}. El usuario escribió: "${userMsg}". Respondé desde el paradigma. Sé breve y abrí territorio — no cerrés.`
@@ -82,137 +103,132 @@ function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir }: DuendeC
     }
   }, [autoAbrir, mensajeInicial])
 
-  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0]
-    if (!file) return
-    const reader = new FileReader()
-    reader.onload = () => {
-      const result = reader.result as string
-      setArchivoBase64(result.split(',')[1])
-      setArchivoTipo(file.type)
-      setArchivoNombre(file.name)
-    }
-    reader.readAsDataURL(file)
-    e.target.value = ''
-  }
-
-  function limpiarArchivo() {
-    setArchivoBase64(null)
-    setArchivoTipo(null)
-    setArchivoNombre(null)
-  }
-
   async function callDuende(
     mensaje: string,
     historial: DuendeMsg[],
     sid: string | null,
-    archivo?: { base64: string; tipo: string; nombre: string },
   ) {
     setLoading(true)
     try {
-      const body: Record<string, unknown> = {
-        mensaje, historial, sesion_id: sid, modo: 'convocatoria', nombre, email, contexto_origen: lente.nombre,
-      }
-      if (archivo) {
-        body.archivo_base64 = archivo.base64
-        body.archivo_tipo = archivo.tipo
-        body.archivo_nombre = archivo.nombre
-      }
       const res = await fetch('/api/duende', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+        body: JSON.stringify({ mensaje, historial, sesion_id: sid, modo: 'convocatoria', nombre, email, contexto_origen: lente.nombre }),
       })
       const data = await res.json()
       if (data.respuesta) {
         setMsgs(prev => [...prev, { role: 'assistant', content: data.respuesta }])
         if (data.sesion_id) setSesionId(data.sesion_id)
+        setModalOpen(true)  // abre el modal cuando llega la primera respuesta
       }
     } catch {
       setMsgs(prev => [...prev, { role: 'assistant', content: '(El Duende no pudo responder en este momento.)' }])
+      setModalOpen(true)
     } finally {
       setLoading(false)
-      setTimeout(() => inputRef.current?.focus(), 50)
+      setTimeout(() => inputRef.current?.focus(), 80)
     }
   }
 
-  function enviarInput(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key !== 'Enter' || !input.trim() || loading) return
+  function enviar() {
+    if (!input.trim() || loading) return
     const msg = input.trim()
     setInput('')
-    const archivo = archivoBase64 && archivoTipo && archivoNombre
-      ? { base64: archivoBase64, tipo: archivoTipo, nombre: archivoNombre }
-      : undefined
-    limpiarArchivo()
-    const newMsgs: DuendeMsg[] = [...msgs, { role: 'user', content: msg }]
-    setMsgs(newMsgs)
-    callDuende(msg, msgs, sesionId, archivo)
+    const next: DuendeMsg[] = [...msgs, { role: 'user', content: msg }]
+    setMsgs(next)
+    callDuende(msg, msgs, sesionId)
   }
 
-  if (!abierto) return null
+  const DIcon = (
+    <div style={{ flexShrink: 0, width: 28, height: 28, borderRadius: '50%', border: '1px solid rgba(201,168,76,0.5)', background: 'rgba(201,168,76,0.10)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: '#C9A84C', fontFamily: 'Karla, sans-serif', letterSpacing: '0.04em' }}>D</div>
+  )
 
-  return (
-    <div style={{ marginTop: 10 }}>
-      {loading && msgs.filter(m => m.role === 'assistant').length === 0 && (
-        <p style={{ fontSize: 13, color: '#8A7E70', fontStyle: 'italic', lineHeight: 1.65 }}>El Duende está pensando…</p>
-      )}
-      {msgs.map((m, i) => (
-        <p key={i} style={{ fontSize: 13, color: m.role === 'assistant' ? '#8A7E70' : '#2C2820', fontStyle: m.role === 'assistant' ? 'italic' : 'normal', lineHeight: 1.65, marginBottom: 8 }}>
-          {m.role === 'user' ? `Vos: ${m.content}` : m.content}
-        </p>
-      ))}
-      {loading && msgs.filter(m => m.role === 'assistant').length > 0 && (
-        <p style={{ fontSize: 13, color: '#8A7E70', fontStyle: 'italic', lineHeight: 1.65 }}>El Duende está pensando…</p>
-      )}
-      {msgs.length > 0 && (
-        <div style={{ marginTop: 8 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              disabled={loading}
-              style={{ flexShrink: 0, width: 28, height: 28, border: '1px solid rgba(139,105,20,0.3)', borderRadius: 6, background: 'rgba(245,240,232,0.5)', color: '#8B6914', cursor: loading ? 'not-allowed' : 'pointer', fontSize: 18, lineHeight: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
-            >+</button>
-            <input
+  const modal = (
+    <div style={{ position: 'fixed', inset: 0, zIndex: 300, background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+      <div style={{ width: 'min(560px, 95vw)', height: '80vh', background: '#fff', borderRadius: 18, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.22)' }}>
+
+        {/* HEADER */}
+        <div style={{ padding: '20px 24px 16px', borderBottom: '1px solid rgba(0,0,0,0.07)', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, flexShrink: 0 }}>
+          <div>
+            <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 18, fontWeight: 600, color: '#2C2820', margin: 0, lineHeight: 1.3 }}>{lente.nombre}</p>
+            <p style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontSize: 13, color: '#8A7E70', margin: '5px 0 0', lineHeight: 1.5 }}>{lente.frase}</p>
+          </div>
+          <button
+            onClick={() => setModalOpen(false)}
+            style={{ flexShrink: 0, background: 'none', border: 'none', fontSize: 20, color: '#8A7E70', cursor: 'pointer', lineHeight: 1, padding: '2px 0 0', marginTop: 2 }}
+            aria-label="Cerrar"
+          >✕</button>
+        </div>
+
+        {/* MENSAJES */}
+        <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 14 }}>
+          {msgs.map((m, i) =>
+            m.role === 'user' ? (
+              <div key={i} style={{ alignSelf: 'flex-end', background: 'rgba(139,105,20,0.08)', border: '1px solid rgba(139,105,20,0.12)', borderRadius: '12px 12px 2px 12px', padding: '10px 14px', maxWidth: '80%', fontSize: 14, color: '#2C2820', lineHeight: 1.7, fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>
+                {m.content}
+              </div>
+            ) : (
+              <div key={i} style={{ alignSelf: 'flex-start', display: 'flex', gap: 10, maxWidth: '88%' }}>
+                {DIcon}
+                <div style={{ background: '#FAFAF8', border: '1px solid rgba(0,0,0,0.07)', borderRadius: '2px 12px 12px 12px', padding: '10px 14px', fontSize: 14, color: '#2C2820', lineHeight: 1.8, fontFamily: 'Karla, sans-serif', fontWeight: 300, fontStyle: 'italic' }}>
+                  {m.content}
+                </div>
+              </div>
+            )
+          )}
+          {loading && (
+            <div style={{ alignSelf: 'flex-start', display: 'flex', gap: 10 }}>
+              {DIcon}
+              <p style={{ fontSize: 13, color: '#8A7E70', fontStyle: 'italic', padding: '10px 0', margin: 0, fontFamily: 'Karla, sans-serif' }}>El Duende está pensando…</p>
+            </div>
+          )}
+          <div ref={msgsEndRef} />
+        </div>
+
+        {/* FOOTER */}
+        <div style={{ padding: '12px 20px 16px', borderTop: '1px solid rgba(0,0,0,0.07)', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div style={{ display: 'flex', gap: 8, alignItems: 'flex-end' }}>
+            <textarea
               ref={inputRef}
               value={input}
               onChange={e => setInput(e.target.value)}
-              onKeyDown={enviarInput}
-              placeholder="Seguí la conversación… (Enter para enviar)"
+              onInput={e => {
+                const el = e.currentTarget
+                el.style.height = 'auto'
+                const maxH = Math.round(14 * 1.6 * 5 + 20)
+                el.style.height = Math.min(el.scrollHeight, maxH) + 'px'
+                el.style.overflowY = el.scrollHeight > maxH ? 'scroll' : 'hidden'
+              }}
+              onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); enviar() } }}
+              placeholder="Seguí la conversación… (Enter para enviar, Shift+Enter para nueva línea)"
+              rows={1}
               disabled={loading}
-              style={{ flex: 1, border: '1px solid rgba(139,105,20,0.2)', borderRadius: 6, padding: '8px 10px', fontSize: 13, fontFamily: 'Karla, sans-serif', color: '#2C2820', background: 'rgba(245,240,232,0.5)', outline: 'none', boxSizing: 'border-box' }}
+              style={{ flex: 1, resize: 'none', border: '1px solid rgba(139,105,20,0.25)', borderRadius: 8, padding: '10px 12px', fontSize: 14, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#2C2820', background: 'rgba(245,240,232,0.4)', outline: 'none', lineHeight: 1.6, overflowY: 'hidden', boxSizing: 'border-box' }}
             />
+            <button
+              onClick={enviar}
+              disabled={!input.trim() || loading}
+              style={{ flexShrink: 0, background: input.trim() && !loading ? '#C9A84C' : 'rgba(201,168,76,0.35)', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 18px', fontSize: 13, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.05em', cursor: input.trim() && !loading ? 'pointer' : 'default', transition: 'background 0.2s', whiteSpace: 'nowrap' }}
+            >Enviar</button>
           </div>
-          {!archivoNombre && (
-            <p style={{ margin: '4px 0 0', fontSize: 11, color: '#8A7E70', fontStyle: 'italic' }}>Si deseás adjuntar un archivo presioná el +</p>
-          )}
-          {archivoNombre && (
-            <div style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 8, padding: '4px 8px', background: 'rgba(139,105,20,0.08)', borderRadius: 4, border: '1px solid rgba(139,105,20,0.15)' }}>
-              {archivoTipo?.startsWith('image/') && archivoBase64 && (
-                <img
-                  src={`data:${archivoTipo};base64,${archivoBase64}`}
-                  alt={archivoNombre}
-                  style={{ maxHeight: 60, maxWidth: 80, borderRadius: 3, objectFit: 'contain' }}
-                />
-              )}
-              <span style={{ fontSize: 12, color: '#8B6914', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {archivoNombre}
-              </span>
-              <button
-                onClick={limpiarArchivo}
-                style={{ flexShrink: 0, background: 'none', border: 'none', color: '#C4941A', cursor: 'pointer', fontSize: 16, lineHeight: 1, padding: 2 }}
-              >×</button>
-            </div>
-          )}
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*,application/pdf"
-            onChange={handleFileChange}
-            style={{ display: 'none' }}
-          />
+          <button
+            onClick={() => setModalOpen(false)}
+            style={{ background: 'none', border: 'none', color: '#8A7E70', fontSize: 12, fontFamily: 'Karla, sans-serif', cursor: 'pointer', textDecoration: 'underline', alignSelf: 'center', padding: '2px 0' }}
+          >Cerrar y guardar conversación</button>
         </div>
-      )}
+      </div>
     </div>
+  )
+
+  return (
+    <>
+      {/* Loading inline mientras espera la primera respuesta */}
+      {loading && !modalOpen && (
+        <p style={{ fontSize: 13, color: '#8A7E70', fontStyle: 'italic', lineHeight: 1.65, marginTop: 8, fontFamily: 'Karla, sans-serif' }}>El Duende está pensando…</p>
+      )}
+      {/* Modal vía portal para cubrir toda la pantalla */}
+      {modalOpen && mounted && createPortal(modal, document.body)}
+    </>
   )
 }
 
