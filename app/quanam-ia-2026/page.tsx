@@ -439,6 +439,7 @@ export default function QuanamIa2026() {
   const [otpToken, setOtpToken] = useState('')
   const [otpError, setOtpError] = useState('')
   const [otpLoading, setOtpLoading] = useState(false)
+  const [otpExpired, setOtpExpired] = useState(false)
 
   useEffect(() => {
     const savedEmail = getCookie('quanam_email')
@@ -464,18 +465,29 @@ export default function QuanamIa2026() {
   }
 
   async function handleVerifyOtp() {
-    if (otpToken.length < 6) return
+    const token = otpToken.trim()
+    if (token.length < 6) return
     setOtpError('')
+    setOtpExpired(false)
     setOtpLoading(true)
     const { createBrowserClient } = await import('@supabase/ssr')
     const sb = createBrowserClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     )
-    const { error } = await sb.auth.verifyOtp({ email: email.trim(), token: otpToken, type: 'email' })
+    const { error } = await sb.auth.verifyOtp({ email: email.trim(), token, type: 'email' })
     setOtpLoading(false)
     if (error) {
-      setOtpError('Código incorrecto o expirado.')
+      const code = (error as { code?: string }).code ?? ''
+      const msg = error.message?.toLowerCase() ?? ''
+      if (code === 'otp_expired' || code === 'token_expired' || code === 'otp_disabled' || msg.includes('expired') || msg.includes('token has expired')) {
+        setOtpError('El código expiró. Solicitá uno nuevo.')
+        setOtpExpired(true)
+      } else if (msg.includes('invalid') || msg.includes('incorrect') || msg.includes('not found') || msg.includes('otp')) {
+        setOtpError('Código incorrecto. Revisá tu email e intentá de nuevo.')
+      } else {
+        setOtpError('No pudimos verificar el código. Intentá de nuevo.')
+      }
       return
     }
     setCookie('quanam_email', email.trim(), 30)
@@ -620,12 +632,12 @@ export default function QuanamIa2026() {
               IHA
             </h1>
             <p style={{ fontSize: 'clamp(18px,3vw,28px)', color: '#C4941A', fontFamily: 'Karla, sans-serif', fontWeight: 300, letterSpacing: '0.06em', margin: 0 }}>Inteligencia Humana Aumentada</p>
-            <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.82)', fontWeight: 300, fontFamily: 'Karla, sans-serif', lineHeight: 1.75, textAlign: 'center', margin: 0 }}>El piso se está moviendo. La IA está reconfigurando lo que hacemos más rápido de lo que podemos nombrarlo. Las organizaciones que van a salir bien paradas son las que empiezan a pensar juntas hoy.<br /><br /><em style={{ color: '#E8C96A', fontStyle: 'italic', fontSize: 17 }}>¿Qué señales te entusiasman… o te inquietan?</em></p>
-            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.40)', fontWeight: 300, fontFamily: 'Karla, sans-serif', lineHeight: 1.6, textAlign: 'center', marginTop: 6 }}>Entre 5 y 8 semanas · Un grupo de entre 15 y 20 personas · Encuentros que no gestionan el presente — exploran el futuro.</p>
+            <p style={{ fontSize: 'clamp(17px,2.6vw,22px)', color: '#E8C96A', fontFamily: 'Karla, sans-serif', fontWeight: 300, fontStyle: 'italic', letterSpacing: '0.02em', lineHeight: 1.4, textAlign: 'center', margin: 0 }}>¿Qué señales te entusiasman… o te inquietan?</p>
+            <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.78)', fontWeight: 300, fontFamily: 'Karla, sans-serif', lineHeight: 1.72, textAlign: 'center', margin: 0 }}>La IA está reconfigurando lo que hacemos más rápido de lo que podemos nombrarlo. Las organizaciones que van a salir bien paradas son las que empiezan a pensar juntas hoy.</p>
+            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', fontStyle: 'italic', textAlign: 'center', margin: '4px 0 0' }}>Tu mirada se activa cuando se encuentra con otras. Ingresá tu email para acceder.</p>
             <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8 }}>
               {otpStep === 'email' ? (
                 <>
-                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', fontStyle: 'italic', textAlign: 'center', marginBottom: 16, margin: '0 0 16px' }}>Tu mirada se activa cuando se encuentra con otras. Ingresá tu email para acceder.</p>
                   <input
                     ref={emailRef}
                     type="email"
@@ -664,13 +676,22 @@ export default function QuanamIa2026() {
                   />
                   <button
                     onClick={handleVerifyOtp}
-                    disabled={otpToken.length < 6 || otpLoading}
-                    style={{ marginTop: 4, background: otpToken.length >= 6 ? '#8B6914' : 'rgba(139,105,20,0.35)', color: '#F5EDD8', border: 'none', borderRadius: 10, padding: '14px 32px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.08em', cursor: otpToken.length >= 6 ? 'pointer' : 'default', transition: 'background 0.2s' }}
+                    disabled={otpToken.trim().length < 6 || otpLoading}
+                    style={{ marginTop: 4, background: otpToken.trim().length >= 6 ? '#8B6914' : 'rgba(139,105,20,0.35)', color: '#F5EDD8', border: 'none', borderRadius: 10, padding: '14px 32px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.08em', cursor: otpToken.trim().length >= 6 ? 'pointer' : 'default', transition: 'background 0.2s' }}
                   >
                     {otpLoading ? 'Verificando…' : 'Ingresar'}
                   </button>
+                  {otpExpired && (
+                    <button
+                      onClick={() => { setOtpExpired(false); setOtpError(''); setOtpToken(''); handleSendOtp() }}
+                      disabled={otpLoading}
+                      style={{ background: 'none', border: '1px solid rgba(196,148,26,0.6)', color: '#C4941A', fontSize: 13, fontFamily: 'Karla, sans-serif', fontWeight: 500, cursor: 'pointer', borderRadius: 8, padding: '8px 20px' }}
+                    >
+                      Reenviar código
+                    </button>
+                  )}
                   <button
-                    onClick={() => { setOtpStep('email'); setOtpToken(''); setOtpError('') }}
+                    onClick={() => { setOtpStep('email'); setOtpToken(''); setOtpError(''); setOtpExpired(false) }}
                     style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.45)', fontSize: 12, fontFamily: 'Karla, sans-serif', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}
                   >
                     Volver a ingresar el email
@@ -679,6 +700,7 @@ export default function QuanamIa2026() {
               )}
               {otpError && <p style={{ fontSize: 13, color: '#ffb3b3', fontFamily: 'Karla, sans-serif' }}>{otpError}</p>}
             </div>
+            <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.32)', fontWeight: 300, fontFamily: 'Karla, sans-serif', lineHeight: 1.6, textAlign: 'center', margin: '4px 0 0' }}>Entre 5 y 8 semanas · Un grupo de entre 15 y 20 personas · Encuentros que no gestionan el presente — exploran el futuro.</p>
           </div>
         </div>
       )}
