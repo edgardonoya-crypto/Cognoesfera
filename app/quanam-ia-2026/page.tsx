@@ -796,8 +796,9 @@ export default function QuanamIa2026() {
         .lente-contenido { padding: 0 32px 28px 92px; display: flex; flex-direction: column; gap: 12px; }
         .lente-desc { font-size: 14px; color: #888; line-height: 1.85; font-weight: 300; }
         .lente-ejemplo { font-size: 15px; color: var(--goldlt); font-style: italic; line-height: 1.65; }
-        .pregunta-central { margin-top: 12px; padding: 60px 8px 56px; border-top: 1px solid var(--rule); display: flex; flex-direction: column; gap: 20px; }
-        .pregunta-central .bloque-etiqueta { color: var(--goldlt); }
+        .card-pregunta-grupo { margin-top: 12px; background: #EDE8DC; border: 1px solid var(--rule); border-top: 2px solid rgba(201,168,76,0.35); border-radius: 20px; overflow: hidden; }
+        .card-pregunta-grupo-bloque { padding: 48px 48px 44px; display: flex; flex-direction: column; gap: 20px; }
+        .card-pregunta-grupo-sep { height: 1px; background: rgba(139,105,20,0.15); margin: 0 48px; }
         .pregunta-texto { font-family: 'Playfair Display', serif; font-size: clamp(22px,3vw,32px); font-style: italic; font-weight: 400; color: #C9A84C; line-height: 1.6; }
         .pregunta-quanam { font-size: 15px; color: var(--inkxlt); font-style: italic; }
         .cierre { margin-top: 12px; background: #EDE8DC; border: 1px solid var(--rule); border-top: 2px solid rgba(201,168,76,0.4); border-radius: 20px; padding: 56px 48px; display: flex; flex-direction: column; gap: 20px; }
@@ -819,7 +820,8 @@ export default function QuanamIa2026() {
           .lente-num { font-size: 36px; min-width: 40px; }
           .lente-contenido { padding: 0 20px 24px 68px; }
           .cierre { padding: 40px 28px; }
-          .pregunta-central { padding: 48px 0 40px; }
+          .card-pregunta-grupo-bloque { padding: 36px 28px 32px; }
+          .card-pregunta-grupo-sep { margin: 0 28px; }
         }
       `}</style>
 
@@ -849,11 +851,21 @@ export default function QuanamIa2026() {
           <p className="aguila-acento">La IA puede decirte todo lo que Quanam sabe. No puede decirte lo que Quanam todavía no sabe que sabe.</p>
         </div>
 
-        {/* PREGUNTA CENTRAL */}
-        <div className="pregunta-central">
-          <span className="bloque-etiqueta" style={{ color: 'var(--goldlt)' }}>La pregunta</span>
-          <p className="pregunta-texto">&ldquo;¿Cómo puede la inteligencia artificial en Quanam crear condiciones para que lo que sabemos juntos — y que todavía no sabemos que sabemos — se vuelva visible… y desde ahí, empezar a ver caminos que hoy todavía no estamos viendo?&rdquo;</p>
-          <p className="pregunta-quanam">Quanam: por este camino.</p>
+        {/* PREGUNTA CENTRAL + CÓMO SE FORMA — card unificado */}
+        <div className="card-pregunta-grupo">
+          <div className="card-pregunta-grupo-bloque">
+            <span className="bloque-etiqueta" style={{ color: 'var(--goldlt)' }}>La pregunta</span>
+            <p className="pregunta-texto">&ldquo;¿Cómo puede la inteligencia artificial en Quanam crear condiciones para que lo que sabemos juntos — y que todavía no sabemos que sabemos — se vuelva visible… y desde ahí, empezar a ver caminos que hoy todavía no estamos viendo?&rdquo;</p>
+            <p className="pregunta-quanam">Quanam: por este camino.</p>
+          </div>
+          <div className="card-pregunta-grupo-sep" />
+          <div className="card-pregunta-grupo-bloque">
+            <span style={{ fontSize: 11, letterSpacing: '0.26em', textTransform: 'uppercase', fontWeight: 500, color: 'var(--goldlt)' }}>cómo se forma el grupo</span>
+            <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 22, fontStyle: 'italic', fontWeight: 400, color: 'var(--gold)', lineHeight: 1.45, marginTop: 4 }}>No hay un perfil buscado. Hay una búsqueda.</p>
+            <p style={{ fontSize: 16, color: 'var(--inklt)', fontWeight: 300, lineHeight: 2, fontFamily: 'Karla, sans-serif' }}>Las respuestas que lleguen van a ser leídas antes de saber quién las escribió. Se va a buscar diversidad de enfoques — no jerarquías, no áreas, no seniority. Una vez identificadas las respuestas que juntas cubran el campo más amplio de miradas, se va a convocar a las personas que las formularon.</p>
+            <p style={{ fontSize: 16, color: 'var(--inklt)', fontWeight: 300, lineHeight: 2, fontFamily: 'Karla, sans-serif' }}>Podés responder con una pregunta, una incomodidad, una intuición, un desafío, una opinión. No hay respuesta correcta ni incorrecta. No hay límite de cantidad — si algo más te surge, respondé otro lente. O el mismo desde otro ángulo.</p>
+            <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 18, fontStyle: 'italic', fontWeight: 400, color: 'var(--gold)', lineHeight: 1.55, textAlign: 'center', marginTop: 24 }}>Lo que importa es lo que ves desde donde estás.</p>
+          </div>
         </div>
 
         {/* SECCIONES */}
@@ -983,15 +995,6 @@ export default function QuanamIa2026() {
                 </div>
 
           </div>}
-
-          {/* CÓMO SE FORMA EL GRUPO */}
-          <div style={{ borderTop: '1px solid var(--rule)', borderBottom: '1px solid var(--rule)', padding: '48px 0', display: 'flex', flexDirection: 'column', gap: 20 }}>
-            <span style={{ fontSize: 11, letterSpacing: '0.26em', textTransform: 'uppercase', fontWeight: 500, color: 'var(--goldlt)' }}>cómo se forma el grupo</span>
-            <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 22, fontStyle: 'italic', fontWeight: 400, color: 'var(--gold)', lineHeight: 1.45 }}>No hay un perfil buscado. Hay una búsqueda.</p>
-            <p style={{ fontSize: 16, color: 'var(--inklt)', fontWeight: 300, lineHeight: 2, fontFamily: 'Karla, sans-serif' }}>Las respuestas que lleguen van a ser leídas antes de saber quién las escribió. Se va a buscar diversidad de enfoques — no jerarquías, no áreas, no seniority. Una vez identificadas las respuestas que juntas cubran el campo más amplio de miradas, se va a convocar a las personas que las formularon.</p>
-            <p style={{ fontSize: 16, color: 'var(--inklt)', fontWeight: 300, lineHeight: 2, fontFamily: 'Karla, sans-serif' }}>Podés responder con una pregunta, una incomodidad, una intuición, un desafío, una opinión. No hay respuesta correcta ni incorrecta. No hay límite de cantidad — si algo más te surge, respondé otro lente. O el mismo desde otro ángulo.</p>
-            <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 18, fontStyle: 'italic', fontWeight: 400, color: 'var(--gold)', lineHeight: 1.55, textAlign: 'center', marginTop: 24 }}>Lo que importa es lo que ves desde donde estás.</p>
-          </div>
 
           {/* SECCIÓN 2 */}
           <div className={`seccion${sec2Open ? ' open' : ''}`}>
