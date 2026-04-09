@@ -19,58 +19,81 @@ export async function POST(request: Request) {
   try {
     const { email } = await request.json() as { email: string }
 
+    console.log('[send-otp] inicio →', email)
+
     if (!email?.trim()) {
       return NextResponse.json({ success: false, error: 'Email requerido' })
     }
 
-    // Pre-garantizar que el usuario existe y está confirmado.
-    // Esto evita que emails nuevos reciban "Confirm your signup" en lugar del OTP.
-    const { data: listData, error: listError } = await supabaseAdmin.auth.admin.listUsers()
+    // Garantizar que el usuario existe y está confirmado.
+    // Usamos createUser en lugar de listUsers para evitar el bug de paginación
+    // (listUsers devuelve máximo 50 por página — puede no encontrar al usuario).
+    const { error: createError } = await supabaseAdmin.auth.admin.createUser({
+      email: email.trim(),
+      email_confirm: true,
+    })
 
-    if (listError) {
-      console.error('send-otp listUsers error:', JSON.stringify(listError))
-      return NextResponse.json({ success: false, error: 'Error al verificar usuario' })
-    }
+    if (createError) {
+      const createErrAny = createError as unknown as Record<string, unknown>
+      const errObj = { message: createError.message, status: createError.status, code: createErrAny.code }
+      console.log('[send-otp] createUser result:', JSON.stringify(errObj))
 
-    const user = listData.users.find(u => u.email === email)
+      // "already registered" o "already exists" = usuario existente, no es un error real
+      const alreadyExists =
+        createError.message?.toLowerCase().includes('already') ||
+        createError.message?.toLowerCase().includes('registered') ||
+        createErrAny.code === 'user_already_exists' ||
+        createError.status === 422
 
-    if (!user) {
-      // Usuario nuevo: crear con email ya confirmado
-      const { error: createError } = await supabaseAdmin.auth.admin.createUser({
-        email,
-        email_confirm: true,
-      })
-      if (createError) {
-        console.error('send-otp createUser error:', JSON.stringify(createError))
+      if (!alreadyExists) {
+        console.error('[send-otp] createUser error no esperado:', JSON.stringify(createError))
         return NextResponse.json({ success: false, error: 'Error al registrar usuario' })
       }
-    } else if (!user.email_confirmed_at) {
-      // Usuario existente sin confirmar: confirmar ahora
-      const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(
-        user.id,
-        { email_confirm: true }
-      )
-      if (updateError) {
-        console.error('send-otp updateUser error:', JSON.stringify(updateError))
-        return NextResponse.json({ success: false, error: 'Error al confirmar usuario' })
+
+      // Usuario ya existe — asegurarse de que está confirmado
+      console.log('[send-otp] usuario existente, verificando confirmación…')
+      const { data: listData, error: listError } = await supabaseAdmin.auth.admin.listUsers({ perPage: 1000 })
+      if (listError) {
+        console.error('[send-otp] listUsers error:', JSON.stringify(listError))
+        // No bloqueamos — intentamos el OTP igual
+      } else {
+        const user = listData.users.find(u => u.email === email.trim())
+        if (user && !user.email_confirmed_at) {
+          console.log('[send-otp] confirmando usuario sin confirmar, id:', user.id)
+          const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(user.id, { email_confirm: true })
+          if (updateError) {
+            console.error('[send-otp] updateUser error:', JSON.stringify(updateError))
+          }
+        } else {
+          console.log('[send-otp] usuario ya confirmado, email_confirmed_at:', user?.email_confirmed_at)
+        }
       }
+    } else {
+      console.log('[send-otp] usuario nuevo creado y confirmado')
     }
 
-    // Enviar OTP. shouldCreateUser: false garantiza el camino de OTP puro
-    // (el usuario ya existe y está confirmado, nunca llega el email de signup)
+    // Enviar OTP
+    console.log('[send-otp] llamando signInWithOtp…')
     const { error: otpError } = await supabase.auth.signInWithOtp({
-      email,
+      email: email.trim(),
       options: { shouldCreateUser: false },
     })
 
     if (otpError) {
-      console.error('send-otp error:', JSON.stringify(otpError))
+      const otpErrAny = otpError as unknown as Record<string, unknown>
+      console.error('[send-otp] signInWithOtp error:', JSON.stringify({
+        message: otpError.message,
+        status: otpError.status,
+        code: otpErrAny.code,
+        name: otpError.name,
+      }))
       return NextResponse.json({ success: false, error: otpError.message })
     }
 
+    console.log('[send-otp] OTP enviado con éxito a', email)
     return NextResponse.json({ success: true })
   } catch (err) {
-    console.error('send-otp error:', err)
+    console.error('[send-otp] catch general:', err)
     return NextResponse.json({ success: false, error: 'Error interno' })
   }
 }
