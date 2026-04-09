@@ -226,6 +226,17 @@ function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir }: DuendeC
       {loading && !modalOpen && (
         <p style={{ fontSize: 13, color: '#8A7E70', fontStyle: 'italic', lineHeight: 1.65, marginTop: 8, fontFamily: 'Karla, sans-serif' }}>El Duende está pensando…</p>
       )}
+      {/* Botón "Retomar" — visible cuando hay conversación y el modal está cerrado */}
+      {!modalOpen && !loading && msgs.length > 0 && (
+        <button
+          onClick={() => setModalOpen(true)}
+          style={{ width: '100%', background: 'transparent', border: '1.5px solid #C9A84C', color: '#C9A84C', borderRadius: 8, padding: '14px 22px', fontSize: 14, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.06em', cursor: 'pointer', transition: 'background 0.15s, color 0.15s' }}
+          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(201,168,76,0.08)' }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
+        >
+          Retomar conversación con el Duende
+        </button>
+      )}
       {/* Modal vía portal para cubrir toda la pantalla */}
       {modalOpen && mounted && createPortal(modal, document.body)}
     </>
