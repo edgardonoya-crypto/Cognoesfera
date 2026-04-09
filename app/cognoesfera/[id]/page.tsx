@@ -146,7 +146,7 @@ function CognoesferaPageInner() {
   const fieldRef = useRef<HTMLDivElement>(null)
   const afldRef = useRef<HTMLDivElement>(null)
 
-  type ResonRow = { respuesta: string; created_at: string }
+  type ResonRow = { primer_mensaje: string; created_at: string }
   const [resonancias, setResonancias] = useState<Record<string, ResonRow[]>>({})
   const [resonOpen, setResonOpen] = useState<string | null>(null)
   const [resonLoaded, setResonLoaded] = useState(false)
@@ -171,16 +171,25 @@ function CognoesferaPageInner() {
 
   useEffect(() => {
     if (mode !== 'resonancias' || resonLoaded) return
-    supabase.from('quanam_respuestas').select('lente, respuesta, created_at').order('created_at', { ascending: true }).then(({ data }) => {
-      if (!data) return
-      const grouped: Record<string, ResonRow[]> = {}
-      for (const row of data) {
-        if (!grouped[row.lente]) grouped[row.lente] = []
-        grouped[row.lente].push({ respuesta: row.respuesta, created_at: row.created_at })
-      }
-      setResonancias(grouped)
-      setResonLoaded(true)
-    })
+    type DuendeConvReson = { id: string; created_at: string; contexto_origen: string | null; mensajes: { role: string; content: string }[] }
+    supabase
+      .from('duende_chats')
+      .select('id, created_at, contexto_origen, mensajes')
+      .order('created_at', { ascending: false })
+      .then(({ data }) => {
+        if (!data) return
+        const grouped: Record<string, ResonRow[]> = {}
+        for (const row of data as DuendeConvReson[]) {
+          const lente = row.contexto_origen
+          if (!lente || !LENTES_ORDEN.includes(lente)) continue
+          const primerUser = (row.mensajes ?? []).find(m => m.role === 'user')
+          if (!primerUser) continue
+          if (!grouped[lente]) grouped[lente] = []
+          grouped[lente].push({ primer_mensaje: primerUser.content, created_at: row.created_at })
+        }
+        setResonancias(grouped)
+        setResonLoaded(true)
+      })
   }, [mode, resonLoaded])
 
   const activateNode = useCallback((idx: number) => {
@@ -448,7 +457,7 @@ function CognoesferaPageInner() {
                 </Link>
               )}
             </div>
-            <p style={{ margin: '8px 0 0', fontSize: '0.875rem', color: '#66706d' }}>Respuestas recibidas, agrupadas por lente. Los nombres no se muestran.</p>
+            <p style={{ margin: '8px 0 0', fontSize: '0.875rem', color: '#66706d' }}>Conversaciones con el Duende, agrupadas por lente. Los nombres no se muestran.</p>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -463,19 +472,19 @@ function CognoesferaPageInner() {
                   >
                     <div>
                       <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#18201e' }}>{lente}</div>
-                      <div style={{ fontSize: '0.75rem', color: '#66706d', marginTop: 2 }}>{rows.length} {rows.length === 1 ? 'resonancia' : 'resonancias'}</div>
+                      <div style={{ fontSize: '0.75rem', color: '#66706d', marginTop: 2 }}>{rows.length} {rows.length === 1 ? 'conversación' : 'conversaciones'}</div>
                     </div>
                     <span style={{ fontSize: 18, color: '#4eaa98', lineHeight: 1, fontWeight: 300 }}>{isOpen ? '−' : '+'}</span>
                   </button>
                   {isOpen && (
                     <div style={{ borderTop: '1px solid rgba(34,58,54,.08)', padding: '12px 20px 16px' }}>
                       {rows.length === 0 ? (
-                        <p style={{ fontSize: '0.85rem', color: '#66706d', fontStyle: 'italic', margin: 0 }}>Todavía no hay resonancias en esta lente</p>
+                        <p style={{ fontSize: '0.85rem', color: '#66706d', fontStyle: 'italic', margin: 0 }}>Todavía no hay conversaciones en esta lente</p>
                       ) : (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                           {rows.map((r, i) => (
                             <div key={i} style={{ borderLeft: '3px solid rgba(78,170,152,.35)', paddingLeft: 14 }}>
-                              <p style={{ fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.7, margin: 0, fontWeight: 300 }}>{r.respuesta}</p>
+                              <p style={{ fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.7, margin: 0, fontWeight: 300 }}>{r.primer_mensaje}</p>
                               <p style={{ fontSize: '0.72rem', color: '#8a9e98', margin: '4px 0 0' }}>{new Date(r.created_at).toLocaleDateString('es-UY', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                             </div>
                           ))}
