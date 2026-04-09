@@ -22,6 +22,7 @@ type AccesoConvocatoria = { id: string; email: string; created_at: string }
 type LoginLog = { id: string; email: string; created_at: string }
 type DuendeConv = { id: string; nombre_participante: string | null; email_participante: string | null; contexto_origen: string | null; mensajes: DuendeMensaje[]; created_at: string }
 type ArchivoCuraduria = { id: string; created_at: string; email_participante: string | null; contexto_origen: string | null; nombre_archivo: string | null; tipo_archivo: string | null; contenido_base64: string | null; mensaje_asociado: string | null; estado: 'pendiente' | 'aprobado' | 'descartado' | 'señal'; notas_curador: string | null }
+type PreguntaArquitecto = { id: string; created_at: string; email_participante: string | null; contexto_origen: string | null; pregunta: string }
 
 function fmt(iso: string) {
   return new Date(iso).toLocaleDateString('es-UY', { day: 'numeric', month: 'short', year: 'numeric' })
@@ -39,6 +40,8 @@ export default function AdminPage() {
   const [accesosConv, setAccesosConv] = useState<AccesoConvocatoria[]>([])
   const [archivos, setArchivos] = useState<ArchivoCuraduria[]>([])
   const [notasCurador, setNotasCurador] = useState<Record<string, string>>({})
+  const [preguntas, setPreguntas] = useState<PreguntaArquitecto[]>([])
+  const [respuestasTexto, setRespuestasTexto] = useState<Record<string, string>>({})
 
   useEffect(() => {
     async function load() {
@@ -87,6 +90,13 @@ export default function AdminPage() {
         setNotasCurador(notas)
       }
 
+      const { data: pData } = await supabase
+        .from('preguntas_arquitectos')
+        .select('id, created_at, email_participante, contexto_origen, pregunta')
+        .eq('estado', 'pendiente')
+        .order('created_at', { ascending: false })
+      if (pData) setPreguntas(pData as PreguntaArquitecto[])
+
       setStatus('ok')
     }
     load()
@@ -101,6 +111,19 @@ export default function AdminPage() {
       body: JSON.stringify({ id, estado }),
     })
     if (res.ok) setArchivos(prev => prev.map(a => a.id === id ? { ...a, estado } : a))
+  }
+
+  async function responderPregunta(p: PreguntaArquitecto) {
+    const respuesta = respuestasTexto[p.id]?.trim()
+    if (!respuesta) return
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) return
+    const res = await fetch('/api/admin/responder-pregunta', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
+      body: JSON.stringify({ id: p.id, email_participante: p.email_participante, pregunta: p.pregunta, respuesta }),
+    })
+    if (res.ok) setPreguntas(prev => prev.filter(q => q.id !== p.id))
   }
 
   async function guardarNotas(id: string) {
@@ -333,6 +356,52 @@ export default function AdminPage() {
                   ))}
                 </tbody>
               </table>
+            </div>
+          )}
+        </section>
+
+        {/* SECCIÓN G — Preguntas para los Arquitectos */}
+        <section style={styles.section}>
+          <h2 style={styles.h2}>Preguntas para los Arquitectos</h2>
+          <p style={styles.meta}>{preguntas.length} pregunta{preguntas.length !== 1 ? 's' : ''} pendiente{preguntas.length !== 1 ? 's' : ''}</p>
+          {preguntas.length === 0 ? (
+            <p style={styles.empty}>No hay preguntas pendientes.</p>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              {preguntas.map(p => (
+                <div key={p.id} style={{ background: 'rgba(255,255,255,.72)', border: '1px solid rgba(34,58,54,.10)', borderRadius: 12, padding: '18px 20px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  {/* Header */}
+                  <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12 }}>
+                    <div>
+                      <span style={{ fontSize: '0.8rem', color: '#66706d' }}>{p.email_participante || '—'}</span>
+                      {p.contexto_origen && <span style={{ fontSize: '0.78rem', color: '#8a9e98', marginLeft: 10 }}>· {p.contexto_origen}</span>}
+                    </div>
+                    <span style={{ fontSize: '0.72rem', color: '#8a9e98', flexShrink: 0 }}>
+                      {new Date(p.created_at).toLocaleDateString('es-UY', { day: 'numeric', month: 'short' })} {new Date(p.created_at).toLocaleTimeString('es-UY', { hour: '2-digit', minute: '2-digit' })}
+                    </span>
+                  </div>
+                  {/* Pregunta */}
+                  <div style={{ borderLeft: '3px solid rgba(139,105,20,.30)', paddingLeft: 14 }}>
+                    <p style={{ margin: 0, fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.7, fontStyle: 'italic', fontWeight: 300 }}>{p.pregunta}</p>
+                  </div>
+                  {/* Textarea respuesta */}
+                  <textarea
+                    value={respuestasTexto[p.id] ?? ''}
+                    onChange={e => setRespuestasTexto(prev => ({ ...prev, [p.id]: e.target.value }))}
+                    placeholder="Escribí la respuesta para enviar por email…"
+                    rows={3}
+                    style={{ width: '100%', border: '1px solid rgba(34,58,54,.12)', borderRadius: 6, padding: '8px 10px', fontSize: '0.8rem', fontFamily: 'inherit', color: '#18201e', background: 'rgba(247,243,232,.6)', outline: 'none', resize: 'vertical', boxSizing: 'border-box' }}
+                  />
+                  {/* Botón */}
+                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <button
+                      onClick={() => responderPregunta(p)}
+                      disabled={!respuestasTexto[p.id]?.trim()}
+                      style={{ ...styles.btnSm, borderColor: 'rgba(78,170,152,.4)', color: '#4eaa98', opacity: respuestasTexto[p.id]?.trim() ? 1 : 0.45, cursor: respuestasTexto[p.id]?.trim() ? 'pointer' : 'default' }}
+                    >Responder por email</button>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </section>
