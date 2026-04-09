@@ -998,7 +998,7 @@ export default function QuanamIa2026() {
                                   disabled={!ls.respuesta.trim()}
                                   style={{ alignSelf: 'flex-start', background: ls.respuesta.trim() ? '#8B6914' : 'rgba(139,105,20,0.3)', color: '#F5EDD8', border: 'none', borderRadius: 8, padding: '10px 22px', fontSize: 13, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.06em', cursor: ls.respuesta.trim() ? 'pointer' : 'default', transition: 'background 0.2s' }}
                                 >
-                                  Enviar al Duende
+                                  Explorar con el Duende
                                 </button>
                               </>
                             ) : (

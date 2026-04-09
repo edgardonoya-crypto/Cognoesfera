@@ -158,7 +158,7 @@ export async function POST(request: Request) {
     const agregarPreguntaDesafiante = ultimos3.length >= 3 && !mencionaIA
 
     let systemPrompt = modo === 'convocatoria'
-      ? SYSTEM_PROMPT + '\n\nIMPORTANTE: Estás hablando con un participante de una convocatoria. Respondé en 2-3 líneas máximo. Tono cálido y conversacional — como alguien que escucha con genuino interés. Sin jerga técnica ni conceptos del paradigma. Terminá siempre con una sola pregunta breve que abra territorio. No explicás — abrís.'
+      ? SYSTEM_PROMPT + '\n\nIMPORTANTE: Estás hablando con un participante de una convocatoria. Respondé en 2-3 líneas máximo. Tono cálido y conversacional — como alguien que escucha con genuino interés. Sin jerga técnica ni conceptos del paradigma. Terminá siempre con una sola pregunta breve que abra territorio. No explicás — abrís.\n\nCerrá cada respuesta con una pregunta que mueva al usuario hacia el siguiente estado de maduración. Los 8 estados son: Latente → Posible → Activado → Emergente → Expresivo → Legible → Sostenido → Ecosistémico. Leé el estado actual de la conversación e invitá al siguiente con una sola pregunta breve.'
       : SYSTEM_PROMPT
 
     if (agregarPreguntaDesafiante) {
