@@ -775,10 +775,7 @@ export default function QuanamIa2026() {
         .lente-header-left { display: flex; flex-direction: column; gap: 4px; flex: 1; padding-right: 12px; }
         .lente-nombre { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--goldlt); font-weight: 500; }
         .lente-frase { font-family: 'Playfair Display', serif; font-size: 16px; font-style: italic; color: var(--ink); line-height: 1.4; }
-        .lente-flecha { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--rule); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--inkxlt); transition: transform 0.3s ease; flex-shrink: 0; background: var(--bg); }
-        .lente.open .lente-flecha { transform: rotate(90deg); }
-        .lente-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
-        .lente.open .lente-body { max-height: 800px; }
+        .lente-body { display: block; }
         .lente-contenido { padding: 4px 40px 24px 40px; display: flex; flex-direction: column; gap: 10px; }
         .lente-desc { font-size: 16px; color: var(--inklt); line-height: 1.8; font-weight: 300; }
         .lente-ejemplo { font-size: 15px; color: var(--goldlt); font-style: italic; line-height: 1.65; }
@@ -969,6 +966,15 @@ export default function QuanamIa2026() {
 
           </div>}
 
+          {/* CÓMO SE FORMA EL GRUPO */}
+          <div style={{ borderTop: '1px solid var(--rule)', borderBottom: '1px solid var(--rule)', padding: '48px 0', display: 'flex', flexDirection: 'column', gap: 20 }}>
+            <span style={{ fontSize: 11, letterSpacing: '0.26em', textTransform: 'uppercase', fontWeight: 500, color: 'var(--goldlt)' }}>cómo se forma el grupo</span>
+            <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 22, fontStyle: 'italic', fontWeight: 400, color: 'var(--gold)', lineHeight: 1.45 }}>No hay un perfil buscado. Hay una búsqueda.</p>
+            <p style={{ fontSize: 16, color: 'var(--inklt)', fontWeight: 300, lineHeight: 2, fontFamily: 'Karla, sans-serif' }}>Las respuestas que lleguen van a ser leídas antes de saber quién las escribió. Se va a buscar diversidad de enfoques — no jerarquías, no áreas, no seniority. Una vez identificadas las respuestas que juntas cubran el campo más amplio de miradas, se va a convocar a las personas que las formularon.</p>
+            <p style={{ fontSize: 16, color: 'var(--inklt)', fontWeight: 300, lineHeight: 2, fontFamily: 'Karla, sans-serif' }}>Podés responder con una pregunta, una incomodidad, una intuición, un desafío, una opinión. No hay respuesta correcta ni incorrecta. No hay límite de cantidad — si algo más te surge, respondé otro lente. O el mismo desde otro ángulo.</p>
+            <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 18, fontStyle: 'italic', fontWeight: 400, color: 'var(--gold)', lineHeight: 1.55, textAlign: 'center', marginTop: 24 }}>Lo que importa es lo que ves desde donde estás.</p>
+          </div>
+
           {/* SECCIÓN 2 */}
           <div className={`seccion${sec2Open ? ' open' : ''}`}>
             <div className="seccion-header" onClick={() => setSec2Open(v => !v)}>
@@ -986,13 +992,12 @@ export default function QuanamIa2026() {
                 {LENTES.map(lente => {
                   const ls = lenteStates[lente.id]
                   return (
-                    <div key={lente.id} className={`lente${ls.open ? ' open' : ''}`}>
-                      <div className="lente-header" onClick={() => toggleLente(lente.id)}>
+                    <div key={lente.id} className="lente">
+                      <div className="lente-header">
                         <div className="lente-header-left">
                           <span className="lente-nombre">{lente.nombre}</span>
                           <span className="lente-frase">{lente.frase}</span>
                         </div>
-                        <span className="lente-flecha">›</span>
                       </div>
                       <div className="lente-body">
                         <div className="lente-contenido">
@@ -1008,9 +1013,16 @@ export default function QuanamIa2026() {
                                 <textarea
                                   value={ls.respuesta}
                                   onChange={e => setRespuesta(lente.id, e.target.value)}
+                                  onInput={e => {
+                                    const el = e.currentTarget
+                                    el.style.height = 'auto'
+                                    const maxH = Math.round(15 * 1.7 * 5 + 24) // ~5 líneas + padding
+                                    el.style.height = Math.min(el.scrollHeight, maxH) + 'px'
+                                    el.style.overflowY = el.scrollHeight > maxH ? 'scroll' : 'hidden'
+                                  }}
                                   placeholder={`Tu respuesta desde "${lente.nombre}"…`}
-                                  rows={4}
-                                  style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 8, padding: '12px 14px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#2C2820', background: 'rgba(245,240,232,0.5)', resize: 'vertical', outline: 'none', lineHeight: 1.7 }}
+                                  rows={1}
+                                  style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 8, padding: '12px 14px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#2C2820', background: 'rgba(245,240,232,0.5)', resize: 'none', outline: 'none', lineHeight: 1.7, overflowY: 'hidden' }}
                                 />
                                 <button
                                   onClick={() => {
@@ -1036,15 +1048,6 @@ export default function QuanamIa2026() {
             </div>
           </div>
 
-        </div>
-
-        {/* CÓMO SE FORMA EL GRUPO */}
-        <div style={{ borderTop: '1px solid var(--rule)', borderBottom: '1px solid var(--rule)', padding: '48px 0', display: 'flex', flexDirection: 'column', gap: 20 }}>
-          <span style={{ fontSize: 11, letterSpacing: '0.26em', textTransform: 'uppercase', fontWeight: 500, color: 'var(--goldlt)' }}>cómo se forma el grupo</span>
-          <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 22, fontStyle: 'italic', fontWeight: 400, color: 'var(--gold)', lineHeight: 1.45 }}>No hay un perfil buscado. Hay una búsqueda.</p>
-          <p style={{ fontSize: 16, color: 'var(--inklt)', fontWeight: 300, lineHeight: 2, fontFamily: 'Karla, sans-serif' }}>Las respuestas que lleguen van a ser leídas antes de saber quién las escribió. Se va a buscar diversidad de enfoques — no jerarquías, no áreas, no seniority. Una vez identificadas las respuestas que juntas cubran el campo más amplio de miradas, se va a convocar a las personas que las formularon.</p>
-          <p style={{ fontSize: 16, color: 'var(--inklt)', fontWeight: 300, lineHeight: 2, fontFamily: 'Karla, sans-serif' }}>Podés responder con una pregunta, una incomodidad, una intuición, un desafío, una opinión. No hay respuesta correcta ni incorrecta. No hay límite de cantidad — si algo más te surge, respondé otro lente. O el mismo desde otro ángulo.</p>
-          <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 18, fontStyle: 'italic', fontWeight: 400, color: 'var(--gold)', lineHeight: 1.55, textAlign: 'center', marginTop: 24 }}>Lo que importa es lo que ves desde donde estás.</p>
         </div>
 
         {/* CIERRE */}
