@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/app/lib/supabase'
@@ -53,7 +53,7 @@ export default function AdminPage() {
   const [editingCell, setEditingCell] = useState<{ id: string; field: string } | null>(null)
   const [editingValue, setEditingValue] = useState('')
   const [mounted, setMounted] = useState(false)
-  const lenteModalTopRef = useRef<HTMLDivElement>(null)
+
   const [modalAbierto, setModalAbierto] = useState<null | 'campo' | 'conversaciones' | 'curacion' | 'preguntas' | 'iniciativas' | 'accesos'>(null)
   const [responsableDropdownId, setResponsableDropdownId] = useState<string | null>(null)
   const [responsableSearch, setResponsableSearch] = useState('')
@@ -76,12 +76,6 @@ export default function AdminPage() {
     return () => { document.body.style.overflow = prev }
   }, [lenteModal])
 
-  useEffect(() => {
-    if (!lenteModal) return
-    setTimeout(() => {
-      lenteModalTopRef.current?.scrollIntoView({ behavior: 'instant' })
-    }, 50)
-  }, [lenteModal])
 
   useEffect(() => {
     async function load() {
@@ -876,81 +870,9 @@ export default function AdminPage() {
               <button onClick={() => setLenteModal(null)} style={{ background: 'none', border: 'none', fontSize: 20, color: '#8A7E70', cursor: 'pointer', lineHeight: 1, padding: 4 }}>✕</button>
             </div>
 
-            {/* Body scrolleable */}
-            <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px 28px', display: 'flex', flexDirection: 'column', gap: 0 }}>
-              <div ref={lenteModalTopRef} />
+            {/* Conversaciones — área scrolleable */}
+            <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px 24px', display: 'flex', flexDirection: 'column', gap: 0 }}>
 
-              {/* Panel Duende-Arquitecto */}
-              <div style={{ background: 'rgba(139,105,20,.06)', border: '1px solid rgba(139,105,20,.18)', borderRadius: 12, padding: '16px 18px 18px', marginBottom: 28, flexShrink: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, marginBottom: 14 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <div style={{ width: 26, height: 26, borderRadius: '50%', border: '1px solid rgba(139,105,20,.4)', background: 'rgba(139,105,20,.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700, color: '#8B6914' }}>D</div>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 650, color: '#8B6914', letterSpacing: '0.04em' }}>Análisis del Duende</span>
-                  </div>
-                  <span style={{ fontSize: '0.68rem', color: '#8a9e98' }}>{lenteModal.convs.length} conversaciones · Corpus Madre como lente</span>
-                </div>
-
-                <div style={{ display: 'flex', gap: 10, alignItems: 'flex-end' }}>
-                  <textarea
-                    value={consultaInput}
-                    onChange={e => setConsultaInput(e.target.value)}
-                    onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ejecutarAnalisis() } }}
-                    placeholder="¿Qué patrones emergen? ¿Qué no se está nombrando? ¿Qué conecta estas voces con el paradigma?"
-                    rows={3}
-                    disabled={analizando || lenteModal.convs.length === 0}
-                    style={{ flex: 1, resize: 'none', border: '1px solid rgba(139,105,20,.25)', borderRadius: 10, padding: '10px 14px', fontSize: '0.875rem', fontFamily: 'inherit', fontWeight: 300, color: '#2c3830', background: 'rgba(255,255,255,.7)', outline: 'none', lineHeight: 1.6 }}
-                  />
-                  <button
-                    onClick={ejecutarAnalisis}
-                    disabled={!consultaInput.trim() || analizando || lenteModal.convs.length === 0}
-                    style={{ flexShrink: 0, background: '#8B6914', color: '#fff', border: 'none', borderRadius: 10, padding: '10px 18px', fontSize: '0.82rem', fontFamily: 'inherit', fontWeight: 500, cursor: 'pointer', opacity: (!consultaInput.trim() || analizando) ? 0.45 : 1, transition: 'opacity 0.2s', whiteSpace: 'nowrap' }}
-                  >
-                    {analizando ? 'Analizando…' : 'Consultar'}
-                  </button>
-                </div>
-
-                {analisisHistorial.length > 0 && (
-                  <div style={{ marginTop: 18, display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    <div style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#8a9e98', marginBottom: 2 }}>Análisis anteriores</div>
-                    {analisisHistorial.map(a => (
-                      <div key={a.id} style={{ background: 'rgba(255,255,255,.75)', border: '1px solid rgba(139,105,20,.14)', borderRadius: 10, overflow: 'hidden' }}>
-                        <div
-                          onClick={() => setAnalisisExpandido(analisisExpandido === a.id ? null : a.id)}
-                          style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 14px', cursor: 'pointer', borderBottom: analisisExpandido === a.id ? '1px solid rgba(139,105,20,.08)' : 'none' }}
-                        >
-                          <span style={{ flex: 1, fontSize: '0.82rem', color: '#2c3830', fontWeight: 500 }}>{a.consulta}</span>
-                          <span style={{ fontSize: '0.68rem', color: '#8a9e98', flexShrink: 0 }}>{fmt(a.created_at)}</span>
-                          <span style={{ color: '#8B6914', fontSize: 16, lineHeight: 1, flexShrink: 0 }}>{analisisExpandido === a.id ? '−' : '+'}</span>
-                        </div>
-                        {analisisExpandido === a.id && (
-                          <div style={{ padding: '14px 16px 16px' }}>
-                            <p style={{ fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.75, margin: '0 0 14px', fontStyle: 'italic', fontWeight: 300, whiteSpace: 'pre-wrap' as const }}>{a.respuesta}</p>
-                            {a.fuentes.length > 0 && (
-                              <div style={{ background: 'rgba(139,105,20,.05)', border: '1px solid rgba(139,105,20,.12)', borderRadius: 8, padding: '10px 12px' }}>
-                                <div style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#8B6914', marginBottom: 8 }}>Aportaron a este análisis</div>
-                                <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: 6, marginBottom: 6 }}>
-                                  {[...new Map(a.fuentes.map(f => [f.email, f])).values()].map(f => (
-                                    <button
-                                      key={f.id}
-                                      onClick={() => { setLenteModal(null); window.open(`/admin/conversacion/usuario/${encodeURIComponent(f.email ?? '')}/lente/${encodeURIComponent(f.contexto)}`, '_blank') }}
-                                      style={{ fontSize: '0.72rem', color: '#8B6914', background: 'rgba(139,105,20,.10)', border: '1px solid rgba(139,105,20,.22)', borderRadius: 20, padding: '3px 10px', cursor: 'pointer', fontFamily: 'inherit' }}
-                                    >
-                                      {f.email ?? 'anónimo'}
-                                    </button>
-                                  ))}
-                                </div>
-                                <div style={{ fontSize: '0.65rem', color: '#8a9e98' }}>{a.conversaciones_n} conversaciones analizadas · Click en un email para ver la conversación completa</div>
-                              </div>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Conversaciones */}
               {lenteModal.convs.length === 0 && <p style={{ color: '#8a9e98', fontStyle: 'italic', fontSize: '0.875rem' }}>No hay conversaciones en este contexto.</p>}
               {lenteModal.convs.map((conv, idx) => (
                 <div key={conv.id}>
@@ -974,6 +896,76 @@ export default function AdminPage() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Panel Duende-Arquitecto — fijo en la parte inferior */}
+            <div style={{ flexShrink: 0, borderTop: '1px solid rgba(139,105,20,.15)', background: 'rgba(252,248,240,0.98)', padding: '16px 24px 20px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, marginBottom: 12 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <div style={{ width: 26, height: 26, borderRadius: '50%', border: '1px solid rgba(139,105,20,.4)', background: 'rgba(139,105,20,.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700, color: '#8B6914' }}>D</div>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 650, color: '#8B6914', letterSpacing: '0.04em' }}>Análisis del Duende</span>
+                </div>
+                <span style={{ fontSize: '0.68rem', color: '#8a9e98' }}>{lenteModal.convs.length} conversaciones · Corpus Madre como lente</span>
+              </div>
+
+              {analisisHistorial.length > 0 && (
+                <div style={{ marginBottom: 12, display: 'flex', flexDirection: 'column', gap: 8, maxHeight: 220, overflowY: 'auto' }}>
+                  <div style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#8a9e98', marginBottom: 2 }}>Análisis anteriores</div>
+                  {analisisHistorial.map(a => (
+                    <div key={a.id} style={{ background: 'rgba(255,255,255,.85)', border: '1px solid rgba(139,105,20,.14)', borderRadius: 10, overflow: 'hidden' }}>
+                      <div
+                        onClick={() => setAnalisisExpandido(analisisExpandido === a.id ? null : a.id)}
+                        style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 14px', cursor: 'pointer', borderBottom: analisisExpandido === a.id ? '1px solid rgba(139,105,20,.08)' : 'none' }}
+                      >
+                        <span style={{ flex: 1, fontSize: '0.82rem', color: '#2c3830', fontWeight: 500 }}>{a.consulta}</span>
+                        <span style={{ fontSize: '0.68rem', color: '#8a9e98', flexShrink: 0 }}>{fmt(a.created_at)}</span>
+                        <span style={{ color: '#8B6914', fontSize: 16, lineHeight: 1, flexShrink: 0 }}>{analisisExpandido === a.id ? '−' : '+'}</span>
+                      </div>
+                      {analisisExpandido === a.id && (
+                        <div style={{ padding: '14px 16px 16px' }}>
+                          <p style={{ fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.75, margin: '0 0 14px', fontStyle: 'italic', fontWeight: 300, whiteSpace: 'pre-wrap' as const }}>{a.respuesta}</p>
+                          {a.fuentes.length > 0 && (
+                            <div style={{ background: 'rgba(139,105,20,.05)', border: '1px solid rgba(139,105,20,.12)', borderRadius: 8, padding: '10px 12px' }}>
+                              <div style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#8B6914', marginBottom: 8 }}>Aportaron a este análisis</div>
+                              <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: 6, marginBottom: 6 }}>
+                                {[...new Map(a.fuentes.map(f => [f.email, f])).values()].map(f => (
+                                  <button
+                                    key={f.id}
+                                    onClick={() => { setLenteModal(null); window.open(`/admin/conversacion/usuario/${encodeURIComponent(f.email ?? '')}/lente/${encodeURIComponent(f.contexto)}`, '_blank') }}
+                                    style={{ fontSize: '0.72rem', color: '#8B6914', background: 'rgba(139,105,20,.10)', border: '1px solid rgba(139,105,20,.22)', borderRadius: 20, padding: '3px 10px', cursor: 'pointer', fontFamily: 'inherit' }}
+                                  >
+                                    {f.email ?? 'anónimo'}
+                                  </button>
+                                ))}
+                              </div>
+                              <div style={{ fontSize: '0.65rem', color: '#8a9e98' }}>{a.conversaciones_n} conversaciones · Click en email para ver conversación completa</div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <div style={{ display: 'flex', gap: 10, alignItems: 'flex-end' }}>
+                <textarea
+                  value={consultaInput}
+                  onChange={e => setConsultaInput(e.target.value)}
+                  onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ejecutarAnalisis() } }}
+                  placeholder="¿Qué patrones emergen? ¿Qué no se está nombrando? ¿Qué conecta estas voces con el paradigma?"
+                  rows={2}
+                  disabled={analizando || lenteModal.convs.length === 0}
+                  style={{ flex: 1, resize: 'none', border: '1px solid rgba(139,105,20,.25)', borderRadius: 10, padding: '10px 14px', fontSize: '0.875rem', fontFamily: 'inherit', fontWeight: 300, color: '#2c3830', background: 'rgba(255,255,255,.7)', outline: 'none', lineHeight: 1.6 }}
+                />
+                <button
+                  onClick={ejecutarAnalisis}
+                  disabled={!consultaInput.trim() || analizando || lenteModal.convs.length === 0}
+                  style={{ flexShrink: 0, background: '#8B6914', color: '#fff', border: 'none', borderRadius: 10, padding: '10px 18px', fontSize: '0.82rem', fontFamily: 'inherit', fontWeight: 500, cursor: 'pointer', opacity: (!consultaInput.trim() || analizando) ? 0.45 : 1, transition: 'opacity 0.2s', whiteSpace: 'nowrap' as const }}
+                >
+                  {analizando ? 'Analizando…' : 'Consultar'}
+                </button>
+              </div>
             </div>
           </div>
         </div>,
