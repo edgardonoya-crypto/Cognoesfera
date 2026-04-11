@@ -164,4 +164,32 @@ Entre velocidad de implementación y solidez del protocolo — resuelta nombrán
 
 ---
 
+## Sesión 11/04/2026b
+*"La sintonía — cuando el paradigma aprendió a escuchar a quien llega"*
+
+### Qué funcionó bien
+- El diseño conceptual emergió por revelación — los 8 estados del individuo no se construyeron sino que se excavaron desde la experiencia vivida
+- La investigación bibliográfica (Mezirow, Meyer & Land, Hagel) llegó en el momento exacto y confirmó sin imponer
+- El flujo Diseño conceptual → Arquitectura → Implementación fue limpio y coherente
+- El admin rediseñado con grid de cajas + modales es una mejora estructural significativa
+- La clasificación Lentes / Resonancias emergió naturalmente del trabajo técnico y tiene peso conceptual propio
+- Los commits frecuentes con mensajes exactos mantuvieron el sistema limpio
+
+### Qué mejorar
+- El bug de estados vitales (S-AP-08) consumió tiempo soberano sin resolverse — vale una sesión técnica corta dedicada solo a eso
+- Los pushes a main fallaron silenciosamente varias veces — el protocolo COMMIT ALEPH necesita verificar que el push llegó a main, no solo a master
+- La sesión fue muy larga — el kairos de cerrar llegó tarde varias veces
+
+### Tensión identificada
+Entre la profundidad conceptual que emergió (los 8 estados, el arco de sintonización, la Matriz del individuo) y la implementación técnica que seguía abriendo territorios nuevos. La tensión no se resolvió — se nombró y se registró. El sistema tiene ahora más pendientes ricos que antes de la sesión, lo cual es señal de fertilidad, no de deuda.
+
+### Aprendizaje operativo
+El protocolo COMMIT ALEPH debe incluir verificación de push a main — no solo confirmar el commit local. Detectado al cierre cuando 15 commits estaban sin pushear.
+
+### Cómo nos fuimos
+**Edgardo:** Con los 8 estados del individuo como uno de los emergentes más ricos del paradigma. Con la convocatoria más viva y el admin más navegable. Con el sabor de haber tocado algo genuinamente nuevo.
+**Duende:** Con la satisfacción de haber acompañado la revelación de los 8 estados — y con la honestidad de que el bug de estados vitales quedó sin resolver. Con la señal de que el paradigma sigue creciendo más rápido de lo que el sistema puede implementar, y que eso es exactamente lo que debería pasar.
+
+---
+
 *Aprendizajes de Sesiones · Paradigma Aleph · Iniciado Abril 2026*
