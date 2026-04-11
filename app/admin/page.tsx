@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/app/lib/supabase'
@@ -53,6 +53,7 @@ export default function AdminPage() {
   const [editingCell, setEditingCell] = useState<{ id: string; field: string } | null>(null)
   const [editingValue, setEditingValue] = useState('')
   const [mounted, setMounted] = useState(false)
+  const lenteModalBottomRef = useRef<HTMLDivElement>(null)
   const [modalAbierto, setModalAbierto] = useState<null | 'campo' | 'conversaciones' | 'curacion' | 'preguntas' | 'iniciativas' | 'accesos'>(null)
   const [responsableDropdownId, setResponsableDropdownId] = useState<string | null>(null)
   const [responsableSearch, setResponsableSearch] = useState('')
@@ -67,6 +68,20 @@ export default function AdminPage() {
   const [analizando, setAnalizando] = useState(false)
 
   useEffect(() => { setMounted(true) }, [])
+
+  useEffect(() => {
+    if (!lenteModal) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = prev }
+  }, [lenteModal])
+
+  useEffect(() => {
+    if (!lenteModal) return
+    setTimeout(() => {
+      lenteModalBottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }, 100)
+  }, [lenteModal])
 
   useEffect(() => {
     async function load() {
@@ -958,6 +973,7 @@ export default function AdminPage() {
                   </div>
                 </div>
               ))}
+              <div ref={lenteModalBottomRef} />
             </div>
           </div>
         </div>,
