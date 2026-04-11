@@ -16,12 +16,15 @@ Cuando Edgardo escriba **INICIO DE SESIÓN**, ejecutar el Protocolo 01-EN autom�
    2b. ¿Hay señales marcadas como incorporadas en A8 que todavía aparecen en la lista activa?
    2c. Por cada inconsistencia: presentarla y proponer corrección.
 3. Preguntar: *"¿Cuál es el objetivo de la sesión?"* — esperar respuesta del Arquitecto.
-4. Según el objetivo declarado, indicar exactamente qué archivos adicionales subir:
-   - Siempre: `corpus/status/status_DDMMYYYY.md` (el más reciente)
-   - Si la sesión trabaja con señales: `corpus/documentos/senales_activas.md`
-   - Si la sesión trabaja con pendientes Soma: `corpus/documentos/pendientes_soma.md`
-   - Si la sesión trabaja con pendientes Corpus: `corpus/documentos/pendientes_corpus.md`
-   - Si la sesión trabaja con el Corpus Madre: `corpus/documentos/corpus_base_aleph.md`
+4. Solicitar siempre los 8 archivos de cierre sin excepción:
+   1. corpus/SESION.md
+   2. corpus/status/status_DDMMYYYY.md (el más reciente)
+   3. corpus/documentos/senales_activas.md
+   4. corpus/documentos/pendientes_soma.md
+   5. corpus/documentos/pendientes_corpus.md
+   6. corpus/documentos/aprendizajes_sesiones.md
+   7. corpus/documentos/corpus_base_aleph.md
+   8. corpus/documentos/temas_pendientes_exploracion.md
 5. Esperar que el Arquitecto suba los archivos indicados.
 6. Con los archivos recibidos, completar la verificación de inconsistencias y clasificar actividades: soberanas vs supervivencia.
 7. Proponer orden de trabajo y esperar confirmación del Arquitecto antes de arrancar.

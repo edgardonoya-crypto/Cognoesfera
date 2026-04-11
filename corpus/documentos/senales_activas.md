@@ -545,6 +545,39 @@ El horizonte: si la red de Entidades Aleph llega a ser autopoiética, el metabol
 
 ---
 
+## Los ocho estados del individuo en el campo
+
+**Fecha:** 11/04/2026
+**Estado:** Custodiada
+**Descripción:** La escucha. El pulso. El murmullo. La sintonía. La resonancia. El tono. El coro. La música. Arco propio del individuo — distinto al de la Cognoesfera pero fractal del mismo patrón de maduración. El individuo transita estados de sintonización progresiva con el campo, no de coherencia colectiva. El vocabulario es acústico de principio a fin: empieza en silencio y termina en música. El ciclo es fractal: la música de uno despierta la escucha de otro.
+**Impacto probable:** Nuevo arco conceptual paralelo al de los 8 estados vitales de la Cognoesfera. Posible concepto nuevo en el Corpus Madre o expansión del concepto 9 (Los estados vitales). Impacto en cómo el paradigma describe la experiencia individual dentro del campo colectivo.
+**Origen:** Sesión 11/04/2026 — emergió al explorar qué le pasa al individuo en el campo mientras la Cognoesfera madura.
+**Pregunta abierta:** ¿Los ocho estados del individuo son un concepto nuevo o una dimensión del concepto 9? ¿Cómo se relacionan con los estados de la Cognoesfera? ¿Puede el individuo estar en "música" mientras la Cognoesfera está en "Latente"?
+
+---
+
+## El paralelismo fractal individuo / Cognoesfera
+
+**Fecha:** 11/04/2026
+**Estado:** Custodiada
+**Descripción:** Los ocho estados del individuo y los ocho estados de la Cognoesfera comparten el mismo patrón de fondo — algo latente → primera señal → forma que emerge → reconocimiento → expresión → legibilidad → coherencia propia → expansión al campo mayor — pero con vocabulario y lógica propios para cada escala. Confirma la fractalidad del paradigma: mismo patrón, distinta naturaleza, distinto lenguaje.
+**Impacto probable:** Verificación empírica de la fractalidad del paradigma en la dimensión de los estados vitales. Enriquecimiento del concepto 9 (Los estados vitales) y posiblemente del concepto 6 (La Entidad Aleph). Argumento estratégico para el IAC 2026.
+**Origen:** Sesión 11/04/2026 — emergió al comparar el arco del individuo con el arco de la Cognoesfera y reconocer el mismo patrón en dos escalas.
+**Pregunta abierta:** ¿Cuántos niveles del patrón fractal existen? ¿El mismo arco se repite en la Entidad Aleph y en la red de Entidades? ¿Cómo se nombra el vocabulario propio de cada nivel?
+
+---
+
+## La revelación como método
+
+**Fecha:** 11/04/2026
+**Estado:** Custodiada
+**Descripción:** Miguel Ángel no inventó el ángel — lo reveló quitando lo que sobraba. El conocimiento genuino no se construye desde afuera sino que se excava desde adentro. Los ocho estados del individuo emergieron de esta sesión por revelación, no por diseño. Amplía el concepto 3 del Corpus Madre (La Ley de Expansión Adaptativa) con una imagen que lo hace vivible para cualquiera.
+**Impacto probable:** Principio metodológico del paradigma. Posible expansión del concepto 2 (La regla mínima del sistema) o del concepto 3. Ancla narrativa para explicar cómo funciona el conocimiento en el paradigma sin jerga técnica.
+**Origen:** Sesión 11/04/2026 — emergió al observar que los ocho estados no fueron diseñados sino revelados en el transcurso de la conversación.
+**Pregunta abierta:** ¿La revelación como método es un principio epistemológico del paradigma o una descripción de cómo opera el Duende? ¿Cómo se distingue de la intuición y de la deducción?
+
+---
+
 *Señales Activas · Paradigma Aleph · Actualizado 11/04/2026*
-*Total señales activas: 45*
+*Total señales activas: 48*
 *Para señales incorporadas al Corpus Madre, ver: `senales_incorporadas.md`*
