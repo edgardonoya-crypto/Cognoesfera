@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/app/lib/supabase'
 
@@ -48,6 +49,12 @@ export default function AdminPage() {
   const [intereses, setIntereses] = useState<InteresSaved[]>([])
   const [editingCell, setEditingCell] = useState<{ id: string; field: string } | null>(null)
   const [editingValue, setEditingValue] = useState('')
+  const [mounted, setMounted] = useState(false)
+  const [responsableDropdownId, setResponsableDropdownId] = useState<string | null>(null)
+  const [responsableSearch, setResponsableSearch] = useState('')
+  const [responsableDropdownPos, setResponsableDropdownPos] = useState<{ top: number; left: number } | null>(null)
+
+  useEffect(() => { setMounted(true) }, [])
 
   useEffect(() => {
     async function load() {
@@ -574,10 +581,18 @@ export default function AdminPage() {
                           : <span style={{ cursor: 'pointer', display: 'block', minHeight: 20, color: ini.descripcion ? '#18201e' : '#aaa', fontStyle: ini.descripcion ? 'normal' : 'italic', fontSize: '0.82rem' }}>{ini.descripcion || 'Agregar descripción…'}</span>}
                       </td>
                       {/* Responsable */}
-                      <td style={styles.td} onClick={() => startEdit(ini.id, 'responsable', ini.responsable ?? '')}>
-                        {editingCell?.id === ini.id && editingCell.field === 'responsable'
-                          ? <input autoFocus value={editingValue} onChange={e => setEditingValue(e.target.value)} onBlur={commitEdit} onKeyDown={e => e.key === 'Enter' && commitEdit()} style={{ width: '100%', border: '1px solid rgba(139,105,20,0.3)', borderRadius: 4, padding: '4px 6px', fontSize: '0.82rem', fontFamily: 'inherit', outline: 'none' }} />
-                          : <span style={{ cursor: 'pointer', display: 'block', minHeight: 20, color: ini.responsable ? '#18201e' : '#aaa', fontStyle: ini.responsable ? 'normal' : 'italic', fontSize: '0.82rem' }}>{ini.responsable || '—'}</span>}
+                      <td
+                        style={styles.td}
+                        onClick={e => {
+                          const rect = (e.currentTarget as HTMLElement).getBoundingClientRect()
+                          setResponsableDropdownPos({ top: rect.bottom + 4, left: rect.left })
+                          setResponsableDropdownId(ini.id)
+                          setResponsableSearch('')
+                        }}
+                      >
+                        <span style={{ cursor: 'pointer', display: 'block', minHeight: 20, color: ini.responsable ? '#18201e' : '#aaa', fontStyle: ini.responsable ? 'normal' : 'italic', fontSize: '0.82rem' }}>
+                          {ini.responsable ? (ini.responsable.length > 20 ? ini.responsable.slice(0, 20) + '…' : ini.responsable) : '—'}
+                        </span>
                       </td>
                       {/* Estado */}
                       <td style={styles.td}>
@@ -669,6 +684,56 @@ export default function AdminPage() {
         </section>
 
       </div>
+
+      {/* Responsable dropdown portal */}
+      {mounted && responsableDropdownId && responsableDropdownPos && createPortal(
+        <>
+          <div
+            onClick={() => setResponsableDropdownId(null)}
+            style={{ position: 'fixed', inset: 0, zIndex: 499 }}
+          />
+          <div style={{ position: 'fixed', top: responsableDropdownPos.top, left: responsableDropdownPos.left, zIndex: 500, background: '#fff', border: '1px solid rgba(139,105,20,0.25)', borderRadius: 10, boxShadow: '0 6px 24px rgba(0,0,0,0.13)', width: 280, padding: '8px 8px 6px', fontFamily: 'Inter,sans-serif' }}>
+            <input
+              autoFocus
+              placeholder="Buscar email…"
+              value={responsableSearch}
+              onChange={e => setResponsableSearch(e.target.value)}
+              onClick={e => e.stopPropagation()}
+              style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 6, padding: '5px 9px', fontSize: '0.8rem', fontFamily: 'inherit', outline: 'none', marginBottom: 6, boxSizing: 'border-box' as const, background: '#faf8f3' }}
+            />
+            <div style={{ maxHeight: 200, overflowY: 'auto' as const }}>
+              <div
+                onClick={() => { patchIniciativa(responsableDropdownId, 'responsable', null); setResponsableDropdownId(null) }}
+                style={{ padding: '5px 8px', cursor: 'pointer', borderRadius: 6, fontSize: '0.8rem', color: '#aaa', fontStyle: 'italic' }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'rgba(139,105,20,0.07)'}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = ''}
+              >— Sin responsable</div>
+              {accesosConv
+                .filter(a => a.email.toLowerCase().includes(responsableSearch.toLowerCase()))
+                .map(a => {
+                  const isSelected = iniciativas.find(i => i.id === responsableDropdownId)?.responsable === a.email
+                  return (
+                    <div
+                      key={a.id}
+                      onClick={() => { patchIniciativa(responsableDropdownId, 'responsable', a.email); setResponsableDropdownId(null) }}
+                      style={{ padding: '6px 8px', cursor: 'pointer', borderRadius: 6, background: isSelected ? 'rgba(78,170,152,0.1)' : undefined }}
+                      onMouseEnter={e => { if (!isSelected) (e.currentTarget as HTMLElement).style.background = 'rgba(139,105,20,0.07)' }}
+                      onMouseLeave={e => { if (!isSelected) (e.currentTarget as HTMLElement).style.background = '' }}
+                    >
+                      <div style={{ color: '#18201e', fontWeight: isSelected ? 600 : 400, fontSize: '0.82rem' }}>{a.email}</div>
+                      <div style={{ color: '#aaa', fontSize: '0.72rem', marginTop: 1 }}>{fmt(a.created_at)}</div>
+                    </div>
+                  )
+                })}
+              {accesosConv.filter(a => a.email.toLowerCase().includes(responsableSearch.toLowerCase())).length === 0 && (
+                <div style={{ padding: '8px', fontSize: '0.8rem', color: '#aaa', textAlign: 'center' as const }}>Sin resultados</div>
+              )}
+            </div>
+          </div>
+        </>,
+        document.body
+      )}
+
     </div>
   )
 }
