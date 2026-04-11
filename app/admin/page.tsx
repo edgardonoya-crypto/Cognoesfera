@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/app/lib/supabase'
@@ -69,8 +69,13 @@ export default function AdminPage() {
   const [consultaInput, setConsultaInput] = useState('')
   const [analizando, setAnalizando] = useState(false)
   const [hiloArquitecto, setHiloArquitecto] = useState<DuendeMsgArquitecto[]>([])
+  const hiloEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => { setMounted(true) }, [])
+
+  useEffect(() => {
+    hiloEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [hiloArquitecto])
 
   useEffect(() => {
     if (!lenteModal) return
@@ -988,6 +993,7 @@ export default function AdminPage() {
                     </div>
                   </div>
                 )}
+                <div ref={hiloEndRef} />
                 {analisisHistorial.length > 0 && hiloArquitecto.length > 0 && (
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '8px 0 4px' }}>
                     <div style={{ flex: 1, height: 1, background: 'rgba(139,105,20,.12)' }} />
