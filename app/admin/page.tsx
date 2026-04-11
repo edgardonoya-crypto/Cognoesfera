@@ -69,6 +69,7 @@ export default function AdminPage() {
   const [consultaInput, setConsultaInput] = useState('')
   const [analizando, setAnalizando] = useState(false)
   const [hiloArquitecto, setHiloArquitecto] = useState<DuendeMsgArquitecto[]>([])
+  const [duendePanelOpen, setDuendePanelOpen] = useState(false)
   const hiloEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => { setMounted(true) }, [])
@@ -208,6 +209,7 @@ export default function AdminPage() {
       c => (c.contexto_origen ?? '') === contexto && Array.isArray(c.mensajes) && c.mensajes.length > 0
     ).sort((a, b) => a.created_at.localeCompare(b.created_at))
     setLenteModal({ contexto, convs: convsFiltradas })
+    setDuendePanelOpen(false)
     setAnalisisHistorial([])
     setAnalisisExpandido(null)
     setConsultaInput('')
@@ -906,24 +908,33 @@ export default function AdminPage() {
         document.body
       )}
 
+      {/* PORTAL 1 — overlay + modal de conversaciones */}
       {mounted && lenteModal && createPortal(
         <div
-          style={{ position: 'fixed', inset: 0, zIndex: 500, background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}
-          onClick={e => { if (e.target === e.currentTarget) setLenteModal(null) }}
+          style={{ position: 'fixed', inset: 0, zIndex: 500, background: 'rgba(0,0,0,0.50)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}
+          onClick={e => { if (e.target === e.currentTarget) { setLenteModal(null); setDuendePanelOpen(false) } }}
         >
-          <div style={{ width: 'min(780px,96vw)', maxHeight: '90vh', background: '#f7f3e8', borderRadius: 18, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.25)' }}>
+          <div style={{ width: 'min(680px,92vw)', maxHeight: '88vh', background: '#f7f3e8', borderRadius: 18, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.25)' }}>
             {/* Header */}
             <div style={{ padding: '18px 24px 14px', borderBottom: '1px solid rgba(34,58,54,.10)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                 <span style={{ fontSize: '0.95rem', fontWeight: 650, color: '#18201e' }}>{lenteModal.contexto}</span>
                 <span style={{ fontSize: '0.72rem', color: '#8a9e98' }}>{lenteModal.convs.length} conversación{lenteModal.convs.length !== 1 ? 'es' : ''} · {new Set(lenteModal.convs.map(c => c.email_participante)).size} usuario{new Set(lenteModal.convs.map(c => c.email_participante)).size !== 1 ? 's' : ''}</span>
               </div>
-              <button onClick={() => setLenteModal(null)} style={{ background: 'none', border: 'none', fontSize: 20, color: '#8A7E70', cursor: 'pointer', lineHeight: 1, padding: 4 }}>✕</button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <button
+                  onClick={() => setDuendePanelOpen(v => !v)}
+                  style={{ background: duendePanelOpen ? 'rgba(139,105,20,.15)' : 'none', border: '1px solid rgba(139,105,20,.35)', borderRadius: 8, padding: '5px 12px', fontSize: '0.75rem', fontFamily: 'inherit', fontWeight: 500, color: '#8B6914', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}
+                >
+                  <span style={{ fontSize: 12 }}>✦</span>
+                  {duendePanelOpen ? 'Ocultar Duende' : 'Consultar al Duende'}
+                </button>
+                <button onClick={() => { setLenteModal(null); setDuendePanelOpen(false) }} style={{ background: 'none', border: 'none', fontSize: 20, color: '#8A7E70', cursor: 'pointer', lineHeight: 1, padding: 4 }}>✕</button>
+              </div>
             </div>
 
             {/* Conversaciones — área scrolleable */}
             <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px 24px', display: 'flex', flexDirection: 'column', gap: 0 }}>
-
               {lenteModal.convs.length === 0 && <p style={{ color: '#8a9e98', fontStyle: 'italic', fontSize: '0.875rem' }}>No hay conversaciones en este contexto.</p>}
               {lenteModal.convs.map((conv, idx) => (
                 <div key={conv.id}>
@@ -948,53 +959,62 @@ export default function AdminPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>,
+        document.body
+      )}
 
-            {/* Panel Duende-Arquitecto — fijo en la parte inferior */}
-            {/* Panel Duende-Arquitecto — footer fijo */}
-            <div style={{ flexShrink: 0, borderTop: '1px solid rgba(139,105,20,.15)', background: 'rgba(252,248,240,0.98)', display: 'flex', flexDirection: 'column', maxHeight: '55%' }}>
-              {/* Encabezado */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, padding: '12px 24px 10px', flexShrink: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <div style={{ width: 26, height: 26, borderRadius: '50%', border: '1px solid rgba(139,105,20,.4)', background: 'rgba(139,105,20,.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700, color: '#8B6914' }}>D</div>
-                  <span style={{ fontSize: '0.8rem', fontWeight: 650, color: '#8B6914', letterSpacing: '0.04em' }}>Análisis del Duende</span>
-                </div>
-                <span style={{ fontSize: '0.68rem', color: '#8a9e98' }}>{lenteModal.convs.length} conversaciones · Corpus Madre como lente</span>
-              </div>
+      {/* PORTAL 2 — panel flotante Duende bottom-right */}
+      {mounted && lenteModal && duendePanelOpen && createPortal(
+        <div style={{ position: 'fixed', bottom: 32, right: 32, zIndex: 520, width: 'min(480px,90vw)', height: '60vh', background: 'rgba(252,248,240,0.98)', borderRadius: 16, boxShadow: '0 16px 48px rgba(0,0,0,0.22)', border: '1px solid rgba(139,105,20,.20)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+          {/* Header del panel */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 18px 10px', borderBottom: '1px solid rgba(139,105,20,.15)', flexShrink: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ width: 26, height: 26, borderRadius: '50%', border: '1px solid rgba(139,105,20,.4)', background: 'rgba(139,105,20,.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700, color: '#8B6914' }}>D</div>
+              <span style={{ fontSize: '0.8rem', fontWeight: 650, color: '#8B6914', letterSpacing: '0.04em' }}>Análisis del Duende</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ fontSize: '0.65rem', color: '#8a9e98' }}>{lenteModal.convs.length} conv · Corpus Madre</span>
+              <button onClick={() => setDuendePanelOpen(false)} style={{ background: 'none', border: 'none', fontSize: 16, color: '#8A7E70', cursor: 'pointer', lineHeight: 1, padding: 2 }}>✕</button>
+            </div>
+          </div>
 
-              {/* Hilo conversacional + sesiones anteriores */}
-              <div style={{ flex: 1, overflowY: 'auto', padding: '0 20px 10px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {hiloArquitecto.length === 0 && analisisHistorial.length === 0 && (
-                  <p style={{ fontSize: '0.78rem', color: '#a08030', fontStyle: 'italic', textAlign: 'center', marginTop: 16 }}>
-                    Hacé tu primera consulta sobre este lente.
+          {/* Hilo conversacional + sesiones anteriores */}
+          <div style={{ flex: 1, overflowY: 'auto', padding: '12px 16px 8px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {hiloArquitecto.length === 0 && analisisHistorial.length === 0 && (
+              <p style={{ fontSize: '0.78rem', color: '#a08030', fontStyle: 'italic', textAlign: 'center', marginTop: 16 }}>
+                Hacé tu primera consulta sobre este lente.
+              </p>
+            )}
+            {hiloArquitecto.map((m, i) => (
+              <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
+                <div style={{
+                  maxWidth: '88%', padding: '10px 14px',
+                  borderRadius: m.role === 'user' ? '14px 14px 3px 14px' : '14px 14px 14px 3px',
+                  background: m.role === 'user' ? 'rgba(139,105,20,.12)' : 'rgba(255,255,255,.80)',
+                  border: '1px solid ' + (m.role === 'user' ? 'rgba(139,105,20,.22)' : 'rgba(139,105,20,.12)'),
+                }}>
+                  <p style={{ fontSize: '0.65rem', fontWeight: 600, color: m.role === 'user' ? '#8B6914' : '#a08030', margin: '0 0 5px', letterSpacing: '0.07em', textTransform: 'uppercase' as const }}>
+                    {m.role === 'user' ? 'Arquitecto' : 'Duende'}
                   </p>
-                )}
-                {hiloArquitecto.map((m, i) => (
-                  <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
-                    <div style={{
-                      maxWidth: '88%', padding: '10px 14px',
-                      borderRadius: m.role === 'user' ? '14px 14px 3px 14px' : '14px 14px 14px 3px',
-                      background: m.role === 'user' ? 'rgba(139,105,20,.12)' : 'rgba(255,255,255,.80)',
-                      border: '1px solid ' + (m.role === 'user' ? 'rgba(139,105,20,.22)' : 'rgba(139,105,20,.12)'),
-                    }}>
-                      <p style={{ fontSize: '0.65rem', fontWeight: 600, color: m.role === 'user' ? '#8B6914' : '#a08030', margin: '0 0 5px', letterSpacing: '0.07em', textTransform: 'uppercase' as const }}>
-                        {m.role === 'user' ? 'Arquitecto' : 'Duende'}
-                      </p>
-                      {m.role === 'assistant'
-                        ? <div style={{ fontSize: '0.85rem', color: '#2c3830', lineHeight: 1.75, fontStyle: 'italic', fontWeight: 300 }}>{renderMarkdown(m.content)}</div>
-                        : <p style={{ fontSize: '0.85rem', color: '#2c3830', lineHeight: 1.7, margin: 0, fontWeight: 300 }}>{m.content}</p>
-                      }
-                    </div>
-                  </div>
-                ))}
-                {analizando && (
-                  <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                    <div style={{ padding: '10px 14px', borderRadius: '14px 14px 14px 3px', background: 'rgba(255,255,255,.80)', border: '1px solid rgba(139,105,20,.12)' }}>
-                      <p style={{ fontSize: '0.78rem', color: '#a08030', fontStyle: 'italic', margin: 0 }}>El Duende está pensando…</p>
-                    </div>
-                  </div>
-                )}
-                <div ref={hiloEndRef} />
-                {analisisHistorial.length > 0 && hiloArquitecto.length > 0 && (
+                  {m.role === 'assistant'
+                    ? <div style={{ fontSize: '0.85rem', color: '#2c3830', lineHeight: 1.75, fontStyle: 'italic', fontWeight: 300 }}>{renderMarkdown(m.content)}</div>
+                    : <p style={{ fontSize: '0.85rem', color: '#2c3830', lineHeight: 1.7, margin: 0, fontWeight: 300 }}>{m.content}</p>
+                  }
+                </div>
+              </div>
+            ))}
+            {analizando && (
+              <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                <div style={{ padding: '10px 14px', borderRadius: '14px 14px 14px 3px', background: 'rgba(255,255,255,.80)', border: '1px solid rgba(139,105,20,.12)' }}>
+                  <p style={{ fontSize: '0.78rem', color: '#a08030', fontStyle: 'italic', margin: 0 }}>El Duende está pensando…</p>
+                </div>
+              </div>
+            )}
+            <div ref={hiloEndRef} />
+            {analisisHistorial.length > 0 && (
+              <>
+                {hiloArquitecto.length > 0 && (
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '8px 0 4px' }}>
                     <div style={{ flex: 1, height: 1, background: 'rgba(139,105,20,.12)' }} />
                     <span style={{ fontSize: '0.62rem', color: '#a08030', letterSpacing: '0.08em', textTransform: 'uppercase' as const }}>sesiones anteriores</span>
@@ -1036,28 +1056,28 @@ export default function AdminPage() {
                     )}
                   </div>
                 ))}
-              </div>
+              </>
+            )}
+          </div>
 
-              {/* Input siempre visible */}
-              <div style={{ flexShrink: 0, padding: '10px 24px 20px', display: 'flex', gap: 10, alignItems: 'flex-end' }}>
-                <textarea
-                  value={consultaInput}
-                  onChange={e => setConsultaInput(e.target.value)}
-                  onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ejecutarAnalisis() } }}
-                  placeholder="¿Qué patrones emergen? ¿Qué no se está nombrando? ¿Qué conecta estas voces con el paradigma?"
-                  rows={2}
-                  disabled={analizando || lenteModal.convs.length === 0}
-                  style={{ flex: 1, resize: 'none', border: '1px solid rgba(139,105,20,.25)', borderRadius: 10, padding: '10px 14px', fontSize: '0.875rem', fontFamily: 'inherit', fontWeight: 300, color: '#2c3830', background: 'rgba(255,255,255,.7)', outline: 'none', lineHeight: 1.6 }}
-                />
-                <button
-                  onClick={ejecutarAnalisis}
-                  disabled={!consultaInput.trim() || analizando || lenteModal.convs.length === 0}
-                  style={{ flexShrink: 0, background: '#8B6914', color: '#fff', border: 'none', borderRadius: 10, padding: '10px 18px', fontSize: '0.82rem', fontFamily: 'inherit', fontWeight: 500, cursor: 'pointer', opacity: (!consultaInput.trim() || analizando) ? 0.45 : 1, transition: 'opacity 0.2s', whiteSpace: 'nowrap' as const }}
-                >
-                  {analizando ? 'Analizando…' : 'Consultar'}
-                </button>
-              </div>
-            </div>
+          {/* Input */}
+          <div style={{ flexShrink: 0, padding: '10px 16px 16px', display: 'flex', gap: 10, alignItems: 'flex-end', borderTop: '1px solid rgba(139,105,20,.10)' }}>
+            <textarea
+              value={consultaInput}
+              onChange={e => setConsultaInput(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ejecutarAnalisis() } }}
+              placeholder="¿Qué patrones emergen? ¿Qué no se está nombrando?"
+              rows={2}
+              disabled={analizando || lenteModal.convs.length === 0}
+              style={{ flex: 1, resize: 'none', border: '1px solid rgba(139,105,20,.25)', borderRadius: 10, padding: '10px 14px', fontSize: '0.875rem', fontFamily: 'inherit', fontWeight: 300, color: '#2c3830', background: 'rgba(255,255,255,.7)', outline: 'none', lineHeight: 1.6 }}
+            />
+            <button
+              onClick={ejecutarAnalisis}
+              disabled={!consultaInput.trim() || analizando || lenteModal.convs.length === 0}
+              style={{ flexShrink: 0, background: '#8B6914', color: '#fff', border: 'none', borderRadius: 10, padding: '10px 18px', fontSize: '0.82rem', fontFamily: 'inherit', fontWeight: 500, cursor: 'pointer', opacity: (!consultaInput.trim() || analizando) ? 0.45 : 1, transition: 'opacity 0.2s', whiteSpace: 'nowrap' as const }}
+            >
+              {analizando ? 'Analizando…' : 'Consultar'}
+            </button>
           </div>
         </div>,
         document.body
