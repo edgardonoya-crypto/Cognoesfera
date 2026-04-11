@@ -505,11 +505,6 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - app/quanam-ia-2026/page.tsx — rediseño completo UX: hero, modal Duende, persistencia, modales contexto, iniciativas dinámicas · 11/04/2026
 - supabase/migrations/20260411_iniciativas.sql — tablas iniciativas e intereses_iniciativas · 11/04/2026
 
-- app/api/duende/route.ts — API route del Duende con system prompt completo · 07/04/2026
-- app/duende/page.tsx — interfaz de conversación con el Duende · 07/04/2026
-- app/quanam-ia-2026/page.tsx — DuendeChat y DuendeFragmento integrados · 07/04/2026
-- app/admin/page.tsx — sección Conversaciones Duende + reorden + título · 07/04/2026
-
 **Hitos de SESION-20260402/04:**
 - Protocolo 01-EN construido y probado exitosamente por primera vez
 - Concepto 5 reescrito con patrón núcleo/expansión — primer concepto del Corpus Madre en este formato
