@@ -333,33 +333,45 @@ export default function AdminPage() {
     setEditingCell(null)
   }
 
-  function renderMarkdown(text: string): React.ReactNode[] {
-    return text.split('\n').map((line, i) => {
-      if (!line.trim()) return <div key={i} style={{ height: 8 }} />
-      if (line.match(/^[-*]\s/)) {
-        const content = line.replace(/^[-*]\s/, '')
-        return (
-          <div key={i} style={{ display: 'flex', gap: 8, marginBottom: 2 }}>
-            <span style={{ color: '#8B6914', flexShrink: 0, marginTop: 2 }}>·</span>
-            <span>{renderInline(content)}</span>
-          </div>
-        )
-      }
-      if (line.match(/^###\s/)) {
-        return <p key={i} style={{ fontSize: '0.78rem', fontWeight: 650, color: '#5a4a20', margin: '8px 0 3px', letterSpacing: '0.02em' }}>{line.replace(/^###\s/, '')}</p>
-      }
-      if (line.match(/^##\s/)) {
-        return <p key={i} style={{ fontSize: '0.82rem', fontWeight: 650, color: '#18201e', margin: '10px 0 4px', letterSpacing: '0.02em' }}>{line.replace(/^##\s/, '')}</p>
-      }
-      return <p key={i} style={{ margin: '0 0 6px', lineHeight: 1.75 }}>{renderInline(line)}</p>
-    })
+  function renderMarkdown(text: string): React.ReactNode {
+    const lines = text.split('\n')
+    return (
+      <div>
+        {lines.map((line, i) => {
+          if (!line.trim()) return <div key={i} style={{ height: 8 }} />
+          if (line.match(/^###\s/)) return (
+            <p key={i} style={{ fontSize: '0.78rem', fontWeight: 700, color: '#5a4a20', margin: '10px 0 3px', fontStyle: 'normal' }}>
+              {line.replace(/^###\s/, '')}
+            </p>
+          )
+          if (line.match(/^##\s/)) return (
+            <p key={i} style={{ fontSize: '0.82rem', fontWeight: 700, color: '#18201e', margin: '12px 0 4px', fontStyle: 'normal' }}>
+              {line.replace(/^##\s/, '')}
+            </p>
+          )
+          if (line.match(/^[-*]\s/)) return (
+            <div key={i} style={{ display: 'flex', gap: 8, marginBottom: 3 }}>
+              <span style={{ color: '#8B6914', flexShrink: 0 }}>·</span>
+              <span style={{ fontSize: '0.875rem', lineHeight: 1.75 }}>{parseBold(line.replace(/^[-*]\s/, ''))}</span>
+            </div>
+          )
+          return (
+            <p key={i} style={{ margin: '0 0 8px', lineHeight: 1.75, fontSize: '0.875rem' }}>
+              {parseBold(line)}
+            </p>
+          )
+        })}
+      </div>
+    )
   }
 
-  function renderInline(text: string): React.ReactNode {
-    const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g)
+  function parseBold(text: string): React.ReactNode {
+    const parts = text.split(/(\*\*[^*]+\*\*)/)
+    if (parts.length === 1) return text
     return parts.map((part, i) => {
-      if (part.match(/^\*\*[^*]+\*\*$/)) return <strong key={i} style={{ fontWeight: 600, fontStyle: 'normal', color: '#18201e' }}>{part.slice(2, -2)}</strong>
-      if (part.match(/^\*[^*]+\*$/)) return <em key={i}>{part.slice(1, -1)}</em>
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={i} style={{ fontWeight: 700, fontStyle: 'normal', color: 'inherit' }}>{part.slice(2, -2)}</strong>
+      }
       return part
     })
   }
@@ -1160,7 +1172,7 @@ export default function AdminPage() {
                 <span style={{ fontSize: '0.72rem', color: '#8a9e98' }}>{conversaciones.length} conversaciones · todos los lentes y resonancias</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-                {campoHilo.length > 0 && !campoAnalizando && (
+                {campoHilo.length > 0 && (
                   <button
                     onClick={() => { setCampoHilo([]); setCampoReporteActivo(null); setCampoInput('') }}
                     style={{ background: 'rgba(139,105,20,.08)', border: '1px solid rgba(139,105,20,.22)', borderRadius: 8, padding: '6px 12px', fontSize: '0.78rem', color: '#8B6914', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 500 }}
