@@ -41,6 +41,8 @@ const LENTES = [
   },
 ]
 
+type Iniciativa = { id: string; nombre: string; descripcion: string | null }
+
 type LenteState = {
   open: boolean
   respuesta: string
@@ -58,11 +60,12 @@ type DuendeChatProps = {
   email?: string
   autoAbrir?: boolean
   prevConv?: DuendeConvPrev
+  iniciativasActivas?: Iniciativa[]
 }
 
 type DuendeMsg = { role: 'user' | 'assistant'; content: string }
 
-function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir, prevConv }: DuendeChatProps) {
+function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir, prevConv, iniciativasActivas }: DuendeChatProps) {
   const [modalOpen, setModalOpen] = useState(false)
   const [msgs, setMsgs] = useState<DuendeMsg[]>(() => prevConv?.msgs ?? [])
   const [sesionId, setSesionId] = useState<string | null>(() => prevConv?.id ?? null)
@@ -119,7 +122,7 @@ function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir, prevConv 
       const res = await fetch('/api/duende', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mensaje, historial, sesion_id: sid, modo: 'convocatoria', nombre, email, contexto_origen: lente.nombre }),
+        body: JSON.stringify({ mensaje, historial, sesion_id: sid, modo: 'convocatoria', nombre, email, contexto_origen: lente.nombre, iniciativas_activas: iniciativasActivas?.map(i => `- ${i.nombre}${i.descripcion ? ': ' + i.descripcion : ''}`).join('\n') }),
         signal: controller.signal,
       })
       const data = await res.json() as { respuesta?: string; sesion_id?: string; error?: string }
@@ -271,9 +274,10 @@ type DuendeFragmentoProps = {
   contexto: string
   nombre?: string
   email?: string
+  iniciativasActivas?: Iniciativa[]
 }
 
-function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoProps) {
+function DuendeFragmento({ titulo, contexto, nombre, email, iniciativasActivas }: DuendeFragmentoProps) {
   const [modalOpen, setModalOpen] = useState(false)
   const [msgs, setMsgs] = useState<DuendeMsg[]>([])
   const [sesionId, setSesionId] = useState<string | null>(null)
@@ -356,6 +360,7 @@ function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoPro
     try {
       const body: Record<string, unknown> = {
         mensaje, historial, sesion_id: sid, modo: 'convocatoria', nombre, email, contexto_origen: titulo,
+        iniciativas_activas: iniciativasActivas?.map(i => `- ${i.nombre}${i.descripcion ? ': ' + i.descripcion : ''}`).join('\n'),
       }
       if (archivo) {
         body.archivo_base64 = archivo.base64
@@ -570,6 +575,7 @@ export default function QuanamIa2026() {
     )
   )
   const [prevConvs, setPrevConvs] = useState<Record<string, DuendeConvPrev>>({})
+  const [iniciativasActivas, setIniciativasActivas] = useState<Iniciativa[]>([])
 
   const [otpStep, setOtpStep] = useState<'email' | 'otp'>('email')
   const [otpToken, setOtpToken] = useState('')
@@ -580,6 +586,13 @@ export default function QuanamIa2026() {
   useEffect(() => {
     const savedEmail = getCookie('quanam_email')
     if (savedEmail) setEmail(savedEmail)
+  }, [])
+
+  useEffect(() => {
+    fetch('/api/iniciativas-publicas')
+      .then(r => r.json())
+      .then((data: { data: Iniciativa[] }) => { if (data?.data) setIniciativasActivas(data.data) })
+      .catch(() => {})
   }, [])
 
   // Cargar historial previo cuando el email está disponible
@@ -1211,7 +1224,7 @@ export default function QuanamIa2026() {
                                 </button>
                               </>
                             ) : (
-                              <DuendeChat lente={lente} mensajeInicial={ls.respuesta} nombre={nombre} email={email} autoAbrir={true} prevConv={prevConvs[lente.nombre]} />
+                              <DuendeChat lente={lente} mensajeInicial={ls.respuesta} nombre={nombre} email={email} autoAbrir={true} prevConv={prevConvs[lente.nombre]} iniciativasActivas={iniciativasActivas} />
                             )}
                           </div>
                         </div>
@@ -1285,17 +1298,17 @@ export default function QuanamIa2026() {
                   <div style={{ paddingBottom: 24, marginBottom: 24, borderBottom: '1px solid rgba(0,0,0,0.07)' }}>
                     <p style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C', marginBottom: 10 }}>El río que cambió de curso</p>
                     <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300, marginBottom: 16 }}>En 2020 el mundo cambió en semanas. Las organizaciones que salieron mejor paradas fueron las que podían pensar juntas bajo incertidumbre. Lo que viene con la IA es una transformación de magnitud similar. Más silenciosa. Pero igual de profunda.</p>
-                    <DuendeFragmento fragmentoId="f1" titulo="El río que cambió de curso" contexto="En 2020 el mundo cambió en semanas. Lo que viene con la IA replica ese patrón — más lento y más profundo. No colapsa el cómo trabajamos. Colapsa el por qué trabajamos. Cuando los agentes hagan ese trabajo, la respuesta de siempre dejará de ser suficiente." nombre={nombre} email={email} />
+                    <DuendeFragmento fragmentoId="f1" titulo="El río que cambió de curso" contexto="En 2020 el mundo cambió en semanas. Lo que viene con la IA replica ese patrón — más lento y más profundo. No colapsa el cómo trabajamos. Colapsa el por qué trabajamos. Cuando los agentes hagan ese trabajo, la respuesta de siempre dejará de ser suficiente." nombre={nombre} email={email} iniciativasActivas={iniciativasActivas} />
                   </div>
                   <div style={{ paddingBottom: 24, marginBottom: 24, borderBottom: '1px solid rgba(0,0,0,0.07)' }}>
                     <p style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C', marginBottom: 10 }}>Cuando el piso se mueve</p>
                     <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300, marginBottom: 16 }}>Cada vez que la humanidad perdió las certezas que organizaban su mundo, encontró la manera de crear nuevas desde adentro. Siempre. Sin excepción. La pregunta no es si va a pasar — es qué construimos antes de que pase.</p>
-                    <DuendeFragmento fragmentoId="f2" titulo="Cuando el piso se mueve" contexto="Cada vez que la humanidad perdió las certezas que organizaban su mundo, encontró la manera de crear nuevas desde adentro. Lo que colapsa ahora es la centralidad del trabajo como fuente de identidad. Si los agentes hacen lo que hacías, ¿desde dónde construís tu valor?" nombre={nombre} email={email} />
+                    <DuendeFragmento fragmentoId="f2" titulo="Cuando el piso se mueve" contexto="Cada vez que la humanidad perdió las certezas que organizaban su mundo, encontró la manera de crear nuevas desde adentro. Lo que colapsa ahora es la centralidad del trabajo como fuente de identidad. Si los agentes hacen lo que hacías, ¿desde dónde construís tu valor?" nombre={nombre} email={email} iniciativasActivas={iniciativasActivas} />
                   </div>
                   <div>
                     <p style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C', marginBottom: 10 }}>Lo que está por encima</p>
                     <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300, marginBottom: 16 }}>Antes de que cualquier sistema procese la información, algo en vos ya sabe. No es intuición mágica — es un tipo de inteligencia que la neurociencia empieza a describir y que la IA, por ahora, no puede tener.</p>
-                    <DuendeFragmento fragmentoId="f3" titulo="Lo que está por encima" contexto="Antes de que cualquier sistema procese la información, algo en vos ya sabe. No es intuición mágica — es juicio situado. Un tipo de procesamiento integrado que la IA, por ahora, no puede tener. El médico que percibe que algo no está bien antes de que los estudios lo confirmen." nombre={nombre} email={email} />
+                    <DuendeFragmento fragmentoId="f3" titulo="Lo que está por encima" contexto="Antes de que cualquier sistema procese la información, algo en vos ya sabe. No es intuición mágica — es juicio situado. Un tipo de procesamiento integrado que la IA, por ahora, no puede tener. El médico que percibe que algo no está bien antes de que los estudios lo confirmen." nombre={nombre} email={email} iniciativasActivas={iniciativasActivas} />
                   </div>
                 </div>
               </div>
@@ -1341,22 +1354,26 @@ export default function QuanamIa2026() {
                     <p style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C', marginBottom: 10 }}>El Paradigma Aleph</p>
                     <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300, marginBottom: 8 }}>Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva, desarrollado a lo largo de más de una década.</p>
                     <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300, marginBottom: 16 }}>El Paradigma Aleph no es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos — y qué condiciones hacen falta para que eso ocurra. El paradigma tiene un origen distribuido: emergió en múltiples redes. Quanam lo integra, siendo parte de su evolución desde los inicios.</p>
-                    <DuendeFragmento fragmentoId="f4" titulo="El Paradigma Aleph" contexto="Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva. No es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos y qué condiciones hacen falta para que eso ocurra." nombre={nombre} email={email} />
+                    <DuendeFragmento fragmentoId="f4" titulo="El Paradigma Aleph" contexto="Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva. No es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos y qué condiciones hacen falta para que eso ocurra." nombre={nombre} email={email} iniciativasActivas={iniciativasActivas} />
                   </div>
+                  {iniciativasActivas.length > 0 && (
                   <div>
                     <p style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C', marginBottom: 10 }}>Líneas de exploración abiertas</p>
                     <ul style={{ margin: '0 0 16px', paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                      {[
-                        'Varios equipos de Quanam',
-                        'En una ONG',
-                        'En una institución educativa que presentará la Inteligencia Humana Aumentada en el Congreso Mundial IAC 2026 (Punta del Este)',
-                        'Diversos grupos de trabajo internacionales que exploran la Inteligencia Colectiva',
-                        'Existen en este momento varias propuestas para la implementación de esta IHA',
-                      ].map((item, i) => (
-                        <li key={i} style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>{item}</li>
+                      {iniciativasActivas.map(ini => (
+                        <li key={ini.id} style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>
+                          {ini.nombre}{ini.descripcion ? ` — ${ini.descripcion}` : ''}
+                        </li>
                       ))}
                     </ul>
-                    <DuendeFragmento fragmentoId="f5" titulo="Líneas de exploración abiertas" contexto="El Paradigma Aleph se está aplicando en este momento en varios equipos de Quanam, una ONG, una institución educativa que presentará en el Congreso Mundial IAC 2026, y grupos internacionales que exploran la Inteligencia Colectiva." nombre={nombre} email={email} />
+                    <DuendeFragmento
+                      fragmentoId="f5"
+                      titulo="Líneas de exploración abiertas"
+                      contexto={`El Paradigma Aleph se está aplicando en este momento en: ${iniciativasActivas.map(i => i.nombre).join(', ')}.`}
+                      nombre={nombre}
+                      email={email}
+                      iniciativasActivas={iniciativasActivas}
+                    />
                     <div style={{ marginTop: 20, paddingTop: 16, borderTop: '1px solid rgba(0,0,0,0.07)', display: 'flex', flexDirection: 'column', gap: 10 }}>
                       <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.65, fontWeight: 300 }}>Si querés conversar sobre estas iniciativas, dejá tu mensaje acá</p>
                       <textarea
@@ -1393,6 +1410,7 @@ export default function QuanamIa2026() {
                       {contactStatus === 'error' && <p style={{ fontSize: 12, color: '#c0392b', lineHeight: 1.65 }}>Hubo un error. Intentá de nuevo.</p>}
                     </div>
                   </div>
+                  )}
                 </div>
               </div>
             </div>,

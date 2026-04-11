@@ -135,11 +135,12 @@ export async function POST(request: Request) {
   try {
     const {
       mensaje, historial = [], sesion_id, modo, nombre, email, contexto_origen,
-      archivo_base64, archivo_tipo, archivo_nombre,
+      archivo_base64, archivo_tipo, archivo_nombre, iniciativas_activas,
     } = await request.json() as {
       mensaje: string; historial?: Message[]; sesion_id?: string; modo?: 'convocatoria' | 'corpus';
       nombre?: string; email?: string; contexto_origen?: string;
       archivo_base64?: string; archivo_tipo?: string; archivo_nombre?: string;
+      iniciativas_activas?: string;
     }
 
     if (!mensaje?.trim()) {
@@ -160,6 +161,10 @@ export async function POST(request: Request) {
     let systemPrompt = modo === 'convocatoria'
       ? SYSTEM_PROMPT + '\n\nIMPORTANTE: Estás hablando con un participante de una convocatoria. Respondé en 2-3 líneas máximo. Tono cálido y conversacional — como alguien que escucha con genuino interés. Sin jerga técnica ni conceptos del paradigma. Terminá siempre con una sola pregunta breve que abra territorio. No explicás — abrís.\n\nCerrá cada respuesta con una pregunta que mueva al usuario hacia el siguiente estado de maduración. Los 8 estados son: Latente → Posible → Activado → Emergente → Expresivo → Legible → Sostenido → Ecosistémico. Leé el estado actual de la conversación e invitá al siguiente con una sola pregunta breve.'
       : SYSTEM_PROMPT
+
+    if (modo === 'convocatoria' && iniciativas_activas?.trim()) {
+      systemPrompt += `\n\nINICIATIVAS ACTIVAS — donde el Paradigma Aleph se está aplicando en este momento:\n${iniciativas_activas}\n\nSi alguien pregunta sobre estas iniciativas, hablá de ellas desde el corpus del paradigma con brevedad.`
+    }
 
     if (agregarPreguntaDesafiante) {
       systemPrompt += '\n\nINSTRUCCIÓN ESPECIAL: Al final de tu respuesta, en una línea separada, incluí una pregunta desafiante anclada en el corpus del paradigma, relacionada con lo que se estuvo hablando. Formato exacto (sin texto adicional antes del →): → [tu pregunta]'
