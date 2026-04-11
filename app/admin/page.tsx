@@ -1174,7 +1174,7 @@ export default function AdminPage() {
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
                 {campoHilo.length > 0 && (
                   <button
-                    onClick={() => { setCampoHilo([]); setCampoReporteActivo(null); setCampoInput('') }}
+                    onClick={() => { setCampoHilo([]); setCampoReporteActivo(null); setCampoInput(''); setCampoAnalizando(false) }}
                     style={{ background: 'rgba(139,105,20,.08)', border: '1px solid rgba(139,105,20,.22)', borderRadius: 8, padding: '6px 12px', fontSize: '0.78rem', color: '#8B6914', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 500 }}
                   >
                     ← Menú
