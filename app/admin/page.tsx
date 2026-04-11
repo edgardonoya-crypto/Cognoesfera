@@ -53,7 +53,7 @@ export default function AdminPage() {
   const [editingCell, setEditingCell] = useState<{ id: string; field: string } | null>(null)
   const [editingValue, setEditingValue] = useState('')
   const [mounted, setMounted] = useState(false)
-  const lenteModalBottomRef = useRef<HTMLDivElement>(null)
+  const lenteModalTopRef = useRef<HTMLDivElement>(null)
   const [modalAbierto, setModalAbierto] = useState<null | 'campo' | 'conversaciones' | 'curacion' | 'preguntas' | 'iniciativas' | 'accesos'>(null)
   const [responsableDropdownId, setResponsableDropdownId] = useState<string | null>(null)
   const [responsableSearch, setResponsableSearch] = useState('')
@@ -79,8 +79,8 @@ export default function AdminPage() {
   useEffect(() => {
     if (!lenteModal) return
     setTimeout(() => {
-      lenteModalBottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }, 100)
+      lenteModalTopRef.current?.scrollIntoView({ behavior: 'instant' })
+    }, 50)
   }, [lenteModal])
 
   useEffect(() => {
@@ -878,6 +878,7 @@ export default function AdminPage() {
 
             {/* Body scrolleable */}
             <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px 28px', display: 'flex', flexDirection: 'column', gap: 0 }}>
+              <div ref={lenteModalTopRef} />
 
               {/* Panel Duende-Arquitecto */}
               <div style={{ background: 'rgba(139,105,20,.06)', border: '1px solid rgba(139,105,20,.18)', borderRadius: 12, padding: '16px 18px 18px', marginBottom: 28, flexShrink: 0 }}>
@@ -973,7 +974,6 @@ export default function AdminPage() {
                   </div>
                 </div>
               ))}
-              <div ref={lenteModalBottomRef} />
             </div>
           </div>
         </div>,
