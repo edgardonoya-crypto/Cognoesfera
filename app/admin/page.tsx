@@ -7,17 +7,7 @@ import { supabase } from '@/app/lib/supabase'
 
 const ARQUITECTO_EMAIL = 'edgardo.noya@gmail.com'
 
-const LENTES_ORDEN = [
-  'El ángulo propio',
-  'La pregunta viva',
-  'La intuición central',
-  'El hilo conector',
-  'El experimento pendiente',
-]
-
-type Respuesta = { id: string; nombre: string; email: string; lente: string; respuesta: string; created_at: string }
 type Contacto  = { id: string; nombre: string; email: string; mensaje: string; origen: string | null; created_at: string }
-type Respondente = { nombre: string; email: string; lentes: string[]; primera: string; respuestas: Respuesta[] }
 type DuendeMensaje = { role: 'user' | 'assistant'; content: string; timestamp?: string }
 type AccesoConvocatoria = { id: string; email: string; created_at: string }
 type LoginLog = { id: string; email: string; created_at: string }
@@ -35,11 +25,13 @@ function fmt(iso: string) {
 export default function AdminPage() {
   const router = useRouter()
   const [status, setStatus] = useState<'loading' | 'unauth' | 'forbidden' | 'ok'>('loading')
-  const [respondentes, setRespondentes] = useState<Respondente[]>([])
   const [contactos, setContactos] = useState<Contacto[]>([])
   const [conversaciones, setConversaciones] = useState<DuendeConv[]>([])
-  const [selected, setSelected] = useState<Respondente | null>(null)
-  const [selectedConv, setSelectedConv] = useState<string | null>(null)
+  const [convTab, setConvTab] = useState<'usuario' | 'lente' | 'usuariolente'>('usuario')
+  const [convExpandedUsers, setConvExpandedUsers] = useState<Set<string>>(new Set())
+  const [convExpandedLentes, setConvExpandedLentes] = useState<Set<string>>(new Set())
+  const [convSelectedUser, setConvSelectedUser] = useState<string | null>(null)
+  const [convSelectedLente, setConvSelectedLente] = useState<string | null>(null)
   const [loginLogs, setLoginLogs] = useState<LoginLog[]>([])
   const [accesosConv, setAccesosConv] = useState<AccesoConvocatoria[]>([])
   const [archivos, setArchivos] = useState<ArchivoCuraduria[]>([])
@@ -52,7 +44,7 @@ export default function AdminPage() {
   const [editingCell, setEditingCell] = useState<{ id: string; field: string } | null>(null)
   const [editingValue, setEditingValue] = useState('')
   const [mounted, setMounted] = useState(false)
-  const [modalAbierto, setModalAbierto] = useState<null | 'campo' | 'conversaciones' | 'respondentes' | 'curacion' | 'preguntas' | 'iniciativas' | 'accesos'>(null)
+  const [modalAbierto, setModalAbierto] = useState<null | 'campo' | 'conversaciones' | 'curacion' | 'preguntas' | 'iniciativas' | 'accesos'>(null)
   const [responsableDropdownId, setResponsableDropdownId] = useState<string | null>(null)
   const [responsableSearch, setResponsableSearch] = useState('')
   const [responsableDropdownPos, setResponsableDropdownPos] = useState<{ top: number; left: number } | null>(null)
@@ -67,29 +59,14 @@ export default function AdminPage() {
 
       const accessToken = session.access_token
 
-      const [{ data: rData }, { data: cData }, duendeRes, { data: lData }] = await Promise.all([
-        supabase.from('quanam_respuestas').select('id, nombre, email, lente, respuesta, created_at').order('created_at', { ascending: true }),
+      const [{ data: cData }, duendeRes, { data: lData }] = await Promise.all([
         supabase.from('aleph_contacto').select('id, nombre, email, mensaje, origen, created_at').order('created_at', { ascending: false }),
         fetch('/api/admin/duende-chats', { headers: { Authorization: `Bearer ${accessToken}` } }).then(r => r.json()),
         supabase.from('login_log').select('id, email, created_at').order('created_at', { ascending: false }).limit(50),
-        supabase.from('convocatoria_accesos').select('id, email, created_at').order('created_at', { ascending: false }).limit(100),
       ])
 
       const dData: DuendeConv[] | null = duendeRes?.data ?? null
       if (duendeRes?.error) console.error('duende-chats admin error:', duendeRes.error)
-
-      if (rData) {
-        const map = new Map<string, Respondente>()
-        for (const r of rData as Respuesta[]) {
-          const key = `${r.nombre}||${r.email}`
-          if (!map.has(key)) map.set(key, { nombre: r.nombre, email: r.email, lentes: [], primera: r.created_at, respuestas: [] })
-          const entry = map.get(key)!
-          if (!entry.lentes.includes(r.lente)) entry.lentes.push(r.lente)
-          entry.respuestas.push(r)
-          if (r.created_at < entry.primera) entry.primera = r.created_at
-        }
-        setRespondentes(Array.from(map.values()))
-      }
 
       if (cData) setContactos(cData as Contacto[])
       if (dData) setConversaciones((dData as DuendeConv[]).filter(d => Array.isArray(d.mensajes) && d.mensajes.length > 0))
@@ -218,7 +195,6 @@ export default function AdminPage() {
   const cajas: { id: typeof modalAbierto & string; nombre: string; conteo: number; desc: string; color: string }[] = [
     { id: 'campo',          nombre: 'El campo',       conteo: estadosVitales.length,   desc: 'Usuarios en el campo',              color: '#4eaa98' },
     { id: 'conversaciones', nombre: 'Conversaciones', conteo: conversaciones.length,   desc: 'Conversaciones con el Duende',      color: '#8B6914' },
-    { id: 'respondentes',   nombre: 'Respondentes',   conteo: respondentes.length,     desc: 'Respuestas en la convocatoria',     color: '#4eaa98' },
     { id: 'curacion',       nombre: 'Curación',       conteo: archivosPendientes,      desc: 'Archivos para revisar',             color: '#C4941A' },
     { id: 'preguntas',      nombre: 'Preguntas',      conteo: preguntas.length,        desc: 'Preguntas al Arquitecto',           color: '#C4941A' },
     { id: 'iniciativas',    nombre: 'Iniciativas',    conteo: iniciativasActivas,      desc: 'Iniciativas del campo',             color: '#8B6914' },
@@ -270,7 +246,6 @@ export default function AdminPage() {
                 <h2 style={{ ...styles.h2, margin: 0 }}>
                   {modalAbierto === 'campo' && 'El campo'}
                   {modalAbierto === 'conversaciones' && 'Conversaciones con el Duende'}
-                  {modalAbierto === 'respondentes' && 'Respondentes'}
                   {modalAbierto === 'curacion' && 'Curación'}
                   {modalAbierto === 'preguntas' && 'Preguntas al Arquitecto'}
                   {modalAbierto === 'iniciativas' && 'Iniciativas'}
@@ -303,124 +278,215 @@ export default function AdminPage() {
                 )}
 
                 {/* CONVERSACIONES */}
-                {modalAbierto === 'conversaciones' && (
-                  conversaciones.length === 0 ? <p style={styles.empty}>Todavía no hay conversaciones.</p> : (
-                    <div style={styles.tableWrap}>
-                      <table style={styles.table}>
-                        <thead><tr>{['Nombre', 'Email', 'Contexto', 'Intercambios', 'Fecha', 'Hora', ''].map(h => <th key={h} style={styles.th}>{h}</th>)}</tr></thead>
-                        <tbody>
-                          {conversaciones.map(conv => {
-                            const isOpen = selectedConv === conv.id
-                            const intercambios = Math.floor(conv.mensajes.length / 2)
+                {modalAbierto === 'conversaciones' && (() => {
+                  if (conversaciones.length === 0) return <p style={styles.empty}>Todavía no hay conversaciones.</p>
+
+                  // Derived data
+                  const byUser = new Map<string, DuendeConv[]>()
+                  const byLente = new Map<string, DuendeConv[]>()
+                  for (const c of conversaciones) {
+                    const u = c.email_participante ?? '(sin email)'
+                    const l = c.contexto_origen ?? '(sin contexto)'
+                    if (!byUser.has(u)) byUser.set(u, [])
+                    byUser.get(u)!.push(c)
+                    if (!byLente.has(l)) byLente.set(l, [])
+                    byLente.get(l)!.push(c)
+                  }
+
+                  const tabBtn = (id: typeof convTab, label: string) => (
+                    <button
+                      onClick={() => setConvTab(id)}
+                      style={{ padding: '6px 16px', borderRadius: 8, border: 'none', cursor: 'pointer', fontSize: '0.8rem', fontWeight: convTab === id ? 650 : 400, background: convTab === id ? 'rgba(139,105,20,0.15)' : 'rgba(34,58,54,0.06)', color: convTab === id ? '#8B6914' : '#66706d' }}
+                    >{label}</button>
+                  )
+
+                  const firstUserMsg = (conv: DuendeConv) => conv.mensajes.find(m => m.role === 'user')?.content ?? '—'
+
+                  return (
+                    <div>
+                      {/* Tabs */}
+                      <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
+                        {tabBtn('usuario', 'Por usuario')}
+                        {tabBtn('lente', 'Por lente')}
+                        {tabBtn('usuariolente', 'Por usuario y lente')}
+                      </div>
+
+                      {/* POR USUARIO */}
+                      {convTab === 'usuario' && (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                          {[...byUser.entries()].map(([email, convs]) => {
+                            const isOpen = convExpandedUsers.has(email)
+                            const ultima = convs.reduce((a, b) => a.created_at > b.created_at ? a : b)
+                            const toggle = () => setConvExpandedUsers(prev => {
+                              const s = new Set(prev); isOpen ? s.delete(email) : s.add(email); return s
+                            })
+                            const porCtx = new Map<string, DuendeConv[]>()
+                            for (const c of convs) {
+                              const k = c.contexto_origen ?? '(sin contexto)'
+                              if (!porCtx.has(k)) porCtx.set(k, [])
+                              porCtx.get(k)!.push(c)
+                            }
                             return (
-                              <React.Fragment key={conv.id}>
-                                <tr style={{ ...styles.tr, background: isOpen ? 'rgba(139,105,20,.06)' : undefined }}>
-                                  <td style={styles.td}>{conv.nombre_participante || '—'}</td>
-                                  <td style={{ ...styles.td, color: '#66706d' }}>{conv.email_participante || '—'}</td>
-                                  <td style={{ ...styles.td, color: '#66706d', fontSize: '0.8rem' }}>{conv.contexto_origen || '—'}</td>
-                                  <td style={{ ...styles.td, color: '#66706d' }}>{intercambios}</td>
-                                  <td style={{ ...styles.td, color: '#66706d', whiteSpace: 'nowrap' }}>{fmt(conv.created_at)}</td>
-                                  <td style={{ ...styles.td, color: '#66706d', whiteSpace: 'nowrap' }}>{new Date(conv.created_at).toLocaleTimeString('es-UY', {hour:'2-digit',minute:'2-digit'})}</td>
-                                  <td style={{ ...styles.td, textAlign: 'right', width: 40 }}>
-                                    <button onClick={() => setSelectedConv(isOpen ? null : conv.id)} style={{ background: 'none', border: '1px solid rgba(139,105,20,.4)', borderRadius: 6, width: 26, height: 26, cursor: 'pointer', fontSize: 16, color: '#8B6914', lineHeight: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 300 }}>{isOpen ? '−' : '+'}</button>
-                                  </td>
-                                </tr>
+                              <div key={email} style={{ border: '1px solid rgba(34,58,54,.10)', borderRadius: 10, overflow: 'hidden' }}>
+                                <div onClick={toggle} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', cursor: 'pointer', background: isOpen ? 'rgba(139,105,20,.05)' : 'rgba(255,255,255,.7)' }}>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                                    <span style={{ fontSize: '0.875rem', color: '#18201e', fontWeight: 500 }}>{email}</span>
+                                    <span style={{ fontSize: '0.75rem', color: '#8B6914', background: 'rgba(139,105,20,.12)', borderRadius: 10, padding: '2px 8px' }}>{convs.length} conv{convs.length !== 1 ? 's' : ''}</span>
+                                  </div>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                                    <span style={{ fontSize: '0.75rem', color: '#8a9e98' }}>{fmt(ultima.created_at)}</span>
+                                    <span style={{ color: '#8B6914', fontSize: 18, lineHeight: 1 }}>{isOpen ? '−' : '+'}</span>
+                                  </div>
+                                </div>
                                 {isOpen && (
-                                  <tr style={{ background: 'rgba(139,105,20,.03)' }}>
-                                    <td colSpan={6} style={{ padding: '16px 20px 20px' }}>
-                                      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                                        {conv.mensajes.map((m, i) => (
-                                          <div key={i} style={{ padding: '10px 14px', borderRadius: 8, background: m.role === 'user' ? 'rgba(34,58,54,.06)' : 'transparent', borderLeft: m.role === 'assistant' ? '3px solid rgba(139,105,20,.35)' : 'none' }}>
-                                            <p style={{ fontSize: '0.72rem', fontWeight: 600, color: m.role === 'user' ? '#4eaa98' : '#8B6914', margin: '0 0 4px', letterSpacing: '0.06em', textTransform: 'uppercase' }}>{m.role === 'user' ? (conv.nombre_participante || 'Usuario') : 'Duende'}</p>
-                                            <p style={{ fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.65, margin: 0, fontStyle: m.role === 'assistant' ? 'italic' : 'normal', fontWeight: 300 }}>{m.content}</p>
-                                          </div>
-                                        ))}
+                                  <div style={{ padding: '12px 16px 16px', display: 'flex', flexDirection: 'column', gap: 12, background: 'rgba(139,105,20,.02)' }}>
+                                    {[...porCtx.entries()].map(([ctx, ctxConvs]) => (
+                                      <div key={ctx}>
+                                        <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#8B6914', marginBottom: 6 }}>{ctx}</div>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                                          {ctxConvs.map(c => (
+                                            <div key={c.id} style={{ padding: '8px 12px', borderRadius: 8, background: 'rgba(255,255,255,.8)', border: '1px solid rgba(34,58,54,.08)' }}>
+                                              <div style={{ fontSize: '0.78rem', color: '#2c3830', lineHeight: 1.5, marginBottom: 4, fontStyle: 'italic', fontWeight: 300 }}>{firstUserMsg(c).slice(0, 120)}{firstUserMsg(c).length > 120 ? '…' : ''}</div>
+                                              <div style={{ fontSize: '0.72rem', color: '#8a9e98' }}>{fmt(c.created_at)}</div>
+                                            </div>
+                                          ))}
+                                        </div>
                                       </div>
-                                    </td>
-                                  </tr>
+                                    ))}
+                                  </div>
                                 )}
-                              </React.Fragment>
+                              </div>
                             )
                           })}
-                        </tbody>
-                      </table>
+                        </div>
+                      )}
+
+                      {/* POR LENTE */}
+                      {convTab === 'lente' && (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                          {[...byLente.entries()].map(([lente, convs]) => {
+                            const isOpen = convExpandedLentes.has(lente)
+                            const usuariosDistintos = new Set(convs.map(c => c.email_participante ?? '')).size
+                            const sorted = [...convs].sort((a, b) => b.created_at.localeCompare(a.created_at))
+                            const toggle = () => setConvExpandedLentes(prev => {
+                              const s = new Set(prev); isOpen ? s.delete(lente) : s.add(lente); return s
+                            })
+                            return (
+                              <div key={lente} style={{ border: '1px solid rgba(34,58,54,.10)', borderRadius: 10, overflow: 'hidden' }}>
+                                <div onClick={toggle} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', cursor: 'pointer', background: isOpen ? 'rgba(78,170,152,.05)' : 'rgba(255,255,255,.7)' }}>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                                    <span style={{ fontSize: '0.875rem', color: '#18201e', fontWeight: 500 }}>{lente}</span>
+                                    <span style={{ fontSize: '0.75rem', color: '#4eaa98', background: 'rgba(78,170,152,.12)', borderRadius: 10, padding: '2px 8px' }}>{convs.length} conv{convs.length !== 1 ? 's' : ''}</span>
+                                    <span style={{ fontSize: '0.75rem', color: '#66706d' }}>{usuariosDistintos} usuario{usuariosDistintos !== 1 ? 's' : ''}</span>
+                                  </div>
+                                  <span style={{ color: '#4eaa98', fontSize: 18, lineHeight: 1 }}>{isOpen ? '−' : '+'}</span>
+                                </div>
+                                {isOpen && (
+                                  <div style={{ padding: '12px 16px 16px', display: 'flex', flexDirection: 'column', gap: 6, background: 'rgba(78,170,152,.02)' }}>
+                                    {sorted.map(c => (
+                                      <div key={c.id} style={{ padding: '8px 12px', borderRadius: 8, background: 'rgba(255,255,255,.8)', border: '1px solid rgba(34,58,54,.08)' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+                                          <span style={{ fontSize: '0.75rem', color: '#4eaa98', fontWeight: 500 }}>{c.email_participante ?? '—'}</span>
+                                          <span style={{ fontSize: '0.72rem', color: '#8a9e98' }}>{fmt(c.created_at)}</span>
+                                        </div>
+                                        <div style={{ fontSize: '0.78rem', color: '#2c3830', lineHeight: 1.5, fontStyle: 'italic', fontWeight: 300 }}>{firstUserMsg(c).slice(0, 120)}{firstUserMsg(c).length > 120 ? '…' : ''}</div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            )
+                          })}
+                        </div>
+                      )}
+
+                      {/* POR USUARIO Y LENTE */}
+                      {convTab === 'usuariolente' && (() => {
+                        const todosUsuarios = [...new Set(conversaciones.map(c => c.email_participante ?? '(sin email)'))]
+                        const todasLentes = [...new Set(conversaciones.map(c => c.contexto_origen ?? '(sin contexto)'))]
+
+                        const lentesDelUsuario = convSelectedUser
+                          ? [...new Set(conversaciones.filter(c => (c.email_participante ?? '(sin email)') === convSelectedUser).map(c => c.contexto_origen ?? '(sin contexto)'))]
+                          : todasLentes
+                        const usuariosDelaLente = convSelectedLente
+                          ? [...new Set(conversaciones.filter(c => (c.contexto_origen ?? '(sin contexto)') === convSelectedLente).map(c => c.email_participante ?? '(sin email)'))]
+                          : todosUsuarios
+
+                        const convInterseccion = (convSelectedUser && convSelectedLente)
+                          ? conversaciones.filter(c =>
+                              (c.email_participante ?? '(sin email)') === convSelectedUser &&
+                              (c.contexto_origen ?? '(sin contexto)') === convSelectedLente
+                            )
+                          : []
+
+                        const itemStyle = (selected: boolean, color: string): React.CSSProperties => ({
+                          padding: '8px 12px', borderRadius: 8, cursor: 'pointer', fontSize: '0.82rem',
+                          background: selected ? `rgba(${color},.15)` : 'rgba(255,255,255,.7)',
+                          border: `1px solid ${selected ? `rgba(${color},.35)` : 'rgba(34,58,54,.08)'}`,
+                          color: selected ? '#18201e' : '#66706d', fontWeight: selected ? 600 : 400,
+                        })
+
+                        return (
+                          <div>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 20 }}>
+                              <div>
+                                <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#4eaa98', marginBottom: 8 }}>Usuarios</div>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                                  {todosUsuarios.filter(u => usuariosDelaLente.includes(u)).map(u => (
+                                    <div key={u} onClick={() => setConvSelectedUser(convSelectedUser === u ? null : u)} style={itemStyle(convSelectedUser === u, '78,170,152')}>{u}</div>
+                                  ))}
+                                  {todosUsuarios.filter(u => !usuariosDelaLente.includes(u)).map(u => (
+                                    <div key={u} onClick={() => { setConvSelectedUser(convSelectedUser === u ? null : u); setConvSelectedLente(null) }} style={{ ...itemStyle(false, '78,170,152'), opacity: 0.35 }}>{u}</div>
+                                  ))}
+                                </div>
+                              </div>
+                              <div>
+                                <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#8B6914', marginBottom: 8 }}>Lentes</div>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                                  {todasLentes.filter(l => lentesDelUsuario.includes(l)).map(l => (
+                                    <div key={l} onClick={() => setConvSelectedLente(convSelectedLente === l ? null : l)} style={itemStyle(convSelectedLente === l, '139,105,20')}>{l}</div>
+                                  ))}
+                                  {todasLentes.filter(l => !lentesDelUsuario.includes(l)).map(l => (
+                                    <div key={l} onClick={() => { setConvSelectedLente(convSelectedLente === l ? null : l); setConvSelectedUser(null) }} style={{ ...itemStyle(false, '139,105,20'), opacity: 0.35 }}>{l}</div>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                            {convSelectedUser && convSelectedLente && (
+                              <div>
+                                <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#66706d', marginBottom: 10 }}>
+                                  {convSelectedUser} · {convSelectedLente}
+                                </div>
+                                {convInterseccion.length === 0
+                                  ? <p style={styles.empty}>Sin conversaciones en esta intersección.</p>
+                                  : <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                                      {convInterseccion.map(c => (
+                                        <div key={c.id} style={{ padding: '12px 14px', borderRadius: 10, background: 'rgba(255,255,255,.8)', border: '1px solid rgba(34,58,54,.10)' }}>
+                                          <div style={{ fontSize: '0.72rem', color: '#8a9e98', marginBottom: 6 }}>{fmt(c.created_at)}</div>
+                                          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                                            {c.mensajes.map((m, i) => (
+                                              <div key={i} style={{ padding: '6px 10px', borderRadius: 6, background: m.role === 'user' ? 'rgba(34,58,54,.06)' : 'transparent', borderLeft: m.role === 'assistant' ? '3px solid rgba(139,105,20,.35)' : 'none' }}>
+                                                <p style={{ fontSize: '0.72rem', fontWeight: 600, color: m.role === 'user' ? '#4eaa98' : '#8B6914', margin: '0 0 3px', letterSpacing: '0.06em', textTransform: 'uppercase' as const }}>{m.role === 'user' ? (c.nombre_participante || 'Usuario') : 'Duende'}</p>
+                                                <p style={{ fontSize: '0.82rem', color: '#2c3830', lineHeight: 1.6, margin: 0, fontStyle: m.role === 'assistant' ? 'italic' : 'normal', fontWeight: 300 }}>{m.content}</p>
+                                              </div>
+                                            ))}
+                                          </div>
+                                        </div>
+                                      ))}
+                                    </div>
+                                }
+                              </div>
+                            )}
+                            {(!convSelectedUser || !convSelectedLente) && (
+                              <p style={{ ...styles.empty, marginTop: 8 }}>Seleccioná un usuario y una lente para ver la intersección.</p>
+                            )}
+                          </div>
+                        )
+                      })()}
+
                     </div>
                   )
-                )}
-
-                {/* RESPONDENTES */}
-                {modalAbierto === 'respondentes' && (<>
-                  <p style={{ ...styles.meta, marginBottom: 20 }}>{respondentes.length} persona{respondentes.length !== 1 ? 's' : ''} respondieron · {contactos.length} contacto{contactos.length !== 1 ? 's' : ''} Aleph</p>
-                  {respondentes.length === 0 ? <p style={styles.empty}>Todavía no hay respuestas.</p> : (
-                    <div style={styles.tableWrap}>
-                      <table style={styles.table}>
-                        <thead><tr>{['Nombre', 'Email', 'Lentes', 'Primera respuesta', ''].map(h => <th key={h} style={styles.th}>{h}</th>)}</tr></thead>
-                        <tbody>
-                          {respondentes.map((r, i) => {
-                            const isOpen = selected?.email === r.email && selected?.nombre === r.nombre
-                            return (
-                              <React.Fragment key={i}>
-                                <tr style={{ ...styles.tr, background: isOpen ? 'rgba(78,170,152,.08)' : undefined }}>
-                                  <td style={styles.td}>{r.nombre}</td>
-                                  <td style={{ ...styles.td, color: '#66706d' }}>{r.email || '—'}</td>
-                                  <td style={styles.td}>{r.lentes.length}</td>
-                                  <td style={{ ...styles.td, color: '#66706d' }}>{fmt(r.primera)}</td>
-                                  <td style={{ ...styles.td, textAlign: 'right', width: 40 }}>
-                                    <button onClick={() => setSelected(isOpen ? null : r)} style={{ background: 'none', border: '1px solid rgba(78,170,152,.4)', borderRadius: 6, width: 26, height: 26, cursor: 'pointer', fontSize: 16, color: '#4eaa98', lineHeight: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 300 }}>{isOpen ? '−' : '+'}</button>
-                                  </td>
-                                </tr>
-                                {isOpen && (
-                                  <tr style={{ background: 'rgba(78,170,152,.04)' }}>
-                                    <td colSpan={5} style={{ padding: '16px 20px 20px' }}>
-                                      <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                                        {LENTES_ORDEN.map(lente => {
-                                          const rows = r.respuestas.filter(rr => rr.lente === lente)
-                                          if (rows.length === 0) return null
-                                          return (
-                                            <div key={lente}>
-                                              <div style={styles.lenteName}>{lente}</div>
-                                              {rows.map((rr, j) => (
-                                                <div key={j} style={styles.respuesta}>
-                                                  <p style={styles.respuestaText}>{rr.respuesta}</p>
-                                                  <p style={styles.respuestaDate}>{fmt(rr.created_at)}</p>
-                                                </div>
-                                              ))}
-                                            </div>
-                                          )
-                                        })}
-                                      </div>
-                                    </td>
-                                  </tr>
-                                )}
-                              </React.Fragment>
-                            )
-                          })}
-                        </tbody>
-                      </table>
-                    </div>
-                  )}
-                  {contactos.length > 0 && (
-                    <div style={{ marginTop: 28 }}>
-                      <h3 style={{ fontSize: '0.9rem', fontWeight: 650, color: '#18201e', marginBottom: 12 }}>Contactos Aleph</h3>
-                      <div style={styles.tableWrap}>
-                        <table style={styles.table}>
-                          <thead><tr>{['Nombre', 'Email', 'Mensaje', 'Origen', 'Fecha'].map(h => <th key={h} style={styles.th}>{h}</th>)}</tr></thead>
-                          <tbody>
-                            {contactos.map((c, i) => (
-                              <tr key={i} style={styles.tr}>
-                                <td style={styles.td}>{c.nombre || '—'}</td>
-                                <td style={{ ...styles.td, color: '#66706d' }}>{c.email || '—'}</td>
-                                <td style={{ ...styles.td, maxWidth: 240, whiteSpace: 'pre-wrap' }}>{c.mensaje}</td>
-                                <td style={{ ...styles.td, color: '#66706d', fontSize: '0.78rem' }}>{c.origen || '—'}</td>
-                                <td style={{ ...styles.td, color: '#66706d', whiteSpace: 'nowrap' }}>{fmt(c.created_at)}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  )}
-                </>)}
+                })()}
 
                 {/* CURACIÓN */}
                 {modalAbierto === 'curacion' && (
