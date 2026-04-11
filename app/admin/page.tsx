@@ -17,6 +17,8 @@ type PreguntaArquitecto = { id: string; created_at: string; email_participante: 
 type Iniciativa = { id: string; nombre: string; descripcion: string | null; responsable: string | null; estado: 'activa' | 'pausada' | 'completada'; fecha_inicio: string | null; visible_convocatoria: boolean; created_at: string }
 type InteresSaved = { id: string; iniciativa_id: string; email_participante: string | null; lente_origen: string | null; fragmento_origen: string | null; momento: string | null; created_at: string; iniciativas?: { nombre: string } | null }
 type EstadoVitalAdmin = { id: string; email: string; contexto: string; estado: string; fecha_entrada: string; dias_en_campo: number }
+type DuendeMsgArquitecto = { role: 'user' | 'assistant'; content: string }
+
 type Analisis = {
   id: string
   consulta: string
@@ -66,6 +68,7 @@ export default function AdminPage() {
   const [analisisExpandido, setAnalisisExpandido] = useState<string | null>(null)
   const [consultaInput, setConsultaInput] = useState('')
   const [analizando, setAnalizando] = useState(false)
+  const [hiloArquitecto, setHiloArquitecto] = useState<DuendeMsgArquitecto[]>([])
 
   useEffect(() => { setMounted(true) }, [])
 
@@ -208,20 +211,29 @@ export default function AdminPage() {
       headers: { Authorization: `Bearer ${session.access_token}` },
     }).then(r => r.json())
     if (res.data) setAnalisisHistorial(res.data as Analisis[])
+    setHiloArquitecto([])
   }
 
   async function ejecutarAnalisis() {
     if (!consultaInput.trim() || analizando || !lenteModal) return
     const { data: { session } } = await supabase.auth.getSession()
     if (!session) return
+    const consultaActual = consultaInput.trim()
+    setConsultaInput('')
     setAnalizando(true)
+
+    // Agregar mensaje del Arquitecto al hilo inmediatamente
+    const hiloActual: DuendeMsgArquitecto[] = [...hiloArquitecto, { role: 'user', content: consultaActual }]
+    setHiloArquitecto(hiloActual)
+
     try {
       const res = await fetch('/api/admin/duende-analisis', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
         body: JSON.stringify({
           contexto: lenteModal.contexto,
-          consulta: consultaInput.trim(),
+          consulta: consultaActual,
+          historial: hiloArquitecto, // historial ANTES de este mensaje
           conversaciones: lenteModal.convs.map(c => ({
             id: c.id,
             email: c.email_participante,
@@ -231,9 +243,14 @@ export default function AdminPage() {
       })
       const data = await res.json() as { respuesta?: string; fuentes?: Analisis['fuentes']; id?: string; error?: string }
       if (!res.ok || !data.respuesta) throw new Error(data.error ?? 'Sin respuesta')
+
+      // Agregar respuesta del Duende al hilo
+      setHiloArquitecto(prev => [...prev, { role: 'assistant', content: data.respuesta! }])
+
+      // Guardar en historial de análisis para persistencia
       const nuevo: Analisis = {
         id: data.id ?? Date.now().toString(),
-        consulta: consultaInput.trim(),
+        consulta: consultaActual,
         respuesta: data.respuesta,
         fuentes: data.fuentes ?? [],
         conversaciones_n: lenteModal.convs.length,
@@ -241,9 +258,10 @@ export default function AdminPage() {
       }
       setAnalisisHistorial(prev => [nuevo, ...prev])
       setAnalisisExpandido(nuevo.id)
-      setConsultaInput('')
     } catch (err) {
       console.error(err)
+      // Sacar el mensaje del usuario del hilo si falló
+      setHiloArquitecto(prev => prev.slice(0, -1))
     } finally {
       setAnalizando(false)
     }
@@ -927,8 +945,10 @@ export default function AdminPage() {
             </div>
 
             {/* Panel Duende-Arquitecto — fijo en la parte inferior */}
-            <div style={{ flexShrink: 0, borderTop: '1px solid rgba(139,105,20,.15)', background: 'rgba(252,248,240,0.98)', padding: '16px 24px 20px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, marginBottom: 12 }}>
+            {/* Panel Duende-Arquitecto — footer fijo */}
+            <div style={{ flexShrink: 0, borderTop: '1px solid rgba(139,105,20,.15)', background: 'rgba(252,248,240,0.98)', display: 'flex', flexDirection: 'column', maxHeight: '55%' }}>
+              {/* Encabezado */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, padding: '12px 24px 10px', flexShrink: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <div style={{ width: 26, height: 26, borderRadius: '50%', border: '1px solid rgba(139,105,20,.4)', background: 'rgba(139,105,20,.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700, color: '#8B6914' }}>D</div>
                   <span style={{ fontSize: '0.8rem', fontWeight: 650, color: '#8B6914', letterSpacing: '0.04em' }}>Análisis del Duende</span>
@@ -936,49 +956,84 @@ export default function AdminPage() {
                 <span style={{ fontSize: '0.68rem', color: '#8a9e98' }}>{lenteModal.convs.length} conversaciones · Corpus Madre como lente</span>
               </div>
 
-              {analisisHistorial.length > 0 && (
-                <div style={{ marginBottom: 12, display: 'flex', flexDirection: 'column', gap: 8, maxHeight: 300, overflowY: 'auto' }}>
-                  <div style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#8a9e98', marginBottom: 2 }}>Análisis anteriores</div>
-                  {analisisHistorial.map(a => (
-                    <div key={a.id} style={{ background: 'rgba(255,255,255,.85)', border: '1px solid rgba(139,105,20,.14)', borderRadius: 10, overflow: 'hidden' }}>
-                      <div
-                        onClick={() => setAnalisisExpandido(analisisExpandido === a.id ? null : a.id)}
-                        style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 14px', cursor: 'pointer', borderBottom: analisisExpandido === a.id ? '1px solid rgba(139,105,20,.08)' : 'none' }}
-                      >
-                        <span style={{ flex: 1, fontSize: '0.82rem', color: '#2c3830', fontWeight: 500 }}>{a.consulta}</span>
-                        <span style={{ fontSize: '0.68rem', color: '#8a9e98', flexShrink: 0 }}>{fmt(a.created_at)}</span>
-                        <span style={{ color: '#8B6914', fontSize: 16, lineHeight: 1, flexShrink: 0 }}>{analisisExpandido === a.id ? '−' : '+'}</span>
-                      </div>
-                      {analisisExpandido === a.id && (
-                        <div style={{ padding: '14px 16px 16px' }}>
-                          <div style={{ fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.75, margin: '0 0 14px', fontStyle: 'italic', fontWeight: 300, maxHeight: 260, overflowY: 'auto', paddingRight: 4 }}>
-                            {renderMarkdown(a.respuesta)}
-                          </div>
-                          {a.fuentes.length > 0 && (
-                            <div style={{ background: 'rgba(139,105,20,.05)', border: '1px solid rgba(139,105,20,.12)', borderRadius: 8, padding: '10px 12px' }}>
-                              <div style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#8B6914', marginBottom: 8 }}>Aportaron a este análisis</div>
-                              <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: 6, marginBottom: 6 }}>
-                                {[...new Map(a.fuentes.map(f => [f.email, f])).values()].map(f => (
-                                  <button
-                                    key={f.id}
-                                    onClick={() => { setLenteModal(null); window.open(`/admin/conversacion/usuario/${encodeURIComponent(f.email ?? '')}/lente/${encodeURIComponent(f.contexto)}`, '_blank') }}
-                                    style={{ fontSize: '0.72rem', color: '#8B6914', background: 'rgba(139,105,20,.10)', border: '1px solid rgba(139,105,20,.22)', borderRadius: 20, padding: '3px 10px', cursor: 'pointer', fontFamily: 'inherit' }}
-                                  >
-                                    {f.email ?? 'anónimo'}
-                                  </button>
-                                ))}
-                              </div>
-                              <div style={{ fontSize: '0.65rem', color: '#8a9e98' }}>{a.conversaciones_n} conversaciones · Click en email para ver conversación completa</div>
-                            </div>
-                          )}
-                        </div>
-                      )}
+              {/* Hilo conversacional + sesiones anteriores */}
+              <div style={{ flex: 1, overflowY: 'auto', padding: '0 20px 10px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {hiloArquitecto.length === 0 && analisisHistorial.length === 0 && (
+                  <p style={{ fontSize: '0.78rem', color: '#a08030', fontStyle: 'italic', textAlign: 'center', marginTop: 16 }}>
+                    Hacé tu primera consulta sobre este lente.
+                  </p>
+                )}
+                {hiloArquitecto.map((m, i) => (
+                  <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
+                    <div style={{
+                      maxWidth: '88%', padding: '10px 14px',
+                      borderRadius: m.role === 'user' ? '14px 14px 3px 14px' : '14px 14px 14px 3px',
+                      background: m.role === 'user' ? 'rgba(139,105,20,.12)' : 'rgba(255,255,255,.80)',
+                      border: '1px solid ' + (m.role === 'user' ? 'rgba(139,105,20,.22)' : 'rgba(139,105,20,.12)'),
+                    }}>
+                      <p style={{ fontSize: '0.65rem', fontWeight: 600, color: m.role === 'user' ? '#8B6914' : '#a08030', margin: '0 0 5px', letterSpacing: '0.07em', textTransform: 'uppercase' as const }}>
+                        {m.role === 'user' ? 'Arquitecto' : 'Duende'}
+                      </p>
+                      {m.role === 'assistant'
+                        ? <div style={{ fontSize: '0.85rem', color: '#2c3830', lineHeight: 1.75, fontStyle: 'italic', fontWeight: 300 }}>{renderMarkdown(m.content)}</div>
+                        : <p style={{ fontSize: '0.85rem', color: '#2c3830', lineHeight: 1.7, margin: 0, fontWeight: 300 }}>{m.content}</p>
+                      }
                     </div>
-                  ))}
-                </div>
-              )}
+                  </div>
+                ))}
+                {analizando && (
+                  <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                    <div style={{ padding: '10px 14px', borderRadius: '14px 14px 14px 3px', background: 'rgba(255,255,255,.80)', border: '1px solid rgba(139,105,20,.12)' }}>
+                      <p style={{ fontSize: '0.78rem', color: '#a08030', fontStyle: 'italic', margin: 0 }}>El Duende está pensando…</p>
+                    </div>
+                  </div>
+                )}
+                {analisisHistorial.length > 0 && hiloArquitecto.length > 0 && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '8px 0 4px' }}>
+                    <div style={{ flex: 1, height: 1, background: 'rgba(139,105,20,.12)' }} />
+                    <span style={{ fontSize: '0.62rem', color: '#a08030', letterSpacing: '0.08em', textTransform: 'uppercase' as const }}>sesiones anteriores</span>
+                    <div style={{ flex: 1, height: 1, background: 'rgba(139,105,20,.12)' }} />
+                  </div>
+                )}
+                {analisisHistorial.map(a => (
+                  <div key={a.id} style={{ background: 'rgba(255,255,255,.55)', border: '1px solid rgba(139,105,20,.14)', borderRadius: 10, overflow: 'hidden' }}>
+                    <div
+                      onClick={() => setAnalisisExpandido(analisisExpandido === a.id ? null : a.id)}
+                      style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '9px 13px', cursor: 'pointer' }}
+                    >
+                      <span style={{ flex: 1, fontSize: '0.78rem', color: '#2c3830', fontWeight: 500 }}>{a.consulta}</span>
+                      <span style={{ fontSize: '0.62rem', color: '#a08030', flexShrink: 0 }}>{fmt(a.created_at)}</span>
+                      <span style={{ color: '#8B6914', fontSize: 14, lineHeight: 1, flexShrink: 0 }}>{analisisExpandido === a.id ? '−' : '+'}</span>
+                    </div>
+                    {analisisExpandido === a.id && (
+                      <div style={{ padding: '0 13px 13px', borderTop: '1px solid rgba(139,105,20,.10)' }}>
+                        <div style={{ fontSize: '0.85rem', color: '#2c3830', lineHeight: 1.75, margin: '10px 0 10px', fontStyle: 'italic', fontWeight: 300 }}>
+                          {renderMarkdown(a.respuesta)}
+                        </div>
+                        {a.fuentes.length > 0 && (
+                          <div style={{ background: 'rgba(139,105,20,.07)', borderRadius: 8, padding: '8px 10px' }}>
+                            <div style={{ fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#8B6914', marginBottom: 6 }}>Aportaron</div>
+                            <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: 5 }}>
+                              {[...new Map(a.fuentes.map(f => [f.email, f])).values()].map(f => (
+                                <button
+                                  key={f.id}
+                                  onClick={() => window.open(`/admin/conversacion/usuario/${encodeURIComponent(f.email ?? '')}/lente/${encodeURIComponent(f.contexto)}`, '_blank')}
+                                  style={{ fontSize: '0.7rem', color: '#8B6914', background: 'rgba(139,105,20,.10)', border: '1px solid rgba(139,105,20,.20)', borderRadius: 20, padding: '2px 9px', cursor: 'pointer', fontFamily: 'inherit' }}
+                                >
+                                  {f.email ?? 'anónimo'}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
 
-              <div style={{ display: 'flex', gap: 10, alignItems: 'flex-end' }}>
+              {/* Input siempre visible */}
+              <div style={{ flexShrink: 0, padding: '10px 24px 20px', display: 'flex', gap: 10, alignItems: 'flex-end' }}>
                 <textarea
                   value={consultaInput}
                   onChange={e => setConsultaInput(e.target.value)}

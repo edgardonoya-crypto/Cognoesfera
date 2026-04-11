@@ -38,8 +38,9 @@ export async function POST(req: Request) {
       email: string | null
       mensajes: Array<{ role: string; content: string }>
     }>
+    historial?: Array<{ role: 'user' | 'assistant'; content: string }>
   }
-  const { contexto, consulta, conversaciones } = body
+  const { contexto, consulta, conversaciones, historial = [] } = body
   if (!contexto || !consulta || !conversaciones)
     return NextResponse.json({ error: 'Faltan campos' }, { status: 400 })
 
@@ -67,14 +68,14 @@ Principios:
 Contexto que analizás: "${contexto}"
 Total de conversaciones: ${conversaciones.length}`
 
-  const userPrompt = `Conversaciones del contexto "${contexto}":\n\n${materialConversaciones}\n\n---\n\nConsulta del Arquitecto: ${consulta}`
-
   try {
     const response = await anthropic.messages.create({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 1000,
-      system: systemPrompt,
-      messages: [{ role: 'user', content: userPrompt }],
+      system: systemPrompt + `\n\nMaterial de conversaciones del campo:\n\n${materialConversaciones}`,
+      messages: historial.length === 0
+        ? [{ role: 'user' as const, content: consulta }]
+        : [...historial, { role: 'user' as const, content: consulta }],
     })
     const respuesta = response.content
       .filter(b => b.type === 'text')
