@@ -275,8 +275,25 @@ function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoPro
   const fileInputRef = useRef<HTMLInputElement>(null)
   const msgsEndRef = useRef<HTMLDivElement>(null)
   const [mounted, setMounted] = useState(false)
+  const [historyLoaded, setHistoryLoaded] = useState(false)
 
   useEffect(() => { setMounted(true) }, [])
+
+  // Cargar historial previo para este fragmento
+  useEffect(() => {
+    if (!email?.trim()) { setHistoryLoaded(true); return }
+    fetch(`/api/duende/history?email=${encodeURIComponent(email.trim())}`)
+      .then(r => r.json())
+      .then((data: { convs: Record<string, { id: string; msgs: DuendeMsg[] }> }) => {
+        const prev = data.convs?.[titulo]
+        if (prev?.msgs?.length) {
+          setMsgs(prev.msgs)
+          setSesionId(prev.id)
+        }
+      })
+      .catch(() => {})
+      .finally(() => setHistoryLoaded(true))
+  }, [email, titulo])
 
   useEffect(() => {
     msgsEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -361,9 +378,11 @@ function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoPro
 
   function handleAbrir(e: React.MouseEvent) {
     e.stopPropagation()
+    if (!historyLoaded) return
     if (msgs.length > 0) {
       setModalOpen(true)
     } else {
+      // Solo incluye contexto en el primer mensaje — cuando no hay historial previo
       const inicial = `El usuario está explorando el fragmento "${titulo}". Contexto: ${contexto}. Respondé desde ese territorio con brevedad. Abrí una pregunta que invite a pensar.`
       callDuende(inicial, [], null)
     }
@@ -477,11 +496,12 @@ function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoPro
       {!loading && (
         <button
           onClick={handleAbrir}
-          style={{ width: '100%', background: '#C9A84C', border: 'none', borderRadius: 8, padding: '12px', fontSize: 13, color: '#fff', cursor: 'pointer', letterSpacing: '0.04em', fontFamily: 'Karla, sans-serif', fontWeight: 500, transition: 'background 0.2s' }}
-          onMouseEnter={e => { e.currentTarget.style.background = '#B8962A' }}
-          onMouseLeave={e => { e.currentTarget.style.background = '#C9A84C' }}
+          disabled={!historyLoaded}
+          style={{ width: '100%', background: historyLoaded ? '#C9A84C' : 'rgba(201,168,76,0.45)', border: 'none', borderRadius: 8, padding: '12px', fontSize: 13, color: '#fff', cursor: historyLoaded ? 'pointer' : 'default', letterSpacing: '0.04em', fontFamily: 'Karla, sans-serif', fontWeight: 500, transition: 'background 0.2s' }}
+          onMouseEnter={e => { if (historyLoaded) e.currentTarget.style.background = '#B8962A' }}
+          onMouseLeave={e => { e.currentTarget.style.background = historyLoaded ? '#C9A84C' : 'rgba(201,168,76,0.45)' }}
         >
-          {msgs.length > 0 ? 'Retomar conversación' : 'Profundizar con el Duende'}
+          {!historyLoaded ? 'Cargando…' : msgs.length > 0 ? 'Retomar conversación' : 'Profundizar con el Duende'}
         </button>
       )}
       {modalOpen && mounted && createPortal(modal, document.body)}
