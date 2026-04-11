@@ -29,7 +29,17 @@ Cuando Edgardo escriba **INICIO DE SESIÓN**, ejecutar el Protocolo 01-EN autom�
 **INSTRUCCIÓN PERMANENTE — PROTOCOLO DE CIERRE:**
 Cuando Edgardo escriba **FIN DE SESIÓN**, ejecutar el Protocolo 02-EN completo de forma automática y secuencial, sin esperar instrucciones paso a paso. No proponer cerrar antes de que Edgardo escriba FIN DE SESIÓN. Mientras no aparezca esa frase, seguir colaborando normalmente. El orden de actualización al cierre es siempre: señales → instructivo → SESION.md → status. SESION.md y status se actualizan ÚLTIMO — cuando el sistema dejó de moverse.
 
-Antes de ejecutar el cierre, solicitar al Arquitecto que suba estos archivos: corpus/SESION.md (versión local), corpus/status/status más reciente, pendientes_soma.md, pendientes_corpus.md, senales_activas.md. Con esos archivos, hacer chequeo de consistencia antes de actualizar nada. Resolver inconsistencias encontradas en el mismo commit de cierre.
+Antes de ejecutar el cierre, solicitar al Arquitecto que suba exactamente estos archivos:
+1. corpus/SESION.md
+2. corpus/status/status_DDMMYYYY.md (el más reciente)
+3. corpus/documentos/senales_activas.md
+4. corpus/documentos/pendientes_soma.md
+5. corpus/documentos/pendientes_corpus.md
+6. corpus/documentos/aprendizajes_sesiones.md
+7. corpus/documentos/corpus_base_aleph.md
+8. corpus/documentos/temas_pendientes_exploracion.md
+
+Esta lista es definitiva y completa. No solicitar archivos adicionales después de que el Arquitecto los suba. Con estos archivos, hacer chequeo de consistencia antes de actualizar nada. Resolver inconsistencias encontradas en el mismo commit de cierre.
 - Actualizar corpus/documentos/aprendizajes_sesiones.md con una nueva entrada: qué funcionó, qué mejorar, tensiones identificadas, y cómo se fue cada uno.
 - Al cierre, preguntar explícitamente: ¿algún tema de `temas_pendientes_exploracion.md` maduró para convertirse en señal? ¿alguna señal maduró para convertirse en pendiente concreto? ¿algún pendiente se completó y pasa al archivo histórico?
 - Proponer un nombre para la sesión (formato: "El [sustantivo] — cuando [qué pasó]") y esperar confirmación del Arquitecto.
