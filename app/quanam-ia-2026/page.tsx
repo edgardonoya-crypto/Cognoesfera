@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { supabase } from '@/app/lib/supabase'
 
 const LENTES = [
   {
@@ -583,9 +584,22 @@ export default function QuanamIa2026() {
   const [otpLoading, setOtpLoading] = useState(false)
   const [otpExpired, setOtpExpired] = useState(false)
 
+  // Sesión persistente: al montar, verificar si ya hay sesión activa en cookies
   useEffect(() => {
-    const savedEmail = getCookie('quanam_email')
-    if (savedEmail) setEmail(savedEmail)
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user?.email) {
+        // Sesión válida — saltar directamente al contenido
+        setEmail(session.user.email)
+        setBienvenida(false)
+      } else {
+        // Sin sesión activa — pre-rellenar email del formulario si había cookie
+        const savedEmail = getCookie('quanam_email')
+        if (savedEmail) setEmail(savedEmail)
+      }
+    }).catch(() => {
+      const savedEmail = getCookie('quanam_email')
+      if (savedEmail) setEmail(savedEmail)
+    })
   }, [])
 
   useEffect(() => {
@@ -641,12 +655,7 @@ export default function QuanamIa2026() {
     setOtpError('')
     setOtpExpired(false)
     setOtpLoading(true)
-    const { createBrowserClient } = await import('@supabase/ssr')
-    const sb = createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    )
-    const { error } = await sb.auth.verifyOtp({ email: email.trim(), token, type: 'email' })
+    const { error } = await supabase.auth.verifyOtp({ email: email.trim(), token, type: 'email' })
     setOtpLoading(false)
     if (error) {
       const code = (error as { code?: string }).code ?? ''
@@ -664,9 +673,7 @@ export default function QuanamIa2026() {
     setCookie('quanam_email', email.trim(), 30)
     // Registrar acceso a la convocatoria
     try {
-      const { createBrowserClient } = await import('@supabase/ssr')
-      const sb = createBrowserClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
-      await sb.from('convocatoria_accesos').insert({ email: email.trim() })
+      await supabase.from('convocatoria_accesos').insert({ email: email.trim() })
     } catch {}
     setBienvenida(false)
   }
