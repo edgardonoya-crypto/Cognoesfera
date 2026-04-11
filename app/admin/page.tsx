@@ -71,12 +71,22 @@ export default function AdminPage() {
   const [hiloArquitecto, setHiloArquitecto] = useState<DuendeMsgArquitecto[]>([])
   const [duendePanelOpen, setDuendePanelOpen] = useState(false)
   const hiloEndRef = useRef<HTMLDivElement>(null)
+  const [campoModal, setCampoModal] = useState(false)
+  const [campoHilo, setCampoHilo] = useState<DuendeMsgArquitecto[]>([])
+  const [campoAnalizando, setCampoAnalizando] = useState(false)
+  const [campoInput, setCampoInput] = useState('')
+  const [campoReporteActivo, setCampoReporteActivo] = useState<string | null>(null)
+  const campoHiloEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => { setMounted(true) }, [])
 
   useEffect(() => {
     hiloEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [hiloArquitecto])
+
+  useEffect(() => {
+    campoHiloEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [campoHilo])
 
   useEffect(() => {
     if (!lenteModal) return
@@ -221,6 +231,44 @@ export default function AdminPage() {
     setHiloArquitecto([])
   }
 
+  async function ejecutarAnalisisCampo(consulta: string) {
+    if (!consulta.trim() || campoAnalizando) return
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) return
+
+    setCampoAnalizando(true)
+    const consultaActual = consulta.trim()
+    setCampoInput('')
+
+    const hiloActual: DuendeMsgArquitecto[] = [...campoHilo, { role: 'user', content: consultaActual }]
+    setCampoHilo(hiloActual)
+
+    try {
+      const res = await fetch('/api/admin/duende-analisis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
+        body: JSON.stringify({
+          contexto: 'campo_completo',
+          consulta: consultaActual,
+          historial: campoHilo,
+          conversaciones: conversaciones.map(c => ({
+            id: c.id,
+            email: c.email_participante,
+            mensajes: c.mensajes,
+          })),
+        }),
+      })
+      const data = await res.json() as { respuesta?: string; error?: string }
+      if (!res.ok || !data.respuesta) throw new Error(data.error ?? 'Sin respuesta')
+      setCampoHilo(prev => [...prev, { role: 'assistant', content: data.respuesta! }])
+    } catch (err) {
+      console.error(err)
+      setCampoHilo(prev => prev.slice(0, -1))
+    } finally {
+      setCampoAnalizando(false)
+    }
+  }
+
   async function ejecutarAnalisis() {
     if (!consultaInput.trim() || analizando || !lenteModal) return
     const { data: { session } } = await supabase.auth.getSession()
@@ -330,7 +378,16 @@ export default function AdminPage() {
   const archivosPendientes = archivos.filter(a => a.estado === 'pendiente').length
   const iniciativasActivas = iniciativas.filter(i => i.estado === 'activa').length
 
-  const cajas: { id: typeof modalAbierto & string; nombre: string; conteo: number; desc: string; color: string }[] = [
+  const REPORTES_CAMPO = [
+    { id: 'resonancias', label: '¿Qué está resonando más fuerte esta semana?' },
+    { id: 'patrones',   label: '¿Qué patrones emergen entre lentes?' },
+    { id: 'estado',     label: '¿En qué estado está el campo colectivo?' },
+    { id: 'senales',    label: '¿Qué señales débiles están apareciendo?' },
+    { id: 'silencio',   label: '¿Qué no se está nombrando en ningún lente?' },
+  ]
+
+  const cajas: { id: string; nombre: string; conteo: number; desc: string; color: string }[] = [
+    { id: 'analisis',       nombre: 'Análisis',       conteo: conversaciones.length,   desc: 'Campo completo con el Duende',      color: '#8B6914' },
     { id: 'campo',          nombre: 'El campo',       conteo: estadosVitales.length,   desc: 'Usuarios en el campo',              color: '#4eaa98' },
     { id: 'conversaciones', nombre: 'Conversaciones', conteo: conversaciones.length,   desc: 'Conversaciones con el Duende',      color: '#8B6914' },
     { id: 'curacion',       nombre: 'Curación',       conteo: archivosPendientes,      desc: 'Archivos para revisar',             color: '#C4941A' },
@@ -360,7 +417,10 @@ export default function AdminPage() {
           {cajas.map(c => (
             <div
               key={c.id}
-              onClick={() => setModalAbierto(c.id as typeof modalAbierto)}
+              onClick={() => {
+                if (c.id === 'analisis') { setCampoModal(true); return }
+                setModalAbierto(c.id as typeof modalAbierto)
+              }}
               style={{ background: 'rgba(255,255,255,0.8)', border: '1px solid rgba(34,58,54,0.10)', borderRadius: 14, padding: '22px 20px 18px', cursor: 'pointer', transition: 'box-shadow 0.15s', display: 'flex', flexDirection: 'column', gap: 6 }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 18px rgba(0,0,0,0.10)'}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.boxShadow = ''}
@@ -1081,6 +1141,107 @@ export default function AdminPage() {
             >
               {analizando ? 'Analizando…' : 'Consultar'}
             </button>
+          </div>
+        </div>,
+        document.body
+      )}
+
+      {mounted && campoModal && createPortal(
+        <div
+          style={{ position: 'fixed', inset: 0, zIndex: 500, background: 'rgba(0,0,0,0.50)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}
+          onClick={e => { if (e.target === e.currentTarget) setCampoModal(false) }}
+        >
+          <div style={{ width: 'min(720px,94vw)', maxHeight: '88vh', background: '#f7f3e8', borderRadius: 18, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.22)' }}>
+            {/* Header */}
+            <div style={{ padding: '18px 24px 14px', borderBottom: '1px solid rgba(34,58,54,.10)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                <div style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#8B6914' }}>Análisis del Duende</div>
+                <span style={{ fontSize: '0.95rem', fontWeight: 650, color: '#18201e' }}>El campo completo</span>
+                <span style={{ fontSize: '0.72rem', color: '#8a9e98' }}>{conversaciones.length} conversaciones · todos los lentes y resonancias</span>
+              </div>
+              <button onClick={() => setCampoModal(false)} style={{ background: 'none', border: 'none', fontSize: 20, color: '#8A7E70', cursor: 'pointer', lineHeight: 1, padding: 4 }}>✕</button>
+            </div>
+
+            {/* Si no hay hilo activo → mostrar menú de reportes */}
+            {campoHilo.length === 0 && !campoAnalizando && (
+              <div style={{ padding: '24px 28px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <p style={{ fontSize: '0.75rem', color: '#8a9e98', margin: '0 0 8px', fontStyle: 'italic' }}>
+                  Elegí un reporte para que el Duende analice el campo completo, o escribí tu propia consulta abajo.
+                </p>
+                {REPORTES_CAMPO.map(r => (
+                  <button
+                    key={r.id}
+                    onClick={() => { setCampoReporteActivo(r.id); ejecutarAnalisisCampo(r.label) }}
+                    style={{ textAlign: 'left' as const, background: 'rgba(139,105,20,.06)', border: '1px solid rgba(139,105,20,.18)', borderRadius: 10, padding: '12px 16px', fontSize: '0.875rem', color: '#2c3830', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 400, lineHeight: 1.5, transition: 'background 0.15s' }}
+                    onMouseEnter={e => (e.currentTarget.style.background = 'rgba(139,105,20,.12)')}
+                    onMouseLeave={e => (e.currentTarget.style.background = 'rgba(139,105,20,.06)')}
+                  >
+                    <span style={{ color: '#8B6914', marginRight: 8 }}>✦</span>{r.label}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Si hay hilo → mostrar conversación */}
+            {(campoHilo.length > 0 || campoAnalizando) && (
+              <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {campoHilo.map((m, i) => (
+                  <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
+                    <div style={{ maxWidth: '88%', padding: '11px 15px', borderRadius: m.role === 'user' ? '14px 14px 3px 14px' : '14px 14px 14px 3px', background: m.role === 'user' ? 'rgba(139,105,20,.10)' : 'rgba(255,255,255,.90)', border: '1px solid ' + (m.role === 'user' ? 'rgba(139,105,20,.20)' : 'rgba(34,58,54,.10)'), boxShadow: '0 1px 3px rgba(0,0,0,.04)' }}>
+                      <p style={{ fontSize: '0.65rem', fontWeight: 600, color: m.role === 'user' ? '#8B6914' : '#a08030', margin: '0 0 5px', letterSpacing: '0.07em', textTransform: 'uppercase' as const }}>
+                        {m.role === 'user' ? 'Arquitecto' : 'Duende'}
+                      </p>
+                      {m.role === 'assistant'
+                        ? <div style={{ fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.8, fontStyle: 'italic', fontWeight: 300 }}>{renderMarkdown(m.content)}</div>
+                        : <p style={{ fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.7, margin: 0, fontWeight: 300 }}>{m.content}</p>
+                      }
+                    </div>
+                  </div>
+                ))}
+                {campoAnalizando && (
+                  <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                    <div style={{ padding: '11px 15px', borderRadius: '14px 14px 14px 3px', background: 'rgba(255,255,255,.90)', border: '1px solid rgba(34,58,54,.10)' }}>
+                      <p style={{ fontSize: '0.78rem', color: '#a08030', fontStyle: 'italic', margin: 0 }}>El Duende está leyendo el campo…</p>
+                    </div>
+                  </div>
+                )}
+                <div ref={campoHiloEndRef} />
+              </div>
+            )}
+
+            {/* Input — visible cuando hay hilo o está cargando */}
+            {(campoHilo.length > 0 || campoAnalizando) && (
+              <div style={{ flexShrink: 0, padding: '12px 24px 18px', borderTop: '1px solid rgba(34,58,54,.08)', display: 'flex', gap: 8, alignItems: 'flex-end' }}>
+                <textarea
+                  value={campoInput}
+                  onChange={e => setCampoInput(e.target.value)}
+                  onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ejecutarAnalisisCampo(campoInput) } }}
+                  placeholder="Seguí explorando el campo…"
+                  rows={2}
+                  disabled={campoAnalizando}
+                  style={{ flex: 1, resize: 'none', border: '1px solid rgba(139,105,20,.25)', borderRadius: 10, padding: '10px 14px', fontSize: '0.875rem', fontFamily: 'inherit', fontWeight: 300, color: '#2c3830', background: 'rgba(255,255,255,.75)', outline: 'none', lineHeight: 1.6 }}
+                />
+                <button
+                  onClick={() => ejecutarAnalisisCampo(campoInput)}
+                  disabled={!campoInput.trim() || campoAnalizando}
+                  style={{ flexShrink: 0, background: '#8B6914', color: '#fff', border: 'none', borderRadius: 10, padding: '10px 18px', fontSize: '0.82rem', fontFamily: 'inherit', fontWeight: 500, cursor: 'pointer', opacity: (!campoInput.trim() || campoAnalizando) ? 0.45 : 1, whiteSpace: 'nowrap' as const }}
+                >
+                  Consultar
+                </button>
+              </div>
+            )}
+
+            {/* Botón para volver al menú si ya hay hilo */}
+            {campoHilo.length > 0 && !campoAnalizando && (
+              <div style={{ flexShrink: 0, padding: '0 24px 16px', display: 'flex', justifyContent: 'center' }}>
+                <button
+                  onClick={() => { setCampoHilo([]); setCampoReporteActivo(null); setCampoInput('') }}
+                  style={{ background: 'none', border: 'none', fontSize: '0.72rem', color: '#8a9e98', cursor: 'pointer', fontFamily: 'inherit', textDecoration: 'underline', padding: '4px 0' }}
+                >
+                  ← Volver al menú de reportes
+                </button>
+              </div>
+            )}
           </div>
         </div>,
         document.body
