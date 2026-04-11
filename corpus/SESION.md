@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v24 · 11 Abril 2026*
+*Versión actual: v25 · 11 Abril 2026*
 
 ---
 
@@ -217,6 +217,19 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - Archivos adjuntos en DuendeChat y DuendeFragmento — imágenes y PDFs vía FileReader + Anthropic content blocks
 - Tabla archivos_curaduria + panel curación en /admin con estados (pendiente/aprobado/descartado/señal) y notas
 - Tabla preguntas_arquitectos — cuando el Duende no sabe, deriva a Arquitectos con frase clave en el system prompt
+
+**Hitos de SESION-20260411b — "La sintonía — cuando el paradigma aprendió a escuchar a quien llega":**
+- Diseño conceptual de los 8 estados del individuo en el campo: La escucha → El pulso → El murmullo → La sintonía → La resonancia → El tono → El coro → La música
+- Actos de cuidado, protocolos y acuerdos para cada estado — arquitectura Madre/situado configurable
+- Lógica de detección: comportamiento (Soma) + Duende (Corpus) en combinación
+- Implementación completa: tablas estados_madre + estados_situados + estados_vitales en Supabase
+- Duende integrado con estado vital del usuario en modo convocatoria
+- Admin rediseñado: grid de 7 cajas + modales por sección
+- Conversaciones con 3 vistas: Por usuario / Por lente-resonancia / Por usuario y lente
+- Clasificación Lentes y Resonancias — 5 lentes nombrados, resto resonancias
+- 6 señales nuevas custodiadas (46-51)
+- Bug S-AP-08: estados vitales no se registran en Supabase — pendiente próxima sesión
+- Protocolo 01-EN paso 4 actualizado: siempre solicitar 8 archivos sin inferir
 - Panel /admin: sección preguntas pendientes con respuesta por email via Resend
 - Duende: recordatorio cada 3 mensajes + pregunta desafiante si últimos 3 mensajes sin mención de IA
 - Pregunta de cierre anclada en los 8 estados Aleph (Latente → Ecosistémico) en modo convocatoria
@@ -325,11 +338,11 @@ Los pendientes viven en dos archivos con schema completo:
 - **Casa Corpus:** `corpus/documentos/pendientes_corpus.md` — conceptos, señales, protocolos, documentos, narrativa
 
 **Prioridades próxima sesión:**
-- **P1 [CORPUS]:** Registrar mínimo de Casa Corpus antes del 17/04 (C-DO-05)
-- **P2 [SOMA]:** Construir decisiones_arquitecturales.md antes del 17/04 (S-IN-05)
-- **P3 [CORPUS]:** Incorporar lista exacta de archivos al Protocolo 02-EN (C-PR-06)
-- **P4 [SOMA]:** Eliminar rama master de Vercel — trabajar solo con main
-- **P5 [CORPUS]:** Sesión propia para arquitectura adaptativa de la convocatoria (gamificación con 8 estados vitales)
+- **P1 [SOMA]:** Fix S-AP-08 — bug registro estados vitales en Supabase
+- **P2 [CORPUS]:** Registrar mínimo de Casa Corpus antes del 17/04 (C-DO-05)
+- **P3 [SOMA]:** Construir decisiones_arquitecturales.md antes del 17/04 (S-IN-05)
+- **P4 [CORPUS]:** Incorporar lista exacta de archivos al Protocolo 02-EN (C-PR-06)
+- **P5 [SOMA]:** Verificar que COMMIT ALEPH pushea a main — agregar verificación al protocolo
 
 ---
 
@@ -355,7 +368,7 @@ Esto debe incluir:
 
 *Las señales activas viven en `corpus/documentos/senales_activas.md` con descripción completa. Las señales incorporadas al Corpus Madre están en `corpus/documentos/senales_incorporadas.md`.*
 
-### Señales activas (45)
+### Señales activas (51)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
@@ -403,6 +416,12 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **La gramática fractal del Duende** — el Duende tiene una gramática base (Corpus Madre) y una expresión situada por receptor. Fractal: persona → Cognoesfera → Entidad Aleph. El lenguaje como infraestructura fractal, no como decoración. Fecha: 11/04/2026
 - **La experiencia adaptativa como infraestructura viva** — la convocatoria que evoluciona con el usuario usando los 8 estados vitales como niveles de progresión. La recompensa no es una medalla — es acceso a un campo más denso. Fecha: 11/04/2026
 - **El protocolo de cierre como tiempo soberano** — la lista exacta de archivos a solicitar al cierre debe vivir en el protocolo, no en la memoria de sesión. El tiempo soberano del Arquitecto no debería usarse en detectar lo que el sistema debería hacer solo. Fecha: 11/04/2026
+- **Los ocho estados del individuo en el campo** — La escucha. El pulso. El murmullo. La sintonía. La resonancia. El tono. El coro. La música. Arco propio del individuo — distinto al de la Cognoesfera pero fractal del mismo patrón de maduración. Vocabulario acústico de principio a fin. El ciclo es fractal: la música de uno despierta la escucha de otro. Fecha: 11/04/2026
+- **El paralelismo fractal individuo / Cognoesfera** — Los ocho estados del individuo y los ocho estados de la Cognoesfera comparten el mismo patrón de fondo — algo latente → primera señal → forma que emerge → reconocimiento → expresión → legibilidad → coherencia propia → expansión al campo mayor — pero con vocabulario y lógica propios para cada escala. Confirma la fractalidad del paradigma. Fecha: 11/04/2026
+- **La revelación como método** — Miguel Ángel no inventó el ángel — lo reveló quitando lo que sobraba. El conocimiento genuino no se construye desde afuera sino que se excava desde adentro. Los ocho estados emergieron de esta sesión por revelación, no por diseño. Amplía el concepto 3 del Corpus Madre con una imagen que lo hace vivible para cualquiera. Fecha: 11/04/2026
+- **Los estados madre del individuo como infraestructura fractal** — El patrón Madre/situado que organiza el Corpus y los Protocolos aplica ahora a los estados individuales. Los ocho estados (La escucha → La música) son la versión universal y agnóstica. Cada contexto tendrá su expresión situada que hereda de los estados madre. Fecha: 11/04/2026
+- **`estados_vitales` como infraestructura fractal del paradigma** — Una sola tabla que registra el estado de cualquier entidad del sistema (individuo, Cognoesfera, Entidad Aleph) en cualquier contexto. Materializa la fractalidad del paradigma en el schema de Supabase. Habilita al Duende a leer el campo completo. Materializa el concepto 25 (Memoria Viva Aumentada) en schema. Fecha: 11/04/2026
+- **La Matriz de Vitalidad del individuo** — La Cognoesfera tiene su Matriz — el individuo también necesita la suya. Mismos tres lentes (el entre, el interior, el reloj interno) pero con capas y expresiones propias del individuo. Junto con los estados madre, formaría el sistema completo de lectura del individuo en el campo. Requiere sesión propia para revelarla. Fecha: 11/04/2026
 
 ### Señales incorporadas al Corpus Madre
 *Historial completo en `corpus/documentos/senales_incorporadas.md`*
@@ -507,6 +526,10 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - app/cognoesfera/[id]/page.tsx — Resonancias muestra conversaciones Duende agrupadas por lente · 09/04/2026
 - app/quanam-ia-2026/page.tsx — rediseño completo UX: hero, modal Duende, persistencia, modales contexto, iniciativas dinámicas · 11/04/2026
 - supabase/migrations/20260411_iniciativas.sql — tablas iniciativas e intereses_iniciativas · 11/04/2026
+- supabase/migrations/20260411_estados_vitales.sql — tablas estados_madre + estados_situados + estados_vitales · 11/04/2026
+- supabase/migrations/20260411_estados_situados_quanam.sql — 8 estados situados convocatoria_quanam · 11/04/2026
+- app/api/estados/route.ts — detección de estados + transición comportamiento/Duende · 11/04/2026
+- app/admin/page.tsx — rediseño grid cajas + modales + conversaciones 3 vistas · 11/04/2026
 
 **Hitos de SESION-20260402/04:**
 - Protocolo 01-EN construido y probado exitosamente por primera vez
