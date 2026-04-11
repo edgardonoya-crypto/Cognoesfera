@@ -17,6 +17,14 @@ type PreguntaArquitecto = { id: string; created_at: string; email_participante: 
 type Iniciativa = { id: string; nombre: string; descripcion: string | null; responsable: string | null; estado: 'activa' | 'pausada' | 'completada'; fecha_inicio: string | null; visible_convocatoria: boolean; created_at: string }
 type InteresSaved = { id: string; iniciativa_id: string; email_participante: string | null; lente_origen: string | null; fragmento_origen: string | null; momento: string | null; created_at: string; iniciativas?: { nombre: string } | null }
 type EstadoVitalAdmin = { id: string; email: string; contexto: string; estado: string; fecha_entrada: string; dias_en_campo: number }
+type Analisis = {
+  id: string
+  consulta: string
+  respuesta: string
+  fuentes: Array<{ id: string; email: string | null; contexto: string }>
+  conversaciones_n: number
+  created_at: string
+}
 
 function fmt(iso: string) {
   return new Date(iso).toLocaleDateString('es-UY', { day: 'numeric', month: 'short', year: 'numeric' })
@@ -49,6 +57,14 @@ export default function AdminPage() {
   const [responsableDropdownId, setResponsableDropdownId] = useState<string | null>(null)
   const [responsableSearch, setResponsableSearch] = useState('')
   const [responsableDropdownPos, setResponsableDropdownPos] = useState<{ top: number; left: number } | null>(null)
+  const [lenteModal, setLenteModal] = useState<{
+    contexto: string
+    convs: DuendeConv[]
+  } | null>(null)
+  const [analisisHistorial, setAnalisisHistorial] = useState<Analisis[]>([])
+  const [analisisExpandido, setAnalisisExpandido] = useState<string | null>(null)
+  const [consultaInput, setConsultaInput] = useState('')
+  const [analizando, setAnalizando] = useState(false)
 
   useEffect(() => { setMounted(true) }, [])
 
@@ -166,6 +182,62 @@ export default function AdminPage() {
     })
     const data = await res.json()
     if (data?.data) setIniciativas(prev => [...prev, data.data as Iniciativa])
+  }
+
+  async function abrirLenteModal(contexto: string) {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) return
+    const convsFiltradas = conversaciones.filter(
+      c => (c.contexto_origen ?? '') === contexto && Array.isArray(c.mensajes) && c.mensajes.length > 0
+    ).sort((a, b) => a.created_at.localeCompare(b.created_at))
+    setLenteModal({ contexto, convs: convsFiltradas })
+    setAnalisisHistorial([])
+    setAnalisisExpandido(null)
+    setConsultaInput('')
+    // Cargar análisis previos
+    const res = await fetch(`/api/admin/duende-analisis?contexto=${encodeURIComponent(contexto)}`, {
+      headers: { Authorization: `Bearer ${session.access_token}` },
+    }).then(r => r.json())
+    if (res.data) setAnalisisHistorial(res.data as Analisis[])
+  }
+
+  async function ejecutarAnalisis() {
+    if (!consultaInput.trim() || analizando || !lenteModal) return
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) return
+    setAnalizando(true)
+    try {
+      const res = await fetch('/api/admin/duende-analisis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
+        body: JSON.stringify({
+          contexto: lenteModal.contexto,
+          consulta: consultaInput.trim(),
+          conversaciones: lenteModal.convs.map(c => ({
+            id: c.id,
+            email: c.email_participante,
+            mensajes: c.mensajes,
+          })),
+        }),
+      })
+      const data = await res.json() as { respuesta?: string; fuentes?: Analisis['fuentes']; id?: string; error?: string }
+      if (!res.ok || !data.respuesta) throw new Error(data.error ?? 'Sin respuesta')
+      const nuevo: Analisis = {
+        id: data.id ?? Date.now().toString(),
+        consulta: consultaInput.trim(),
+        respuesta: data.respuesta,
+        fuentes: data.fuentes ?? [],
+        conversaciones_n: lenteModal.convs.length,
+        created_at: new Date().toISOString(),
+      }
+      setAnalisisHistorial(prev => [nuevo, ...prev])
+      setAnalisisExpandido(nuevo.id)
+      setConsultaInput('')
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setAnalizando(false)
+    }
   }
 
   function startEdit(id: string, field: string, currentValue: string) {
@@ -435,7 +507,7 @@ export default function AdminPage() {
                                   <span style={{ fontSize: '0.75rem', color: '#66706d' }}>{usuariosDistintos} usuario{usuariosDistintos !== 1 ? 's' : ''}</span>
                                 </div>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                  <a href={`/admin/conversacion/lente/${encodeURIComponent(lente)}`} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} style={{ fontSize: '0.68rem', color: '#4eaa98', textDecoration: 'none', border: '1px solid rgba(78,170,152,.3)', borderRadius: 5, padding: '1px 7px' }}>Ver todo</a>
+                                  <button onClick={e => { e.stopPropagation(); abrirLenteModal(lente) }} style={{ fontSize: '0.68rem', color: '#4eaa98', background: 'none', border: '1px solid rgba(78,170,152,.3)', borderRadius: 5, padding: '1px 7px', cursor: 'pointer', fontFamily: 'inherit' }}>Ver todo</button>
                                   <span style={{ color: '#4eaa98', fontSize: 18, lineHeight: 1 }}>{isOpen ? '−' : '+'}</span>
                                 </div>
                               </div>
@@ -771,6 +843,124 @@ export default function AdminPage() {
             </div>
           </div>
         </>,
+        document.body
+      )}
+
+      {mounted && lenteModal && createPortal(
+        <div
+          style={{ position: 'fixed', inset: 0, zIndex: 500, background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}
+          onClick={e => { if (e.target === e.currentTarget) setLenteModal(null) }}
+        >
+          <div style={{ width: 'min(780px,96vw)', maxHeight: '90vh', background: '#f7f3e8', borderRadius: 18, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.25)' }}>
+            {/* Header */}
+            <div style={{ padding: '18px 24px 14px', borderBottom: '1px solid rgba(34,58,54,.10)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                <span style={{ fontSize: '0.95rem', fontWeight: 650, color: '#18201e' }}>{lenteModal.contexto}</span>
+                <span style={{ fontSize: '0.72rem', color: '#8a9e98' }}>{lenteModal.convs.length} conversación{lenteModal.convs.length !== 1 ? 'es' : ''} · {new Set(lenteModal.convs.map(c => c.email_participante)).size} usuario{new Set(lenteModal.convs.map(c => c.email_participante)).size !== 1 ? 's' : ''}</span>
+              </div>
+              <button onClick={() => setLenteModal(null)} style={{ background: 'none', border: 'none', fontSize: 20, color: '#8A7E70', cursor: 'pointer', lineHeight: 1, padding: 4 }}>✕</button>
+            </div>
+
+            {/* Body scrolleable */}
+            <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px 28px', display: 'flex', flexDirection: 'column', gap: 0 }}>
+
+              {/* Panel Duende-Arquitecto */}
+              <div style={{ background: 'rgba(139,105,20,.06)', border: '1px solid rgba(139,105,20,.18)', borderRadius: 12, padding: '16px 18px 18px', marginBottom: 28, flexShrink: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, marginBottom: 14 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ width: 26, height: 26, borderRadius: '50%', border: '1px solid rgba(139,105,20,.4)', background: 'rgba(139,105,20,.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700, color: '#8B6914' }}>D</div>
+                    <span style={{ fontSize: '0.8rem', fontWeight: 650, color: '#8B6914', letterSpacing: '0.04em' }}>Análisis del Duende</span>
+                  </div>
+                  <span style={{ fontSize: '0.68rem', color: '#8a9e98' }}>{lenteModal.convs.length} conversaciones · Corpus Madre como lente</span>
+                </div>
+
+                <div style={{ display: 'flex', gap: 10, alignItems: 'flex-end' }}>
+                  <textarea
+                    value={consultaInput}
+                    onChange={e => setConsultaInput(e.target.value)}
+                    onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ejecutarAnalisis() } }}
+                    placeholder="¿Qué patrones emergen? ¿Qué no se está nombrando? ¿Qué conecta estas voces con el paradigma?"
+                    rows={3}
+                    disabled={analizando || lenteModal.convs.length === 0}
+                    style={{ flex: 1, resize: 'none', border: '1px solid rgba(139,105,20,.25)', borderRadius: 10, padding: '10px 14px', fontSize: '0.875rem', fontFamily: 'inherit', fontWeight: 300, color: '#2c3830', background: 'rgba(255,255,255,.7)', outline: 'none', lineHeight: 1.6 }}
+                  />
+                  <button
+                    onClick={ejecutarAnalisis}
+                    disabled={!consultaInput.trim() || analizando || lenteModal.convs.length === 0}
+                    style={{ flexShrink: 0, background: '#8B6914', color: '#fff', border: 'none', borderRadius: 10, padding: '10px 18px', fontSize: '0.82rem', fontFamily: 'inherit', fontWeight: 500, cursor: 'pointer', opacity: (!consultaInput.trim() || analizando) ? 0.45 : 1, transition: 'opacity 0.2s', whiteSpace: 'nowrap' }}
+                  >
+                    {analizando ? 'Analizando…' : 'Consultar'}
+                  </button>
+                </div>
+
+                {analisisHistorial.length > 0 && (
+                  <div style={{ marginTop: 18, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                    <div style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#8a9e98', marginBottom: 2 }}>Análisis anteriores</div>
+                    {analisisHistorial.map(a => (
+                      <div key={a.id} style={{ background: 'rgba(255,255,255,.75)', border: '1px solid rgba(139,105,20,.14)', borderRadius: 10, overflow: 'hidden' }}>
+                        <div
+                          onClick={() => setAnalisisExpandido(analisisExpandido === a.id ? null : a.id)}
+                          style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 14px', cursor: 'pointer', borderBottom: analisisExpandido === a.id ? '1px solid rgba(139,105,20,.08)' : 'none' }}
+                        >
+                          <span style={{ flex: 1, fontSize: '0.82rem', color: '#2c3830', fontWeight: 500 }}>{a.consulta}</span>
+                          <span style={{ fontSize: '0.68rem', color: '#8a9e98', flexShrink: 0 }}>{fmt(a.created_at)}</span>
+                          <span style={{ color: '#8B6914', fontSize: 16, lineHeight: 1, flexShrink: 0 }}>{analisisExpandido === a.id ? '−' : '+'}</span>
+                        </div>
+                        {analisisExpandido === a.id && (
+                          <div style={{ padding: '14px 16px 16px' }}>
+                            <p style={{ fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.75, margin: '0 0 14px', fontStyle: 'italic', fontWeight: 300, whiteSpace: 'pre-wrap' as const }}>{a.respuesta}</p>
+                            {a.fuentes.length > 0 && (
+                              <div style={{ background: 'rgba(139,105,20,.05)', border: '1px solid rgba(139,105,20,.12)', borderRadius: 8, padding: '10px 12px' }}>
+                                <div style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#8B6914', marginBottom: 8 }}>Aportaron a este análisis</div>
+                                <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: 6, marginBottom: 6 }}>
+                                  {[...new Map(a.fuentes.map(f => [f.email, f])).values()].map(f => (
+                                    <button
+                                      key={f.id}
+                                      onClick={() => { setLenteModal(null); window.open(`/admin/conversacion/usuario/${encodeURIComponent(f.email ?? '')}/lente/${encodeURIComponent(f.contexto)}`, '_blank') }}
+                                      style={{ fontSize: '0.72rem', color: '#8B6914', background: 'rgba(139,105,20,.10)', border: '1px solid rgba(139,105,20,.22)', borderRadius: 20, padding: '3px 10px', cursor: 'pointer', fontFamily: 'inherit' }}
+                                    >
+                                      {f.email ?? 'anónimo'}
+                                    </button>
+                                  ))}
+                                </div>
+                                <div style={{ fontSize: '0.65rem', color: '#8a9e98' }}>{a.conversaciones_n} conversaciones analizadas · Click en un email para ver la conversación completa</div>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Conversaciones */}
+              {lenteModal.convs.length === 0 && <p style={{ color: '#8a9e98', fontStyle: 'italic', fontSize: '0.875rem' }}>No hay conversaciones en este contexto.</p>}
+              {lenteModal.convs.map((conv, idx) => (
+                <div key={conv.id}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: idx === 0 ? '0 0 14px' : '24px 0 14px' }}>
+                    <div style={{ flex: 1, height: 1, background: 'rgba(34,58,54,.10)' }} />
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flexShrink: 0 }}>
+                      <span style={{ fontSize: '0.72rem', color: '#4eaa98', fontWeight: 500 }}>{conv.email_participante ?? '—'}</span>
+                      <span style={{ fontSize: '0.65rem', color: '#8a9e98' }}>{new Date(conv.created_at).toLocaleDateString('es-UY', { day: 'numeric', month: 'short', year: 'numeric' })} · {new Date(conv.created_at).toLocaleTimeString('es-UY', { hour: '2-digit', minute: '2-digit' })}</span>
+                    </div>
+                    <div style={{ flex: 1, height: 1, background: 'rgba(34,58,54,.10)' }} />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    {conv.mensajes.map((m, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
+                        <div style={{ maxWidth: '72%', padding: '10px 14px', borderRadius: m.role === 'user' ? '14px 14px 3px 14px' : '14px 14px 14px 3px', background: m.role === 'user' ? 'rgba(78,170,152,.14)' : 'rgba(255,255,255,.92)', border: '1px solid ' + (m.role === 'user' ? 'rgba(78,170,152,.25)' : 'rgba(34,58,54,.10)'), boxShadow: '0 1px 3px rgba(0,0,0,.04)' }}>
+                          <p style={{ fontSize: '0.68rem', fontWeight: 600, color: m.role === 'user' ? '#4eaa98' : '#8B6914', margin: '0 0 4px', letterSpacing: '0.07em', textTransform: 'uppercase' as const }}>{m.role === 'user' ? (conv.nombre_participante || conv.email_participante || 'Usuario') : 'El Duende'}</p>
+                          <p style={{ fontSize: '0.85rem', color: '#2c3830', lineHeight: 1.7, margin: 0, fontStyle: m.role === 'assistant' ? 'italic' : 'normal', fontWeight: 300, whiteSpace: 'pre-wrap' as const }}>{m.content}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>,
         document.body
       )}
 
