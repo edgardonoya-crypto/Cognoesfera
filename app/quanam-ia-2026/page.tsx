@@ -585,6 +585,7 @@ export default function QuanamIa2026() {
   const [otpError, setOtpError] = useState('')
   const [otpLoading, setOtpLoading] = useState(false)
   const [otpExpired, setOtpExpired] = useState(false)
+  const [sessionChecked, setSessionChecked] = useState(false)
 
   // Sesión persistente: al montar, verificar si ya hay sesión activa en cookies
   useEffect(() => {
@@ -594,6 +595,12 @@ export default function QuanamIa2026() {
         setEmail(session.user.email)
         setUserId(session.user.id)
         setBienvenida(false)
+        // Registrar llegada ahora que tenemos el user confirmado
+        fetch('/api/estados', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user_id: session.user.id, contexto: 'convocatoria_quanam', senales: { llegó: true, abrió_convocatoria: true } }),
+        }).catch(() => {})
       } else {
         // Sin sesión activa — pre-rellenar email del formulario si había cookie
         const savedEmail = getCookie('quanam_email')
@@ -602,6 +609,8 @@ export default function QuanamIa2026() {
     }).catch(() => {
       const savedEmail = getCookie('quanam_email')
       if (savedEmail) setEmail(savedEmail)
+    }).finally(() => {
+      setSessionChecked(true)
     })
   }, [])
 
@@ -611,21 +620,6 @@ export default function QuanamIa2026() {
       .then((data: { data: Iniciativa[] }) => { if (data?.data) setIniciativasActivas(data.data) })
       .catch(() => {})
   }, [])
-
-  // Señal de llegada — se dispara una vez cuando el usuario accede al contenido
-  useEffect(() => {
-    if (bienvenida) return
-    async function enviarLlegada() {
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user?.id) return
-      fetch('/api/estados', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: user.id, contexto: 'convocatoria_quanam', senales: { llegó: true, abrió_convocatoria: true } }),
-      }).catch(() => {})
-    }
-    enviarLlegada()
-  }, [bienvenida])
 
   // Cargar historial previo cuando el email está disponible
   useEffect(() => {
@@ -694,7 +688,15 @@ export default function QuanamIa2026() {
       await supabase.from('convocatoria_accesos').insert({ email: email.trim() })
     } catch {}
     const { data: { session: newSession } } = await supabase.auth.getSession()
-    if (newSession?.user?.id) setUserId(newSession.user.id)
+    if (newSession?.user?.id) {
+      setUserId(newSession.user.id)
+      // Registrar llegada — sesión confirmada tras OTP
+      fetch('/api/estados', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: newSession.user.id, contexto: 'convocatoria_quanam', senales: { llegó: true, abrió_convocatoria: true } }),
+      }).catch(() => {})
+    }
     setBienvenida(false)
   }
 
@@ -836,6 +838,9 @@ export default function QuanamIa2026() {
       setLenteStates(prev => ({ ...prev, [lente.id]: { ...prev[lente.id], status: 'error', errorMsg: 'Error de conexión.' } }))
     }
   }
+
+  // Esperar a que se resuelva la sesión antes de renderizar para evitar el flash
+  if (!sessionChecked) return null
 
   return (
     <>
