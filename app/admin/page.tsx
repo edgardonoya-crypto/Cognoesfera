@@ -396,7 +396,10 @@ export default function AdminPage() {
                                           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                                             {entradas.map(([ctx, ctxConvs]) => (
                                               <div key={ctx}>
-                                                <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#8B6914', marginBottom: 6 }}>{ctx}</div>
+                                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
+                                                  <span style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#8B6914' }}>{ctx}</span>
+                                                  <a href={`/admin/conversacion/usuario/${encodeURIComponent(email)}/lente/${encodeURIComponent(ctx)}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.68rem', color: '#8B6914', textDecoration: 'none', border: '1px solid rgba(139,105,20,.28)', borderRadius: 5, padding: '1px 7px', background: 'none', flexShrink: 0 }}>Ver todo</a>
+                                                </div>
                                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                                                   {ctxConvs.map(c => convCard(c, false))}
                                                 </div>
@@ -431,7 +434,10 @@ export default function AdminPage() {
                                   <span style={{ fontSize: '0.75rem', color: '#4eaa98', background: 'rgba(78,170,152,.12)', borderRadius: 10, padding: '2px 8px' }}>{convs.length} conv{convs.length !== 1 ? 's' : ''}</span>
                                   <span style={{ fontSize: '0.75rem', color: '#66706d' }}>{usuariosDistintos} usuario{usuariosDistintos !== 1 ? 's' : ''}</span>
                                 </div>
-                                <span style={{ color: '#4eaa98', fontSize: 18, lineHeight: 1 }}>{isOpen ? '−' : '+'}</span>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                  <a href={`/admin/conversacion/lente/${encodeURIComponent(lente)}`} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} style={{ fontSize: '0.68rem', color: '#4eaa98', textDecoration: 'none', border: '1px solid rgba(78,170,152,.3)', borderRadius: 5, padding: '1px 7px' }}>Ver todo</a>
+                                  <span style={{ color: '#4eaa98', fontSize: 18, lineHeight: 1 }}>{isOpen ? '−' : '+'}</span>
+                                </div>
                               </div>
                               {isOpen && (
                                 <div style={{ padding: '8px 12px 12px', display: 'flex', flexDirection: 'column', gap: 6, background: 'rgba(78,170,152,.02)' }}>
