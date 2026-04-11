@@ -32,6 +32,7 @@ export default function AdminPage() {
   const [convExpandedLentes, setConvExpandedLentes] = useState<Set<string>>(new Set())
   const [convSelectedUser, setConvSelectedUser] = useState<string | null>(null)
   const [convSelectedLente, setConvSelectedLente] = useState<string | null>(null)
+  const [convExpandedMsgs, setConvExpandedMsgs] = useState<Set<string>>(new Set())
   const [loginLogs, setLoginLogs] = useState<LoginLog[]>([])
   const [accesosConv, setAccesosConv] = useState<AccesoConvocatoria[]>([])
   const [archivos, setArchivos] = useState<ArchivoCuraduria[]>([])
@@ -312,6 +313,42 @@ export default function AdminPage() {
                     </div>
                   )
 
+                  const btnMini: React.CSSProperties = { background: 'none', border: '1px solid', borderRadius: 5, padding: '2px 8px', fontSize: '0.7rem', cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap' as const, lineHeight: 1.5 }
+
+                  const convCard = (c: DuendeConv, showEmail: boolean) => {
+                    const expanded = convExpandedMsgs.has(c.id)
+                    const toggle = () => setConvExpandedMsgs(prev => { const s = new Set(prev); s.has(c.id) ? s.delete(c.id) : s.add(c.id); return s })
+                    return (
+                      <div key={c.id} style={{ borderRadius: 8, background: 'rgba(255,255,255,.8)', border: '1px solid rgba(34,58,54,.08)', overflow: 'hidden' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', gap: 8 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0, flex: 1 }}>
+                            {showEmail && <span style={{ fontSize: '0.75rem', color: '#4eaa98', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' as const }}>{c.email_participante ?? '—'}</span>}
+                            <span style={{ fontSize: '0.72rem', color: '#8a9e98', flexShrink: 0 }}>{fmt(c.created_at)}</span>
+                          </div>
+                          <div style={{ display: 'flex', gap: 5, flexShrink: 0 }}>
+                            <button onClick={toggle} style={{ ...btnMini, color: '#8B6914', borderColor: 'rgba(139,105,20,.3)' }}>{expanded ? 'Cerrar' : 'Ver conversación'}</button>
+                            <a href={`/admin/conversacion/${c.id}`} target="_blank" rel="noopener noreferrer" style={{ ...btnMini, color: '#66706d', borderColor: 'rgba(34,58,54,.2)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}>↗</a>
+                          </div>
+                        </div>
+                        {!expanded && (
+                          <div style={{ padding: '0 12px 8px', fontSize: '0.78rem', color: '#2c3830', lineHeight: 1.5, fontStyle: 'italic', fontWeight: 300 }}>{firstUserMsg(c).slice(0, 120)}{firstUserMsg(c).length > 120 ? '…' : ''}</div>
+                        )}
+                        {expanded && (
+                          <div style={{ padding: '0 10px 10px', display: 'flex', flexDirection: 'column', gap: 5, maxHeight: 380, overflowY: 'auto' as const }}>
+                            {c.mensajes.map((m, i) => (
+                              <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
+                                <div style={{ maxWidth: '82%', padding: '7px 11px', borderRadius: m.role === 'user' ? '10px 10px 2px 10px' : '10px 10px 10px 2px', background: m.role === 'user' ? 'rgba(78,170,152,.13)' : 'rgba(247,243,232,.9)', border: '1px solid ' + (m.role === 'user' ? 'rgba(78,170,152,.22)' : 'rgba(34,58,54,.09)') }}>
+                                  {m.timestamp && <p style={{ fontSize: '0.65rem', color: '#8a9e98', margin: '0 0 2px' }}>{new Date(m.timestamp).toLocaleTimeString('es-UY', { hour: '2-digit', minute: '2-digit' })}</p>}
+                                  <p style={{ fontSize: '0.8rem', color: '#2c3830', lineHeight: 1.6, margin: 0, fontStyle: m.role === 'assistant' ? 'italic' : 'normal', fontWeight: 300 }}>{m.content}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )
+                  }
+
                   return (
                     <div>
                       {/* Tabs */}
@@ -361,12 +398,7 @@ export default function AdminPage() {
                                               <div key={ctx}>
                                                 <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#8B6914', marginBottom: 6 }}>{ctx}</div>
                                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                                                  {ctxConvs.map(c => (
-                                                    <div key={c.id} style={{ padding: '8px 12px', borderRadius: 8, background: 'rgba(255,255,255,.8)', border: '1px solid rgba(34,58,54,.08)' }}>
-                                                      <div style={{ fontSize: '0.78rem', color: '#2c3830', lineHeight: 1.5, marginBottom: 4, fontStyle: 'italic', fontWeight: 300 }}>{firstUserMsg(c).slice(0, 120)}{firstUserMsg(c).length > 120 ? '…' : ''}</div>
-                                                      <div style={{ fontSize: '0.72rem', color: '#8a9e98' }}>{fmt(c.created_at)}</div>
-                                                    </div>
-                                                  ))}
+                                                  {ctxConvs.map(c => convCard(c, false))}
                                                 </div>
                                               </div>
                                             ))}
@@ -402,16 +434,8 @@ export default function AdminPage() {
                                 <span style={{ color: '#4eaa98', fontSize: 18, lineHeight: 1 }}>{isOpen ? '−' : '+'}</span>
                               </div>
                               {isOpen && (
-                                <div style={{ padding: '12px 16px 16px', display: 'flex', flexDirection: 'column', gap: 6, background: 'rgba(78,170,152,.02)' }}>
-                                  {sorted.map(c => (
-                                    <div key={c.id} style={{ padding: '8px 12px', borderRadius: 8, background: 'rgba(255,255,255,.8)', border: '1px solid rgba(34,58,54,.08)' }}>
-                                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
-                                        <span style={{ fontSize: '0.75rem', color: '#4eaa98', fontWeight: 500 }}>{c.email_participante ?? '—'}</span>
-                                        <span style={{ fontSize: '0.72rem', color: '#8a9e98' }}>{fmt(c.created_at)}</span>
-                                      </div>
-                                      <div style={{ fontSize: '0.78rem', color: '#2c3830', lineHeight: 1.5, fontStyle: 'italic', fontWeight: 300 }}>{firstUserMsg(c).slice(0, 120)}{firstUserMsg(c).length > 120 ? '…' : ''}</div>
-                                    </div>
-                                  ))}
+                                <div style={{ padding: '8px 12px 12px', display: 'flex', flexDirection: 'column', gap: 6, background: 'rgba(78,170,152,.02)' }}>
+                                  {sorted.map(c => convCard(c, true))}
                                 </div>
                               )}
                             </div>
@@ -498,19 +522,7 @@ export default function AdminPage() {
                                 {convInterseccion.length === 0
                                   ? <p style={styles.empty}>Sin conversaciones en esta intersección.</p>
                                   : <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                                      {convInterseccion.map(c => (
-                                        <div key={c.id} style={{ padding: '12px 14px', borderRadius: 10, background: 'rgba(255,255,255,.8)', border: '1px solid rgba(34,58,54,.10)' }}>
-                                          <div style={{ fontSize: '0.72rem', color: '#8a9e98', marginBottom: 6 }}>{fmt(c.created_at)}</div>
-                                          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                                            {c.mensajes.map((m, i) => (
-                                              <div key={i} style={{ padding: '6px 10px', borderRadius: 6, background: m.role === 'user' ? 'rgba(34,58,54,.06)' : 'transparent', borderLeft: m.role === 'assistant' ? '3px solid rgba(139,105,20,.35)' : 'none' }}>
-                                                <p style={{ fontSize: '0.72rem', fontWeight: 600, color: m.role === 'user' ? '#4eaa98' : '#8B6914', margin: '0 0 3px', letterSpacing: '0.06em', textTransform: 'uppercase' as const }}>{m.role === 'user' ? (c.nombre_participante || 'Usuario') : 'Duende'}</p>
-                                                <p style={{ fontSize: '0.82rem', color: '#2c3830', lineHeight: 1.6, margin: 0, fontStyle: m.role === 'assistant' ? 'italic' : 'normal', fontWeight: 300 }}>{m.content}</p>
-                                              </div>
-                                            ))}
-                                          </div>
-                                        </div>
-                                      ))}
+                                      {convInterseccion.map(c => convCard(c, false))}
                                     </div>
                                 }
                               </div>
