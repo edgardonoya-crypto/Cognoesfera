@@ -77,6 +77,15 @@ export default function AdminPage() {
   const [campoInput, setCampoInput] = useState('')
   const [campoReporteActivo, setCampoReporteActivo] = useState<string | null>(null)
   const campoHiloEndRef = useRef<HTMLDivElement>(null)
+  const [usuarioModal, setUsuarioModal] = useState<{
+    email: string
+    convs: DuendeConv[]
+  } | null>(null)
+  const [usuarioDuendePanelOpen, setUsuarioDuendePanelOpen] = useState(false)
+  const [usuarioHilo, setUsuarioHilo] = useState<DuendeMsgArquitecto[]>([])
+  const [usuarioAnalizando, setUsuarioAnalizando] = useState(false)
+  const [usuarioInput, setUsuarioInput] = useState('')
+  const usuarioHiloEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => { setMounted(true) }, [])
 
@@ -87,6 +96,17 @@ export default function AdminPage() {
   useEffect(() => {
     campoHiloEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [campoHilo])
+
+  useEffect(() => {
+    usuarioHiloEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [usuarioHilo])
+
+  useEffect(() => {
+    if (!usuarioModal) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = prev }
+  }, [usuarioModal])
 
   useEffect(() => {
     if (!lenteModal) return
@@ -229,6 +249,51 @@ export default function AdminPage() {
     }).then(r => r.json())
     if (res.data) setAnalisisHistorial(res.data as Analisis[])
     setHiloArquitecto([])
+  }
+
+  function abrirUsuarioModal(email: string) {
+    const convsFiltradas = conversaciones
+      .filter(c => (c.email_participante ?? '(sin email)') === email && Array.isArray(c.mensajes) && c.mensajes.length > 0)
+      .sort((a, b) => a.created_at.localeCompare(b.created_at))
+    setUsuarioModal({ email, convs: convsFiltradas })
+    setUsuarioDuendePanelOpen(false)
+    setUsuarioHilo([])
+    setUsuarioInput('')
+  }
+
+  async function ejecutarAnalisisUsuario() {
+    if (!usuarioInput.trim() || usuarioAnalizando || !usuarioModal) return
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) return
+    const consultaActual = usuarioInput.trim()
+    setUsuarioInput('')
+    setUsuarioAnalizando(true)
+    const hiloActual: DuendeMsgArquitecto[] = [...usuarioHilo, { role: 'user', content: consultaActual }]
+    setUsuarioHilo(hiloActual)
+    try {
+      const res = await fetch('/api/admin/duende-analisis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
+        body: JSON.stringify({
+          contexto: `usuario:${usuarioModal.email}`,
+          consulta: consultaActual,
+          historial: usuarioHilo,
+          conversaciones: usuarioModal.convs.map(c => ({
+            id: c.id,
+            email: c.email_participante,
+            mensajes: c.mensajes,
+          })),
+        }),
+      })
+      const data = await res.json() as { respuesta?: string; error?: string }
+      if (!res.ok || !data.respuesta) throw new Error(data.error ?? 'Sin respuesta')
+      setUsuarioHilo(prev => [...prev, { role: 'assistant', content: data.respuesta! }])
+    } catch (err) {
+      console.error(err)
+      setUsuarioHilo(prev => prev.slice(0, -1))
+    } finally {
+      setUsuarioAnalizando(false)
+    }
   }
 
   async function ejecutarAnalisisCampo(consulta: string) {
@@ -592,8 +657,12 @@ export default function AdminPage() {
                                     <span style={{ fontSize: '0.875rem', color: '#18201e', fontWeight: 500 }}>{email}</span>
                                     <span style={{ fontSize: '0.75rem', color: '#8B6914', background: 'rgba(139,105,20,.12)', borderRadius: 10, padding: '2px 8px' }}>{convs.length} conv{convs.length !== 1 ? 's' : ''}</span>
                                   </div>
-                                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                                     <span style={{ fontSize: '0.75rem', color: '#8a9e98' }}>{fmt(ultima.created_at)}</span>
+                                    <button
+                                      onClick={e => { e.stopPropagation(); abrirUsuarioModal(email) }}
+                                      style={{ fontSize: '0.68rem', color: '#4eaa98', background: 'none', border: '1px solid rgba(78,170,152,.3)', borderRadius: 5, padding: '1px 7px', cursor: 'pointer', fontFamily: 'inherit' }}
+                                    >Ver todo</button>
                                     <span style={{ color: '#8B6914', fontSize: 18, lineHeight: 1 }}>{isOpen ? '−' : '+'}</span>
                                   </div>
                                 </div>
@@ -1257,6 +1326,118 @@ export default function AdminPage() {
             )}
 
             {/* Botón para volver al menú si ya hay hilo */}
+          </div>
+        </div>,
+        document.body
+      )}
+
+      {/* PORTAL — Modal conversaciones por usuario */}
+      {mounted && usuarioModal && createPortal(
+        <div
+          style={{ position: 'fixed', inset: 0, zIndex: 500, background: 'rgba(0,0,0,0.50)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}
+          onClick={e => { if (e.target === e.currentTarget) { setUsuarioModal(null); setUsuarioDuendePanelOpen(false) } }}
+        >
+          <div style={{ width: 'min(680px,92vw)', maxHeight: '88vh', background: '#f7f3e8', borderRadius: 18, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.22)' }}>
+            <div style={{ padding: '18px 24px 14px', borderBottom: '1px solid rgba(34,58,54,.10)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0, gap: 12 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 4, minWidth: 0 }}>
+                <span style={{ fontSize: '0.95rem', fontWeight: 650, color: '#18201e', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' as const }}>{usuarioModal.email}</span>
+                <span style={{ fontSize: '0.72rem', color: '#8a9e98' }}>{usuarioModal.convs.length} conversación{usuarioModal.convs.length !== 1 ? 'es' : ''} · {new Set(usuarioModal.convs.map(c => c.contexto_origen)).size} contextos</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+                <button
+                  onClick={() => setUsuarioDuendePanelOpen(d => !d)}
+                  style={{ display: 'flex', alignItems: 'center', gap: 6, background: usuarioDuendePanelOpen ? 'rgba(139,105,20,.18)' : 'rgba(139,105,20,.08)', border: '1px solid rgba(139,105,20,.30)', borderRadius: 8, padding: '6px 12px', fontSize: '0.78rem', color: '#8B6914', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 500 }}
+                >
+                  <span>✦</span> {usuarioDuendePanelOpen ? 'Ocultar Duende' : 'Consultar al Duende'}
+                </button>
+                <button onClick={() => { setUsuarioModal(null); setUsuarioDuendePanelOpen(false) }} style={{ background: 'none', border: 'none', fontSize: 20, color: '#8A7E70', cursor: 'pointer', lineHeight: 1, padding: 4 }}>✕</button>
+              </div>
+            </div>
+            <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px 28px', display: 'flex', flexDirection: 'column', gap: 0 }}>
+              {usuarioModal.convs.length === 0 && <p style={{ color: '#8a9e98', fontStyle: 'italic', fontSize: '0.875rem' }}>No hay conversaciones para este usuario.</p>}
+              {usuarioModal.convs.map((conv, idx) => (
+                <div key={conv.id}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: idx === 0 ? '0 0 14px' : '24px 0 14px' }}>
+                    <div style={{ flex: 1, height: 1, background: 'rgba(34,58,54,.10)' }} />
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, flexShrink: 0 }}>
+                      <span style={{ fontSize: '0.72rem', color: '#8B6914', fontWeight: 500 }}>{conv.contexto_origen ?? '—'}</span>
+                      <span style={{ fontSize: '0.65rem', color: '#8a9e98' }}>{new Date(conv.created_at).toLocaleDateString('es-UY', { day: 'numeric', month: 'short', year: 'numeric' })} · {new Date(conv.created_at).toLocaleTimeString('es-UY', { hour: '2-digit', minute: '2-digit' })}</span>
+                    </div>
+                    <div style={{ flex: 1, height: 1, background: 'rgba(34,58,54,.10)' }} />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    {conv.mensajes.map((m, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
+                        <div style={{ maxWidth: '72%', padding: '10px 14px', borderRadius: m.role === 'user' ? '14px 14px 3px 14px' : '14px 14px 14px 3px', background: m.role === 'user' ? 'rgba(78,170,152,.14)' : 'rgba(255,255,255,.92)', border: '1px solid ' + (m.role === 'user' ? 'rgba(78,170,152,.25)' : 'rgba(34,58,54,.10)'), boxShadow: '0 1px 3px rgba(0,0,0,.04)' }}>
+                          <p style={{ fontSize: '0.68rem', fontWeight: 600, color: m.role === 'user' ? '#4eaa98' : '#8B6914', margin: '0 0 4px', letterSpacing: '0.07em', textTransform: 'uppercase' as const }}>{m.role === 'user' ? (conv.nombre_participante || conv.email_participante || 'Usuario') : 'El Duende'}</p>
+                          <p style={{ fontSize: '0.85rem', color: '#2c3830', lineHeight: 1.7, margin: 0, fontStyle: m.role === 'assistant' ? 'italic' : 'normal', fontWeight: 300, whiteSpace: 'pre-wrap' as const }}>{m.content}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+
+      {/* PORTAL — Ventana flotante Duende por usuario */}
+      {mounted && usuarioModal && usuarioDuendePanelOpen && createPortal(
+        <div style={{ position: 'fixed', bottom: 32, right: 32, zIndex: 520, width: 'min(480px,90vw)', height: '60vh', background: 'linear-gradient(160deg,#fdf6e3,#f7edcf)', borderRadius: 18, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 32px 80px rgba(139,105,20,0.28), 0 0 0 1px rgba(139,105,20,0.20)' }}>
+          <div style={{ padding: '14px 18px 12px', borderBottom: '1px solid rgba(139,105,20,.15)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+            <div>
+              <div style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#a08030', marginBottom: 2 }}>Análisis del Duende</div>
+              <div style={{ fontSize: '0.88rem', fontWeight: 650, color: '#18201e', lineHeight: 1.2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' as const, maxWidth: 340 }}>{usuarioModal.email}</div>
+            </div>
+            <button onClick={() => setUsuarioDuendePanelOpen(false)} style={{ background: 'none', border: 'none', fontSize: 17, color: '#a08030', cursor: 'pointer', lineHeight: 1, padding: 4 }}>✕</button>
+          </div>
+          <div style={{ flex: 1, overflowY: 'auto', padding: '14px 18px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {usuarioHilo.length === 0 && !usuarioAnalizando && (
+              <p style={{ fontSize: '0.78rem', color: '#a08030', fontStyle: 'italic', textAlign: 'center', marginTop: 20 }}>
+                Preguntá al Duende sobre este usuario.
+              </p>
+            )}
+            {usuarioHilo.map((m, i) => (
+              <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
+                <div style={{ maxWidth: '88%', padding: '10px 13px', borderRadius: m.role === 'user' ? '14px 14px 3px 14px' : '14px 14px 14px 3px', background: m.role === 'user' ? 'rgba(139,105,20,.12)' : 'rgba(255,255,255,.80)', border: '1px solid ' + (m.role === 'user' ? 'rgba(139,105,20,.22)' : 'rgba(139,105,20,.12)') }}>
+                  <p style={{ fontSize: '0.62rem', fontWeight: 600, color: m.role === 'user' ? '#8B6914' : '#a08030', margin: '0 0 4px', letterSpacing: '0.07em', textTransform: 'uppercase' as const }}>{m.role === 'user' ? 'Arquitecto' : 'Duende'}</p>
+                  {m.role === 'assistant'
+                    ? <div style={{ fontSize: '0.85rem', color: '#2c3830', lineHeight: 1.75, fontWeight: 300 }}>{renderMarkdown(m.content)}</div>
+                    : <p style={{ fontSize: '0.85rem', color: '#2c3830', lineHeight: 1.7, margin: 0, fontWeight: 300 }}>{m.content}</p>
+                  }
+                </div>
+              </div>
+            ))}
+            {usuarioAnalizando && (
+              <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                <div style={{ padding: '10px 13px', borderRadius: '14px 14px 14px 3px', background: 'rgba(255,255,255,.80)', border: '1px solid rgba(139,105,20,.12)' }}>
+                  <p style={{ fontSize: '0.78rem', color: '#a08030', fontStyle: 'italic', margin: 0 }}>El Duende está pensando…</p>
+                </div>
+              </div>
+            )}
+            <div ref={usuarioHiloEndRef} />
+          </div>
+          <div style={{ flexShrink: 0, padding: '10px 18px 14px', borderTop: '1px solid rgba(139,105,20,.15)' }}>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'flex-end' }}>
+              <textarea
+                value={usuarioInput}
+                onChange={e => setUsuarioInput(e.target.value)}
+                onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ejecutarAnalisisUsuario() } }}
+                placeholder="¿Qué está explorando este usuario? ¿Qué patrones tiene?"
+                rows={2}
+                disabled={usuarioAnalizando}
+                style={{ flex: 1, resize: 'none', border: '1px solid rgba(139,105,20,.25)', borderRadius: 10, padding: '9px 12px', fontSize: '0.85rem', fontFamily: 'inherit', fontWeight: 300, color: '#2c3830', background: 'rgba(255,255,255,.75)', outline: 'none', lineHeight: 1.6 }}
+              />
+              <button
+                onClick={ejecutarAnalisisUsuario}
+                disabled={!usuarioInput.trim() || usuarioAnalizando}
+                style={{ flexShrink: 0, background: '#8B6914', color: '#fff', border: 'none', borderRadius: 10, padding: '9px 16px', fontSize: '0.82rem', fontFamily: 'inherit', fontWeight: 500, cursor: 'pointer', opacity: (!usuarioInput.trim() || usuarioAnalizando) ? 0.45 : 1, whiteSpace: 'nowrap' as const }}
+              >
+                {usuarioAnalizando ? '…' : 'Consultar'}
+              </button>
+            </div>
           </div>
         </div>,
         document.body
