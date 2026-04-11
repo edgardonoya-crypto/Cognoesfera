@@ -26,6 +26,7 @@ type ArchivoCuraduria = { id: string; created_at: string; email_participante: st
 type PreguntaArquitecto = { id: string; created_at: string; email_participante: string | null; contexto_origen: string | null; pregunta: string }
 type Iniciativa = { id: string; nombre: string; descripcion: string | null; responsable: string | null; estado: 'activa' | 'pausada' | 'completada'; fecha_inicio: string | null; visible_convocatoria: boolean; created_at: string }
 type InteresSaved = { id: string; iniciativa_id: string; email_participante: string | null; lente_origen: string | null; fragmento_origen: string | null; momento: string | null; created_at: string; iniciativas?: { nombre: string } | null }
+type EstadoVitalAdmin = { id: string; email: string; contexto: string; estado: string; fecha_entrada: string; dias_en_campo: number }
 
 function fmt(iso: string) {
   return new Date(iso).toLocaleDateString('es-UY', { day: 'numeric', month: 'short', year: 'numeric' })
@@ -47,6 +48,7 @@ export default function AdminPage() {
   const [respuestasTexto, setRespuestasTexto] = useState<Record<string, string>>({})
   const [iniciativas, setIniciativas] = useState<Iniciativa[]>([])
   const [intereses, setIntereses] = useState<InteresSaved[]>([])
+  const [estadosVitales, setEstadosVitales] = useState<EstadoVitalAdmin[]>([])
   const [editingCell, setEditingCell] = useState<{ id: string; field: string } | null>(null)
   const [editingValue, setEditingValue] = useState('')
   const [mounted, setMounted] = useState(false)
@@ -117,6 +119,9 @@ export default function AdminPage() {
       ])
       if (iniciativasRes?.data) setIniciativas(iniciativasRes.data as Iniciativa[])
       if (interesesRes?.data) setIntereses(interesesRes.data as InteresSaved[])
+
+      const evRes = await fetch('/api/admin/estados-vitales', { headers: { Authorization: `Bearer ${accessToken}` } }).then(r => r.json())
+      if (evRes?.data) setEstadosVitales(evRes.data as EstadoVitalAdmin[])
 
       setStatus('ok')
     }
@@ -648,6 +653,37 @@ export default function AdminPage() {
                         <td style={{ ...styles.td, color: '#66706d' }}>{fmt(int.created_at)}</td>
                       </tr>
                     </React.Fragment>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </section>
+
+        {/* SECCIÓN EV — Estados Vitales */}
+        <section style={styles.section}>
+          <h2 style={styles.h2}>Estados Vitales</h2>
+          <p style={styles.meta}>{estadosVitales.length} usuario{estadosVitales.length !== 1 ? 's' : ''} en el campo</p>
+          {estadosVitales.length === 0 ? (
+            <p style={styles.empty}>Todavía no hay estados vitales registrados.</p>
+          ) : (
+            <div style={styles.tableWrap}>
+              <table style={styles.table}>
+                <thead>
+                  <tr>
+                    {['Email', 'Estado actual', 'Fecha entrada', 'Días en campo'].map(h => (
+                      <th key={h} style={styles.th}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {estadosVitales.map(ev => (
+                    <tr key={ev.id} style={styles.tr}>
+                      <td style={styles.td}>{ev.email}</td>
+                      <td style={{ ...styles.td, fontStyle: 'italic', color: '#5a7a6a' }}>{ev.estado}</td>
+                      <td style={{ ...styles.td, color: '#66706d' }}>{fmt(ev.fecha_entrada)}</td>
+                      <td style={{ ...styles.td, color: '#66706d', textAlign: 'center' }}>{ev.dias_en_campo}</td>
+                    </tr>
                   ))}
                 </tbody>
               </table>

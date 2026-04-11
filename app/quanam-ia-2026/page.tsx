@@ -577,6 +577,8 @@ export default function QuanamIa2026() {
   )
   const [prevConvs, setPrevConvs] = useState<Record<string, DuendeConvPrev>>({})
   const [iniciativasActivas, setIniciativasActivas] = useState<Iniciativa[]>([])
+  const [userId, setUserId] = useState<string | null>(null)
+  const lentesAbiertasRef = useRef<Set<string>>(new Set())
 
   const [otpStep, setOtpStep] = useState<'email' | 'otp'>('email')
   const [otpToken, setOtpToken] = useState('')
@@ -590,6 +592,7 @@ export default function QuanamIa2026() {
       if (session?.user?.email) {
         // Sesión válida — saltar directamente al contenido
         setEmail(session.user.email)
+        setUserId(session.user.id)
         setBienvenida(false)
       } else {
         // Sin sesión activa — pre-rellenar email del formulario si había cookie
@@ -608,6 +611,16 @@ export default function QuanamIa2026() {
       .then((data: { data: Iniciativa[] }) => { if (data?.data) setIniciativasActivas(data.data) })
       .catch(() => {})
   }, [])
+
+  // Señal de llegada — se dispara una vez cuando el usuario accede al contenido
+  useEffect(() => {
+    if (bienvenida || !userId) return
+    fetch('/api/estados', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: userId, contexto: 'convocatoria_quanam', señales: { llegó: true, abrió_convocatoria: true } }),
+    }).catch(() => {})
+  }, [bienvenida, userId])
 
   // Cargar historial previo cuando el email está disponible
   useEffect(() => {
@@ -675,6 +688,8 @@ export default function QuanamIa2026() {
     try {
       await supabase.from('convocatoria_accesos').insert({ email: email.trim() })
     } catch {}
+    const { data: { session: newSession } } = await supabase.auth.getSession()
+    if (newSession?.user?.id) setUserId(newSession.user.id)
     setBienvenida(false)
   }
 
@@ -771,7 +786,19 @@ export default function QuanamIa2026() {
   }
 
   function toggleLente(id: string) {
+    const isOpening = !lenteStates[id].open
     setLenteStates(prev => ({ ...prev, [id]: { ...prev[id], open: !prev[id].open } }))
+    if (isOpening && userId) {
+      lentesAbiertasRef.current.add(id)
+      const count = lentesAbiertasRef.current.size
+      const señales: Record<string, unknown> = { abrió_lente: true }
+      if (count > 1) señales.lentes_exploradas = count
+      fetch('/api/estados', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: userId, contexto: 'convocatoria_quanam', señales }),
+      }).catch(() => {})
+    }
   }
 
   function setRespuesta(id: string, value: string) {
