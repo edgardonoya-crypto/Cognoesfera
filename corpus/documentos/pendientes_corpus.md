@@ -2,7 +2,7 @@
 *Pendientes conceptuales, documentales y narrativos del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes CORPUS*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 11/04/2026: 25*
+*Pendientes activos al 11/04/2026: 28*
 
 ---
 
@@ -90,6 +90,16 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
+**C-CO-08**
+**Título:** Sesión propia para revelar la Matriz de Vitalidad del individuo
+**Descripción:** Los tres lentes ya están (el entre, el interior, el reloj interno). Las cuatro capas del individuo necesitan emerger — no construirse. Misma metodología que los ocho estados: partir de la experiencia vivida, no de la teoría. Ver señal 51.
+**Prioridad:** P4
+**Estado:** Activo
+**Fecha:** 11/04/2026
+**Dependencias:** Señal 51
+
+---
+
 ## Subcategoría: Señales
 
 ---
@@ -174,6 +184,26 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 **Prioridad:** P3
 **Estado:** Activo
 **Fecha:** 09/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**C-PR-07**
+**Título:** Incorporar al Protocolo 01-EN paso 4 la regla de siempre solicitar 8 archivos
+**Descripción:** Decisión tomada en SESION-20260411: el paso 4 del Protocolo 01-EN ya no infiere archivos según el objetivo — siempre solicita los 8 archivos de cierre sin excepción. Verificar que el cambio quedó commiteado en corpus/SESION.md.
+**Prioridad:** P1
+**Estado:** En progreso
+**Fecha:** 11/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**C-PR-08**
+**Título:** Protocolo COMMIT ALEPH — mensaje del Arquitecto tiene precedencia
+**Descripción:** En SESION-20260411 se detectó que cuando el Arquitecto especifica un mensaje exacto de commit, Claude Code a veces genera el suyo propio. El protocolo COMMIT ALEPH debe especificar que el mensaje propuesto por el Arquitecto tiene precedencia absoluta sobre el generado por el Duende.
+**Prioridad:** P3
+**Estado:** Activo
+**Fecha:** 11/04/2026
 **Dependencias:** Ninguna
 
 ---

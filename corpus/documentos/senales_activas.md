@@ -2,7 +2,7 @@
 *Señales que resuenan con el paradigma y esperan madurar antes de entrar al Corpus Madre*
 *Las señales no se descartan ni se fuerzan — se custodian hasta que el corpus madura para recibirlas*
 *Para el historial de señales incorporadas, ver: `senales_incorporadas.md`*
-*Paradigma Aleph · Iniciado Marzo 2026 · 45 señales activas*
+*Paradigma Aleph · Iniciado Marzo 2026 · 51 señales activas*
 
 ---
 
@@ -578,6 +578,39 @@ El horizonte: si la red de Entidades Aleph llega a ser autopoiética, el metabol
 
 ---
 
+## Los estados madre del individuo como infraestructura fractal
+
+**Fecha:** 11/04/2026
+**Estado:** Custodiada
+**Descripción:** El patrón Madre/situado que organiza el Corpus y los Protocolos aplica ahora a los estados individuales. Los ocho estados (La escucha → La música) son la versión universal y agnóstica. Cada contexto (convocatoria, Cognoesfera, proceso de incorporación) tendrá su expresión situada que hereda de los estados madre. La arquitectura del paradigma es consistente en todos sus niveles.
+**Impacto probable:** Validación de la arquitectura madre/situado como principio organizador del paradigma en todas sus dimensiones. Posible expansión del concepto 9 (Los estados vitales) o nuevo concepto que nombre el principio madre/situado como patrón estructural.
+**Origen:** Sesión 11/04/2026 — emergió al diseñar la tabla `estados_situados` y reconocer que aplicaba el mismo patrón que ya estructura el Corpus y los Protocolos.
+**Pregunta abierta:** ¿El patrón madre/situado merece un concepto propio en el Corpus Madre, o es una propiedad del paradigma que ya está implícita en los conceptos existentes?
+
+---
+
+## `estados_vitales` como infraestructura fractal del paradigma
+
+**Fecha:** 11/04/2026
+**Estado:** Custodiada
+**Descripción:** Una sola tabla que registra el estado de cualquier entidad del sistema (individuo, Cognoesfera, Entidad Aleph) en cualquier contexto. Materializa la fractalidad del paradigma en el schema de Supabase. Habilita al Duende a leer el campo completo — no solo la conversación individual sino la configuración del sistema entero. Materializa el concepto 25 (Memoria Viva Aumentada) en schema.
+**Impacto probable:** Expansión del concepto 25 (Memoria Viva Aumentada) hacia su expresión en infraestructura. El Duende puede leer el estado vital del sistema en tiempo real. Base técnica para que el paradigma se vea a sí mismo.
+**Origen:** Sesión 11/04/2026 — emergió al diseñar la tabla `estados_vitales` con `entidad_tipo` y `entidad_id` genéricos.
+**Pregunta abierta:** ¿Cómo se registra el estado vital de la Cognoesfera como entidad? ¿Quién actualiza ese estado — el Arquitecto, el Duende, el campo mismo?
+
+---
+
+## La Matriz de Vitalidad del individuo
+
+**Fecha:** 11/04/2026
+**Estado:** Custodiada
+**Descripción:** La Cognoesfera tiene su Matriz — el individuo también necesita la suya. Mismos tres lentes (el entre, el interior, el reloj interno) pero con capas y expresiones propias del individuo, no del colectivo. Junto con los estados madre, formaría el sistema completo de lectura del individuo en el campo. Requiere sesión propia para revelarla — no construirla.
+**Impacto probable:** Nuevo documento/concepto: la Matriz de Vitalidad del individuo. Complementa los ocho estados del individuo (señal 46) con una dimensión de profundidad — los estados son el arco longitudinal, la Matriz es el corte transversal en cualquier momento del arco.
+**Origen:** Sesión 11/04/2026 — emergió al reconocer que los ocho estados describen el arco pero no la textura del momento.
+**Pregunta abierta:** ¿Las cuatro capas de la Matriz del individuo son las mismas que las de la Cognoesfera o tienen su propia lógica? ¿Cómo se relacionan los lentes con los estados?
+
+---
+
 *Señales Activas · Paradigma Aleph · Actualizado 11/04/2026*
-*Total señales activas: 48*
+*Total señales activas: 51*
 *Para señales incorporadas al Corpus Madre, ver: `senales_incorporadas.md`*

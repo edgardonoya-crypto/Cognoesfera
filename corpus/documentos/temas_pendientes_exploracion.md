@@ -44,5 +44,13 @@ La diferencia con `senales_custodiadas.md`: las señales custodiadas ya tienen f
 
 ---
 
+## Lentes y Resonancias como categorías del paradigma
+
+**Fecha:** 11/04/2026
+**Origen:** Emergió al diseñar el panel /admin de conversaciones — la distinción entre los 5 lentes (preguntas que el usuario habita) y las resonancias (fragmentos del paradigma que el usuario completa) es conceptualmente relevante más allá de la UI.
+**Pregunta central:** ¿Lentes y Resonancias son categorías formales del paradigma que merecen entrar al Corpus Madre, o son nomenclatura operativa de la convocatoria Quanam? ¿Aplica la misma distinción en otros contextos de Cognoesfera?
+
+---
+
 *Temas Pendientes de Exploración · Paradigma Aleph · Iniciado Abril 2026*
 *Para señales con forma suficiente, ver: `senales_activas.md`*
