@@ -203,21 +203,41 @@ export async function POST(request: Request) {
       .eq('contexto', contexto)
       .single()
 
-    if (fetchErr) {
+    if (fetchErr && fetchErr.code !== 'PGRST116') {
       console.error('[estados POST] fetch error:', JSON.stringify(fetchErr))
-      if (fetchErr.code !== 'PGRST116') {
-        return NextResponse.json({ error: 'Error al leer estado vital', details: fetchErr.message }, { status: 500 })
-      }
+      return NextResponse.json({ error: 'Error al leer estado vital', details: fetchErr.message }, { status: 500 })
     }
+
+    let vital: EstadoVitalRow
 
     if (!estadoVital) {
-      return NextResponse.json(
-        { error: 'Estado vital no encontrado. Usar GET primero para inicializarlo.' },
-        { status: 404 }
-      )
+      const estadoInicial = await getEstadoSituadoPorOrden(contexto, 1)
+      if (!estadoInicial) {
+        return NextResponse.json(
+          { error: `No existe estado situado para contexto '${contexto}' orden 1` },
+          { status: 404 }
+        )
+      }
+      const { data: nuevo, error: insertErr } = await supabase
+        .from('estados_vitales')
+        .insert({
+          entidad_tipo: 'individuo',
+          entidad_id: user_id,
+          contexto,
+          estado_situado_id: estadoInicial.id,
+          señales: {},
+          historia: [],
+        })
+        .select('*')
+        .single()
+      if (insertErr || !nuevo) {
+        console.error('[estados POST] auto-init insert error:', JSON.stringify(insertErr))
+        return NextResponse.json({ error: 'Error al inicializar estado vital' }, { status: 500 })
+      }
+      vital = nuevo as EstadoVitalRow
+    } else {
+      vital = estadoVital as EstadoVitalRow
     }
-
-    const vital = estadoVital as EstadoVitalRow
 
     // Merge señales: las nuevas se suman a las existentes (los números se acumulan)
     const señalesActualizadas: Record<string, unknown> = { ...vital.señales }
