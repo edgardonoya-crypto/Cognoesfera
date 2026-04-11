@@ -621,7 +621,7 @@ export default function QuanamIa2026() {
       fetch('/api/estados', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: user.id, contexto: 'convocatoria_quanam', señales: { llegó: true, abrió_convocatoria: true } }),
+        body: JSON.stringify({ user_id: user.id, contexto: 'convocatoria_quanam', senales: { llegó: true, abrió_convocatoria: true } }),
       }).catch(() => {})
     }
     enviarLlegada()
@@ -803,7 +803,7 @@ export default function QuanamIa2026() {
         fetch('/api/estados', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ user_id: user.id, contexto: 'convocatoria_quanam', señales }),
+          body: JSON.stringify({ user_id: user.id, contexto: 'convocatoria_quanam', senales: señales }),
         }).catch(() => {})
       })
     }

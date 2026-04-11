@@ -88,7 +88,7 @@ async function getOrdenDeEstadoSituado(estadoSituadoId: string): Promise<number 
 // Evalúa si las señales actuales satisfacen las requeridas por un estado.
 // boolean true → la señal debe estar presente y ser truthy
 // number N → el valor actual debe ser >= N
-function satisfaceSeñales(
+function satisfaceSenales(
   requeridas: Record<string, unknown>,
   actuales: Record<string, unknown>
 ): boolean {
@@ -181,16 +181,16 @@ export async function POST(request: Request) {
     const body = await request.json() as {
       user_id: string
       contexto: string
-      señales: Record<string, unknown>
+      senales: Record<string, unknown>
     }
 
-    const { user_id, contexto, señales: señalesEntrantes } = body
+    const { user_id, contexto, senales: señalesEntrantes } = body
 
-    console.log('[estados POST]', { user_id, contexto, señales: señalesEntrantes })
+    console.log('[estados POST]', { user_id, contexto, senales: señalesEntrantes })
 
     if (!user_id || !contexto || !señalesEntrantes) {
       return NextResponse.json(
-        { error: 'Faltan campos: user_id, contexto, señales' },
+        { error: 'Faltan campos: user_id, contexto, senales' },
         { status: 400 }
       )
     }
@@ -249,7 +249,7 @@ export async function POST(request: Request) {
 
       if (
         siguienteEstado &&
-        satisfaceSeñales(siguienteEstado.señales_comportamiento, señalesActualizadas)
+        satisfaceSenales(siguienteEstado.señales_comportamiento, señalesActualizadas)
       ) {
         const historialActualizado: HistorialItem[] = [
           ...(vital.historia ?? []),
