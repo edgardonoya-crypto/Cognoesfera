@@ -1061,7 +1061,7 @@ export default function AdminPage() {
                     {m.role === 'user' ? 'Arquitecto' : 'Duende'}
                   </p>
                   {m.role === 'assistant'
-                    ? <div style={{ fontSize: '0.85rem', color: '#2c3830', lineHeight: 1.75, fontStyle: 'italic', fontWeight: 300 }}>{renderMarkdown(m.content)}</div>
+                    ? <div style={{ fontSize: '0.85rem', color: '#2c3830', lineHeight: 1.75, fontStyle: 'normal', fontWeight: 300 }}>{renderMarkdown(m.content)}</div>
                     : <p style={{ fontSize: '0.85rem', color: '#2c3830', lineHeight: 1.7, margin: 0, fontWeight: 300 }}>{m.content}</p>
                   }
                 </div>
@@ -1192,7 +1192,7 @@ export default function AdminPage() {
                         {m.role === 'user' ? 'Arquitecto' : 'Duende'}
                       </p>
                       {m.role === 'assistant'
-                        ? <div style={{ fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.8, fontStyle: 'italic', fontWeight: 300 }}>{renderMarkdown(m.content)}</div>
+                        ? <div style={{ fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.8, fontStyle: 'normal', fontWeight: 300 }}>{renderMarkdown(m.content)}</div>
                         : <p style={{ fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.7, margin: 0, fontWeight: 300 }}>{m.content}</p>
                       }
                     </div>
