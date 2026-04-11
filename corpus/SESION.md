@@ -27,9 +27,10 @@ Cuando Edgardo escriba **INICIO DE SESIÓN**, ejecutar el Protocolo 01-EN autom�
 7. Proponer orden de trabajo y esperar confirmación del Arquitecto antes de arrancar.
 
 **INSTRUCCIÓN PERMANENTE — PROTOCOLO DE CIERRE:**
-Cuando Edgardo escriba **FIN DE SESIÓN**, ejecutar el Protocolo 02-EN completo de forma automática y secuencial, sin esperar instrucciones paso a paso. No proponer cerrar antes de que Edgardo escriba FIN DE SESIÓN. Mientras no aparezca esa frase, seguir colaborando normalmente. El orden de actualización al cierre es siempre: señales → instructivo → SESION.md → status. SESION.md y status se actualizan ÚLTIMO — cuando el sistema dejó de moverse.
+Cuando Edgardo escriba **FIN DE SESIÓN**, ejecutar estos pasos en orden, uno por uno, confirmando cada uno antes de pasar al siguiente. No proponer cerrar antes de que Edgardo escriba FIN DE SESIÓN. Mientras no aparezca esa frase, seguir colaborando normalmente.
 
-Antes de ejecutar el cierre, solicitar al Arquitecto que suba exactamente estos archivos:
+**PASO 1 — Solicitar archivos**
+Pedir al Arquitecto que suba exactamente estos 8 archivos:
 1. corpus/SESION.md
 2. corpus/status/status_DDMMYYYY.md (el más reciente)
 3. corpus/documentos/senales_activas.md
@@ -38,13 +39,45 @@ Antes de ejecutar el cierre, solicitar al Arquitecto que suba exactamente estos 
 6. corpus/documentos/aprendizajes_sesiones.md
 7. corpus/documentos/corpus_base_aleph.md
 8. corpus/documentos/temas_pendientes_exploracion.md
+Esta lista es definitiva. No solicitar más archivos después.
 
-Esta lista es definitiva y completa. No solicitar archivos adicionales después de que el Arquitecto los suba. Con estos archivos, hacer chequeo de consistencia antes de actualizar nada. Resolver inconsistencias encontradas en el mismo commit de cierre.
-- Actualizar corpus/documentos/aprendizajes_sesiones.md con una nueva entrada: qué funcionó, qué mejorar, tensiones identificadas, y cómo se fue cada uno.
-- Al cierre, preguntar explícitamente: ¿algún tema de `temas_pendientes_exploracion.md` maduró para convertirse en señal? ¿alguna señal maduró para convertirse en pendiente concreto? ¿algún pendiente se completó y pasa al archivo histórico?
-- Proponer un nombre para la sesión (formato: "El [sustantivo] — cuando [qué pasó]") y esperar confirmación del Arquitecto.
+**PASO 2 — Chequeo de consistencia**
+Con los archivos recibidos, verificar:
+- ¿Los conteos coinciden entre archivos?
+- ¿Hay señales en lista activa que ya fueron incorporadas?
+- ¿Hay pendientes completados que no pasaron al histórico?
+Reportar cada inconsistencia y esperar decisión del Arquitecto antes de continuar.
 
-IMPORTANTE: cuando el Arquitecto escribe FIN DE SESIÓN, el Duende ejecuta el cierre y propone cerrar la conversación. Los ajustes que emergen después van como primer pendiente de la próxima sesión — no se ejecutan en el momento.
+**PASO 3 — Proponer nombre de sesión**
+Formato: "El [sustantivo] — cuando [qué pasó]"
+Esperar confirmación del Arquitecto.
+
+**PASO 4 — Commit 1: señales y pendientes**
+Actualizar y commitear:
+- corpus/documentos/senales_activas.md
+- corpus/documentos/pendientes_soma.md
+- corpus/documentos/pendientes_corpus.md
+- corpus/documentos/temas_pendientes_exploracion.md
+Confirmar: "Commit 1 ejecutado ✓"
+
+**PASO 5 — Commit 2: aprendizajes**
+Actualizar y commitear:
+- corpus/documentos/aprendizajes_sesiones.md
+Confirmar: "Commit 2 ejecutado ✓"
+
+**PASO 6 — Commit 3: SESION.md**
+Actualizar versión, fecha, hitos A2, prioridades A6, señales A8, documentos A9.
+Confirmar: "Commit 3 ejecutado ✓"
+
+**PASO 7 — Commit 4: status**
+Generar corpus/status/status_DDMMYYYY.md nuevo.
+Confirmar: "Commit 4 ejecutado ✓"
+
+**PASO 8 — Verificación final**
+Listar los 4 commits ejecutados con sus mensajes.
+Preguntar: "¿Algo más antes de cerrar la conversación?"
+
+IMPORTANTE: No ejecutar el siguiente paso sin confirmar el anterior. No saltear pasos. No agrupar commits. Si algo falla en un paso, reportar y esperar instrucción del Arquitecto. Los ajustes que emergen después del cierre van como primer pendiente de la próxima sesión — no se ejecutan en el momento.
 
 **INSTRUCCIÓN PERMANENTE — COMMIT ALEPH:**
 Cuando el Arquitecto escriba COMMIT ALEPH, ejecutar automáticamente:
