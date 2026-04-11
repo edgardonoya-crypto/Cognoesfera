@@ -302,12 +302,29 @@ export default function AdminPage() {
 
                   const firstUserMsg = (conv: DuendeConv) => conv.mensajes.find(m => m.role === 'user')?.content ?? '—'
 
+                  const LENTES_CONOCIDAS = ['El ángulo propio', 'La pregunta viva', 'La intuición central', 'El hilo conector', 'El experimento pendiente']
+                  const clasificarCtx = (ctx: string): 'lente' | 'resonancia' | null => {
+                    const l = ctx.toLowerCase()
+                    if (LENTES_CONOCIDAS.includes(ctx) || l.includes('lente')) return 'lente'
+                    if (l.includes('fragmento') || l.includes('contexto')) return 'resonancia'
+                    return null
+                  }
+                  const badgeCtx = (ctx: string) => {
+                    const tipo = clasificarCtx(ctx)
+                    if (!tipo) return null
+                    return (
+                      <span style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' as const, padding: '1px 6px', borderRadius: 4, marginLeft: 6, background: tipo === 'lente' ? 'rgba(78,170,152,.15)' : 'rgba(196,148,26,.15)', color: tipo === 'lente' ? '#3a8a7a' : '#a07010', border: `1px solid ${tipo === 'lente' ? 'rgba(78,170,152,.3)' : 'rgba(196,148,26,.3)'}` }}>
+                        {tipo === 'lente' ? 'Lente' : 'Resonancia'}
+                      </span>
+                    )
+                  }
+
                   return (
                     <div>
                       {/* Tabs */}
                       <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
                         {tabBtn('usuario', 'Por usuario')}
-                        {tabBtn('lente', 'Por lente')}
+                        {tabBtn('lente', 'Por lente / resonancia')}
                         {tabBtn('usuariolente', 'Por usuario y lente')}
                       </div>
 
@@ -342,7 +359,10 @@ export default function AdminPage() {
                                   <div style={{ padding: '12px 16px 16px', display: 'flex', flexDirection: 'column', gap: 12, background: 'rgba(139,105,20,.02)' }}>
                                     {[...porCtx.entries()].map(([ctx, ctxConvs]) => (
                                       <div key={ctx}>
-                                        <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#8B6914', marginBottom: 6 }}>{ctx}</div>
+                                        <div style={{ display: 'flex', alignItems: 'center', marginBottom: 6 }}>
+                                          <span style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#8B6914' }}>{ctx}</span>
+                                          {badgeCtx(ctx)}
+                                        </div>
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                                           {ctxConvs.map(c => (
                                             <div key={c.id} style={{ padding: '8px 12px', borderRadius: 8, background: 'rgba(255,255,255,.8)', border: '1px solid rgba(34,58,54,.08)' }}>
@@ -376,6 +396,7 @@ export default function AdminPage() {
                                 <div onClick={toggle} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', cursor: 'pointer', background: isOpen ? 'rgba(78,170,152,.05)' : 'rgba(255,255,255,.7)' }}>
                                   <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                                     <span style={{ fontSize: '0.875rem', color: '#18201e', fontWeight: 500 }}>{lente}</span>
+                                    {badgeCtx(lente)}
                                     <span style={{ fontSize: '0.75rem', color: '#4eaa98', background: 'rgba(78,170,152,.12)', borderRadius: 10, padding: '2px 8px' }}>{convs.length} conv{convs.length !== 1 ? 's' : ''}</span>
                                     <span style={{ fontSize: '0.75rem', color: '#66706d' }}>{usuariosDistintos} usuario{usuariosDistintos !== 1 ? 's' : ''}</span>
                                   </div>
@@ -441,13 +462,13 @@ export default function AdminPage() {
                                 </div>
                               </div>
                               <div>
-                                <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#8B6914', marginBottom: 8 }}>Lentes</div>
+                                <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#8B6914', marginBottom: 8 }}>Lentes / Resonancias</div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                                   {todasLentes.filter(l => lentesDelUsuario.includes(l)).map(l => (
-                                    <div key={l} onClick={() => setConvSelectedLente(convSelectedLente === l ? null : l)} style={itemStyle(convSelectedLente === l, '139,105,20')}>{l}</div>
+                                    <div key={l} onClick={() => setConvSelectedLente(convSelectedLente === l ? null : l)} style={{ ...itemStyle(convSelectedLente === l, '139,105,20'), display: 'flex', alignItems: 'center' }}><span>{l}</span>{badgeCtx(l)}</div>
                                   ))}
                                   {todasLentes.filter(l => !lentesDelUsuario.includes(l)).map(l => (
-                                    <div key={l} onClick={() => { setConvSelectedLente(convSelectedLente === l ? null : l); setConvSelectedUser(null) }} style={{ ...itemStyle(false, '139,105,20'), opacity: 0.35 }}>{l}</div>
+                                    <div key={l} onClick={() => { setConvSelectedLente(convSelectedLente === l ? null : l); setConvSelectedUser(null) }} style={{ ...itemStyle(false, '139,105,20'), opacity: 0.35, display: 'flex', alignItems: 'center' }}><span>{l}</span>{badgeCtx(l)}</div>
                                   ))}
                                 </div>
                               </div>
