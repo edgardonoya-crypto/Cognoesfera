@@ -550,7 +550,7 @@ function setCookie(name: string, value: string, days: number) {
   document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`
 }
 
-type FragmentoKey = 'mas' | 'preguntas' | null
+type FragmentoKey = 'mas' | 'preguntas' | 'masContexto' | null
 
 export default function QuanamIa2026() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -558,10 +558,14 @@ export default function QuanamIa2026() {
   const emailRef = useRef<HTMLInputElement>(null)
 
   const [bienvenida, setBienvenida] = useState(true)
+  const [entradaPersonalizada, setEntradaPersonalizada] = useState(false)
+  const [estadoVitalNombre, setEstadoVitalNombre] = useState<string | null>(null)
+  const [ultimoLente, setUltimoLente] = useState<string | null>(null)
+  const [helpPopup, setHelpPopup] = useState<string | null>(null)
   const [nombre, setNombre] = useState('')
   const [email, setEmail] = useState('')
   const [contextMenuOpen, setContextMenuOpen] = useState(false)
-  const [contextModal, setContextModal] = useState<'sec1' | 'mid' | 'sec2' | null>(null)
+  const [contextModal, setContextModal] = useState<'sec1' | 'mid' | 'sec2' | 'masContexto' | null>(null)
   const [contextMounted, setContextMounted] = useState(false)
   const [contactMsg, setContactMsg] = useState('')
   const [contactStatus, setContactStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
@@ -591,16 +595,28 @@ export default function QuanamIa2026() {
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user?.email) {
-        // Sesión válida — saltar directamente al contenido
         setEmail(session.user.email)
         setUserId(session.user.id)
+        // Cargar estado vital del usuario
+        fetch(`/api/estados?user_id=${session.user.id}&contexto=convocatoria_quanam`)
+          .then(r => r.json())
+          .then((data: { estado?: { estado_situado?: { nombre_situado?: string } } }) => {
+            const nombre = data?.estado?.estado_situado?.nombre_situado ?? null
+            setEstadoVitalNombre(nombre)
+          })
+          .catch(() => {})
+        // Cargar último lente del historial
+        fetch(`/api/duende/history?email=${encodeURIComponent(session.user.email)}`)
+          .then(r => r.json())
+          .then((data: { convs?: Record<string, unknown> }) => {
+            const LENTES_CONOCIDAS = ['El ángulo propio', 'La pregunta viva', 'La intuición central', 'El hilo conector', 'El experimento pendiente']
+            const lentesConHistorial = LENTES_CONOCIDAS.filter(l => data?.convs?.[l])
+            if (lentesConHistorial.length > 0) setUltimoLente(lentesConHistorial[0])
+          })
+          .catch(() => {})
+        // Mostrar entrada personalizada en lugar de ir directo al contenido
+        setEntradaPersonalizada(true)
         setBienvenida(false)
-        // Registrar llegada ahora que tenemos el user confirmado
-        fetch('/api/estados', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ user_id: session.user.id, contexto: 'convocatoria_quanam', senales: { llegó: true, abrió_convocatoria: true } }),
-        }).catch(() => {})
       } else {
         // Sin sesión activa — pre-rellenar email del formulario si había cookie
         const savedEmail = getCookie('quanam_email')
@@ -697,6 +713,7 @@ export default function QuanamIa2026() {
         body: JSON.stringify({ user_id: newSession.user.id, contexto: 'convocatoria_quanam', senales: { llegó: true, abrió_convocatoria: true } }),
       }).catch(() => {})
     }
+    setEntradaPersonalizada(true)
     setBienvenida(false)
   }
 
@@ -788,6 +805,13 @@ export default function QuanamIa2026() {
     return () => window.removeEventListener('keydown', onKey)
   }, [contextModal, contextMenuOpen])
 
+  useEffect(() => {
+    if (!helpPopup) return
+    function onClickOutside() { setHelpPopup(null) }
+    document.addEventListener('click', onClickOutside)
+    return () => document.removeEventListener('click', onClickOutside)
+  }, [helpPopup])
+
   function toggleFragmento(setter: React.Dispatch<React.SetStateAction<FragmentoKey>>, key: FragmentoKey, current: FragmentoKey) {
     setter(current === key ? null : key)
   }
@@ -839,11 +863,113 @@ export default function QuanamIa2026() {
     }
   }
 
+  const TEXTOS_ESTADO: Record<string, { saludo: string; pregunta: string }> = {
+    'La escucha': {
+      saludo: 'Tu mirada se activa cuando se encuentra con otras.',
+      pregunta: 'Es la primera vez que llegás. ¿Qué te trajo hasta acá?',
+    },
+    'El pulso': {
+      saludo: 'Algo en vos ya empezó a moverse.',
+      pregunta: 'La última vez dejaste algo abierto. ¿Qué resonó después?',
+    },
+    'El murmullo': {
+      saludo: 'Tu perspectiva está tomando forma.',
+      pregunta: ultimoLente ? `La última vez exploraste "${ultimoLente}". ¿Qué cambió desde entonces?` : 'Tu perspectiva está tomando forma. ¿Qué emergió desde la última vez?',
+    },
+    'La sintonía': {
+      saludo: 'Ya hay algo tuyo en este campo.',
+      pregunta: ultimoLente ? `Estás en sintonía con "${ultimoLente}". ¿Querés profundizar o explorar otro territorio?` : 'Estás en sintonía con el campo. ¿Querés profundizar o explorar algo nuevo?',
+    },
+    'La resonancia': {
+      saludo: 'Tu mirada ya está resonando con otras.',
+      pregunta: '¿Qué conexión nueva apareció desde la última vez que estuviste acá?',
+    },
+    'El tono': {
+      saludo: 'Tu voz ya tiene peso en este campo.',
+      pregunta: '¿Qué querés aportar hoy?',
+    },
+    'El coro': {
+      saludo: 'Sos parte activa de lo que está emergiendo.',
+      pregunta: '¿Qué estás viendo que otros todavía no ven?',
+    },
+    'La música': {
+      saludo: 'Lo que empezaste a nombrar ya está moviéndose en el campo.',
+      pregunta: '¿Hacia dónde querés que siga?',
+    },
+  }
+
+  const textoEstado = estadoVitalNombre
+    ? (TEXTOS_ESTADO[estadoVitalNombre] ?? TEXTOS_ESTADO['La escucha'])
+    : TEXTOS_ESTADO['La escucha']
+
   // Esperar a que se resuelva la sesión antes de renderizar para evitar el flash
   if (!sessionChecked) return null
 
   return (
     <>
+      {!bienvenida && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200,
+          background: 'rgba(26,20,14,0.92)', backdropFilter: 'blur(8px)',
+          borderBottom: '1px solid rgba(201,168,76,0.12)',
+          padding: '0 24px', height: 44,
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        }}>
+          <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>
+            {email}
+          </span>
+          <button
+            onClick={async () => {
+              await supabase.auth.signOut()
+              window.location.reload()
+            }}
+            style={{ background: 'none', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 6, padding: '4px 12px', fontSize: 12, color: '#C9A84C', fontFamily: 'Karla, sans-serif', cursor: 'pointer', fontWeight: 400 }}
+          >
+            Salir
+          </button>
+        </div>
+      )}
+      {!bienvenida && <div style={{ height: 44 }} />}
+
+      {entradaPersonalizada && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <video autoPlay loop muted playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} src="/Inteligencia_Colectiva.MP4" />
+          <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.60)' }} />
+          <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 28, padding: '0 24px', maxWidth: 480, width: '100%' }}>
+
+            {/* Zona A — saludo */}
+            <div style={{ borderLeft: '2px solid rgba(201,168,76,0.45)', paddingLeft: 16 }}>
+              {estadoVitalNombre && (
+                <div style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: 'rgba(201,168,76,0.55)', fontFamily: 'Karla, sans-serif', fontWeight: 400, marginBottom: 8 }}>
+                  {estadoVitalNombre}
+                </div>
+              )}
+              <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(18px,3vw,24px)', color: '#E8C96A', fontStyle: 'italic', lineHeight: 1.5, margin: 0, fontWeight: 400 }}>
+                {textoEstado.saludo}
+              </p>
+            </div>
+
+            {/* Zona B — pregunta activa */}
+            <div style={{ borderLeft: '2px solid rgba(255,255,255,0.12)', paddingLeft: 16 }}>
+              <p style={{ fontFamily: 'Karla, sans-serif', fontSize: 15, color: 'rgba(255,255,255,0.72)', lineHeight: 1.7, margin: 0, fontWeight: 300 }}>
+                {textoEstado.pregunta}
+              </p>
+            </div>
+
+            {/* Zona C — acceso */}
+            <div style={{ paddingLeft: 18 }}>
+              <button
+                onClick={() => setEntradaPersonalizada(false)}
+                style={{ background: '#8B6914', color: '#F5EDD8', border: 'none', borderRadius: 10, padding: '14px 32px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.08em', cursor: 'pointer' }}
+              >
+                Continuar →
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
+
       {/* BIENVENIDA */}
       {bienvenida && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -1222,60 +1348,115 @@ export default function QuanamIa2026() {
               <div className="lentes-intro">
                 <p className="lentes-sub">Elegí uno o varios lentes y describí lo que ves — o lo que imaginarías ver — desde ahí.</p>
               </div>
-              <div className="lentes-lista">
-                {LENTES.map((lente, idx) => {
-                  const ls = lenteStates[lente.id]
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 16 }}>
+                {LENTES.map(lente => {
+                  const state = lenteStates[lente.id]
+                  const isOpen = state.open
+                  const prevConv = prevConvs[lente.nombre]
+                  const hasDuende = prevConv?.msgs && prevConv.msgs.length > 0
+                  const primerMsgDuende = hasDuende ? prevConv!.msgs.find(m => m.role === 'assistant')?.content : null
+                  const respuestaUsuario = lenteStates[lente.id].respuesta
+
                   return (
-                    <div key={lente.id} className="lente">
-                      <div className="lente-header">
-                        <span className="lente-num">{String(idx + 1).padStart(2, '0')}</span>
-                        <div className="lente-header-left">
-                          <span className="lente-nombre">{lente.nombre}</span>
-                          <span className="lente-frase">{lente.frase}</span>
+                    <div key={lente.id} style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${isOpen ? 'rgba(201,168,76,0.30)' : 'rgba(255,255,255,0.08)'}`, borderRadius: 12, overflow: 'visible', transition: 'border-color 0.2s' }}>
+
+                      {/* Header del lente */}
+                      <div
+                        onClick={() => toggleLente(lente.id)}
+                        style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', gap: 10 }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0, position: 'relative' }}>
+                          <span style={{ fontSize: 14, color: isOpen ? '#E8D0A0' : 'rgba(255,255,255,0.60)', fontFamily: 'Playfair Display, serif', fontWeight: isOpen ? 500 : 400, transition: 'color 0.2s' }}>{lente.nombre}</span>
+                          {/* Botón de ayuda */}
+                          <button
+                            onClick={e => { e.stopPropagation(); setHelpPopup(helpPopup === lente.id ? null : lente.id) }}
+                            style={{ flexShrink: 0, width: 17, height: 17, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.20)', background: 'none', color: 'rgba(255,255,255,0.30)', fontSize: 10, fontFamily: 'Karla, sans-serif', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}
+                          >?</button>
+                          {/* Popup de ayuda */}
+                          {helpPopup === lente.id && (
+                            <div
+                              onClick={e => e.stopPropagation()}
+                              style={{ position: 'absolute', marginTop: 4, left: 0, top: '100%', background: '#2a2018', border: '1px solid rgba(201,168,76,0.30)', borderRadius: 10, padding: '12px 14px', width: 240, zIndex: 50 }}
+                            >
+                              <div style={{ fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: 'rgba(201,168,76,0.60)', fontFamily: 'Karla, sans-serif', marginBottom: 6 }}>¿Qué es este lente?</div>
+                              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.6, margin: 0, fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>{lente.desc}</p>
+                              {lente.ejemplo && (
+                                <p style={{ fontSize: 12, color: 'rgba(201,168,76,0.50)', lineHeight: 1.5, margin: '8px 0 0', fontFamily: 'Karla, sans-serif', fontStyle: 'italic', fontWeight: 300 }}>{lente.ejemplo}</p>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+                          {hasDuende && !isOpen && (
+                            <span style={{ fontSize: 11, color: '#C9A84C', fontFamily: 'Karla, sans-serif', background: 'rgba(201,168,76,0.10)', borderRadius: 4, padding: '2px 7px' }}>Activo</span>
+                          )}
+                          <span style={{ color: isOpen ? 'rgba(201,168,76,0.6)' : 'rgba(255,255,255,0.20)', fontSize: 18, lineHeight: 1 }}>{isOpen ? '−' : '+'}</span>
                         </div>
                       </div>
-                      <div className="lente-body">
-                        <div className="lente-contenido">
-                          {lente.desc.split('\n').map((line, i) => (
-                            <p key={i} className="lente-desc" style={i > 0 ? { marginTop: 8 } : undefined}>{line}</p>
-                          ))}
-                          {lente.ejemplo && <p className="lente-ejemplo">{lente.ejemplo}</p>}
 
-                          {/* FORM */}
-                          <div style={{ marginTop: 8, display: 'flex', flexDirection: 'column', gap: 10 }} onClick={e => e.stopPropagation()}>
-                            {!ls.showDuende ? (
-                              <>
-                                <textarea
-                                  value={ls.respuesta}
-                                  onChange={e => setRespuesta(lente.id, e.target.value)}
-                                  onInput={e => {
-                                    const el = e.currentTarget
-                                    el.style.height = 'auto'
-                                    const maxH = Math.round(15 * 1.7 * 5 + 24) // ~5 líneas + padding
-                                    el.style.height = Math.min(el.scrollHeight, maxH) + 'px'
-                                    el.style.overflowY = el.scrollHeight > maxH ? 'scroll' : 'hidden'
-                                  }}
-                                  placeholder={`Tu perspectiva desde "${lente.nombre}"…`}
-                                  rows={1}
-                                  style={{ width: '100%', border: '1px solid rgba(201,168,76,0.27)', borderRadius: 8, padding: '13px 15px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#2C2820', background: '#F5F0E8', resize: 'none', outline: 'none', lineHeight: 1.7, overflowY: 'hidden' }}
+                      {/* Contenido expandido */}
+                      {isOpen && (
+                        <div style={{ padding: '0 16px 16px' }}>
+                          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', fontFamily: 'Karla, sans-serif', fontStyle: 'italic', lineHeight: 1.6, margin: '0 0 14px', fontWeight: 300 }}>{lente.frase}</p>
+                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+
+                            {/* Columna izquierda — Duende */}
+                            <div style={{ background: 'rgba(201,168,76,0.05)', border: '1px solid rgba(201,168,76,0.15)', borderRadius: 10, padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                              <div style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: 'rgba(201,168,76,0.55)', fontFamily: 'Karla, sans-serif' }}>El Duende</div>
+                              {primerMsgDuende ? (
+                                <>
+                                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', fontStyle: 'italic', lineHeight: 1.6, margin: 0, fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>
+                                    &ldquo;{primerMsgDuende.slice(0, 140)}{primerMsgDuende.length > 140 ? '…' : ''}&rdquo;
+                                  </p>
+                                  <DuendeChat
+                                    lente={lente}
+                                    nombre={nombre}
+                                    email={email}
+                                    prevConv={prevConv}
+                                    iniciativasActivas={iniciativasActivas}
+                                  />
+                                </>
+                              ) : (
+                                <DuendeChat
+                                  lente={lente}
+                                  mensajeInicial={respuestaUsuario}
+                                  nombre={nombre}
+                                  email={email}
+                                  autoAbrir={false}
+                                  iniciativasActivas={iniciativasActivas}
                                 />
-                                <button
-                                  onClick={() => {
-                                    if (!ls.respuesta.trim()) return
-                                    setLenteStates(prev => ({ ...prev, [lente.id]: { ...prev[lente.id], showDuende: true } }))
-                                  }}
-                                  disabled={!ls.respuesta.trim()}
-                                  style={{ width: '100%', background: ls.respuesta.trim() ? '#C9A84C' : 'rgba(201,168,76,0.28)', color: ls.respuesta.trim() ? '#fff' : 'rgba(255,255,255,0.6)', border: 'none', borderRadius: 8, padding: '14px 22px', fontSize: 14, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.06em', cursor: ls.respuesta.trim() ? 'pointer' : 'default', transition: 'background 0.2s' }}
-                                >
-                                  Explorar con el Duende
-                                </button>
-                              </>
-                            ) : (
-                              <DuendeChat lente={lente} mensajeInicial={ls.respuesta} nombre={nombre} email={email} autoAbrir={true} prevConv={prevConvs[lente.nombre]} iniciativasActivas={iniciativasActivas} />
-                            )}
+                              )}
+                            </div>
+
+                            {/* Columna derecha — Usuario */}
+                            <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10, padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                              <div style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.30)', fontFamily: 'Karla, sans-serif' }}>Tu perspectiva</div>
+                              {state.status === 'sent' ? (
+                                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', fontStyle: 'italic', fontFamily: 'Karla, sans-serif', fontWeight: 300, lineHeight: 1.6, margin: 0 }}>Enviado. Podés seguir explorando con el Duende.</p>
+                              ) : (
+                                <>
+                                  <textarea
+                                    value={state.respuesta}
+                                    onChange={e => setRespuesta(lente.id, e.target.value)}
+                                    placeholder={`"${lente.frase.replace(/"/g, '')}"`}
+                                    rows={4}
+                                    style={{ resize: 'none' as const, border: '1px solid rgba(255,255,255,0.10)', borderRadius: 8, padding: '10px 12px', fontSize: 13, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: 'rgba(255,255,255,0.80)', background: 'rgba(255,255,255,0.05)', outline: 'none', lineHeight: 1.6, width: '100%', boxSizing: 'border-box' as const }}
+                                  />
+                                  {state.errorMsg && <p style={{ fontSize: 12, color: '#ff8080', fontFamily: 'Karla, sans-serif', margin: 0 }}>{state.errorMsg}</p>}
+                                  <button
+                                    onClick={() => enviar(lente)}
+                                    disabled={!state.respuesta.trim() || state.status === 'sending'}
+                                    style={{ background: state.respuesta.trim() ? '#8B6914' : 'rgba(139,105,20,0.25)', color: '#F5EDD8', border: 'none', borderRadius: 8, padding: '9px 16px', fontSize: 12, fontFamily: 'Karla, sans-serif', fontWeight: 500, cursor: state.respuesta.trim() ? 'pointer' : 'default', transition: 'background 0.2s', letterSpacing: '0.05em', alignSelf: 'flex-start' }}
+                                  >
+                                    {state.status === 'sending' ? 'Enviando…' : 'Compartir perspectiva'}
+                                  </button>
+                                </>
+                              )}
+                            </div>
+
                           </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   )
                 })}
@@ -1283,6 +1464,16 @@ export default function QuanamIa2026() {
             </div>
           </div>
 
+        </div>
+
+        <div style={{ marginTop: 8 }}>
+          <button
+            onClick={() => setContextModal('masContexto')}
+            style={{ width: '100%', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, padding: '12px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', fontFamily: 'Karla, sans-serif' }}
+          >
+            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.28)', fontWeight: 300 }}>Más contexto</span>
+            <span style={{ color: 'rgba(255,255,255,0.15)', fontSize: 14 }}>+</span>
+          </button>
         </div>
 
         {/* CIERRE */}
@@ -1458,6 +1649,48 @@ export default function QuanamIa2026() {
                     </div>
                   </div>
                   )}
+                </div>
+              </div>
+            </div>,
+            document.body
+          )}
+
+          {contextModal === 'masContexto' && contextMounted && createPortal(
+            <div style={{ position: 'fixed', inset: 0, zIndex: 300, background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
+              <div style={{ width: 'min(600px, 95vw)', maxHeight: '85vh', background: '#fff', borderRadius: 18, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.22)' }}>
+                <div style={{ padding: '20px 28px 18px', borderBottom: '1px solid rgba(0,0,0,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 17, fontWeight: 500, color: '#C9A84C', margin: 0 }}>Más contexto</p>
+                  <button onClick={() => setContextModal(null)} style={{ background: 'rgba(0,0,0,0.08)', border: '1px solid rgba(0,0,0,0.1)', fontSize: 16, color: '#2C2820', cursor: 'pointer', lineHeight: 1, padding: '7px 11px', borderRadius: 6 }}>✕</button>
+                </div>
+                <div style={{ overflowY: 'auto', padding: '28px 28px 32px', display: 'flex', flexDirection: 'column', gap: 24 }}>
+
+                  {/* Bloque — El Paradigma Aleph */}
+                  <div style={{ paddingBottom: 24, borderBottom: '1px solid rgba(0,0,0,0.07)' }}>
+                    <p style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C', marginBottom: 10 }}>El Paradigma Aleph</p>
+                    <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300, marginBottom: 8 }}>Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva, desarrollado a lo largo de más de una década.</p>
+                    <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300, marginBottom: 0 }}>El Paradigma Aleph no es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos — y qué condiciones hacen falta para que eso ocurra.</p>
+                  </div>
+
+                  {/* Bloque — Cómo se forma el grupo */}
+                  <div style={{ paddingBottom: 24, borderBottom: '1px solid rgba(0,0,0,0.07)' }}>
+                    <p style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C', marginBottom: 10 }}>Cómo se forma el grupo</p>
+                    <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>Entre 5 y 8 semanas · Un grupo de entre 15 y 20 personas · Encuentros que no gestionan el presente — exploran el futuro.</p>
+                  </div>
+
+                  {/* Bloque — Iniciativas activas */}
+                  {iniciativasActivas.length > 0 && (
+                    <div>
+                      <p style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C', marginBottom: 10 }}>Líneas de exploración abiertas</p>
+                      <ul style={{ margin: '0 0 0', paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                        {iniciativasActivas.map(ini => (
+                          <li key={ini.id} style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>
+                            {ini.nombre}{ini.descripcion ? ` — ${ini.descripcion}` : ''}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
                 </div>
               </div>
             </div>,
