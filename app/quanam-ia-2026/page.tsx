@@ -361,7 +361,7 @@ function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoPro
 
   return (
     <div>
-      <button onClick={toggleOpen} style={{ width: '100%', background: open ? 'rgba(201,168,76,0.12)' : '#C9A84C', border: open ? '1.5px solid #C9A84C' : 'none', borderRadius: 8, padding: '12px 16px', fontSize: 13, color: open ? '#C9A84C' : '#fff', cursor: 'pointer', letterSpacing: '0.04em', fontFamily: 'Karla, sans-serif', fontWeight: 500, transition: 'background 0.2s' }}>
+      <button onClick={toggleOpen} style={{ width: '100%', background: open ? 'rgba(201,168,76,0.12)' : '#C9A84C', border: open ? '1.5px solid #C9A84C' : 'none', borderRadius: 8, padding: '12px', fontSize: 13, color: open ? '#C9A84C' : '#fff', cursor: 'pointer', letterSpacing: '0.04em', fontFamily: 'Karla, sans-serif', fontWeight: 500, transition: 'background 0.2s' }}>
         {open ? 'Cerrar el Duende' : 'Conversá con el Duende'}
       </button>
       {open && (
@@ -1187,18 +1187,18 @@ export default function QuanamIa2026() {
             }}
           >
             {/* CABECERA */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '32px 32px 4px', borderBottom: '1px solid rgba(0,0,0,0.06)', paddingBottom: 20 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '28px 32px 24px', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
               <p style={{ fontSize: 13, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#C9A84C', fontWeight: 600, margin: 0 }}>El mapa del momento</p>
-              <button onClick={() => setDrawerOpen(false)} style={{ background: 'rgba(0,0,0,0.04)', border: 'none', fontSize: 18, color: '#2C2820', cursor: 'pointer', lineHeight: 1, padding: '6px 10px', borderRadius: 6, flexShrink: 0, fontWeight: 300 }}>✕</button>
+              <button onClick={() => setDrawerOpen(false)} style={{ background: 'rgba(0,0,0,0.08)', border: '1px solid rgba(0,0,0,0.1)', fontSize: 16, color: '#2C2820', cursor: 'pointer', lineHeight: 1, padding: '7px 11px', borderRadius: 6, flexShrink: 0, fontWeight: 400 }}>✕</button>
             </div>
 
             {/* CONTENIDO */}
-            <div style={{ padding: '24px 32px 48px', display: 'flex', flexDirection: 'column', gap: 0 }}>
+            <div style={{ padding: '8px 32px 48px', display: 'flex', flexDirection: 'column', gap: 0 }}>
 
               {/* NIVEL 1 — SECCIÓN A */}
-              <div style={{ borderBottom: '1px solid rgba(139,105,20,0.18)' }}>
+              <div style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
                 <div onClick={() => setDrawerSec1Open(v => !v)} style={{ padding: '22px 0', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 17, fontStyle: 'italic', color: '#C9A84C', lineHeight: 1.35, margin: 0 }}>Tres veces que el piso se movió</p>
+                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, fontWeight: 500, color: '#C9A84C', lineHeight: 1.35, margin: 0 }}>Tres veces que el piso se movió</p>
                   <span style={{ fontSize: 16, color: '#C4941A', fontWeight: 300, flexShrink: 0, marginLeft: 12 }}>{drawerSec1Open ? '−' : '+'}</span>
                 </div>
                 {drawerSec1Open && (
@@ -1212,17 +1212,17 @@ export default function QuanamIa2026() {
                       </div>
                       {dF1Open && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: 16 }}>
-                          <p style={{ fontSize: 14, color: '#888', lineHeight: 1.75, fontWeight: 300 }}>En 2020 el mundo cambió en semanas. Las organizaciones que salieron mejor paradas fueron las que podían pensar juntas bajo incertidumbre. Lo que viene con la IA es una transformación de magnitud similar. Más silenciosa. Pero igual de profunda.</p>
+                          <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>En 2020 el mundo cambió en semanas. Las organizaciones que salieron mejor paradas fueron las que podían pensar juntas bajo incertidumbre. Lo que viene con la IA es una transformación de magnitud similar. Más silenciosa. Pero igual de profunda.</p>
                           <button onClick={e => { e.stopPropagation(); setDF1Prof(v => !v) }} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#C4941A', fontWeight: 500, cursor: 'pointer', letterSpacing: '0.04em' }}>{dF1Prof ? '— menos' : '+ Profundizar'}</button>
                           {dF1Prof && (
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.75, fontWeight: 300 }}>El COVID fue el colapso simultáneo de tres certezas: que el trabajo era un lugar físico, que las decisiones importantes requerían presencia, que el ritmo de cambio era predecible. Lo que emergió no fue tecnología — fue inteligencia colectiva.</p>
-                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.75, fontWeight: 300 }}>Lo que está llegando con la IA replica ese patrón — pero más lento y más profundo. No colapsa el cómo trabajamos. Colapsa el por qué trabajamos. Cuando los agentes hagan ese trabajo, la respuesta de siempre dejará de ser suficiente.</p>
+                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>El COVID fue el colapso simultáneo de tres certezas: que el trabajo era un lugar físico, que las decisiones importantes requerían presencia, que el ritmo de cambio era predecible. Lo que emergió no fue tecnología — fue inteligencia colectiva.</p>
+                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>Lo que está llegando con la IA replica ese patrón — pero más lento y más profundo. No colapsa el cómo trabajamos. Colapsa el por qué trabajamos. Cuando los agentes hagan ese trabajo, la respuesta de siempre dejará de ser suficiente.</p>
                               <p style={{ fontSize: 13, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>¿Cuál será entonces la nueva respuesta?</p>
-                              <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#aaa', fontWeight: 600, marginBottom: 4 }}>Pregunta orientadora</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '10px 14px', borderRadius: 8, margin: 0 }}>La última vez que tomaste una decisión difícil, ¿qué parte podría haber hecho un agente? ¿Y qué parte no?</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '10px 14px', borderRadius: 8, margin: 0 }}>¿Cuánto de tu jornada de la semana pasada fue urgente? ¿Cuánto fue importante?</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '10px 14px', borderRadius: 8, margin: 0 }}>¿Qué sabés sobre tu cliente que ningún sistema podría saber?</p>
+                              <p style={{ fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#888', fontWeight: 600, marginBottom: 4 }}>Pregunta orientadora</p>
+                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>La última vez que tomaste una decisión difícil, ¿qué parte podría haber hecho un agente? ¿Y qué parte no?</p>
+                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>¿Cuánto de tu jornada de la semana pasada fue urgente? ¿Cuánto fue importante?</p>
+                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>¿Qué sabés sobre tu cliente que ningún sistema podría saber?</p>
                               <DuendeFragmento fragmentoId="f1" titulo="El río que cambió de curso" contexto="En 2020 el mundo cambió en semanas. Lo que viene con la IA replica ese patrón — más lento y más profundo. No colapsa el cómo trabajamos. Colapsa el por qué trabajamos. Cuando los agentes hagan ese trabajo, la respuesta de siempre dejará de ser suficiente." nombre={nombre} email={email} />
                             </div>
                           )}
@@ -1238,17 +1238,17 @@ export default function QuanamIa2026() {
                       </div>
                       {dF2Open && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: 16 }}>
-                          <p style={{ fontSize: 14, color: '#888', lineHeight: 1.75, fontWeight: 300 }}>Cada vez que la humanidad perdió las certezas que organizaban su mundo, encontró la manera de crear nuevas desde adentro. Siempre. Sin excepción. La pregunta no es si va a pasar — es qué construimos antes de que pase.</p>
+                          <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>Cada vez que la humanidad perdió las certezas que organizaban su mundo, encontró la manera de crear nuevas desde adentro. Siempre. Sin excepción. La pregunta no es si va a pasar — es qué construimos antes de que pase.</p>
                           <button onClick={e => { e.stopPropagation(); setDF2Prof(v => !v) }} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#C4941A', fontWeight: 500, cursor: 'pointer', letterSpacing: '0.04em' }}>{dF2Prof ? '— menos' : '+ Profundizar'}</button>
                           {dF2Prof && (
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.75, fontWeight: 300 }}>En el siglo XIX colapsaron tres pilares simultáneamente: la religión perdió autoridad con Darwin, la filosofía iluminista prometía progreso pero las revoluciones industriales mostraron miseria, y los vínculos comunitarios se disolvieron con la urbanización. Nietzsche lo documentó como diagnóstico, no catástrofe.</p>
-                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.75, fontWeight: 300 }}>Tolstoi fue a vivir con los campesinos. Los movimientos obreros inventaron nuevas formas de valor colectivo. Las vanguardias artísticas crearon lenguajes completamente nuevos.<br /><br />Lo que colapsa ahora es la centralidad del trabajo como fuente de identidad.</p>
+                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>En el siglo XIX colapsaron tres pilares simultáneamente: la religión perdió autoridad con Darwin, la filosofía iluminista prometía progreso pero las revoluciones industriales mostraron miseria, y los vínculos comunitarios se disolvieron con la urbanización. Nietzsche lo documentó como diagnóstico, no catástrofe.</p>
+                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>Tolstoi fue a vivir con los campesinos. Los movimientos obreros inventaron nuevas formas de valor colectivo. Las vanguardias artísticas crearon lenguajes completamente nuevos.<br /><br />Lo que colapsa ahora es la centralidad del trabajo como fuente de identidad.</p>
                               <p style={{ fontSize: 13, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>Si los agentes hacen lo que hacías, ¿desde dónde construís tu valor?</p>
-                              <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#aaa', fontWeight: 600, marginBottom: 4 }}>Pregunta orientadora</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '10px 14px', borderRadius: 8, margin: 0 }}>¿Cuándo fue la última vez que tu equipo llegó a algo que ninguno traía solo?</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '10px 14px', borderRadius: 8, margin: 0 }}>¿Qué conversaciones importantes nunca quedan registradas en Quanam?</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '10px 14px', borderRadius: 8, margin: 0 }}>Si mañana un agente hiciera el 80% de tu trabajo, ¿en qué usarías el tiempo liberado?</p>
+                              <p style={{ fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#888', fontWeight: 600, marginBottom: 4 }}>Pregunta orientadora</p>
+                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>¿Cuándo fue la última vez que tu equipo llegó a algo que ninguno traía solo?</p>
+                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>¿Qué conversaciones importantes nunca quedan registradas en Quanam?</p>
+                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>Si mañana un agente hiciera el 80% de tu trabajo, ¿en qué usarías el tiempo liberado?</p>
                               <DuendeFragmento fragmentoId="f2" titulo="Cuando el piso se mueve" contexto="Cada vez que la humanidad perdió las certezas que organizaban su mundo, encontró la manera de crear nuevas desde adentro. Lo que colapsa ahora es la centralidad del trabajo como fuente de identidad. Si los agentes hacen lo que hacías, ¿desde dónde construís tu valor?" nombre={nombre} email={email} />
                             </div>
                           )}
@@ -1264,18 +1264,18 @@ export default function QuanamIa2026() {
                       </div>
                       {dF3Open && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: 16 }}>
-                          <p style={{ fontSize: 14, color: '#888', lineHeight: 1.75, fontWeight: 300 }}>Antes de que cualquier sistema procese la información, algo en vos ya sabe. No es intuición mágica — es un tipo de inteligencia que la neurociencia empieza a describir y que la IA, por ahora, no puede tener.</p>
+                          <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>Antes de que cualquier sistema procese la información, algo en vos ya sabe. No es intuición mágica — es un tipo de inteligencia que la neurociencia empieza a describir y que la IA, por ahora, no puede tener.</p>
                           <button onClick={e => { e.stopPropagation(); setDF3Prof(v => !v) }} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#C4941A', fontWeight: 500, cursor: 'pointer', letterSpacing: '0.04em' }}>{dF3Prof ? '— menos' : '+ Profundizar'}</button>
                           {dF3Prof && (
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.75, fontWeight: 300 }}>Kant decía que había dos cosas que lo sorprendían: el orden del cielo, y algo dentro de cada persona que sabe cuándo un acto es ético antes de calcularlo.</p>
-                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.75, fontWeight: 300 }}>Hoy la neurociencia lo describe como un procesamiento no consciente e integrado, en el que múltiples sistemas —cerebrales y corporales— participan en la toma de decisiones antes de que aparezca el pensamiento deliberativo.</p>
-                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.75, fontWeight: 300 }}>El médico que percibe que algo no está bien antes de que los estudios lo confirmen. El vendedor que siente que un cliente necesita ser escuchado antes de ser resuelto. El responsable que reconoce que el momento no está maduro, aunque todos los indicadores digan que sí.</p>
+                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>Kant decía que había dos cosas que lo sorprendían: el orden del cielo, y algo dentro de cada persona que sabe cuándo un acto es ético antes de calcularlo.</p>
+                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>Hoy la neurociencia lo describe como un procesamiento no consciente e integrado, en el que múltiples sistemas —cerebrales y corporales— participan en la toma de decisiones antes de que aparezca el pensamiento deliberativo.</p>
+                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>El médico que percibe que algo no está bien antes de que los estudios lo confirmen. El vendedor que siente que un cliente necesita ser escuchado antes de ser resuelto. El responsable que reconoce que el momento no está maduro, aunque todos los indicadores digan que sí.</p>
                               <p style={{ fontSize: 13, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>Eso no es dato: es juicio situado. Un tipo de procesamiento integrado, presente en cada persona y equipo de Quanam — distribuido, latente, esperando las condiciones adecuadas para hacerse visible.</p>
-                              <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#aaa', fontWeight: 600, marginBottom: 4 }}>Pregunta orientadora</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '10px 14px', borderRadius: 8, margin: 0 }}>¿Cuándo fue la última vez que una conversación cambió genuinamente tu forma de ver un problema?</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '10px 14px', borderRadius: 8, margin: 0 }}>¿Para qué te llamaría tu cliente si pudiera llamarle a un agente para todo lo demás?</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '10px 14px', borderRadius: 8, margin: 0 }}>¿Qué es lo que hacés que no podrías explicarle a un sistema?</p>
+                              <p style={{ fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#888', fontWeight: 600, marginBottom: 4 }}>Pregunta orientadora</p>
+                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>¿Cuándo fue la última vez que una conversación cambió genuinamente tu forma de ver un problema?</p>
+                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>¿Para qué te llamaría tu cliente si pudiera llamarle a un agente para todo lo demás?</p>
+                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>¿Qué es lo que hacés que no podrías explicarle a un sistema?</p>
                               <DuendeFragmento fragmentoId="f3" titulo="Lo que está por encima" contexto="Antes de que cualquier sistema procese la información, algo en vos ya sabe. No es intuición mágica — es juicio situado. Un tipo de procesamiento integrado que la IA, por ahora, no puede tener. El médico que percibe que algo no está bien antes de que los estudios lo confirmen." nombre={nombre} email={email} />
                             </div>
                           )}
@@ -1288,9 +1288,9 @@ export default function QuanamIa2026() {
               </div>
 
               {/* NIVEL 1 — SECCIÓN MID */}
-              <div style={{ borderBottom: '1px solid rgba(139,105,20,0.18)' }}>
+              <div style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
                 <div onClick={() => setDrawerSecMidOpen(v => !v)} style={{ padding: '22px 0', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 17, fontStyle: 'italic', color: '#C9A84C', lineHeight: 1.35, margin: 0 }}>Y en cada caso, quedó algo más</p>
+                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, fontWeight: 500, color: '#C9A84C', lineHeight: 1.35, margin: 0 }}>Y en cada caso, quedó algo más</p>
                   <span style={{ fontSize: 16, color: '#C4941A', fontWeight: 300, flexShrink: 0, marginLeft: 12 }}>{drawerSecMidOpen ? '−' : '+'}</span>
                 </div>
                 {drawerSecMidOpen && (
@@ -1319,9 +1319,9 @@ export default function QuanamIa2026() {
               </div>
 
               {/* NIVEL 1 — SECCIÓN B */}
-              <div style={{ borderBottom: '1px solid rgba(139,105,20,0.18)' }}>
+              <div style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
                 <div onClick={() => setDrawerSec2Open(v => !v)} style={{ padding: '22px 0', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 17, fontStyle: 'italic', color: '#C9A84C', lineHeight: 1.35, margin: 0 }}>¿Desde dónde se diseñó esto?</p>
+                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, fontWeight: 500, color: '#C9A84C', lineHeight: 1.35, margin: 0 }}>¿Desde dónde se diseñó esto?</p>
                   <span style={{ fontSize: 16, color: '#C4941A', fontWeight: 300, flexShrink: 0, marginLeft: 12 }}>{drawerSec2Open ? '−' : '+'}</span>
                 </div>
                 {drawerSec2Open && (
@@ -1335,13 +1335,13 @@ export default function QuanamIa2026() {
                       </div>
                       {dF4Open && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: 16 }}>
-                          <p style={{ fontSize: 14, color: '#888', lineHeight: 1.75, fontWeight: 300 }}>Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva, desarrollado a lo largo de más de una década.</p>
+                          <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva, desarrollado a lo largo de más de una década.</p>
                           <button onClick={e => { e.stopPropagation(); setDF4Prof(v => !v) }} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#C4941A', fontWeight: 500, cursor: 'pointer', letterSpacing: '0.04em' }}>{dF4Prof ? '— menos' : '+ Profundizar'}</button>
                           {dF4Prof && (
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.75, fontWeight: 300 }}>El Paradigma Aleph no es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos — y qué condiciones hacen falta para que eso ocurra. El paradigma tiene un origen distribuido: emergió en múltiples redes. Quanam lo integra, siendo parte de su evolución desde los inicios.</p>
-                              <p style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#aaa', fontWeight: 600, marginBottom: 4 }}>Pregunta orientadora</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '10px 14px', borderRadius: 8, margin: 0 }}>¿Qué condiciones harían falta en Quanam para que la inteligencia colectiva emerja como propiedad del sistema?</p>
+                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>El Paradigma Aleph no es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos — y qué condiciones hacen falta para que eso ocurra. El paradigma tiene un origen distribuido: emergió en múltiples redes. Quanam lo integra, siendo parte de su evolución desde los inicios.</p>
+                              <p style={{ fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#888', fontWeight: 600, marginBottom: 4 }}>Pregunta orientadora</p>
+                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>¿Qué condiciones harían falta en Quanam para que la inteligencia colectiva emerja como propiedad del sistema?</p>
                               <DuendeFragmento fragmentoId="f4" titulo="El Paradigma Aleph" contexto="Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva. No es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos y qué condiciones hacen falta para que eso ocurra." nombre={nombre} email={email} />
                             </div>
                           )}
