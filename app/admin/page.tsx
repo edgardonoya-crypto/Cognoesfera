@@ -302,18 +302,13 @@ export default function AdminPage() {
 
                   const firstUserMsg = (conv: DuendeConv) => conv.mensajes.find(m => m.role === 'user')?.content ?? '—'
 
-                  const LENTES_CONOCIDAS = ['El ángulo propio', 'La pregunta viva', 'La intuición central', 'El hilo conector', 'El experimento pendiente']
-                  const clasificarCtx = (ctx: string): 'lente' | 'resonancia' | null => {
-                    const l = ctx.toLowerCase()
-                    if (LENTES_CONOCIDAS.includes(ctx) || l.includes('lente')) return 'lente'
-                    if (l.includes('fragmento') || l.includes('contexto')) return 'resonancia'
-                    return null
-                  }
+                  const LENTES_CONOCIDAS = new Set(['El ángulo propio', 'La pregunta viva', 'La intuición central', 'El hilo conector', 'El experimento pendiente'])
+                  const clasificarCtx = (ctx: string): 'lente' | 'resonancia' =>
+                    LENTES_CONOCIDAS.has(ctx) ? 'lente' : 'resonancia'
                   const badgeCtx = (ctx: string) => {
                     const tipo = clasificarCtx(ctx)
-                    if (!tipo) return null
                     return (
-                      <span style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' as const, padding: '1px 6px', borderRadius: 4, marginLeft: 6, background: tipo === 'lente' ? 'rgba(78,170,152,.15)' : 'rgba(196,148,26,.15)', color: tipo === 'lente' ? '#3a8a7a' : '#a07010', border: `1px solid ${tipo === 'lente' ? 'rgba(78,170,152,.3)' : 'rgba(196,148,26,.3)'}` }}>
+                      <span style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' as const, padding: '1px 6px', borderRadius: 4, marginLeft: 6, background: tipo === 'lente' ? 'rgba(90,120,80,.12)' : 'rgba(139,105,20,.13)', color: tipo === 'lente' ? '#4a7040' : '#8B6914', border: `1px solid ${tipo === 'lente' ? 'rgba(90,120,80,.28)' : 'rgba(139,105,20,.28)'}` }}>
                         {tipo === 'lente' ? 'Lente' : 'Resonancia'}
                       </span>
                     )
