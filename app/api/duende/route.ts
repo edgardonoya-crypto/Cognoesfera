@@ -200,7 +200,12 @@ export async function POST(request: Request) {
       messages,
     })
 
-    const respuesta = response.content[0].type === 'text' ? response.content[0].text : ''
+    const respuesta = response.content[0]?.type === 'text' ? response.content[0].text : ''
+
+    if (!respuesta) {
+      console.error('Duende API: respuesta vacía del modelo', JSON.stringify(response.content))
+      return NextResponse.json({ error: 'El Duende no pudo generar una respuesta' }, { status: 500 })
+    }
 
     // B1: el Duende no sabe — guardar pregunta en preguntas_arquitectos
     if (respuesta.includes(FRASE_NO_SABE)) {

@@ -109,22 +109,29 @@ function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir }: DuendeC
     sid: string | null,
   ) {
     setLoading(true)
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 30_000)
     try {
       const res = await fetch('/api/duende', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ mensaje, historial, sesion_id: sid, modo: 'convocatoria', nombre, email, contexto_origen: lente.nombre }),
+        signal: controller.signal,
       })
-      const data = await res.json()
-      if (data.respuesta) {
-        setMsgs(prev => [...prev, { role: 'assistant', content: data.respuesta }])
-        if (data.sesion_id) setSesionId(data.sesion_id)
-        setModalOpen(true)  // abre el modal cuando llega la primera respuesta
-      }
-    } catch {
-      setMsgs(prev => [...prev, { role: 'assistant', content: '(El Duende no pudo responder en este momento.)' }])
+      const data = await res.json() as { respuesta?: string; sesion_id?: string; error?: string }
+      if (!res.ok || !data.respuesta) throw new Error(data.error ?? 'Sin respuesta del servidor')
+      setMsgs(prev => [...prev, { role: 'assistant', content: data.respuesta! }])
+      if (data.sesion_id) setSesionId(data.sesion_id)
+      setModalOpen(true)
+    } catch (err) {
+      const isTimeout = err instanceof Error && err.name === 'AbortError'
+      const msg = isTimeout
+        ? 'El Duende tardó demasiado en responder. Intentá de nuevo.'
+        : 'El Duende no pudo responder. Intentá de nuevo.'
+      setMsgs(prev => [...prev, { role: 'assistant', content: msg }])
       setModalOpen(true)
     } finally {
+      clearTimeout(timeoutId)
       setLoading(false)
       setTimeout(() => inputRef.current?.focus(), 80)
     }
@@ -290,6 +297,8 @@ function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoPro
     archivo?: { base64: string; tipo: string; nombre: string },
   ) {
     setLoading(true)
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 30_000)
     try {
       const body: Record<string, unknown> = {
         mensaje, historial, sesion_id: sid, modo: 'convocatoria', nombre, email, contexto_origen: titulo,
@@ -303,15 +312,20 @@ function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoPro
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
+        signal: controller.signal,
       })
-      const data = await res.json()
-      if (data.respuesta) {
-        setMsgs(prev => [...prev, { role: 'assistant', content: data.respuesta }])
-        if (data.sesion_id) setSesionId(data.sesion_id)
-      }
-    } catch {
-      setMsgs(prev => [...prev, { role: 'assistant', content: '(El Duende no pudo responder en este momento.)' }])
+      const data = await res.json() as { respuesta?: string; sesion_id?: string; error?: string }
+      if (!res.ok || !data.respuesta) throw new Error(data.error ?? 'Sin respuesta del servidor')
+      setMsgs(prev => [...prev, { role: 'assistant', content: data.respuesta! }])
+      if (data.sesion_id) setSesionId(data.sesion_id)
+    } catch (err) {
+      const isTimeout = err instanceof Error && err.name === 'AbortError'
+      const msg = isTimeout
+        ? 'El Duende tardó demasiado en responder. Intentá de nuevo.'
+        : 'El Duende no pudo responder. Intentá de nuevo.'
+      setMsgs(prev => [...prev, { role: 'assistant', content: msg }])
     } finally {
+      clearTimeout(timeoutId)
       setLoading(false)
       setTimeout(() => inputRef.current?.focus(), 50)
     }
