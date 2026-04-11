@@ -23,6 +23,8 @@ type LoginLog = { id: string; email: string; created_at: string }
 type DuendeConv = { id: string; nombre_participante: string | null; email_participante: string | null; contexto_origen: string | null; mensajes: DuendeMensaje[]; created_at: string }
 type ArchivoCuraduria = { id: string; created_at: string; email_participante: string | null; contexto_origen: string | null; nombre_archivo: string | null; tipo_archivo: string | null; contenido_base64: string | null; mensaje_asociado: string | null; estado: 'pendiente' | 'aprobado' | 'descartado' | 'señal'; notas_curador: string | null }
 type PreguntaArquitecto = { id: string; created_at: string; email_participante: string | null; contexto_origen: string | null; pregunta: string }
+type Iniciativa = { id: string; nombre: string; descripcion: string | null; responsable: string | null; estado: 'activa' | 'pausada' | 'completada'; fecha_inicio: string | null; visible_convocatoria: boolean; created_at: string }
+type InteresSaved = { id: string; iniciativa_id: string; email_participante: string | null; lente_origen: string | null; fragmento_origen: string | null; momento: string | null; created_at: string; iniciativas?: { nombre: string } | null }
 
 function fmt(iso: string) {
   return new Date(iso).toLocaleDateString('es-UY', { day: 'numeric', month: 'short', year: 'numeric' })
@@ -42,6 +44,10 @@ export default function AdminPage() {
   const [notasCurador, setNotasCurador] = useState<Record<string, string>>({})
   const [preguntas, setPreguntas] = useState<PreguntaArquitecto[]>([])
   const [respuestasTexto, setRespuestasTexto] = useState<Record<string, string>>({})
+  const [iniciativas, setIniciativas] = useState<Iniciativa[]>([])
+  const [intereses, setIntereses] = useState<InteresSaved[]>([])
+  const [editingCell, setEditingCell] = useState<{ id: string; field: string } | null>(null)
+  const [editingValue, setEditingValue] = useState('')
 
   useEffect(() => {
     async function load() {
@@ -97,6 +103,14 @@ export default function AdminPage() {
         .order('created_at', { ascending: false })
       if (pData) setPreguntas(pData as PreguntaArquitecto[])
 
+      // Iniciativas + intereses
+      const [iniciativasRes, interesesRes] = await Promise.all([
+        fetch('/api/admin/iniciativas', { headers: { Authorization: `Bearer ${accessToken}` } }).then(r => r.json()),
+        fetch('/api/admin/iniciativas?tipo=intereses', { headers: { Authorization: `Bearer ${accessToken}` } }).then(r => r.json()),
+      ])
+      if (iniciativasRes?.data) setIniciativas(iniciativasRes.data as Iniciativa[])
+      if (interesesRes?.data) setIntereses(interesesRes.data as InteresSaved[])
+
       setStatus('ok')
     }
     load()
@@ -136,6 +150,42 @@ export default function AdminPage() {
       body: JSON.stringify({ id, notas_curador }),
     })
     if (res.ok) setArchivos(prev => prev.map(a => a.id === id ? { ...a, notas_curador } : a))
+  }
+
+  async function patchIniciativa(id: string, field: string, value: unknown) {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) return
+    const res = await fetch('/api/admin/iniciativas', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
+      body: JSON.stringify({ id, field, value }),
+    })
+    if (res.ok) {
+      setIniciativas(prev => prev.map(ini => ini.id === id ? { ...ini, [field]: value } : ini))
+    }
+  }
+
+  async function nuevaIniciativa() {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) return
+    const res = await fetch('/api/admin/iniciativas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
+      body: JSON.stringify({ nombre: 'Nueva iniciativa' }),
+    })
+    const data = await res.json()
+    if (data?.data) setIniciativas(prev => [...prev, data.data as Iniciativa])
+  }
+
+  function startEdit(id: string, field: string, currentValue: string) {
+    setEditingCell({ id, field })
+    setEditingValue(currentValue)
+  }
+
+  async function commitEdit() {
+    if (!editingCell) return
+    await patchIniciativa(editingCell.id, editingCell.field, editingValue)
+    setEditingCell(null)
   }
 
   if (status === 'loading') return (
@@ -483,6 +533,109 @@ export default function AdminPage() {
                   </div>
                 )
               })}
+            </div>
+          )}
+        </section>
+
+        {/* SECCIÓN F — Iniciativas */}
+        <section style={styles.section}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+            <div>
+              <h2 style={styles.h2}>Iniciativas</h2>
+              <p style={styles.meta}>{iniciativas.length} iniciativa{iniciativas.length !== 1 ? 's' : ''}</p>
+            </div>
+            <button onClick={nuevaIniciativa} style={{ ...styles.btnSm, background: 'rgba(139,105,20,0.1)', borderColor: 'rgba(139,105,20,0.25)', color: '#8B6914' }}>+ Nueva iniciativa</button>
+          </div>
+          {iniciativas.length === 0 ? (
+            <p style={styles.empty}>No hay iniciativas.</p>
+          ) : (
+            <div style={styles.tableWrap}>
+              <table style={{ ...styles.table, tableLayout: 'fixed' as const }}>
+                <thead>
+                  <tr>
+                    {['Nombre', 'Descripción', 'Responsable', 'Estado', 'Visible'].map(h => (
+                      <th key={h} style={{ ...styles.th, width: h === 'Nombre' ? '22%' : h === 'Descripción' ? '30%' : h === 'Responsable' ? '18%' : h === 'Estado' ? '14%' : '10%' }}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {iniciativas.map(ini => (
+                    <tr key={ini.id} style={{ ...styles.tr, cursor: 'default' }}>
+                      {/* Nombre */}
+                      <td style={styles.td} onClick={() => startEdit(ini.id, 'nombre', ini.nombre)}>
+                        {editingCell?.id === ini.id && editingCell.field === 'nombre'
+                          ? <input autoFocus value={editingValue} onChange={e => setEditingValue(e.target.value)} onBlur={commitEdit} onKeyDown={e => e.key === 'Enter' && commitEdit()} style={{ width: '100%', border: '1px solid rgba(139,105,20,0.3)', borderRadius: 4, padding: '4px 6px', fontSize: '0.82rem', fontFamily: 'inherit', outline: 'none' }} />
+                          : <span style={{ cursor: 'pointer', display: 'block', minHeight: 20 }}>{ini.nombre}</span>}
+                      </td>
+                      {/* Descripción */}
+                      <td style={styles.td} onClick={() => startEdit(ini.id, 'descripcion', ini.descripcion ?? '')}>
+                        {editingCell?.id === ini.id && editingCell.field === 'descripcion'
+                          ? <textarea autoFocus value={editingValue} onChange={e => setEditingValue(e.target.value)} onBlur={commitEdit} rows={2} style={{ width: '100%', border: '1px solid rgba(139,105,20,0.3)', borderRadius: 4, padding: '4px 6px', fontSize: '0.82rem', fontFamily: 'inherit', outline: 'none', resize: 'vertical' }} />
+                          : <span style={{ cursor: 'pointer', display: 'block', minHeight: 20, color: ini.descripcion ? '#18201e' : '#aaa', fontStyle: ini.descripcion ? 'normal' : 'italic', fontSize: '0.82rem' }}>{ini.descripcion || 'Agregar descripción…'}</span>}
+                      </td>
+                      {/* Responsable */}
+                      <td style={styles.td} onClick={() => startEdit(ini.id, 'responsable', ini.responsable ?? '')}>
+                        {editingCell?.id === ini.id && editingCell.field === 'responsable'
+                          ? <input autoFocus value={editingValue} onChange={e => setEditingValue(e.target.value)} onBlur={commitEdit} onKeyDown={e => e.key === 'Enter' && commitEdit()} style={{ width: '100%', border: '1px solid rgba(139,105,20,0.3)', borderRadius: 4, padding: '4px 6px', fontSize: '0.82rem', fontFamily: 'inherit', outline: 'none' }} />
+                          : <span style={{ cursor: 'pointer', display: 'block', minHeight: 20, color: ini.responsable ? '#18201e' : '#aaa', fontStyle: ini.responsable ? 'normal' : 'italic', fontSize: '0.82rem' }}>{ini.responsable || '—'}</span>}
+                      </td>
+                      {/* Estado */}
+                      <td style={styles.td}>
+                        <select
+                          value={ini.estado}
+                          onChange={e => patchIniciativa(ini.id, 'estado', e.target.value)}
+                          style={{ border: '1px solid rgba(34,58,54,.15)', borderRadius: 6, padding: '3px 6px', fontSize: '0.8rem', fontFamily: 'inherit', background: '#fff', color: ini.estado === 'activa' ? '#4eaa98' : ini.estado === 'pausada' ? '#C4941A' : '#66706d', cursor: 'pointer' }}
+                        >
+                          <option value="activa">Activa</option>
+                          <option value="pausada">Pausada</option>
+                          <option value="completada">Completada</option>
+                        </select>
+                      </td>
+                      {/* Visible convocatoria */}
+                      <td style={{ ...styles.td, textAlign: 'center' as const }}>
+                        <button
+                          onClick={() => patchIniciativa(ini.id, 'visible_convocatoria', !ini.visible_convocatoria)}
+                          style={{ background: ini.visible_convocatoria ? 'rgba(78,170,152,0.15)' : 'rgba(34,58,54,0.06)', border: `1px solid ${ini.visible_convocatoria ? 'rgba(78,170,152,0.4)' : 'rgba(34,58,54,0.15)'}`, borderRadius: 12, padding: '3px 10px', fontSize: '0.75rem', color: ini.visible_convocatoria ? '#4eaa98' : '#66706d', cursor: 'pointer', whiteSpace: 'nowrap' as const }}
+                        >
+                          {ini.visible_convocatoria ? 'Visible' : 'Oculta'}
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </section>
+
+        {/* SECCIÓN G — Intereses registrados */}
+        <section style={styles.section}>
+          <h2 style={styles.h2}>Intereses registrados</h2>
+          <p style={styles.meta}>{intereses.length} interés{intereses.length !== 1 ? 'es' : ''} detectado{intereses.length !== 1 ? 's' : ''}</p>
+          {intereses.length === 0 ? (
+            <p style={styles.empty}>Todavía no hay intereses registrados.</p>
+          ) : (
+            <div style={styles.tableWrap}>
+              <table style={styles.table}>
+                <thead>
+                  <tr>
+                    {['Email', 'Iniciativa', 'Origen', 'Momento', 'Fecha'].map(h => <th key={h} style={styles.th}>{h}</th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {intereses.map(int => (
+                    <React.Fragment key={int.id}>
+                      <tr style={{ ...styles.tr, cursor: 'default' }}>
+                        <td style={styles.td}>{int.email_participante || '—'}</td>
+                        <td style={styles.td}>{int.iniciativas?.nombre || int.iniciativa_id}</td>
+                        <td style={{ ...styles.td, color: '#66706d', fontSize: '0.8rem' }}>{int.lente_origen || int.fragmento_origen || '—'}</td>
+                        <td style={{ ...styles.td, color: '#66706d', fontSize: '0.8rem', maxWidth: 240, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' as const }}>{int.momento || '—'}</td>
+                        <td style={{ ...styles.td, color: '#66706d' }}>{fmt(int.created_at)}</td>
+                      </tr>
+                    </React.Fragment>
+                  ))}
+                </tbody>
+              </table>
             </div>
           )}
         </section>

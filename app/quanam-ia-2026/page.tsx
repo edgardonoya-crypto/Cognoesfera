@@ -150,6 +150,17 @@ function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir, prevConv 
     callDuende(msg, msgs, sesionId)
   }
 
+  function handleClose() {
+    if (msgs.length > 0 && email?.trim()) {
+      fetch('/api/quanam-interes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim(), lente_origen: lente.nombre, msgs }),
+      }).catch(() => {})
+    }
+    setModalOpen(false)
+  }
+
   const DIcon = (
     <div style={{ flexShrink: 0, width: 28, height: 28, borderRadius: '50%', border: '1px solid rgba(201,168,76,0.5)', background: 'rgba(201,168,76,0.10)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: '#C9A84C', fontFamily: 'Karla, sans-serif', letterSpacing: '0.04em' }}>D</div>
   )
@@ -165,7 +176,7 @@ function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir, prevConv 
             <p style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic', fontSize: 13, color: '#8A7E70', margin: '5px 0 0', lineHeight: 1.5 }}>{lente.frase}</p>
           </div>
           <button
-            onClick={() => setModalOpen(false)}
+            onClick={handleClose}
             style={{ flexShrink: 0, background: 'none', border: 'none', fontSize: 20, color: '#8A7E70', cursor: 'pointer', lineHeight: 1, padding: '2px 0 0', marginTop: 2 }}
             aria-label="Cerrar"
           >✕</button>
@@ -223,7 +234,7 @@ function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir, prevConv 
             >Enviar</button>
           </div>
           <button
-            onClick={() => setModalOpen(false)}
+            onClick={handleClose}
             style={{ background: 'none', border: 'none', color: '#8A7E70', fontSize: 12, fontFamily: 'Karla, sans-serif', cursor: 'pointer', textDecoration: 'underline', alignSelf: 'center', padding: '2px 0' }}
           >Cerrar y guardar conversación</button>
         </div>
@@ -401,6 +412,17 @@ function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoPro
     callDuende(msg, msgs, sesionId, archivo)
   }
 
+  function handleClose() {
+    if (msgs.length > 0 && email?.trim()) {
+      fetch('/api/quanam-interes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim(), fragmento_origen: titulo, msgs }),
+      }).catch(() => {})
+    }
+    setModalOpen(false)
+  }
+
   const DIcon = (
     <div style={{ flexShrink: 0, width: 28, height: 28, borderRadius: '50%', border: '1px solid rgba(201,168,76,0.5)', background: 'rgba(201,168,76,0.10)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: '#C9A84C', fontFamily: 'Karla, sans-serif', letterSpacing: '0.04em' }}>D</div>
   )
@@ -414,7 +436,7 @@ function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoPro
             <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 18, fontWeight: 600, color: '#2C2820', margin: 0, lineHeight: 1.3 }}>{titulo}</p>
             <p style={{ fontFamily: 'Karla, sans-serif', fontStyle: 'italic', fontSize: 12, color: '#8A7E70', margin: '4px 0 0', lineHeight: 1.5 }}>Profundizando con el Duende</p>
           </div>
-          <button onClick={() => setModalOpen(false)} style={{ flexShrink: 0, background: 'none', border: 'none', fontSize: 20, color: '#8A7E70', cursor: 'pointer', lineHeight: 1, padding: '2px 0 0', marginTop: 2 }} aria-label="Cerrar">✕</button>
+          <button onClick={handleClose} style={{ flexShrink: 0, background: 'none', border: 'none', fontSize: 20, color: '#8A7E70', cursor: 'pointer', lineHeight: 1, padding: '2px 0 0', marginTop: 2 }} aria-label="Cerrar">✕</button>
         </div>
         {/* MENSAJES */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -482,7 +504,7 @@ function DuendeFragmento({ titulo, contexto, nombre, email }: DuendeFragmentoPro
             </div>
           )}
           <input ref={fileInputRef} type="file" accept="image/*,application/pdf" onChange={handleFileChange} style={{ display: 'none' }} />
-          <button onClick={() => setModalOpen(false)} style={{ background: 'none', border: 'none', color: '#8A7E70', fontSize: 12, fontFamily: 'Karla, sans-serif', cursor: 'pointer', textDecoration: 'underline', alignSelf: 'center', padding: '2px 0' }}>Cerrar y guardar conversación</button>
+          <button onClick={handleClose} style={{ background: 'none', border: 'none', color: '#8A7E70', fontSize: 12, fontFamily: 'Karla, sans-serif', cursor: 'pointer', textDecoration: 'underline', alignSelf: 'center', padding: '2px 0' }}>Cerrar y guardar conversación</button>
         </div>
       </div>
     </div>
