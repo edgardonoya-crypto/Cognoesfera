@@ -454,19 +454,9 @@ export default function QuanamIa2026() {
   const [bienvenida, setBienvenida] = useState(true)
   const [nombre, setNombre] = useState('')
   const [email, setEmail] = useState('')
-  const [drawerOpen, setDrawerOpen] = useState(false)
-  const [drawerSec1Open, setDrawerSec1Open] = useState(false)
-  const [drawerSecMidOpen, setDrawerSecMidOpen] = useState(false)
-  const [drawerSec2Open, setDrawerSec2Open] = useState(false)
-  const [dF1Open, setDF1Open] = useState(false)
-  const [dF2Open, setDF2Open] = useState(false)
-  const [dF3Open, setDF3Open] = useState(false)
-  const [dF4Open, setDF4Open] = useState(false)
-  const [dF1Prof, setDF1Prof] = useState(false)
-  const [dF2Prof, setDF2Prof] = useState(false)
-  const [dF3Prof, setDF3Prof] = useState(false)
-  const [dF4Prof, setDF4Prof] = useState(false)
-  const [dF5Open, setDF5Open] = useState(false)
+  const [contextMenuOpen, setContextMenuOpen] = useState(false)
+  const [contextModal, setContextModal] = useState<'sec1' | 'mid' | 'sec2' | null>(null)
+  const [contextMounted, setContextMounted] = useState(false)
   const [contactMsg, setContactMsg] = useState('')
   const [contactStatus, setContactStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const [sec2Open, setSec2Open] = useState(true)
@@ -644,6 +634,17 @@ export default function QuanamIa2026() {
     initNodes(); draw()
     return () => cancelAnimationFrame(animRef.current)
   }, [])
+
+  useEffect(() => { setContextMounted(true) }, [])
+
+  useEffect(() => {
+    if (!contextModal && !contextMenuOpen) return
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') { setContextModal(null); setContextMenuOpen(false) }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [contextModal, contextMenuOpen])
 
   function toggleFragmento(setter: React.Dispatch<React.SetStateAction<FragmentoKey>>, key: FragmentoKey, current: FragmentoKey) {
     setter(current === key ? null : key)
@@ -1143,279 +1144,160 @@ export default function QuanamIa2026() {
 
       </div>
 
-      {/* PESTAÑA + DRAWER — contexto */}
-      {!bienvenida && (
+      {/* PESTAÑA + MODALES — contexto */}
+      {!bienvenida && contextMounted && (
         <>
-          {/* OVERLAY */}
-          {drawerOpen && (
-            <div
-              onClick={() => setDrawerOpen(false)}
-              style={{ position: 'fixed', inset: 0, zIndex: 60, background: 'rgba(0,0,0,0.3)' }}
-            />
+          {/* MENÚ FLOTANTE */}
+          {contextMenuOpen && (
+            <>
+              <div onClick={() => setContextMenuOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 68 }} />
+              <div style={{ position: 'fixed', right: 48, top: '50%', transform: 'translateY(-50%)', zIndex: 69, background: '#fff', border: '1px solid rgba(139,105,20,0.18)', borderRadius: 12, boxShadow: '0 8px 32px rgba(0,0,0,0.15)', overflow: 'hidden', minWidth: 270 }}>
+                {([
+                  { key: 'sec1' as const, label: 'Tres veces que el piso se movió' },
+                  { key: 'mid' as const, label: 'Y en cada caso, quedó algo más' },
+                  { key: 'sec2' as const, label: '¿Desde dónde se diseñó esto?' },
+                ] as { key: 'sec1' | 'mid' | 'sec2'; label: string }[]).map(({ key, label }, i, arr) => (
+                  <button key={key} onClick={() => { setContextMenuOpen(false); setContextModal(key) }} style={{ display: 'block', width: '100%', padding: '14px 20px', background: 'none', border: 'none', borderBottom: i < arr.length - 1 ? '1px solid rgba(0,0,0,0.06)' : 'none', textAlign: 'left', fontFamily: 'Karla, sans-serif', fontSize: 14, color: '#2C2820', cursor: 'pointer', fontWeight: 300, lineHeight: 1.5 }}>
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </>
           )}
 
           {/* PESTAÑA VERTICAL */}
           <div
-            onClick={() => setDrawerOpen(true)}
-            style={{
-              position: 'fixed', right: 0, top: '50%', transform: 'translateY(-50%)',
-              zIndex: 70, width: 40, height: 120,
-              background: '#FFFFFF',
-              borderLeft: '1px solid rgba(139,105,20,0.15)',
-              borderTop: '1px solid rgba(139,105,20,0.15)',
-              borderBottom: '1px solid rgba(139,105,20,0.15)',
-              borderRadius: '8px 0 0 8px',
-              alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer',
-              display: drawerOpen ? 'none' : 'flex',
-            }}
+            onClick={() => setContextMenuOpen(v => !v)}
+            style={{ position: 'fixed', right: 0, top: '50%', transform: 'translateY(-50%)', zIndex: 70, width: 40, height: 120, background: contextMenuOpen ? '#FBF7EE' : '#FFFFFF', border: '1px solid rgba(139,105,20,0.15)', borderRight: 'none', borderRadius: '8px 0 0 8px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'background 0.15s' }}
           >
             <span style={{ fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#8A7E70', writingMode: 'vertical-rl', transform: 'rotate(180deg)', whiteSpace: 'nowrap', userSelect: 'none', padding: '8px 0' }}>contexto</span>
           </div>
 
-          {/* DRAWER */}
-          <div
-            style={{
-              position: 'fixed', top: 0, right: 0, height: '100vh', width: 420,
-              zIndex: 70,
-              background: '#FFFFFF',
-              boxShadow: '-4px 0 24px rgba(0,0,0,0.10)',
-              transform: drawerOpen ? 'translateX(0)' : 'translateX(100%)',
-              transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1)',
-              display: 'flex', flexDirection: 'column',
-              overflowY: 'auto',
-            }}
-          >
-            {/* CABECERA */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '28px 32px 24px', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
-              <p style={{ fontSize: 13, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#C9A84C', fontWeight: 600, margin: 0 }}>El mapa del momento</p>
-              <button onClick={() => setDrawerOpen(false)} style={{ background: 'rgba(0,0,0,0.08)', border: '1px solid rgba(0,0,0,0.1)', fontSize: 16, color: '#2C2820', cursor: 'pointer', lineHeight: 1, padding: '7px 11px', borderRadius: 6, flexShrink: 0, fontWeight: 400 }}>✕</button>
-            </div>
-
-            {/* CONTENIDO */}
-            <div style={{ padding: '8px 32px 48px', display: 'flex', flexDirection: 'column', gap: 0 }}>
-
-              {/* NIVEL 1 — SECCIÓN A */}
-              <div style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
-                <div onClick={() => setDrawerSec1Open(v => !v)} style={{ padding: '22px 0', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, fontWeight: 500, color: '#C9A84C', lineHeight: 1.35, margin: 0 }}>Tres veces que el piso se movió</p>
-                  <span style={{ fontSize: 16, color: '#C4941A', fontWeight: 300, flexShrink: 0, marginLeft: 12 }}>{drawerSec1Open ? '−' : '+'}</span>
+          {/* MODAL 1 — Tres veces que el piso se movió */}
+          {contextModal === 'sec1' && createPortal(
+            <div style={{ position: 'fixed', inset: 0, zIndex: 300, background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
+              <div style={{ width: 'min(600px, 95vw)', maxHeight: '85vh', background: '#fff', borderRadius: 18, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.22)' }}>
+                <div style={{ padding: '20px 28px 18px', borderBottom: '1px solid rgba(0,0,0,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 17, fontWeight: 500, color: '#C9A84C', margin: 0 }}>Tres veces que el piso se movió</p>
+                  <button onClick={() => setContextModal(null)} style={{ background: 'rgba(0,0,0,0.08)', border: '1px solid rgba(0,0,0,0.1)', fontSize: 16, color: '#2C2820', cursor: 'pointer', lineHeight: 1, padding: '7px 11px', borderRadius: 6, flexShrink: 0 }}>✕</button>
                 </div>
-                {drawerSec1Open && (
-                  <div style={{ paddingBottom: 8 }}>
-
-                    {/* SUB F1 */}
-                    <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)' }}>
-                      <div onClick={() => setDF1Open(v => !v)} style={{ padding: '16px 0 10px', cursor: 'pointer', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8 }}>
-                        <span style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C' }}>El río que cambió de curso</span>
-                        <span style={{ fontSize: 14, color: '#C4941A', fontWeight: 300, flexShrink: 0 }}>{dF1Open ? '−' : '+'}</span>
-                      </div>
-                      {dF1Open && (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: 16 }}>
-                          <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>En 2020 el mundo cambió en semanas. Las organizaciones que salieron mejor paradas fueron las que podían pensar juntas bajo incertidumbre. Lo que viene con la IA es una transformación de magnitud similar. Más silenciosa. Pero igual de profunda.</p>
-                          <button onClick={e => { e.stopPropagation(); setDF1Prof(v => !v) }} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#C4941A', fontWeight: 500, cursor: 'pointer', letterSpacing: '0.04em' }}>{dF1Prof ? '— menos' : '+ Profundizar'}</button>
-                          {dF1Prof && (
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>El COVID fue el colapso simultáneo de tres certezas: que el trabajo era un lugar físico, que las decisiones importantes requerían presencia, que el ritmo de cambio era predecible. Lo que emergió no fue tecnología — fue inteligencia colectiva.</p>
-                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>Lo que está llegando con la IA replica ese patrón — pero más lento y más profundo. No colapsa el cómo trabajamos. Colapsa el por qué trabajamos. Cuando los agentes hagan ese trabajo, la respuesta de siempre dejará de ser suficiente.</p>
-                              <p style={{ fontSize: 13, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>¿Cuál será entonces la nueva respuesta?</p>
-                              <p style={{ fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#888', fontWeight: 600, marginBottom: 4 }}>Pregunta orientadora</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>La última vez que tomaste una decisión difícil, ¿qué parte podría haber hecho un agente? ¿Y qué parte no?</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>¿Cuánto de tu jornada de la semana pasada fue urgente? ¿Cuánto fue importante?</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>¿Qué sabés sobre tu cliente que ningún sistema podría saber?</p>
-                              <DuendeFragmento fragmentoId="f1" titulo="El río que cambió de curso" contexto="En 2020 el mundo cambió en semanas. Lo que viene con la IA replica ese patrón — más lento y más profundo. No colapsa el cómo trabajamos. Colapsa el por qué trabajamos. Cuando los agentes hagan ese trabajo, la respuesta de siempre dejará de ser suficiente." nombre={nombre} email={email} />
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* SUB F2 */}
-                    <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)' }}>
-                      <div onClick={() => setDF2Open(v => !v)} style={{ padding: '16px 0 10px', cursor: 'pointer', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8 }}>
-                        <span style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C' }}>Cuando el piso se mueve</span>
-                        <span style={{ fontSize: 14, color: '#C4941A', fontWeight: 300, flexShrink: 0 }}>{dF2Open ? '−' : '+'}</span>
-                      </div>
-                      {dF2Open && (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: 16 }}>
-                          <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>Cada vez que la humanidad perdió las certezas que organizaban su mundo, encontró la manera de crear nuevas desde adentro. Siempre. Sin excepción. La pregunta no es si va a pasar — es qué construimos antes de que pase.</p>
-                          <button onClick={e => { e.stopPropagation(); setDF2Prof(v => !v) }} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#C4941A', fontWeight: 500, cursor: 'pointer', letterSpacing: '0.04em' }}>{dF2Prof ? '— menos' : '+ Profundizar'}</button>
-                          {dF2Prof && (
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>En el siglo XIX colapsaron tres pilares simultáneamente: la religión perdió autoridad con Darwin, la filosofía iluminista prometía progreso pero las revoluciones industriales mostraron miseria, y los vínculos comunitarios se disolvieron con la urbanización. Nietzsche lo documentó como diagnóstico, no catástrofe.</p>
-                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>Tolstoi fue a vivir con los campesinos. Los movimientos obreros inventaron nuevas formas de valor colectivo. Las vanguardias artísticas crearon lenguajes completamente nuevos.<br /><br />Lo que colapsa ahora es la centralidad del trabajo como fuente de identidad.</p>
-                              <p style={{ fontSize: 13, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>Si los agentes hacen lo que hacías, ¿desde dónde construís tu valor?</p>
-                              <p style={{ fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#888', fontWeight: 600, marginBottom: 4 }}>Pregunta orientadora</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>¿Cuándo fue la última vez que tu equipo llegó a algo que ninguno traía solo?</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>¿Qué conversaciones importantes nunca quedan registradas en Quanam?</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>Si mañana un agente hiciera el 80% de tu trabajo, ¿en qué usarías el tiempo liberado?</p>
-                              <DuendeFragmento fragmentoId="f2" titulo="Cuando el piso se mueve" contexto="Cada vez que la humanidad perdió las certezas que organizaban su mundo, encontró la manera de crear nuevas desde adentro. Lo que colapsa ahora es la centralidad del trabajo como fuente de identidad. Si los agentes hacen lo que hacías, ¿desde dónde construís tu valor?" nombre={nombre} email={email} />
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* SUB F3 */}
-                    <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', marginBottom: 8 }}>
-                      <div onClick={() => setDF3Open(v => !v)} style={{ padding: '16px 0 10px', cursor: 'pointer', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8 }}>
-                        <span style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C' }}>Lo que está por encima</span>
-                        <span style={{ fontSize: 14, color: '#C4941A', fontWeight: 300, flexShrink: 0 }}>{dF3Open ? '−' : '+'}</span>
-                      </div>
-                      {dF3Open && (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: 16 }}>
-                          <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>Antes de que cualquier sistema procese la información, algo en vos ya sabe. No es intuición mágica — es un tipo de inteligencia que la neurociencia empieza a describir y que la IA, por ahora, no puede tener.</p>
-                          <button onClick={e => { e.stopPropagation(); setDF3Prof(v => !v) }} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#C4941A', fontWeight: 500, cursor: 'pointer', letterSpacing: '0.04em' }}>{dF3Prof ? '— menos' : '+ Profundizar'}</button>
-                          {dF3Prof && (
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>Kant decía que había dos cosas que lo sorprendían: el orden del cielo, y algo dentro de cada persona que sabe cuándo un acto es ético antes de calcularlo.</p>
-                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>Hoy la neurociencia lo describe como un procesamiento no consciente e integrado, en el que múltiples sistemas —cerebrales y corporales— participan en la toma de decisiones antes de que aparezca el pensamiento deliberativo.</p>
-                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>El médico que percibe que algo no está bien antes de que los estudios lo confirmen. El vendedor que siente que un cliente necesita ser escuchado antes de ser resuelto. El responsable que reconoce que el momento no está maduro, aunque todos los indicadores digan que sí.</p>
-                              <p style={{ fontSize: 13, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65, fontFamily: 'Playfair Display, serif' }}>Eso no es dato: es juicio situado. Un tipo de procesamiento integrado, presente en cada persona y equipo de Quanam — distribuido, latente, esperando las condiciones adecuadas para hacerse visible.</p>
-                              <p style={{ fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#888', fontWeight: 600, marginBottom: 4 }}>Pregunta orientadora</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>¿Cuándo fue la última vez que una conversación cambió genuinamente tu forma de ver un problema?</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>¿Para qué te llamaría tu cliente si pudiera llamarle a un agente para todo lo demás?</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>¿Qué es lo que hacés que no podrías explicarle a un sistema?</p>
-                              <DuendeFragmento fragmentoId="f3" titulo="Lo que está por encima" contexto="Antes de que cualquier sistema procese la información, algo en vos ya sabe. No es intuición mágica — es juicio situado. Un tipo de procesamiento integrado que la IA, por ahora, no puede tener. El médico que percibe que algo no está bien antes de que los estudios lo confirmen." nombre={nombre} email={email} />
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-
+                <div style={{ overflowY: 'auto', padding: '28px 28px 32px', display: 'flex', flexDirection: 'column', gap: 0 }}>
+                  <div style={{ paddingBottom: 24, marginBottom: 24, borderBottom: '1px solid rgba(0,0,0,0.07)' }}>
+                    <p style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C', marginBottom: 10 }}>El río que cambió de curso</p>
+                    <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300, marginBottom: 16 }}>En 2020 el mundo cambió en semanas. Las organizaciones que salieron mejor paradas fueron las que podían pensar juntas bajo incertidumbre. Lo que viene con la IA es una transformación de magnitud similar. Más silenciosa. Pero igual de profunda.</p>
+                    <DuendeFragmento fragmentoId="f1" titulo="El río que cambió de curso" contexto="En 2020 el mundo cambió en semanas. Lo que viene con la IA replica ese patrón — más lento y más profundo. No colapsa el cómo trabajamos. Colapsa el por qué trabajamos. Cuando los agentes hagan ese trabajo, la respuesta de siempre dejará de ser suficiente." nombre={nombre} email={email} />
                   </div>
-                )}
-              </div>
-
-              {/* NIVEL 1 — SECCIÓN MID */}
-              <div style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
-                <div onClick={() => setDrawerSecMidOpen(v => !v)} style={{ padding: '22px 0', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, fontWeight: 500, color: '#C9A84C', lineHeight: 1.35, margin: 0 }}>Y en cada caso, quedó algo más</p>
-                  <span style={{ fontSize: 16, color: '#C4941A', fontWeight: 300, flexShrink: 0, marginLeft: 12 }}>{drawerSecMidOpen ? '−' : '+'}</span>
+                  <div style={{ paddingBottom: 24, marginBottom: 24, borderBottom: '1px solid rgba(0,0,0,0.07)' }}>
+                    <p style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C', marginBottom: 10 }}>Cuando el piso se mueve</p>
+                    <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300, marginBottom: 16 }}>Cada vez que la humanidad perdió las certezas que organizaban su mundo, encontró la manera de crear nuevas desde adentro. Siempre. Sin excepción. La pregunta no es si va a pasar — es qué construimos antes de que pase.</p>
+                    <DuendeFragmento fragmentoId="f2" titulo="Cuando el piso se mueve" contexto="Cada vez que la humanidad perdió las certezas que organizaban su mundo, encontró la manera de crear nuevas desde adentro. Lo que colapsa ahora es la centralidad del trabajo como fuente de identidad. Si los agentes hacen lo que hacías, ¿desde dónde construís tu valor?" nombre={nombre} email={email} />
+                  </div>
+                  <div>
+                    <p style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C', marginBottom: 10 }}>Lo que está por encima</p>
+                    <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300, marginBottom: 16 }}>Antes de que cualquier sistema procese la información, algo en vos ya sabe. No es intuición mágica — es un tipo de inteligencia que la neurociencia empieza a describir y que la IA, por ahora, no puede tener.</p>
+                    <DuendeFragmento fragmentoId="f3" titulo="Lo que está por encima" contexto="Antes de que cualquier sistema procese la información, algo en vos ya sabe. No es intuición mágica — es juicio situado. Un tipo de procesamiento integrado que la IA, por ahora, no puede tener. El médico que percibe que algo no está bien antes de que los estudios lo confirmen." nombre={nombre} email={email} />
+                  </div>
                 </div>
-                {drawerSecMidOpen && (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 16, paddingBottom: 24 }}>
-                    {[
-                      {
-                        label: 'Siglo XIX',
-                        text: 'Tolstoi fue a vivir con los campesinos. Los movimientos obreros inventaron nuevas formas de valor colectivo. Las vanguardias crearon lenguajes que antes no existían. La humanidad no encontró las respuestas en los sistemas que colapsaban — las construyó desde el entre.',
-                      },
-                      {
-                        label: '2020',
-                        text: 'Lo que emergió no fue tecnología — fue inteligencia colectiva. Las organizaciones que salieron mejor paradas fueron las que aprendieron a pensar juntas bajo incertidumbre.',
-                      },
-                      {
-                        label: 'Ahora',
-                        text: 'Todavía está emergiendo. Pero el patrón sugiere que lo que quedará no será lo que los agentes puedan hacer solos — sino lo que emerge cuando humanos y agentes piensan juntos. Sin los humanos, los agentes no tienen hacia dónde ir.',
-                      },
-                    ].map(({ label, text }) => (
-                      <div key={label} style={{ paddingLeft: 14, borderLeft: '2px solid rgba(196,148,26,0.35)' }}>
-                        <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#C4941A', fontWeight: 500, margin: '0 0 6px' }}>{label}</p>
-                        <p style={{ fontSize: 14, color: '#888', lineHeight: 1.75, fontWeight: 300, margin: 0 }}>{text}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
               </div>
+            </div>,
+            document.body
+          )}
 
-              {/* NIVEL 1 — SECCIÓN B */}
-              <div style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
-                <div onClick={() => setDrawerSec2Open(v => !v)} style={{ padding: '22px 0', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 16, fontWeight: 500, color: '#C9A84C', lineHeight: 1.35, margin: 0 }}>¿Desde dónde se diseñó esto?</p>
-                  <span style={{ fontSize: 16, color: '#C4941A', fontWeight: 300, flexShrink: 0, marginLeft: 12 }}>{drawerSec2Open ? '−' : '+'}</span>
+          {/* MODAL 2 — Y en cada caso, quedó algo más */}
+          {contextModal === 'mid' && createPortal(
+            <div style={{ position: 'fixed', inset: 0, zIndex: 300, background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
+              <div style={{ width: 'min(600px, 95vw)', maxHeight: '85vh', background: '#fff', borderRadius: 18, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.22)' }}>
+                <div style={{ padding: '20px 28px 18px', borderBottom: '1px solid rgba(0,0,0,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 17, fontWeight: 500, color: '#C9A84C', margin: 0 }}>Y en cada caso, quedó algo más</p>
+                  <button onClick={() => setContextModal(null)} style={{ background: 'rgba(0,0,0,0.08)', border: '1px solid rgba(0,0,0,0.1)', fontSize: 16, color: '#2C2820', cursor: 'pointer', lineHeight: 1, padding: '7px 11px', borderRadius: 6, flexShrink: 0 }}>✕</button>
                 </div>
-                {drawerSec2Open && (
-                  <div style={{ paddingBottom: 8 }}>
-
-                    {/* SUB F4 */}
-                    <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', marginBottom: 8 }}>
-                      <div onClick={() => setDF4Open(v => !v)} style={{ padding: '16px 0 10px', cursor: 'pointer', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8 }}>
-                        <span style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C' }}>El Paradigma Aleph</span>
-                        <span style={{ fontSize: 14, color: '#C4941A', fontWeight: 300, flexShrink: 0 }}>{dF4Open ? '−' : '+'}</span>
-                      </div>
-                      {dF4Open && (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: 16 }}>
-                          <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva, desarrollado a lo largo de más de una década.</p>
-                          <button onClick={e => { e.stopPropagation(); setDF4Prof(v => !v) }} style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#C4941A', fontWeight: 500, cursor: 'pointer', letterSpacing: '0.04em' }}>{dF4Prof ? '— menos' : '+ Profundizar'}</button>
-                          {dF4Prof && (
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                              <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>El Paradigma Aleph no es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos — y qué condiciones hacen falta para que eso ocurra. El paradigma tiene un origen distribuido: emergió en múltiples redes. Quanam lo integra, siendo parte de su evolución desde los inicios.</p>
-                              <p style={{ fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#888', fontWeight: 600, marginBottom: 4 }}>Pregunta orientadora</p>
-                              <p style={{ fontSize: 13, color: '#5A5048', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic', background: '#F5F0E8', padding: '12px', borderRadius: 8, margin: 0 }}>¿Qué condiciones harían falta en Quanam para que la inteligencia colectiva emerja como propiedad del sistema?</p>
-                              <DuendeFragmento fragmentoId="f4" titulo="El Paradigma Aleph" contexto="Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva. No es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos y qué condiciones hacen falta para que eso ocurra." nombre={nombre} email={email} />
-                            </div>
-                          )}
-                        </div>
-                      )}
+                <div style={{ overflowY: 'auto', padding: '28px 28px 32px', display: 'flex', flexDirection: 'column', gap: 0 }}>
+                  {([
+                    { label: 'Siglo XIX', text: 'Tolstoi fue a vivir con los campesinos. Los movimientos obreros inventaron nuevas formas de valor colectivo. Las vanguardias crearon lenguajes que antes no existían. La humanidad no encontró las respuestas en los sistemas que colapsaban — las construyó desde el entre.' },
+                    { label: '2020', text: 'Lo que emergió no fue tecnología — fue inteligencia colectiva. Las organizaciones que salieron mejor paradas fueron las que aprendieron a pensar juntas bajo incertidumbre.' },
+                    { label: 'Ahora', text: 'Todavía está emergiendo. Pero el patrón sugiere que lo que quedará no será lo que los agentes puedan hacer solos — sino lo que emerge cuando humanos y agentes piensan juntos. Sin los humanos, los agentes no tienen hacia dónde ir.' },
+                  ] as { label: string; text: string }[]).map(({ label, text }, i, arr) => (
+                    <div key={label} style={{ paddingBottom: 24, marginBottom: i < arr.length - 1 ? 24 : 0, borderBottom: i < arr.length - 1 ? '1px solid rgba(0,0,0,0.07)' : 'none' }}>
+                      <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#C9A84C', fontWeight: 600, marginBottom: 8 }}>{label}</p>
+                      <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300, margin: 0 }}>{text}</p>
                     </div>
-
-                    {/* SUB F5 — Líneas de exploración */}
-                    <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', marginBottom: 8 }}>
-                      <div onClick={() => setDF5Open(v => !v)} style={{ padding: '16px 0 10px', cursor: 'pointer', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8 }}>
-                        <span style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C' }}>Líneas de exploración abiertas</span>
-                        <span style={{ fontSize: 14, color: '#C4941A', fontWeight: 300, flexShrink: 0 }}>{dF5Open ? '−' : '+'}</span>
-                      </div>
-                      {dF5Open && (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, paddingBottom: 16 }}>
-                          <ul style={{ margin: 0, paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                            {[
-                              'Varios equipos de Quanam',
-                              'En una ONG',
-                              'En una institución educativa que presentará la Inteligencia Humana Aumentada en el Congreso Mundial IAC 2026 (Punta del Este)',
-                              'Diversos grupos de trabajo internacionales que exploran la Inteligencia Colectiva',
-                              'Existen en este momento varias propuestas para la implementación de esta IHA',
-                            ].map((item, i) => (
-                              <li key={i} style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.7, fontWeight: 300 }}>{item}</li>
-                            ))}
-                          </ul>
-
-                          <DuendeFragmento fragmentoId="f5" titulo="Líneas de exploración abiertas" contexto="El Paradigma Aleph se está aplicando en este momento en varios equipos de Quanam, una ONG, una institución educativa que presentará en el Congreso Mundial IAC 2026, y grupos internacionales que exploran la Inteligencia Colectiva." nombre={nombre} email={email} />
-
-                          <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', marginTop: 4, paddingTop: 14, display: 'flex', flexDirection: 'column', gap: 10 }}>
-                            <p style={{ fontSize: 12, color: '#6A5E50', lineHeight: 1.65, fontWeight: 300 }}>Si querés conversar sobre estas iniciativas, dejá tu mensaje acá</p>
-                            <textarea
-                              value={contactMsg}
-                              onChange={e => setContactMsg(e.target.value)}
-                              placeholder="Tu mensaje…"
-                              rows={3}
-                              style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 8, padding: '10px 12px', fontSize: 12, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#2C2820', background: 'rgba(245,240,232,0.4)', resize: 'vertical', outline: 'none', lineHeight: 1.6 }}
-                            />
-                            {contactStatus !== 'sent' && (
-                              <button
-                                onClick={async e => {
-                                  e.stopPropagation()
-                                  if (!contactMsg.trim() || contactStatus === 'sending') return
-                                  setContactStatus('sending')
-                                  try {
-                                    const res = await fetch('/api/aleph-contacto', {
-                                      method: 'POST',
-                                      headers: { 'Content-Type': 'application/json' },
-                                      body: JSON.stringify({ nombre, email, mensaje: contactMsg.trim(), origen: 'Líneas de exploración abiertas' }),
-                                    })
-                                    setContactStatus(res.ok ? 'sent' : 'error')
-                                  } catch {
-                                    setContactStatus('error')
-                                  }
-                                }}
-                                disabled={!contactMsg.trim() || contactStatus === 'sending'}
-                                style={{ alignSelf: 'flex-start', background: contactMsg.trim() ? '#8B6914' : 'rgba(139,105,20,0.3)', color: '#F5EDD8', border: 'none', borderRadius: 8, padding: '8px 16px', fontSize: 11, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.06em', cursor: contactMsg.trim() ? 'pointer' : 'default', transition: 'background 0.2s' }}
-                              >
-                                {contactStatus === 'sending' ? 'Enviando…' : 'Enviar mensaje'}
-                              </button>
-                            )}
-                            {contactStatus === 'sent' && <p style={{ fontSize: 12, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65 }}>Tu mensaje fue enviado. Gracias.</p>}
-                            {contactStatus === 'error' && <p style={{ fontSize: 12, color: '#c0392b', lineHeight: 1.65 }}>Hubo un error. Intentá de nuevo.</p>}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-
-                  </div>
-                )}
+                  ))}
+                </div>
               </div>
+            </div>,
+            document.body
+          )}
 
-            </div>
-          </div>
+          {/* MODAL 3 — ¿Desde dónde se diseñó esto? */}
+          {contextModal === 'sec2' && createPortal(
+            <div style={{ position: 'fixed', inset: 0, zIndex: 300, background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
+              <div style={{ width: 'min(600px, 95vw)', maxHeight: '85vh', background: '#fff', borderRadius: 18, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.22)' }}>
+                <div style={{ padding: '20px 28px 18px', borderBottom: '1px solid rgba(0,0,0,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 17, fontWeight: 500, color: '#C9A84C', margin: 0 }}>¿Desde dónde se diseñó esto?</p>
+                  <button onClick={() => setContextModal(null)} style={{ background: 'rgba(0,0,0,0.08)', border: '1px solid rgba(0,0,0,0.1)', fontSize: 16, color: '#2C2820', cursor: 'pointer', lineHeight: 1, padding: '7px 11px', borderRadius: 6, flexShrink: 0 }}>✕</button>
+                </div>
+                <div style={{ overflowY: 'auto', padding: '28px 28px 32px', display: 'flex', flexDirection: 'column', gap: 0 }}>
+                  <div style={{ paddingBottom: 24, marginBottom: 24, borderBottom: '1px solid rgba(0,0,0,0.07)' }}>
+                    <p style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C', marginBottom: 10 }}>El Paradigma Aleph</p>
+                    <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300, marginBottom: 8 }}>Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva, desarrollado a lo largo de más de una década.</p>
+                    <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300, marginBottom: 16 }}>El Paradigma Aleph no es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos — y qué condiciones hacen falta para que eso ocurra. El paradigma tiene un origen distribuido: emergió en múltiples redes. Quanam lo integra, siendo parte de su evolución desde los inicios.</p>
+                    <DuendeFragmento fragmentoId="f4" titulo="El Paradigma Aleph" contexto="Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva. No es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos y qué condiciones hacen falta para que eso ocurra." nombre={nombre} email={email} />
+                  </div>
+                  <div>
+                    <p style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C', marginBottom: 10 }}>Líneas de exploración abiertas</p>
+                    <ul style={{ margin: '0 0 16px', paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                      {[
+                        'Varios equipos de Quanam',
+                        'En una ONG',
+                        'En una institución educativa que presentará la Inteligencia Humana Aumentada en el Congreso Mundial IAC 2026 (Punta del Este)',
+                        'Diversos grupos de trabajo internacionales que exploran la Inteligencia Colectiva',
+                        'Existen en este momento varias propuestas para la implementación de esta IHA',
+                      ].map((item, i) => (
+                        <li key={i} style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>{item}</li>
+                      ))}
+                    </ul>
+                    <DuendeFragmento fragmentoId="f5" titulo="Líneas de exploración abiertas" contexto="El Paradigma Aleph se está aplicando en este momento en varios equipos de Quanam, una ONG, una institución educativa que presentará en el Congreso Mundial IAC 2026, y grupos internacionales que exploran la Inteligencia Colectiva." nombre={nombre} email={email} />
+                    <div style={{ marginTop: 20, paddingTop: 16, borderTop: '1px solid rgba(0,0,0,0.07)', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                      <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.65, fontWeight: 300 }}>Si querés conversar sobre estas iniciativas, dejá tu mensaje acá</p>
+                      <textarea
+                        value={contactMsg}
+                        onChange={e => setContactMsg(e.target.value)}
+                        placeholder="Tu mensaje…"
+                        rows={3}
+                        style={{ width: '100%', border: '1px solid rgba(139,105,20,0.2)', borderRadius: 8, padding: '10px 12px', fontSize: 13, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#2C2820', background: 'rgba(245,240,232,0.4)', resize: 'vertical', outline: 'none', lineHeight: 1.6 }}
+                      />
+                      {contactStatus !== 'sent' && (
+                        <button
+                          onClick={async e => {
+                            e.stopPropagation()
+                            if (!contactMsg.trim() || contactStatus === 'sending') return
+                            setContactStatus('sending')
+                            try {
+                              const res = await fetch('/api/aleph-contacto', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ nombre, email, mensaje: contactMsg.trim(), origen: 'Líneas de exploración abiertas' }),
+                              })
+                              setContactStatus(res.ok ? 'sent' : 'error')
+                            } catch {
+                              setContactStatus('error')
+                            }
+                          }}
+                          disabled={!contactMsg.trim() || contactStatus === 'sending'}
+                          style={{ alignSelf: 'flex-start', background: contactMsg.trim() ? '#8B6914' : 'rgba(139,105,20,0.3)', color: '#F5EDD8', border: 'none', borderRadius: 8, padding: '8px 16px', fontSize: 12, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.06em', cursor: contactMsg.trim() ? 'pointer' : 'default', transition: 'background 0.2s' }}
+                        >
+                          {contactStatus === 'sending' ? 'Enviando…' : 'Enviar mensaje'}
+                        </button>
+                      )}
+                      {contactStatus === 'sent' && <p style={{ fontSize: 12, color: '#8B6914', fontStyle: 'italic', lineHeight: 1.65 }}>Tu mensaje fue enviado. Gracias.</p>}
+                      {contactStatus === 'error' && <p style={{ fontSize: 12, color: '#c0392b', lineHeight: 1.65 }}>Hubo un error. Intentá de nuevo.</p>}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>,
+            document.body
+          )}
         </>
       )}
     </>
