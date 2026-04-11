@@ -135,16 +135,60 @@ export async function POST(request: Request) {
   try {
     const {
       mensaje, historial = [], sesion_id, modo, nombre, email, contexto_origen,
-      archivo_base64, archivo_tipo, archivo_nombre, iniciativas_activas,
+      archivo_base64, archivo_tipo, archivo_nombre, iniciativas_activas, user_id,
     } = await request.json() as {
       mensaje: string; historial?: Message[]; sesion_id?: string; modo?: 'convocatoria' | 'corpus';
       nombre?: string; email?: string; contexto_origen?: string;
       archivo_base64?: string; archivo_tipo?: string; archivo_nombre?: string;
-      iniciativas_activas?: string;
+      iniciativas_activas?: string; user_id?: string;
     }
 
     if (!mensaje?.trim()) {
       return NextResponse.json({ error: 'Falta el mensaje' }, { status: 400 })
+    }
+
+    // ── Estado vital del usuario (solo modo convocatoria) ──────────────────────
+    type EstadoSituadoData = { id: string; nombre_situado: string | null; prompt_duende: string | null }
+    type EstadoVitalData = { id: string; estado_situado_id: string | null; señales: Record<string, unknown>; historia: unknown[]; estado_situado: EstadoSituadoData | null }
+
+    let estadoVital: EstadoVitalData | null = null
+
+    if (modo === 'convocatoria' && user_id) {
+      const contextoEstado = 'convocatoria_quanam'
+      const evSelect = 'id, estado_situado_id, historia, estado_situado:estados_situados(id, nombre_situado, prompt_duende)'
+
+      // Buscar estado vital existente
+      const { data: evExistente } = await supabase
+        .from('estados_vitales')
+        .select(evSelect)
+        .eq('entidad_tipo', 'individuo')
+        .eq('entidad_id', user_id)
+        .eq('contexto', contextoEstado)
+        .single()
+
+      if (evExistente) {
+        // Obtener señales por separado para evitar el campo con ñ en el select anidado
+        const { data: evSeñales } = await supabase
+          .from('estados_vitales').select('señales').eq('id', (evExistente as { id: string }).id).single()
+        estadoVital = { ...(evExistente as unknown as EstadoVitalData), señales: (evSeñales as { señales: Record<string, unknown> } | null)?.señales ?? {} }
+      } else {
+        // Crear con estado 1 (La escucha)
+        const { data: madre1 } = await supabase
+          .from('estados_madre').select('id').eq('orden', 1).single()
+        if (madre1) {
+          const { data: situado1 } = await supabase
+            .from('estados_situados').select('id, nombre_situado, prompt_duende')
+            .eq('contexto', contextoEstado).eq('estado_madre_id', (madre1 as { id: string }).id).eq('activo', true).single()
+          if (situado1) {
+            const { data: nuevoEv } = await supabase
+              .from('estados_vitales')
+              .insert({ entidad_tipo: 'individuo', entidad_id: user_id, contexto: contextoEstado, estado_situado_id: (situado1 as { id: string }).id, señales: {}, historia: [] })
+              .select(evSelect)
+              .single()
+            if (nuevoEv) estadoVital = { ...(nuevoEv as unknown as EstadoVitalData), señales: {} }
+          }
+        }
+      }
     }
 
     // B2: contar mensajes del usuario (historial + el actual)
@@ -159,8 +203,14 @@ export async function POST(request: Request) {
     const agregarPreguntaDesafiante = ultimos3.length >= 3 && !mencionaIA
 
     let systemPrompt = modo === 'convocatoria'
-      ? SYSTEM_PROMPT + '\n\nIMPORTANTE: Estás hablando con un participante de una convocatoria. Respondé en 2-3 líneas máximo. Tono cálido y conversacional — como alguien que escucha con genuino interés. Sin jerga técnica ni conceptos del paradigma. Terminá siempre con una sola pregunta breve que abra territorio. No explicás — abrís.\n\nCerrá cada respuesta con una pregunta que mueva al usuario hacia el siguiente estado de maduración. Los 8 estados son: Latente → Posible → Activado → Emergente → Expresivo → Legible → Sostenido → Ecosistémico. Leé el estado actual de la conversación e invitá al siguiente con una sola pregunta breve.'
+      ? SYSTEM_PROMPT + '\n\nIMPORTANTE: Estás hablando con un participante de una convocatoria. Respondé en 2-3 líneas máximo. Tono cálido y conversacional — como alguien que escucha con genuino interés. Sin jerga técnica ni conceptos del paradigma. Terminá siempre con una sola pregunta breve que abra territorio. No explicás — abrís.'
       : SYSTEM_PROMPT
+
+    // Capa 2: instrucción del estado vital situado
+    if (modo === 'convocatoria' && estadoVital?.estado_situado) {
+      const es = estadoVital.estado_situado
+      systemPrompt += `\n\nESTADO ACTUAL DEL USUARIO: ${es.nombre_situado ?? 'La escucha'}\nINSTRUCCIÓN PARA ESTE ESTADO: ${es.prompt_duende ?? ''}`
+    }
 
     if (modo === 'convocatoria' && iniciativas_activas?.trim()) {
       systemPrompt += `\n\nINICIATIVAS ACTIVAS — donde el Paradigma Aleph se está aplicando en este momento:\n${iniciativas_activas}\n\nSi alguien pregunta sobre estas iniciativas, hablá de ellas desde el corpus del paradigma con brevedad.`
@@ -223,6 +273,42 @@ export async function POST(request: Request) {
           estado: 'pendiente',
         })
       if (preguntaErr) console.error('preguntas_arquitectos insert error:', JSON.stringify(preguntaErr))
+    }
+
+    // ── Actualizar señales de estado vital (solo modo convocatoria) ────────────
+    if (modo === 'convocatoria' && user_id && estadoVital) {
+      const señalesNuevas: Record<string, unknown> = {}
+      const totalUser = historial.filter(m => m.role === 'user').length
+
+      if (totalUser === 0) {
+        // Primer mensaje de esta sesión
+        señalesNuevas.primer_mensaje = true
+      }
+      if (totalUser > 0) {
+        // Conversación en curso — acumular contador
+        señalesNuevas.conversaciones = 1
+      }
+      if (historial.length > 0 && sesion_id) {
+        // Hay historial previo cargado → usuario regresó
+        señalesNuevas.regresó = true
+      }
+
+      if (Object.keys(señalesNuevas).length > 0) {
+        const { error: señalesErr } = await supabase
+          .from('estados_vitales')
+          .update({
+            señales: Object.fromEntries(
+              Object.entries({ ...(estadoVital.señales ?? {}), ...señalesNuevas }).map(([k, v]) => {
+                const prev = (estadoVital!.señales ?? {})[k]
+                if (typeof v === 'number' && typeof prev === 'number') return [k, prev + v]
+                return [k, v]
+              })
+            ),
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', estadoVital.id)
+        if (señalesErr) console.error('estados_vitales señales update error:', JSON.stringify(señalesErr))
+      }
     }
 
     // B2: cada 3 mensajes del usuario — agregar línea de memoria viva
