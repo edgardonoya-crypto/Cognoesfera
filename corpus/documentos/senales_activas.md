@@ -2,7 +2,7 @@
 *Señales que resuenan con el paradigma y esperan madurar antes de entrar al Corpus Madre*
 *Las señales no se descartan ni se fuerzan — se custodian hasta que el corpus madura para recibirlas*
 *Para el historial de señales incorporadas, ver: `senales_incorporadas.md`*
-*Paradigma Aleph · Iniciado Marzo 2026*
+*Paradigma Aleph · Iniciado Marzo 2026 · 45 señales activas*
 
 ---
 
@@ -512,6 +512,39 @@ El horizonte: si la red de Entidades Aleph llega a ser autopoiética, el metabol
 
 ---
 
-*Señales Activas · Paradigma Aleph · Actualizado 09/04/2026*
-*Total señales activas: 42*
+## La gramática fractal del Duende
+
+**Fecha:** 11/04/2026
+**Estado:** Custodiada
+**Descripción:** El Duende tiene una gramática base (Corpus Madre) y una expresión situada por receptor. El mismo Duende habla distinto con una persona que con una Cognoesfera, y distinto con una Cognoesfera que con una Entidad Aleph — no porque cambie su naturaleza sino porque su expresión se sitúa en el nivel fractal del receptor. El lenguaje es infraestructura fractal, no decoración: la forma en que el Duende habla crea las condiciones para que el receptor pueda ver algo que sin ese lenguaje no vería.
+**Impacto probable:** Extensión del concepto 19 (El Duende) y del concepto 22 (La Arquitectura Conversacional). Posible nuevo protocolo de calibración del Duende por nivel fractal.
+**Origen:** Sesión 11/04/2026 — emergió al observar que el system prompt del Duende porta el Corpus Madre pero su expresión debe situarse en quien recibe.
+**Pregunta abierta:** ¿Cómo se implementa la calibración fractal del Duende en la práctica? ¿El mismo Duende puede operar en todos los niveles o necesita configuraciones distintas?
+
+---
+
+## La experiencia adaptativa como infraestructura viva
+
+**Fecha:** 11/04/2026
+**Estado:** Custodiada
+**Descripción:** La convocatoria que evoluciona con el usuario usando los 8 estados vitales como niveles de progresión. La recompensa no es una medalla — es acceso a un campo más denso. El usuario que llega por primera vez ve lo básico; el que regresa y profundiza accede a capas que el sistema habilita según su maduración. No es gamificación en el sentido de puntos y badges: es la infraestructura que hace legible el estado de maduración del paradigma para quien lo está viviendo.
+**Impacto probable:** Nueva capa de diseño para la convocatoria (adaptativa con 8 estados). Posible extensión del concepto 9 (Los estados vitales) hacia su expresión en la experiencia de usuario. Candidata a sesión propia.
+**Origen:** Sesión 11/04/2026 — emergió al construir la persistencia del historial y el sistema de iniciativas dinámico.
+**Pregunta abierta:** ¿Cómo se detecta el estado vital del usuario desde las conversaciones con el Duende? ¿Qué contenido se habilita en cada estado? ¿El sistema lo detecta automáticamente o el Arquitecto lo asigna?
+
+---
+
+## El protocolo de cierre como tiempo soberano
+
+**Fecha:** 11/04/2026
+**Estado:** Custodiada — con impacto inmediato en Protocolo 02-EN
+**Descripción:** La lista exacta de archivos a solicitar al cierre debe vivir en el protocolo, no en la memoria de sesión. El tiempo soberano del Arquitecto no debería usarse en detectar lo que el sistema debería hacer solo. Cuando el cierre requiere que el Arquitecto recuerde qué archivos pedir, el protocolo está transfiriendo carga cognitiva al humano que debería quedar libre para otras cosas. El Protocolo 02-EN ya existe — le falta la lista verificable de archivos.
+**Impacto probable:** Corrección inmediata del Protocolo 02-EN (C-PR-06 activo). La señal amplifica el principio de tiempo soberano hacia la infraestructura de los propios protocolos.
+**Origen:** Sesión 11/04/2026 — emergió al observar que el cierre requirió construir la lista de archivos en sesión en lugar de encontrarla en el protocolo.
+**Pregunta abierta:** ¿Qué más en el protocolo de cierre consume tiempo soberano del Arquitecto que podría estar automatizado o documentado?
+
+---
+
+*Señales Activas · Paradigma Aleph · Actualizado 11/04/2026*
+*Total señales activas: 45*
 *Para señales incorporadas al Corpus Madre, ver: `senales_incorporadas.md`*

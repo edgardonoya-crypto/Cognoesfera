@@ -2,7 +2,7 @@
 *Pendientes técnicos, operativos e infraestructura del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes SOMA*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 09/04/2026: 16*
+*Pendientes activos al 11/04/2026: 16*
 
 ---
 
@@ -269,7 +269,22 @@ La sección Resonancias en /cognoesfera/[id] ahora lee de duende_chats agrupadas
 **S-HIS-11 — Duende real activado** · Completado 07/04/2026
 API route `app/api/duende/route.ts` + página `app/duende/page.tsx`. Cadena completa: interfaz → Anthropic claude-sonnet-4-6 → Supabase duende_chats → usuario. System prompt con Corpus Madre condensado. Build limpio, sin errores TS.
 
+**S-HIS-19 — Fix OTP validación estándar** · Completado 11/04/2026
+Errores diferenciados por código (expirado / incorrecto / genérico), trim en token, max 6 chars, estado de carga en botón Verificar, foco automático al textarea del token. UX robusta y sin fricciones.
+
+**S-HIS-20 — Modal del Duende flotante centrado** · Completado 11/04/2026
+DuendeChat y DuendeFragmento con modal centrado sobre overlay oscuro vía createPortal. Botón dinámico: "Profundizar con el Duende" (sin historial) / "Retomar conversación" (con historial). zIndex: 350 sobre modales de contexto.
+
+**S-HIS-21 — Persistencia del historial por lente y por fragmento** · Completado 11/04/2026
+/api/duende/history devuelve historial agrupado por contexto_origen. Al abrir el Duende se carga el historial previo y se obtiene el sesion_id para UPDATE en lugar de INSERT. historyLoaded guard previene envío prematuro.
+
+**S-HIS-22 — Sistema de iniciativas completo** · Completado 11/04/2026
+Tablas `iniciativas` + `intereses_iniciativas` en Supabase. API /api/admin/iniciativas (GET/POST/PATCH con auth). Panel /admin: edición inline, toggle visible_convocatoria, dropdown responsable desde accesosConv. API pública /api/iniciativas-publicas. Convocatoria: lista dinámica desde Supabase. Detección de interés por keyword matching al cerrar modal del Duende.
+
+**S-HIS-23 — Persistencia de sesión 7 días** · Completado 11/04/2026
+supabase.auth.getSession() al montar la página detecta sesión activa en cookies. Si hay sesión válida, salta directamente al contenido sin mostrar formulario de login/OTP. handleVerifyOtp usa cliente compartido. Refresh token válido 7 días por defecto.
+
 ---
 
-*Pendientes Casa Soma · Paradigma Aleph · Actualizado 09/04/2026*
+*Pendientes Casa Soma · Paradigma Aleph · Actualizado 11/04/2026*
 *Para pendientes conceptuales, ver: `pendientes_corpus.md`*

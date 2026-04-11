@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v23 · 09 Abril 2026*
+*Versión actual: v24 · 11 Abril 2026*
 
 ---
 
@@ -182,6 +182,18 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - RESEND_API_KEY configurada en .env.local y Vercel
 - Inconsistencia I1 resuelta al inicio: orden cronológico hitos A2
 
+**Hitos de SESION-20260411 — "La convocatoria viva — cuando el sistema aprendió a recordar y evolucionar":**
+- Hero de la convocatoria rediseñado — pregunta primero, info logística debajo del botón
+- OTP con validación estándar — errores diferenciados, trim, max 6 chars, estado de carga, foco al textarea
+- Modal del Duende flotante centrado — overlay oscuro, historial, botón "Retomar conversación"
+- Bug del Duende resuelto — try/catch/finally, timeout 30s, siempre devuelve control
+- Persistencia del historial por lente y por fragmento de contexto — UPDATE en lugar de INSERT
+- Sistema de contexto rediseñado — drawer reemplazado por modales centrados por sección
+- Duende con contexto del fragmento en primer mensaje — solo cuando no hay historial previo
+- Sistema de iniciativas completo — tabla Supabase + admin con edición inline + convocatoria dinámica
+- Persistencia de sesión — refresh token 7 días, no requiere re-autenticación en cada recarga
+- Inconsistencia detectada: lista de archivos de cierre debe vivir en el Protocolo 02-EN — pendiente de incorporar
+
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
 - **Corpus Universal** — el campo total del conocimiento vivo del paradigma en todos sus niveles y expresiones
@@ -269,9 +281,9 @@ Los pendientes viven en dos archivos con schema completo:
 **Prioridades próxima sesión:**
 - **P1 [CORPUS]:** Registrar mínimo de Casa Corpus antes del 17/04 (C-DO-05)
 - **P2 [SOMA]:** Construir decisiones_arquitecturales.md antes del 17/04 (S-IN-05)
-- **P3 [CORPUS]:** Sesión propia para el InterSer Soma/Corpus (C-SE-01)
-- **P4 [SOMA]:** Completar S-SE-01 — documentar variables de entorno (S-IN-04)
-- **P5 [CORPUS]:** Protocolo de actualización del system prompt del Duende (C-CO-07)
+- **P3 [CORPUS]:** Incorporar lista exacta de archivos al Protocolo 02-EN (C-PR-06)
+- **P4 [SOMA]:** Eliminar rama master de Vercel — trabajar solo con main
+- **P5 [CORPUS]:** Sesión propia para arquitectura adaptativa de la convocatoria (gamificación con 8 estados vitales)
 
 ---
 
@@ -297,7 +309,7 @@ Esto debe incluir:
 
 *Las señales activas viven en `corpus/documentos/senales_activas.md` con descripción completa. Las señales incorporadas al Corpus Madre están en `corpus/documentos/senales_incorporadas.md`.*
 
-### Señales activas (42)
+### Señales activas (45)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
@@ -342,6 +354,9 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **El Duende como espejo del corpus** — cuando el system prompt porta el Corpus Madre completo (33 conceptos), el Duende responde desde adentro del paradigma y no desde afuera de él. La calidad de la respuesta es función directa de la fidelidad del corpus que porta. Fecha: 07/04/2026
 - **La curación como acto de cuidado del corpus** — el flujo archivos → curador → repositorio materializa el concepto 12 (Cognoesfera curadora) en la infraestructura digital. Lo que el paradigma describe como postura se convierte en proceso técnico concreto. Fecha: 09/04/2026
 - **El relato como infraestructura de acceso** — la frase "Tu mirada se activa cuando se encuentra con otras" como formulación que conecta la entrada al sistema con el paradigma. El relato no es decoración — es la primera condición de posibilidad. Antes del código, antes del formulario, la palabra que crea el espacio. Fecha: 09/04/2026
+- **La gramática fractal del Duende** — el Duende tiene una gramática base (Corpus Madre) y una expresión situada por receptor. Fractal: persona → Cognoesfera → Entidad Aleph. El lenguaje como infraestructura fractal, no como decoración. Fecha: 11/04/2026
+- **La experiencia adaptativa como infraestructura viva** — la convocatoria que evoluciona con el usuario usando los 8 estados vitales como niveles de progresión. La recompensa no es una medalla — es acceso a un campo más denso. Fecha: 11/04/2026
+- **El protocolo de cierre como tiempo soberano** — la lista exacta de archivos a solicitar al cierre debe vivir en el protocolo, no en la memoria de sesión. El tiempo soberano del Arquitecto no debería usarse en detectar lo que el sistema debería hacer solo. Fecha: 11/04/2026
 
 ### Señales incorporadas al Corpus Madre
 *Historial completo en `corpus/documentos/senales_incorporadas.md`*
@@ -444,6 +459,8 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - app/api/admin/responder-pregunta/route.ts — respuesta por email via Resend · 09/04/2026
 - app/api/auth/send-otp/route.ts — fix OTP emails nuevos + cliente correcto · 09/04/2026
 - app/cognoesfera/[id]/page.tsx — Resonancias muestra conversaciones Duende agrupadas por lente · 09/04/2026
+- app/quanam-ia-2026/page.tsx — rediseño completo UX: hero, modal Duende, persistencia, modales contexto, iniciativas dinámicas · 11/04/2026
+- supabase/migrations/20260411_iniciativas.sql — tablas iniciativas e intereses_iniciativas · 11/04/2026
 
 - app/api/duende/route.ts — API route del Duende con system prompt completo · 07/04/2026
 - app/duende/page.tsx — interfaz de conversación con el Duende · 07/04/2026

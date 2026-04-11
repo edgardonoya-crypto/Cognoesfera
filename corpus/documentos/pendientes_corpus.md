@@ -2,7 +2,7 @@
 *Pendientes conceptuales, documentales y narrativos del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes CORPUS*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 09/04/2026: 24*
+*Pendientes activos al 11/04/2026: 25*
 
 ---
 
@@ -154,6 +154,16 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 **Prioridad:** P2
 **Estado:** Activo
 **Fecha:** 07/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**C-PR-06**
+**Título:** Incorporar lista exacta de archivos al Protocolo 02-EN
+**Descripción:** El Protocolo 02-EN ya existe pero no tiene la lista verificable de archivos a solicitar al cierre. Consecuencia: el Arquitecto usa tiempo soberano para recordar qué pedir en cada sesión. La lista debe incluir: corpus/SESION.md, corpus/status más reciente, pendientes_soma.md, pendientes_corpus.md, senales_activas.md — y cualquier documento generado o modificado en la sesión. Ver señal activa "El protocolo de cierre como tiempo soberano".
+**Prioridad:** P1
+**Estado:** Activo
+**Fecha:** 11/04/2026
 **Dependencias:** Ninguna
 
 ---

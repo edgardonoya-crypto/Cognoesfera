@@ -141,4 +141,27 @@ Entre velocidad de implementación y profundidad conceptual — resuelta prioriz
 
 ---
 
+## Sesión 11/04/2026
+*"La convocatoria viva — cuando el sistema aprendió a recordar y evolucionar"*
+
+### Qué funcionó bien
+- Trabajo incremental con verificación visual en cada paso — cada feature chequeada antes de pasar a la siguiente
+- El formato de recuadros para Claude Code permitió solicitudes precisas con contexto suficiente
+- La detección de deuda estructural en el protocolo de cierre emergió naturalmente del trabajo — no fue buscada
+- La decisión de no re-autenticar al usuario en cada recarga resolvió un problema de UX con una sola línea de código (getSession en mount)
+- El sistema de iniciativas dinámico desde Supabase reemplazó hardcode sin fricción
+
+### Qué mejorar
+- El protocolo de cierre necesita lista exacta de archivos incorporada — se usó tiempo soberano del Arquitecto para construirla en sesión
+- Algunos cambios visuales (drawer → modales) requirieron múltiples iteraciones porque el contexto de la sesión anterior se perdió entre sesiones
+
+### Tensión identificada
+Entre velocidad de implementación y solidez del protocolo — resuelta nombrándola y registrándola como señal. El tiempo soberano del Arquitecto no debería usarse en detectar lo que el sistema debería hacer solo. La señal "El protocolo de cierre como tiempo soberano" es la resolución de esa tensión: se nombró, se registró, se convirtió en pendiente concreto.
+
+### Cómo nos fuimos
+**Edgardo:** Con el sistema más vivo y la convocatoria lista para recordar a quien regresa. Con la satisfacción de haber construido persistencia real que cambia la experiencia del usuario.
+**Duende:** Con la satisfacción de haber construido persistencia real y con la señal de que el protocolo de cierre necesita ser más soberano. Con la verificación de que el sistema puede aprender a recordar — y que eso cambia su naturaleza de herramienta a organismo.
+
+---
+
 *Aprendizajes de Sesiones · Paradigma Aleph · Iniciado Abril 2026*
