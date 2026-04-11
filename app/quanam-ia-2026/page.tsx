@@ -614,13 +614,18 @@ export default function QuanamIa2026() {
 
   // Señal de llegada — se dispara una vez cuando el usuario accede al contenido
   useEffect(() => {
-    if (bienvenida || !userId) return
-    fetch('/api/estados', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user_id: userId, contexto: 'convocatoria_quanam', señales: { llegó: true, abrió_convocatoria: true } }),
-    }).catch(() => {})
-  }, [bienvenida, userId])
+    if (bienvenida) return
+    async function enviarLlegada() {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user?.id) return
+      fetch('/api/estados', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: user.id, contexto: 'convocatoria_quanam', señales: { llegó: true, abrió_convocatoria: true } }),
+      }).catch(() => {})
+    }
+    enviarLlegada()
+  }, [bienvenida])
 
   // Cargar historial previo cuando el email está disponible
   useEffect(() => {
@@ -788,16 +793,19 @@ export default function QuanamIa2026() {
   function toggleLente(id: string) {
     const isOpening = !lenteStates[id].open
     setLenteStates(prev => ({ ...prev, [id]: { ...prev[id], open: !prev[id].open } }))
-    if (isOpening && userId) {
+    if (isOpening) {
       lentesAbiertasRef.current.add(id)
       const count = lentesAbiertasRef.current.size
       const señales: Record<string, unknown> = { abrió_lente: true }
       if (count > 1) señales.lentes_exploradas = count
-      fetch('/api/estados', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: userId, contexto: 'convocatoria_quanam', señales }),
-      }).catch(() => {})
+      supabase.auth.getUser().then(({ data: { user } }) => {
+        if (!user?.id) return
+        fetch('/api/estados', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user_id: user.id, contexto: 'convocatoria_quanam', señales }),
+        }).catch(() => {})
+      })
     }
   }
 
