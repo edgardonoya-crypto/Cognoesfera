@@ -1159,7 +1159,17 @@ export default function AdminPage() {
                 <span style={{ fontSize: '0.95rem', fontWeight: 650, color: '#18201e' }}>El campo completo</span>
                 <span style={{ fontSize: '0.72rem', color: '#8a9e98' }}>{conversaciones.length} conversaciones · todos los lentes y resonancias</span>
               </div>
-              <button onClick={() => setCampoModal(false)} style={{ background: 'none', border: 'none', fontSize: 20, color: '#8A7E70', cursor: 'pointer', lineHeight: 1, padding: 4 }}>✕</button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+                {campoHilo.length > 0 && !campoAnalizando && (
+                  <button
+                    onClick={() => { setCampoHilo([]); setCampoReporteActivo(null); setCampoInput('') }}
+                    style={{ background: 'rgba(139,105,20,.08)', border: '1px solid rgba(139,105,20,.22)', borderRadius: 8, padding: '6px 12px', fontSize: '0.78rem', color: '#8B6914', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 500 }}
+                  >
+                    ← Menú
+                  </button>
+                )}
+                <button onClick={() => setCampoModal(false)} style={{ background: 'none', border: 'none', fontSize: 20, color: '#8A7E70', cursor: 'pointer', lineHeight: 1, padding: 4 }}>✕</button>
+              </div>
             </div>
 
             {/* Si no hay hilo activo → mostrar menú de reportes */}
@@ -1232,16 +1242,6 @@ export default function AdminPage() {
             )}
 
             {/* Botón para volver al menú si ya hay hilo */}
-            {campoHilo.length > 0 && !campoAnalizando && (
-              <div style={{ flexShrink: 0, padding: '0 24px 16px', display: 'flex', justifyContent: 'center' }}>
-                <button
-                  onClick={() => { setCampoHilo([]); setCampoReporteActivo(null); setCampoInput('') }}
-                  style={{ background: 'none', border: 'none', fontSize: '0.72rem', color: '#8a9e98', cursor: 'pointer', fontFamily: 'inherit', textDecoration: 'underline', padding: '4px 0' }}
-                >
-                  ← Volver al menú de reportes
-                </button>
-              </div>
-            )}
           </div>
         </div>,
         document.body
