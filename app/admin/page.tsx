@@ -305,14 +305,12 @@ export default function AdminPage() {
                   const LENTES_CONOCIDAS = new Set(['El ángulo propio', 'La pregunta viva', 'La intuición central', 'El hilo conector', 'El experimento pendiente'])
                   const clasificarCtx = (ctx: string): 'lente' | 'resonancia' =>
                     LENTES_CONOCIDAS.has(ctx) ? 'lente' : 'resonancia'
-                  const badgeCtx = (ctx: string) => {
-                    const tipo = clasificarCtx(ctx)
-                    return (
-                      <span style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' as const, padding: '1px 6px', borderRadius: 4, marginLeft: 6, background: tipo === 'lente' ? 'rgba(90,120,80,.12)' : 'rgba(139,105,20,.13)', color: tipo === 'lente' ? '#4a7040' : '#8B6914', border: `1px solid ${tipo === 'lente' ? 'rgba(90,120,80,.28)' : 'rgba(139,105,20,.28)'}` }}>
-                        {tipo === 'lente' ? 'Lente' : 'Resonancia'}
-                      </span>
-                    )
-                  }
+                  const seccionTitulo = (label: string) => (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '18px 0 10px' }}>
+                      <span style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase' as const, color: '#8a9e98', whiteSpace: 'nowrap' as const }}>{label}</span>
+                      <div style={{ flex: 1, height: 1, background: 'rgba(34,58,54,.10)' }} />
+                    </div>
+                  )
 
                   return (
                     <div>
@@ -351,23 +349,31 @@ export default function AdminPage() {
                                   </div>
                                 </div>
                                 {isOpen && (
-                                  <div style={{ padding: '12px 16px 16px', display: 'flex', flexDirection: 'column', gap: 12, background: 'rgba(139,105,20,.02)' }}>
-                                    {[...porCtx.entries()].map(([ctx, ctxConvs]) => (
-                                      <div key={ctx}>
-                                        <div style={{ display: 'flex', alignItems: 'center', marginBottom: 6 }}>
-                                          <span style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#8B6914' }}>{ctx}</span>
-                                          {badgeCtx(ctx)}
+                                  <div style={{ padding: '0 16px 16px', background: 'rgba(139,105,20,.02)' }}>
+                                    {(['lente', 'resonancia'] as const).map(tipo => {
+                                      const entradas = [...porCtx.entries()].filter(([ctx]) => clasificarCtx(ctx) === tipo)
+                                      if (entradas.length === 0) return null
+                                      return (
+                                        <div key={tipo}>
+                                          {seccionTitulo(tipo === 'lente' ? 'Lentes' : 'Resonancias')}
+                                          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                                            {entradas.map(([ctx, ctxConvs]) => (
+                                              <div key={ctx}>
+                                                <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#8B6914', marginBottom: 6 }}>{ctx}</div>
+                                                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                                                  {ctxConvs.map(c => (
+                                                    <div key={c.id} style={{ padding: '8px 12px', borderRadius: 8, background: 'rgba(255,255,255,.8)', border: '1px solid rgba(34,58,54,.08)' }}>
+                                                      <div style={{ fontSize: '0.78rem', color: '#2c3830', lineHeight: 1.5, marginBottom: 4, fontStyle: 'italic', fontWeight: 300 }}>{firstUserMsg(c).slice(0, 120)}{firstUserMsg(c).length > 120 ? '…' : ''}</div>
+                                                      <div style={{ fontSize: '0.72rem', color: '#8a9e98' }}>{fmt(c.created_at)}</div>
+                                                    </div>
+                                                  ))}
+                                                </div>
+                                              </div>
+                                            ))}
+                                          </div>
                                         </div>
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                                          {ctxConvs.map(c => (
-                                            <div key={c.id} style={{ padding: '8px 12px', borderRadius: 8, background: 'rgba(255,255,255,.8)', border: '1px solid rgba(34,58,54,.08)' }}>
-                                              <div style={{ fontSize: '0.78rem', color: '#2c3830', lineHeight: 1.5, marginBottom: 4, fontStyle: 'italic', fontWeight: 300 }}>{firstUserMsg(c).slice(0, 120)}{firstUserMsg(c).length > 120 ? '…' : ''}</div>
-                                              <div style={{ fontSize: '0.72rem', color: '#8a9e98' }}>{fmt(c.created_at)}</div>
-                                            </div>
-                                          ))}
-                                        </div>
-                                      </div>
-                                    ))}
+                                      )
+                                    })}
                                   </div>
                                 )}
                               </div>
@@ -377,44 +383,49 @@ export default function AdminPage() {
                       )}
 
                       {/* POR LENTE */}
-                      {convTab === 'lente' && (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                          {[...byLente.entries()].map(([lente, convs]) => {
-                            const isOpen = convExpandedLentes.has(lente)
-                            const usuariosDistintos = new Set(convs.map(c => c.email_participante ?? '')).size
-                            const sorted = [...convs].sort((a, b) => b.created_at.localeCompare(a.created_at))
-                            const toggle = () => setConvExpandedLentes(prev => {
-                              const s = new Set(prev); isOpen ? s.delete(lente) : s.add(lente); return s
-                            })
-                            return (
-                              <div key={lente} style={{ border: '1px solid rgba(34,58,54,.10)', borderRadius: 10, overflow: 'hidden' }}>
-                                <div onClick={toggle} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', cursor: 'pointer', background: isOpen ? 'rgba(78,170,152,.05)' : 'rgba(255,255,255,.7)' }}>
-                                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                                    <span style={{ fontSize: '0.875rem', color: '#18201e', fontWeight: 500 }}>{lente}</span>
-                                    {badgeCtx(lente)}
-                                    <span style={{ fontSize: '0.75rem', color: '#4eaa98', background: 'rgba(78,170,152,.12)', borderRadius: 10, padding: '2px 8px' }}>{convs.length} conv{convs.length !== 1 ? 's' : ''}</span>
-                                    <span style={{ fontSize: '0.75rem', color: '#66706d' }}>{usuariosDistintos} usuario{usuariosDistintos !== 1 ? 's' : ''}</span>
-                                  </div>
-                                  <span style={{ color: '#4eaa98', fontSize: 18, lineHeight: 1 }}>{isOpen ? '−' : '+'}</span>
+                      {convTab === 'lente' && (() => {
+                        const renderFila = (lente: string, convs: DuendeConv[]) => {
+                          const isOpen = convExpandedLentes.has(lente)
+                          const usuariosDistintos = new Set(convs.map(c => c.email_participante ?? '')).size
+                          const sorted = [...convs].sort((a, b) => b.created_at.localeCompare(a.created_at))
+                          const toggle = () => setConvExpandedLentes(prev => {
+                            const s = new Set(prev); isOpen ? s.delete(lente) : s.add(lente); return s
+                          })
+                          return (
+                            <div key={lente} style={{ border: '1px solid rgba(34,58,54,.10)', borderRadius: 10, overflow: 'hidden' }}>
+                              <div onClick={toggle} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', cursor: 'pointer', background: isOpen ? 'rgba(78,170,152,.05)' : 'rgba(255,255,255,.7)' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                                  <span style={{ fontSize: '0.875rem', color: '#18201e', fontWeight: 500 }}>{lente}</span>
+                                  <span style={{ fontSize: '0.75rem', color: '#4eaa98', background: 'rgba(78,170,152,.12)', borderRadius: 10, padding: '2px 8px' }}>{convs.length} conv{convs.length !== 1 ? 's' : ''}</span>
+                                  <span style={{ fontSize: '0.75rem', color: '#66706d' }}>{usuariosDistintos} usuario{usuariosDistintos !== 1 ? 's' : ''}</span>
                                 </div>
-                                {isOpen && (
-                                  <div style={{ padding: '12px 16px 16px', display: 'flex', flexDirection: 'column', gap: 6, background: 'rgba(78,170,152,.02)' }}>
-                                    {sorted.map(c => (
-                                      <div key={c.id} style={{ padding: '8px 12px', borderRadius: 8, background: 'rgba(255,255,255,.8)', border: '1px solid rgba(34,58,54,.08)' }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
-                                          <span style={{ fontSize: '0.75rem', color: '#4eaa98', fontWeight: 500 }}>{c.email_participante ?? '—'}</span>
-                                          <span style={{ fontSize: '0.72rem', color: '#8a9e98' }}>{fmt(c.created_at)}</span>
-                                        </div>
-                                        <div style={{ fontSize: '0.78rem', color: '#2c3830', lineHeight: 1.5, fontStyle: 'italic', fontWeight: 300 }}>{firstUserMsg(c).slice(0, 120)}{firstUserMsg(c).length > 120 ? '…' : ''}</div>
-                                      </div>
-                                    ))}
-                                  </div>
-                                )}
+                                <span style={{ color: '#4eaa98', fontSize: 18, lineHeight: 1 }}>{isOpen ? '−' : '+'}</span>
                               </div>
-                            )
-                          })}
-                        </div>
-                      )}
+                              {isOpen && (
+                                <div style={{ padding: '12px 16px 16px', display: 'flex', flexDirection: 'column', gap: 6, background: 'rgba(78,170,152,.02)' }}>
+                                  {sorted.map(c => (
+                                    <div key={c.id} style={{ padding: '8px 12px', borderRadius: 8, background: 'rgba(255,255,255,.8)', border: '1px solid rgba(34,58,54,.08)' }}>
+                                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+                                        <span style={{ fontSize: '0.75rem', color: '#4eaa98', fontWeight: 500 }}>{c.email_participante ?? '—'}</span>
+                                        <span style={{ fontSize: '0.72rem', color: '#8a9e98' }}>{fmt(c.created_at)}</span>
+                                      </div>
+                                      <div style={{ fontSize: '0.78rem', color: '#2c3830', lineHeight: 1.5, fontStyle: 'italic', fontWeight: 300 }}>{firstUserMsg(c).slice(0, 120)}{firstUserMsg(c).length > 120 ? '…' : ''}</div>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          )
+                        }
+                        const lentesEntries = [...byLente.entries()].filter(([l]) => clasificarCtx(l) === 'lente')
+                        const resonanciasEntries = [...byLente.entries()].filter(([l]) => clasificarCtx(l) === 'resonancia')
+                        return (
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                            {lentesEntries.length > 0 && <>{seccionTitulo('Lentes')}{lentesEntries.map(([l, c]) => renderFila(l, c))}</>}
+                            {resonanciasEntries.length > 0 && <>{seccionTitulo('Resonancias')}{resonanciasEntries.map(([l, c]) => renderFila(l, c))}</>}
+                          </div>
+                        )
+                      })()}
 
                       {/* POR USUARIO Y LENTE */}
                       {convTab === 'usuariolente' && (() => {
@@ -457,14 +468,25 @@ export default function AdminPage() {
                                 </div>
                               </div>
                               <div>
-                                <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#8B6914', marginBottom: 8 }}>Lentes / Resonancias</div>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                                  {todasLentes.filter(l => lentesDelUsuario.includes(l)).map(l => (
-                                    <div key={l} onClick={() => setConvSelectedLente(convSelectedLente === l ? null : l)} style={{ ...itemStyle(convSelectedLente === l, '139,105,20'), display: 'flex', alignItems: 'center' }}><span>{l}</span>{badgeCtx(l)}</div>
-                                  ))}
-                                  {todasLentes.filter(l => !lentesDelUsuario.includes(l)).map(l => (
-                                    <div key={l} onClick={() => { setConvSelectedLente(convSelectedLente === l ? null : l); setConvSelectedUser(null) }} style={{ ...itemStyle(false, '139,105,20'), opacity: 0.35, display: 'flex', alignItems: 'center' }}><span>{l}</span>{badgeCtx(l)}</div>
-                                  ))}
+                                <div>
+                                  {(['lente', 'resonancia'] as const).map(tipo => {
+                                    const activas = todasLentes.filter(l => clasificarCtx(l) === tipo && lentesDelUsuario.includes(l))
+                                    const inactivas = todasLentes.filter(l => clasificarCtx(l) === tipo && !lentesDelUsuario.includes(l))
+                                    if (activas.length === 0 && inactivas.length === 0) return null
+                                    return (
+                                      <div key={tipo}>
+                                        {seccionTitulo(tipo === 'lente' ? 'Lentes' : 'Resonancias')}
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                                          {activas.map(l => (
+                                            <div key={l} onClick={() => setConvSelectedLente(convSelectedLente === l ? null : l)} style={itemStyle(convSelectedLente === l, '139,105,20')}>{l}</div>
+                                          ))}
+                                          {inactivas.map(l => (
+                                            <div key={l} onClick={() => { setConvSelectedLente(convSelectedLente === l ? null : l); setConvSelectedUser(null) }} style={{ ...itemStyle(false, '139,105,20'), opacity: 0.35 }}>{l}</div>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    )
+                                  })}
                                 </div>
                               </div>
                             </div>
