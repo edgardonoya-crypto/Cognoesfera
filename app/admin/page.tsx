@@ -297,8 +297,11 @@ export default function AdminPage() {
           </div>
         )
       }
+      if (line.match(/^###\s/)) {
+        return <p key={i} style={{ fontSize: '0.78rem', fontWeight: 650, color: '#5a4a20', margin: '8px 0 3px', letterSpacing: '0.02em' }}>{line.replace(/^###\s/, '')}</p>
+      }
       if (line.match(/^##\s/)) {
-        return <p key={i} style={{ fontSize: '0.8rem', fontWeight: 650, color: '#18201e', margin: '10px 0 4px', letterSpacing: '0.02em' }}>{line.replace(/^##\s/, '')}</p>
+        return <p key={i} style={{ fontSize: '0.82rem', fontWeight: 650, color: '#18201e', margin: '10px 0 4px', letterSpacing: '0.02em' }}>{line.replace(/^##\s/, '')}</p>
       }
       return <p key={i} style={{ margin: '0 0 6px', lineHeight: 1.75 }}>{renderInline(line)}</p>
     })
@@ -969,9 +972,9 @@ export default function AdminPage() {
         <div style={{ position: 'fixed', bottom: 32, right: 32, zIndex: 520, width: 'min(480px,90vw)', height: '60vh', background: 'rgba(252,248,240,0.98)', borderRadius: 16, boxShadow: '0 16px 48px rgba(0,0,0,0.22)', border: '1px solid rgba(139,105,20,.20)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
           {/* Header del panel */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 18px 10px', borderBottom: '1px solid rgba(139,105,20,.15)', flexShrink: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div style={{ width: 26, height: 26, borderRadius: '50%', border: '1px solid rgba(139,105,20,.4)', background: 'rgba(139,105,20,.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700, color: '#8B6914' }}>D</div>
-              <span style={{ fontSize: '0.8rem', fontWeight: 650, color: '#8B6914', letterSpacing: '0.04em' }}>Análisis del Duende</span>
+            <div>
+              <div style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#a08030', marginBottom: 2 }}>Análisis del Duende</div>
+              <div style={{ fontSize: '0.88rem', fontWeight: 650, color: '#18201e', lineHeight: 1.2 }}>{lenteModal.contexto}</div>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <span style={{ fontSize: '0.65rem', color: '#8a9e98' }}>{lenteModal.convs.length} conv · Corpus Madre</span>
