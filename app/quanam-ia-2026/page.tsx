@@ -49,20 +49,23 @@ type LenteState = {
   showDuende: boolean
 }
 
+type DuendeConvPrev = { id: string; msgs: DuendeMsg[] }
+
 type DuendeChatProps = {
   lente: { id: string; nombre: string; frase: string; desc: string }
   mensajeInicial?: string
   nombre?: string
   email?: string
   autoAbrir?: boolean
+  prevConv?: DuendeConvPrev
 }
 
 type DuendeMsg = { role: 'user' | 'assistant'; content: string }
 
-function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir }: DuendeChatProps) {
+function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir, prevConv }: DuendeChatProps) {
   const [modalOpen, setModalOpen] = useState(false)
-  const [msgs, setMsgs] = useState<DuendeMsg[]>([])
-  const [sesionId, setSesionId] = useState<string | null>(null)
+  const [msgs, setMsgs] = useState<DuendeMsg[]>(() => prevConv?.msgs ?? [])
+  const [sesionId, setSesionId] = useState<string | null>(() => prevConv?.id ?? null)
   const [loading, setLoading] = useState(false)
   const [input, setInput] = useState('')
   const inputRef = useRef<HTMLTextAreaElement>(null)
@@ -94,7 +97,8 @@ function DuendeChat({ lente, mensajeInicial, nombre, email, autoAbrir }: DuendeC
   }, [modalOpen])
 
   useEffect(() => {
-    if (autoAbrir && mensajeInicial?.trim() && !iniciado.current) {
+    // No arrancar si ya hay historial cargado desde prevConv
+    if (autoAbrir && mensajeInicial?.trim() && !iniciado.current && (prevConv == null)) {
       iniciado.current = true
       const userMsg = mensajeInicial.trim()
       setMsgs([{ role: 'user', content: userMsg }])
@@ -475,6 +479,7 @@ export default function QuanamIa2026() {
       LENTES.map(l => [l.id, { open: false, respuesta: '', status: 'idle', errorMsg: '', showDuende: false }])
     )
   )
+  const [prevConvs, setPrevConvs] = useState<Record<string, DuendeConvPrev>>({})
 
   const [otpStep, setOtpStep] = useState<'email' | 'otp'>('email')
   const [otpToken, setOtpToken] = useState('')
@@ -486,6 +491,28 @@ export default function QuanamIa2026() {
     const savedEmail = getCookie('quanam_email')
     if (savedEmail) setEmail(savedEmail)
   }, [])
+
+  // Cargar historial previo cuando el email está disponible
+  useEffect(() => {
+    if (!email.trim() || bienvenida) return
+    fetch(`/api/duende/history?email=${encodeURIComponent(email.trim())}`)
+      .then(r => r.json())
+      .then((data: { convs: Record<string, DuendeConvPrev> }) => {
+        if (!data.convs || Object.keys(data.convs).length === 0) return
+        setPrevConvs(data.convs)
+        // Activar showDuende en los lentes que tienen historial
+        setLenteStates(prev => {
+          const next = { ...prev }
+          for (const lente of LENTES) {
+            if (data.convs[lente.nombre]) {
+              next[lente.id] = { ...next[lente.id], showDuende: true }
+            }
+          }
+          return next
+        })
+      })
+      .catch(() => { /* historial no crítico — falla silenciosa */ })
+  }, [email, bienvenida])
 
   async function handleSendOtp() {
     if (!email.trim()) return
@@ -1083,7 +1110,7 @@ export default function QuanamIa2026() {
                                 </button>
                               </>
                             ) : (
-                              <DuendeChat lente={lente} mensajeInicial={ls.respuesta} nombre={nombre} email={email} autoAbrir={true} />
+                              <DuendeChat lente={lente} mensajeInicial={ls.respuesta} nombre={nombre} email={email} autoAbrir={true} prevConv={prevConvs[lente.nombre]} />
                             )}
                           </div>
                         </div>
