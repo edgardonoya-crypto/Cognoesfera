@@ -186,6 +186,8 @@ export async function POST(request: Request) {
 
     const { user_id, contexto, señales: señalesEntrantes } = body
 
+    console.log('[estados POST]', { user_id, contexto, señales: señalesEntrantes })
+
     if (!user_id || !contexto || !señalesEntrantes) {
       return NextResponse.json(
         { error: 'Faltan campos: user_id, contexto, señales' },
@@ -201,7 +203,14 @@ export async function POST(request: Request) {
       .eq('contexto', contexto)
       .single()
 
-    if (fetchErr || !estadoVital) {
+    if (fetchErr) {
+      console.error('[estados POST] fetch error:', JSON.stringify(fetchErr))
+      if (fetchErr.code !== 'PGRST116') {
+        return NextResponse.json({ error: 'Error al leer estado vital', details: fetchErr.message }, { status: 500 })
+      }
+    }
+
+    if (!estadoVital) {
       return NextResponse.json(
         { error: 'Estado vital no encontrado. Usar GET primero para inicializarlo.' },
         { status: 404 }
@@ -251,7 +260,7 @@ export async function POST(request: Request) {
           },
         ]
 
-        await supabase
+        const { error: transErr } = await supabase
           .from('estados_vitales')
           .update({
             estado_situado_id: siguienteEstado.id,
@@ -261,20 +270,32 @@ export async function POST(request: Request) {
             updated_at: new Date().toISOString(),
           })
           .eq('id', vital.id)
+        if (transErr) {
+          console.error('[estados POST] transición update error:', JSON.stringify(transErr))
+          return NextResponse.json({ error: 'Error al guardar transición', details: transErr.message }, { status: 500 })
+        }
 
         transitó = true
       } else {
-        await supabase
+        const { error: updateErr } = await supabase
           .from('estados_vitales')
           .update({ señales: señalesActualizadas, updated_at: new Date().toISOString() })
           .eq('id', vital.id)
+        if (updateErr) {
+          console.error('[estados POST] señales update error:', JSON.stringify(updateErr))
+          return NextResponse.json({ error: 'Error al guardar señales', details: updateErr.message }, { status: 500 })
+        }
       }
     } else {
       // Estado 8 (La música) — solo actualizar señales, no transitar
-      await supabase
+      const { error: musica8Err } = await supabase
         .from('estados_vitales')
         .update({ señales: señalesActualizadas, updated_at: new Date().toISOString() })
         .eq('id', vital.id)
+      if (musica8Err) {
+        console.error('[estados POST] estado 8 update error:', JSON.stringify(musica8Err))
+        return NextResponse.json({ error: 'Error al guardar señales', details: musica8Err.message }, { status: 500 })
+      }
     }
 
     const { data: estadoFinal } = await getEstadoConJoin(vital.id)
