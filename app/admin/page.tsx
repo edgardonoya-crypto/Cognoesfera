@@ -260,6 +260,34 @@ export default function AdminPage() {
     setEditingCell(null)
   }
 
+  function renderMarkdown(text: string): React.ReactNode[] {
+    return text.split('\n').map((line, i) => {
+      if (!line.trim()) return <div key={i} style={{ height: 8 }} />
+      if (line.match(/^[-*]\s/)) {
+        const content = line.replace(/^[-*]\s/, '')
+        return (
+          <div key={i} style={{ display: 'flex', gap: 8, marginBottom: 2 }}>
+            <span style={{ color: '#8B6914', flexShrink: 0, marginTop: 2 }}>·</span>
+            <span>{renderInline(content)}</span>
+          </div>
+        )
+      }
+      if (line.match(/^##\s/)) {
+        return <p key={i} style={{ fontSize: '0.8rem', fontWeight: 650, color: '#18201e', margin: '10px 0 4px', letterSpacing: '0.02em' }}>{line.replace(/^##\s/, '')}</p>
+      }
+      return <p key={i} style={{ margin: '0 0 6px', lineHeight: 1.75 }}>{renderInline(line)}</p>
+    })
+  }
+
+  function renderInline(text: string): React.ReactNode {
+    const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g)
+    return parts.map((part, i) => {
+      if (part.match(/^\*\*[^*]+\*\*$/)) return <strong key={i} style={{ fontWeight: 600, fontStyle: 'normal', color: '#18201e' }}>{part.slice(2, -2)}</strong>
+      if (part.match(/^\*[^*]+\*$/)) return <em key={i}>{part.slice(1, -1)}</em>
+      return part
+    })
+  }
+
   if (status === 'loading') return (
     <div style={styles.center}>Cargando…</div>
   )
@@ -909,7 +937,7 @@ export default function AdminPage() {
               </div>
 
               {analisisHistorial.length > 0 && (
-                <div style={{ marginBottom: 12, display: 'flex', flexDirection: 'column', gap: 8, maxHeight: 220, overflowY: 'auto' }}>
+                <div style={{ marginBottom: 12, display: 'flex', flexDirection: 'column', gap: 8, maxHeight: 300, overflowY: 'auto' }}>
                   <div style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#8a9e98', marginBottom: 2 }}>Análisis anteriores</div>
                   {analisisHistorial.map(a => (
                     <div key={a.id} style={{ background: 'rgba(255,255,255,.85)', border: '1px solid rgba(139,105,20,.14)', borderRadius: 10, overflow: 'hidden' }}>
@@ -923,7 +951,9 @@ export default function AdminPage() {
                       </div>
                       {analisisExpandido === a.id && (
                         <div style={{ padding: '14px 16px 16px' }}>
-                          <p style={{ fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.75, margin: '0 0 14px', fontStyle: 'italic', fontWeight: 300, whiteSpace: 'pre-wrap' as const }}>{a.respuesta}</p>
+                          <div style={{ fontSize: '0.875rem', color: '#2c3830', lineHeight: 1.75, margin: '0 0 14px', fontStyle: 'italic', fontWeight: 300, maxHeight: 260, overflowY: 'auto', paddingRight: 4 }}>
+                            {renderMarkdown(a.respuesta)}
+                          </div>
                           {a.fuentes.length > 0 && (
                             <div style={{ background: 'rgba(139,105,20,.05)', border: '1px solid rgba(139,105,20,.12)', borderRadius: 8, padding: '10px 12px' }}>
                               <div style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#8B6914', marginBottom: 8 }}>Aportaron a este análisis</div>
