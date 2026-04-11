@@ -399,7 +399,7 @@ export default function AdminPage() {
   ]
 
   const cajas: { id: string; nombre: string; conteo: number; desc: string; color: string }[] = [
-    { id: 'analisis',       nombre: 'Análisis',       conteo: conversaciones.length,   desc: 'Campo completo con el Duende',      color: '#8B6914' },
+    { id: 'analisis',       nombre: 'Análisis',       conteo: conversaciones.length,   desc: 'Leer el campo con el Duende',       color: '#8B6914' },
     { id: 'campo',          nombre: 'El campo',       conteo: estadosVitales.length,   desc: 'Usuarios en el campo',              color: '#4eaa98' },
     { id: 'conversaciones', nombre: 'Conversaciones', conteo: conversaciones.length,   desc: 'Conversaciones con el Duende',      color: '#8B6914' },
     { id: 'curacion',       nombre: 'Curación',       conteo: archivosPendientes,      desc: 'Archivos para revisar',             color: '#C4941A' },
@@ -438,7 +438,10 @@ export default function AdminPage() {
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.boxShadow = ''}
             >
               <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: c.color }}>{c.nombre}</div>
-              <div style={{ fontSize: '2.4rem', fontWeight: 700, letterSpacing: '-0.04em', color: '#18201e', lineHeight: 1 }}>{c.conteo}</div>
+              {c.id === 'analisis'
+                ? <div style={{ fontSize: '2rem', fontWeight: 400, color: '#8B6914', lineHeight: 1 }}>✦</div>
+                : <div style={{ fontSize: '2.4rem', fontWeight: 700, letterSpacing: '-0.04em', color: '#18201e', lineHeight: 1 }}>{c.conteo}</div>
+              }
               <div style={{ fontSize: '0.78rem', color: '#66706d', marginTop: 2 }}>{c.desc}</div>
             </div>
           ))}
