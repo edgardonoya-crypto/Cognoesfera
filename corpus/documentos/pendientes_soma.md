@@ -2,7 +2,7 @@
 *Pendientes técnicos, operativos e infraestructura del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes SOMA*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 11/04/2026: 17*
+*Pendientes activos al 12/04/2026: 19*
 
 ---
 
@@ -124,6 +124,16 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
+**S-IN-07**
+**Título:** Redis para rate limiting en producción
+**Descripción:** El rate limiting actual usa un Map en memoria que se resetea con cada cold start de Vercel. Para producción a escala usar Upstash Redis.
+**Prioridad:** P4
+**Estado:** Activo
+**Fecha:** 07/04/2026
+**Dependencias:** Ninguna
+
+---
+
 ## Subcategoría: Aplicación
 
 ---
@@ -204,16 +214,6 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 **Prioridad:** P3
 **Estado:** Activo
 **Fecha:** 11/04/2026
-**Dependencias:** Ninguna
-
----
-
-**S-IN-07**
-**Título:** Redis para rate limiting en producción
-**Descripción:** El rate limiting actual usa un Map en memoria que se resetea con cada cold start de Vercel. Para producción a escala usar Upstash Redis.
-**Prioridad:** P4
-**Estado:** Activo
-**Fecha:** 07/04/2026
 **Dependencias:** Ninguna
 
 ---
