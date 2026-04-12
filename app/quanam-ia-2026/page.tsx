@@ -1038,7 +1038,30 @@ export default function QuanamIa2026() {
         }
       `}</style>
 
-      <div className="wrap" style={{ display: bienvenida ? 'none' : undefined }}>
+      {!bienvenida && userId && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+          background: '#F5F0E8',
+          borderBottom: '1px solid rgba(139,105,20,0.14)',
+          padding: '0 24px', height: 44,
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        }}>
+          <span style={{ fontSize: 12, color: '#9A8E80', fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>
+            {email}
+          </span>
+          <button
+            onClick={async () => {
+              await supabase.auth.signOut()
+              window.location.href = '/login'
+            }}
+            style={{ background: 'none', border: '1px solid rgba(139,105,20,0.25)', borderRadius: 6, padding: '4px 12px', fontSize: 12, color: '#8B6914', fontFamily: 'Karla, sans-serif', cursor: 'pointer', fontWeight: 400 }}
+          >
+            Salir
+          </button>
+        </div>
+      )}
+
+      <div className="wrap" style={{ display: bienvenida ? 'none' : undefined, paddingTop: userId ? 60 : undefined }}>
 
         {/* HEADER */}
         <header>
