@@ -908,8 +908,8 @@ export default function QuanamIa2026() {
               {contenido.zona_titulo_principal}
             </h1>
             <p style={{ fontSize: 'clamp(18px,3vw,28px)', color: '#C4941A', fontFamily: 'Karla, sans-serif', fontWeight: 300, letterSpacing: '0.06em', margin: 0 }}>{contenido.zona_titulo_sub}</p>
-            <p style={{ fontSize: 'clamp(17px,2.6vw,22px)', color: '#E8C96A', fontFamily: 'Karla, sans-serif', fontWeight: 300, fontStyle: 'italic', letterSpacing: '0.02em', lineHeight: 1.4, textAlign: 'center', margin: 0 }}>{contenido.zona_pregunta}</p>
             <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.78)', fontWeight: 300, fontFamily: 'Karla, sans-serif', lineHeight: 1.72, textAlign: 'center', margin: 0 }}>{contenido.zona_argumental}</p>
+            <p style={{ fontSize: 'clamp(17px,2.6vw,22px)', color: '#E8C96A', fontFamily: 'Karla, sans-serif', fontWeight: 300, fontStyle: 'italic', letterSpacing: '0.02em', lineHeight: 1.4, textAlign: 'center', margin: 0 }}>{contenido.zona_pregunta}</p>
             <p style={{ fontSize: 15, color: '#a89870', fontStyle: 'italic', textAlign: 'center', margin: '4px 0 0', fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>{contenido.zona_convoca}</p>
 
             {/* PUERTA */}
