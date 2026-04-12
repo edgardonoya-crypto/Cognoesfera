@@ -1164,8 +1164,9 @@ export default function QuanamIa2026() {
         }
       `}</style>
 
-      <div className="wrap" style={{ display: bienvenida ? 'none' : undefined }}>
+      <div className="wrap" style={{ display: bienvenida ? 'none' : undefined, background: userId ? '#1a1410' : undefined, minHeight: userId ? '100vh' : undefined, maxWidth: userId ? 680 : undefined }}>
 
+        {!userId && <>
         {/* HEADER */}
         <header>
           <div className="header-left">
@@ -1181,17 +1182,18 @@ export default function QuanamIa2026() {
         <div style={{ width: '100%', padding: '16px 20px', background: 'rgba(245,240,232,0.95)', border: '1px solid rgba(139,105,20,0.15)', borderRadius: 12, marginBottom: 12, marginTop: 12 }}>
           <p style={{ fontSize: 13, color: '#8A7E70', lineHeight: 1.75, fontWeight: 300 }}><em>Esta convocatoria tiene tres capas.</em> Podés leer solo la primera y ya tenés todo lo que necesitás para decidir. Las otras dos son para quien quiera ir más lejos. Ninguna es obligatoria.</p>
         </div>
+        </>}
 
         {/* ÁGUILA */}
-        <div className="aguila">
+        {!userId && <div className="aguila">
           <span className="bloque-etiqueta">el punto de partida</span>
           <p className="aguila-titulo">Cuenta la historia que un águila se posó en una rama. Una voz de alguien que no sabía volar le preguntó si no temía que la rama se quebrara. El águila respondió: mi confianza no está en la rama. Está en mis alas.</p>
           <p className="aguila-cuerpo">Quanam lleva años construyendo ramas — metodologías, proyectos, tecnologías. La inteligencia artificial es la rama más nueva, y la más tentadora: procesa todo lo que Quanam ha hecho, ordena todo lo que Quanam sabe. Pero sigue siendo una rama. Las alas son otra cosa: la inteligencia que vive distribuida entre las personas, las áreas, las conversaciones que nunca se registraron.</p>
           <p className="aguila-acento">La IA puede decirte todo lo que Quanam sabe. No puede decirte lo que Quanam todavía no sabe que sabe.</p>
-        </div>
+        </div>}
 
         {/* PREGUNTA CENTRAL + CÓMO SE FORMA — card unificado */}
-        <div className="card-pregunta-grupo">
+        {!userId && <div className="card-pregunta-grupo">
           <div className="card-pregunta-grupo-bloque">
             <span className="bloque-etiqueta" style={{ color: 'var(--goldlt)' }}>La pregunta</span>
             <p className="pregunta-texto">&ldquo;¿Cómo puede la inteligencia artificial en Quanam crear condiciones para que lo que sabemos juntos — y que todavía no sabemos que sabemos — se vuelva visible… y desde ahí, empezar a ver caminos que hoy todavía no estamos viendo?&rdquo;</p>
@@ -1205,9 +1207,83 @@ export default function QuanamIa2026() {
             <p style={{ fontSize: 16, color: 'var(--inklt)', fontWeight: 300, lineHeight: 2, fontFamily: 'Karla, sans-serif' }}>Podés responder con una pregunta, una incomodidad, una intuición, un desafío, una opinión. No hay respuesta correcta ni incorrecta. No hay límite de cantidad — si algo más te surge, respondé otro lente. O el mismo desde otro ángulo.</p>
             <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 18, fontStyle: 'italic', fontWeight: 400, color: 'var(--gold)', lineHeight: 1.55, textAlign: 'center', marginTop: 24 }}>Lo que importa es lo que ves desde donde estás.</p>
           </div>
-        </div>
+        </div>}
 
         {/* SECCIONES */}
+        {userId ? (
+          <div style={{ padding: '24px 0 80px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', fontFamily: 'Karla, sans-serif', fontWeight: 300, marginBottom: 8 }}>
+              ¿Qué ves vos desde donde estás?
+            </p>
+            {LENTES.map(lente => {
+              const state = lenteStates[lente.id]
+              const isOpen = state.open
+              const prevConv = prevConvs[lente.nombre]
+              const hasDuende = prevConv?.msgs && prevConv.msgs.length > 0
+              const primerMsgDuende = hasDuende ? prevConv!.msgs.find(m => m.role === 'assistant')?.content : null
+              const respuestaUsuario = lenteStates[lente.id].respuesta
+              return (
+                <div key={lente.id} style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${isOpen ? 'rgba(201,168,76,0.30)' : 'rgba(255,255,255,0.08)'}`, borderRadius: 12, overflow: 'visible', transition: 'border-color 0.2s' }}>
+                  <div onClick={() => toggleLente(lente.id)} style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', gap: 10 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0, position: 'relative' }}>
+                      <span style={{ fontSize: 14, color: isOpen ? '#E8D0A0' : 'rgba(255,255,255,0.60)', fontFamily: 'Playfair Display, serif', fontWeight: isOpen ? 500 : 400, transition: 'color 0.2s' }}>{lente.nombre}</span>
+                      <button onClick={e => { e.stopPropagation(); setHelpPopup(helpPopup === lente.id ? null : lente.id) }} style={{ flexShrink: 0, width: 17, height: 17, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.20)', background: 'none', color: 'rgba(255,255,255,0.30)', fontSize: 10, fontFamily: 'Karla, sans-serif', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}>?</button>
+                      {helpPopup === lente.id && (
+                        <div onClick={e => e.stopPropagation()} style={{ position: 'absolute', marginTop: 4, left: 0, top: '100%', background: '#2a2018', border: '1px solid rgba(201,168,76,0.30)', borderRadius: 10, padding: '12px 14px', width: 240, zIndex: 50 }}>
+                          <div style={{ fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: 'rgba(201,168,76,0.60)', fontFamily: 'Karla, sans-serif', marginBottom: 6 }}>¿Qué es este lente?</div>
+                          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.6, margin: 0, fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>{lente.desc}</p>
+                          {lente.ejemplo && <p style={{ fontSize: 12, color: 'rgba(201,168,76,0.50)', lineHeight: 1.5, margin: '8px 0 0', fontFamily: 'Karla, sans-serif', fontStyle: 'italic', fontWeight: 300 }}>{lente.ejemplo}</p>}
+                        </div>
+                      )}
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+                      {hasDuende && !isOpen && <span style={{ fontSize: 11, color: '#C9A84C', fontFamily: 'Karla, sans-serif', background: 'rgba(201,168,76,0.10)', borderRadius: 4, padding: '2px 7px' }}>Activo</span>}
+                      <span style={{ color: isOpen ? 'rgba(201,168,76,0.6)' : 'rgba(255,255,255,0.20)', fontSize: 18, lineHeight: 1 }}>{isOpen ? '−' : '+'}</span>
+                    </div>
+                  </div>
+                  {isOpen && (
+                    <div style={{ padding: '0 16px 16px' }}>
+                      <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', fontFamily: 'Karla, sans-serif', fontStyle: 'italic', lineHeight: 1.6, margin: '0 0 14px', fontWeight: 300 }}>{lente.frase}</p>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                        <div style={{ background: 'rgba(201,168,76,0.05)', border: '1px solid rgba(201,168,76,0.15)', borderRadius: 10, padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                          <div style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: 'rgba(201,168,76,0.55)', fontFamily: 'Karla, sans-serif' }}>El Duende</div>
+                          {primerMsgDuende ? (
+                            <>
+                              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', fontStyle: 'italic', lineHeight: 1.6, margin: 0, fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>"{primerMsgDuende.slice(0, 140)}{primerMsgDuende.length > 140 ? '…' : ''}"</p>
+                              <DuendeChat lente={lente} nombre={nombre} email={email} prevConv={prevConv} iniciativasActivas={iniciativasActivas} />
+                            </>
+                          ) : (
+                            <DuendeChat lente={lente} mensajeInicial={respuestaUsuario} nombre={nombre} email={email} autoAbrir={false} iniciativasActivas={iniciativasActivas} />
+                          )}
+                        </div>
+                        <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10, padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                          <div style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.30)', fontFamily: 'Karla, sans-serif' }}>Tu perspectiva</div>
+                          {state.status === 'sent' ? (
+                            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', fontStyle: 'italic', fontFamily: 'Karla, sans-serif', fontWeight: 300, lineHeight: 1.6, margin: 0 }}>Enviado. Podés seguir explorando con el Duende.</p>
+                          ) : (
+                            <>
+                              <textarea value={state.respuesta} onChange={e => setRespuesta(lente.id, e.target.value)} placeholder={lente.frase.replace(/"/g, '')} rows={4} style={{ resize: 'none' as const, border: '1px solid rgba(255,255,255,0.10)', borderRadius: 8, padding: '10px 12px', fontSize: 13, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: 'rgba(255,255,255,0.80)', background: 'rgba(255,255,255,0.05)', outline: 'none', lineHeight: 1.6, width: '100%', boxSizing: 'border-box' as const }} />
+                              {state.errorMsg && <p style={{ fontSize: 12, color: '#ff8080', fontFamily: 'Karla, sans-serif', margin: 0 }}>{state.errorMsg}</p>}
+                              <button onClick={() => enviar(lente)} disabled={!state.respuesta.trim() || state.status === 'sending'} style={{ background: state.respuesta.trim() ? '#8B6914' : 'rgba(139,105,20,0.25)', color: '#F5EDD8', border: 'none', borderRadius: 8, padding: '9px 16px', fontSize: 12, fontFamily: 'Karla, sans-serif', fontWeight: 500, cursor: state.respuesta.trim() ? 'pointer' : 'default', transition: 'background 0.2s', letterSpacing: '0.05em', alignSelf: 'flex-start' }}>
+                                {state.status === 'sending' ? 'Enviando…' : 'Compartir perspectiva'}
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+            <div style={{ marginTop: 8 }}>
+              <button onClick={() => setContextModal('masContexto')} style={{ width: '100%', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, padding: '12px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', fontFamily: 'Karla, sans-serif' }}>
+                <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.28)', fontWeight: 300 }}>Más contexto</span>
+                <span style={{ color: 'rgba(255,255,255,0.15)', fontSize: 14 }}>+</span>
+              </button>
+            </div>
+          </div>
+        ) : (
         <div className="secciones">
 
           {/* SECCIÓN 1 — movida al panel flotante lateral */}
@@ -1348,115 +1424,58 @@ export default function QuanamIa2026() {
               <div className="lentes-intro">
                 <p className="lentes-sub">Elegí uno o varios lentes y describí lo que ves — o lo que imaginarías ver — desde ahí.</p>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 16 }}>
-                {LENTES.map(lente => {
-                  const state = lenteStates[lente.id]
-                  const isOpen = state.open
-                  const prevConv = prevConvs[lente.nombre]
-                  const hasDuende = prevConv?.msgs && prevConv.msgs.length > 0
-                  const primerMsgDuende = hasDuende ? prevConv!.msgs.find(m => m.role === 'assistant')?.content : null
-                  const respuestaUsuario = lenteStates[lente.id].respuesta
-
+              <div className="lentes-lista">
+                {LENTES.map((lente, idx) => {
+                  const ls = lenteStates[lente.id]
                   return (
-                    <div key={lente.id} style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${isOpen ? 'rgba(201,168,76,0.30)' : 'rgba(255,255,255,0.08)'}`, borderRadius: 12, overflow: 'visible', transition: 'border-color 0.2s' }}>
-
-                      {/* Header del lente */}
-                      <div
-                        onClick={() => toggleLente(lente.id)}
-                        style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', gap: 10 }}
-                      >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0, position: 'relative' }}>
-                          <span style={{ fontSize: 14, color: isOpen ? '#E8D0A0' : 'rgba(255,255,255,0.60)', fontFamily: 'Playfair Display, serif', fontWeight: isOpen ? 500 : 400, transition: 'color 0.2s' }}>{lente.nombre}</span>
-                          {/* Botón de ayuda */}
-                          <button
-                            onClick={e => { e.stopPropagation(); setHelpPopup(helpPopup === lente.id ? null : lente.id) }}
-                            style={{ flexShrink: 0, width: 17, height: 17, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.20)', background: 'none', color: 'rgba(255,255,255,0.30)', fontSize: 10, fontFamily: 'Karla, sans-serif', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}
-                          >?</button>
-                          {/* Popup de ayuda */}
-                          {helpPopup === lente.id && (
-                            <div
-                              onClick={e => e.stopPropagation()}
-                              style={{ position: 'absolute', marginTop: 4, left: 0, top: '100%', background: '#2a2018', border: '1px solid rgba(201,168,76,0.30)', borderRadius: 10, padding: '12px 14px', width: 240, zIndex: 50 }}
-                            >
-                              <div style={{ fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: 'rgba(201,168,76,0.60)', fontFamily: 'Karla, sans-serif', marginBottom: 6 }}>¿Qué es este lente?</div>
-                              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.6, margin: 0, fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>{lente.desc}</p>
-                              {lente.ejemplo && (
-                                <p style={{ fontSize: 12, color: 'rgba(201,168,76,0.50)', lineHeight: 1.5, margin: '8px 0 0', fontFamily: 'Karla, sans-serif', fontStyle: 'italic', fontWeight: 300 }}>{lente.ejemplo}</p>
-                              )}
-                            </div>
-                          )}
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-                          {hasDuende && !isOpen && (
-                            <span style={{ fontSize: 11, color: '#C9A84C', fontFamily: 'Karla, sans-serif', background: 'rgba(201,168,76,0.10)', borderRadius: 4, padding: '2px 7px' }}>Activo</span>
-                          )}
-                          <span style={{ color: isOpen ? 'rgba(201,168,76,0.6)' : 'rgba(255,255,255,0.20)', fontSize: 18, lineHeight: 1 }}>{isOpen ? '−' : '+'}</span>
+                    <div key={lente.id} className="lente">
+                      <div className="lente-header">
+                        <span className="lente-num">{String(idx + 1).padStart(2, '0')}</span>
+                        <div className="lente-header-left">
+                          <span className="lente-nombre">{lente.nombre}</span>
+                          <span className="lente-frase">{lente.frase}</span>
                         </div>
                       </div>
-
-                      {/* Contenido expandido */}
-                      {isOpen && (
-                        <div style={{ padding: '0 16px 16px' }}>
-                          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', fontFamily: 'Karla, sans-serif', fontStyle: 'italic', lineHeight: 1.6, margin: '0 0 14px', fontWeight: 300 }}>{lente.frase}</p>
-                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-
-                            {/* Columna izquierda — Duende */}
-                            <div style={{ background: 'rgba(201,168,76,0.05)', border: '1px solid rgba(201,168,76,0.15)', borderRadius: 10, padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-                              <div style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: 'rgba(201,168,76,0.55)', fontFamily: 'Karla, sans-serif' }}>El Duende</div>
-                              {primerMsgDuende ? (
-                                <>
-                                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', fontStyle: 'italic', lineHeight: 1.6, margin: 0, fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>
-                                    &ldquo;{primerMsgDuende.slice(0, 140)}{primerMsgDuende.length > 140 ? '…' : ''}&rdquo;
-                                  </p>
-                                  <DuendeChat
-                                    lente={lente}
-                                    nombre={nombre}
-                                    email={email}
-                                    prevConv={prevConv}
-                                    iniciativasActivas={iniciativasActivas}
-                                  />
-                                </>
-                              ) : (
-                                <DuendeChat
-                                  lente={lente}
-                                  mensajeInicial={respuestaUsuario}
-                                  nombre={nombre}
-                                  email={email}
-                                  autoAbrir={false}
-                                  iniciativasActivas={iniciativasActivas}
+                      <div className="lente-body">
+                        <div className="lente-contenido">
+                          {lente.desc.split('\n').map((line, i) => (
+                            <p key={i} className="lente-desc" style={i > 0 ? { marginTop: 8 } : undefined}>{line}</p>
+                          ))}
+                          {lente.ejemplo && <p className="lente-ejemplo">{lente.ejemplo}</p>}
+                          <div style={{ marginTop: 8, display: 'flex', flexDirection: 'column', gap: 10 }} onClick={e => e.stopPropagation()}>
+                            {!ls.showDuende ? (
+                              <>
+                                <textarea
+                                  value={ls.respuesta}
+                                  onChange={e => setRespuesta(lente.id, e.target.value)}
+                                  onInput={e => {
+                                    const el = e.currentTarget
+                                    el.style.height = 'auto'
+                                    const maxH = Math.round(15 * 1.7 * 5 + 24)
+                                    el.style.height = Math.min(el.scrollHeight, maxH) + 'px'
+                                    el.style.overflowY = el.scrollHeight > maxH ? 'scroll' : 'hidden'
+                                  }}
+                                  placeholder={`Tu perspectiva desde "${lente.nombre}"…`}
+                                  rows={1}
+                                  style={{ width: '100%', border: '1px solid rgba(201,168,76,0.27)', borderRadius: 8, padding: '13px 15px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#2C2820', background: '#F5F0E8', resize: 'none', outline: 'none', lineHeight: 1.7, overflowY: 'hidden' }}
                                 />
-                              )}
-                            </div>
-
-                            {/* Columna derecha — Usuario */}
-                            <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10, padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-                              <div style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.30)', fontFamily: 'Karla, sans-serif' }}>Tu perspectiva</div>
-                              {state.status === 'sent' ? (
-                                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', fontStyle: 'italic', fontFamily: 'Karla, sans-serif', fontWeight: 300, lineHeight: 1.6, margin: 0 }}>Enviado. Podés seguir explorando con el Duende.</p>
-                              ) : (
-                                <>
-                                  <textarea
-                                    value={state.respuesta}
-                                    onChange={e => setRespuesta(lente.id, e.target.value)}
-                                    placeholder={`"${lente.frase.replace(/"/g, '')}"`}
-                                    rows={4}
-                                    style={{ resize: 'none' as const, border: '1px solid rgba(255,255,255,0.10)', borderRadius: 8, padding: '10px 12px', fontSize: 13, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: 'rgba(255,255,255,0.80)', background: 'rgba(255,255,255,0.05)', outline: 'none', lineHeight: 1.6, width: '100%', boxSizing: 'border-box' as const }}
-                                  />
-                                  {state.errorMsg && <p style={{ fontSize: 12, color: '#ff8080', fontFamily: 'Karla, sans-serif', margin: 0 }}>{state.errorMsg}</p>}
-                                  <button
-                                    onClick={() => enviar(lente)}
-                                    disabled={!state.respuesta.trim() || state.status === 'sending'}
-                                    style={{ background: state.respuesta.trim() ? '#8B6914' : 'rgba(139,105,20,0.25)', color: '#F5EDD8', border: 'none', borderRadius: 8, padding: '9px 16px', fontSize: 12, fontFamily: 'Karla, sans-serif', fontWeight: 500, cursor: state.respuesta.trim() ? 'pointer' : 'default', transition: 'background 0.2s', letterSpacing: '0.05em', alignSelf: 'flex-start' }}
-                                  >
-                                    {state.status === 'sending' ? 'Enviando…' : 'Compartir perspectiva'}
-                                  </button>
-                                </>
-                              )}
-                            </div>
-
+                                <button
+                                  onClick={() => {
+                                    if (!ls.respuesta.trim()) return
+                                    setLenteStates(prev => ({ ...prev, [lente.id]: { ...prev[lente.id], showDuende: true } }))
+                                  }}
+                                  disabled={!ls.respuesta.trim()}
+                                  style={{ width: '100%', background: ls.respuesta.trim() ? '#C9A84C' : 'rgba(201,168,76,0.28)', color: ls.respuesta.trim() ? '#fff' : 'rgba(255,255,255,0.6)', border: 'none', borderRadius: 8, padding: '14px 22px', fontSize: 14, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.06em', cursor: ls.respuesta.trim() ? 'pointer' : 'default', transition: 'background 0.2s' }}
+                                >
+                                  Explorar con el Duende
+                                </button>
+                              </>
+                            ) : (
+                              <DuendeChat lente={lente} mensajeInicial={ls.respuesta} nombre={nombre} email={email} autoAbrir={true} prevConv={prevConvs[lente.nombre]} iniciativasActivas={iniciativasActivas} />
+                            )}
                           </div>
                         </div>
-                      )}
+                      </div>
                     </div>
                   )
                 })}
@@ -1465,18 +1484,10 @@ export default function QuanamIa2026() {
           </div>
 
         </div>
-
-        <div style={{ marginTop: 8 }}>
-          <button
-            onClick={() => setContextModal('masContexto')}
-            style={{ width: '100%', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, padding: '12px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', fontFamily: 'Karla, sans-serif' }}
-          >
-            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.28)', fontWeight: 300 }}>Más contexto</span>
-            <span style={{ color: 'rgba(255,255,255,0.15)', fontSize: 14 }}>+</span>
-          </button>
-        </div>
+        )}
 
         {/* CIERRE */}
+        {!userId && <>
         <div className="cierre">
           <p className="cierre-texto">La inteligencia genuina no se construye acumulando información. Emerge cuando se crean las condiciones para que aparezca. Eso es lo que estamos invitando a construir.</p>
           <p className="cierre-sub">Entre 5 y 8 semanas. Un grupo de entre 15 y 20 personas. Encuentros que no gestionan el presente — exploran el futuro. <strong>Dentro de ese tiempo, Quanam puede saber cosas de sí misma que hoy no sabe que sabe. Eso empieza con una respuesta tuya.</strong></p>
@@ -1492,6 +1503,8 @@ export default function QuanamIa2026() {
             <span className="col-meta">Inteligencia Colectiva potenciada por la IA</span>
           </div>
         </div>
+        </>}
+
 
       </div>
 
