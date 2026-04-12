@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 
-const ARQUITECTO_EMAIL = 'edgardo.noya@gmail.com'
+const ARQUITECTO_EMAILS = new Set(['edgardo.noya@gmail.com', 'edgardo.noya@quanam.com'])
 
 const supabasePublic = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
   }
   const { data: { user }, error: authError } = await supabasePublic.auth.getUser(authHeader.slice(7))
-  if (authError || !user || user.email !== ARQUITECTO_EMAIL) {
+  if (authError || !user || !ARQUITECTO_EMAILS.has(user.email ?? '')) {
     return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
   }
 

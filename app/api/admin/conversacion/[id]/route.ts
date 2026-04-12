@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
 
-const ARQUITECTO_EMAIL = 'edgardo.noya@gmail.com'
+const ARQUITECTO_EMAILS = new Set(['edgardo.noya@gmail.com', 'edgardo.noya@quanam.com'])
 
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -25,7 +25,7 @@ export async function GET(
 
   const token = authHeader.slice(7)
   const { data: { user }, error: authError } = await supabasePublic.auth.getUser(token)
-  if (authError || !user || user.email !== ARQUITECTO_EMAIL) {
+  if (authError || !user || !ARQUITECTO_EMAILS.has(user.email ?? '')) {
     return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
   }
 

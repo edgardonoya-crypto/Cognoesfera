@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { supabase } from '@/app/lib/supabase'
 
-const ARQUITECTO_EMAIL = 'edgardo.noya@gmail.com'
+const ARQUITECTO_EMAILS = new Set(['edgardo.noya@gmail.com', 'edgardo.noya@quanam.com'])
 const LENTES_CONOCIDAS = new Set(['El ángulo propio', 'La pregunta viva', 'La intuición central', 'El hilo conector', 'El experimento pendiente'])
 
 type DuendeMensaje = { role: 'user' | 'assistant'; content: string; timestamp?: string }
@@ -36,7 +36,7 @@ export default function ConversacionPage() {
   useEffect(() => {
     async function load() {
       const { data: { session } } = await supabase.auth.getSession()
-      if (!session || session.user.email !== ARQUITECTO_EMAIL) {
+      if (!session || !ARQUITECTO_EMAILS.has(session.user.email ?? '')) {
         setStatus('unauth')
         return
       }

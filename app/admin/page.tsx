@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/app/lib/supabase'
 
-const ARQUITECTO_EMAIL = 'edgardo.noya@gmail.com'
+const ARQUITECTO_EMAILS = new Set(['edgardo.noya@gmail.com', 'edgardo.noya@quanam.com'])
 
 type Contacto  = { id: string; nombre: string; email: string; mensaje: string; origen: string | null; created_at: string }
 type DuendeMensaje = { role: 'user' | 'assistant'; content: string; timestamp?: string }
@@ -122,7 +122,7 @@ export default function AdminPage() {
     async function load() {
       const { data: { session } } = await supabase.auth.getSession()
       if (!session) { router.push('/login'); return }
-      if (session.user.email !== ARQUITECTO_EMAIL) { setStatus('forbidden'); return }
+      if (!ARQUITECTO_EMAILS.has(session.user.email ?? '')) { setStatus('forbidden'); return }
 
       const accessToken = session.access_token
 

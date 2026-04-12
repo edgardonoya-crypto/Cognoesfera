@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
 
-const ARQUITECTO_EMAIL = 'edgardo.noya@gmail.com'
+const ARQUITECTO_EMAILS = new Set(['edgardo.noya@gmail.com', 'edgardo.noya@quanam.com'])
 
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -19,7 +19,7 @@ async function verificarArquitecto(request: Request): Promise<boolean> {
   if (!authHeader?.startsWith('Bearer ')) return false
   const token = authHeader.slice(7)
   const { data: { user }, error } = await supabasePublic.auth.getUser(token)
-  return !error && user?.email === ARQUITECTO_EMAIL
+  return !error && ARQUITECTO_EMAILS.has(user?.email ?? '')
 }
 
 export async function GET(request: Request) {
