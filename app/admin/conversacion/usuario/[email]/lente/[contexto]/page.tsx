@@ -15,6 +15,7 @@ type DuendeConv = {
   contexto_origen: string | null
   mensajes: DuendeMensaje[]
   created_at: string
+  estado?: 'activa' | 'ruido' | 'archivada'
 }
 
 function fmt(iso: string) {
@@ -32,11 +33,14 @@ export default function UsuarioLentePage() {
 
   const [convs, setConvs] = useState<DuendeConv[]>([])
   const [status, setStatus] = useState<'loading' | 'unauth' | 'ok'>('loading')
+  const [estados, setEstados] = useState<Record<string, 'activa' | 'ruido' | 'archivada'>>({})
+  const [token, setToken] = useState<string>('')
 
   useEffect(() => {
     async function load() {
       const { data: { session } } = await supabase.auth.getSession()
       if (!session || !ARQUITECTO_EMAILS.has(session.user.email ?? '')) { setStatus('unauth'); return }
+      setToken(session.access_token)
 
       const res = await fetch('/api/admin/duende-chats', {
         headers: { Authorization: `Bearer ${session.access_token}` },
@@ -50,11 +54,23 @@ export default function UsuarioLentePage() {
           Array.isArray(c.mensajes) && c.mensajes.length > 0
         )
         .sort((a, b) => a.created_at.localeCompare(b.created_at))
+      const init: Record<string, 'activa' | 'ruido' | 'archivada'> = {}
+      filtradas.forEach(c => { init[c.id] = (c.estado ?? 'activa') as 'activa' | 'ruido' | 'archivada' })
+      setEstados(init)
       setConvs(filtradas)
       setStatus('ok')
     }
     load()
   }, [email, contexto])
+
+  async function marcarEstado(id: string, estado: 'activa' | 'ruido') {
+    setEstados(prev => ({ ...prev, [id]: estado }))
+    await fetch('/api/admin/duende-chats', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ id, estado }),
+    })
+  }
 
   const tipoCtx = LENTES_CONOCIDAS.has(contexto) ? 'Lente' : 'Resonancia'
   const colorCtx = tipoCtx === 'Lente' ? '#4a7040' : '#8B6914'
@@ -80,12 +96,22 @@ export default function UsuarioLentePage() {
 
         {convs.length === 0 && <p style={s.empty}>No hay conversaciones para esta combinación.</p>}
 
-        {convs.map((conv, idx) => (
-          <div key={conv.id}>
+        {convs.map((conv, idx) => {
+          const est = estados[conv.id] ?? 'activa'
+          const esRuido = est === 'ruido'
+          return (
+          <div key={conv.id} style={esRuido ? { opacity: 0.45, transition: 'opacity .2s' } : { transition: 'opacity .2s' }}>
             {/* Separador entre conversaciones */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: idx === 0 ? '0 0 16px' : '28px 0 16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: idx === 0 ? '0 0 16px' : '28px 0 16px' }}>
               <div style={{ flex: 1, height: 1, background: 'rgba(34,58,54,.10)' }} />
               <span style={{ fontSize: '0.72rem', color: '#8a9e98', whiteSpace: 'nowrap' as const, flexShrink: 0 }}>{fmt(conv.created_at)} · {fmtHora(conv.created_at)}</span>
+              {esRuido && <span style={{ fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' as const, padding: '2px 6px', borderRadius: 3, background: 'rgba(180,60,40,.10)', color: '#b43c28', border: '1px solid rgba(180,60,40,.25)', flexShrink: 0 }}>ruido</span>}
+              <button
+                onClick={() => marcarEstado(conv.id, esRuido ? 'activa' : 'ruido')}
+                style={{ background: 'none', border: '1px solid ' + (esRuido ? 'rgba(34,58,54,.20)' : 'rgba(180,60,40,.30)'), borderRadius: 4, padding: '2px 8px', fontSize: '0.65rem', color: esRuido ? '#8a9e98' : '#b43c28', cursor: 'pointer', fontFamily: 'inherit', flexShrink: 0, whiteSpace: 'nowrap' as const }}
+              >
+                {esRuido ? '← Activa' : 'Ruido'}
+              </button>
               <div style={{ flex: 1, height: 1, background: 'rgba(34,58,54,.10)' }} />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -108,7 +134,8 @@ export default function UsuarioLentePage() {
               ))}
             </div>
           </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )
