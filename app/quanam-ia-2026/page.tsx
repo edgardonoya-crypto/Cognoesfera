@@ -550,7 +550,7 @@ function setCookie(name: string, value: string, days: number) {
   document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`
 }
 
-type FragmentoKey = 'mas' | 'preguntas' | 'masContexto' | null
+type FragmentoKey = 'mas' | 'preguntas' | null
 
 export default function QuanamIa2026() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -558,14 +558,10 @@ export default function QuanamIa2026() {
   const emailRef = useRef<HTMLInputElement>(null)
 
   const [bienvenida, setBienvenida] = useState(true)
-  const [entradaPersonalizada, setEntradaPersonalizada] = useState(false)
-  const [estadoVitalNombre, setEstadoVitalNombre] = useState<string | null>(null)
-  const [ultimoLente, setUltimoLente] = useState<string | null>(null)
-  const [helpPopup, setHelpPopup] = useState<string | null>(null)
   const [nombre, setNombre] = useState('')
   const [email, setEmail] = useState('')
   const [contextMenuOpen, setContextMenuOpen] = useState(false)
-  const [contextModal, setContextModal] = useState<'sec1' | 'mid' | 'sec2' | 'masContexto' | null>(null)
+  const [contextModal, setContextModal] = useState<'sec1' | 'mid' | 'sec2' | null>(null)
   const [contextMounted, setContextMounted] = useState(false)
   const [contactMsg, setContactMsg] = useState('')
   const [contactStatus, setContactStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
@@ -595,28 +591,16 @@ export default function QuanamIa2026() {
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user?.email) {
+        // Sesión válida — saltar directamente al contenido
         setEmail(session.user.email)
         setUserId(session.user.id)
-        // Cargar estado vital del usuario
-        fetch(`/api/estados?user_id=${session.user.id}&contexto=convocatoria_quanam`)
-          .then(r => r.json())
-          .then((data: { estado?: { estado_situado?: { nombre_situado?: string } } }) => {
-            const nombre = data?.estado?.estado_situado?.nombre_situado ?? null
-            setEstadoVitalNombre(nombre)
-          })
-          .catch(() => {})
-        // Cargar último lente del historial
-        fetch(`/api/duende/history?email=${encodeURIComponent(session.user.email)}`)
-          .then(r => r.json())
-          .then((data: { convs?: Record<string, unknown> }) => {
-            const LENTES_CONOCIDAS = ['El ángulo propio', 'La pregunta viva', 'La intuición central', 'El hilo conector', 'El experimento pendiente']
-            const lentesConHistorial = LENTES_CONOCIDAS.filter(l => data?.convs?.[l])
-            if (lentesConHistorial.length > 0) setUltimoLente(lentesConHistorial[0])
-          })
-          .catch(() => {})
-        // Mostrar entrada personalizada en lugar de ir directo al contenido
-        setEntradaPersonalizada(true)
         setBienvenida(false)
+        // Registrar llegada ahora que tenemos el user confirmado
+        fetch('/api/estados', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user_id: session.user.id, contexto: 'convocatoria_quanam', senales: { llegó: true, abrió_convocatoria: true } }),
+        }).catch(() => {})
       } else {
         // Sin sesión activa — pre-rellenar email del formulario si había cookie
         const savedEmail = getCookie('quanam_email')
@@ -713,7 +697,6 @@ export default function QuanamIa2026() {
         body: JSON.stringify({ user_id: newSession.user.id, contexto: 'convocatoria_quanam', senales: { llegó: true, abrió_convocatoria: true } }),
       }).catch(() => {})
     }
-    setEntradaPersonalizada(true)
     setBienvenida(false)
   }
 
@@ -805,13 +788,6 @@ export default function QuanamIa2026() {
     return () => window.removeEventListener('keydown', onKey)
   }, [contextModal, contextMenuOpen])
 
-  useEffect(() => {
-    if (!helpPopup) return
-    function onClickOutside() { setHelpPopup(null) }
-    document.addEventListener('click', onClickOutside)
-    return () => document.removeEventListener('click', onClickOutside)
-  }, [helpPopup])
-
   function toggleFragmento(setter: React.Dispatch<React.SetStateAction<FragmentoKey>>, key: FragmentoKey, current: FragmentoKey) {
     setter(current === key ? null : key)
   }
@@ -863,113 +839,11 @@ export default function QuanamIa2026() {
     }
   }
 
-  const TEXTOS_ESTADO: Record<string, { saludo: string; pregunta: string }> = {
-    'La escucha': {
-      saludo: 'Tu mirada se activa cuando se encuentra con otras.',
-      pregunta: 'Es la primera vez que llegás. ¿Qué te trajo hasta acá?',
-    },
-    'El pulso': {
-      saludo: 'Algo en vos ya empezó a moverse.',
-      pregunta: 'La última vez dejaste algo abierto. ¿Qué resonó después?',
-    },
-    'El murmullo': {
-      saludo: 'Tu perspectiva está tomando forma.',
-      pregunta: ultimoLente ? `La última vez exploraste "${ultimoLente}". ¿Qué cambió desde entonces?` : 'Tu perspectiva está tomando forma. ¿Qué emergió desde la última vez?',
-    },
-    'La sintonía': {
-      saludo: 'Ya hay algo tuyo en este campo.',
-      pregunta: ultimoLente ? `Estás en sintonía con "${ultimoLente}". ¿Querés profundizar o explorar otro territorio?` : 'Estás en sintonía con el campo. ¿Querés profundizar o explorar algo nuevo?',
-    },
-    'La resonancia': {
-      saludo: 'Tu mirada ya está resonando con otras.',
-      pregunta: '¿Qué conexión nueva apareció desde la última vez que estuviste acá?',
-    },
-    'El tono': {
-      saludo: 'Tu voz ya tiene peso en este campo.',
-      pregunta: '¿Qué querés aportar hoy?',
-    },
-    'El coro': {
-      saludo: 'Sos parte activa de lo que está emergiendo.',
-      pregunta: '¿Qué estás viendo que otros todavía no ven?',
-    },
-    'La música': {
-      saludo: 'Lo que empezaste a nombrar ya está moviéndose en el campo.',
-      pregunta: '¿Hacia dónde querés que siga?',
-    },
-  }
-
-  const textoEstado = estadoVitalNombre
-    ? (TEXTOS_ESTADO[estadoVitalNombre] ?? TEXTOS_ESTADO['La escucha'])
-    : TEXTOS_ESTADO['La escucha']
-
   // Esperar a que se resuelva la sesión antes de renderizar para evitar el flash
   if (!sessionChecked) return null
 
   return (
     <>
-      {!bienvenida && (
-        <div style={{
-          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200,
-          background: 'rgba(26,20,14,0.92)', backdropFilter: 'blur(8px)',
-          borderBottom: '1px solid rgba(201,168,76,0.12)',
-          padding: '0 24px', height: 44,
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        }}>
-          <span style={{ fontSize: 12, color: '#fff', fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>
-            {email}
-          </span>
-          <button
-            onClick={async () => {
-              await supabase.auth.signOut()
-              window.location.reload()
-            }}
-            style={{ background: 'none', border: '1px solid rgba(255,255,255,0.4)', borderRadius: 6, padding: '4px 12px', fontSize: 12, color: '#fff', fontFamily: 'Karla, sans-serif', cursor: 'pointer', fontWeight: 400 }}
-          >
-            Salir
-          </button>
-        </div>
-      )}
-      {!bienvenida && <div style={{ height: 44 }} />}
-
-      {entradaPersonalizada && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <video autoPlay loop muted playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} src="/Inteligencia_Colectiva.MP4" />
-          <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.60)' }} />
-          <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 28, padding: '0 24px', maxWidth: 480, width: '100%' }}>
-
-            {/* Zona A — saludo */}
-            <div style={{ borderLeft: '2px solid rgba(201,168,76,0.45)', paddingLeft: 16 }}>
-              {estadoVitalNombre && (
-                <div style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: 'rgba(201,168,76,0.55)', fontFamily: 'Karla, sans-serif', fontWeight: 400, marginBottom: 8 }}>
-                  {estadoVitalNombre}
-                </div>
-              )}
-              <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(18px,3vw,24px)', color: '#E8C96A', fontStyle: 'italic', lineHeight: 1.5, margin: 0, fontWeight: 400 }}>
-                {textoEstado.saludo}
-              </p>
-            </div>
-
-            {/* Zona B — pregunta activa */}
-            <div style={{ borderLeft: '2px solid rgba(255,255,255,0.12)', paddingLeft: 16 }}>
-              <p style={{ fontFamily: 'Karla, sans-serif', fontSize: 15, color: 'rgba(255,255,255,0.72)', lineHeight: 1.7, margin: 0, fontWeight: 300 }}>
-                {textoEstado.pregunta}
-              </p>
-            </div>
-
-            {/* Zona C — acceso */}
-            <div style={{ paddingLeft: 18 }}>
-              <button
-                onClick={() => setEntradaPersonalizada(false)}
-                style={{ background: '#8B6914', color: '#F5EDD8', border: 'none', borderRadius: 10, padding: '14px 32px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.08em', cursor: 'pointer' }}
-              >
-                Continuar →
-              </button>
-            </div>
-
-          </div>
-        </div>
-      )}
-
       {/* BIENVENIDA */}
       {bienvenida && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -1166,7 +1040,6 @@ export default function QuanamIa2026() {
 
       <div className="wrap" style={{ display: bienvenida ? 'none' : undefined }}>
 
-        {!userId && <>
         {/* HEADER */}
         <header>
           <div className="header-left">
@@ -1182,18 +1055,17 @@ export default function QuanamIa2026() {
         <div style={{ width: '100%', padding: '16px 20px', background: 'rgba(245,240,232,0.95)', border: '1px solid rgba(139,105,20,0.15)', borderRadius: 12, marginBottom: 12, marginTop: 12 }}>
           <p style={{ fontSize: 13, color: '#8A7E70', lineHeight: 1.75, fontWeight: 300 }}><em>Esta convocatoria tiene tres capas.</em> Podés leer solo la primera y ya tenés todo lo que necesitás para decidir. Las otras dos son para quien quiera ir más lejos. Ninguna es obligatoria.</p>
         </div>
-        </>}
 
         {/* ÁGUILA */}
-        {!userId && <div className="aguila">
+        <div className="aguila">
           <span className="bloque-etiqueta">el punto de partida</span>
           <p className="aguila-titulo">Cuenta la historia que un águila se posó en una rama. Una voz de alguien que no sabía volar le preguntó si no temía que la rama se quebrara. El águila respondió: mi confianza no está en la rama. Está en mis alas.</p>
           <p className="aguila-cuerpo">Quanam lleva años construyendo ramas — metodologías, proyectos, tecnologías. La inteligencia artificial es la rama más nueva, y la más tentadora: procesa todo lo que Quanam ha hecho, ordena todo lo que Quanam sabe. Pero sigue siendo una rama. Las alas son otra cosa: la inteligencia que vive distribuida entre las personas, las áreas, las conversaciones que nunca se registraron.</p>
           <p className="aguila-acento">La IA puede decirte todo lo que Quanam sabe. No puede decirte lo que Quanam todavía no sabe que sabe.</p>
-        </div>}
+        </div>
 
         {/* PREGUNTA CENTRAL + CÓMO SE FORMA — card unificado */}
-        {!userId && <div className="card-pregunta-grupo">
+        <div className="card-pregunta-grupo">
           <div className="card-pregunta-grupo-bloque">
             <span className="bloque-etiqueta" style={{ color: 'var(--goldlt)' }}>La pregunta</span>
             <p className="pregunta-texto">&ldquo;¿Cómo puede la inteligencia artificial en Quanam crear condiciones para que lo que sabemos juntos — y que todavía no sabemos que sabemos — se vuelva visible… y desde ahí, empezar a ver caminos que hoy todavía no estamos viendo?&rdquo;</p>
@@ -1207,84 +1079,9 @@ export default function QuanamIa2026() {
             <p style={{ fontSize: 16, color: 'var(--inklt)', fontWeight: 300, lineHeight: 2, fontFamily: 'Karla, sans-serif' }}>Podés responder con una pregunta, una incomodidad, una intuición, un desafío, una opinión. No hay respuesta correcta ni incorrecta. No hay límite de cantidad — si algo más te surge, respondé otro lente. O el mismo desde otro ángulo.</p>
             <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 18, fontStyle: 'italic', fontWeight: 400, color: 'var(--gold)', lineHeight: 1.55, textAlign: 'center', marginTop: 24 }}>Lo que importa es lo que ves desde donde estás.</p>
           </div>
-        </div>}
+        </div>
 
         {/* SECCIONES */}
-        {userId ? (
-          <div style={{ paddingBottom: 80 }}>
-            <div className="secciones" style={{ marginTop: 24 }}>
-              <div className="seccion open">
-                <div className="seccion-body" style={{ maxHeight: 'none' }}>
-                  <div className="lentes-intro">
-                    <p className="lentes-sub">¿Qué ves vos desde donde estás?</p>
-                  </div>
-                  <div className="lentes-lista">
-                    {LENTES.map((lente, idx) => {
-                      const state = lenteStates[lente.id]
-                      const isOpen = state.open
-                      const prevConv = prevConvs[lente.nombre]
-
-                      return (
-                        <div key={lente.id} className={`lente${isOpen ? ' open' : ''}`}>
-                          <div className="lente-header" onClick={() => toggleLente(lente.id)} style={{ cursor: 'pointer' }}>
-                            <div className="lente-num">{idx + 1}</div>
-                            <div className="lente-header-left">
-                              <div style={{ display: 'flex', alignItems: 'center', gap: 6, position: 'relative' }}>
-                                <span className="lente-nombre">{lente.nombre}</span>
-                                <button
-                                  onClick={e => { e.stopPropagation(); setHelpPopup(helpPopup === lente.id ? null : lente.id) }}
-                                  style={{ flexShrink: 0, width: 17, height: 17, borderRadius: '50%', border: '1px solid rgba(139,105,20,0.3)', background: 'none', color: '#8B6914', fontSize: 10, fontFamily: 'Karla, sans-serif', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}
-                                >?</button>
-                                {helpPopup === lente.id && (
-                                  <div
-                                    onClick={e => e.stopPropagation()}
-                                    style={{ position: 'absolute', top: '100%', left: 0, marginTop: 6, background: '#fff', border: '1px solid rgba(139,105,20,0.22)', borderRadius: 10, padding: '12px 14px', width: 240, zIndex: 50, boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
-                                  >
-                                    <div style={{ fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: '#8B6914', fontFamily: 'Karla, sans-serif', fontWeight: 500, marginBottom: 6 }}>¿Qué es este lente?</div>
-                                    <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.65, margin: 0, fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>{lente.desc}</p>
-                                    {lente.ejemplo && <p style={{ fontSize: 12, color: '#C4941A', fontStyle: 'italic', lineHeight: 1.5, margin: '8px 0 0', fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>{lente.ejemplo}</p>}
-                                  </div>
-                                )}
-                              </div>
-                              <span className="lente-frase">{lente.frase}</span>
-                            </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-                              {prevConv?.msgs && prevConv.msgs.length > 0 && !isOpen && (
-                                <span style={{ fontSize: 11, color: '#8B6914', background: 'rgba(139,105,20,0.08)', borderRadius: 4, padding: '2px 7px', fontFamily: 'Karla, sans-serif' }}>Activo</span>
-                              )}
-                            </div>
-                          </div>
-                          {isOpen && (
-                            <div className="lente-contenido">
-                              <p className="lente-desc">{lente.desc}</p>
-                              {lente.ejemplo && <p className="lente-ejemplo">{lente.ejemplo}</p>}
-                              <DuendeChat
-                                lente={lente}
-                                nombre={nombre}
-                                email={email}
-                                prevConv={prevConv}
-                                iniciativasActivas={iniciativasActivas}
-                              />
-                            </div>
-                          )}
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div style={{ marginTop: 10 }}>
-              <button
-                onClick={() => setContextModal('masContexto')}
-                style={{ width: '100%', background: 'rgba(245,240,232,0.8)', border: '1px solid rgba(139,105,20,0.15)', borderRadius: 8, padding: '12px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', fontFamily: 'Karla, sans-serif' }}
-              >
-                <span style={{ fontSize: 13, color: '#8A7E70', fontWeight: 300 }}>Más contexto</span>
-                <span style={{ color: '#8A7E70', fontSize: 14 }}>+</span>
-              </button>
-            </div>
-          </div>
-        ) : (
         <div className="secciones">
 
           {/* SECCIÓN 1 — movida al panel flotante lateral */}
@@ -1443,6 +1240,8 @@ export default function QuanamIa2026() {
                             <p key={i} className="lente-desc" style={i > 0 ? { marginTop: 8 } : undefined}>{line}</p>
                           ))}
                           {lente.ejemplo && <p className="lente-ejemplo">{lente.ejemplo}</p>}
+
+                          {/* FORM */}
                           <div style={{ marginTop: 8, display: 'flex', flexDirection: 'column', gap: 10 }} onClick={e => e.stopPropagation()}>
                             {!ls.showDuende ? (
                               <>
@@ -1452,7 +1251,7 @@ export default function QuanamIa2026() {
                                   onInput={e => {
                                     const el = e.currentTarget
                                     el.style.height = 'auto'
-                                    const maxH = Math.round(15 * 1.7 * 5 + 24)
+                                    const maxH = Math.round(15 * 1.7 * 5 + 24) // ~5 líneas + padding
                                     el.style.height = Math.min(el.scrollHeight, maxH) + 'px'
                                     el.style.overflowY = el.scrollHeight > maxH ? 'scroll' : 'hidden'
                                   }}
@@ -1485,10 +1284,8 @@ export default function QuanamIa2026() {
           </div>
 
         </div>
-        )}
 
         {/* CIERRE */}
-        {!userId && <>
         <div className="cierre">
           <p className="cierre-texto">La inteligencia genuina no se construye acumulando información. Emerge cuando se crean las condiciones para que aparezca. Eso es lo que estamos invitando a construir.</p>
           <p className="cierre-sub">Entre 5 y 8 semanas. Un grupo de entre 15 y 20 personas. Encuentros que no gestionan el presente — exploran el futuro. <strong>Dentro de ese tiempo, Quanam puede saber cosas de sí misma que hoy no sabe que sabe. Eso empieza con una respuesta tuya.</strong></p>
@@ -1504,8 +1301,6 @@ export default function QuanamIa2026() {
             <span className="col-meta">Inteligencia Colectiva potenciada por la IA</span>
           </div>
         </div>
-        </>}
-
 
       </div>
 
@@ -1663,48 +1458,6 @@ export default function QuanamIa2026() {
                     </div>
                   </div>
                   )}
-                </div>
-              </div>
-            </div>,
-            document.body
-          )}
-
-          {contextModal === 'masContexto' && contextMounted && createPortal(
-            <div style={{ position: 'fixed', inset: 0, zIndex: 300, background: 'rgba(0,0,0,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
-              <div style={{ width: 'min(600px, 95vw)', maxHeight: '85vh', background: '#fff', borderRadius: 18, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.22)' }}>
-                <div style={{ padding: '20px 28px 18px', borderBottom: '1px solid rgba(0,0,0,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
-                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 17, fontWeight: 500, color: '#C9A84C', margin: 0 }}>Más contexto</p>
-                  <button onClick={() => setContextModal(null)} style={{ background: 'rgba(0,0,0,0.08)', border: '1px solid rgba(0,0,0,0.1)', fontSize: 16, color: '#2C2820', cursor: 'pointer', lineHeight: 1, padding: '7px 11px', borderRadius: 6 }}>✕</button>
-                </div>
-                <div style={{ overflowY: 'auto', padding: '28px 28px 32px', display: 'flex', flexDirection: 'column', gap: 24 }}>
-
-                  {/* Bloque — El Paradigma Aleph */}
-                  <div style={{ paddingBottom: 24, borderBottom: '1px solid rgba(0,0,0,0.07)' }}>
-                    <p style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C', marginBottom: 10 }}>El Paradigma Aleph</p>
-                    <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300, marginBottom: 8 }}>Esta convocatoria se construyó desde el Paradigma Aleph — un marco teórico-práctico para la emergencia de inteligencia colectiva, desarrollado a lo largo de más de una década.</p>
-                    <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300, marginBottom: 0 }}>El Paradigma Aleph no es una metodología. Es una forma de leer cómo los sistemas vivos piensan juntos — y qué condiciones hacen falta para que eso ocurra.</p>
-                  </div>
-
-                  {/* Bloque — Cómo se forma el grupo */}
-                  <div style={{ paddingBottom: 24, borderBottom: '1px solid rgba(0,0,0,0.07)' }}>
-                    <p style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C', marginBottom: 10 }}>Cómo se forma el grupo</p>
-                    <p style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>Entre 5 y 8 semanas · Un grupo de entre 15 y 20 personas · Encuentros que no gestionan el presente — exploran el futuro.</p>
-                  </div>
-
-                  {/* Bloque — Iniciativas activas */}
-                  {iniciativasActivas.length > 0 && (
-                    <div>
-                      <p style={{ fontSize: 16, fontWeight: 500, color: '#C9A84C', marginBottom: 10 }}>Líneas de exploración abiertas</p>
-                      <ul style={{ margin: '0 0 0', paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                        {iniciativasActivas.map(ini => (
-                          <li key={ini.id} style={{ fontSize: 14, color: '#888', lineHeight: 1.7, fontWeight: 300 }}>
-                            {ini.nombre}{ini.descripcion ? ` — ${ini.descripcion}` : ''}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
                 </div>
               </div>
             </div>,
