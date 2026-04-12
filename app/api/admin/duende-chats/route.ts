@@ -31,7 +31,7 @@ export async function GET(request: Request) {
 
     const { data, error } = await supabaseAdmin
       .from('duende_chats')
-      .select('id, mensajes, created_at, nombre_participante, email_participante, contexto_origen, estado')
+      .select('id, mensajes, created_at, nombre_participante, email_participante, contexto_origen, estado, mensajes_ruido')
       .order('created_at', { ascending: false })
 
     if (error) {
@@ -52,19 +52,33 @@ export async function PATCH(request: Request) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
     }
 
-    const { id, estado } = await request.json()
-    if (!id || !['activa', 'archivada', 'ruido'].includes(estado)) {
-      return NextResponse.json({ error: 'Parámetros inválidos' }, { status: 400 })
+    const body = await request.json()
+    const { id, estado, mensajes_ruido } = body as { id: string; estado?: string; mensajes_ruido?: number[] }
+
+    if (!id) return NextResponse.json({ error: 'Falta id' }, { status: 400 })
+
+    const patch: Record<string, unknown> = {}
+    if (estado !== undefined) {
+      if (!['activa', 'archivada', 'ruido'].includes(estado))
+        return NextResponse.json({ error: 'Estado inválido' }, { status: 400 })
+      patch.estado = estado
     }
+    if (mensajes_ruido !== undefined) {
+      if (!Array.isArray(mensajes_ruido))
+        return NextResponse.json({ error: 'mensajes_ruido debe ser array' }, { status: 400 })
+      patch.mensajes_ruido = mensajes_ruido
+    }
+    if (Object.keys(patch).length === 0)
+      return NextResponse.json({ error: 'Nada que actualizar' }, { status: 400 })
 
     const { error } = await supabaseAdmin
       .from('duende_chats')
-      .update({ estado })
+      .update(patch)
       .eq('id', id)
 
     if (error) {
       console.error('duende-chats PATCH error:', JSON.stringify(error))
-      return NextResponse.json({ error: 'Error al actualizar estado' }, { status: 500 })
+      return NextResponse.json({ error: 'Error al actualizar' }, { status: 500 })
     }
 
     return NextResponse.json({ ok: true })

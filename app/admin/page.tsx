@@ -12,7 +12,7 @@ type DuendeMensaje = { role: 'user' | 'assistant'; content: string; timestamp?: 
 type AccesoConvocatoria = { id: string; email: string; created_at: string }
 type LoginLog = { id: string; email: string; created_at: string }
 type DuendeConvEstado = 'activa' | 'archivada' | 'ruido'
-type DuendeConv = { id: string; nombre_participante: string | null; email_participante: string | null; contexto_origen: string | null; mensajes: DuendeMensaje[]; created_at: string; estado?: DuendeConvEstado }
+type DuendeConv = { id: string; nombre_participante: string | null; email_participante: string | null; contexto_origen: string | null; mensajes: DuendeMensaje[]; created_at: string; estado?: DuendeConvEstado; mensajes_ruido?: number[] }
 type ArchivoCuraduria = { id: string; created_at: string; email_participante: string | null; contexto_origen: string | null; nombre_archivo: string | null; tipo_archivo: string | null; contenido_base64: string | null; mensaje_asociado: string | null; estado: 'pendiente' | 'aprobado' | 'descartado' | 'señal'; notas_curador: string | null }
 type PreguntaArquitecto = { id: string; created_at: string; email_participante: string | null; contexto_origen: string | null; pregunta: string }
 type Iniciativa = { id: string; nombre: string; descripcion: string | null; responsable: string | null; estado: 'activa' | 'pausada' | 'completada'; fecha_inicio: string | null; visible_convocatoria: boolean; created_at: string }
@@ -93,6 +93,7 @@ export default function AdminPage() {
   const [usuarioAnalizando, setUsuarioAnalizando] = useState(false)
   const [usuarioInput, setUsuarioInput] = useState('')
   const usuarioHiloEndRef = useRef<HTMLDivElement>(null)
+  const [mensajesRuido, setMensajesRuido] = useState<Record<string, number[]>>({})
 
   useEffect(() => { setMounted(true) }, [])
 
@@ -141,7 +142,13 @@ export default function AdminPage() {
       if (duendeRes?.error) console.error('duende-chats admin error:', duendeRes.error)
 
       if (cData) setContactos(cData as Contacto[])
-      if (dData) setConversaciones((dData as DuendeConv[]).filter(d => Array.isArray(d.mensajes) && d.mensajes.length > 0))
+      if (dData) {
+        const convsFiltradas = (dData as DuendeConv[]).filter(d => Array.isArray(d.mensajes) && d.mensajes.length > 0)
+        setConversaciones(convsFiltradas)
+        const initMR: Record<string, number[]> = {}
+        convsFiltradas.forEach(c => { initMR[c.id] = c.mensajes_ruido ?? [] })
+        setMensajesRuido(initMR)
+      }
       if (lData) setLoginLogs(lData as LoginLog[])
       const { data: aData } = await supabase.from('convocatoria_accesos').select('id, email, created_at').order('created_at', { ascending: false }).limit(100)
       if (aData) setAccesosConv(aData as AccesoConvocatoria[])
@@ -202,6 +209,19 @@ export default function AdminPage() {
     setConversaciones(prev => prev.map(c => ids.includes(c.id) ? { ...c, estado } : c))
     setConvSeleccionados(new Set())
     setConvSeleccionModo(false)
+  }
+
+  async function toggleMensajeRuido(convId: string, msgIdx: number) {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) return
+    const actual = mensajesRuido[convId] ?? []
+    const nuevo = actual.includes(msgIdx) ? actual.filter(i => i !== msgIdx) : [...actual, msgIdx]
+    setMensajesRuido(prev => ({ ...prev, [convId]: nuevo }))
+    await fetch('/api/admin/duende-chats', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
+      body: JSON.stringify({ id: convId, mensajes_ruido: nuevo }),
+    })
   }
 
   async function actualizarEstado(id: string, estado: ArchivoCuraduria['estado']) {
@@ -1224,14 +1244,27 @@ export default function AdminPage() {
                     <div style={{ flex: 1, height: 1, background: 'rgba(34,58,54,.10)' }} />
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    {conv.mensajes.map((m, i) => (
-                      <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
+                    {conv.mensajes.map((m, i) => {
+                      const esRuido = (mensajesRuido[conv.id] ?? []).includes(i)
+                      return (
+                      <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start', alignItems: 'flex-start', gap: 6, opacity: esRuido ? 0.35 : 1, transition: 'opacity .15s' }}>
+                        {m.role !== 'user' && (
+                          <input type="checkbox" checked={esRuido} onChange={() => toggleMensajeRuido(conv.id, i)}
+                            title="Marcar mensaje como ruido"
+                            style={{ marginTop: 12, flexShrink: 0, cursor: 'pointer', accentColor: '#b43c28', width: 13, height: 13 }} />
+                        )}
                         <div style={{ maxWidth: '72%', padding: '10px 14px', borderRadius: m.role === 'user' ? '14px 14px 3px 14px' : '14px 14px 14px 3px', background: m.role === 'user' ? 'rgba(78,170,152,.14)' : 'rgba(255,255,255,.92)', border: '1px solid ' + (m.role === 'user' ? 'rgba(78,170,152,.25)' : 'rgba(34,58,54,.10)'), boxShadow: '0 1px 3px rgba(0,0,0,.04)' }}>
                           <p style={{ fontSize: '0.68rem', fontWeight: 600, color: m.role === 'user' ? '#4eaa98' : '#8B6914', margin: '0 0 4px', letterSpacing: '0.07em', textTransform: 'uppercase' as const }}>{m.role === 'user' ? (conv.nombre_participante || conv.email_participante || 'Usuario') : 'El Duende'}</p>
                           <p style={{ fontSize: '0.85rem', color: '#2c3830', lineHeight: 1.7, margin: 0, fontStyle: m.role === 'assistant' ? 'italic' : 'normal', fontWeight: 300, whiteSpace: 'pre-wrap' as const }}>{m.content}</p>
                         </div>
+                        {m.role === 'user' && (
+                          <input type="checkbox" checked={esRuido} onChange={() => toggleMensajeRuido(conv.id, i)}
+                            title="Marcar mensaje como ruido"
+                            style={{ marginTop: 12, flexShrink: 0, cursor: 'pointer', accentColor: '#b43c28', width: 13, height: 13 }} />
+                        )}
                       </div>
-                    ))}
+                      )
+                    })}
                   </div>
                 </div>
               ))}
@@ -1547,14 +1580,27 @@ export default function AdminPage() {
                     <div style={{ flex: 1, height: 1, background: 'rgba(34,58,54,.10)' }} />
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    {conv.mensajes.map((m, i) => (
-                      <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
+                    {conv.mensajes.map((m, i) => {
+                      const esRuido = (mensajesRuido[conv.id] ?? []).includes(i)
+                      return (
+                      <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start', alignItems: 'flex-start', gap: 6, opacity: esRuido ? 0.35 : 1, transition: 'opacity .15s' }}>
+                        {m.role !== 'user' && (
+                          <input type="checkbox" checked={esRuido} onChange={() => toggleMensajeRuido(conv.id, i)}
+                            title="Marcar mensaje como ruido"
+                            style={{ marginTop: 12, flexShrink: 0, cursor: 'pointer', accentColor: '#b43c28', width: 13, height: 13 }} />
+                        )}
                         <div style={{ maxWidth: '72%', padding: '10px 14px', borderRadius: m.role === 'user' ? '14px 14px 3px 14px' : '14px 14px 14px 3px', background: m.role === 'user' ? 'rgba(78,170,152,.14)' : 'rgba(255,255,255,.92)', border: '1px solid ' + (m.role === 'user' ? 'rgba(78,170,152,.25)' : 'rgba(34,58,54,.10)'), boxShadow: '0 1px 3px rgba(0,0,0,.04)' }}>
                           <p style={{ fontSize: '0.68rem', fontWeight: 600, color: m.role === 'user' ? '#4eaa98' : '#8B6914', margin: '0 0 4px', letterSpacing: '0.07em', textTransform: 'uppercase' as const }}>{m.role === 'user' ? (conv.nombre_participante || conv.email_participante || 'Usuario') : 'El Duende'}</p>
                           <p style={{ fontSize: '0.85rem', color: '#2c3830', lineHeight: 1.7, margin: 0, fontStyle: m.role === 'assistant' ? 'italic' : 'normal', fontWeight: 300, whiteSpace: 'pre-wrap' as const }}>{m.content}</p>
                         </div>
+                        {m.role === 'user' && (
+                          <input type="checkbox" checked={esRuido} onChange={() => toggleMensajeRuido(conv.id, i)}
+                            title="Marcar mensaje como ruido"
+                            style={{ marginTop: 12, flexShrink: 0, cursor: 'pointer', accentColor: '#b43c28', width: 13, height: 13 }} />
+                        )}
                       </div>
-                    ))}
+                      )
+                    })}
                   </div>
                 </div>
               ))}
