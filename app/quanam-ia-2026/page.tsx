@@ -10,14 +10,14 @@ const LENTES = [
     nombre: 'El ángulo propio',
     frase: '"Desde donde estoy veo algo que el resto no está viendo…"',
     desc: 'Lo que solo vos podés ver desde tu lugar. La percepción que no aparece en ninguna presentación — independientemente de tu área o seniority.',
-    ejemplo: '"Desde operaciones veo algo que el negocio no está viendo…"',
+    ejemplo: '"Desde mi Unidad de Negocios veo algo que otras áreas no están viendo…"',
   },
   {
     id: 'pregunta',
     nombre: 'La pregunta viva',
     frase: '"Mi gran pregunta es…"',
     desc: 'Algo que te intriga y todavía no tiene respuesta. Una incomodidad productiva que el grupo podría explorar juntos.',
-    ejemplo: '"¿Qué queda vivo en la organización de cada persona que estuvo?"',
+    ejemplo: '"De cada persona que estuvo en la organización, ¿qué quedó vivo?"',
   },
   {
     id: 'intuicion',
