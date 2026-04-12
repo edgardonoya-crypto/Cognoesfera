@@ -40,6 +40,8 @@ export default function AdminPage() {
   const [conversaciones, setConversaciones] = useState<DuendeConv[]>([])
   const [convTab, setConvTab] = useState<'usuario' | 'lente' | 'usuariolente'>('usuario')
   const [convFiltroEstado, setConvFiltroEstado] = useState<'activa' | 'archivada' | 'ruido' | null>(null)
+  const [convSeleccionModo, setConvSeleccionModo] = useState(false)
+  const [convSeleccionados, setConvSeleccionados] = useState<Set<string>>(new Set())
   const [convExpandedUsers, setConvExpandedUsers] = useState<Set<string>>(new Set())
   const [convExpandedLentes, setConvExpandedLentes] = useState<Set<string>>(new Set())
   const [convSelectedUser, setConvSelectedUser] = useState<string | null>(null)
@@ -184,6 +186,21 @@ export default function AdminPage() {
     if (res.ok) setConversaciones(prev => prev.map(c => c.id === id ? { ...c, estado } : c))
   }
 
+  async function actualizarEstadoConvBulk(ids: string[], estado: DuendeConvEstado) {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) return
+    await Promise.all(ids.map(id =>
+      fetch('/api/admin/duende-chats', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
+        body: JSON.stringify({ id, estado }),
+      })
+    ))
+    setConversaciones(prev => prev.map(c => ids.includes(c.id) ? { ...c, estado } : c))
+    setConvSeleccionados(new Set())
+    setConvSeleccionModo(false)
+  }
+
   async function actualizarEstado(id: string, estado: ArchivoCuraduria['estado']) {
     const { data: { session } } = await supabase.auth.getSession()
     if (!session) return
@@ -309,7 +326,7 @@ export default function AdminPage() {
     }
   }
 
-  async function ejecutarAnalisisCampo(consulta: string) {
+  async function ejecutarAnalisisCampo(consulta: string, reporteId?: string) {
     if (!consulta.trim() || campoAnalizando) return
     const { data: { session } } = await supabase.auth.getSession()
     if (!session) return
@@ -321,19 +338,35 @@ export default function AdminPage() {
     const hiloActual: DuendeMsgArquitecto[] = [...campoHilo, { role: 'user', content: consultaActual }]
     setCampoHilo(hiloActual)
 
+    const esRuido = reporteId === 'ruido'
+    const convPayload = esRuido
+      ? conversaciones.filter(c => (c.estado ?? 'activa') === 'activa').map(c => ({
+          id: c.id,
+          email: c.email_participante,
+          contexto_origen: c.contexto_origen,
+          created_at: c.created_at,
+          mensajes_n: c.mensajes?.length ?? 0,
+          primer_msg: c.mensajes?.find(m => m.role === 'user')?.content?.slice(0, 200) ?? null,
+        }))
+      : conversaciones.map(c => ({
+          id: c.id,
+          email: c.email_participante,
+          mensajes: c.mensajes,
+        }))
+
+    const consultaFinal = esRuido
+      ? `Analizá las siguientes conversaciones con estado "activa" y sugerí cuáles podrían marcarse como "ruido" o "archivadas". Criterios: sin email (email null), mensaje de prueba (mensajes muy cortos o genéricos sin contenido real), conversación vacía (0 mensajes), contexto nulo, o duplicados evidentes del mismo usuario en el mismo lente sin valor adicional.\n\nDevolvé una lista estructurada con este formato para cada conversación sospechosa:\n- ID: [id]\n  Email: [email o "sin email"]\n  Contexto: [contexto_origen]\n  Razón: [razón concreta]\n  Recomendación: ruido | archivar\n\nSi una conversación parece tener valor real, no la incluyas. Sé específico en la razón.`
+      : consultaActual
+
     try {
       const res = await fetch('/api/admin/duende-analisis', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
         body: JSON.stringify({
           contexto: 'campo_completo',
-          consulta: consultaActual,
+          consulta: consultaFinal,
           historial: campoHilo,
-          conversaciones: conversaciones.map(c => ({
-            id: c.id,
-            email: c.email_participante,
-            mensajes: c.mensajes,
-          })),
+          conversaciones: convPayload,
         }),
       })
       const data = await res.json() as { respuesta?: string; error?: string }
@@ -474,6 +507,7 @@ export default function AdminPage() {
     { id: 'estado',     label: '¿En qué estado está el campo colectivo?' },
     { id: 'senales',    label: '¿Qué señales débiles están apareciendo?' },
     { id: 'silencio',   label: '¿Qué no se está nombrando en ningún lente?' },
+    { id: 'ruido',      label: 'Sugerir conversaciones ruido' },
   ]
 
   const cajas: { id: string; nombre: string; conteo: number; desc: string; color: string }[] = [
@@ -616,10 +650,15 @@ export default function AdminPage() {
                     const expanded = convExpandedMsgs.has(c.id)
                     const toggle = () => setConvExpandedMsgs(prev => { const s = new Set(prev); s.has(c.id) ? s.delete(c.id) : s.add(c.id); return s })
                     const estadoActual: DuendeConvEstado = (c.estado as DuendeConvEstado) ?? 'activa'
+                    const seleccionado = convSeleccionados.has(c.id)
+                    const toggleSeleccion = (e: React.MouseEvent) => { e.stopPropagation(); setConvSeleccionados(prev => { const s = new Set(prev); seleccionado ? s.delete(c.id) : s.add(c.id); return s }) }
                     return (
-                      <div key={c.id} style={{ borderRadius: 8, background: 'rgba(255,255,255,.8)', border: '1px solid rgba(34,58,54,.08)', overflow: 'hidden' }}>
+                      <div key={c.id} style={{ borderRadius: 8, background: seleccionado ? 'rgba(34,58,54,.06)' : 'rgba(255,255,255,.8)', border: `1px solid ${seleccionado ? 'rgba(34,58,54,.3)' : 'rgba(34,58,54,.08)'}`, overflow: 'hidden' }}>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', gap: 8 }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0, flex: 1 }}>
+                            {convSeleccionModo && (
+                              <input type="checkbox" checked={seleccionado} onChange={() => {}} onClick={toggleSeleccion} style={{ width: 15, height: 15, cursor: 'pointer', flexShrink: 0, accentColor: '#18201e' }} />
+                            )}
                             {showEmail && <span style={{ fontSize: '0.75rem', color: '#4eaa98', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' as const }}>{c.email_participante ?? '—'}</span>}
                             <span style={{ fontSize: '0.72rem', color: '#8a9e98', flexShrink: 0 }}>{fmt(c.created_at)}</span>
                             <span style={{ fontSize: '0.68rem', fontWeight: 600, color: ESTADO_CONV_COLORS[estadoActual], background: ESTADO_CONV_BG[estadoActual], borderRadius: 4, padding: '1px 6px', flexShrink: 0 }}>{estadoActual}</span>
@@ -671,13 +710,37 @@ export default function AdminPage() {
 
                   return (
                     <div>
-                      {/* Filtro de estado */}
-                      <div style={{ display: 'flex', gap: 6, marginBottom: 14, alignItems: 'center' }}>
+                      {/* Filtro de estado + botón Seleccionar */}
+                      <div style={{ display: 'flex', gap: 6, marginBottom: 14, alignItems: 'center', flexWrap: 'wrap' as const }}>
                         <span style={{ fontSize: '0.7rem', color: '#8a9e98', letterSpacing: '0.08em', textTransform: 'uppercase' as const, marginRight: 4 }}>Ver</span>
                         {filtroBtn(null, 'Activas', '46,125,86')}
                         {filtroBtn('archivada', 'Archivadas', '139,105,20')}
                         {filtroBtn('ruido', 'Ruido', '158,58,58')}
+                        <div style={{ flex: 1 }} />
+                        <button
+                          onClick={() => { setConvSeleccionModo(prev => !prev); setConvSeleccionados(new Set()) }}
+                          style={{ padding: '4px 12px', borderRadius: 6, border: '1px solid', cursor: 'pointer', fontSize: '0.72rem', fontFamily: 'inherit',
+                            background: convSeleccionModo ? 'rgba(34,58,54,.12)' : 'transparent',
+                            borderColor: convSeleccionModo ? 'rgba(34,58,54,.4)' : 'rgba(34,58,54,.2)',
+                            color: convSeleccionModo ? '#18201e' : '#66706d', fontWeight: convSeleccionModo ? 600 : 400 }}
+                        >{convSeleccionModo ? 'Cancelar' : 'Seleccionar'}</button>
                       </div>
+
+                      {/* Barra de acciones cuando hay seleccionados */}
+                      {convSeleccionModo && convSeleccionados.size > 0 && (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12, padding: '10px 14px', background: 'rgba(34,58,54,.06)', borderRadius: 8, border: '1px solid rgba(34,58,54,.12)' }}>
+                          <span style={{ fontSize: '0.78rem', color: '#18201e', fontWeight: 500 }}>{convSeleccionados.size} seleccionada{convSeleccionados.size !== 1 ? 's' : ''}</span>
+                          <div style={{ flex: 1 }} />
+                          <button
+                            onClick={() => actualizarEstadoConvBulk([...convSeleccionados], 'ruido')}
+                            style={{ padding: '5px 14px', borderRadius: 6, border: '1px solid rgba(158,58,58,.4)', cursor: 'pointer', fontSize: '0.75rem', fontFamily: 'inherit', background: 'rgba(158,58,58,.08)', color: '#9e3a3a', fontWeight: 500 }}
+                          >Marcar como ruido</button>
+                          <button
+                            onClick={() => actualizarEstadoConvBulk([...convSeleccionados], 'archivada')}
+                            style={{ padding: '5px 14px', borderRadius: 6, border: '1px solid rgba(139,105,20,.4)', cursor: 'pointer', fontSize: '0.75rem', fontFamily: 'inherit', background: 'rgba(139,105,20,.08)', color: '#8B6914', fontWeight: 500 }}
+                          >Archivar</button>
+                        </div>
+                      )}
 
                       {conversacionesFiltradas.length === 0 && (
                         <p style={{ ...styles.empty, marginBottom: 16 }}>No hay conversaciones con estado &quot;{estadoActivo}&quot;.</p>
@@ -1320,7 +1383,7 @@ export default function AdminPage() {
                 {REPORTES_CAMPO.map(r => (
                   <button
                     key={r.id}
-                    onClick={() => { setCampoReporteActivo(r.id); ejecutarAnalisisCampo(r.label) }}
+                    onClick={() => { setCampoReporteActivo(r.id); ejecutarAnalisisCampo(r.label, r.id) }}
                     style={{ textAlign: 'left' as const, background: 'rgba(139,105,20,.06)', border: '1px solid rgba(139,105,20,.18)', borderRadius: 10, padding: '12px 16px', fontSize: '0.875rem', color: '#2c3830', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 400, lineHeight: 1.5, transition: 'background 0.15s' }}
                     onMouseEnter={e => (e.currentTarget.style.background = 'rgba(139,105,20,.12)')}
                     onMouseLeave={e => (e.currentTarget.style.background = 'rgba(139,105,20,.06)')}
