@@ -2,7 +2,7 @@
 *Pendientes técnicos, operativos e infraestructura del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes SOMA*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 11/04/2026: 18*
+*Pendientes activos al 11/04/2026: 17*
 
 ---
 
@@ -198,16 +198,6 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
-**S-AP-08**
-**Título:** Fix registro de estados vitales en convocatoria
-**Descripción:** El POST a /api/estados desde /quanam-ia-2026/page.tsx no está registrando filas en la tabla estados_vitales de Supabase. La route responde pero el estado queda en 0 en /admin. Diagnóstico parcial: el user_id llega correctamente después del fix de sesión confirmada. Causa raíz pendiente de identificar. Ver logs de Vercel para próxima sesión.
-**Prioridad:** P2
-**Estado:** Activo
-**Fecha:** 11/04/2026
-**Dependencias:** Ninguna
-
----
-
 **S-AP-09**
 **Título:** Archivar status_11042026.md — reemplazado por status_11042026b.md
 **Descripción:** El archivo status_11042026.md refleja el estado al inicio de la sesión 11/04/2026b. El archivo correcto de cierre es status_11042026b.md. Verificar al inicio de la próxima sesión y eliminar o mover el archivo a del directorio status/.
@@ -224,6 +214,16 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 **Prioridad:** P4
 **Estado:** Activo
 **Fecha:** 07/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**S-AP-10**
+**Título:** Rediseño convocatoria — vista para usuarios con sesión
+**Descripción:** Diseño aprobado en sesión 11/04/2026c. Para usuarios con sesión: topbar fija (email + Salir en blanco), pantalla de entrada personalizada por estado vital (video + zonas A/B/C), vista simplificada con lentes protagonistas (mismo estilo original) + popup ? con descripción de cada lente + acordeón "Más contexto". El intento de implementación fue revertido por problemas de estilo. Retomar con mockups como referencia visual antes de tocar el código.
+**Prioridad:** P3
+**Estado:** Activo
+**Fecha:** 11/04/2026
 **Dependencias:** Ninguna
 
 ---
@@ -303,6 +303,9 @@ Tablas `iniciativas` + `intereses_iniciativas` en Supabase. API /api/admin/inici
 
 **S-HIS-23 — Persistencia de sesión 7 días** · Completado 11/04/2026
 supabase.auth.getSession() al montar la página detecta sesión activa en cookies. Si hay sesión válida, salta directamente al contenido sin mostrar formulario de login/OTP. handleVerifyOtp usa cliente compartido. Refresh token válido 7 días por defecto.
+
+**S-HIS-24 — Fix S-AP-08: registro de estados vitales** · Completado 11/04/2026
+POST a /api/estados auto-inicializa la fila en estados_vitales si no existe — antes devolvía 404 porque requería GET previo. Fix en route.ts: bloque que retornaba 404 reemplazado por inicialización automática igual a la del GET. Verificado en /admin: usuario aparece con estado "La escucha" y fecha de entrada correcta.
 
 ---
 

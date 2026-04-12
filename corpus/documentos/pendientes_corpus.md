@@ -188,16 +188,6 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
-**C-PR-07**
-**Título:** Incorporar al Protocolo 01-EN paso 4 la regla de siempre solicitar 8 archivos
-**Descripción:** Decisión tomada en SESION-20260411: el paso 4 del Protocolo 01-EN ya no infiere archivos según el objetivo — siempre solicita los 8 archivos de cierre sin excepción. Verificar que el cambio quedó commiteado en corpus/SESION.md.
-**Prioridad:** P1
-**Estado:** En progreso
-**Fecha:** 11/04/2026
-**Dependencias:** Ninguna
-
----
-
 **C-PR-08**
 **Título:** Protocolo COMMIT ALEPH — mensaje del Arquitecto tiene precedencia
 **Descripción:** En SESION-20260411 se detectó que cuando el Arquitecto especifica un mensaje exacto de commit, Claude Code a veces genera el suyo propio. El protocolo COMMIT ALEPH debe especificar que el mensaje propuesto por el Arquitecto tiene precedencia absoluta sobre el generado por el Duende.
@@ -336,6 +326,9 @@ El concepto 33 fue incorporado al Corpus Madre en la Sección VII.
 
 **C-HIS-05 — Ejecutar reestructura arquitectural** · Completado 06/04/2026
 Las tres propuestas aprobadas en sesión 05/04 ejecutadas: separación senales_activas/incorporadas, pendientes_soma/corpus, nuevo template status, actualización de protocolos e instructivo.
+
+**C-HIS-06 — C-PR-07: Protocolo 01-EN paso 4 actualizado** · Completado 11/04/2026
+El paso 4 del Protocolo 01-EN ahora siempre solicita los 8 archivos de cierre sin inferir según el objetivo. Commiteado en corpus/SESION.md en SESION-20260411.
 
 ---
 

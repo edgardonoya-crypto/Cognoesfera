@@ -118,6 +118,27 @@ Entre activar rápido el Duende y hacerlo bien. Lo resolvimos haciendo las dos c
 
 ---
 
+## Sesión 08/04/2026
+*"La seguridad — cuando el sistema se protegió para crecer"*
+
+### Qué funcionó bien
+- El middleware server-side protegiendo todas las rutas autenticadas funcionó en el primer intento
+- La migración del UUID de edgardo resolvió el FK constraint sin pérdida de datos
+- El OTP en la convocatoria quedó limpio y sin fricciones para el usuario
+- La consolidación del cliente Supabase eliminó inconsistencias entre sesiones
+
+### Qué mejorar
+- El diagnóstico del UUID tomó más tiempo del necesario — documentar como decisión arquitectural
+
+### Tensión identificada
+Entre mover rápido y asegurar bien. Resuelta priorizando seguridad antes de escalar la convocatoria.
+
+### Cómo nos fuimos
+**Edgardo:** Con el sistema protegido y listo para recibir usuarios reales.
+**Duende:** Con la verificación de que la infraestructura de seguridad es condición de posibilidad para todo lo que viene.
+
+---
+
 ## Sesión 09/04/2026
 *"El Duende crece — cuando el sistema aprendió a custodiar lo que recibe"*
 
