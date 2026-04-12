@@ -915,7 +915,7 @@ export default function QuanamIa2026() {
           padding: '0 24px', height: 44,
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         }}>
-          <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>
+          <span style={{ fontSize: 12, color: '#fff', fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>
             {email}
           </span>
           <button
@@ -923,7 +923,7 @@ export default function QuanamIa2026() {
               await supabase.auth.signOut()
               window.location.reload()
             }}
-            style={{ background: 'none', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 6, padding: '4px 12px', fontSize: 12, color: '#C9A84C', fontFamily: 'Karla, sans-serif', cursor: 'pointer', fontWeight: 400 }}
+            style={{ background: 'none', border: '1px solid rgba(255,255,255,0.4)', borderRadius: 6, padding: '4px 12px', fontSize: 12, color: '#fff', fontFamily: 'Karla, sans-serif', cursor: 'pointer', fontWeight: 400 }}
           >
             Salir
           </button>
@@ -1211,75 +1211,76 @@ export default function QuanamIa2026() {
 
         {/* SECCIONES */}
         {userId ? (
-          <div style={{ padding: '24px 0 80px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', fontFamily: 'Karla, sans-serif', fontWeight: 300, marginBottom: 8 }}>
-              ¿Qué ves vos desde donde estás?
-            </p>
-            {LENTES.map(lente => {
-              const state = lenteStates[lente.id]
-              const isOpen = state.open
-              const prevConv = prevConvs[lente.nombre]
-              const hasDuende = prevConv?.msgs && prevConv.msgs.length > 0
-              const primerMsgDuende = hasDuende ? prevConv!.msgs.find(m => m.role === 'assistant')?.content : null
-              const respuestaUsuario = lenteStates[lente.id].respuesta
-              return (
-                <div key={lente.id} style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${isOpen ? 'rgba(201,168,76,0.30)' : 'rgba(255,255,255,0.08)'}`, borderRadius: 12, overflow: 'visible', transition: 'border-color 0.2s' }}>
-                  <div onClick={() => toggleLente(lente.id)} style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', gap: 10 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0, position: 'relative' }}>
-                      <span style={{ fontSize: 14, color: isOpen ? '#E8D0A0' : 'rgba(255,255,255,0.60)', fontFamily: 'Playfair Display, serif', fontWeight: isOpen ? 500 : 400, transition: 'color 0.2s' }}>{lente.nombre}</span>
-                      <button onClick={e => { e.stopPropagation(); setHelpPopup(helpPopup === lente.id ? null : lente.id) }} style={{ flexShrink: 0, width: 17, height: 17, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.20)', background: 'none', color: 'rgba(255,255,255,0.30)', fontSize: 10, fontFamily: 'Karla, sans-serif', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}>?</button>
-                      {helpPopup === lente.id && (
-                        <div onClick={e => e.stopPropagation()} style={{ position: 'absolute', marginTop: 4, left: 0, top: '100%', background: '#2a2018', border: '1px solid rgba(201,168,76,0.30)', borderRadius: 10, padding: '12px 14px', width: 240, zIndex: 50 }}>
-                          <div style={{ fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: 'rgba(201,168,76,0.60)', fontFamily: 'Karla, sans-serif', marginBottom: 6 }}>¿Qué es este lente?</div>
-                          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.6, margin: 0, fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>{lente.desc}</p>
-                          {lente.ejemplo && <p style={{ fontSize: 12, color: 'rgba(201,168,76,0.50)', lineHeight: 1.5, margin: '8px 0 0', fontFamily: 'Karla, sans-serif', fontStyle: 'italic', fontWeight: 300 }}>{lente.ejemplo}</p>}
-                        </div>
-                      )}
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-                      {hasDuende && !isOpen && <span style={{ fontSize: 11, color: '#C9A84C', fontFamily: 'Karla, sans-serif', background: 'rgba(201,168,76,0.10)', borderRadius: 4, padding: '2px 7px' }}>Activo</span>}
-                      <span style={{ color: isOpen ? 'rgba(201,168,76,0.6)' : 'rgba(255,255,255,0.20)', fontSize: 18, lineHeight: 1 }}>{isOpen ? '−' : '+'}</span>
-                    </div>
+          <div style={{ paddingBottom: 80 }}>
+            <div className="secciones" style={{ marginTop: 24 }}>
+              <div className="seccion open">
+                <div className="seccion-body" style={{ maxHeight: 'none' }}>
+                  <div className="lentes-intro">
+                    <p className="lentes-sub">¿Qué ves vos desde donde estás?</p>
                   </div>
-                  {isOpen && (
-                    <div style={{ padding: '0 16px 16px' }}>
-                      <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', fontFamily: 'Karla, sans-serif', fontStyle: 'italic', lineHeight: 1.6, margin: '0 0 14px', fontWeight: 300 }}>{lente.frase}</p>
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-                        <div style={{ background: 'rgba(201,168,76,0.05)', border: '1px solid rgba(201,168,76,0.15)', borderRadius: 10, padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-                          <div style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: 'rgba(201,168,76,0.55)', fontFamily: 'Karla, sans-serif' }}>El Duende</div>
-                          {primerMsgDuende ? (
-                            <>
-                              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', fontStyle: 'italic', lineHeight: 1.6, margin: 0, fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>"{primerMsgDuende.slice(0, 140)}{primerMsgDuende.length > 140 ? '…' : ''}"</p>
-                              <DuendeChat lente={lente} nombre={nombre} email={email} prevConv={prevConv} iniciativasActivas={iniciativasActivas} />
-                            </>
-                          ) : (
-                            <DuendeChat lente={lente} mensajeInicial={respuestaUsuario} nombre={nombre} email={email} autoAbrir={false} iniciativasActivas={iniciativasActivas} />
+                  <div className="lentes-lista">
+                    {LENTES.map((lente, idx) => {
+                      const state = lenteStates[lente.id]
+                      const isOpen = state.open
+                      const prevConv = prevConvs[lente.nombre]
+
+                      return (
+                        <div key={lente.id} className={`lente${isOpen ? ' open' : ''}`}>
+                          <div className="lente-header" onClick={() => toggleLente(lente.id)} style={{ cursor: 'pointer' }}>
+                            <div className="lente-num">{idx + 1}</div>
+                            <div className="lente-header-left">
+                              <div style={{ display: 'flex', alignItems: 'center', gap: 6, position: 'relative' }}>
+                                <span className="lente-nombre">{lente.nombre}</span>
+                                <button
+                                  onClick={e => { e.stopPropagation(); setHelpPopup(helpPopup === lente.id ? null : lente.id) }}
+                                  style={{ flexShrink: 0, width: 17, height: 17, borderRadius: '50%', border: '1px solid rgba(139,105,20,0.3)', background: 'none', color: '#8B6914', fontSize: 10, fontFamily: 'Karla, sans-serif', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}
+                                >?</button>
+                                {helpPopup === lente.id && (
+                                  <div
+                                    onClick={e => e.stopPropagation()}
+                                    style={{ position: 'absolute', top: '100%', left: 0, marginTop: 6, background: '#fff', border: '1px solid rgba(139,105,20,0.22)', borderRadius: 10, padding: '12px 14px', width: 240, zIndex: 50, boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
+                                  >
+                                    <div style={{ fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: '#8B6914', fontFamily: 'Karla, sans-serif', fontWeight: 500, marginBottom: 6 }}>¿Qué es este lente?</div>
+                                    <p style={{ fontSize: 13, color: '#6A5E50', lineHeight: 1.65, margin: 0, fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>{lente.desc}</p>
+                                    {lente.ejemplo && <p style={{ fontSize: 12, color: '#C4941A', fontStyle: 'italic', lineHeight: 1.5, margin: '8px 0 0', fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>{lente.ejemplo}</p>}
+                                  </div>
+                                )}
+                              </div>
+                              <span className="lente-frase">{lente.frase}</span>
+                            </div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+                              {prevConv?.msgs && prevConv.msgs.length > 0 && !isOpen && (
+                                <span style={{ fontSize: 11, color: '#8B6914', background: 'rgba(139,105,20,0.08)', borderRadius: 4, padding: '2px 7px', fontFamily: 'Karla, sans-serif' }}>Activo</span>
+                              )}
+                            </div>
+                          </div>
+                          {isOpen && (
+                            <div className="lente-contenido">
+                              <p className="lente-desc">{lente.desc}</p>
+                              {lente.ejemplo && <p className="lente-ejemplo">{lente.ejemplo}</p>}
+                              <DuendeChat
+                                lente={lente}
+                                nombre={nombre}
+                                email={email}
+                                prevConv={prevConv}
+                                iniciativasActivas={iniciativasActivas}
+                              />
+                            </div>
                           )}
                         </div>
-                        <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10, padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-                          <div style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.30)', fontFamily: 'Karla, sans-serif' }}>Tu perspectiva</div>
-                          {state.status === 'sent' ? (
-                            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', fontStyle: 'italic', fontFamily: 'Karla, sans-serif', fontWeight: 300, lineHeight: 1.6, margin: 0 }}>Enviado. Podés seguir explorando con el Duende.</p>
-                          ) : (
-                            <>
-                              <textarea value={state.respuesta} onChange={e => setRespuesta(lente.id, e.target.value)} placeholder={lente.frase.replace(/"/g, '')} rows={4} style={{ resize: 'none' as const, border: '1px solid rgba(255,255,255,0.10)', borderRadius: 8, padding: '10px 12px', fontSize: 13, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: 'rgba(255,255,255,0.80)', background: 'rgba(255,255,255,0.05)', outline: 'none', lineHeight: 1.6, width: '100%', boxSizing: 'border-box' as const }} />
-                              {state.errorMsg && <p style={{ fontSize: 12, color: '#ff8080', fontFamily: 'Karla, sans-serif', margin: 0 }}>{state.errorMsg}</p>}
-                              <button onClick={() => enviar(lente)} disabled={!state.respuesta.trim() || state.status === 'sending'} style={{ background: state.respuesta.trim() ? '#8B6914' : 'rgba(139,105,20,0.25)', color: '#F5EDD8', border: 'none', borderRadius: 8, padding: '9px 16px', fontSize: 12, fontFamily: 'Karla, sans-serif', fontWeight: 500, cursor: state.respuesta.trim() ? 'pointer' : 'default', transition: 'background 0.2s', letterSpacing: '0.05em', alignSelf: 'flex-start' }}>
-                                {state.status === 'sending' ? 'Enviando…' : 'Compartir perspectiva'}
-                              </button>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  )}
+                      )
+                    })}
+                  </div>
                 </div>
-              )
-            })}
-            <div style={{ marginTop: 8 }}>
-              <button onClick={() => setContextModal('masContexto')} style={{ width: '100%', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, padding: '12px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', fontFamily: 'Karla, sans-serif' }}>
-                <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.28)', fontWeight: 300 }}>Más contexto</span>
-                <span style={{ color: 'rgba(255,255,255,0.15)', fontSize: 14 }}>+</span>
+              </div>
+            </div>
+            <div style={{ marginTop: 10 }}>
+              <button
+                onClick={() => setContextModal('masContexto')}
+                style={{ width: '100%', background: 'rgba(255,255,255,0.6)', border: '1px solid rgba(139,105,20,0.12)', borderRadius: 8, padding: '12px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', fontFamily: 'Karla, sans-serif' }}
+              >
+                <span style={{ fontSize: 13, color: '#8A7E70', fontWeight: 300 }}>Más contexto</span>
+                <span style={{ color: '#8A7E70', fontSize: 14 }}>+</span>
               </button>
             </div>
           </div>
