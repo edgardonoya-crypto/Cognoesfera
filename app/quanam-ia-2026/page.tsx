@@ -44,6 +44,28 @@ const LENTES = [
 
 type Iniciativa = { id: string; nombre: string; descripcion: string | null }
 
+type ConvocatoriaContenido = {
+  zona_titulo_sup: string
+  zona_titulo_principal: string
+  zona_titulo_sub: string
+  zona_argumental: string
+  zona_pregunta: string
+  zona_convoca: string
+  puerta_texto: string
+  puerta_boton: string
+}
+
+const FALLBACK_CONTENIDO: ConvocatoriaContenido = {
+  zona_titulo_sup: 'Convocatoria · Por este camino 2026',
+  zona_titulo_principal: 'IHA',
+  zona_titulo_sub: 'Inteligencia Humana Aumentada',
+  zona_argumental: 'La IA está reconfigurando lo que hacemos más rápido de lo que podemos nombrarlo. Las organizaciones que van a salir bien paradas son las que empiezan a pensar juntas hoy.',
+  zona_pregunta: '¿Qué señales te entusiasman… o te inquietan?',
+  zona_convoca: 'Tu mirada se activa cuando se encuentra con otras.',
+  puerta_texto: 'Seguís acá. Tu mirada ya está activa.',
+  puerta_boton: 'Continuar explorando →',
+}
+
 type LenteState = {
   open: boolean
   respuesta: string
@@ -586,32 +608,52 @@ export default function QuanamIa2026() {
   const [otpLoading, setOtpLoading] = useState(false)
   const [otpExpired, setOtpExpired] = useState(false)
   const [sessionChecked, setSessionChecked] = useState(false)
+  const [contenido, setContenido] = useState<ConvocatoriaContenido>(FALLBACK_CONTENIDO)
+  const lentesRef = useRef<HTMLDivElement>(null)
 
   // Sesión persistente: al montar, verificar si ya hay sesión activa en cookies
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session?.user?.email) {
-        // Sesión válida — saltar directamente al contenido
-        setEmail(session.user.email)
-        setUserId(session.user.id)
-        setBienvenida(false)
-        // Registrar llegada ahora que tenemos el user confirmado
-        fetch('/api/estados', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ user_id: session.user.id, contexto: 'convocatoria_quanam', senales: { llegó: true, abrió_convocatoria: true } }),
-        }).catch(() => {})
-      } else {
-        // Sin sesión activa — pre-rellenar email del formulario si había cookie
+    const init = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession()
+        if (session?.user?.email) {
+          // Sesión válida — mostrar puerta personalizada en bienvenida
+          setEmail(session.user.email)
+          setUserId(session.user.id)
+          // Registrar llegada ahora que tenemos el user confirmado
+          fetch('/api/estados', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: session.user.id, contexto: 'convocatoria_quanam', senales: { llegó: true, abrió_convocatoria: true } }),
+          }).catch(() => {})
+          // Fetch estado vital → contenido situado
+          const { data: ev } = await supabase
+            .from('estados_vitales')
+            .select('estado_situado:estados_situados(estado_madre:estados_madre(nombre))')
+            .eq('entidad_tipo', 'individuo')
+            .eq('entidad_id', session.user.id)
+            .eq('contexto', 'convocatoria_quanam')
+            .maybeSingle()
+          const nombre = (ev as Record<string, unknown> & { estado_situado?: { estado_madre?: { nombre?: string } } })?.estado_situado?.estado_madre?.nombre ?? 'La escucha'
+          const slug = nombre.toLowerCase().replace(/\s+/g, '_')
+          const { data: c } = await supabase.from('convocatoria_contenido').select('*').eq('contexto', 'quanam_ia_2026').eq('estado', slug).maybeSingle()
+          if (c) setContenido(c as ConvocatoriaContenido)
+        } else {
+          // Sin sesión activa — pre-rellenar email del formulario si había cookie
+          const savedEmail = getCookie('quanam_email')
+          if (savedEmail) setEmail(savedEmail)
+          // Fetch contenido con estado por defecto
+          const { data: c } = await supabase.from('convocatoria_contenido').select('*').eq('contexto', 'quanam_ia_2026').eq('estado', 'la_escucha').maybeSingle()
+          if (c) setContenido(c as ConvocatoriaContenido)
+        }
+      } catch {
         const savedEmail = getCookie('quanam_email')
         if (savedEmail) setEmail(savedEmail)
+      } finally {
+        setSessionChecked(true)
       }
-    }).catch(() => {
-      const savedEmail = getCookie('quanam_email')
-      if (savedEmail) setEmail(savedEmail)
-    }).finally(() => {
-      setSessionChecked(true)
-    })
+    }
+    init()
   }, [])
 
   useEffect(() => {
@@ -857,78 +899,105 @@ export default function QuanamIa2026() {
           />
           <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.55)' }} />
           <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24, padding: '0 24px', maxWidth: 480, width: '100%', textAlign: 'center' }}>
+            {contenido.zona_titulo_sup && (
+              <p style={{ fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase' as const, color: 'rgba(196,148,26,0.7)', fontFamily: 'Karla, sans-serif', fontWeight: 500, margin: 0 }}>
+                {contenido.zona_titulo_sup}
+              </p>
+            )}
             <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(48px,8vw,80px)', fontWeight: 400, lineHeight: 1.1, letterSpacing: '-0.02em', color: '#C4941A', margin: 0 }}>
-              IHA
+              {contenido.zona_titulo_principal}
             </h1>
-            <p style={{ fontSize: 'clamp(18px,3vw,28px)', color: '#C4941A', fontFamily: 'Karla, sans-serif', fontWeight: 300, letterSpacing: '0.06em', margin: 0 }}>Inteligencia Humana Aumentada</p>
-            <p style={{ fontSize: 'clamp(17px,2.6vw,22px)', color: '#E8C96A', fontFamily: 'Karla, sans-serif', fontWeight: 300, fontStyle: 'italic', letterSpacing: '0.02em', lineHeight: 1.4, textAlign: 'center', margin: 0 }}>¿Qué señales te entusiasman… o te inquietan?</p>
-            <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.78)', fontWeight: 300, fontFamily: 'Karla, sans-serif', lineHeight: 1.72, textAlign: 'center', margin: 0 }}>La IA está reconfigurando lo que hacemos más rápido de lo que podemos nombrarlo. Las organizaciones que van a salir bien paradas son las que empiezan a pensar juntas hoy.</p>
-            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', fontStyle: 'italic', textAlign: 'center', margin: '4px 0 0' }}>Tu mirada se activa cuando se encuentra con otras. Ingresá tu email para acceder.</p>
-            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8 }}>
-              {otpStep === 'email' ? (
-                <>
-                  <input
-                    ref={emailRef}
-                    type="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    onKeyDown={e => { if (e.key === 'Enter') handleSendOtp() }}
-                    placeholder="Tu email…"
-                    style={{ width: '100%', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(196,148,26,0.5)', borderRadius: 10, padding: '14px 18px', fontSize: 16, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#fff', outline: 'none', textAlign: 'center' }}
-                  />
-                  <button
-                    onClick={handleSendOtp}
-                    disabled={!email.trim() || otpLoading}
-                    style={{ marginTop: 4, background: email.trim() ? '#8B6914' : 'rgba(139,105,20,0.35)', color: '#F5EDD8', border: 'none', borderRadius: 10, padding: '14px 32px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.08em', cursor: email.trim() ? 'pointer' : 'default', transition: 'background 0.2s' }}
-                  >
-                    {otpLoading ? 'Enviando…' : 'Enviar código'}
-                  </button>
-                </>
-              ) : (
-                <>
-                  <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)', fontFamily: 'Karla, sans-serif', fontWeight: 300, lineHeight: 1.6 }}>
-                    Ingresá el código que enviamos a <strong style={{ color: '#C4941A' }}>{email}</strong>
-                  </p>
-                  <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.50)', fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>
-                    Si no llegó, revisá tu carpeta de spam.
-                  </p>
-                  <input
-                    type="text"
-                    value={otpToken}
-                    onChange={e => setOtpToken(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                    onKeyDown={e => { if (e.key === 'Enter') handleVerifyOtp() }}
-                    placeholder="Código de 6 dígitos…"
-                    inputMode="numeric"
-                    autoComplete="one-time-code"
-                    autoFocus
-                    style={{ width: '100%', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(196,148,26,0.5)', borderRadius: 10, padding: '14px 18px', fontSize: 16, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#fff', outline: 'none', textAlign: 'center', letterSpacing: '0.2em' }}
-                  />
-                  <button
-                    onClick={handleVerifyOtp}
-                    disabled={otpToken.trim().length < 6 || otpLoading}
-                    style={{ marginTop: 4, background: otpToken.trim().length >= 6 ? '#8B6914' : 'rgba(139,105,20,0.35)', color: '#F5EDD8', border: 'none', borderRadius: 10, padding: '14px 32px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.08em', cursor: otpToken.trim().length >= 6 ? 'pointer' : 'default', transition: 'background 0.2s' }}
-                  >
-                    {otpLoading ? 'Verificando…' : 'Ingresar'}
-                  </button>
-                  {otpExpired && (
+            <p style={{ fontSize: 'clamp(18px,3vw,28px)', color: '#C4941A', fontFamily: 'Karla, sans-serif', fontWeight: 300, letterSpacing: '0.06em', margin: 0 }}>{contenido.zona_titulo_sub}</p>
+            <p style={{ fontSize: 'clamp(17px,2.6vw,22px)', color: '#E8C96A', fontFamily: 'Karla, sans-serif', fontWeight: 300, fontStyle: 'italic', letterSpacing: '0.02em', lineHeight: 1.4, textAlign: 'center', margin: 0 }}>{contenido.zona_pregunta}</p>
+            <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.78)', fontWeight: 300, fontFamily: 'Karla, sans-serif', lineHeight: 1.72, textAlign: 'center', margin: 0 }}>{contenido.zona_argumental}</p>
+            <p style={{ fontSize: 15, color: '#a89870', fontStyle: 'italic', textAlign: 'center', margin: '4px 0 0', fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>{contenido.zona_convoca}</p>
+
+            {/* PUERTA */}
+            {!sessionChecked ? (
+              <div style={{ height: 56 }} />
+            ) : userId ? (
+              <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8 }}>
+                <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.85)', fontStyle: 'italic', fontFamily: 'Karla, sans-serif', fontWeight: 300, lineHeight: 1.6 }}>
+                  {contenido.puerta_texto}
+                </p>
+                <button
+                  onClick={() => {
+                    setBienvenida(false)
+                    setTimeout(() => lentesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200)
+                  }}
+                  style={{ marginTop: 4, background: '#8B6914', color: '#F5EDD8', border: 'none', borderRadius: 10, padding: '14px 32px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.08em', cursor: 'pointer', transition: 'background 0.2s' }}
+                >
+                  {contenido.puerta_boton}
+                </button>
+              </div>
+            ) : (
+              <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8 }}>
+                {otpStep === 'email' ? (
+                  <>
+                    <input
+                      ref={emailRef}
+                      type="email"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      onKeyDown={e => { if (e.key === 'Enter') handleSendOtp() }}
+                      placeholder="Tu email…"
+                      style={{ width: '100%', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(196,148,26,0.5)', borderRadius: 10, padding: '14px 18px', fontSize: 16, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#fff', outline: 'none', textAlign: 'center' }}
+                    />
                     <button
-                      onClick={() => { setOtpExpired(false); setOtpError(''); setOtpToken(''); handleSendOtp() }}
-                      disabled={otpLoading}
-                      style={{ background: 'none', border: '1px solid rgba(196,148,26,0.6)', color: '#C4941A', fontSize: 13, fontFamily: 'Karla, sans-serif', fontWeight: 500, cursor: 'pointer', borderRadius: 8, padding: '8px 20px' }}
+                      onClick={handleSendOtp}
+                      disabled={!email.trim() || otpLoading}
+                      style={{ marginTop: 4, background: email.trim() ? '#8B6914' : 'rgba(139,105,20,0.35)', color: '#F5EDD8', border: 'none', borderRadius: 10, padding: '14px 32px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.08em', cursor: email.trim() ? 'pointer' : 'default', transition: 'background 0.2s' }}
                     >
-                      Reenviar código
+                      {otpLoading ? 'Enviando…' : 'Enviar código'}
                     </button>
-                  )}
-                  <button
-                    onClick={() => { setOtpStep('email'); setOtpToken(''); setOtpError(''); setOtpExpired(false) }}
-                    style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.45)', fontSize: 12, fontFamily: 'Karla, sans-serif', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}
-                  >
-                    Volver a ingresar el email
-                  </button>
-                </>
-              )}
-              {otpError && <p style={{ fontSize: 13, color: '#ffb3b3', fontFamily: 'Karla, sans-serif' }}>{otpError}</p>}
-            </div>
+                  </>
+                ) : (
+                  <>
+                    <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)', fontFamily: 'Karla, sans-serif', fontWeight: 300, lineHeight: 1.6 }}>
+                      Ingresá el código que enviamos a <strong style={{ color: '#C4941A' }}>{email}</strong>
+                    </p>
+                    <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.50)', fontFamily: 'Karla, sans-serif', fontWeight: 300 }}>
+                      Si no llegó, revisá tu carpeta de spam.
+                    </p>
+                    <input
+                      type="text"
+                      value={otpToken}
+                      onChange={e => setOtpToken(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                      onKeyDown={e => { if (e.key === 'Enter') handleVerifyOtp() }}
+                      placeholder="Código de 6 dígitos…"
+                      inputMode="numeric"
+                      autoComplete="one-time-code"
+                      autoFocus
+                      style={{ width: '100%', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(196,148,26,0.5)', borderRadius: 10, padding: '14px 18px', fontSize: 16, fontFamily: 'Karla, sans-serif', fontWeight: 300, color: '#fff', outline: 'none', textAlign: 'center', letterSpacing: '0.2em' }}
+                    />
+                    <button
+                      onClick={handleVerifyOtp}
+                      disabled={otpToken.trim().length < 6 || otpLoading}
+                      style={{ marginTop: 4, background: otpToken.trim().length >= 6 ? '#8B6914' : 'rgba(139,105,20,0.35)', color: '#F5EDD8', border: 'none', borderRadius: 10, padding: '14px 32px', fontSize: 15, fontFamily: 'Karla, sans-serif', fontWeight: 500, letterSpacing: '0.08em', cursor: otpToken.trim().length >= 6 ? 'pointer' : 'default', transition: 'background 0.2s' }}
+                    >
+                      {otpLoading ? 'Verificando…' : 'Ingresar'}
+                    </button>
+                    {otpExpired && (
+                      <button
+                        onClick={() => { setOtpExpired(false); setOtpError(''); setOtpToken(''); handleSendOtp() }}
+                        disabled={otpLoading}
+                        style={{ background: 'none', border: '1px solid rgba(196,148,26,0.6)', color: '#C4941A', fontSize: 13, fontFamily: 'Karla, sans-serif', fontWeight: 500, cursor: 'pointer', borderRadius: 8, padding: '8px 20px' }}
+                      >
+                        Reenviar código
+                      </button>
+                    )}
+                    <button
+                      onClick={() => { setOtpStep('email'); setOtpToken(''); setOtpError(''); setOtpExpired(false) }}
+                      style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.45)', fontSize: 12, fontFamily: 'Karla, sans-serif', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}
+                    >
+                      Volver a ingresar el email
+                    </button>
+                  </>
+                )}
+                {otpError && <p style={{ fontSize: 13, color: '#ffb3b3', fontFamily: 'Karla, sans-serif' }}>{otpError}</p>}
+              </div>
+            )}
+
             <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.32)', fontWeight: 300, fontFamily: 'Karla, sans-serif', lineHeight: 1.6, textAlign: 'center', margin: '4px 0 0' }}>Entre 5 y 8 semanas · Un grupo de entre 15 y 20 personas · Encuentros que no gestionan el presente — exploran el futuro.</p>
           </div>
         </div>
@@ -1107,7 +1176,7 @@ export default function QuanamIa2026() {
         </div>
 
         {/* SECCIONES */}
-        <div className="secciones">
+        <div ref={lentesRef} className="secciones">
 
           {/* SECCIÓN 1 — movida al panel flotante lateral */}
           {false && <div className="fragmentos">
