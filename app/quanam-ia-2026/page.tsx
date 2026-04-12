@@ -1164,7 +1164,7 @@ export default function QuanamIa2026() {
         }
       `}</style>
 
-      <div className="wrap" style={{ display: bienvenida ? 'none' : undefined, background: userId ? '#1a1410' : undefined, minHeight: userId ? '100vh' : undefined, maxWidth: userId ? 680 : undefined }}>
+      <div className="wrap" style={{ display: bienvenida ? 'none' : undefined }}>
 
         {!userId && <>
         {/* HEADER */}
@@ -1277,7 +1277,7 @@ export default function QuanamIa2026() {
             <div style={{ marginTop: 10 }}>
               <button
                 onClick={() => setContextModal('masContexto')}
-                style={{ width: '100%', background: 'rgba(255,255,255,0.6)', border: '1px solid rgba(139,105,20,0.12)', borderRadius: 8, padding: '12px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', fontFamily: 'Karla, sans-serif' }}
+                style={{ width: '100%', background: 'rgba(245,240,232,0.8)', border: '1px solid rgba(139,105,20,0.15)', borderRadius: 8, padding: '12px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', fontFamily: 'Karla, sans-serif' }}
               >
                 <span style={{ fontSize: 13, color: '#8A7E70', fontWeight: 300 }}>Más contexto</span>
                 <span style={{ color: '#8A7E70', fontSize: 14 }}>+</span>
