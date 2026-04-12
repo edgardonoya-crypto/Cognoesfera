@@ -33,6 +33,7 @@ export async function POST(req: Request) {
   const body = await req.json() as {
     contexto: string
     consulta: string
+    reporteId?: string
     conversaciones: Array<{
       id: string
       email: string | null
@@ -44,10 +45,55 @@ export async function POST(req: Request) {
     }>
     historial?: Array<{ role: 'user' | 'assistant'; content: string }>
   }
-  const { contexto, consulta, conversaciones, historial = [] } = body
+  const { contexto, consulta, reporteId, conversaciones, historial = [] } = body
   if (!contexto || !consulta || !conversaciones)
     return NextResponse.json({ error: 'Faltan campos' }, { status: 400 })
 
+  const esRuido = reporteId === 'ruido'
+
+  // ── RAMA RUIDO: devuelve JSON estructurado ──────────────────────────────────
+  if (esRuido) {
+    const lineas = conversaciones.map(c =>
+      `{"id":"${c.id}","email":${JSON.stringify(c.email)},"contexto":${JSON.stringify(c.contexto_origen)},"mensajes_n":${c.mensajes_n ?? 0},"primer_msg":${JSON.stringify(c.primer_msg ?? '')}}`
+    ).join('\n')
+
+    const systemRuido = `Sos un asistente de curación de datos. Analizás conversaciones y devolvés ÚNICAMENTE un array JSON válido — sin texto antes ni después, sin markdown, sin bloques de código.
+
+Criterios para incluir una conversación como candidata a ruido o archivo:
+- email null → ruido
+- mensajes_n = 0 → ruido
+- primer_msg vacío o genérico sin contenido real del usuario → ruido
+- contexto null → ruido
+- conversación claramente de prueba (mensajes muy cortos, sin aportes) → ruido
+- conversación de valor real pero sin continuación → archivar
+
+Si una conversación tiene contenido real del usuario (reflexión, pregunta, aporte), NO la incluyas.
+
+Formato exacto de cada ítem:
+{"id":"...","email":"...o null","contexto":"...o null","razon":"...","recomendacion":"ruido"}
+recomendacion debe ser exactamente "ruido" o "archivar".`
+
+    try {
+      const response = await anthropic.messages.create({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 2000,
+        system: systemRuido,
+        messages: [{ role: 'user', content: `Analizá estas ${conversaciones.length} conversaciones y devolvé el array JSON:\n\n${lineas}` }],
+      })
+      const raw = response.content.filter(b => b.type === 'text').map(b => (b as { type: 'text'; text: string }).text).join('').trim()
+
+      // Extraer array JSON aunque venga envuelto en código
+      const match = raw.match(/\[[\s\S]*\]/)
+      const sugerencias = match ? JSON.parse(match[0]) : []
+
+      return NextResponse.json({ sugerencias })
+    } catch (err) {
+      console.error('duende-analisis ruido error:', err)
+      return NextResponse.json({ error: 'Error al analizar ruido' }, { status: 500 })
+    }
+  }
+
+  // ── RAMA NORMAL: análisis de campo con texto libre ──────────────────────────
   const fuentes = conversaciones.map(c => ({ id: c.id, email: c.email ?? null, contexto }))
 
   const materialConversaciones = conversaciones.map((c, i) => {
@@ -57,7 +103,6 @@ export async function POST(req: Request) {
         .join('\n')
       return `Conversación ${i + 1} — ${c.email ?? 'anónimo'} | ${c.contexto_origen ?? '(sin contexto)'}:\n${turnos}`
     }
-    // Formato compacto para análisis de ruido
     return `Conversación ${i + 1} — ID: ${c.id} | Email: ${c.email ?? 'null'} | Contexto: ${c.contexto_origen ?? 'null'} | Mensajes: ${c.mensajes_n ?? 0} | Primer msg: ${c.primer_msg ?? '(vacío)'}`
   }).join('\n\n---\n\n')
 

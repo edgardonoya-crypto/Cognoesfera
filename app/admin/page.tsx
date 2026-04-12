@@ -81,6 +81,9 @@ export default function AdminPage() {
   const [campoInput, setCampoInput] = useState('')
   const [campoReporteActivo, setCampoReporteActivo] = useState<string | null>(null)
   const campoHiloEndRef = useRef<HTMLDivElement>(null)
+  type SugerenciaRuido = { id: string; email: string | null; contexto: string | null; razon: string; recomendacion: 'ruido' | 'archivar' }
+  const [campoSugerencias, setCampoSugerencias] = useState<SugerenciaRuido[] | null>(null)
+  const [campoSugerenciasSelec, setCampoSugerenciasSelec] = useState<Set<string>>(new Set())
   const [usuarioModal, setUsuarioModal] = useState<{
     email: string
     convs: DuendeConv[]
@@ -331,32 +334,41 @@ export default function AdminPage() {
     const { data: { session } } = await supabase.auth.getSession()
     if (!session) return
 
+    const esRuido = reporteId === 'ruido'
     setCampoAnalizando(true)
-    const consultaActual = consulta.trim()
     setCampoInput('')
 
+    if (esRuido) {
+      const convPayload = conversaciones.filter(c => (c.estado ?? 'activa') === 'activa').map(c => ({
+        id: c.id,
+        email: c.email_participante,
+        contexto_origen: c.contexto_origen,
+        created_at: c.created_at,
+        mensajes_n: c.mensajes?.length ?? 0,
+        primer_msg: c.mensajes?.find(m => m.role === 'user')?.content?.slice(0, 200) ?? null,
+      }))
+      try {
+        const res = await fetch('/api/admin/duende-analisis', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
+          body: JSON.stringify({ contexto: 'campo_completo', consulta, reporteId, conversaciones: convPayload }),
+        })
+        const data = await res.json() as { sugerencias?: SugerenciaRuido[]; error?: string }
+        if (!res.ok || !data.sugerencias) throw new Error(data.error ?? 'Sin respuesta')
+        setCampoSugerencias(data.sugerencias)
+        setCampoSugerenciasSelec(new Set(data.sugerencias.map(s => s.id)))
+      } catch (err) {
+        console.error(err)
+      } finally {
+        setCampoAnalizando(false)
+      }
+      return
+    }
+
+    // Rama normal
+    const consultaActual = consulta.trim()
     const hiloActual: DuendeMsgArquitecto[] = [...campoHilo, { role: 'user', content: consultaActual }]
     setCampoHilo(hiloActual)
-
-    const esRuido = reporteId === 'ruido'
-    const convPayload = esRuido
-      ? conversaciones.filter(c => (c.estado ?? 'activa') === 'activa').map(c => ({
-          id: c.id,
-          email: c.email_participante,
-          contexto_origen: c.contexto_origen,
-          created_at: c.created_at,
-          mensajes_n: c.mensajes?.length ?? 0,
-          primer_msg: c.mensajes?.find(m => m.role === 'user')?.content?.slice(0, 200) ?? null,
-        }))
-      : conversaciones.map(c => ({
-          id: c.id,
-          email: c.email_participante,
-          mensajes: c.mensajes,
-        }))
-
-    const consultaFinal = esRuido
-      ? `Analizá las siguientes conversaciones con estado "activa" y sugerí cuáles podrían marcarse como "ruido" o "archivadas". Criterios: sin email (email null), mensaje de prueba (mensajes muy cortos o genéricos sin contenido real), conversación vacía (0 mensajes), contexto nulo, o duplicados evidentes del mismo usuario en el mismo lente sin valor adicional.\n\nDevolvé una lista estructurada con este formato para cada conversación sospechosa:\n- ID: [id]\n  Email: [email o "sin email"]\n  Contexto: [contexto_origen]\n  Razón: [razón concreta]\n  Recomendación: ruido | archivar\n\nSi una conversación parece tener valor real, no la incluyas. Sé específico en la razón.`
-      : consultaActual
 
     try {
       const res = await fetch('/api/admin/duende-analisis', {
@@ -364,9 +376,9 @@ export default function AdminPage() {
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
         body: JSON.stringify({
           contexto: 'campo_completo',
-          consulta: consultaFinal,
+          consulta: consultaActual,
           historial: campoHilo,
-          conversaciones: convPayload,
+          conversaciones: conversaciones.map(c => ({ id: c.id, email: c.email_participante, mensajes: c.mensajes })),
         }),
       })
       const data = await res.json() as { respuesta?: string; error?: string }
@@ -1362,9 +1374,9 @@ export default function AdminPage() {
                 <span style={{ fontSize: '0.72rem', color: '#8a9e98' }}>{conversaciones.length} conversaciones · todos los lentes y resonancias</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-                {campoHilo.length > 0 && (
+                {(campoHilo.length > 0 || campoSugerencias !== null) && (
                   <button
-                    onClick={() => { setCampoHilo([]); setCampoReporteActivo(null); setCampoInput(''); setCampoAnalizando(false) }}
+                    onClick={() => { setCampoHilo([]); setCampoReporteActivo(null); setCampoInput(''); setCampoAnalizando(false); setCampoSugerencias(null); setCampoSugerenciasSelec(new Set()) }}
                     style={{ background: 'rgba(139,105,20,.08)', border: '1px solid rgba(139,105,20,.22)', borderRadius: 8, padding: '6px 12px', fontSize: '0.78rem', color: '#8B6914', cursor: 'pointer', fontFamily: 'inherit', fontWeight: 500 }}
                   >
                     ← Menú
@@ -1374,8 +1386,59 @@ export default function AdminPage() {
               </div>
             </div>
 
+            {/* Spinner mientras analiza ruido */}
+            {campoAnalizando && campoSugerencias === null && campoHilo.length === 0 && (
+              <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 40 }}>
+                <p style={{ fontSize: '0.875rem', color: '#a08030', fontStyle: 'italic' }}>El Duende está analizando las conversaciones…</p>
+              </div>
+            )}
+
+            {/* Vista de sugerencias ruido */}
+            {campoSugerencias !== null && !campoAnalizando && (
+              <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <p style={{ fontSize: '0.75rem', color: '#8a9e98', margin: '0 0 4px', fontStyle: 'italic' }}>
+                  {campoSugerencias.length === 0
+                    ? 'El Duende no encontró conversaciones candidatas a ruido.'
+                    : `${campoSugerencias.length} conversación${campoSugerencias.length !== 1 ? 'es' : ''} sugerida${campoSugerencias.length !== 1 ? 's' : ''}. Destildá las que no acordás y aplicá.`}
+                </p>
+                {campoSugerencias.map(s => {
+                  const sel = campoSugerenciasSelec.has(s.id)
+                  return (
+                    <div key={s.id} onClick={() => setCampoSugerenciasSelec(prev => { const n = new Set(prev); sel ? n.delete(s.id) : n.add(s.id); return n })}
+                      style={{ display: 'flex', alignItems: 'flex-start', gap: 10, padding: '10px 14px', borderRadius: 8, background: sel ? 'rgba(255,255,255,.9)' : 'rgba(255,255,255,.4)', border: `1px solid ${sel ? 'rgba(34,58,54,.2)' : 'rgba(34,58,54,.08)'}`, cursor: 'pointer', opacity: sel ? 1 : 0.5, transition: 'all 0.15s' }}>
+                      <input type="checkbox" checked={sel} onChange={() => {}} onClick={e => e.stopPropagation()} style={{ marginTop: 2, width: 14, height: 14, cursor: 'pointer', accentColor: '#18201e', flexShrink: 0 }} />
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, flexWrap: 'wrap' as const }}>
+                          <span style={{ fontSize: '0.78rem', fontWeight: 500, color: '#18201e' }}>{s.email ?? '(sin email)'}</span>
+                          {s.contexto && <span style={{ fontSize: '0.68rem', color: '#8B6914', background: 'rgba(139,105,20,.1)', borderRadius: 4, padding: '1px 6px' }}>{s.contexto}</span>}
+                          <span style={{ fontSize: '0.68rem', fontWeight: 600, color: s.recomendacion === 'ruido' ? '#9e3a3a' : '#8B6914', background: s.recomendacion === 'ruido' ? 'rgba(158,58,58,.1)' : 'rgba(139,105,20,.1)', borderRadius: 4, padding: '1px 6px', marginLeft: 'auto' }}>{s.recomendacion}</span>
+                        </div>
+                        <p style={{ fontSize: '0.78rem', color: '#4a5c58', margin: 0, lineHeight: 1.5, fontStyle: 'italic' }}>{s.razon}</p>
+                      </div>
+                    </div>
+                  )
+                })}
+                {campoSugerencias.length > 0 && (
+                  <button
+                    disabled={campoSugerenciasSelec.size === 0}
+                    onClick={async () => {
+                      const ruido = [...campoSugerenciasSelec].filter(id => campoSugerencias.find(s => s.id === id)?.recomendacion === 'ruido')
+                      const archivar = [...campoSugerenciasSelec].filter(id => campoSugerencias.find(s => s.id === id)?.recomendacion === 'archivar')
+                      if (ruido.length > 0) await actualizarEstadoConvBulk(ruido, 'ruido')
+                      if (archivar.length > 0) await actualizarEstadoConvBulk(archivar, 'archivada')
+                      setCampoSugerencias(null)
+                      setCampoSugerenciasSelec(new Set())
+                    }}
+                    style={{ marginTop: 8, background: '#18201e', color: '#f7f3e8', border: 'none', borderRadius: 10, padding: '11px 20px', fontSize: '0.875rem', fontFamily: 'inherit', fontWeight: 500, cursor: 'pointer', opacity: campoSugerenciasSelec.size === 0 ? 0.4 : 1, transition: 'opacity 0.15s' }}
+                  >
+                    Aplicar selección ({campoSugerenciasSelec.size})
+                  </button>
+                )}
+              </div>
+            )}
+
             {/* Si no hay hilo activo → mostrar menú de reportes */}
-            {campoHilo.length === 0 && !campoAnalizando && (
+            {campoHilo.length === 0 && !campoAnalizando && campoSugerencias === null && (
               <div style={{ padding: '24px 28px', display: 'flex', flexDirection: 'column', gap: 10 }}>
                 <p style={{ fontSize: '0.75rem', color: '#8a9e98', margin: '0 0 8px', fontStyle: 'italic' }}>
                   Elegí un reporte para que el Duende analice el campo completo, o escribí tu propia consulta abajo.
@@ -1395,7 +1458,7 @@ export default function AdminPage() {
             )}
 
             {/* Si hay hilo → mostrar conversación */}
-            {(campoHilo.length > 0 || campoAnalizando) && (
+            {campoSugerencias === null && (campoHilo.length > 0 || (campoAnalizando && campoHilo.length > 0)) && (
               <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {campoHilo.map((m, i) => (
                   <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
@@ -1421,8 +1484,8 @@ export default function AdminPage() {
               </div>
             )}
 
-            {/* Input — visible cuando hay hilo o está cargando */}
-            {(campoHilo.length > 0 || campoAnalizando) && (
+            {/* Input — visible cuando hay hilo normal activo */}
+            {campoSugerencias === null && (campoHilo.length > 0 || campoAnalizando) && (
               <div style={{ flexShrink: 0, padding: '12px 24px 18px', borderTop: '1px solid rgba(34,58,54,.08)', display: 'flex', gap: 8, alignItems: 'flex-end' }}>
                 <textarea
                   value={campoInput}
