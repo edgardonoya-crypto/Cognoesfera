@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v25 · 11 Abril 2026*
+*Versión actual: v26 · 11 Abril 2026*
 
 ---
 
@@ -253,6 +253,16 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - Persistencia de sesión — refresh token 7 días, no requiere re-autenticación en cada recarga
 - Inconsistencia detectada: lista de archivos de cierre debe vivir en el Protocolo 02-EN — pendiente de incorporar
 
+**Hitos de SESION-20260411c — "El Duende lee el campo — cuando el sistema aprendió a analizar lo que recibe":**
+- Fix S-AP-08 completado: POST /api/estados auto-inicializa estados_vitales si no existe — verificado en /admin
+- Tabla duende_analisis creada en Supabase con trazabilidad de fuentes
+- API route /api/admin/duende-analisis — análisis multi-turno con contexto de conversaciones
+- Modal "Ver todo" por lente con Duende-Arquitecto flotante — dos portales independientes
+- Modal "Ver todo" por usuario con mismo patrón Duende flotante
+- Caja "Análisis" en /admin con menú de 5 reportes predefinidos y conversación multi-turno
+- renderMarkdown con parseBold — bold y títulos visibles sin marcas
+- Revert quanam-ia-2026/page.tsx al estado pre-sesión — rediseño convocatoria guardado para próxima sesión (S-AP-10)
+
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
 - **Corpus Universal** — el campo total del conocimiento vivo del paradigma en todos sus niveles y expresiones
@@ -338,11 +348,11 @@ Los pendientes viven en dos archivos con schema completo:
 - **Casa Corpus:** `corpus/documentos/pendientes_corpus.md` — conceptos, señales, protocolos, documentos, narrativa
 
 **Prioridades próxima sesión:**
-- **P1 [SOMA]:** Fix S-AP-08 — bug registro estados vitales en Supabase
-- **P2 [CORPUS]:** Registrar mínimo de Casa Corpus antes del 17/04 (C-DO-05)
-- **P3 [SOMA]:** Construir decisiones_arquitecturales.md antes del 17/04 (S-IN-05)
-- **P4 [CORPUS]:** Incorporar lista exacta de archivos al Protocolo 02-EN (C-PR-06)
-- **P5 [SOMA]:** Verificar que COMMIT ALEPH pushea a main — agregar verificación al protocolo
+- **P1 [CORPUS]:** Registrar mínimo de Casa Corpus antes del 17/04 (C-DO-05)
+- **P2 [SOMA]:** Construir decisiones_arquitecturales.md antes del 17/04 (S-IN-05)
+- **P3 [CORPUS]:** Incorporar lista exacta de archivos al Protocolo 02-EN (C-PR-06)
+- **P4 [SOMA]:** Rediseño convocatoria — vista para usuarios con sesión (S-AP-10)
+- **P5 [SOMA]:** Verificar que COMMIT ALEPH pushea a main
 
 ---
 
@@ -530,6 +540,8 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - supabase/migrations/20260411_estados_situados_quanam.sql — 8 estados situados convocatoria_quanam · 11/04/2026
 - app/api/estados/route.ts — detección de estados + transición comportamiento/Duende · 11/04/2026
 - app/admin/page.tsx — rediseño grid cajas + modales + conversaciones 3 vistas · 11/04/2026
+- supabase/migrations/20260411_duende_analisis.sql — tabla duende_analisis con trazabilidad de fuentes · 11/04/2026
+- app/api/admin/duende-analisis/route.ts — análisis multi-turno del Duende-Arquitecto · 11/04/2026
 
 **Hitos de SESION-20260402/04:**
 - Protocolo 01-EN construido y probado exitosamente por primera vez
