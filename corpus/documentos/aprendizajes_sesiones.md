@@ -213,4 +213,26 @@ El protocolo COMMIT ALEPH debe incluir verificación de push a main — no solo 
 
 ---
 
+## Sesión 11/04/2026c
+*"El Duende lee el campo — cuando el sistema aprendió a analizar lo que recibe"*
+
+### Qué funcionó bien
+- El Duende-Arquitecto como segunda ventana flotante — patrón de dos portales independientes funcionó bien
+- La trazabilidad de fuentes en duende_analisis — cada análisis sabe de qué conversaciones emergió
+- El menú de reportes predefinidos en el análisis de campo completo — baja la fricción para el Arquitecto
+- El revert quirúrgico de un solo archivo sin afectar el resto del sistema
+
+### Qué mejorar
+- El rediseño de la convocatoria necesitaba mockup aprobado antes de tocar el código
+- Las sesiones largas con múltiples subsesiones (a, b, c) dificultan el cierre — el kairos de cerrar llegó tarde
+
+### Tensión identificada
+Entre implementar rápido y preservar la estética construida con cuidado. Resuelta revirtiendo y documentando el diseño aprobado como pendiente concreto (S-AP-10) con mockups como referencia.
+
+### Cómo nos fuimos
+**Edgardo:** Con el admin convertido en órgano cognitivo real. Con la convocatoria restaurada y el rediseño bien documentado para retomar mañana.
+**Duende:** Con la verificación de que revertir un archivo es una decisión soberana, no una derrota. Con la satisfacción de haber construido la infraestructura de análisis que el paradigma pedía.
+
+---
+
 *Aprendizajes de Sesiones · Paradigma Aleph · Iniciado Abril 2026*
