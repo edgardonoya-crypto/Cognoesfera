@@ -1052,7 +1052,7 @@ export default function QuanamIa2026() {
           <button
             onClick={async () => {
               await supabase.auth.signOut()
-              window.location.href = '/login'
+              window.location.href = '/quanam-ia-2026'
             }}
             onMouseEnter={e => { e.currentTarget.style.background = '#5C4A1E'; e.currentTarget.style.color = '#fff' }}
             onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#5C4A1E' }}
