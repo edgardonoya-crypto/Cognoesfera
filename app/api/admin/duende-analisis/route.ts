@@ -36,7 +36,11 @@ export async function POST(req: Request) {
     conversaciones: Array<{
       id: string
       email: string | null
-      mensajes: Array<{ role: string; content: string }>
+      mensajes?: Array<{ role: string; content: string }>
+      mensajes_n?: number
+      primer_msg?: string | null
+      contexto_origen?: string | null
+      created_at?: string
     }>
     historial?: Array<{ role: 'user' | 'assistant'; content: string }>
   }
@@ -47,10 +51,14 @@ export async function POST(req: Request) {
   const fuentes = conversaciones.map(c => ({ id: c.id, email: c.email ?? null, contexto }))
 
   const materialConversaciones = conversaciones.map((c, i) => {
-    const turnos = c.mensajes
-      .map(m => `  [${m.role === 'user' ? (c.email ?? 'Usuario') : 'Duende'}]: ${m.content}`)
-      .join('\n')
-    return `Conversación ${i + 1} — ${c.email ?? 'anónimo'}:\n${turnos}`
+    if (c.mensajes && c.mensajes.length > 0) {
+      const turnos = c.mensajes
+        .map(m => `  [${m.role === 'user' ? (c.email ?? 'Usuario') : 'Duende'}]: ${m.content}`)
+        .join('\n')
+      return `Conversación ${i + 1} — ${c.email ?? 'anónimo'} | ${c.contexto_origen ?? '(sin contexto)'}:\n${turnos}`
+    }
+    // Formato compacto para análisis de ruido
+    return `Conversación ${i + 1} — ID: ${c.id} | Email: ${c.email ?? 'null'} | Contexto: ${c.contexto_origen ?? 'null'} | Mensajes: ${c.mensajes_n ?? 0} | Primer msg: ${c.primer_msg ?? '(vacío)'}`
   }).join('\n\n---\n\n')
 
   const systemPrompt = `Sos el Duende-Arquitecto del Paradigma Aleph. Operás en modo de análisis de campo — leés el campo colectivo para el Arquitecto, no acompañás participantes individuales.
