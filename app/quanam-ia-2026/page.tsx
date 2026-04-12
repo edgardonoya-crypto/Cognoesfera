@@ -917,9 +917,6 @@ export default function QuanamIa2026() {
               <div style={{ height: 56 }} />
             ) : userId ? (
               <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 12, marginTop: 8 }}>
-                <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.85)', fontStyle: 'italic', fontFamily: 'Karla, sans-serif', fontWeight: 300, lineHeight: 1.6 }}>
-                  {contenido.puerta_texto}
-                </p>
                 <button
                   onClick={() => {
                     setBienvenida(false)
