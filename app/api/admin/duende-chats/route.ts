@@ -14,25 +14,24 @@ const supabasePublic = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 )
 
+async function autenticarArquitecto(request: Request) {
+  const authHeader = request.headers.get('Authorization')
+  if (!authHeader?.startsWith('Bearer ')) return null
+  const token = authHeader.slice(7)
+  const { data: { user }, error } = await supabasePublic.auth.getUser(token)
+  if (error || !user || user.email !== ARQUITECTO_EMAIL) return null
+  return user
+}
+
 export async function GET(request: Request) {
   try {
-    // Verify the caller is the Arquitecto
-    const authHeader = request.headers.get('Authorization')
-    if (!authHeader?.startsWith('Bearer ')) {
+    if (!await autenticarArquitecto(request)) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
     }
 
-    const token = authHeader.slice(7)
-    const { data: { user }, error: authError } = await supabasePublic.auth.getUser(token)
-
-    if (authError || !user || user.email !== ARQUITECTO_EMAIL) {
-      return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
-    }
-
-    // Fetch all conversations bypassing RLS
     const { data, error } = await supabaseAdmin
       .from('duende_chats')
-      .select('id, mensajes, created_at, nombre_participante, email_participante, contexto_origen')
+      .select('id, mensajes, created_at, nombre_participante, email_participante, contexto_origen, estado')
       .order('created_at', { ascending: false })
 
     if (error) {
@@ -43,6 +42,34 @@ export async function GET(request: Request) {
     return NextResponse.json({ data })
   } catch (err) {
     console.error('duende-chats admin route error:', err)
+    return NextResponse.json({ error: 'Error interno' }, { status: 500 })
+  }
+}
+
+export async function PATCH(request: Request) {
+  try {
+    if (!await autenticarArquitecto(request)) {
+      return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+    }
+
+    const { id, estado } = await request.json()
+    if (!id || !['activa', 'archivada', 'ruido'].includes(estado)) {
+      return NextResponse.json({ error: 'Parámetros inválidos' }, { status: 400 })
+    }
+
+    const { error } = await supabaseAdmin
+      .from('duende_chats')
+      .update({ estado })
+      .eq('id', id)
+
+    if (error) {
+      console.error('duende-chats PATCH error:', JSON.stringify(error))
+      return NextResponse.json({ error: 'Error al actualizar estado' }, { status: 500 })
+    }
+
+    return NextResponse.json({ ok: true })
+  } catch (err) {
+    console.error('duende-chats PATCH error:', err)
     return NextResponse.json({ error: 'Error interno' }, { status: 500 })
   }
 }

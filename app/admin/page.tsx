@@ -11,7 +11,8 @@ type Contacto  = { id: string; nombre: string; email: string; mensaje: string; o
 type DuendeMensaje = { role: 'user' | 'assistant'; content: string; timestamp?: string }
 type AccesoConvocatoria = { id: string; email: string; created_at: string }
 type LoginLog = { id: string; email: string; created_at: string }
-type DuendeConv = { id: string; nombre_participante: string | null; email_participante: string | null; contexto_origen: string | null; mensajes: DuendeMensaje[]; created_at: string }
+type DuendeConvEstado = 'activa' | 'archivada' | 'ruido'
+type DuendeConv = { id: string; nombre_participante: string | null; email_participante: string | null; contexto_origen: string | null; mensajes: DuendeMensaje[]; created_at: string; estado?: DuendeConvEstado }
 type ArchivoCuraduria = { id: string; created_at: string; email_participante: string | null; contexto_origen: string | null; nombre_archivo: string | null; tipo_archivo: string | null; contenido_base64: string | null; mensaje_asociado: string | null; estado: 'pendiente' | 'aprobado' | 'descartado' | 'señal'; notas_curador: string | null }
 type PreguntaArquitecto = { id: string; created_at: string; email_participante: string | null; contexto_origen: string | null; pregunta: string }
 type Iniciativa = { id: string; nombre: string; descripcion: string | null; responsable: string | null; estado: 'activa' | 'pausada' | 'completada'; fecha_inicio: string | null; visible_convocatoria: boolean; created_at: string }
@@ -38,6 +39,7 @@ export default function AdminPage() {
   const [contactos, setContactos] = useState<Contacto[]>([])
   const [conversaciones, setConversaciones] = useState<DuendeConv[]>([])
   const [convTab, setConvTab] = useState<'usuario' | 'lente' | 'usuariolente'>('usuario')
+  const [convFiltroEstado, setConvFiltroEstado] = useState<'activa' | 'archivada' | 'ruido' | null>(null)
   const [convExpandedUsers, setConvExpandedUsers] = useState<Set<string>>(new Set())
   const [convExpandedLentes, setConvExpandedLentes] = useState<Set<string>>(new Set())
   const [convSelectedUser, setConvSelectedUser] = useState<string | null>(null)
@@ -170,6 +172,17 @@ export default function AdminPage() {
     }
     load()
   }, [router])
+
+  async function actualizarEstadoConv(id: string, estado: DuendeConvEstado) {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) return
+    const res = await fetch('/api/admin/duende-chats', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
+      body: JSON.stringify({ id, estado }),
+    })
+    if (res.ok) setConversaciones(prev => prev.map(c => c.id === id ? { ...c, estado } : c))
+  }
 
   async function actualizarEstado(id: string, estado: ArchivoCuraduria['estado']) {
     const { data: { session } } = await supabase.auth.getSession()
@@ -559,10 +572,14 @@ export default function AdminPage() {
                 {modalAbierto === 'conversaciones' && (() => {
                   if (conversaciones.length === 0) return <p style={styles.empty}>Todavía no hay conversaciones.</p>
 
+                  // Filtro de estado: por defecto solo activas
+                  const estadoActivo = convFiltroEstado ?? 'activa'
+                  const conversacionesFiltradas = conversaciones.filter(c => (c.estado ?? 'activa') === estadoActivo)
+
                   // Derived data
                   const byUser = new Map<string, DuendeConv[]>()
                   const byLente = new Map<string, DuendeConv[]>()
-                  for (const c of conversaciones) {
+                  for (const c of conversacionesFiltradas) {
                     const u = c.email_participante ?? '(sin email)'
                     const l = c.contexto_origen ?? '(sin contexto)'
                     if (!byUser.has(u)) byUser.set(u, [])
@@ -592,17 +609,32 @@ export default function AdminPage() {
 
                   const btnMini: React.CSSProperties = { background: 'none', border: '1px solid', borderRadius: 5, padding: '2px 8px', fontSize: '0.7rem', cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap' as const, lineHeight: 1.5 }
 
+                  const ESTADO_CONV_COLORS: Record<DuendeConvEstado, string> = { activa: '#2e7d56', archivada: '#8B6914', ruido: '#9e3a3a' }
+                  const ESTADO_CONV_BG: Record<DuendeConvEstado, string> = { activa: 'rgba(46,125,86,.1)', archivada: 'rgba(139,105,20,.1)', ruido: 'rgba(158,58,58,.1)' }
+
                   const convCard = (c: DuendeConv, showEmail: boolean) => {
                     const expanded = convExpandedMsgs.has(c.id)
                     const toggle = () => setConvExpandedMsgs(prev => { const s = new Set(prev); s.has(c.id) ? s.delete(c.id) : s.add(c.id); return s })
+                    const estadoActual: DuendeConvEstado = (c.estado as DuendeConvEstado) ?? 'activa'
                     return (
                       <div key={c.id} style={{ borderRadius: 8, background: 'rgba(255,255,255,.8)', border: '1px solid rgba(34,58,54,.08)', overflow: 'hidden' }}>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', gap: 8 }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0, flex: 1 }}>
                             {showEmail && <span style={{ fontSize: '0.75rem', color: '#4eaa98', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' as const }}>{c.email_participante ?? '—'}</span>}
                             <span style={{ fontSize: '0.72rem', color: '#8a9e98', flexShrink: 0 }}>{fmt(c.created_at)}</span>
+                            <span style={{ fontSize: '0.68rem', fontWeight: 600, color: ESTADO_CONV_COLORS[estadoActual], background: ESTADO_CONV_BG[estadoActual], borderRadius: 4, padding: '1px 6px', flexShrink: 0 }}>{estadoActual}</span>
                           </div>
-                          <div style={{ display: 'flex', gap: 5, flexShrink: 0 }}>
+                          <div style={{ display: 'flex', gap: 5, flexShrink: 0, alignItems: 'center' }}>
+                            <select
+                              value={estadoActual}
+                              onChange={e => actualizarEstadoConv(c.id, e.target.value as DuendeConvEstado)}
+                              onClick={e => e.stopPropagation()}
+                              style={{ fontSize: '0.7rem', border: '1px solid rgba(34,58,54,.2)', borderRadius: 5, padding: '2px 4px', background: 'white', color: '#2c3830', cursor: 'pointer', fontFamily: 'inherit' }}
+                            >
+                              <option value="activa">Activa</option>
+                              <option value="archivada">Archivada</option>
+                              <option value="ruido">Ruido</option>
+                            </select>
                             <button onClick={toggle} style={{ ...btnMini, color: '#8B6914', borderColor: 'rgba(139,105,20,.3)' }}>{expanded ? 'Cerrar' : 'Ver conversación'}</button>
                             <a href={`/admin/conversacion/${c.id}`} target="_blank" rel="noopener noreferrer" style={{ ...btnMini, color: '#66706d', borderColor: 'rgba(34,58,54,.2)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}>↗</a>
                           </div>
@@ -626,8 +658,31 @@ export default function AdminPage() {
                     )
                   }
 
+                  const filtroBtn = (val: DuendeConvEstado | null, label: string, color: string) => (
+                    <button
+                      onClick={() => setConvFiltroEstado(val)}
+                      style={{ padding: '4px 12px', borderRadius: 6, border: '1px solid', cursor: 'pointer', fontSize: '0.72rem', fontFamily: 'inherit',
+                        background: estadoActivo === (val ?? 'activa') ? `rgba(${color},.15)` : 'transparent',
+                        borderColor: estadoActivo === (val ?? 'activa') ? `rgba(${color},.5)` : 'rgba(34,58,54,.15)',
+                        color: estadoActivo === (val ?? 'activa') ? '#18201e' : '#8a9e98',
+                        fontWeight: estadoActivo === (val ?? 'activa') ? 600 : 400 }}
+                    >{label} <span style={{ opacity: 0.6 }}>({conversaciones.filter(c => (c.estado ?? 'activa') === (val ?? 'activa')).length})</span></button>
+                  )
+
                   return (
                     <div>
+                      {/* Filtro de estado */}
+                      <div style={{ display: 'flex', gap: 6, marginBottom: 14, alignItems: 'center' }}>
+                        <span style={{ fontSize: '0.7rem', color: '#8a9e98', letterSpacing: '0.08em', textTransform: 'uppercase' as const, marginRight: 4 }}>Ver</span>
+                        {filtroBtn(null, 'Activas', '46,125,86')}
+                        {filtroBtn('archivada', 'Archivadas', '139,105,20')}
+                        {filtroBtn('ruido', 'Ruido', '158,58,58')}
+                      </div>
+
+                      {conversacionesFiltradas.length === 0 && (
+                        <p style={{ ...styles.empty, marginBottom: 16 }}>No hay conversaciones con estado &quot;{estadoActivo}&quot;.</p>
+                      )}
+
                       {/* Tabs */}
                       <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
                         {tabBtn('usuario', 'Por usuario')}
@@ -740,18 +795,18 @@ export default function AdminPage() {
 
                       {/* POR USUARIO Y LENTE */}
                       {convTab === 'usuariolente' && (() => {
-                        const todosUsuarios = [...new Set(conversaciones.map(c => c.email_participante ?? '(sin email)'))]
-                        const todasLentes = [...new Set(conversaciones.map(c => c.contexto_origen ?? '(sin contexto)'))]
+                        const todosUsuarios = [...new Set(conversacionesFiltradas.map(c => c.email_participante ?? '(sin email)'))]
+                        const todasLentes = [...new Set(conversacionesFiltradas.map(c => c.contexto_origen ?? '(sin contexto)'))]
 
                         const lentesDelUsuario = convSelectedUser
-                          ? [...new Set(conversaciones.filter(c => (c.email_participante ?? '(sin email)') === convSelectedUser).map(c => c.contexto_origen ?? '(sin contexto)'))]
+                          ? [...new Set(conversacionesFiltradas.filter(c => (c.email_participante ?? '(sin email)') === convSelectedUser).map(c => c.contexto_origen ?? '(sin contexto)'))]
                           : todasLentes
                         const usuariosDelaLente = convSelectedLente
-                          ? [...new Set(conversaciones.filter(c => (c.contexto_origen ?? '(sin contexto)') === convSelectedLente).map(c => c.email_participante ?? '(sin email)'))]
+                          ? [...new Set(conversacionesFiltradas.filter(c => (c.contexto_origen ?? '(sin contexto)') === convSelectedLente).map(c => c.email_participante ?? '(sin email)'))]
                           : todosUsuarios
 
                         const convInterseccion = (convSelectedUser && convSelectedLente)
-                          ? conversaciones.filter(c =>
+                          ? conversacionesFiltradas.filter(c =>
                               (c.email_participante ?? '(sin email)') === convSelectedUser &&
                               (c.contexto_origen ?? '(sin contexto)') === convSelectedLente
                             )
