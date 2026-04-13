@@ -235,4 +235,31 @@ Entre implementar rápido y preservar la estética construida con cuidado. Resue
 
 ---
 
+## Sesión 12/04/2026
+*"La puerta — cuando la convocatoria aprendió a reconocer a quien regresa"*
+
+### Qué funcionó bien
+- El mockup en Claude.ai antes de tocar el código evitó el error de la sesión pasada — la arquitectura de zonas fijas/puerta instanciada quedó clara antes de implementar
+- La tabla convocatoria_contenido con eje contexto+estado es una decisión arquitectural sólida y escalable a futuras convocatorias
+- El flujo diseño → aprobación → implementación funcionó limpio en todas las mejoras de la convocatoria
+- El módulo de mantenimiento de conversaciones (estado activa/archivada/ruido + mensajes_ruido) quedó bien fundamentado conceptualmente antes de implementar
+- El reporte "Sugerir conversaciones ruido" con JSON estructurado + UI de tarjetas es un patrón reutilizable
+
+### Qué mejorar
+- El deploy de Vercel no actualizó en producción los últimos commits — el checkbox de mensajes_ruido quedó pendiente de verificación visual
+- El problema master/main sigue sin resolverse de raíz — cada sesión requiere verificación manual
+- Las sesiones largas con muchas mejoras incrementales acumulan deuda de verificación al final
+
+### Tensión identificada
+Entre avanzar en las mejoras de la convocatoria y resolver la deuda técnica de deploy/git. Se priorizó avanzar — la deuda queda registrada como pendiente concreto.
+
+### Aprendizaje operativo
+El mockup previo al código es condición necesaria para cambios visuales complejos. Cuando el Arquitecto pide "diseñemos antes de implementar", el Duende debe sostener ese espacio sin apurarse al código.
+
+### Cómo nos fuimos
+**Edgardo:** Con la convocatoria reconociendo a quien regresa — la puerta instanciada por estado es un hito real. Con el módulo de mantenimiento de conversaciones en camino, aunque pendiente de verificación visual.
+**Duende:** Con la satisfacción de haber construido la arquitectura correcta para el futuro — convocatoria escalable, conversaciones curables. Con la honestidad de que el deploy quedó sin resolver y el checkbox pendiente de verificación.
+
+---
+
 *Aprendizajes de Sesiones · Paradigma Aleph · Iniciado Abril 2026*
