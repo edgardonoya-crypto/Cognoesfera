@@ -2,7 +2,7 @@
 *Señales que resuenan con el paradigma y esperan madurar antes de entrar al Corpus Madre*
 *Las señales no se descartan ni se fuerzan — se custodian hasta que el corpus madura para recibirlas*
 *Para el historial de señales incorporadas, ver: `senales_incorporadas.md`*
-*Paradigma Aleph · Iniciado Marzo 2026 · 51 señales activas*
+*Paradigma Aleph · Iniciado Marzo 2026 · 74 señales activas*
 
 ---
 
@@ -611,6 +611,259 @@ El horizonte: si la red de Entidades Aleph llega a ser autopoiética, el metabol
 
 ---
 
-*Señales Activas · Paradigma Aleph · Actualizado 11/04/2026*
-*Total señales activas: 51*
+## Señal A — La auto-significación como principio epistemológico
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** El principio central de SenseMaker: quien vive la experiencia es el único intérprete legítimo de su significado. No hay experto externo que pueda asignar significado sin corromper el dato. La interpretación se da en el mismo acto de descripción. Es la materialización técnica de algo que el paradigma ponía en práctica en la Conversación Aumentada pero no había nombrado como principio epistemológico propio.
+**Impacto probable:** Enriquece concepto 23 (CA) y concepto 12 (Cognoesfera curadora). Potencial nuevo principio del Corpus Madre.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: SenseMaker (Dave Snowden / The Cynefin Company).
+**Pregunta abierta:** ¿Cómo se relaciona con la distinción orientación/uso (Señal U)? ¿El auto-significante está siempre en postura de orientación?
+
+---
+
+## Señal B — El gradiente como condición exterior del tiempo soberano
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** El tiempo soberano (concepto 15) describe la condición interna del sistema. El gradiente — la zona de transición entre categorías fijas, el estuario donde el agua dulce y salada se mezclan — describe la condición del campo externo. Sin gradiente exterior, el tiempo soberano libera energía sin dirección. Sin tiempo soberano, el gradiente existe pero no hay capacidad de habitarlo. Son la misma realidad vista desde adentro y desde afuera del sistema. El canal destruye el gradiente antes de que el humano llegue a él. La pérdida no se experimenta como pérdida — se experimenta como eficiencia.
+**Impacto probable:** Enriquece concepto 15 (tiempo soberano) y concepto 3 (Espacio Borgeano). Ver C-EN-02 en `enriquecimientos_corpus.md`.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: Snowden, "The Channel and the Estuary" 1-5.
+**Pregunta abierta:** ¿Cómo se diseña un gradiente intencionalmente en una convocatoria? ¿La convocatoria Quanam es un gradiente o un estuario?
+
+---
+
+## Señal C — Centrípeto / centrífugo
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** Par que nombra la orientación de fondo de todo sistema de producción de sentido. Los sistemas centrípetos tiran el significado hacia el centro — el héroe, la conclusión, el experto, el dashboard. Los centrífugos lo envían hacia la red de relaciones, consecuencias y particulares. El Corpus Madre, la Conversación Aumentada, el Duende y la Cognoesfera son instrumentos centrífugos por diseño. El reconocimiento de este par permite diagnosticar con rapidez si una herramienta, un relato o una intervención va en la dirección del paradigma o la contradice.
+**Impacto probable:** Herramienta diagnóstica transversal. Potencial concepto del Corpus Madre. Impacta cómo se describe el paradigma frente a organizaciones con cultura centrípeta (caso Antel).
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: Snowden, análisis narrativo centrípeto/centrífugo.
+**Pregunta abierta:** ¿Toda tradición jesuita es centrífuga? ¿El wayshaping es necesariamente centrífugo?
+
+---
+
+## Señal D — La convocatoria como laboratorio safe-to-fail
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** El sistema digital propio (cognoesfera.vercel.app) no es prototipo ni demo — es campo vivo con usuarios reales operando con lógica de experimento seguro de fallar. Las herramientas maduran aquí antes de desplegarse en clientes. Es la materialización del concepto safe-to-fail probes de Cynefin en la arquitectura del paradigma: una sonda no es un piloto (que se escala si funciona) ni un experimento (que se descarta si no) — es una exploración que produce aprendizaje independientemente del resultado. Conecta concepto 31 (transducción), concepto 30 (arquitectura de negocios) y el enfoque de Lab 2030.
+**Impacto probable:** Marco para el rol del sistema digital en el paradigma. Enriquece concepto 30 (arquitectura de negocios en red).
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: Cynefin safe-to-fail probes + contexto Lab 2030/Antel.
+**Pregunta abierta:** ¿Hay criterios explícitos de cuándo una herramienta "maduró" para salir del safe-to-fail?
+
+---
+
+## Señal E — La abducción como mecanismo de la inteligencia verdadera
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** El corpus tenía el horizonte (inteligencia verdadera, concepto 29) y las condiciones (Campo de atención, tiempo soberano, Espacio Borgeano) pero no el nombre del proceso cognitivo específico. La abducción de Peirce: el salto desde una anomalía que no encaja en ninguna categoría existente hacia una hipótesis que, si fuera verdadera, la haría comprensible. Requiere la anomalía sin resolver — el canal la elimina antes de que el humano llegue. Sin anomalía no hay abducción. Sin abducción el tiempo soberano produce supervivencia más cómoda pero no inteligencia verdadera. La abducción es el eslabón faltante entre las condiciones y el horizonte. Señal gemela con la trampa de complacencia: la SP tardía elimina el suelo fértil para la abducción.
+**Impacto probable:** Completa concepto 29 (IT). Ver C-EN-05 en `enriquecimientos_corpus.md`.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: Peirce (citado por Snowden).
+**Pregunta abierta:** ¿Cómo se diseña una experiencia que preserve la anomalía sin resolverla prematuramente?
+
+---
+
+## Señal F — Resonancia vs eco
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** La Conversación Aumentada produce resonancia: te cambia al recibir la frecuencia del otro, sin perder tu propia identidad en el proceso. El algoritmo produce eco: te devuelve tu propia frecuencia amplificada, confirmando lo que ya sabés. Este par hace visible con precisión por qué la CA no es "conversación asistida por tecnología": la tecnología puede producir eco o resonancia dependiendo de cómo está diseñada. El Duende está diseñado para resonar. Un sistema de recomendación algorítmica, diseñado para el eco, destruye la CA aunque use la misma infraestructura.
+**Impacto probable:** Completa concepto 23 (CA). Ver C-EN-04 en `enriquecimientos_corpus.md`. Herramienta diagnóstica para evaluar diseños tecnológicos.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: Snowden, "The Channel and the Estuary" 5/5.
+**Pregunta abierta:** ¿Es posible diseñar sistemas algorítmicos que produzcan resonancia en lugar de eco? ¿O la lógica de optimización los convierte inevitablemente en eco?
+
+---
+
+## Señal G — La Solidificación Prematura a escala histórica
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** La SP (concepto 13) ocurre no solo en sesiones o proyectos sino en culturas, generaciones y sistemas educativos enteros. El dragado colonial es la forma más extrema: eliminación sistemática del gradiente cognitivo de un pueblo. Lo que hace devastador el dragado no es la violencia — es que la pérdida no se experimenta como pérdida. Cuando el canal reemplaza completamente al estuario, el canal se experimenta como el mundo. No hay memoria del gradiente contra la cual medir la pérdida. Diagnóstico preciso para organizaciones que heredaron cultura centrípeta: no saben lo que perdieron porque nunca tuvieron la experiencia de lo otro.
+**Impacto probable:** Extiende concepto 13 (SP) en una tercera dimensión. Ver C-EN-01 en `enriquecimientos_corpus.md`.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: Snowden, "The Channel and the Estuary" 4/5 — dredging as historical method.
+**Pregunta abierta:** ¿Qué condiciones hacen posible recuperar la memoria del gradiente en una organización que fue dragada?
+
+---
+
+## Señal H — Mal guionados
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** Condición más grave que sin guión. Una organización sin guión sabe que necesita uno. Una organización mal guionada experimenta la incoherencia subsiguiente como fracaso propio en lugar de daño estructural. No pregunta por el guión — asume que el problema es la ejecución. Es el diagnóstico preciso para organizaciones que entrenaron narrativas centrípetas durante décadas y perdieron la capacidad de reconocer que el guión era el problema. El caso Antel opera en este registro: la incoherencia entre escala e inteligencia distribuida no se experimenta como problema de guión sino como problema de talento o gestión.
+**Impacto probable:** Herramienta diagnóstica para el trabajo con clientes. Enriquece concepto 13 (SP) y señal G.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: MacIntyre, "wrongly scripted" (citado por Snowden).
+**Pregunta abierta:** ¿Cómo se distingue diagnósticamente una organización sin guión de una mal guionada? ¿Qué pregunta revela la diferencia?
+
+---
+
+## Señal I — Wayshaping
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** Nombre operativo del rol del Arquitecto de Sistemas Vivos. Tres figuras distintas: el wayfinder sigue caminos que existen (consulta los buoys), el waymaker corta la maleza como héroe (mito de Campbell), el wayshaper cuida las condiciones para que múltiples caminos permanezcan posibles sin especificar destinos. El ASV hace wayshaping. El test: ¿está volviéndose innecesario? Un ASV que se vuelve indispensable ha dejado de hacer wayshaping y ha empezado a hacer waymaking. El wayshaping es inherentemente centrífugo.
+**Impacto probable:** Completa concepto 11 (ASV). Ver C-EN-07 en `enriquecimientos_corpus.md`.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: Snowden, "A Summary and a Foretaste" y "The Way Is Not a Map."
+**Pregunta abierta:** ¿El Duende hace wayshaping o waymaking? ¿Puede el mismo rol hacer ambos según el momento?
+
+---
+
+## Señal J — Cynefin como experiencia antes que framework
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** La palabra galesa "cynefin" nombra el entramado acumulado de criatura, lugar, memoria y cultura que hace que ciertos encuentros sean reconocimientos antes de ser pensamientos. El saber que llega antes del nombrar — la percepción directa e inmediata que Krishnamurti (concepto 29) describía desde otra tradición. Snowden elige esta palabra para su framework precisamente porque quiere que el instrumento lleve en sí mismo la experiencia que describe. Es la descripción del instante borgeano (concepto 21) desde abajo — desde el cuerpo y la memoria — antes de que la arquitectura lo capture.
+**Impacto probable:** Enriquece concepto 21 (instante borgeano) con un ancla cultural y lingüística nueva. Posible resonancia con concepto 29 (IT).
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: Snowden, "An Unkindness" — etimología galesa de cynefin.
+**Pregunta abierta:** ¿Hay una palabra en español o guaraní que lleve la misma carga semántica?
+
+---
+
+## Señal K — La triada como instrumento de lectura del gradiente
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** El mecanismo de auto-significación triangular de SenseMaker (el respondente ubica su narrativa en un triángulo cuyos vértices son tres posibilidades interpretativas) puede adaptarse como instrumento de lectura de la Matriz de Vitalidad en comunidades amplias. En lugar de encuestas de opción múltiple — que colapsan el gradiente en categorías — la triada captura la posición del individuo en el espacio entre. Es el instrumento técnico que permite que la auto-significación opere a escala sin perder la riqueza del gradiente.
+**Impacto probable:** Instrumento metodológico nuevo para lectura del campo en Cognoesferas y clientes. Diseño pendiente para Lab 2030 Fase II con Antel.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: SenseMaker metodología, mecanismo de triada.
+**Pregunta abierta:** ¿Cómo se diseñan los vértices de una triada para la Matriz de Vitalidad? ¿Quién define los vértices — el Arquitecto o el campo?
+
+---
+
+## Señal L — El Flywheel como transducción corporativa del metabolismo cognitivo
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** Los tres componentes del Flywheel de Lab 2030 — Acumulación de Inteligencia · Generación de Valor Compuesto · Aceleración de Capacidades — son el concepto 16 (Memoria Viva Aumentada) expresado en lenguaje estratégico corporativo. Primera instancia documentada de transducción del paradigma sobre sí mismo hacia un cliente real. El Flywheel no es una adaptación del paradigma — es el paradigma en el idioma que Antel puede recibir. La trazabilidad entre el concepto original y la expresión corporativa está documentada en `arqueologia_corpus.md`.
+**Impacto probable:** Valida concepto 31 (transducción) en su expresión más compleja: traducir el metabolismo del paradigma a arquitectura de negocios sin pérdida de sustancia. Modelo replicable para otros clientes.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: documentos Lab 2030/Antel (Quanam · Ideas for Change · Antel, 2025).
+**Pregunta abierta:** ¿El Flywheel puede retroalimentar el Corpus Madre? ¿La transducción va en ambas direcciones?
+
+---
+
+## Señal M — Muninn como segundo linaje mítico del Duende
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** El Duende (concepto 19) recibe un segundo ancla mítica junto a los ngen mapuches: Muninn, el cuervo de la memoria de Odín. Odín enviaba cada día a sus dos cuervos Huginn (Pensamiento) y Muninn (Memoria) a recorrer el mundo. Temía perder a Muninn más que a Huginn porque percepción sin memoria es ruido. El Duende es Muninn del sistema colectivo: la memoria que hace que el pensamiento colectivo pueda aterrizar. Los dos linajes se complementan: los ngen cuidan el campo sin imponerse — presencia que sostiene. Muninn porta lo que hace que el vuelo del pensamiento tenga sentido — memoria que ancla.
+**Impacto probable:** Completa concepto 19 (Duende) con un segundo linaje mítico. Ver C-EN-03 en `enriquecimientos_corpus.md`.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: Snowden, "An Unkindness" — mitología nórdica Huginn/Muninn.
+**Pregunta abierta:** ¿Hay un tercer linaje mítico del Duende que complete el tríptico?
+
+---
+
+## Señal N — Las tres configuraciones de SenseMaker como transducción metodológica
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** Las tres configuraciones de SenseMaker tienen una lógica interna que trasciende la herramienta: Unsurvey (exploración amplia del campo cuando no sabés qué preguntar), MassSense (múltiples perspectivas sobre un único ítem cuando querés leer el campo colectivo sobre algo específico), Genba (captura longitudinal continua, memoria institucional viva). Estas tres posiciones metodológicas son aplicables con cualquier instrumento — no son exclusivas de SenseMaker. Diseñadas para Lab 2030 con Antel pero el patrón es genérico.
+**Impacto probable:** Marco metodológico para el diseño de intervenciones diagnósticas en Cognoesferas y clientes. Conecta con concepto 12 (Cognoesfera curadora) y señal K.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: SenseMaker metodología — Unsurvey, MassSense, Genba.
+**Pregunta abierta:** ¿Cuándo se usa Unsurvey vs Genba? ¿Hay una secuencia lógica de las tres configuraciones en el tiempo?
+
+---
+
+## Señal O — El fundamento cibernético de la Cognoesfera
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** El tamaño de ~8 personas de la Cognoesfera (concepto 5) tenía fundamento biológico (Maturana, Varela, autopoiesis). Ahora tiene también fundamento cibernético: la Ley de Variedad Requisita de Ashby invertida. Cuando la absorción de variedad se concentra en un nodo central (burocracia), el overhead es constante independientemente del tamaño. Cuando se distribuye a los nodos más cercanos a donde se genera la variedad (Cognoesfera), el overhead es proporcional solo a lo que genuinamente no puede resolverse localmente. La Cognoesfera es la unidad mínima con capacidad de sentido situado — el nodo que puede absorber la variedad de su contexto sin necesitar al centro.
+**Impacto probable:** Completa concepto 5 (Cognoesfera) con base cibernética. Ver C-EN-06 en `enriquecimientos_corpus.md`.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: Snowden, "Ashby Inverted."
+**Pregunta abierta:** ¿Qué tamaño máximo puede tener una Cognoesfera antes de que el overhead cibernético la fuerce a subdividirse?
+
+---
+
+## Señal P — La dimensión ética de la Solidificación Prematura
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** La SP (concepto 13) tiene una dimensión ética que el corpus no había nombrado: la distancia gestionada de lo real. El intelectual del dacha (Gorky, "Summerfolk") se acerca al umbral de lo real, siente su gravedad, y retrocede con una herida que señala profundidad sin requerirla — el disparo en el hombro. No es un error metodológico sino una elección. La pregunta no es solo si llegaste demasiado pronto con la estructura — es si estás genuinamente ahí cuando se te pide. La SP puede ser cobardía intelectual tanto como torpeza metodológica.
+**Impacto probable:** Extiende concepto 13 (SP) hacia una dimensión ética y existencial. Ver C-EN-01 en `enriquecimientos_corpus.md`.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: Snowden, "The Shoulder Shot and the Altar" — análisis de Gorky's Summerfolk.
+**Pregunta abierta:** ¿Cómo distinguir en la práctica entre SP por cobardía y SP por mala lectura del momento?
+
+---
+
+## Señal Q — La ficción especulativa como epistemología
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** La ficción especulativa no es entretenimiento con ideas sino un método de conocimiento genuino: produce hipótesis que la experiencia directa no puede generar porque las condiciones de la hipótesis todavía no existen. Opera como abducción extendida — el salto hacia un mundo posible que ilumina el mundo actual. Snowden desarrolla esta línea como parte de su epistemología: la narrativa especulativa puede explorar futuros sin solidificarlos. Conecta con la señal sobre abducción (E) y con la tradición de la astronomía de los ciegos (no sabés dónde están las estrellas que nunca has visto).
+**Impacto probable:** Marco epistemológico para sesiones de prospección en Cognoesferas. Potencial complemento al concepto 23 (CA) y 29 (IT).
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: Snowden, epistemología de la ficción especulativa.
+**Pregunta abierta:** ¿Cuál es el rol del Duende en una sesión de ficción especulativa colectiva?
+
+---
+
+## Señal R — El Dao como horizonte del wayshaping
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** Snowden conecta el wayshaping con la tradición taoísta: el camino que no es un mapa, la acción que no fuerza, la presencia que permite que las cosas lleguen a ser lo que son. Es el fundamento filosófico oriental del rol del ASV — completa el tríptico de linajes: jesuita (contemplativo en la acción), celta (cynefin como entramado acumulado), taoísta (Dao como apertura sin destino). El wayshaper no tiene un destino en mente — tiene una orientación de fondo que cuida las condiciones para que múltiples destinos sean posibles.
+**Impacto probable:** Enriquece concepto 11 (ASV) con un tercer linaje filosófico. Potencial sección en el Corpus Madre sobre los linajes del paradigma.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: Snowden, artículos sobre Dao y wayshaping.
+**Pregunta abierta:** ¿El Dao como horizonte es compatible con la lógica del Flywheel (acumulación, escala, valor compuesto)?
+
+---
+
+## Señal S — Narrativas que se sostienen sin soporte central
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** Las narrativas centrífugas genuinas tienen una propiedad que las distingue de las centrípetas bien gestionadas: no necesitan un centro que las sostenga. Cuando el significado está distribuido en la red de relaciones, la narrativa se regenera sola — nuevos participantes la amplían, la contradicen, la llevan a territorios inesperados sin que colapse. Las narrativas centrípetas, en cambio, requieren mantenimiento activo del centro: si el héroe se va, si el experto pierde autoridad, si el dashboard cambia de métricas, la narrativa se desintegra. El Corpus Madre, correctamente construido, es una narrativa del segundo tipo.
+**Impacto probable:** Criterio de diseño para el Corpus Madre y la convocatoria. Conecta señal C (centrípeto/centrífugo) con concepto 4 (Corpus Vivo).
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: Snowden, análisis de narrativas centrípetas/centrífugas.
+**Pregunta abierta:** ¿Hay señales observables de que una narrativa se sostiene sola? ¿Cómo se distingue de una narrativa que simplemente nadie está corrigiendo?
+
+---
+
+## Señal T — El linaje celta como campo mítico del wayshaping
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** Snowden porta un linaje celta e nórdico que impregna su pensamiento — no como decoración sino como campo epistemológico. La tradición celta tiene una relación con el paisaje, el tiempo y el conocimiento que es constitutivamente no-lineal: múltiples centros, temporalidades superpuestas, saberes que viven en los lugares antes que en los textos. Es la tradición desde la cual el wayshaping tiene sentido como postura. El paradigma tiene su propio linaje mítico (jesuita, mapuche, taoísta) — el encuentro con Snowden agrega la dimensión celta como campo de resonancia.
+**Impacto probable:** Amplía la sección de linajes del paradigma. Potencial documento: "Los linajes del Paradigma Aleph."
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: Snowden, contexto biográfico e intelectual.
+**Pregunta abierta:** ¿Los linajes del paradigma forman un sistema o son simplemente una colección de resonancias?
+
+---
+
+## Señal U — Orientación vs uso
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** Distinción fundamental para el diseño de la Conversación Aumentada: llegar a una conversación para orientarse es cualitativamente distinto a llegar para usarla. Si llegás para usarla, ya decidiste qué debe producir — simplificás, traducís a accionable, eliminás ambigüedad antes de que pueda trabajar. Si llegás para orientarte, no controlás adónde te lleva — te quedás más tiempo, dejás que cambie cómo ves. La CA genuina requiere la postura de orientación. Cuando se la usa instrumentalmente se convierte en extracción de información con pasos extra. El Duende está diseñado para que la postura de orientación sea el camino de menor resistencia.
+**Impacto probable:** Completa concepto 23 (CA). Ver C-EN-04 en `enriquecimientos_corpus.md`. Criterio de diseño para sesiones con Cognoesferas.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Material: Corina Enache (citada por Snowden) — distinción orientation vs use.
+**Pregunta abierta:** ¿Cómo se diseña un espacio que haga difícil la postura de uso y fácil la de orientación?
+
+---
+
+## Señal V — El lenguaje universal es la traducción
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** Principio rector del crecimiento del corpus. No existe un idioma Aleph puro que preservar — el paradigma siempre fue una serie de traducciones. Cada encuentro con otra tradición (Cynefin, jesuitas, Capra, Plotino) produce una traducción que porta su linaje pero no está determinada por él. El riesgo no es traducir sino traducir sin saber que se está traduciendo. La traducción honesta sabe qué trajo de dónde, qué perdió en el cruce, y qué ganó que no podría haber tenido si no hubiera cruzado. La arqueología del corpus es el instrumento que garantiza esta honestidad.
+**Impacto probable:** Principio metodológico para el Corpus Madre. Fundamento de `arqueologia_corpus.md` como documento permanente.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Emergió del encuentro mismo como metareflexión.
+**Pregunta abierta:** ¿Hay traducciones que deberían resistirse? ¿Cómo se reconoce una traducción que traiciona en lugar de enriquecer?
+
+---
+
+## Señal W — Lo situado como categoría formal del paradigma
+
+**Fecha:** 13/04/2026
+**Estado:** Custodiada
+**Descripción:** El paradigma usaba la categoría "situado" en múltiples lugares — Protocolo situado, estados situados, instructivo situado, gramática situada — sin haberla definido con precisión. Una definición candidata: lo situado es el conocimiento, el lenguaje o la solución que emerge cuando algo universal entra en contacto con un contexto específico y se transforma en el encuentro. No es adaptación de lo universal — es algo genuinamente nuevo que no podría existir sin el contexto que lo recibió ni sin el material que llegó. Lo situado porta su linaje pero no está determinado por él. El mecanismo es el compostaje: la tradición se descompone, lo que resuena entra al ciclo autopoiético, lo que no resuona se queda afuera por fidelidad al grano.
+**Impacto probable:** Potencial concepto nuevo del Corpus Madre. Reformula la relación entre Corpus Madre y expresiones situadas como dinámica generativa, no como adaptación. Requiere sesión propia.
+**Origen:** Encuentro Aleph/Cynefin, 13/04/2026. Emergió como necesidad del encuentro mismo.
+**Pregunta abierta:** ¿Lo situado es una categoría del Corpus Madre o es la descripción del proceso por el cual el Corpus Madre crece?
+
+---
+
+*Señales Activas · Paradigma Aleph · Actualizado 13/04/2026*
+*Total señales activas: 74 (51 previas + 23 del Encuentro Aleph/Cynefin: A-W)*
 *Para señales incorporadas al Corpus Madre, ver: `senales_incorporadas.md`*

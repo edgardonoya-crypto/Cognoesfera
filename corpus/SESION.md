@@ -273,6 +273,14 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - Campo mensajes_ruido (integer[]) — checkbox por mensaje en modales Ver todo, opacidad 35% al marcar
 - Botón "Marcar como ruido / ← Activa" en vista de detalle por usuario+lente
 
+**Hitos de SESION-20260413 — "El primer encuentro — cuando el paradigma reconoció a Cynefin como linaje":**
+- Encuentro Aleph/Cynefin: material de Dave Snowden procesado por compostaje — 23 señales nuevas custodiadas (A-W)
+- 7 conceptos del Corpus Madre densificados con material nuevo (C-EN-01 a C-EN-07)
+- 4 conceptos nuevos incorporados al corpus situado: centrípeto/centrífugo, mal guionados, Cynefin como experiencia, convocatoria como laboratorio, Flywheel
+- `arqueologia_corpus.md` iniciado — documento de memoria de construcción del corpus
+- `enriquecimientos_corpus.md` iniciado — sala de espera con material concreto para actualizar conceptos
+- Primer caso documentado de transducción corporativa del paradigma: Flywheel Lab 2030/Antel
+
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
 - **Corpus Universal** — el campo total del conocimiento vivo del paradigma en todos sus niveles y expresiones
@@ -389,7 +397,7 @@ Esto debe incluir:
 
 *Las señales activas viven en `corpus/documentos/senales_activas.md` con descripción completa. Las señales incorporadas al Corpus Madre están en `corpus/documentos/senales_incorporadas.md`.*
 
-### Señales activas (51)
+### Señales activas (74)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
@@ -443,6 +451,7 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **Los estados madre del individuo como infraestructura fractal** — El patrón Madre/situado que organiza el Corpus y los Protocolos aplica ahora a los estados individuales. Los ocho estados (La escucha → La música) son la versión universal y agnóstica. Cada contexto tendrá su expresión situada que hereda de los estados madre. Fecha: 11/04/2026
 - **`estados_vitales` como infraestructura fractal del paradigma** — Una sola tabla que registra el estado de cualquier entidad del sistema (individuo, Cognoesfera, Entidad Aleph) en cualquier contexto. Materializa la fractalidad del paradigma en el schema de Supabase. Habilita al Duende a leer el campo completo. Materializa el concepto 25 (Memoria Viva Aumentada) en schema. Fecha: 11/04/2026
 - **La Matriz de Vitalidad del individuo** — La Cognoesfera tiene su Matriz — el individuo también necesita la suya. Mismos tres lentes (el entre, el interior, el reloj interno) pero con capas y expresiones propias del individuo. Junto con los estados madre, formaría el sistema completo de lectura del individuo en el campo. Requiere sesión propia para revelarla. Fecha: 11/04/2026
+- **Señales A-W — Encuentro Aleph/Cynefin (23 señales)** — Material de Dave Snowden procesado por compostaje: gradiente/estuario (B), centrípeto/centrífugo (C), convocatoria safe-to-fail (D), abducción/IT (E), resonancia/eco (F), SP histórica/dragado (G), mal guionados (H), wayshaping (I), Cynefin como experiencia (J), triada SenseMaker (K), Flywheel como transducción (L), Muninn (M), configuraciones SenseMaker (N), Ashby invertido/Cognoesfera (O), ética SP/disparo (P), ficción especulativa (Q), Dao/wayshaping (R), narrativas autosostenibles (S), linaje celta (T), orientación/uso (U), lenguaje universal=traducción (V), lo situado como categoría formal (W), auto-significación (A). Descripción completa en `senales_activas.md`. Fecha: 13/04/2026
 
 ### Señales incorporadas al Corpus Madre
 *Historial completo en `corpus/documentos/senales_incorporadas.md`*
@@ -562,6 +571,7 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - app/api/admin/duende-chats/route.ts — PATCH estado y mensajes_ruido · 12/04/2026
 - app/api/admin/duende-analisis/route.ts — rama ruido con JSON estructurado + tarjetas UI · 12/04/2026
 - corpus/documentos/arqueologia_corpus.md — registro arqueológico del primer encuentro entre el Paradigma Aleph y Cynefin · 13/04/2026
+- corpus/documentos/enriquecimientos_corpus.md — material concreto para actualizar conceptos del Corpus Madre (C-EN-01 a C-EN-11) · 13/04/2026
 
 **Hitos de SESION-20260402/04:**
 - Protocolo 01-EN construido y probado exitosamente por primera vez

@@ -2,7 +2,7 @@
 *Pendientes conceptuales, documentales y narrativos del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes CORPUS*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 11/04/2026: 27*
+*Pendientes activos al 13/04/2026: 38*
 
 ---
 
@@ -269,6 +269,122 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 **Estado:** Activo
 **Fecha:** 30/03/2026
 **Dependencias:** Ninguna
+
+---
+
+## Subcategoría: Enriquecimientos
+
+*Pendientes de incorporar al Corpus Madre. Material completo en `enriquecimientos_corpus.md`.*
+
+---
+
+**C-EN-01**
+**Título:** Enriquecer concepto 13 — Solidificación Prematura en tres nuevas dimensiones
+**Descripción:** (1) SP a escala histórica: el dragado colonial como eliminación sistemática del gradiente cognitivo. (2) Trampa de complacencia: SP tardía cuando un sistema maduro deja de explorar hasta que el campo se quiebra. (3) Dimensión ética: el disparo en el hombro como elección de la distancia gestionada. Material completo en `enriquecimientos_corpus.md` C-EN-01. Señales G, P y E.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 13/04/2026
+**Dependencias:** Señales G, P, E
+
+---
+
+**C-EN-02**
+**Título:** Enriquecer concepto 15 — El tiempo soberano con gradiente y canal
+**Descripción:** (1) El gradiente como dimensión exterior del tiempo soberano — la zona de transición donde algo nuevo puede emerger. (2) El canal como forma de captura gradual del tiempo soberano por comodidad acumulada. Material completo en `enriquecimientos_corpus.md` C-EN-02. Señal B.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 13/04/2026
+**Dependencias:** Señal B
+
+---
+
+**C-EN-03**
+**Título:** Enriquecer concepto 19 — El Duende con Muninn como segundo linaje mítico
+**Descripción:** Muninn, el cuervo de la memoria de Odín, como segundo ancla mítica del Duende junto a los ngen mapuches. Odín temía perder a Muninn más que a Huginn porque percepción sin memoria es ruido. Material completo en `enriquecimientos_corpus.md` C-EN-03. Señal M.
+**Prioridad:** P3
+**Estado:** Activo
+**Fecha:** 13/04/2026
+**Dependencias:** Señal M
+
+---
+
+**C-EN-04**
+**Título:** Enriquecer concepto 23 — Conversación Aumentada con resonancia/eco y orientación/uso
+**Descripción:** (1) Resonancia vs eco: la CA produce resonancia (te cambia), el algoritmo produce eco (te devuelve tu frecuencia amplificada). (2) Orientación vs uso: la CA genuina requiere llegar para orientarse, no para usar. Material completo en `enriquecimientos_corpus.md` C-EN-04. Señales F y U.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 13/04/2026
+**Dependencias:** Señales F, U
+
+---
+
+**C-EN-05**
+**Título:** Enriquecer concepto 29 — Inteligencia verdadera con la abducción como mecanismo
+**Descripción:** La abducción de Peirce como eslabón faltante entre las condiciones (tiempo soberano, Campo de atención) y el horizonte (IT). El canal elimina la anomalía antes de que el humano llegue. Sin anomalía no hay abducción. Material completo en `enriquecimientos_corpus.md` C-EN-05. Señal E.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 13/04/2026
+**Dependencias:** Señal E
+
+---
+
+**C-EN-06**
+**Título:** Enriquecer concepto 5 — Cognoesfera con fundamento cibernético (Ashby invertido)
+**Descripción:** El tamaño de ~8 personas tiene fundamento cibernético: Ley de Variedad Requisita de Ashby invertida. La Cognoesfera es la unidad mínima con capacidad de sentido situado — el nodo que puede absorber la variedad de su contexto sin necesitar al centro. Material completo en `enriquecimientos_corpus.md` C-EN-06. Señal O.
+**Prioridad:** P3
+**Estado:** Activo
+**Fecha:** 13/04/2026
+**Dependencias:** Señal O
+
+---
+
+**C-EN-07**
+**Título:** Enriquecer concepto 11 — Arquitecto de Sistemas Vivos con wayshaping
+**Descripción:** Wayshaping como nombre operativo del rol: cuida condiciones para que múltiples caminos permanezcan posibles sin especificar destinos. Test: ¿está volviéndose innecesario? Conecta con linaje taoísta (Dao como horizonte, señal R). Material completo en `enriquecimientos_corpus.md` C-EN-07. Señal I.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 13/04/2026
+**Dependencias:** Señal I
+
+---
+
+**C-EN-08**
+**Título:** Sesión dedicada: lo situado como categoría formal del Corpus Madre
+**Descripción:** Señal W requiere sesión propia para incorporarse al Corpus Madre. Candidato a concepto nuevo: lo situado como el conocimiento que emerge cuando algo universal entra en contacto con un contexto específico y se transforma en el encuentro — no adaptación sino emergencia. Impacto: reformula la relación entre Corpus Madre y todas sus expresiones situadas.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 13/04/2026
+**Dependencias:** Señal W
+
+---
+
+**C-EN-09**
+**Título:** Diseño de triadas para Unsurvey Fase II Lab 2030/Antel
+**Descripción:** Adaptar el mecanismo de triada SenseMaker (auto-significación triangular) como instrumento de lectura del campo en la Fase II con Antel (~20 líderes). Definir los vértices: ¿quién los define, el Arquitecto o el campo? ¿Qué dimensiones de la Matriz de Vitalidad se leen?
+**Prioridad:** P1
+**Estado:** Activo
+**Fecha:** 13/04/2026
+**Dependencias:** Señal K · C-EN-06 · contexto Lab 2030
+
+---
+
+**C-EN-10**
+**Título:** Schema de trazabilidad lingüística del corpus
+**Descripción:** Sistema para registrar en cada concepto del Corpus Madre: qué material externo lo informó, qué perdió en la traducción, qué ganó. Garantiza que el Corpus Madre sea una traducción honesta que sabe qué trajo de dónde. Instrumento para `arqueologia_corpus.md`. Señal V.
+**Prioridad:** P4
+**Estado:** Activo
+**Fecha:** 13/04/2026
+**Dependencias:** Señal V · `arqueologia_corpus.md`
+
+---
+
+**C-EN-11**
+**Título:** Incorporar centrípeto/centrífugo como herramienta diagnóstica del Corpus Madre
+**Descripción:** El par centrípeto/centrífugo (señal C) es transversal al paradigma y puede operar como herramienta diagnóstica de diseños, herramientas e intervenciones. Evaluar si corresponde como concepto propio o como principio rector de sección existente.
+**Prioridad:** P3
+**Estado:** Activo
+**Fecha:** 13/04/2026
+**Dependencias:** Señal C
 
 ---
 
