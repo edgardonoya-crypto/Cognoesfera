@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v26 · 11 Abril 2026*
+*Versión actual: v27 · 12 Abril 2026 · 06:11*
 
 ---
 
@@ -263,6 +263,16 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - renderMarkdown con parseBold — bold y títulos visibles sin marcas
 - Revert quanam-ia-2026/page.tsx al estado pre-sesión — rediseño convocatoria guardado para próxima sesión (S-AP-10)
 
+**Hitos de SESION-20260412 — "La puerta — cuando la convocatoria aprendió a reconocer a quien regresa":**
+- Topbar fija con email + botón Salir en /quanam-ia-2026 — fondo #FDFAF5, borde dorado, texto #5C4A1E
+- Tabla convocatoria_contenido creada en Supabase — 6 zonas instanciadas por contexto + estado vital
+- Pantalla de ingreso con zonas dinámicas (argumental / pregunta / convoca / puerta) desde Supabase
+- edgardo.noya@quanam.com agregado como segundo administrador en 12 archivos
+- Campo estado en duende_chats (activa/archivada/ruido) — filtro, selector y PATCH en /admin
+- Reporte "Sugerir conversaciones ruido" — JSON estructurado + UI de tarjetas con checkbox + Aplicar selección
+- Campo mensajes_ruido (integer[]) — checkbox por mensaje en modales Ver todo, opacidad 35% al marcar
+- Botón "Marcar como ruido / ← Activa" en vista de detalle por usuario+lente
+
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
 - **Corpus Universal** — el campo total del conocimiento vivo del paradigma en todos sus niveles y expresiones
@@ -351,8 +361,9 @@ Los pendientes viven en dos archivos con schema completo:
 - **P1 [CORPUS]:** Registrar mínimo de Casa Corpus antes del 17/04 (C-DO-05)
 - **P2 [SOMA]:** Construir decisiones_arquitecturales.md antes del 17/04 (S-IN-05)
 - **P3 [CORPUS]:** Incorporar lista exacta de archivos al Protocolo 02-EN (C-PR-06)
-- **P4 [SOMA]:** Rediseño convocatoria — vista para usuarios con sesión (S-AP-10)
-- **P5 [SOMA]:** Verificar que COMMIT ALEPH pushea a main
+- **P4 [SOMA]:** Completar instanciación convocatoria para estados 2-8 (S-AP-10)
+- **P5 [SOMA]:** Verificar deploy Vercel — checkbox mensajes_ruido pendiente de verificación visual
+- **P6 [SOMA]:** Resolver rama master/main de raíz — renombrar rama local a main
 
 ---
 
@@ -542,6 +553,14 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - app/admin/page.tsx — rediseño grid cajas + modales + conversaciones 3 vistas · 11/04/2026
 - supabase/migrations/20260411_duende_analisis.sql — tabla duende_analisis con trazabilidad de fuentes · 11/04/2026
 - app/api/admin/duende-analisis/route.ts — análisis multi-turno del Duende-Arquitecto · 11/04/2026
+- supabase/migrations/20260412_convocatoria_contenido.sql — tabla convocatoria_contenido (6 zonas por contexto+estado) · 12/04/2026
+- supabase/migrations/20260412_duende_chats_estado.sql — columna estado en duende_chats · 12/04/2026
+- supabase/migrations/20260412_mensajes_ruido.sql — columna mensajes_ruido integer[] en duende_chats · 12/04/2026
+- app/quanam-ia-2026/page.tsx — topbar fija + zonas dinámicas desde convocatoria_contenido · 12/04/2026
+- app/admin/page.tsx — estado conversaciones + reporte ruido JSON + mensajes_ruido checkbox · 12/04/2026
+- app/admin/conversacion/usuario/[email]/lente/[contexto]/page.tsx — botón Marcar como ruido · 12/04/2026
+- app/api/admin/duende-chats/route.ts — PATCH estado y mensajes_ruido · 12/04/2026
+- app/api/admin/duende-analisis/route.ts — rama ruido con JSON estructurado + tarjetas UI · 12/04/2026
 
 **Hitos de SESION-20260402/04:**
 - Protocolo 01-EN construido y probado exitosamente por primera vez
@@ -763,7 +782,7 @@ Cuando Edgardo escriba "Actualizá corpus/SESION.md con lo que emergió hoy y ha
 
 ## C1. Qué actualizar
 
-**1. Encabezado** — actualizar número de versión y fecha.
+**1. Encabezado** — actualizar número de versión, fecha y hora de cierre.
 
 **2. Sección A2 (Estado actual)** — si el estado vital del paradigma cambió, o si hay nueva información sobre fechas o nomenclatura, actualizarlo. Agregar bloque de hitos de la sesión que cierra.
 
