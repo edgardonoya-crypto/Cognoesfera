@@ -561,6 +561,7 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - app/admin/conversacion/usuario/[email]/lente/[contexto]/page.tsx — botón Marcar como ruido · 12/04/2026
 - app/api/admin/duende-chats/route.ts — PATCH estado y mensajes_ruido · 12/04/2026
 - app/api/admin/duende-analisis/route.ts — rama ruido con JSON estructurado + tarjetas UI · 12/04/2026
+- corpus/documentos/arqueologia_corpus.md — registro arqueológico del primer encuentro entre el Paradigma Aleph y Cynefin · 13/04/2026
 
 **Hitos de SESION-20260402/04:**
 - Protocolo 01-EN construido y probado exitosamente por primera vez
