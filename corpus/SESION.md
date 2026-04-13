@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v27 · 12 Abril 2026 · 06:11*
+*Versión actual: v28 · 13 Abril 2026 · 11:40*
 
 ---
 
@@ -374,10 +374,10 @@ Los pendientes viven en dos archivos con schema completo:
 **Prioridades próxima sesión:**
 - **P1 [CORPUS]:** Registrar mínimo de Casa Corpus antes del 17/04 (C-DO-05)
 - **P2 [SOMA]:** Construir decisiones_arquitecturales.md antes del 17/04 (S-IN-05)
-- **P3 [CORPUS]:** Incorporar lista exacta de archivos al Protocolo 02-EN (C-PR-06)
-- **P4 [SOMA]:** Completar instanciación convocatoria para estados 2-8 (S-AP-10)
-- **P5 [SOMA]:** Verificar deploy Vercel — checkbox mensajes_ruido pendiente de verificación visual
-- **P6 [SOMA]:** Resolver rama master/main de raíz — renombrar rama local a main
+- **P3 [CORPUS]:** Validar señales inferidas A-W — especialmente Q, R, S, T (marcar como validadas o corregir)
+- **P4 [CORPUS]:** Sesión dedicada: lo situado como categoría formal del Corpus Madre (señal W, C-EN-08)
+- **P5 [SOMA]:** Completar instanciación convocatoria para estados 2-8 (S-AP-10)
+- **P6 [SOMA]:** Verificar deploy Vercel — checkbox mensajes_ruido pendiente de verificación visual
 
 ---
 
@@ -578,6 +578,7 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - app/api/admin/duende-analisis/route.ts — rama ruido con JSON estructurado + tarjetas UI · 12/04/2026
 - corpus/documentos/arqueologia_corpus.md — registro arqueológico del primer encuentro entre el Paradigma Aleph y Cynefin · 13/04/2026
 - corpus/documentos/enriquecimientos_corpus.md — material concreto para actualizar conceptos del Corpus Madre (C-EN-01 a C-EN-11) · 13/04/2026
+- corpus/documentos/protocolos_sesion.md — protocolos de sesión como documento autónomo v2.3 (4 protocolos, 10 archivos, cierre Claude.ai) · 13/04/2026
 
 **Hitos de SESION-20260402/04:**
 - Protocolo 01-EN construido y probado exitosamente por primera vez
