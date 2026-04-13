@@ -1,6 +1,6 @@
 # Protocolos de Sesión — Paradigma Aleph
 *Documento autónomo de protocolos · Referenciado desde corpus/SESION.md*
-*Versión: 2.0 · 13/04/2026*
+*Versión: 2.2 · 13/04/2026*
 *Versión anterior: integrada en SESION.md hasta SESION-20260413*
 
 ---
@@ -50,7 +50,9 @@ Desde la información disponible en SESION.md reportar:
 - 2a. ¿La fecha del último status en A9 coincide con la versión del SESION.md?
 - 2b. ¿Hay señales marcadas como incorporadas en A8 que todavía aparecen en la lista activa?
 - 2c. ¿Hay enriquecimientos en enriquecimientos_corpus.md que ya fueron incorporados al Corpus Madre pero no tienen el registro de incorporación actualizado?
-- 2d. Por cada inconsistencia: presentarla y proponer corrección. No avanzar al paso 3 hasta que cada inconsistencia tenga una decisión del Arquitecto (resolver ahora / diferir al cierre / descartar).
+- 2d. ¿Hay señales marcadas como "inferida — pendiente validación" en senales_activas.md? Si las hay, listarlas para que el Arquitecto las valide ahora — antes de arrancar la sesión, no al cierre.
+- 2e. ¿El número de entradas C-EN en pendientes_corpus.md coincide con el número de entradas en enriquecimientos_corpus.md? Si no coinciden, reportar la discrepancia.
+- 2f. Por cada inconsistencia detectada en 2a-2e: presentarla y proponer corrección. No avanzar al paso 3 hasta que cada inconsistencia tenga una decisión del Arquitecto (resolver ahora / diferir al cierre / descartar).
 
 **Paso 3 — Preguntar objetivo**
 *"¿Cuál es el objetivo de la sesión?"* — esperar respuesta del Arquitecto.
@@ -222,6 +224,7 @@ El aviso es: *"Hay cambios sin commitear desde [descripción]. ¿COMMIT ALEPH an
 | 1.0 | Hasta 12/04/2026 | Protocolo integrado en SESION.md |
 | 2.0 | 13/04/2026 | Separado como documento autónomo. Lista ampliada a 10 archivos. Apertura: paso 2c (inconsistencias en enriquecimientos), paso 6 (verificación enriquecimientos). Cierre: paso 3 (inventario de emergentes), paso 5 (commit 1 incluye enriquecimientos), paso 6 (commit 2 incluye arqueología). Regla de señales inferidas. |
 | 2.1 | 13/04/2026 | Protocolo 04-EN agregado: cierre de Claude.ai antes de ir a Claude Code. Cubre el gap de material conceptual que emerge en sesiones de diseño y pensamiento antes de llegar a Claude Code. |
+| 2.2 | 13/04/2026 | Protocolo 01-EN ajustado: pasos 2d y 2e agregados. 2d: validación de señales inferidas al inicio de sesión. 2e: chequeo de consistencia entre C-EN en pendientes_corpus.md y entradas en enriquecimientos_corpus.md. |
 
 ---
 
