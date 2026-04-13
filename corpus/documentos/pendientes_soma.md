@@ -319,6 +319,9 @@ Tabla convocatoria_contenido en Supabase (contexto + estado + 6 zonas). Zonas di
 **S-HIS-28 — Mantenimiento de conversaciones en admin** · Completado 12/04/2026
 Campo estado en duende_chats (activa/archivada/ruido). Reporte "Sugerir conversaciones ruido" en caja Análisis con JSON estructurado + UI de tarjetas con checkbox. Campo mensajes_ruido (integer[]) para marcar mensajes individuales.
 
+**S-HIS-29 — Resolver master/main de raíz** · Completado 12/04/2026
+Rama local renombrada de master a main. Upstream conectado a origin/main. origin/master eliminado. A partir de ahora git push va directo a main sin mapeo manual.
+
 ---
 
 *Pendientes Casa Soma · Paradigma Aleph · Actualizado 12/04/2026*
