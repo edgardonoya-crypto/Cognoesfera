@@ -220,7 +220,7 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 **S-AP-10**
 **Título:** Rediseño convocatoria — vista para usuarios con sesión
-**Descripción:** Diseño aprobado en sesión 11/04/2026c. Para usuarios con sesión: topbar fija (email + Salir en blanco), pantalla de entrada personalizada por estado vital (video + zonas A/B/C), vista simplificada con lentes protagonistas (mismo estilo original) + popup ? con descripción de cada lente + acordeón "Más contexto". El intento de implementación fue revertido por problemas de estilo. Retomar con mockups como referencia visual antes de tocar el código.
+**Descripción:** Diseño aprobado con mockup en claude.ai. Implementado: topbar fija (email + Salir), pantalla de ingreso con zonas dinámicas desde tabla convocatoria_contenido, contenido instanciado por estado vital del usuario. Pendiente: completar instanciación para estados 2-8 y resolver deploy de checkboxes mensajes_ruido.
 **Prioridad:** P3
 **Estado:** Activo
 **Fecha:** 11/04/2026
@@ -307,7 +307,19 @@ supabase.auth.getSession() al montar la página detecta sesión activa en cookie
 **S-HIS-24 — Fix S-AP-08: registro de estados vitales** · Completado 11/04/2026
 POST a /api/estados auto-inicializa la fila en estados_vitales si no existe — antes devolvía 404 porque requería GET previo. Fix en route.ts: bloque que retornaba 404 reemplazado por inicialización automática igual a la del GET. Verificado en /admin: usuario aparece con estado "La escucha" y fecha de entrada correcta.
 
+**S-HIS-25 — Topbar fija en convocatoria** · Completado 12/04/2026
+Topbar con email + botón Salir (redirige a /quanam-ia-2026). Fondo #FDFAF5, borde dorado, texto #5C4A1E. Visible solo con sesión activa.
+
+**S-HIS-26 — Pantalla de ingreso instanciada por estado** · Completado 12/04/2026
+Tabla convocatoria_contenido en Supabase (contexto + estado + 6 zonas). Zonas dinámicas en /quanam-ia-2026 según estado vital del usuario. Fila inicial: quanam_ia_2026 / la_escucha. Orden zonas: título → argumental → pregunta → convoca → puerta.
+
+**S-HIS-27 — edgardo.noya@quanam.com como administrador** · Completado 12/04/2026
+12 archivos actualizados para reconocer segundo email del Arquitecto en todos los endpoints y páginas del admin.
+
+**S-HIS-28 — Mantenimiento de conversaciones en admin** · Completado 12/04/2026
+Campo estado en duende_chats (activa/archivada/ruido). Reporte "Sugerir conversaciones ruido" en caja Análisis con JSON estructurado + UI de tarjetas con checkbox. Campo mensajes_ruido (integer[]) para marcar mensajes individuales.
+
 ---
 
-*Pendientes Casa Soma · Paradigma Aleph · Actualizado 11/04/2026*
+*Pendientes Casa Soma · Paradigma Aleph · Actualizado 12/04/2026*
 *Para pendientes conceptuales, ver: `pendientes_corpus.md`*
