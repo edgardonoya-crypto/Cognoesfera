@@ -795,7 +795,12 @@ Cuando Edgardo escriba "Actualizá corpus/SESION.md con lo que emergió hoy y ha
 
 **5. Sección A9 (Estado técnico)** — agregar los documentos nuevos generados en la sesión a la lista de "Documentos generados en sesiones recientes".
 
-**6. No tocar** — Sección B (documentos de referencia) y Sección C (este protocolo). Solo se actualizan cuando Edgardo lo pide explícitamente.
+**6. Generar `corpus/status/status_DDMMYYYY.md`** — el archivo de status debe incluir:
+- Hora de cierre en el encabezado: `*Fecha: DD/MM/YYYY · HH:MM · Sesión "..."*`
+- Fila "Hora de cierre" en el Dashboard (después de "Fecha límite clave"): `| **Hora de cierre** | HH:MM |`
+- Hora de cierre en el pie: `*Paradigma Aleph · Status SESION-YYYYMMDD · DD/MM/YYYY · HH:MM*`
+
+**7. No tocar** — Sección B (documentos de referencia) y Sección C (este protocolo). Solo se actualizan cuando Edgardo lo pide explícitamente.
 
 ## C2. El commit
 
