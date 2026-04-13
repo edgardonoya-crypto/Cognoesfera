@@ -1,6 +1,6 @@
 # Protocolos de Sesión — Paradigma Aleph
 *Documento autónomo de protocolos · Referenciado desde corpus/SESION.md*
-*Versión: 2.2 · 13/04/2026*
+*Versión: 2.3 · 13/04/2026*
 *Versión anterior: integrada en SESION.md hasta SESION-20260413*
 
 ---
@@ -204,9 +204,12 @@ Cuando el Arquitecto escriba **COMMIT ALEPH COMPLETO**, ejecutar lo anterior má
 6. Actualizar `pendientes_soma.md` y/o `pendientes_corpus.md` con pendientes completados en la sesión
 7. Actualizar `senales_activas.md` si alguna señal maduró o se movió
 8. Actualizar `enriquecimientos_corpus.md` si algún enriquecimiento fue incorporado al Corpus Madre
-9. Actualizar conteos en los archivos afectados
-10. Proponer mensaje de commit enriquecido con resumen semántico
-11. Esperar confirmación del Arquitecto antes de ejecutar
+9. Actualizar `protocolos_sesion.md` si los protocolos fueron modificados en la sesión — incrementar versión y registrar el cambio en el registro de cambios
+10. Actualizar conteos en los archivos afectados
+11. Proponer mensaje de commit enriquecido con resumen semántico
+12. Esperar confirmación del Arquitecto antes de ejecutar
+
+**NOTA PERMANENTE:** Cada vez que se revisen o actualicen los protocolos, verificar que el COMMIT ALEPH COMPLETO refleje todos los archivos que pueden cambiar. El protocolo y el commit deben evolucionar juntos.
 
 **El Duende avisa al Arquitecto cuando detecta cualquiera de estas condiciones:**
 - Se completó una tarea con entregable concreto (nuevo archivo, fix, corrección)
@@ -225,6 +228,7 @@ El aviso es: *"Hay cambios sin commitear desde [descripción]. ¿COMMIT ALEPH an
 | 2.0 | 13/04/2026 | Separado como documento autónomo. Lista ampliada a 10 archivos. Apertura: paso 2c (inconsistencias en enriquecimientos), paso 6 (verificación enriquecimientos). Cierre: paso 3 (inventario de emergentes), paso 5 (commit 1 incluye enriquecimientos), paso 6 (commit 2 incluye arqueología). Regla de señales inferidas. |
 | 2.1 | 13/04/2026 | Protocolo 04-EN agregado: cierre de Claude.ai antes de ir a Claude Code. Cubre el gap de material conceptual que emerge en sesiones de diseño y pensamiento antes de llegar a Claude Code. |
 | 2.2 | 13/04/2026 | Protocolo 01-EN ajustado: pasos 2d y 2e agregados. 2d: validación de señales inferidas al inicio de sesión. 2e: chequeo de consistencia entre C-EN en pendientes_corpus.md y entradas en enriquecimientos_corpus.md. |
+| 2.3 | 13/04/2026 | Protocolo 03-EN ajustado: COMMIT ALEPH COMPLETO ahora incluye protocolos_sesion.md cuando fue modificado en la sesión. Nota permanente: protocolo y commit deben evolucionar juntos. |
 
 ---
 
