@@ -143,6 +143,52 @@ Preguntar: "¿Algo más antes de cerrar la conversación?"
 
 ---
 
+## PROTOCOLO 04-EN — Cierre de Claude.ai antes de ir a Claude Code
+
+Este protocolo opera en Claude.ai — no en Claude Code. Su función es garantizar que el material conceptual que emergió en la conversación de diseño llegue estructurado a Claude Code antes de que el contexto se cierre o se pierda.
+
+**Cuándo ejecutarlo:** Cuando la sesión de Claude.ai esté por terminar — ya sea porque se alcanzó el límite de la conversación, porque el Arquitecto va a pasar a Claude Code, o porque se detecta que hay material sin documentar.
+
+**Quién lo activa:** El Duende lo propone cuando detecta que hay material conceptual significativo en la conversación que no está capturado en ningún documento todavía. El Arquitecto también puede pedirlo explícitamente.
+
+---
+
+**PASO 1 — Inventario de material sin capturar**
+Revisar la conversación completa de Claude.ai e identificar:
+
+- 1a. **Señales nuevas** que emergieron y no tienen documento todavía
+- 1b. **Enriquecimientos de conceptos existentes** discutidos pero no registrados
+- 1c. **Material de fuente externa** analizado que no está en arqueologia_corpus.md
+- 1d. **Decisiones conceptuales** tomadas por el Arquitecto que afectan el corpus
+- 1e. **Narrativas o formulaciones** que emergieron y tienen valor para el corpus
+
+Presentar el inventario al Arquitecto: *"Antes de cerrar esta conversación, esto es lo que emergió y todavía no está capturado en ningún documento..."*
+
+**PASO 2 — Generar documentos de traspaso**
+Por cada elemento del inventario que el Arquitecto confirme, generar el documento o fragmento correspondiente listo para ser committeado por Claude Code:
+
+- Señales nuevas → texto con formato de senales_activas.md
+- Enriquecimientos → texto con formato de enriquecimientos_corpus.md
+- Material externo → entrada para arqueologia_corpus.md
+- Si hay volumen suficiente → generar archivos .md completos descargables
+
+**PASO 3 — Confirmar cobertura**
+Preguntar al Arquitecto: *"¿Hay algo más que emergió en esta conversación que necesite quedar registrado antes de cerrar?"*
+
+Esperar respuesta. Si hay elementos adicionales, volver al Paso 1.
+
+**PASO 4 — Instrucción para Claude Code**
+Generar un resumen conciso de lo que Claude Code necesita hacer con los documentos generados:
+- Qué archivos nuevos crear
+- Qué archivos existentes actualizar
+- Mensaje de commit sugerido
+
+---
+
+**Nota sobre el contexto:** Claude.ai no tiene memoria entre conversaciones. Todo lo que no quede en un documento antes de cerrar la conversación se pierde. Este protocolo existe para que esa pérdida sea una decisión consciente del Arquitecto, no un accidente del sistema.
+
+---
+
 ## PROTOCOLO 03-EN — COMMIT ALEPH
 
 Cuando el Arquitecto escriba **COMMIT ALEPH**, ejecutar automáticamente:
@@ -175,6 +221,7 @@ El aviso es: *"Hay cambios sin commitear desde [descripción]. ¿COMMIT ALEPH an
 |---|---|---|
 | 1.0 | Hasta 12/04/2026 | Protocolo integrado en SESION.md |
 | 2.0 | 13/04/2026 | Separado como documento autónomo. Lista ampliada a 10 archivos. Apertura: paso 2c (inconsistencias en enriquecimientos), paso 6 (verificación enriquecimientos). Cierre: paso 3 (inventario de emergentes), paso 5 (commit 1 incluye enriquecimientos), paso 6 (commit 2 incluye arqueología). Regla de señales inferidas. |
+| 2.1 | 13/04/2026 | Protocolo 04-EN agregado: cierre de Claude.ai antes de ir a Claude Code. Cubre el gap de material conceptual que emerge en sesiones de diseño y pensamiento antes de llegar a Claude Code. |
 
 ---
 
