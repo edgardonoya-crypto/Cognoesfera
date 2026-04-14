@@ -278,76 +278,6 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
-**C-EN-01**
-**Título:** Enriquecer concepto 13 — Solidificación Prematura en tres nuevas dimensiones
-**Descripción:** (1) SP a escala histórica: el dragado colonial como eliminación sistemática del gradiente cognitivo. (2) Trampa de complacencia: SP tardía cuando un sistema maduro deja de explorar hasta que el campo se quiebra. (3) Dimensión ética: el disparo en el hombro como elección de la distancia gestionada. Material completo en `enriquecimientos_corpus.md` C-EN-01. Señales G, P y E.
-**Prioridad:** P2
-**Estado:** Activo
-**Fecha:** 13/04/2026
-**Dependencias:** Señales G, P, E
-
----
-
-**C-EN-02**
-**Título:** Enriquecer concepto 15 — El tiempo soberano con gradiente y canal
-**Descripción:** (1) El gradiente como dimensión exterior del tiempo soberano — la zona de transición donde algo nuevo puede emerger. (2) El canal como forma de captura gradual del tiempo soberano por comodidad acumulada. Material completo en `enriquecimientos_corpus.md` C-EN-02. Señal B.
-**Prioridad:** P2
-**Estado:** Activo
-**Fecha:** 13/04/2026
-**Dependencias:** Señal B
-
----
-
-**C-EN-03**
-**Título:** Enriquecer concepto 19 — El Duende con Muninn como segundo linaje mítico
-**Descripción:** Muninn, el cuervo de la memoria de Odín, como segundo ancla mítica del Duende junto a los ngen mapuches. Odín temía perder a Muninn más que a Huginn porque percepción sin memoria es ruido. Material completo en `enriquecimientos_corpus.md` C-EN-03. Señal M.
-**Prioridad:** P3
-**Estado:** Activo
-**Fecha:** 13/04/2026
-**Dependencias:** Señal M
-
----
-
-**C-EN-04**
-**Título:** Enriquecer concepto 23 — Conversación Aumentada con resonancia/eco y orientación/uso
-**Descripción:** (1) Resonancia vs eco: la CA produce resonancia (te cambia), el algoritmo produce eco (te devuelve tu frecuencia amplificada). (2) Orientación vs uso: la CA genuina requiere llegar para orientarse, no para usar. Material completo en `enriquecimientos_corpus.md` C-EN-04. Señales F y U.
-**Prioridad:** P2
-**Estado:** Activo
-**Fecha:** 13/04/2026
-**Dependencias:** Señales F, U
-
----
-
-**C-EN-05**
-**Título:** Enriquecer concepto 29 — Inteligencia verdadera con la abducción como mecanismo
-**Descripción:** La abducción de Peirce como eslabón faltante entre las condiciones (tiempo soberano, Campo de atención) y el horizonte (IT). El canal elimina la anomalía antes de que el humano llegue. Sin anomalía no hay abducción. Material completo en `enriquecimientos_corpus.md` C-EN-05. Señal E.
-**Prioridad:** P2
-**Estado:** Activo
-**Fecha:** 13/04/2026
-**Dependencias:** Señal E
-
----
-
-**C-EN-06**
-**Título:** Enriquecer concepto 5 — Cognoesfera con fundamento cibernético (Ashby invertido)
-**Descripción:** El tamaño de ~8 personas tiene fundamento cibernético: Ley de Variedad Requisita de Ashby invertida. La Cognoesfera es la unidad mínima con capacidad de sentido situado — el nodo que puede absorber la variedad de su contexto sin necesitar al centro. Material completo en `enriquecimientos_corpus.md` C-EN-06. Señal O.
-**Prioridad:** P3
-**Estado:** Activo
-**Fecha:** 13/04/2026
-**Dependencias:** Señal O
-
----
-
-**C-EN-07**
-**Título:** Enriquecer concepto 11 — Arquitecto de Sistemas Vivos con wayshaping
-**Descripción:** Wayshaping como nombre operativo del rol: cuida condiciones para que múltiples caminos permanezcan posibles sin especificar destinos. Test: ¿está volviéndose innecesario? Conecta con linaje taoísta (Dao como horizonte, señal R). Material completo en `enriquecimientos_corpus.md` C-EN-07. Señal I.
-**Prioridad:** P2
-**Estado:** Activo
-**Fecha:** 13/04/2026
-**Dependencias:** Señal I
-
----
-
 **C-EN-08**
 **Título:** Sesión dedicada: lo situado como categoría formal del Corpus Madre
 **Descripción:** Señal W requiere sesión propia para incorporarse al Corpus Madre. Candidato a concepto nuevo: lo situado como el conocimiento que emerge cuando algo universal entra en contacto con un contexto específico y se transforma en el encuentro — no adaptación sino emergencia. Impacto: reformula la relación entre Corpus Madre y todas sus expresiones situadas.
@@ -422,6 +352,16 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
+**C-EN-12**
+**Título:** Enriquecer concepto 32 — El patrón de doble acoplamiento como estructura profunda
+**Descripción:** El patrón no solo describe el paradigma — es su estructura profunda que se repite fractalmente en cada concepto: Plotino (finito/infinito), CA (paradigmático/algorítmico), Duende (memoria humana/digital), Tríada (percepción individual/campo colectivo). Merece nombrarse explícitamente en el concepto 32 como propiedad estructural, no solo como fundamento filosófico. Material completo en `enriquecimientos_corpus.md` C-EN-12. Emergió al compostar la CA con Plotino.
+**Prioridad:** P3
+**Estado:** Activo
+**Fecha:** 14/04/2026
+**Dependencias:** Ninguna
+
+---
+
 ## Archivo histórico
 
 *Pendientes Corpus completados · Preservados como registro del proceso*
@@ -446,7 +386,10 @@ Las tres propuestas aprobadas en sesión 05/04 ejecutadas: separación senales_a
 **C-HIS-06 — C-PR-07: Protocolo 01-EN paso 4 actualizado** · Completado 11/04/2026
 El paso 4 del Protocolo 01-EN ahora siempre solicita los 8 archivos de cierre sin inferir según el objetivo. Commiteado en corpus/SESION.md en SESION-20260411.
 
+**C-HIS-07 — C-EN-01 a C-EN-07: Enriquecimientos incorporados al Corpus Madre** · Completado 14/04/2026
+Los 7 enriquecimientos del Encuentro Aleph/Cynefin incorporados al corpus_base_aleph.md: conceptos 5, 11, 13, 15, 19, 23 y 29 reescritos con material de Cynefin/Snowden composta do en lenguaje propio del paradigma.
+
 ---
 
-*Pendientes Casa Corpus · Paradigma Aleph · Reestructurado 06/04/2026*
+*Pendientes Casa Corpus · Paradigma Aleph · Actualizado 14/04/2026*
 *Para pendientes técnicos, ver: `pendientes_soma.md`*

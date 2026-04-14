@@ -124,14 +124,40 @@ El ASV hace tres cosas que Snowden distingue con precisión: no sigue caminos qu
 
 ---
 
-## Registro de incorporación
+## C-EN-12 — Concepto 32: El patrón de doble acoplamiento
 
-Este documento fue generado en SESION-20260413 como parte del cierre del Encuentro I de la Arqueología del Corpus. Vive en `corpus/documentos/enriquecimientos_corpus.md`.
+**Estado actual del concepto:** El patrón de doble acoplamiento describe dos naturalezas distintas que se necesitan, se alimentan y se transforman mutuamente sin que ninguna preceda a la otra. Su fundamento está en Plotino y en la autopoiesis de Maturana y Varela.
 
-Los pendientes correspondientes en `pendientes_corpus.md` son C-EN-01 a C-EN-07.
+**Dimensión nueva que espera incorporación:**
 
-Cada enriquecimiento se incorpora al Corpus Madre solo en sesión dedicada con decisión explícita del Arquitecto. La trazabilidad completa vive en `arqueologia_corpus.md`.
+El patrón no solo describe el paradigma — es su estructura profunda, heredada de Plotino, que se repite fractalmente en cada concepto.
+
+Plotino: el ser humano es el punto de encuentro entre lo finito y lo infinito.
+La CA: el punto de encuentro entre lo paradigmático y lo algorítmico.
+El Duende: el punto de encuentro entre la memoria humana y la digital.
+La Tríada: el punto de encuentro entre la percepción individual y el campo colectivo.
+
+Es el patrón de doble acoplamiento operando en todos los niveles — y Plotino es su ancla filosófica más antigua. Ya estaba señalado en el corpus como fundamento del concepto 32, pero ese mismo patrón vertebra la Conversación Aumentada, el Duende, la Tríada — todos son instancias del mismo punto de encuentro entre dos naturalezas. El patrón de doble acoplamiento no es solo una descripción del paradigma — es su estructura profunda que se repite en cada concepto. Merece nombrarse explícitamente en el concepto 32 como propiedad estructural, no solo como fundamento filosófico.
+*Emergió al compostar la Conversación Aumentada con Plotino · SESION-20260414*
 
 ---
 
-*Enriquecimientos Pendientes del Corpus Madre · Paradigma Aleph · Iniciado 13/04/2026*
+## Registro de incorporación
+
+**Incorporados al Corpus Madre en SESION-20260414:**
+- C-EN-01 ✓ — Concepto 13: Solidificación Prematura en tres nuevas dimensiones
+- C-EN-02 ✓ — Concepto 15: El tiempo soberano con gradiente y canal
+- C-EN-03 ✓ — Concepto 19: El Duende con Muninn y la mitocondria
+- C-EN-04 ✓ — Concepto 23: Conversación Aumentada con resonancia/eco y orientación/uso
+- C-EN-05 ✓ — Concepto 29: Inteligencia verdadera con la anomalía y la abducción
+- C-EN-06 ✓ — Concepto 5: Cognoesfera con fundamento cibernético (Ashby invertido)
+- C-EN-07 ✓ — Concepto 11: Arquitecto de Sistemas Vivos con wayshaping
+
+**Pendientes de incorporar:**
+- C-EN-08 — Sesión dedicada: lo situado como categoría formal
+- C-EN-09 — Triadas SenseMaker para Antel
+- C-EN-10 — Schema de trazabilidad lingüística
+- C-EN-11 — Centrípeto/centrífugo como herramienta diagnóstica
+- C-EN-12 — Concepto 32: El patrón de doble acoplamiento como estructura profunda
+
+*Enriquecimientos Pendientes del Corpus Madre · Paradigma Aleph · Actualizado 14/04/2026*

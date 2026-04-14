@@ -864,6 +864,17 @@ El horizonte: si la red de Entidades Aleph llega a ser autopoiética, el metabol
 
 ---
 
-*Señales Activas · Paradigma Aleph · Actualizado 13/04/2026*
-*Total señales activas: 74 (51 previas + 23 del Encuentro Aleph/Cynefin: A-W)*
+## La zona liminal como condición de emergencia
+
+**Fecha:** 14/04/2026
+**Estado:** Custodiada
+**Descripción:** El espacio donde dos sistemas distintos se encuentran y en ese encuentro emerge algo que no existía en ninguno de los dos. No es mezcla — es emergencia. El estuario de Snowden es el ejemplo más vívido: no es agua dulce mezclada con agua salada sino un ecosistema propio que solo existe en ese entre, con la biodiversidad más rica precisamente porque ninguno de los dos sistemas lo controla completamente. Su opuesto es el canal — la intervención que elimina la zona de transición para hacer el sistema más predecible y eficiente, y que en ese acto elimina también la condición para que algo nuevo emerja. La misma lógica opera en ecosistemas cognitivos: la biodiversidad de perspectivas, lenguajes y tradiciones es más fértil en las zonas donde se encuentran que en los centros donde cada una es pura. El corpus describe desde adentro lo que ocurre cuando la zona liminal está viva (Espacio Borgeano, Campo de atención) y cuando se la destruye (Solidificación Prematura) — pero no ha nombrado la zona liminal misma como condición. Van Gennep y Turner ya están en los fundamentos académicos del corpus — este concepto los conecta con Snowden desde la biología y la complejidad. El triángulo de SenseMaker es este concepto operacionalizado como herramienta: los vértices no son categorías donde se llega sino marcos posibles entre los cuales la persona se ubica en la zona intermedia. La Tríada de Percepción hereda esta lógica.
+**Impacto probable:** Candidato a concepto propio que articula Espacio Borgeano, Campo de atención y Solidificación Prematura. Requiere sesión propia para incorporarse al Corpus Madre.
+**Origen:** SESION-20260414 — emergió al compostar la imagen del estuario de Snowden con la biología del ecosistema y la Tríada de Percepción.
+**Pregunta abierta:** ¿La zona liminal es un concepto nuevo del Corpus Madre o la descripción de la condición que varios conceptos existentes ya suponen sin nombrar? ¿El estuario es la imagen justa o emerge una más propia del paradigma?
+
+---
+
+*Señales Activas · Paradigma Aleph · Actualizado 14/04/2026*
+*Total señales activas: 75 (74 previas + 1 nueva: zona liminal)*
 *Para señales incorporadas al Corpus Madre, ver: `senales_incorporadas.md`*
