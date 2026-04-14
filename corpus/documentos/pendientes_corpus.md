@@ -318,6 +318,26 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
+**C-EN-12**
+**Título:** Enriquecer concepto 32 — El patrón de doble acoplamiento como estructura profunda
+**Descripción:** El patrón no solo describe el paradigma — es su estructura profunda que se repite fractalmente en cada concepto: Plotino (finito/infinito), CA (paradigmático/algorítmico), Duende (memoria humana/digital), Tríada (percepción individual/campo colectivo). Merece nombrarse explícitamente en el concepto 32 como propiedad estructural, no solo como fundamento filosófico. Material completo en `enriquecimientos_corpus.md` C-EN-12. Emergió al compostar la CA con Plotino.
+**Prioridad:** P3
+**Estado:** Activo
+**Fecha:** 14/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**C-EN-13**
+**Título:** Sesión dedicada: la zona liminal como concepto formal del Corpus Madre
+**Descripción:** La señal "La zona liminal como condición de emergencia" (SESION-20260414) necesita sesión propia para determinar si entra al corpus como concepto nuevo o como principio transversal. La zona liminal es el espacio donde dos sistemas se encuentran y emerge algo que no existía en ninguno de los dos — el estuario vs el canal. Conecta Espacio Borgeano, SP y Campo de atención. Candidato a concepto nuevo o enriquecimiento del concepto 20 (El Espacio Borgeano) o concepto 21 (El instante borgeano).
+**Prioridad:** P4
+**Estado:** Activo
+**Fecha:** 14/04/2026
+**Dependencias:** Señal "La zona liminal como condición de emergencia"
+
+---
+
 ## Subcategoría: Narrativa
 
 ---
@@ -349,26 +369,6 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 **Estado:** Activo
 **Fecha:** 29/03/2026
 **Dependencias:** Ninguna
-
----
-
-**C-EN-12**
-**Título:** Enriquecer concepto 32 — El patrón de doble acoplamiento como estructura profunda
-**Descripción:** El patrón no solo describe el paradigma — es su estructura profunda que se repite fractalmente en cada concepto: Plotino (finito/infinito), CA (paradigmático/algorítmico), Duende (memoria humana/digital), Tríada (percepción individual/campo colectivo). Merece nombrarse explícitamente en el concepto 32 como propiedad estructural, no solo como fundamento filosófico. Material completo en `enriquecimientos_corpus.md` C-EN-12. Emergió al compostar la CA con Plotino.
-**Prioridad:** P3
-**Estado:** Activo
-**Fecha:** 14/04/2026
-**Dependencias:** Ninguna
-
----
-
-**C-EN-13**
-**Título:** Sesión dedicada: la zona liminal como concepto formal del Corpus Madre
-**Descripción:** La señal "La zona liminal como condición de emergencia" (SESION-20260414) necesita sesión propia para determinar si entra al corpus como concepto nuevo o como principio transversal. La zona liminal es el espacio donde dos sistemas se encuentran y emerge algo que no existía en ninguno de los dos — el estuario vs el canal. Conecta Espacio Borgeano, SP y Campo de atención. Candidato a concepto nuevo o enriquecimiento del concepto 1 (El Entre).
-**Prioridad:** P4
-**Estado:** Activo
-**Fecha:** 14/04/2026
-**Dependencias:** Señal "La zona liminal como condición de emergencia"
 
 ---
 

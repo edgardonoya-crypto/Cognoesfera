@@ -282,7 +282,7 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 **Hitos de SESION-20260413 — "El encuentro — cuando el Paradigma Aleph y Cynefin se reconocieron":**
 - Encuentro Aleph/Cynefin: material de Dave Snowden procesado por compostaje — 23 señales nuevas custodiadas (A-W)
 - 7 conceptos del Corpus Madre densificados con material nuevo (C-EN-01 a C-EN-07)
-- 4 conceptos nuevos incorporados al corpus situado: centrípeto/centrífugo, mal guionados, Cynefin como experiencia, convocatoria como laboratorio, Flywheel
+- 5 conceptos nuevos incorporados al corpus situado: centrípeto/centrífugo, mal guionados, Cynefin como experiencia, convocatoria como laboratorio, Flywheel
 - `arqueologia_corpus.md` iniciado — documento de memoria de construcción del corpus
 - `enriquecimientos_corpus.md` iniciado — sala de espera con material concreto para actualizar conceptos
 - Primer caso documentado de transducción corporativa del paradigma: Flywheel Lab 2030/Antel
@@ -480,7 +480,6 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 Conceptos o procesos que merecen atención pero todavía no están listos para ser custodiados.
 
 - **Protocolo mínimo de registro de conversación** — cómo venimos / transformaciones / cómo nos vamos / qué aprendimos. Concepto que merece entrar al Corpus Madre.
-- **Inteligencia verdadera** — incorporada parcialmente en el concepto 29, pendiente de profundizar con más material.
 - **Los tres documentos del conjunto de gramáticas** — solo se completó la introducción. Faltan Documento 1 (ontológico), Documento 2 (ejemplos), Documento 3 (periférico).
 
 ### Registros históricos (2)
