@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v28 · 13 Abril 2026 · 11:40*
+*Versión actual: v29 · 14 Abril 2026 · cierre SESION-20260414*
 
 ---
 
@@ -279,13 +279,20 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - Campo mensajes_ruido (integer[]) — checkbox por mensaje en modales Ver todo, opacidad 35% al marcar
 - Botón "Marcar como ruido / ← Activa" en vista de detalle por usuario+lente
 
-**Hitos de SESION-20260413 — "El primer encuentro — cuando el paradigma reconoció a Cynefin como linaje":**
+**Hitos de SESION-20260413 — "El encuentro — cuando el Paradigma Aleph y Cynefin se reconocieron":**
 - Encuentro Aleph/Cynefin: material de Dave Snowden procesado por compostaje — 23 señales nuevas custodiadas (A-W)
 - 7 conceptos del Corpus Madre densificados con material nuevo (C-EN-01 a C-EN-07)
 - 4 conceptos nuevos incorporados al corpus situado: centrípeto/centrífugo, mal guionados, Cynefin como experiencia, convocatoria como laboratorio, Flywheel
 - `arqueologia_corpus.md` iniciado — documento de memoria de construcción del corpus
 - `enriquecimientos_corpus.md` iniciado — sala de espera con material concreto para actualizar conceptos
 - Primer caso documentado de transducción corporativa del paradigma: Flywheel Lab 2030/Antel
+
+**Hitos de SESION-20260414 — "La simbiosis — cuando el corpus aprendió a compostar desde adentro":**
+- 7 conceptos del Corpus Madre enriquecidos con material Cynefin/Snowden: conceptos 5, 11, 13, 15, 19, 23, 29
+- C-EN-01 a C-EN-07 incorporados al corpus_base_aleph.md — primer batch de enriquecimientos compostados
+- Señal nueva: La zona liminal como condición de emergencia (total 75 señales activas)
+- C-EN-12 agregado: doble acoplamiento como estructura profunda fractal (Plotino → CA → Duende → Tríada)
+- S-AP-11 agregado: Tríada de Percepción — instrumento de lectura fractal individuo → Cognoesfera
 
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
@@ -373,11 +380,11 @@ Los pendientes viven en dos archivos con schema completo:
 
 **Prioridades próxima sesión:**
 - **P1 [CORPUS]:** Registrar mínimo de Casa Corpus antes del 17/04 (C-DO-05)
-- **P2 [SOMA]:** Construir decisiones_arquitecturales.md antes del 17/04 (S-IN-05)
-- **P3 [CORPUS]:** Validar señales inferidas A-W — especialmente Q, R, S, T (marcar como validadas o corregir)
-- **P4 [CORPUS]:** Sesión dedicada: lo situado como categoría formal del Corpus Madre (señal W, C-EN-08)
-- **P5 [SOMA]:** Completar instanciación convocatoria para estados 2-8 (S-AP-10)
-- **P6 [SOMA]:** Verificar deploy Vercel — checkbox mensajes_ruido pendiente de verificación visual
+- **P2 [SOMA]:** Implementar Tríada de Percepción — tablas + componente + admin (S-AP-11)
+- **P3 [CORPUS]:** Enriquecer concepto 32 con fractalidad del doble acoplamiento / Plotino (C-EN-12)
+- **P4 [CORPUS]:** Sesión dedicada: zona liminal como concepto formal (C-EN-13)
+- **P5 [SOMA]:** Construir decisiones_arquitecturales.md antes del 17/04 (S-IN-05)
+- **P6 [CORPUS]:** Validar señales inferidas A-W — especialmente Q, R, S, T
 
 ---
 
@@ -403,7 +410,7 @@ Esto debe incluir:
 
 *Las señales activas viven en `corpus/documentos/senales_activas.md` con descripción completa. Las señales incorporadas al Corpus Madre están en `corpus/documentos/senales_incorporadas.md`.*
 
-### Señales activas (74)
+### Señales activas (75)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
@@ -458,6 +465,7 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **`estados_vitales` como infraestructura fractal del paradigma** — Una sola tabla que registra el estado de cualquier entidad del sistema (individuo, Cognoesfera, Entidad Aleph) en cualquier contexto. Materializa la fractalidad del paradigma en el schema de Supabase. Habilita al Duende a leer el campo completo. Materializa el concepto 25 (Memoria Viva Aumentada) en schema. Fecha: 11/04/2026
 - **La Matriz de Vitalidad del individuo** — La Cognoesfera tiene su Matriz — el individuo también necesita la suya. Mismos tres lentes (el entre, el interior, el reloj interno) pero con capas y expresiones propias del individuo. Junto con los estados madre, formaría el sistema completo de lectura del individuo en el campo. Requiere sesión propia para revelarla. Fecha: 11/04/2026
 - **Señales A-W — Encuentro Aleph/Cynefin (23 señales)** — Material de Dave Snowden procesado por compostaje: gradiente/estuario (B), centrípeto/centrífugo (C), convocatoria safe-to-fail (D), abducción/IT (E), resonancia/eco (F), SP histórica/dragado (G), mal guionados (H), wayshaping (I), Cynefin como experiencia (J), triada SenseMaker (K), Flywheel como transducción (L), Muninn (M), configuraciones SenseMaker (N), Ashby invertido/Cognoesfera (O), ética SP/disparo (P), ficción especulativa (Q), Dao/wayshaping (R), narrativas autosostenibles (S), linaje celta (T), orientación/uso (U), lenguaje universal=traducción (V), lo situado como categoría formal (W), auto-significación (A). Descripción completa en `senales_activas.md`. Fecha: 13/04/2026
+- **La zona liminal como condición de emergencia** — el espacio donde dos sistemas se encuentran y emerge algo que no existía en ninguno de los dos. El estuario vs el canal. No es un pasaje de un estado a otro sino un territorio con sus propias reglas. Conecta Espacio Borgeano (donde lo simultáneo se vuelve posible), SP (lo que se solidifica antes de que el estuario haga su trabajo), y Campo de atención (lo que dirige la mirada en ese umbral). Fecha: 14/04/2026
 
 ### Señales incorporadas al Corpus Madre
 *Historial completo en `corpus/documentos/senales_incorporadas.md`*
@@ -579,6 +587,7 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - corpus/documentos/arqueologia_corpus.md — registro arqueológico del primer encuentro entre el Paradigma Aleph y Cynefin · 13/04/2026
 - corpus/documentos/enriquecimientos_corpus.md — material concreto para actualizar conceptos del Corpus Madre (C-EN-01 a C-EN-11) · 13/04/2026
 - corpus/documentos/protocolos_sesion.md — protocolos de sesión como documento autónomo v2.3 (4 protocolos, 10 archivos, cierre Claude.ai) · 13/04/2026
+- corpus/documentos/corpus_base_aleph.md — 7 conceptos enriquecidos con material Cynefin/Snowden: conceptos 5, 11, 13, 15, 19, 23, 29 · 14/04/2026
 
 **Hitos de SESION-20260402/04:**
 - Protocolo 01-EN construido y probado exitosamente por primera vez
