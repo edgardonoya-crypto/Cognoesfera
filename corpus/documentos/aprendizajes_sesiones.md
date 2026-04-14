@@ -288,4 +288,12 @@ El compostaje requiere dos pasos: primero dejar que el material externo se desco
 
 ---
 
+## Sesión 14/04/2026
+*"La simbiosis — cuando el corpus aprendió a compostar desde adentro"*
+
+### Aprendizaje operativo
+El cierre sin verificación cruzada entre archivos produce inconsistencias que el próximo inicio detecta. Cinco inconsistencias encontradas post-commit: header desactualizado, pendiente mal ubicado, referencia incorrecta, hito con número equivocado, entrada obsoleta en A8. Raíz: Claude Code actualizó archivos por separado sin leer el conjunto como sistema.
+
+---
+
 *Aprendizajes de Sesiones · Paradigma Aleph · Iniciado Abril 2026*

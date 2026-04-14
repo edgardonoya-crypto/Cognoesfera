@@ -1,6 +1,6 @@
 # Protocolos de Sesión — Paradigma Aleph
 *Documento autónomo de protocolos · Referenciado desde corpus/SESION.md*
-*Versión: 2.3 · 13/04/2026*
+*Versión: 2.4 · 14/04/2026*
 *Versión anterior: integrada en SESION.md hasta SESION-20260413*
 
 ---
@@ -89,6 +89,9 @@ Con los archivos recibidos, verificar:
 - ¿Hay pendientes completados que no pasaron al histórico?
 - ¿Hay enriquecimientos en enriquecimientos_corpus.md que ya fueron incorporados al Corpus Madre en esta sesión y necesitan registro de incorporación?
 - ¿El encuentro registrado en arqueologia_corpus.md tiene material nuevo de esta sesión que agregar?
+- ¿Los headers de archivos con conteos y fechas coinciden con el dashboard del status?
+- ¿Todos los pendientes nuevos están en su subcategoría correcta?
+- ¿Las entradas en A8 "señales vivas pendientes" siguen siendo válidas a la luz de lo que se incorporó en la sesión?
 
 Reportar cada inconsistencia y esperar decisión del Arquitecto antes de continuar.
 
@@ -229,7 +232,8 @@ El aviso es: *"Hay cambios sin commitear desde [descripción]. ¿COMMIT ALEPH an
 | 2.1 | 13/04/2026 | Protocolo 04-EN agregado: cierre de Claude.ai antes de ir a Claude Code. Cubre el gap de material conceptual que emerge en sesiones de diseño y pensamiento antes de llegar a Claude Code. |
 | 2.2 | 13/04/2026 | Protocolo 01-EN ajustado: pasos 2d y 2e agregados. 2d: validación de señales inferidas al inicio de sesión. 2e: chequeo de consistencia entre C-EN en pendientes_corpus.md y entradas en enriquecimientos_corpus.md. |
 | 2.3 | 13/04/2026 | Protocolo 03-EN ajustado: COMMIT ALEPH COMPLETO ahora incluye protocolos_sesion.md cuando fue modificado en la sesión. Nota permanente: protocolo y commit deben evolucionar juntos. |
+| 2.4 | 14/04/2026 | Protocolo 02-EN paso 2 ampliado: tres chequeos nuevos — (a) headers con conteos y fechas vs dashboard status, (b) pendientes nuevos en subcategoría correcta, (c) señales vivas pendientes válidas a la luz de lo incorporado. Origen: 5 inconsistencias post-commit SESION-20260414. |
 
 ---
 
-*Protocolos de Sesión · Paradigma Aleph · Versión 2.0 · 13/04/2026*
+*Protocolos de Sesión · Paradigma Aleph · Versión 2.4 · 14/04/2026*
