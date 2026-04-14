@@ -2,7 +2,7 @@
 *Pendientes conceptuales, documentales y narrativos del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes CORPUS*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 13/04/2026: 38*
+*Pendientes activos al 14/04/2026: 33*
 
 ---
 
@@ -359,6 +359,16 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 **Estado:** Activo
 **Fecha:** 14/04/2026
 **Dependencias:** Ninguna
+
+---
+
+**C-EN-13**
+**Título:** Sesión dedicada: la zona liminal como concepto formal del Corpus Madre
+**Descripción:** La señal "La zona liminal como condición de emergencia" (SESION-20260414) necesita sesión propia para determinar si entra al corpus como concepto nuevo o como principio transversal. La zona liminal es el espacio donde dos sistemas se encuentran y emerge algo que no existía en ninguno de los dos — el estuario vs el canal. Conecta Espacio Borgeano, SP y Campo de atención. Candidato a concepto nuevo o enriquecimiento del concepto 1 (El Entre).
+**Prioridad:** P4
+**Estado:** Activo
+**Fecha:** 14/04/2026
+**Dependencias:** Señal "La zona liminal como condición de emergencia"
 
 ---
 

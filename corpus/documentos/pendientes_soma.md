@@ -2,7 +2,7 @@
 *Pendientes técnicos, operativos e infraestructura del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes SOMA*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 12/04/2026: 19*
+*Pendientes activos al 14/04/2026: 20*
 
 ---
 
@@ -225,6 +225,16 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 **Estado:** Activo
 **Fecha:** 11/04/2026
 **Dependencias:** Ninguna
+
+---
+
+**S-AP-11**
+**Título:** Implementar Tríada de Percepción
+**Descripción:** Implementar la Tríada de Percepción como instrumento de lectura del campo individual. Incluye: tablas `triadas` y `percepciones_triada` en Supabase, componente visual en /quanam-ia-2026 donde el usuario posiciona su percepción en el triángulo (auto-significación), y sección en /admin para que el Arquitecto lea el campo colectivo agregado. Basado en el mecanismo SenseMaker (C-EN-09) adaptado al paradigma. Primer instrumento de lectura fractal individuo → Cognoesfera.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 14/04/2026
+**Dependencias:** C-EN-09
 
 ---
 
