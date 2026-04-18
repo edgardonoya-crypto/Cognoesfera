@@ -52,5 +52,13 @@ La diferencia con `senales_custodiadas.md`: las señales custodiadas ya tienen f
 
 ---
 
+---
+
+## Espacio Alephiano, lugar geométrico situado y Distancia Alephiana como familia conceptual
+
+**Fecha:** 15/04/2026
+**Origen:** Emergió en SESION-20260415 al conectar la Tríada de Percepción con los conceptos de espacio, geometría y campo. La sesión también exploró conexiones con el vacío cuántico (física) y Cantor (matemática) como posibles linajes.
+**Pregunta central:** ¿Estos tres conceptos son suficientemente distintos del Espacio Borgeano e instante borgeano para merecer entrada propia en el Corpus Madre, o son reformulaciones con nomenclatura nueva? ¿La conexión con el vacío cuántico y con Cantor tiene rigor suficiente para ser linaje formal o opera solo como imagen que ilumina? Requiere sesión propia con tiempo suficiente y posiblemente consulta con alguien con formación en física o matemática antes de incorporar al corpus.
+
 *Temas Pendientes de Exploración · Paradigma Aleph · Iniciado Abril 2026*
 *Para señales con forma suficiente, ver: `senales_activas.md`*

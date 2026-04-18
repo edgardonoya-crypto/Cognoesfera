@@ -263,6 +263,26 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 ---
 
 **C-DO-07**
+**Título:** Diseñar sección de collages/papers en el corpus
+**Descripción:** Los documentos de síntesis — como "La inteligencia que emerge" generado en SESION-20260415 — tienen naturaleza de paper más que de documento operativo. Diseñar una sección propia en el repositorio: formato, nivel de visibilidad (privado → Cognoesfera → público), relación con el Corpus Madre. "La inteligencia que emerge" sería el primer caso — en estado de borrador, requiere revisión antes de publicación.
+**Prioridad:** P3
+**Estado:** Activo
+**Fecha:** 15/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**C-CO-13**
+**Título:** Diseñar tríadas para Cognoesfera y Entidad Aleph
+**Descripción:** El catálogo actual de 8 geometrías está diseñado para el individuo. El paradigma opera en tres escalas y cada una necesita sus propias tríadas. Las tríadas de Cognoesfera revelarían el campo de un grupo con historia y coherencia relacional. Las de Entidad Aleph revelarían la percepción de una red de Cognoesferas. Aplicar la metodología de construcción de geometrías desarrollada en SESION-20260415. Requiere sesión propia.
+**Prioridad:** P3
+**Estado:** Activo
+**Fecha:** 15/04/2026
+**Dependencias:** Señal "Tríada de Percepción"
+
+---
+
+**C-DO-08**
 **Título:** Limpiar referencias a "Quanam" en documentos
 **Descripción:** El paradigma es agnóstico de organizaciones. Revisar todos los documentos y eliminar referencias que lo subordinen a Quanam.
 **Prioridad:** P4
@@ -369,6 +389,46 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 **Estado:** Activo
 **Fecha:** 29/03/2026
 **Dependencias:** Ninguna
+
+---
+
+**C-CO-09**
+**Título:** Articular coherencia entre Campo de atención, Tríada de Percepción, Conversación Aumentada e Instante Alephiano
+**Descripción:** Los cuatro conceptos describen el mismo fenómeno en cuatro momentos distintos pero el corpus todavía no lo nombra explícitamente. Hipótesis emergida en SESION-20260415: Campo de atención (condición previa) → Tríada de Percepción (mecanismo que activa) → Conversación Aumentada (proceso vivo) → Instante Alephiano (momento de emergencia). Son cuatro capas del mismo campo, no cuatro conceptos separados. La coherencia entre ellos no requiere fusionarlos sino nombrar cómo se articulan como secuencia viva.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 15/04/2026
+**Dependencias:** Señal "Tríada de Percepción" · C-EN-05 · C-EN-13
+
+---
+
+**C-CO-10**
+**Título:** Migrar nomenclatura borgeano → alephiano en todos los documentos
+**Descripción:** Decisión tomada en SESION-20260415: Espacio Borgeano → Espacio Alephiano, instante borgeano → Instante Alephiano. Actualizar en: corpus_base_aleph.md (conceptos 21 y 25), SESION.md (A2 nomenclatura, A3, señales activas), system prompt del Duende, senales_activas.md, arqueologia_corpus.md, enriquecimientos_corpus.md, y todos los documentos que los mencionen.
+**Prioridad:** P1
+**Estado:** Activo
+**Fecha:** 15/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**C-CO-11**
+**Título:** Cambio de nomenclatura IAH → IHA en todos los documentos
+**Descripción:** Decisión tomada en SESION-20260415: IAH (Inteligencia Aumentada Humanista) → IHA (Inteligencia Humana Aumentada). Actualizar en: corpus_base_aleph.md (concepto 27), SESION.md (A2 nomenclatura, A3), system prompt del Duende, senales_activas.md, y todos los documentos que mencionen IAH o Inteligencia Aumentada Humanista.
+**Prioridad:** P1
+**Estado:** Activo
+**Fecha:** 15/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**C-CO-12**
+**Título:** Incorporar al Corpus Madre los conceptos nuevos emergidos en SESION-20260415
+**Descripción:** Nueve conceptos emergidos en sesión requieren incorporación formal: lugar geométrico situado, Espacio Alephiano, Distancia Alephiana, Instante Alephiano (renombrado), condicionantes generativas, andamiaje topológico, adyacentes posibles, Tríada de Percepción, IHA (renombrado y enriquecido). Algunos reemplazan conceptos existentes, otros son nuevos. Usar los esbozos del documento conceptos_emergentes_aleph.pdf generado en SESION-20260415 como punto de partida. Requiere sesión propia.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 15/04/2026
+**Dependencias:** C-CO-10 · C-CO-11
 
 ---
 

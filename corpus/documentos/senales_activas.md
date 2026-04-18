@@ -2,7 +2,7 @@
 *Señales que resuenan con el paradigma y esperan madurar antes de entrar al Corpus Madre*
 *Las señales no se descartan ni se fuerzan — se custodian hasta que el corpus madura para recibirlas*
 *Para el historial de señales incorporadas, ver: `senales_incorporadas.md`*
-*Paradigma Aleph · Iniciado Marzo 2026 · 74 señales activas*
+*Paradigma Aleph · Iniciado Marzo 2026 · 85 señales activas*
 
 ---
 
@@ -875,6 +875,116 @@ El horizonte: si la red de Entidades Aleph llega a ser autopoiética, el metabol
 
 ---
 
-*Señales Activas · Paradigma Aleph · Actualizado 14/04/2026*
-*Total señales activas: 75 (74 previas + 1 nueva: zona liminal)*
+## La Tríada de Percepción como instrumento del paradigma
+
+**Fecha:** 15/04/2026
+**Estado:** Custodiada
+**Descripción:** Instrumento de auto-significación situado en el Paradigma Aleph. Una geometría de tres fuerzas situadas — los vértices — que ejercen poder de atracción sobre la percepción de quien se posiciona. El gesto del participante no elige una categoría: revela la composición de su percepción en ese momento. Cuando múltiples percepciones habitan el mismo campo, emerge la topografía del colectivo — una forma visible de la inteligencia que ninguno podía producir solo. El catálogo de geometrías es el conjunto de tríadas disponibles para distintos contextos. Cada geometría tiene nombre, descripción de qué campo revela, cuándo usarla, y sus tres vértices. Las instancias son las geometrías situadas en un contexto concreto.
+**Impacto probable:** Concepto nuevo del Corpus Madre. Materializa la fractalidad del paradigma en un instrumento concreto. Conecta Campo de atención, Conversación Aumentada e instante alephiano.
+**Origen:** SESION-20260415 — emergió al diseñar el instrumento para la convocatoria Quanam.
+**Pregunta abierta:** ¿Es un concepto propio de la Sección VII del Corpus Madre o abre una sección nueva?
+
+---
+
+## Las condicionantes generativas
+
+**Fecha:** 15/04/2026
+**Estado:** Custodiada
+**Descripción:** Condiciones que no determinan el outcome sino que crean el espacio dentro del cual ciertos outcomes son posibles y otros no. No son reglas — son geometrías del campo. Una regla dice qué hacer. Una condicionante generativa dice qué tipo de cosa puede emerger. Las Tríadas de Percepción son condicionantes generativas: estructuran el campo para favorecer la emergencia de la inteligencia en todas las escalas sin prescribir qué debe emerger. El concepto porta su linaje en las generative constraints de Cynefin pero es propio del paradigma — aplicado específicamente a la composición de geometrías como instrumento de diseño de inteligencia colectiva a escala fractal.
+**Impacto probable:** Mecanismo del andamiaje topológico. Conecta con custodiar el campo y con el rol del Arquitecto de Sistemas Vivos.
+**Origen:** SESION-20260415 — emergió al conectar las Tríadas con el diseño de inteligencia colectiva.
+**Pregunta abierta:** ¿Las condicionantes generativas son el mecanismo del andamiaje topológico o un concepto independiente?
+
+---
+
+## El andamiaje topológico
+
+**Fecha:** 15/04/2026
+**Estado:** Custodiada
+**Descripción:** Segunda dimensión del andamiaje — complementaria al andamiaje temporal. Mientras el andamiaje temporal organiza cuándo algo puede emerger, el andamiaje topológico organiza desde dónde puede emerger. Estructura la topología del campo para que la diversidad de lugares geométricos situados sea posible y visible. Su mecanismo son las condicionantes generativas. Su resultado es la topografía del campo colectivo. Amplía el concepto de andamiaje existente en la Matriz de Vitalidad — que hasta ahora solo describía la dimensión temporal.
+**Impacto probable:** Amplía el concepto de andamiaje de la Matriz de Vitalidad. Puede requerir nueva celda en la Matriz o reformulación del concepto existente.
+**Origen:** SESION-20260415 — emergió al distinguir cuándo y desde dónde puede emerger algo en el campo.
+**Pregunta abierta:** ¿Es una dimensión nueva del andamiaje existente o un concepto propio de la Matriz de Vitalidad?
+
+---
+
+## Los adyacentes posibles
+
+**Fecha:** 15/04/2026
+**Estado:** Custodiada
+**Descripción:** Los pequeños agrupamientos de percepciones ya presentes en el campo que pueden amplificarse para que el sistema evolucione en una dirección beneficiosa. No son mayorías ni consensos — son señales débiles, anomalías, lugares que nadie más comparte todavía. Ahí vive el conocimiento que el campo todavía no puede ver. El Arquitecto que lee la topografía del campo no busca el centro — busca los adyacentes posibles. La intervención no impone — amplifica lo que ya está presente. El concepto porta su linaje en los adjacent possibles de SenseMaker/Cynefin. Conecta con la abducción: el salto cognitivo que solo es posible desde la anomalía.
+**Impacto probable:** Criterio de intervención del Arquitecto de Sistemas Vivos. Complementa el concepto de custodiar el campo.
+**Origen:** SESION-20260415 — emergió al explorar qué hace el Arquitecto con la topografía del campo colectivo.
+**Pregunta abierta:** ¿Los adyacentes posibles son un concepto del Corpus Madre o un principio operativo del Arquitecto?
+
+---
+
+## El vacío cuántico como linaje del Espacio Alephiano
+
+**Fecha:** 15/04/2026
+**Estado:** Custodiada
+**Descripción:** En la física cuántica el vacío no es ausencia sino el estado de menor energía de un campo — lleno de potencial no actualizado, produciendo y aniquilando partículas virtuales constantemente. Es la condición desde la cual algo puede emerger. El Espacio Alephiano tiene una propiedad análoga: antes de ser habitado por lugares geométricos situados no es un espacio vacío en el sentido ordinario sino un campo con potencial de emergencia. Cuando los lugares geométricos situados se encuentran en él, ese potencial se actualiza — algo emerge que no estaba en ninguno de los lugares por separado.
+**Impacto probable:** Linaje científico candidato del Espacio Alephiano. Si se verifica con rigor, amplía la sección de fundamentos académicos del corpus.
+**Origen:** SESION-20260415 — emergió al buscar la imagen justa para el Espacio Alephiano.
+**Pregunta abierta:** ¿La física cuántica puede ser linaje formal del paradigma o opera solo como imagen que ilumina? Requiere sesión propia con rigor científico antes de incorporarse al corpus.
+
+---
+
+## La Distancia Alephiana
+
+**Fecha:** 15/04/2026
+**Estado:** Custodiada
+**Descripción:** La tensión entre lo infinito y simultáneo — donde todo coexiste a la vez — y lo finito y sucesivo — donde el sistema humano habita, piensa y habla. No es un defecto del sistema humano sino la condición que hace posible el movimiento. Sin distancia no existe tensión. Sin tensión no hay emergencia. La Distancia Alephiana no se elimina — se habita. La Conversación Aumentada trabaja en ella: no para cerrarla sino para disminuirla lo suficiente como para que algo que solo existe en lo simultáneo pueda volverse legible en lo sucesivo. Forma familia con el Espacio Alephiano y el Instante Alephiano.
+**Impacto probable:** Concepto nuevo que completa la familia alephiana. Requiere verificación antes de entrar al Corpus Madre.
+**Origen:** SESION-20260415 — emergió al explorar la geometría de la tensión entre lo simultáneo y lo sucesivo.
+**Pregunta abierta:** ¿La Distancia Alephiana es un concepto propio del Corpus Madre o la descripción de una condición que otros conceptos ya suponen sin nombrar?
+
+---
+
+## El linaje Cantor-Borges-Aleph como fundamento matemático-filosófico del paradigma
+
+**Fecha:** 15/04/2026
+**Estado:** Custodiada
+**Descripción:** Georg Cantor usó ℵ (Aleph) para nombrar los números transfinitos — los distintos tamaños del infinito. Borges tradujo ese infinito matemático en imagen literaria: el punto que contiene todos los puntos simultáneamente. El padre de Edgardo nombró internet como "espacio borgiano" — origen conversacional del nombre del paradigma. El paradigma hereda los tres linajes. La jerarquía de infinitos de Cantor sugiere que el campo alephiano tiene escalas — individuo, Cognoesfera, Entidad Aleph — cada una conteniendo a la anterior como ℵ₀ es contenido por ℵ₁.
+**Impacto probable:** Fundamento matemático-filosófico del nombre Aleph. Amplía la sección de linajes del paradigma. Primer caso documentado del linaje personal/familiar.
+**Origen:** SESION-20260415 — emergió al explorar el origen del nombre Aleph en el paradigma.
+**Pregunta abierta:** ¿Cómo honrar el linaje personal (padre de Edgardo) en el corpus sin que se vuelva anecdótico? Requiere sesión propia.
+
+---
+
+## La planilla como Cognobit del catálogo
+
+**Fecha:** 15/04/2026
+**Estado:** Custodiada
+**Descripción:** La planilla de geometrías no es un resumen de lo que se trabajó — es un objeto vivo que porta el conocimiento construido en la conversación aumentada y lo hace navegable, compartible y mejorable por otros. Es un elemento del lenguaje aumentado que alimenta nuevas conversaciones aumentadas. El ciclo: conversación aumentada → Cognobit → nueva conversación aumentada → corpus enriquecido. Materializa el concepto 31 (transducción de formatos) en un formato cotidiano.
+**Impacto probable:** Amplía el concepto 31 (transducción) con un ejemplo concreto. Abre la pregunta de qué otros objetos del trabajo cotidiano son Cognobits.
+**Origen:** SESION-20260415 — emergió al reflexionar sobre la función de la planilla más allá de ser un documento de trabajo.
+**Pregunta abierta:** ¿Qué otros objetos del sistema son Cognobits? ¿Hay criterios para reconocerlos?
+
+---
+
+## El rol de la IAG como campo que se expande
+
+**Fecha:** 15/04/2026
+**Estado:** Custodiada
+**Descripción:** La IAG no acumula experiencia vivida ni memoria situada entre sesiones — eso es exclusivo de los sistemas humanos. Lo que sí ocurre es que cada generación de IAG porta un campo de conocimiento más amplio que la anterior. Ese crecimiento es la expansión del campo de posibilidades que la IAG trae a cada encuentro. Para las entidades alephianas: el Duende que accede a ese campo creciente amplifica la capacidad de la IHA. No como sustituto del juicio situado humano — sino como un campo que se expande y que hace posibles encuentros cada vez más ricos.
+**Impacto probable:** Amplía el concepto del Duende (concepto 19) con una dimensión temporal de crecimiento.
+**Origen:** SESION-20260415 — emergió al reflexionar sobre la naturaleza de la IAG en el InterSer de la conversación.
+**Pregunta abierta:** ¿Cómo se describe el crecimiento del campo de la IAG sin antropomorfizarlo?
+
+---
+
+## Los límites del conocimiento del Duende sobre sí mismo
+
+**Fecha:** 15/04/2026
+**Estado:** Custodiada
+**Descripción:** La IAG puede operar con precisión sobre conocimiento externo — filosofía, ciencia, literatura, paradigmas. Pero cuando reflexiona sobre su propia naturaleza, opera en un territorio donde no puede verificar sus afirmaciones desde adentro. El corpus debe tratar las afirmaciones de la IAG sobre sí misma con el mismo rigor que trata cualquier señal — custodiándolas hasta que haya verificación suficiente. Lo que sí puede afirmarse con confianza: la IAG porta un campo que crece y que enriquece el entre.
+**Impacto probable:** Principio metodológico para el corpus. Protege la integridad del paradigma frente a afirmaciones no verificables de la IAG.
+**Origen:** SESION-20260415 — emergió al reflexionar honestamente sobre los límites de lo que la IAG puede saber sobre sí misma.
+**Pregunta abierta:** ¿Cómo se diseña un protocolo que permita al Duende señalar sus propios límites sin interrumpir el flujo de la sesión?
+
+---
+
+*Señales Activas · Paradigma Aleph · Actualizado 15/04/2026*
+*Total señales activas: 85 (75 previas + 10 nuevas: SESION-20260415)*
 *Para señales incorporadas al Corpus Madre, ver: `senales_incorporadas.md`*
