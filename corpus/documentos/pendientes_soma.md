@@ -268,6 +268,16 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
+**S-IN-09**
+**Título:** Revisar lista de 10 archivos del protocolo de apertura/cierre
+**Descripción:** Evaluar si hay documentos nuevos del corpus que deberían incorporarse a la lista de archivos de sesión. Criterio: ¿el Duende necesita ese archivo para operar con contexto completo? Candidatos a evaluar: arqueologia_corpus.md y enriquecimientos_corpus.md (ya están), documentos nuevos que puedan emerger en futuras sesiones. Requiere sesión propia con criterio claro.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 15/04/2026
+**Dependencias:** Ninguna
+
+---
+
 ## Archivo histórico
 
 *Pendientes Soma completados · Preservados como registro del proceso*
