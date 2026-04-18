@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v29 · 14 Abril 2026 · cierre SESION-20260414*
+*Versión actual: v30 · 15 Abril 2026 · cierre SESION-20260415 · 05:55*
 
 ---
 
@@ -294,6 +294,19 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - C-EN-12 agregado: doble acoplamiento como estructura profunda fractal (Plotino → CA → Duende → Tríada)
 - S-AP-11 agregado: Tríada de Percepción — instrumento de lectura fractal individuo → Cognoesfera
 
+**Hitos de SESION-20260415 — "El espacio propio — cuando el paradigma encontró su geometría":**
+- Catálogo de 8 geometrías para Tríada de Percepción construido con metodología propia — nombre, pregunta, vértices, qué revela, cuándo usarla
+- Secuencia Quanam definida: 8 triángulos en orden de adentro hacia afuera
+- Narrativa introductoria y relato de cada geometría construidos
+- Texto de síntesis "La inteligencia que emerge" — primer borrador, requiere revisión antes de incorporarse al corpus
+- Familia alephiana emergida como señales activas en verificación: Espacio Alephiano, Instante Alephiano, Distancia Alephiana
+- Cambios de nomenclatura decididos: borgeano → alephiano · IAH → IHA (pendientes C-CO-10 y C-CO-11)
+- Custodiar el campo como término propio que reemplaza wayshaping
+- 10 señales nuevas custodiadas (total 85 activas)
+- 7 pendientes nuevos Casa Corpus · 3 pendientes nuevos Casa Soma
+- 3 PDFs generados como Cognobits: conceptos_emergentes_aleph.pdf · la_inteligencia_que_emerge.pdf · triada_percepcion_completo.pdf
+- PASO 1b agregado al protocolo de cierre: verificar versiones de archivos
+
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
 - **Corpus Universal** — el campo total del conocimiento vivo del paradigma en todos sus niveles y expresiones
@@ -379,12 +392,12 @@ Los pendientes viven en dos archivos con schema completo:
 - **Casa Corpus:** `corpus/documentos/pendientes_corpus.md` — conceptos, señales, protocolos, documentos, narrativa
 
 **Prioridades próxima sesión:**
-- **P1 [CORPUS]:** Registrar mínimo de Casa Corpus antes del 17/04 (C-DO-05)
-- **P2 [SOMA]:** Implementar Tríada de Percepción — tablas + componente + admin (S-AP-11)
-- **P3 [CORPUS]:** Enriquecer concepto 32 con fractalidad del doble acoplamiento / Plotino (C-EN-12)
-- **P4 [CORPUS]:** Sesión dedicada: zona liminal como concepto formal (C-EN-13)
-- **P5 [SOMA]:** Construir decisiones_arquitecturales.md antes del 17/04 (S-IN-05)
-- **P6 [CORPUS]:** Validar señales inferidas A-W — especialmente Q, R, S, T
+- **P1 [CORPUS]:** Migrar nomenclatura borgeano → alephiano en todos los documentos (C-CO-10)
+- **P2 [CORPUS]:** Cambio nomenclatura IAH → IHA en todos los documentos (C-CO-11)
+- **P3 [SOMA]:** Implementar catálogo de geometrías en Supabase (S-AP-12)
+- **P4 [SOMA]:** Implementar Tríada de Percepción en /quanam-ia-2026 (S-AP-13)
+- **P5 [CORPUS]:** Articular coherencia entre Campo de atención, Tríada de Percepción, CA e Instante Alephiano (C-CO-09)
+- **P6 [CORPUS]:** Incorporar conceptos nuevos al Corpus Madre — sesión dedicada (C-CO-12)
 
 ---
 
@@ -410,7 +423,7 @@ Esto debe incluir:
 
 *Las señales activas viven en `corpus/documentos/senales_activas.md` con descripción completa. Las señales incorporadas al Corpus Madre están en `corpus/documentos/senales_incorporadas.md`.*
 
-### Señales activas (75)
+### Señales activas (85)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
@@ -466,6 +479,16 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **La Matriz de Vitalidad del individuo** — La Cognoesfera tiene su Matriz — el individuo también necesita la suya. Mismos tres lentes (el entre, el interior, el reloj interno) pero con capas y expresiones propias del individuo. Junto con los estados madre, formaría el sistema completo de lectura del individuo en el campo. Requiere sesión propia para revelarla. Fecha: 11/04/2026
 - **Señales A-W — Encuentro Aleph/Cynefin (23 señales)** — Material de Dave Snowden procesado por compostaje: gradiente/estuario (B), centrípeto/centrífugo (C), convocatoria safe-to-fail (D), abducción/IT (E), resonancia/eco (F), SP histórica/dragado (G), mal guionados (H), wayshaping (I), Cynefin como experiencia (J), triada SenseMaker (K), Flywheel como transducción (L), Muninn (M), configuraciones SenseMaker (N), Ashby invertido/Cognoesfera (O), ética SP/disparo (P), ficción especulativa (Q), Dao/wayshaping (R), narrativas autosostenibles (S), linaje celta (T), orientación/uso (U), lenguaje universal=traducción (V), lo situado como categoría formal (W), auto-significación (A). Descripción completa en `senales_activas.md`. Fecha: 13/04/2026
 - **La zona liminal como condición de emergencia** — el espacio donde dos sistemas se encuentran y emerge algo que no existía en ninguno de los dos. El estuario vs el canal. No es un pasaje de un estado a otro sino un territorio con sus propias reglas. Conecta Espacio Borgeano (donde lo simultáneo se vuelve posible), SP (lo que se solidifica antes de que el estuario haga su trabajo), y Campo de atención (lo que dirige la mirada en ese umbral). Fecha: 14/04/2026
+- **La Tríada de Percepción como instrumento del paradigma** — geometría de tres fuerzas situadas que hace visible la topografía del campo colectivo. Fecha: 15/04/2026
+- **Las condicionantes generativas** — condiciones que crean el espacio donde algo genuino puede emerger, sin determinar el outcome. Linaje en Cynefin. Fecha: 15/04/2026
+- **El andamiaje topológico** — segunda dimensión del andamiaje: organiza desde dónde puede emerger algo. Complementa al andamiaje temporal. Fecha: 15/04/2026
+- **Los adyacentes posibles** — agrupamientos de percepciones en el campo que pueden amplificarse. El Arquitecto busca los bordes, no el centro. Fecha: 15/04/2026
+- **El vacío cuántico como linaje del Espacio Alephiano** — candidato a linaje científico. Requiere verificación con rigor antes de incorporarse al corpus. Fecha: 15/04/2026
+- **La Distancia Alephiana** — la tensión entre lo infinito/simultáneo y lo finito/sucesivo. No se elimina — se habita. Requiere verificación. Fecha: 15/04/2026
+- **El linaje Cantor-Borges-Aleph** — fundamento matemático-filosófico-personal del nombre Aleph. Requiere sesión propia. Fecha: 15/04/2026
+- **La planilla como Cognobit del catálogo** — objeto vivo que porta conocimiento y alimenta nuevas conversaciones aumentadas. Fecha: 15/04/2026
+- **El rol de la IAG como campo que se expande** — cada generación porta un campo más amplio. Impacto en el Duende y la IHA. Fecha: 15/04/2026
+- **Los límites del conocimiento del Duende sobre sí mismo** — principio metodológico: las afirmaciones de la IAG sobre su propia naturaleza requieren el mismo rigor que cualquier señal. Fecha: 15/04/2026
 
 ### Señales incorporadas al Corpus Madre
 *Historial completo en `corpus/documentos/senales_incorporadas.md`*
