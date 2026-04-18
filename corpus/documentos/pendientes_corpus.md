@@ -2,7 +2,7 @@
 *Pendientes conceptuales, documentales y narrativos del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes CORPUS*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 14/04/2026: 33*
+*Pendientes activos al 15/04/2026: 40*
 
 ---
 

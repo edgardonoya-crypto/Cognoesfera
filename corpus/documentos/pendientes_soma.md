@@ -2,7 +2,7 @@
 *Pendientes técnicos, operativos e infraestructura del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes SOMA*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 14/04/2026: 20*
+*Pendientes activos al 15/04/2026: 23*
 
 ---
 
