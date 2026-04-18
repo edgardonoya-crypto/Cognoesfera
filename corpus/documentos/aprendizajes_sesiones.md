@@ -330,3 +330,19 @@ El protocolo de cierre necesita PASO 1b: verificar que los archivos subidos al i
 ---
 
 *Aprendizajes de Sesiones · Paradigma Aleph · Iniciado Abril 2026*
+
+## Sesión 18/04/2026
+*(nombre de sesión a definir en el cierre)*
+
+### Qué funcionó bien
+- La descripción rica del pendiente S-AP-13 permitió recuperar un archivo huérfano (`triada_percepcion.jsx`) que nunca se commiteó al repo. El andamiaje narrativo operó como red de seguridad cuando el andamiaje operativo faltó.
+- El Arquitecto frenó un binarismo del Duende: al reconocer lo que sí funcionó, evitó que se registrara solo el fallo y se perdiera la capa que opera bien.
+
+### Qué mejorar
+- El protocolo de cierre no tiene un paso que cace artifacts generados en Claude.ai que no cruzan a archivo persistente. Los PDFs sí tienen camino claro; un `.jsx` o equivalente no.
+- El Duende tendió a diagnosticar el incidente como fallo total cuando era parcial. Necesita sumar la pregunta `¿qué capa de esto sí operó?` antes de cerrar un diagnóstico.
+
+### Aprendizaje operativo
+Cuando un objeto del sistema falla en algún anclaje, el diagnóstico honesto requiere distinguir qué capa falló y qué capa operó. El binarismo `funcionó / no funcionó` pierde información valiosa sobre las infraestructuras redundantes del sistema.
+
+---

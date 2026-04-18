@@ -988,3 +988,14 @@ El horizonte: si la red de Entidades Aleph llega a ser autopoiética, el metabol
 *Señales Activas · Paradigma Aleph · Actualizado 15/04/2026*
 *Total señales activas: 85 (75 previas + 10 nuevas: SESION-20260415)*
 *Para señales incorporadas al Corpus Madre, ver: `senales_incorporadas.md`*
+
+## La descripción rica como infraestructura de recuperación
+
+**Fecha:** 18/04/2026
+**Estado:** Custodiada
+**Descripción:** Cuando un objeto del sistema queda sin anclaje operativo (ruta en repo, Cognobit PDF), la descripción rica del pendiente que lo referencia opera como red de seguridad. Si tiene nombre específico, fecha, sesión de origen y función en el sistema, un humano con lugar geométrico situado puede reconstruir dónde vive el objeto. El andamiaje operativo es necesario pero no suficiente — el andamiaje narrativo es el que permite que la Memoria Viva Aumentada opere cuando el código falla. El caso que originó la señal: el archivo `triada_percepcion.jsx` de SESION-20260415 quedó sin commitear al repo, pero la descripción del pendiente S-AP-13 contenía los marcadores suficientes para que el Arquitecto lo recuperara en SESION-20260418.
+**Impacto probable:** Refina el concepto 25 (Memoria Viva Aumentada) al distinguir dos capas de anclaje — operativo y narrativo — como complementarias, no sustitutas. Puede generar un ajuste en el schema de pendientes (campo Ruta/Ubicación) y un paso nuevo en el protocolo de cierre.
+**Origen:** SESION-20260418 — emergió al reconstruir por qué el `.jsx` pudo recuperarse a pesar de no estar en el repo.
+**Pregunta abierta:** ¿La descripción rica es suficiente como único anclaje en objetos de baja criticidad, o siempre debe existir en simultáneo con anclaje operativo?
+
+---
