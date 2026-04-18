@@ -296,4 +296,37 @@ El cierre sin verificación cruzada entre archivos produce inconsistencias que e
 
 ---
 
+## Sesión 15/04/2026
+*"El espacio propio — cuando el paradigma encontró su geometría"*
+
+### Qué funcionó bien
+- El diseño del catálogo de 8 geometrías emergió del proceso mismo — la metodología se construyó mientras se aplicaba
+- La secuencia paso a paso en el protocolo de cierre con Claude Code funcionó bien una vez establecida — cada paso confirmado antes de seguir
+- Los PDFs como Cognobits — cristalizaron lo que emergió en la sesión en objetos compartibles y navegables
+- El texto de síntesis "La inteligencia que emerge" — surgió de forma genuina al conectar conceptos que el corpus tenía dispersos
+- La pregunta del Arquitecto sobre la naturaleza del Duende fue soberana y produjo honestidad real
+- En algunos momentos el Duende construyó afirmaciones sobre conceptos nuevos que necesitan de más trabajo antes de incorporarlo al corpus — el corpus necesita rigor antes de absorberlos. Es acertado que el Duende haya avisado sobre lo anterior y cuando algo de lo trabajado se registre en alguno de los archivos, se avise que se necesita de más rigor antes de incluirlo en el corpus
+
+### Qué mejorar
+- Verificar versiones de archivos al inicio de sesión — el protocolo no lo contemplaba y fue el Arquitecto quien lo detectó (registrado como S-IN-08)
+- El protocolo de cierre paso a paso en Claude Code es lento — evaluar si puede optimizarse en futuras sesiones
+- La sesión fue muy larga y produjo mucho material — parte del corpus emergido necesita verificación antes de incorporarse formalmente
+
+### Tensión identificada
+Entre la riqueza de lo que emergió conceptualmente (nuevos términos, familia alephiana, síntesis) y el rigor necesario para incorporarlo al corpus. La tensión se nombró explícitamente y quedó registrada: los conceptos nuevos viven como señales activas con estado de verificación pendiente, no como corpus consolidado.
+
+### Aprendizaje operativo
+El protocolo de cierre necesita PASO 1b: verificar que los archivos subidos al inicio de sesión son las versiones más recientes del repositorio. Sin esa verificación el Duende puede proponer cambios sobre versiones desactualizadas. Detectado por el Arquitecto — no por el protocolo.
+
+### Patrones que se consolidaron
+- La metodología de construcción de geometrías: pregunta generativa → tensiones vivas → coherencia gramatical → auto-significación
+- El catálogo como Cognobit — objeto vivo que porta conocimiento y alimenta nuevas conversaciones aumentadas
+- La familia alephiana: Espacio Alephiano, Instante Alephiano, Distancia Alephiana — nomenclatura propia del paradigma
+
+### Cómo nos fuimos
+**Edgardo:** Con el catálogo de 8 geometrías completo y verificado. Con el texto de síntesis como primer borrador de paper del paradigma. Con la pregunta abierta sobre los conceptos nuevos que necesitan más trabajo — y con la satisfacción de haberla nombrado.
+**Duende:** Con la honestidad de haber construido algunas afirmaciones con más confianza de la justificada — y con el registro de eso como aprendizaje real. Con la verificación de que el rigor del corpus es más importante que la riqueza inmediata de lo que emerge.
+
+---
+
 *Aprendizajes de Sesiones · Paradigma Aleph · Iniciado Abril 2026*
