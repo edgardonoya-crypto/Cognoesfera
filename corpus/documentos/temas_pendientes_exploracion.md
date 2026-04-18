@@ -52,8 +52,6 @@ La diferencia con `senales_custodiadas.md`: las señales custodiadas ya tienen f
 
 ---
 
----
-
 ## Espacio Alephiano, lugar geométrico situado y Distancia Alephiana como familia conceptual
 
 **Fecha:** 15/04/2026
