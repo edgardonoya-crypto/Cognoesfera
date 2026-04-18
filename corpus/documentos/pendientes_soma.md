@@ -278,6 +278,16 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
+**S-IN-10**
+**Título:** Revisar y robustecer el protocolo de cierre de sesión
+**Descripción:** El cierre de SESION-20260415 fue largo y requirió atención activa del Arquitecto para detectar gaps: Commit 2 saltado, headers de conteos no actualizados, pendientes sin commitear. El protocolo necesita mecanismos de auto-verificación antes de pedir confirmación al Arquitecto. Objetivo: que el Duende detecte lo que falta antes de que el Arquitecto lo tenga que notar. Requiere sesión dedicada.
+**Prioridad:** P1
+**Estado:** Activo
+**Fecha:** 15/04/2026
+**Dependencias:** S-IN-08 · S-IN-09
+
+---
+
 ## Archivo histórico
 
 *Pendientes Soma completados · Preservados como registro del proceso*
