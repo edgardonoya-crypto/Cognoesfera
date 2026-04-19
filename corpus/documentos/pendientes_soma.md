@@ -20,6 +20,16 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
+**S-DU-01**
+**Título:** Paso de contexto al Duende — posiciones en tríadas
+**Descripción:** Cuando el usuario ha completado las 8 tríadas, el Duende debe poder leer esas posiciones y narrativas desde su contexto. Decidir si se pasan en system prompt o se consultan vía tool_call.
+**Prioridad:** P1
+**Estado:** Activo
+**Fecha:** 19/04/2026
+**Dependencias:** S-AP-18
+
+---
+
 ## Subcategoría: Seguridad
 
 ---
@@ -288,6 +298,76 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
+**S-AP-14**
+**Título:** Rediseño pantallas 2 (tríada activa) y 3 (completado) con Figma
+**Descripción:** Crear mockups en Figma para pantalla de tríada activa y pantalla de completado siguiendo la dirección editorial establecida en pantalla 1. Considerar responsive desktop/móvil. Exportar como PNG 2x para traducir a código con Claude Code.
+**Prioridad:** P1
+**Estado:** Activo
+**Fecha:** 19/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**S-AP-15**
+**Título:** Ajustes de viewport pantalla intro — scroll residual
+**Descripción:** La pantalla intro rediseñada todavía genera scroll en viewport 1024px. Achicar imagen topografía y reducir paddings para que todo entre en un vistazo.
+**Prioridad:** P1
+**Estado:** Activo
+**Fecha:** 19/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**S-AP-16**
+**Título:** Separación visual logo / botón pantalla intro
+**Descripción:** El logo aleph/Quanam queda visualmente superpuesto con el botón INGRESAR en la esquina inferior derecha. Reposicionar logo para que sea "firma discreta en esquina" sin competir con el botón.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 19/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**S-AP-17**
+**Título:** Pantalla tríada activa — 6 ajustes visuales identificados
+**Descripción:** (1) textos de vértices más grandes, (2) etiquetas inferiores menos pegadas a base, (3) "MI MOMENTO" eyebrow más grande, (4) pregunta más chica que el título actual, (5) textarea con bordes más visibles (hoy solo border-bottom), (6) botón más oscuro. Esperar mockups Figma antes de aplicar.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 19/04/2026
+**Dependencias:** S-AP-14
+
+---
+
+**S-AP-18**
+**Título:** Integración del instrumento Tríadas en /quanam-ia-2026
+**Descripción:** El componente TriadaPercepcion actualmente vive en /triadas-test. Debe integrarse en la ruta de producción /quanam-ia-2026 con el contexto "convocatoria_quanam".
+**Prioridad:** P1
+**Estado:** Activo
+**Fecha:** 19/04/2026
+**Dependencias:** S-AP-13
+
+---
+
+**S-AP-19**
+**Título:** Panel /admin con topografía colectiva
+**Descripción:** Vista para administradores que muestre la topografía colectiva agregada de todos los participantes. Incluir filtros por contexto y visualización de agregación. Requisito: 8 narrativas completadas por usuario para que su lugar sea visible.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 19/04/2026
+**Dependencias:** S-AP-18
+
+---
+
+**S-AP-20**
+**Título:** Carousel PPT introductorio
+**Descripción:** Crear componente de carousel con los slides introductorios (beta + gamma) con placeholder del texto actual. Preceder al IntroScreen de las tríadas.
+**Prioridad:** P3
+**Estado:** Activo
+**Fecha:** 19/04/2026
+**Dependencias:** S-AP-18
+
+---
+
 ## Archivo histórico
 
 *Pendientes Soma completados · Preservados como registro del proceso*
@@ -384,5 +464,5 @@ Rama local renombrada de master a main. Upstream conectado a origin/main. origin
 
 ---
 
-*Pendientes Casa Soma · Paradigma Aleph · Actualizado 12/04/2026*
+*Pendientes Casa Soma · Paradigma Aleph · Actualizado 19/04/2026*
 *Para pendientes conceptuales, ver: `pendientes_corpus.md`*

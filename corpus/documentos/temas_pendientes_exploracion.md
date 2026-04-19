@@ -58,5 +58,13 @@ La diferencia con `senales_custodiadas.md`: las señales custodiadas ya tienen f
 **Origen:** Emergió en SESION-20260415 al conectar la Tríada de Percepción con los conceptos de espacio, geometría y campo. La sesión también exploró conexiones con el vacío cuántico (física) y Cantor (matemática) como posibles linajes.
 **Pregunta central:** ¿Estos tres conceptos son suficientemente distintos del Espacio Borgeano e instante borgeano para merecer entrada propia en el Corpus Madre, o son reformulaciones con nomenclatura nueva? ¿La conexión con el vacío cuántico y con Cantor tiene rigor suficiente para ser linaje formal o opera solo como imagen que ilumina? Requiere sesión propia con tiempo suficiente y posiblemente consulta con alguien con formación en física o matemática antes de incorporar al corpus.
 
+## Protocolo de producción del instrumento: rol de las herramientas intermedias (Figma, Miro, otros)
+
+**Fecha:** 19/04/2026
+**Origen:** Sesiones recientes mostraron que el Duende no puede ser el único traductor entre intención visual y código. Herramientas intermedias (Figma para mockup, potencialmente Miro para flujos, etc.) son "lugares geométricos situados" donde el Arquitecto puede pensar visualmente antes de codificar. Merece sesión dedicada para definir el protocolo de cuándo usar cada una, cómo compartir artifacts entre herramientas, y cómo preservar la trazabilidad entre mockup → prompt → código.
+**Pregunta central:** ¿Cuándo la herramienta intermedia es condición necesaria para la convergencia y cuándo es fricción adicional? ¿Hay un criterio que distinga los momentos en que el texto es suficiente de los que requieren imagen? ¿Cómo se documenta el mockup como artifact del corpus (no solo como input al código)?
+
+---
+
 *Temas Pendientes de Exploración · Paradigma Aleph · Iniciado Abril 2026*
 *Para señales con forma suficiente, ver: `senales_activas.md`*

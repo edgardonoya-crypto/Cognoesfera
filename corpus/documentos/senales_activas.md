@@ -985,17 +985,35 @@ El horizonte: si la red de Entidades Aleph llega a ser autopoiética, el metabol
 
 ---
 
-*Señales Activas · Paradigma Aleph · Actualizado 15/04/2026*
-*Total señales activas: 85 (75 previas + 10 nuevas: SESION-20260415)*
-*Para señales incorporadas al Corpus Madre, ver: `senales_incorporadas.md`*
-
 ## La descripción rica como infraestructura de recuperación
 
 **Fecha:** 18/04/2026
 **Estado:** Custodiada
-**Descripción:** Cuando un objeto del sistema queda sin anclaje operativo (ruta en repo, Cognobit PDF), la descripción rica del pendiente que lo referencia opera como red de seguridad. Si tiene nombre específico, fecha, sesión de origen y función en el sistema, un humano con lugar geométrico situado puede reconstruir dónde vive el objeto. El andamiaje operativo es necesario pero no suficiente — el andamiaje narrativo es el que permite que la Memoria Viva Aumentada opere cuando el código falla. El caso que originó la señal: el archivo `triada_percepcion.jsx` de SESION-20260415 quedó sin commitear al repo, pero la descripción del pendiente S-AP-13 contenía los marcadores suficientes para que el Arquitecto lo recuperara en SESION-20260418.
+**Descripción:** Cuando un objeto del sistema queda sin anclaje operativo (ruta en repo, Cognobit PDF), la descripción rica del pendiente que lo referencia opera como red de seguridad. Si tiene nombre específico, fecha, sesión de origen y función en el sistema, un humano con lugar geométrico situado puede reconstruir dónde vive el objeto. El andamiaje operativo es necesario pero no suficiente — el andamiaje narrativo es el que permite que la Memoria Viva Aumentada opere cuando el código falla. El caso que originó la señal: el archivo `triada_percepcion.jsx` de SESION-20260415 quedó sin commitear al repo, pero la descripción del pendiente S-AP-13 contenía los marcadores suficientes para que el Arquitecto lo recuperara en SESION-20260418. Complementa Memoria Viva Aumentada (concepto 25) distinguiendo anclaje operativo (commit, archivo en disco) versus anclaje narrativo (descripción rica en SESION.md). Son capas complementarias, no sustitutas.
 **Impacto probable:** Refina el concepto 25 (Memoria Viva Aumentada) al distinguir dos capas de anclaje — operativo y narrativo — como complementarias, no sustitutas. Puede generar un ajuste en el schema de pendientes (campo Ruta/Ubicación) y un paso nuevo en el protocolo de cierre.
-**Origen:** SESION-20260418 — emergió al reconstruir por qué el `.jsx` pudo recuperarse a pesar de no estar en el repo.
+**Origen:** SESION-20260418-19 — emergió al reconstruir por qué el `.jsx` pudo recuperarse a pesar de no estar en el repo.
 **Pregunta abierta:** ¿La descripción rica es suficiente como único anclaje en objetos de baja criticidad, o siempre debe existir en simultáneo con anclaje operativo?
 
 ---
+
+## La regla de la narrativa en el campo colectivo
+
+**Fecha:** 19/04/2026
+**Estado:** Custodiada
+**Descripción:** En instrumentos que producen topografía colectiva (como la Tríada de Percepción), el avance individual puede permitirse sin palabra (postergar narrativa). Pero el campo colectivo solo se vuelve visible cuando TODOS los gestos individuales tienen palabra. El instrumento tolera pausa individual, no admite campo sin interpretación.
+**Origen:** SESION-20260418-19 — emergió al diseñar la lógica de postergación de narrativa en la Tríada de Percepción y reconocer la asimetría entre el avance individual y la visibilidad colectiva.
+
+---
+
+## El instrumento se compone por Figma + Claude Code en colaboración
+
+**Fecha:** 19/04/2026
+**Estado:** Custodiada
+**Descripción:** Iterar diseño UX exclusivamente por texto (Arquitecto describe → Duende transcribe → Claude Code ejecuta → Arquitecto verifica) tiene límite de ~3 iteraciones antes de perder convergencia. La introducción de Figma como herramienta intermedia cambia la naturaleza del input: el mockup visual colapsa dos capas de interpretación. Esta sesión descubrió el flujo: Arquitecto diseña en Figma → exporta PNG → Duende arma prompt → Claude Code traduce a código. Es un patrón de producción del instrumento.
+**Origen:** SESION-20260418-19 — emergió al observar la pérdida de convergencia en iteraciones sucesivas de la pantalla intro y al reconocer que el Figma resuelve lo que el texto no puede.
+
+---
+
+*Señales Activas · Paradigma Aleph · Actualizado 19/04/2026*
+*Total señales activas: 88 (85 previas + 3 nuevas: SESION-20260418-19)*
+*Para señales incorporadas al Corpus Madre, ver: `senales_incorporadas.md`*
