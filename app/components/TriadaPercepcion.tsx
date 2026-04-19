@@ -258,7 +258,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
     return (
       <div
         style={{
-          minHeight: "100vh",
+          minHeight: "auto",
           background: "#FDFAF5",
           padding: "clamp(24px, 5vh, 48px) clamp(40px, 6vw, 120px) clamp(24px, 5vh, 48px) clamp(40px, 4.7vw, 90px)",
           display: "flex",
@@ -300,10 +300,8 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
         {/* Grid principal 2x2 asimétrico */}
         <div
           style={{
-            flex: 1,
             display: "grid",
-            gridTemplateColumns: "minmax(0, auto) minmax(0, 1fr)",
-            gridTemplateRows: "auto 1fr",
+            gridTemplateColumns: "clamp(600px, 48vw, 900px) minmax(0, 1fr)",
             columnGap: "clamp(40px, 5vw, 100px)",
             rowGap: "clamp(16px, 3vh, 32px)",
             marginTop: "clamp(16px, 3vh, 32px)",
@@ -351,7 +349,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
           </div>
 
           {/* bottom-left: título + p1 */}
-          <div style={{ alignSelf: "end" }}>
+          <div>
             <h1
               style={{
                 fontFamily: FD,
@@ -372,7 +370,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
           <div
             style={{
               display: "flex",
-              alignItems: "flex-end",
+              alignItems: "flex-start",
               justifyContent: "flex-end",
             }}
           >
