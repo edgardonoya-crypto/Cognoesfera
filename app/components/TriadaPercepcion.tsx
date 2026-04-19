@@ -324,40 +324,22 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             }}
           />
 
-          {/* top-right: p2/p3/p4 con ornamento ✦ */}
-          <div
-            style={{
-              position: "relative",
-              maxWidth: "clamp(460px, 32vw, 620px)",
-              paddingTop: 8,
-              paddingLeft: "clamp(32px, 3vw, 56px)",
-            }}
-          >
-            <div
+          {/* top-right: h2 "El gesto" + p2/p3/p4 */}
+          <div style={{ maxWidth: "clamp(460px, 32vw, 620px)", paddingTop: 8 }}>
+            <h2
               style={{
-                fontSize: "clamp(11px, 0.75vw, 14px)",
-                fontFamily: FB,
-                fontWeight: 400,
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                color: AMBER,
-                marginBottom: 18,
-              }}
-            >
-              El gesto
-            </div>
-            <span
-              style={{
-                position: "absolute",
-                left: 0,
-                top: 4,
                 fontFamily: FD,
-                fontSize: "clamp(20px, 1.4vw, 26px)",
-                color: AMBER,
+                fontSize: "clamp(26px, 2vw, 36px)",
+                fontWeight: 300,
+                color: "#3D2B1A",
+                lineHeight: 1.1,
+                letterSpacing: "-0.005em",
+                margin: "0 0 24px",
               }}
             >
-              ✦
-            </span>
+              <span style={{ color: AMBER, marginRight: 16 }}>✦</span>
+              El gesto
+            </h2>
             <p style={{ ...paraStyle, marginBottom: 16 }}>{p2}</p>
             <p style={{ ...paraStyle, marginBottom: 16 }}>{p3}</p>
             <p style={paraStyle}>{p4}</p>
