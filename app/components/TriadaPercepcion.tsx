@@ -256,7 +256,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
 
   if (isDesktop) {
     return (
-      <div style={{ minHeight: "100vh", background: "#FDFAF5", padding: "32px 120px 32px", position: "relative" }}>
+      <div style={{ minHeight: "100vh", background: "#FDFAF5", padding: "24px 120px 24px", position: "relative" }}>
         {/* Sección 1 — Eyebrow */}
         <div style={{ fontSize: 16, fontFamily: FB, fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: AMBER }}>
           Paradigma Aleph
@@ -269,7 +269,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
           width={1839}
           height={1119}
           priority={false}
-          style={{ display: "block", marginTop: 20, marginLeft: "auto", marginRight: "auto", width: "100%", maxWidth: 460, height: "auto" }}
+          style={{ display: "block", marginTop: 12, marginLeft: "auto", marginRight: "auto", width: "100%", maxWidth: 380, height: "auto" }}
         />
 
         {/* Sección 3 — Título */}
@@ -282,11 +282,11 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
         <img
           src="/images/Aleph_vectorial_poweredby.svg"
           alt="aleph Powered by QUANAM"
-          style={{ position: "absolute", bottom: 24, right: 32, width: 64, height: "auto", opacity: 0.85 }}
+          style={{ position: "absolute", bottom: 24, left: 32, width: 64, height: "auto", opacity: 0.85 }}
         />
 
         {/* Sección 4 — Dos columnas + ornamento */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", gap: 60, alignItems: "start", marginTop: 32 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", gap: 60, alignItems: "start", marginTop: 24 }}>
           <div>
             <p style={{ ...paraStyle, marginBottom: 20 }}>{p1}</p>
             <p style={paraStyle}>{p2}</p>
