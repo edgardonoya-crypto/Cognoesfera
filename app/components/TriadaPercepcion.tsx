@@ -302,9 +302,9 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             gridTemplateColumns: "min(48vw, 880px) minmax(0, 1fr)",
             gridTemplateRows: "1fr auto",
             columnGap: "clamp(40px, 5vw, 100px)",
-            rowGap: "clamp(30px, 5vh, 80px)",
+            rowGap: "clamp(16px, 2.5vh, 40px)",
             marginTop: "clamp(20px, 3vh, 40px)",
-            alignContent: "space-between",
+            alignContent: "start",
           }}
         >
           {/* (1,1) Imagen topográfica */}
