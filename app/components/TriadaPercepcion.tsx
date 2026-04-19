@@ -301,64 +301,39 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
           />
         </div>
 
-        {/* Grid principal 2x2 asimétrico */}
+        {/* Grid 2 columnas con flex column independiente */}
         <div
           style={{
+            flex: 1,
             display: "grid",
             gridTemplateColumns: "min(42vw, 780px) minmax(0, 1fr)",
             columnGap: "clamp(40px, 5vw, 100px)",
-            rowGap: "clamp(16px, 3vh, 32px)",
             marginTop: "clamp(8px, 1.5vh, 20px)",
-            alignItems: "start",
-            alignContent: "space-between",
           }}
         >
-          {/* top-left: imagen topográfica */}
-          <Image
-            src="/images/topografia-intro.png"
-            alt="Topografía de lugares geométricos situados habitando el espacio alephiano"
-            width={1839}
-            height={1119}
-            priority={false}
-            style={{
-              display: "block",
-              width: "100%",
-              height: "auto",
-            }}
-          />
-
-          {/* top-right: h2 "El gesto" + p2/p3/p4 */}
-          <div style={{ maxWidth: "100%", paddingTop: 8 }}>
-            <h2
+          {/* Columna izquierda: imagen + título + p1 */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "clamp(24px, 3vh, 48px)" }}>
+            <Image
+              src="/images/topografia-intro.png"
+              alt="Topografía del campo colectivo"
+              width={1839}
+              height={1122}
+              priority
               style={{
-                fontFamily: FD,
-                fontSize: "clamp(26px, 2vw, 36px)",
-                fontWeight: 300,
-                color: "#3D2B1A",
-                lineHeight: 1.1,
-                letterSpacing: "-0.005em",
-                margin: "0 0 24px",
+                width: "100%",
+                height: "auto",
+                display: "block",
               }}
-            >
-              <span style={{ color: AMBER, marginRight: 16 }}>✦</span>
-              El gesto
-            </h2>
-            <p style={{ ...paraStyle, marginBottom: 16 }}>{p2}</p>
-            <p style={{ ...paraStyle, marginBottom: 16 }}>{p3}</p>
-            <p style={paraStyle}>{p4}</p>
-          </div>
-
-          {/* bottom-left: título + p1 */}
-          <div>
+            />
             <h1
               style={{
                 fontFamily: FD,
                 fontSize: "clamp(32px, 2.5vw, 48px)",
                 fontWeight: 300,
                 color: "#3D2B1A",
-                lineHeight: 1.1,
-                letterSpacing: "-0.005em",
-                margin: "0 0 14px",
+                lineHeight: 1.05,
+                letterSpacing: "-0.01em",
+                margin: 0,
               }}
             >
               Antes de ingresar al campo
@@ -366,15 +341,31 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             <p style={{ ...paraStyle, maxWidth: "100%" }}>{p1}</p>
           </div>
 
-          {/* bottom-right: botón outline */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "flex-end",
-            }}
-          >
-            {btnEl}
+          {/* Columna derecha: el gesto + p2, p3, p4 + botón abajo */}
+          <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", minWidth: 0 }}>
+            <div style={{ maxWidth: "100%", paddingTop: 8 }}>
+              <h2
+                style={{
+                  fontFamily: FD,
+                  fontSize: "clamp(26px, 2vw, 36px)",
+                  fontWeight: 300,
+                  color: "#3D2B1A",
+                  lineHeight: 1.1,
+                  letterSpacing: "-0.005em",
+                  margin: "0 0 24px",
+                }}
+              >
+                <span style={{ color: AMBER, marginRight: 16 }}>✦</span>
+                El gesto
+              </h2>
+              <p style={{ ...paraStyle, marginBottom: 16 }}>{p2}</p>
+              <p style={{ ...paraStyle, marginBottom: 16 }}>{p3}</p>
+              <p style={paraStyle}>{p4}</p>
+            </div>
+
+            <div style={{ alignSelf: "flex-end" }}>
+              {btnEl}
+            </div>
           </div>
         </div>
       </div>
