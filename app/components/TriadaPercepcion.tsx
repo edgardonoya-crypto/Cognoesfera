@@ -228,7 +228,10 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
     fontWeight: 400,
     color: INK_MID,
     lineHeight: 1.6,
-    margin: 0,
+    marginTop: 0,
+    marginRight: 0,
+    marginBottom: 0,
+    marginLeft: 0,
   };
 
   const btnEl = (
