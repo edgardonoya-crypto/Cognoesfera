@@ -267,7 +267,6 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
           padding: "clamp(40px, 6vh, 72px) clamp(60px, 6.5vw, 130px) clamp(32px, 4.5vh, 56px) clamp(60px, 4.7vw, 95px)",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-start",
         }}
       >
         {/* Header: eyebrow PARADIGMA ALEPH (izq) + logo aleph (der) */}
@@ -298,14 +297,14 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
         {/* Grid principal: 2×2 con 4 celdas separadas */}
         <div
           style={{
-            flex: "none",
+            flex: 1,
             display: "grid",
             gridTemplateColumns: "min(48vw, 880px) minmax(0, 1fr)",
             gridTemplateRows: "1fr auto",
             columnGap: "clamp(40px, 5vw, 100px)",
-            rowGap: "clamp(8px, 1.5vh, 24px)",
+            rowGap: 0,
             marginTop: "clamp(12px, 2vh, 28px)",
-            alignContent: "start",
+            alignContent: "space-between",
           }}
         >
           {/* (1,1) Imagen topográfica */}
