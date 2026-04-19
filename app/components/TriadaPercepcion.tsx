@@ -260,7 +260,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
         style={{
           minHeight: "auto",
           background: "#FDFAF5",
-          padding: "clamp(24px, 5vh, 48px) clamp(40px, 6vw, 120px) clamp(24px, 5vh, 48px) clamp(40px, 4.7vw, 90px)",
+          padding: "clamp(16px, 3vh, 32px) clamp(40px, 6vw, 120px) clamp(16px, 3vh, 32px) clamp(40px, 4.7vw, 90px)",
           display: "flex",
           flexDirection: "column",
         }}
@@ -270,7 +270,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
           style={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "flex-start",
+            alignItems: "center",
           }}
         >
           <div
@@ -304,7 +304,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             gridTemplateColumns: "clamp(600px, 48vw, 900px) minmax(0, 1fr)",
             columnGap: "clamp(40px, 5vw, 100px)",
             rowGap: "clamp(16px, 3vh, 32px)",
-            marginTop: "clamp(16px, 3vh, 32px)",
+            marginTop: "clamp(8px, 1.5vh, 20px)",
             alignItems: "start",
           }}
         >
