@@ -237,9 +237,9 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
       className="triada-btn"
       style={{
         display: "inline-block",
-        background: "#5C4A1E",
-        color: "#FDFAF5",
-        border: "1px solid #5C4A1E",
+        background: "transparent",
+        color: "#5C4A1E",
+        border: "1.5px solid #5C4A1E",
         padding: "16px 40px",
         fontSize: 13,
         fontFamily: FB,
@@ -256,50 +256,118 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
 
   if (isDesktop) {
     return (
-      <div style={{ minHeight: "100vh", background: "#FDFAF5", padding: "24px 120px 24px", position: "relative" }}>
-        {/* Sección 1 — Eyebrow */}
-        <div style={{ fontSize: 16, fontFamily: FB, fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: AMBER }}>
-          Paradigma Aleph
+      <div
+        style={{
+          minHeight: "100vh",
+          background: "#FDFAF5",
+          padding: "48px 56px 48px 90px",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        {/* Header: eyebrow izquierda / logo derecha (balance editorial) */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+          }}
+        >
+          <div
+            style={{
+              fontSize: 14,
+              fontFamily: FB,
+              fontWeight: 400,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: AMBER,
+              paddingTop: 10,
+            }}
+          >
+            Paradigma Aleph
+          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/Aleph_vectorial_poweredby.svg"
+            alt="aleph Powered by QUANAM"
+            style={{ width: 72, height: "auto", opacity: 0.9 }}
+          />
         </div>
 
-        {/* Sección 2 — Imagen topografía */}
-        <Image
-          src="/images/topografia-intro.png"
-          alt="Topografía de lugares geométricos situados habitando el espacio alephiano"
-          width={1839}
-          height={1119}
-          priority={false}
-          style={{ display: "block", marginTop: 12, marginLeft: "auto", marginRight: "auto", width: "100%", maxWidth: 380, height: "auto" }}
-        />
+        {/* Grid principal 2×2 asimétrico */}
+        <div
+          style={{
+            flex: 1,
+            display: "grid",
+            gridTemplateColumns: "minmax(0, 820px) minmax(0, 1fr)",
+            gridTemplateRows: "auto 1fr",
+            columnGap: 120,
+            rowGap: 32,
+            marginTop: 32,
+          }}
+        >
+          {/* top-left — imagen topográfica dominante */}
+          <Image
+            src="/images/topografia-intro.png"
+            alt="Topografía de lugares geométricos situados habitando el espacio alephiano"
+            width={1839}
+            height={1119}
+            priority={false}
+            style={{
+              display: "block",
+              width: "100%",
+              maxWidth: 820,
+              height: "auto",
+              alignSelf: "start",
+            }}
+          />
 
-        {/* Sección 3 — Título */}
-        <h1 style={{ fontFamily: FD, fontSize: 50, fontWeight: 300, color: "#3D2B1A", lineHeight: 1.15, margin: "28px 0 0" }}>
-          Antes de ingresar al campo
-        </h1>
-
-        {/* Logo powered by — esquina inferior derecha */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/Aleph_vectorial_poweredby.svg"
-          alt="aleph Powered by QUANAM"
-          style={{ position: "absolute", bottom: 24, left: 32, width: 64, height: "auto", opacity: 0.85 }}
-        />
-
-        {/* Sección 4 — Dos columnas + ornamento */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", gap: 60, alignItems: "start", marginTop: 24 }}>
-          <div>
-            <p style={{ ...paraStyle, marginBottom: 20 }}>{p1}</p>
-            <p style={paraStyle}>{p2}</p>
-          </div>
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", alignSelf: "stretch" }}>
-            <span style={{ fontFamily: FD, fontSize: 32, color: AMBER }}>✦</span>
-          </div>
-          <div>
+          {/* top-right — p2 p3 p4 con ornamento ✦ a la izquierda */}
+          <div style={{ position: "relative", maxWidth: 620, alignSelf: "start", paddingTop: 12 }}>
+            <span
+              style={{
+                position: "absolute",
+                left: -64,
+                top: 4,
+                fontFamily: FD,
+                fontSize: 26,
+                color: AMBER,
+              }}
+            >
+              ✦
+            </span>
+            <p style={{ ...paraStyle, marginBottom: 20 }}>{p2}</p>
             <p style={{ ...paraStyle, marginBottom: 20 }}>{p3}</p>
             <p style={paraStyle}>{p4}</p>
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 40 }}>
-              {btnEl}
-            </div>
+          </div>
+
+          {/* bottom-left — título grande (umbral) + p1 */}
+          <div style={{ alignSelf: "end" }}>
+            <h1
+              style={{
+                fontFamily: FD,
+                fontSize: 52,
+                fontWeight: 300,
+                color: "#3D2B1A",
+                lineHeight: 1.1,
+                letterSpacing: "-0.005em",
+                margin: "0 0 20px",
+              }}
+            >
+              Antes de ingresar al campo
+            </h1>
+            <p style={{ ...paraStyle, maxWidth: 520 }}>{p1}</p>
+          </div>
+
+          {/* bottom-right — botón outline */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "flex-end",
+            }}
+          >
+            {btnEl}
           </div>
         </div>
       </div>
