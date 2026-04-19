@@ -2,7 +2,7 @@
 *Pendientes técnicos, operativos e infraestructura del paradigma*
 *Reemplaza la sección A6 de SESION.md para los pendientes SOMA*
 *Paradigma Aleph · Reestructurado 06/04/2026*
-*Pendientes activos al 15/04/2026: 23*
+*Pendientes activos al 19/04/2026: 31*
 
 ---
 
@@ -248,26 +248,6 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
-**S-AP-12**
-**Título:** Implementar catálogo de geometrías en Supabase
-**Descripción:** Crear tablas con schema extendido: geometrias_triada (id, nombre, descripcion, vertice_a_base, vertice_b_base, vertice_c_base), triadas (id, geometria_id, contexto, vertice_a, vertice_b, vertice_c, pregunta_contexto, umbral_visibilidad, activa, orden), percepciones_triada (id, user_id, triada_id, peso_a, peso_b, peso_c, narrativa, estado_vital, created_at). Las 8 geometrías de Quanam como primer seed. Admin: sección para crear/editar geometrías y tríadas instanciadas.
-**Prioridad:** P2
-**Estado:** Activo
-**Fecha:** 15/04/2026
-**Dependencias:** S-AP-11
-
----
-
-**S-AP-13**
-**Título:** Implementar Tríada de Percepción en /quanam-ia-2026
-**Descripción:** Las 8 geometrías activas en secuencia entre la bienvenida (OTP) y los lentes. Flujo: Tríada 1 → ... → Tríada 8 → Lentes. Video introductorio antes de la primera tríada. Micro-narrativa opcional después de cada gesto. Pantalla de resumen al completar las 8. Campo colectivo visible al final de la jornada según umbral_visibilidad. El Duende recibe el contexto completo de las 8 posiciones antes de los lentes. Referencia visual: triada_percepcion.jsx generado en SESION-20260415.
-**Prioridad:** P2
-**Estado:** Activo
-**Fecha:** 15/04/2026
-**Dependencias:** S-AP-12
-
----
-
 **S-IN-08**
 **Título:** Actualizar protocolo de cierre en SESION.md — agregar PASO 1b
 **Descripción:** Agregar en el Protocolo de Cierre entre PASO 1 y PASO 2: PASO 1b — Verificar versiones de archivos. Antes de proceder con cualquier actualización, confirmar con el Arquitecto que los 10 archivos subidos son las versiones más recientes del repositorio. Si hay dudas, verificar con git log --oneline -5 en Claude Code antes de continuar. No asumir que los archivos del inicio de sesión reflejan el estado actual del corpus.
@@ -461,6 +441,12 @@ Campo estado en duende_chats (activa/archivada/ruido). Reporte "Sugerir conversa
 
 **S-HIS-29 — Resolver master/main de raíz** · Completado 12/04/2026
 Rama local renombrada de master a main. Upstream conectado a origin/main. origin/master eliminado. A partir de ahora git push va directo a main sin mapeo manual.
+
+**S-AP-12 — Implementar catálogo de geometrías en Supabase** · Completado 18/04/2026
+Schema Supabase: tablas geometrias_triada, triadas, percepciones_triada, vista de herencia, RLS, seed 8 geometrías Quanam.
+
+**S-AP-13 — Implementar Tríada de Percepción (componente + API + schema)** · Completado 18/04/2026
+TriadaPercepcion.tsx con 3 stages (intro → triadas → completado). API /api/triadas/posicion con upsert y validación baricéntrica. Migración narrativa_pospuesta aplicada.
 
 ---
 
