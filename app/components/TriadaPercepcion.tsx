@@ -293,18 +293,21 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
           />
         </div>
 
-        {/* Grid principal: 2 columnas paralelas */}
+        {/* Grid principal: 2×2 con 4 celdas separadas */}
         <div
           style={{
             flex: 1,
             display: "grid",
             gridTemplateColumns: "min(48vw, 880px) minmax(0, 1fr)",
+            gridTemplateRows: "1fr auto",
             columnGap: "clamp(40px, 5vw, 100px)",
+            rowGap: "clamp(30px, 5vh, 80px)",
             marginTop: "clamp(20px, 3vh, 40px)",
+            alignContent: "space-between",
           }}
         >
-          {/* Columna izquierda: imagen + título + p1 (flujo natural) */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "clamp(20px, 3vh, 40px)" }}>
+          {/* (1,1) Imagen topográfica */}
+          <div style={{ alignSelf: "start" }}>
             <Image
               src="/images/topografia-intro.png"
               alt="Topografía del campo colectivo"
@@ -317,6 +320,34 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
                 display: "block",
               }}
             />
+          </div>
+
+          {/* (1,2) Subtítulo El gesto + párrafos p2, p3, p4 */}
+          <div style={{ alignSelf: "start", minWidth: 0, maxWidth: "100%", paddingTop: 4 }}>
+            <h2
+              style={{
+                fontFamily: FD,
+                fontSize: "clamp(26px, 2vw, 36px)",
+                fontWeight: 300,
+                color: "#3D2B1A",
+                lineHeight: 1.1,
+                letterSpacing: "-0.005em",
+                marginTop: 0,
+                marginRight: 0,
+                marginBottom: 24,
+                marginLeft: 0,
+              }}
+            >
+              <span style={{ color: AMBER, marginRight: 16 }}>✦</span>
+              El gesto
+            </h2>
+            <p style={{ ...paraStyle, marginBottom: 16 }}>{p2}</p>
+            <p style={{ ...paraStyle, marginBottom: 16 }}>{p3}</p>
+            <p style={paraStyle}>{p4}</p>
+          </div>
+
+          {/* (2,1) Título + p1 */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "clamp(12px, 1.5vh, 20px)" }}>
             <h1
               style={{
                 fontFamily: FD,
@@ -336,34 +367,9 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             <p style={{ ...paraStyle, maxWidth: "100%" }}>{p1}</p>
           </div>
 
-          {/* Columna derecha: subtitulo "El gesto" + párrafos + botón */}
-          <div style={{ display: "flex", flexDirection: "column", minWidth: 0, maxWidth: "100%" }}>
-            <div style={{ paddingTop: 4 }}>
-              <h2
-                style={{
-                  fontFamily: FD,
-                  fontSize: "clamp(26px, 2vw, 36px)",
-                  fontWeight: 300,
-                  color: "#3D2B1A",
-                  lineHeight: 1.1,
-                  letterSpacing: "-0.005em",
-                  marginTop: 0,
-                  marginRight: 0,
-                  marginBottom: 24,
-                  marginLeft: 0,
-                }}
-              >
-                <span style={{ color: AMBER, marginRight: 16 }}>✦</span>
-                El gesto
-              </h2>
-              <p style={{ ...paraStyle, marginBottom: 16 }}>{p2}</p>
-              <p style={{ ...paraStyle, marginBottom: 16 }}>{p3}</p>
-              <p style={paraStyle}>{p4}</p>
-            </div>
-
-            <div style={{ marginTop: "clamp(80px, 12vh, 160px)", alignSelf: "flex-end" }}>
-              {btnEl}
-            </div>
+          {/* (2,2) Botón — centrado verticalmente en su fila, alineado a la derecha */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
+            {btnEl}
           </div>
         </div>
       </div>
