@@ -297,14 +297,14 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
         {/* Grid principal: 2×2 con 4 celdas separadas */}
         <div
           style={{
-            flex: 1,
+            flex: "none",
             display: "grid",
             gridTemplateColumns: "min(48vw, 880px) minmax(0, 1fr)",
             gridTemplateRows: "1fr auto",
             columnGap: "clamp(40px, 5vw, 100px)",
-            rowGap: 0,
+            rowGap: "clamp(12px, 2vh, 28px)",
             marginTop: "clamp(12px, 2vh, 28px)",
-            alignContent: "space-between",
+            alignContent: "start",
           }}
         >
           {/* (1,1) Imagen topográfica */}
