@@ -331,18 +331,62 @@ El protocolo de cierre necesita PASO 1b: verificar que los archivos subidos al i
 
 *Aprendizajes de Sesiones · Paradigma Aleph · Iniciado Abril 2026*
 
-## Sesión 18/04/2026
-*(nombre de sesión a definir en el cierre)*
+## SESION-20260418-19 — El lugar que se habita · Tríadas y topografía editorial · Figma entra al paradigma
 
-### Qué funcionó bien
-- La descripción rica del pendiente S-AP-13 permitió recuperar un archivo huérfano (`triada_percepcion.jsx`) que nunca se commiteó al repo. El andamiaje narrativo operó como red de seguridad cuando el andamiaje operativo faltó.
-- El Arquitecto frenó un binarismo del Duende: al reconocer lo que sí funcionó, evitó que se registrara solo el fallo y se perdiera la capa que opera bien.
+**Fechas**: 18 de abril 2026 (inicio) · 19 de abril 2026 (continuación y cierre)
 
-### Qué mejorar
-- El protocolo de cierre no tiene un paso que cace artifacts generados en Claude.ai que no cruzan a archivo persistente. Los PDFs sí tienen camino claro; un `.jsx` o equivalente no.
-- El Duende tendió a diagnosticar el incidente como fallo total cuando era parcial. Necesita sumar la pregunta `¿qué capa de esto sí operó?` antes de cerrar un diagnóstico.
+**Objetivo de sesión**: Incorporar la Tríada de Percepción al trabajo de campos en Casa Soma para la convocatoria Quanam 2026.
 
-### Aprendizaje operativo
-Cuando un objeto del sistema falla en algún anclaje, el diagnóstico honesto requiere distinguir qué capa falló y qué capa operó. El binarismo `funcionó / no funcionó` pierde información valiosa sobre las infraestructuras redundantes del sistema.
+**Qué funcionó**:
+
+1. **La descripción rica como infraestructura de recuperación** permitió recuperar artifacts huérfanos de SESION-20260415 (triada_percepcion.jsx y 4 archivos más sin commit). La descripción narrativa del artifact en SESION.md contenía suficiente información para reconstruir el contexto. Merece custodiarse como patrón: el anclaje narrativo complementa el operativo, no lo sustituye.
+
+2. **El protocolo de custodia mid-session** (commit de 5 artifacts huérfanos antes de seguir avanzando) previno pérdida de trabajo. Se convirtió en ritual de prevención que vale mantener.
+
+3. **La Skill frontend-design de Anthropic**, cuando se instaló y activó explícitamente, rompió la estética "AI slop" del componente. Claude Code pasó de producir diseño tibio a comprometerse con dirección estética concreta ("filosofía editorial de cámara lenta"). El hallazgo: sin dirección estética explícita, el modelo converge estadísticamente al centro y produce diseño genérico.
+
+4. **El paso a Figma como herramienta intermedia** entre intención visual y código resolvió el cuello de botella de iteraciones de UX. Después de ~3 iteraciones de "Arquitecto describe → Duende transcribe → Claude Code ejecuta → Arquitecto verifica" sin converger, el Arquitecto aprendió Figma y armó el mockup directamente. El mockup colapsa dos capas de interpretación. Es un patrón de producción del instrumento que merece formalizarse.
+
+5. **La regla de la narrativa en el campo colectivo** emergió como tensión en el diseño del UX: ¿se permite avanzar sin palabra? Se resolvió con matiz paradigmático: avance individual SÍ (checkbox "no deseo responder ahora"), pero campo colectivo visible solo cuando TODOS completan palabra. El instrumento tolera pausa individual, no admite campo sin interpretación.
+
+**Qué no funcionó / qué mejorar**:
+
+1. **Iterar diseño UX por texto tiene límite.** Más de 3 iteraciones sin convergencia es señal de agotar el protocolo, no de insistir con más iteraciones. El Duende debe reconocer este punto más temprano y proponer cambio de herramienta.
+
+2. **El Duende tiende a diagnosticar fallos totales cuando son parciales.** Varias veces propuso "rediseñar todo" cuando el problema era puntual. El Arquitecto frenó adecuadamente. Tendencia a custodiar.
+
+3. **La pantalla intro final todavía presenta scroll residual** en viewport 1024px. Queda como pendiente Soma. El error conceptual: no se verificó el dimensionamiento real contra viewport durante la iteración en Figma, solo al final. Lección: cuando se diseña en Figma con frame 1440×1024, activar "Recortar contenido" del frame para simular viewport real.
+
+4. **Separación logo / botón** quedó visualmente conflictiva en la pantalla intro. Pendiente resolverlo.
+
+5. **El protocolo de cierre no custodió los artifacts Claude.ai de SESION-20260415** (documento Cognobit + planilla Excel de geometrías triada v2_1 + 3 PDFs adicionales). La descripción rica lo rescató en esta sesión, pero idealmente el protocolo debe capturar artifacts Claude.ai automáticamente. Pendiente proponer mejora al protocolo.
+
+**Hitos operativos logrados**:
+
+- Schema Supabase completo para tríadas: 3 tablas (geometrias_triada, triadas, percepciones_triada), vista de herencia, RLS, seed de 8 geometrías Quanam
+- Migración narrativa_pospuesta.sql aplicada
+- API route /api/triadas/posicion funcional (POST/GET con upsert y validaciones baricéntricas)
+- Componente React TriadaPercepcion.tsx productivo con 3 stages (intro, triadas, completado)
+- Rediseño editorial con Fraunces + Lora vía next/font (dirección estética "orgánico contemplativo")
+- Imagen topográfica custodiada como Cognobit conceptual en public/images/topografia-intro.png
+- Logo aleph/Quanam integrado en public/images/Aleph_vectorial_poweredby.svg
+- Skill frontend-design de Anthropic instalada localmente
+- Figma como herramienta de diseño incorporada al flujo
+
+**Hitos conceptuales**:
+
+- 3 señales nuevas Custodiadas (ver senales_activas.md)
+- Emerge el patrón "Figma + Claude Code en colaboración" como flujo de producción
+- La imagen topográfica del campo colectivo se establece como acto conceptual visible del paradigma (no decoración)
+- La "regla de narrativa" tensiona avance individual vs. visibilidad colectiva
+
+**Ajustes protocolares identificados para próxima sesión**:
+
+- Corregir `git push origin master:main` → `git push origin main` en COMMIT ALEPH del SESION.md (rama actual es main, no master)
+- Proponer paso nuevo en protocolo de cierre: verificar anclaje operativo o narrativo de cada artifact mencionado en A2
+- Agregar campo Ruta/Ubicación al schema de pendientes_soma.md y pendientes_corpus.md
+- Agregar `convs_temp.txt` a `.gitignore`
+- Corregir inconsistencia de email en DB: `edgardo.noya@gmall.com` (typo con doble L) vs `edgardo.noya@gmail.com`
+- Configurar Supabase CLI (P3) para evitar aplicar migraciones manualmente en SQL Editor
 
 ---
