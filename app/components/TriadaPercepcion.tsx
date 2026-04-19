@@ -258,7 +258,8 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
     return (
       <div
         style={{
-          minHeight: "auto",
+          height: "100dvh",
+          minHeight: "100vh",
           background: "#FDFAF5",
           padding: "clamp(16px, 3vh, 32px) clamp(40px, 6vw, 120px) clamp(16px, 3vh, 32px) clamp(40px, 4.7vw, 90px)",
           display: "flex",
@@ -306,6 +307,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             rowGap: "clamp(16px, 3vh, 32px)",
             marginTop: "clamp(8px, 1.5vh, 20px)",
             alignItems: "start",
+            alignContent: "space-between",
           }}
         >
           {/* top-left: imagen topográfica */}
