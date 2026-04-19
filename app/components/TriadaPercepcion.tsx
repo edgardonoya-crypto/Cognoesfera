@@ -217,62 +217,88 @@ function TriangleField({
 }
 
 function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesktop: boolean }) {
-  const paragraphs = [
-    "Lo que sigue no es un cuestionario. Son ocho momentos para posicionarte en un campo — cada uno con tres fuerzas que tiran desde los vértices de un triángulo.",
-    "No vas a elegir una opción entre tres. Vas a ubicar tu punto donde sientas que estás hoy, con la mezcla que sea: más cerca de una, a mitad de camino entre dos, en el centro de las tres. Nadie está esperando una respuesta correcta — solo la que es tuya ahora.",
-    "Te sugerimos no apurar el gesto. El instrumento funciona mejor cuando el movimiento del punto sigue al pensamiento, no al revés.",
-    "Cuando todos completan los ocho momentos, emerge la topografía del grupo — un mapa del campo colectivo que nadie podía producir solo. Tu posición contribuye a ese mapa.",
-  ];
+  const p1 = "Lo que sigue no es un cuestionario. Son ocho momentos para posicionarte en un campo — cada uno con tres fuerzas que tiran desde los vértices de un triángulo.";
+  const p2 = "No vas a elegir una opción entre tres. Vas a ubicar tu punto donde sientas que estás hoy, con la mezcla que sea: más cerca de una, a mitad de camino entre dos, en el centro de las tres. Nadie está esperando una respuesta correcta — solo la que es tuya ahora.";
+  const p3 = "Te sugerimos no apurar el gesto. El instrumento funciona mejor cuando el movimiento del punto sigue al pensamiento, no al revés.";
+  const p4 = "Cuando todos completan los ocho momentos, emerge la topografía del grupo — un mapa del campo colectivo que nadie podía producir solo. Tu posición contribuye a ese mapa.";
 
-  const btnStyle = (full?: boolean): React.CSSProperties => ({
-    display: full ? "block" : "inline-block",
-    width: full ? "100%" : undefined,
-    background: "#5C4A1E",
-    color: "#FDFAF5",
-    border: "1px solid #5C4A1E",
-    padding: "18px 44px",
-    fontSize: 13,
-    letterSpacing: "0.18em",
-    textTransform: "uppercase",
+  const paraStyle: React.CSSProperties = {
+    fontSize: isDesktop ? 15.5 : 15,
     fontFamily: FB,
     fontWeight: 400,
-    cursor: "pointer",
-    transition: "all 400ms ease",
-  });
+    color: INK_MID,
+    lineHeight: 1.6,
+    margin: 0,
+  };
+
+  const btnEl = (
+    <button
+      onClick={onContinue}
+      className="triada-btn"
+      style={{
+        display: "inline-block",
+        background: "#5C4A1E",
+        color: "#FDFAF5",
+        border: "1px solid #5C4A1E",
+        padding: "16px 40px",
+        fontSize: 13,
+        fontFamily: FB,
+        fontWeight: 400,
+        letterSpacing: "0.18em",
+        textTransform: "uppercase",
+        cursor: "pointer",
+        transition: "all 400ms ease",
+      }}
+    >
+      Ingresar
+    </button>
+  );
 
   if (isDesktop) {
     return (
-      <div style={{ minHeight: "100vh", background: BG, display: "flex", alignItems: "flex-start", justifyContent: "center", padding: "80px 80px 60px" }}>
-        <div style={{ maxWidth: 1100, width: "100%", display: "grid", gridTemplateColumns: "40% 5% 55%", alignItems: "start" }}>
-          <div style={{ paddingTop: 8 }}>
-            <div style={{ fontSize: 16, fontFamily: FB, fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: AMBER, marginBottom: 28 }}>
-              Paradigma Aleph
-            </div>
-            <h1 style={{ fontFamily: FD, fontSize: 56, fontWeight: 300, color: INK, lineHeight: 1.2, margin: "0 0 48px" }}>
-              Antes <em style={{ fontStyle: "italic" }}>de</em><br />empezar
-            </h1>
-            <div style={{ fontSize: 32, color: AMBER, opacity: 0.55 }}>✦</div>
-            <Image
-              src="/images/topografia-intro.png"
-              alt="Topografía de lugares geométricos situados habitando el espacio alephiano"
-              width={440}
-              height={268}
-              priority={false}
-              style={{ display: "block", marginTop: 20, width: "100%", maxWidth: 440, height: "auto" }}
-            />
-          </div>
-          <div />
+      <div style={{ minHeight: "100vh", background: "#FDFAF5", padding: "32px 120px 32px", position: "relative" }}>
+        {/* Sección 1 — Eyebrow */}
+        <div style={{ fontSize: 16, fontFamily: FB, fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: AMBER }}>
+          Paradigma Aleph
+        </div>
+
+        {/* Sección 2 — Imagen topografía */}
+        <Image
+          src="/images/topografia-intro.png"
+          alt="Topografía de lugares geométricos situados habitando el espacio alephiano"
+          width={1839}
+          height={1119}
+          priority={false}
+          style={{ display: "block", marginTop: 20, marginLeft: "auto", marginRight: "auto", width: "100%", maxWidth: 460, height: "auto" }}
+        />
+
+        {/* Sección 3 — Título */}
+        <h1 style={{ fontFamily: FD, fontSize: 50, fontWeight: 300, color: "#3D2B1A", lineHeight: 1.15, margin: "28px 0 0" }}>
+          Antes de ingresar al campo
+        </h1>
+
+        {/* Logo powered by — esquina inferior derecha */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/Aleph_vectorial_poweredby.svg"
+          alt="aleph Powered by QUANAM"
+          style={{ position: "absolute", bottom: 24, right: 32, width: 64, height: "auto", opacity: 0.85 }}
+        />
+
+        {/* Sección 4 — Dos columnas + ornamento */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", gap: 60, alignItems: "start", marginTop: 32 }}>
           <div>
-            <div className="drop-cap" style={{ fontSize: 18, fontFamily: FB, color: INK, lineHeight: 1.85, marginBottom: 22 }}>
-              {paragraphs[0]}
-            </div>
-            {paragraphs.slice(1).map((p, i) => (
-              <p key={i} style={{ fontSize: 16, fontFamily: FB, color: INK_MID, lineHeight: 1.85, margin: `0 0 ${i < 2 ? 18 : 40}px` }}>{p}</p>
-            ))}
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
-              <button onClick={onContinue} className="triada-btn" style={btnStyle()}>
-                Empezá cuando estés
-              </button>
+            <p style={{ ...paraStyle, marginBottom: 20 }}>{p1}</p>
+            <p style={paraStyle}>{p2}</p>
+          </div>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", alignSelf: "stretch" }}>
+            <span style={{ fontFamily: FD, fontSize: 32, color: AMBER }}>✦</span>
+          </div>
+          <div>
+            <p style={{ ...paraStyle, marginBottom: 20 }}>{p3}</p>
+            <p style={paraStyle}>{p4}</p>
+            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 40 }}>
+              {btnEl}
             </div>
           </div>
         </div>
@@ -281,35 +307,37 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
   }
 
   return (
-    <div style={{ minHeight: "100vh", background: BG, display: "flex", alignItems: "flex-start", justifyContent: "center", padding: "64px 28px 60px" }}>
-      <div style={{ maxWidth: 520, width: "100%" }}>
-        <div style={{ fontSize: 14, fontFamily: FB, fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: AMBER, marginBottom: 20, textAlign: "center" }}>
-          Paradigma Aleph
-        </div>
-        <h1 style={{ fontFamily: FD, fontSize: 36, fontWeight: 300, color: INK, lineHeight: 1.2, margin: "0 0 36px", textAlign: "center" }}>
-          Antes <em style={{ fontStyle: "italic" }}>de</em> empezar
-        </h1>
-        <div className="drop-cap" style={{ fontSize: 17, fontFamily: FB, color: INK, lineHeight: 1.85, marginBottom: 18 }}>
-          {paragraphs[0]}
-        </div>
-        {paragraphs.slice(1).map((p, i) => (
-          <p key={i} style={{ fontSize: 15, fontFamily: FB, color: INK_MID, lineHeight: 1.85, margin: `0 0 ${i < 2 ? 16 : 32}px` }}>{p}</p>
-        ))}
-        <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <span style={{ fontSize: 24, color: AMBER, opacity: 0.55 }}>✦</span>
-        </div>
-        <button onClick={onContinue} className="triada-btn" style={btnStyle(true)}>
-          Empezá cuando estés
-        </button>
-        <Image
-          src="/images/topografia-intro.png"
-          alt="Topografía de lugares geométricos situados habitando el espacio alephiano"
-          width={1839}
-          height={1119}
-          priority={false}
-          style={{ display: "block", marginTop: 48, marginBottom: 40, width: "100%", height: "auto" }}
-        />
+    <div style={{ minHeight: "100vh", background: "#FDFAF5", padding: "80px 32px 100px" }}>
+      <div style={{ fontSize: 14, fontFamily: FB, fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: AMBER, marginBottom: 32 }}>
+        Paradigma Aleph
       </div>
+      <Image
+        src="/images/topografia-intro.png"
+        alt="Topografía de lugares geométricos situados habitando el espacio alephiano"
+        width={1839}
+        height={1119}
+        priority={false}
+        style={{ display: "block", width: "100%", height: "auto", marginBottom: 40 }}
+      />
+      <h1 style={{ fontFamily: FD, fontSize: 32, fontWeight: 300, color: "#3D2B1A", lineHeight: 1.15, margin: "0 0 48px" }}>
+        Antes de ingresar al campo
+      </h1>
+      <p style={{ ...paraStyle, marginBottom: 20 }}>{p1}</p>
+      <p style={{ ...paraStyle, marginBottom: 20 }}>{p2}</p>
+      <div style={{ textAlign: "center", margin: "20px 0" }}>
+        <span style={{ fontFamily: FD, fontSize: 24, color: AMBER }}>✦</span>
+      </div>
+      <p style={{ ...paraStyle, marginBottom: 20 }}>{p3}</p>
+      <p style={paraStyle}>{p4}</p>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: 40 }}>
+        {btnEl}
+      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/Aleph_vectorial_poweredby.svg"
+        alt="aleph Powered by QUANAM"
+        style={{ display: "block", width: 64, height: "auto", margin: "32px auto 24px" }}
+      />
     </div>
   );
 }
