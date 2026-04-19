@@ -305,7 +305,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "clamp(650px, 52vw, 980px) minmax(0, 1fr)",
+            gridTemplateColumns: "min(52vw, 820px) minmax(0, 1fr)",
             columnGap: "clamp(40px, 5vw, 100px)",
             rowGap: "clamp(16px, 3vh, 32px)",
             marginTop: "clamp(8px, 1.5vh, 20px)",
@@ -322,13 +322,13 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             priority={false}
             style={{
               display: "block",
-              width: "clamp(650px, 52vw, 980px)",
+              width: "min(52vw, 820px)",
               height: "auto",
             }}
           />
 
           {/* top-right: h2 "El gesto" + p2/p3/p4 */}
-          <div style={{ maxWidth: "clamp(460px, 32vw, 620px)", paddingTop: 8 }}>
+          <div style={{ maxWidth: "min(42vw, 780px)", paddingTop: 8 }}>
             <h2
               style={{
                 fontFamily: FD,
