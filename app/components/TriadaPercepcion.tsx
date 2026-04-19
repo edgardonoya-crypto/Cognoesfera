@@ -302,7 +302,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             gridTemplateColumns: "min(48vw, 880px) minmax(0, 1fr)",
             gridTemplateRows: "1fr auto",
             columnGap: "clamp(40px, 5vw, 100px)",
-            rowGap: "clamp(12px, 2vh, 28px)",
+            rowGap: "clamp(32px, 5vh, 64px)",
             marginTop: "clamp(4px, 0.5vh, 10px)",
             alignContent: "start",
           }}
