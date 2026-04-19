@@ -264,22 +264,16 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
           height: "100dvh",
           minHeight: "100vh",
           background: "#FDFAF5",
-          padding: "clamp(12px, 2.5vh, 28px) clamp(40px, 6vw, 120px) clamp(12px, 2.5vh, 28px) clamp(40px, 4.7vw, 90px)",
+          padding: "clamp(40px, 6vh, 72px) clamp(60px, 6.5vw, 130px) clamp(32px, 4.5vh, 56px) clamp(60px, 4.7vw, 95px)",
           display: "flex",
           flexDirection: "column",
         }}
       >
-        {/* Header: eyebrow izquierda / logo derecha */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
+        {/* Header: eyebrow PARADIGMA ALEPH (izq) + logo aleph (der) */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div
             style={{
-              fontSize: "clamp(11px, 0.75vw, 14px)",
+              fontSize: "clamp(12px, 0.85vw, 15px)",
               fontFamily: FB,
               fontWeight: 400,
               letterSpacing: "0.22em",
@@ -289,30 +283,28 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
           >
             Paradigma Aleph
           </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/Aleph_vectorial_poweredby.svg"
-            alt="aleph Powered by QUANAM"
-            style={{
-              width: "clamp(56px, 3.6vw, 80px)",
-              height: "auto",
-              opacity: 0.9,
-            }}
+          <Image
+            src="/images/logo-aleph-powered.png"
+            alt="aleph powered by Quanam"
+            width={200}
+            height={100}
+            priority
+            style={{ width: "clamp(60px, 4vw, 80px)", height: "auto", display: "block" }}
           />
         </div>
 
-        {/* Grid 2 columnas con flex column independiente */}
+        {/* Grid principal: 2 columnas paralelas */}
         <div
           style={{
             flex: 1,
             display: "grid",
-            gridTemplateColumns: "min(42vw, 780px) minmax(0, 1fr)",
+            gridTemplateColumns: "min(48vw, 880px) minmax(0, 1fr)",
             columnGap: "clamp(40px, 5vw, 100px)",
-            marginTop: "clamp(8px, 1.5vh, 20px)",
+            marginTop: "clamp(20px, 3vh, 40px)",
           }}
         >
-          {/* Columna izquierda: imagen + título + p1 */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "clamp(24px, 3vh, 48px)" }}>
+          {/* Columna izquierda: imagen + título + p1 (flujo natural) */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "clamp(20px, 3vh, 40px)" }}>
             <Image
               src="/images/topografia-intro.png"
               alt="Topografía del campo colectivo"
@@ -328,12 +320,15 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             <h1
               style={{
                 fontFamily: FD,
-                fontSize: "clamp(32px, 2.5vw, 48px)",
+                fontSize: "clamp(32px, 2.6vw, 50px)",
                 fontWeight: 300,
                 color: "#3D2B1A",
                 lineHeight: 1.05,
                 letterSpacing: "-0.01em",
-                margin: 0,
+                marginTop: 0,
+                marginRight: 0,
+                marginBottom: 0,
+                marginLeft: 0,
               }}
             >
               Antes de ingresar al campo
@@ -341,9 +336,9 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             <p style={{ ...paraStyle, maxWidth: "100%" }}>{p1}</p>
           </div>
 
-          {/* Columna derecha: el gesto + p2, p3, p4 + botón abajo */}
-          <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", minWidth: 0 }}>
-            <div style={{ maxWidth: "100%", paddingTop: 8 }}>
+          {/* Columna derecha: subtitulo "El gesto" + párrafos + botón */}
+          <div style={{ display: "flex", flexDirection: "column", minWidth: 0, maxWidth: "100%" }}>
+            <div style={{ paddingTop: 4 }}>
               <h2
                 style={{
                   fontFamily: FD,
@@ -352,7 +347,10 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
                   color: "#3D2B1A",
                   lineHeight: 1.1,
                   letterSpacing: "-0.005em",
-                  margin: "0 0 24px",
+                  marginTop: 0,
+                  marginRight: 0,
+                  marginBottom: 24,
+                  marginLeft: 0,
                 }}
               >
                 <span style={{ color: AMBER, marginRight: 16 }}>✦</span>
@@ -363,7 +361,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
               <p style={paraStyle}>{p4}</p>
             </div>
 
-            <div style={{ alignSelf: "flex-end" }}>
+            <div style={{ marginTop: "clamp(80px, 12vh, 160px)", alignSelf: "flex-end" }}>
               {btnEl}
             </div>
           </div>
