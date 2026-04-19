@@ -261,7 +261,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
           height: "100dvh",
           minHeight: "100vh",
           background: "#FDFAF5",
-          padding: "clamp(16px, 3vh, 32px) clamp(40px, 6vw, 120px) clamp(16px, 3vh, 32px) clamp(40px, 4.7vw, 90px)",
+          padding: "clamp(12px, 2.5vh, 28px) clamp(40px, 6vw, 120px) clamp(12px, 2.5vh, 28px) clamp(40px, 4.7vw, 90px)",
           display: "flex",
           flexDirection: "column",
         }}
@@ -302,7 +302,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "clamp(600px, 48vw, 900px) minmax(0, 1fr)",
+            gridTemplateColumns: "clamp(650px, 52vw, 980px) minmax(0, 1fr)",
             columnGap: "clamp(40px, 5vw, 100px)",
             rowGap: "clamp(16px, 3vh, 32px)",
             marginTop: "clamp(8px, 1.5vh, 20px)",
@@ -319,7 +319,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             priority={false}
             style={{
               display: "block",
-              width: "clamp(600px, 48vw, 900px)",
+              width: "clamp(650px, 52vw, 980px)",
               height: "auto",
             }}
           />
@@ -333,6 +333,19 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
               paddingLeft: "clamp(32px, 3vw, 56px)",
             }}
           >
+            <div
+              style={{
+                fontSize: "clamp(11px, 0.75vw, 14px)",
+                fontFamily: FB,
+                fontWeight: 400,
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: AMBER,
+                marginBottom: 18,
+              }}
+            >
+              El gesto
+            </div>
             <span
               style={{
                 position: "absolute",
