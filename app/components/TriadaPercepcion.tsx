@@ -260,12 +260,12 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
         style={{
           minHeight: "100vh",
           background: "#FDFAF5",
-          padding: "32px 56px 32px 90px",
+          padding: "clamp(24px, 5vh, 48px) clamp(40px, 6vw, 120px) clamp(24px, 5vh, 48px) clamp(40px, 4.7vw, 90px)",
           display: "flex",
           flexDirection: "column",
         }}
       >
-        {/* Header: eyebrow izquierda / logo derecha (balance editorial) */}
+        {/* Header: eyebrow izquierda / logo derecha */}
         <div
           style={{
             display: "flex",
@@ -275,7 +275,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
         >
           <div
             style={{
-              fontSize: 14,
+              fontSize: "clamp(11px, 0.75vw, 14px)",
               fontFamily: FB,
               fontWeight: 400,
               letterSpacing: "0.22em",
@@ -289,23 +289,28 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
           <img
             src="/images/Aleph_vectorial_poweredby.svg"
             alt="aleph Powered by QUANAM"
-            style={{ width: 72, height: "auto", opacity: 0.9 }}
+            style={{
+              width: "clamp(56px, 3.6vw, 80px)",
+              height: "auto",
+              opacity: 0.9,
+            }}
           />
         </div>
 
-        {/* Grid principal 2×2 asimétrico */}
+        {/* Grid principal 2x2 asimétrico */}
         <div
           style={{
             flex: 1,
             display: "grid",
-            gridTemplateColumns: "minmax(0, 820px) minmax(0, 1fr)",
+            gridTemplateColumns: "minmax(0, auto) minmax(0, 1fr)",
             gridTemplateRows: "auto 1fr",
-            columnGap: 120,
-            rowGap: 24,
-            marginTop: 20,
+            columnGap: "clamp(40px, 5vw, 100px)",
+            rowGap: "clamp(16px, 3vh, 32px)",
+            marginTop: "clamp(16px, 3vh, 32px)",
+            alignItems: "start",
           }}
         >
-          {/* top-left — imagen topográfica dominante */}
+          {/* top-left: imagen topográfica */}
           <Image
             src="/images/topografia-intro.png"
             alt="Topografía de lugares geométricos situados habitando el espacio alephiano"
@@ -314,43 +319,48 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             priority={false}
             style={{
               display: "block",
-              width: "100%",
-              maxWidth: 720,
+              width: "clamp(600px, 48vw, 900px)",
               height: "auto",
-              alignSelf: "start",
             }}
           />
 
-          {/* top-right — p2 p3 p4 con ornamento ✦ a la izquierda */}
-          <div style={{ position: "relative", maxWidth: 620, alignSelf: "start", paddingTop: 12 }}>
+          {/* top-right: p2/p3/p4 con ornamento ✦ */}
+          <div
+            style={{
+              position: "relative",
+              maxWidth: "clamp(460px, 32vw, 620px)",
+              paddingTop: 8,
+              paddingLeft: "clamp(32px, 3vw, 56px)",
+            }}
+          >
             <span
               style={{
                 position: "absolute",
-                left: -64,
+                left: 0,
                 top: 4,
                 fontFamily: FD,
-                fontSize: 26,
+                fontSize: "clamp(20px, 1.4vw, 26px)",
                 color: AMBER,
               }}
             >
               ✦
             </span>
-            <p style={{ ...paraStyle, marginBottom: 20 }}>{p2}</p>
-            <p style={{ ...paraStyle, marginBottom: 20 }}>{p3}</p>
+            <p style={{ ...paraStyle, marginBottom: 16 }}>{p2}</p>
+            <p style={{ ...paraStyle, marginBottom: 16 }}>{p3}</p>
             <p style={paraStyle}>{p4}</p>
           </div>
 
-          {/* bottom-left — título grande (umbral) + p1 */}
+          {/* bottom-left: título + p1 */}
           <div style={{ alignSelf: "end" }}>
             <h1
               style={{
                 fontFamily: FD,
-                fontSize: 46,
+                fontSize: "clamp(32px, 2.5vw, 48px)",
                 fontWeight: 300,
                 color: "#3D2B1A",
                 lineHeight: 1.1,
                 letterSpacing: "-0.005em",
-                margin: "0 0 20px",
+                margin: "0 0 14px",
               }}
             >
               Antes de ingresar al campo
@@ -358,7 +368,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             <p style={{ ...paraStyle, maxWidth: 520 }}>{p1}</p>
           </div>
 
-          {/* bottom-right — botón outline */}
+          {/* bottom-right: botón outline */}
           <div
             style={{
               display: "flex",
