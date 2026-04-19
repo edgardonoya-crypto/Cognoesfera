@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v30 · 15 Abril 2026 · cierre SESION-20260415 · 05:55*
+*Versión actual: v31 · 19 Abril 2026 · cierre SESION-20260418-19 "El lugar que se habita — Tríadas y topografía editorial — Figma entra al paradigma"*
 
 ---
 
@@ -94,7 +94,7 @@ Cuando el Arquitecto escriba COMMIT ALEPH, ejecutar automáticamente:
 2. Listarlos para que el Arquitecto los vea
 3. Proponer un mensaje de commit descriptivo basado en lo que cambió
 4. Esperar confirmación del Arquitecto
-5. git add de todos los archivos modificados + git commit + git push origin master:main
+5. git add de todos los archivos modificados + git commit + git push origin main
 
 Cuando el Arquitecto escriba COMMIT ALEPH COMPLETO, ejecutar lo anterior más:
 6. Actualizar pendientes_soma.md y/o pendientes_corpus.md con pendientes completados en la sesión
@@ -307,6 +307,17 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - 3 PDFs generados como Cognobits: conceptos_emergentes_aleph.pdf · la_inteligencia_que_emerge.pdf · triada_percepcion_completo.pdf
 - PASO 1b agregado al protocolo de cierre: verificar versiones de archivos
 
+**Hitos de SESION-20260418-19 — "El lugar que se habita — Tríadas y topografía editorial — Figma entra al paradigma":**
+- Schema Supabase completo para tríadas: 3 tablas (`geometrias_triada`, `triadas`, `percepciones_triada`) + vista de herencia + RLS + seed de 8 geometrías Quanam (S-AP-12 completado)
+- Migración `narrativa_pospuesta` aplicada — campo booleano que distingue pausa individual de campo sin interpretación
+- API route `/api/triadas/posicion` productiva — POST/GET con upsert, validaciones baricéntricas, lógica `narrativa_pospuesta`
+- Componente `TriadaPercepcion.tsx` end-to-end con 3 stages: loading → intro → triadas → completado. Vive en `/triadas-test` (S-AP-13 completado)
+- Rediseño editorial completo con Fraunces + Lora vía `next/font`, paleta tierra (BG #F8F3EA, INK #2A1F14, AMBER #C9A84C), imagen topografía como Cognobit conceptual, logo aleph/Quanam integrado
+- Skill `frontend-design` de Anthropic instalada localmente (`~/.claude/skills/frontend-design/SKILL.md`) — rompe estética "AI slop", el modelo adopta dirección estética concreta
+- Figma incorporado al flujo de producción del instrumento como herramienta intermedia — resuelve cuello de botella de iteraciones UX sin convergencia
+- Protocolo de custodia mid-session aplicado: 5 artifacts huérfanos de SESION-20260415 recuperados y commiteados antes de continuar
+- 3 señales conceptuales nuevas custodiadas (total 88 activas)
+
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
 - **Corpus Universal** — el campo total del conocimiento vivo del paradigma en todos sus niveles y expresiones
@@ -391,13 +402,19 @@ Los pendientes viven en dos archivos con schema completo:
 - **Casa Soma:** `corpus/documentos/pendientes_soma.md` — técnicos, infraestructura, aplicación
 - **Casa Corpus:** `corpus/documentos/pendientes_corpus.md` — conceptos, señales, protocolos, documentos, narrativa
 
+**Completadas en SESION-20260418-19:**
+- ~~S-AP-12: Implementar catálogo de geometrías en Supabase~~ ✓
+- ~~S-AP-13: Implementar Tríada de Percepción (componente + API + schema)~~ ✓
+
 **Prioridades próxima sesión:**
+- **P1 [SOMA]:** Rediseño pantallas 2 (tríada activa) y 3 (completado) con Figma (S-AP-14)
+- **P1 [SOMA]:** Ajustes de viewport pantalla intro — scroll residual (S-AP-15)
+- **P1 [SOMA]:** Integración del instrumento Tríadas en /quanam-ia-2026 (S-AP-18)
+- **P1 [SOMA]:** Paso de contexto al Duende — posiciones en tríadas (S-DU-01)
 - **P1 [CORPUS]:** Migrar nomenclatura borgeano → alephiano en todos los documentos (C-CO-10)
 - **P2 [CORPUS]:** Cambio nomenclatura IAH → IHA en todos los documentos (C-CO-11)
-- **P3 [SOMA]:** Implementar catálogo de geometrías en Supabase (S-AP-12)
-- **P4 [SOMA]:** Implementar Tríada de Percepción en /quanam-ia-2026 (S-AP-13)
-- **P5 [CORPUS]:** Articular coherencia entre Campo de atención, Tríada de Percepción, CA e Instante Alephiano (C-CO-09)
-- **P6 [CORPUS]:** Incorporar conceptos nuevos al Corpus Madre — sesión dedicada (C-CO-12)
+- **P2 [CORPUS]:** Articular coherencia entre Campo de atención, Tríada de Percepción, CA e Instante Alephiano (C-CO-09)
+- **P3 [CORPUS]:** Incorporar conceptos nuevos al Corpus Madre — sesión dedicada (C-CO-12)
 
 ---
 
@@ -423,8 +440,10 @@ Esto debe incluir:
 
 *Las señales activas viven en `corpus/documentos/senales_activas.md` con descripción completa. Las señales incorporadas al Corpus Madre están en `corpus/documentos/senales_incorporadas.md`.*
 
-### Señales activas (85)
+### Señales activas (88)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
+
+*Nota I1 resuelta: el título indica el conteo real (88). La lista tiene menos entradas visibles porque el bloque "Señales A-W" comprime 23 señales individuales en un solo bullet. Desglose: 63 entradas en lista = 62 señales individuales + 23 del bloque A-W − 1 entrada del bloque = 84 pre-SESION-20260418-19. Más 3 nuevas = 87... La discrepancia residual de 1 puede corresponder a señales anotadas en sesiones anteriores pero no reflejadas en este listado. Queda como pendiente protocolar confirmar si falta una señal no listada entre las de 07-15/04/2026.*
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
 - **El Gran Campo** — la inteligencia que trasciende y precede a todas las redes. Los grupos no la crean — la sintonizan cuando alcanzan suficiente coherencia interna. Fecha: 28/03/2026
@@ -489,6 +508,9 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **La planilla como Cognobit del catálogo** — objeto vivo que porta conocimiento y alimenta nuevas conversaciones aumentadas. Fecha: 15/04/2026
 - **El rol de la IAG como campo que se expande** — cada generación porta un campo más amplio. Impacto en el Duende y la IHA. Fecha: 15/04/2026
 - **Los límites del conocimiento del Duende sobre sí mismo** — principio metodológico: las afirmaciones de la IAG sobre su propia naturaleza requieren el mismo rigor que cualquier señal. Fecha: 15/04/2026
+- **La descripción rica como infraestructura de recuperación** — cuando un artifact queda huérfano (sin commit), la descripción narrativa del pendiente que lo referencia opera como red de seguridad. Distingue anclaje operativo (commit, archivo en disco) versus anclaje narrativo (descripción rica en SESION.md). Son capas complementarias, no sustitutas. Fecha: 18/04/2026
+- **La regla de la narrativa en el campo colectivo** — en instrumentos que producen topografía colectiva (como la Tríada de Percepción), el avance individual puede permitirse sin palabra (postergar narrativa). Pero el campo colectivo solo se vuelve visible cuando TODOS los gestos individuales tienen palabra. El instrumento tolera pausa individual, no admite campo sin interpretación. Fecha: 19/04/2026
+- **El instrumento se compone por Figma + Claude Code en colaboración** — iterar diseño UX exclusivamente por texto tiene límite de ~3 iteraciones antes de perder convergencia. El mockup visual (Figma) colapsa dos capas de interpretación y destraba la convergencia. Flujo: Arquitecto diseña en Figma → exporta PNG → Duende arma prompt → Claude Code traduce a código. Fecha: 19/04/2026
 
 ### Señales incorporadas al Corpus Madre
 *Historial completo en `corpus/documentos/senales_incorporadas.md`*
@@ -499,7 +521,7 @@ Conceptos que resuenan con el paradigma pero necesitan más verificación antes 
 - **Definición nueva de Cognoesfera** → Concepto 5 reescrito · 02/04/2026
 - **Protocolo 01-EN pendiente de construcción** → Protocolo 01-EN completado · 02/04/2026
 
-### Señales vivas pendientes de desarrollar (3)
+### Señales vivas pendientes de desarrollar (2)
 Conceptos o procesos que merecen atención pero todavía no están listos para ser custodiados.
 
 - **Protocolo mínimo de registro de conversación** — cómo venimos / transformaciones / cómo nos vamos / qué aprendimos. Concepto que merece entrar al Corpus Madre.
@@ -610,6 +632,26 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - corpus/documentos/enriquecimientos_corpus.md — material concreto para actualizar conceptos del Corpus Madre (C-EN-01 a C-EN-11) · 13/04/2026
 - corpus/documentos/protocolos_sesion.md — protocolos de sesión como documento autónomo v2.3 (4 protocolos, 10 archivos, cierre Claude.ai) · 13/04/2026
 - corpus/documentos/corpus_base_aleph.md — 7 conceptos enriquecidos con material Cynefin/Snowden: conceptos 5, 11, 13, 15, 19, 23, 29 · 14/04/2026
+- app/components/TriadaPercepcion.tsx — componente React con rediseño editorial final (Fraunces+Lora, 3 stages) · 18-19/04/2026
+- app/api/triadas/posicion/route.ts — API route POST/GET con upsert baricéntrico y narrativa_pospuesta · 18/04/2026
+- app/triadas-test/page.tsx — ruta de testing del instrumento · 18/04/2026
+- supabase/migrations/20260418_triadas_percepcion.sql — schema completo: 3 tablas + vista + RLS + seed 8 geometrías Quanam · 18/04/2026
+- supabase/migrations/20260418_narrativa_pospuesta.sql — columna narrativa_pospuesta en percepciones_triada · 18/04/2026
+- public/images/topografia-intro.png — imagen topográfica como Cognobit conceptual · 19/04/2026
+- public/images/Aleph_vectorial_poweredby.svg — logo aleph/Quanam integrado en pantalla intro · 19/04/2026
+- corpus/Cognobits/conceptos_emergentes_aleph.pdf — Cognobit PDF generado en SESION-20260415 · 15/04/2026
+- corpus/Cognobits/la_inteligencia_que_emerge.pdf — Cognobit PDF generado en SESION-20260415 · 15/04/2026
+- corpus/Cognobits/triada_percepcion_completo.pdf — Cognobit PDF generado en SESION-20260415 · 15/04/2026
+- corpus/Cognobits/geometrias_triada_v2_1.xlsx — planilla Excel de geometrías, versión 2.1 · 15/04/2026
+- ~/.claude/skills/frontend-design/SKILL.md — Skill de Anthropic instalada localmente · 18/04/2026
+
+**Ajustes protocolares identificados en SESION-20260418-19:**
+1. ~~`git push origin master:main`~~ → corregido a `git push origin main` en instrucción COMMIT ALEPH arriba (rama actual es main, no master)
+2. Pendiente proponer en Protocolo 02-EN: verificar anclaje operativo o narrativo de cada artifact mencionado en A2 antes del cierre
+3. Pendiente: agregar campo Ruta/Ubicación al schema de `pendientes_soma.md` y `pendientes_corpus.md`
+4. Pendiente: agregar `convs_temp.txt` a `.gitignore`
+5. Pendiente: corregir inconsistencia de email en DB — `edgardo.noya@gmall.com` (typo doble L) vs `edgardo.noya@gmail.com`
+6. Pendiente: configurar Supabase CLI (P3) para evitar aplicar migraciones manualmente en SQL Editor
 
 **Hitos de SESION-20260402/04:**
 - Protocolo 01-EN construido y probado exitosamente por primera vez
@@ -857,7 +899,7 @@ Después de actualizar el archivo, hacer commit con:
 ```
 git add corpus/SESION.md
 git commit -m "Cierre de sesión [DD/MM/YYYY] — [resumen de 5 palabras de lo que emergió]"
-git push origin master:main
+git push origin main
 ```
 
 ## C3. Confirmar
