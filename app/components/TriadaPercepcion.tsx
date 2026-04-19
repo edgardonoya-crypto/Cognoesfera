@@ -305,7 +305,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "min(52vw, 820px) minmax(0, 1fr)",
+            gridTemplateColumns: "1fr 1fr",
             columnGap: "clamp(40px, 5vw, 100px)",
             rowGap: "clamp(16px, 3vh, 32px)",
             marginTop: "clamp(8px, 1.5vh, 20px)",
@@ -322,13 +322,13 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             priority={false}
             style={{
               display: "block",
-              width: "min(52vw, 820px)",
+              width: "100%",
               height: "auto",
             }}
           />
 
           {/* top-right: h2 "El gesto" + p2/p3/p4 */}
-          <div style={{ maxWidth: "min(42vw, 780px)", paddingTop: 8 }}>
+          <div style={{ maxWidth: "100%", paddingTop: 8 }}>
             <h2
               style={{
                 fontFamily: FD,
@@ -363,14 +363,14 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             >
               Antes de ingresar al campo
             </h1>
-            <p style={{ ...paraStyle, maxWidth: 520 }}>{p1}</p>
+            <p style={{ ...paraStyle, maxWidth: "100%" }}>{p1}</p>
           </div>
 
           {/* bottom-right: botón outline */}
           <div
             style={{
               display: "flex",
-              alignItems: "flex-start",
+              alignItems: "flex-end",
               justifyContent: "flex-end",
             }}
           >
