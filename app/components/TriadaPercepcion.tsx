@@ -260,7 +260,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
         style={{
           minHeight: "100vh",
           background: "#FDFAF5",
-          padding: "48px 56px 48px 90px",
+          padding: "32px 56px 32px 90px",
           display: "flex",
           flexDirection: "column",
         }}
@@ -281,7 +281,6 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
               letterSpacing: "0.22em",
               textTransform: "uppercase",
               color: AMBER,
-              paddingTop: 10,
             }}
           >
             Paradigma Aleph
@@ -302,8 +301,8 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             gridTemplateColumns: "minmax(0, 820px) minmax(0, 1fr)",
             gridTemplateRows: "auto 1fr",
             columnGap: 120,
-            rowGap: 32,
-            marginTop: 32,
+            rowGap: 24,
+            marginTop: 20,
           }}
         >
           {/* top-left — imagen topográfica dominante */}
@@ -316,7 +315,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             style={{
               display: "block",
               width: "100%",
-              maxWidth: 820,
+              maxWidth: 720,
               height: "auto",
               alignSelf: "start",
             }}
@@ -346,7 +345,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             <h1
               style={{
                 fontFamily: FD,
-                fontSize: 52,
+                fontSize: 46,
                 fontWeight: 300,
                 color: "#3D2B1A",
                 lineHeight: 1.1,
