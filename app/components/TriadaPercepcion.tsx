@@ -284,11 +284,12 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
             Paradigma Aleph
           </div>
           <Image
-            src="/images/logo-aleph-powered.png"
+            src="/images/Aleph_vectorial_poweredby.svg"
             alt="aleph powered by Quanam"
             width={200}
             height={100}
             priority
+            unoptimized
             style={{ width: "clamp(60px, 4vw, 80px)", height: "auto", display: "block" }}
           />
         </div>
