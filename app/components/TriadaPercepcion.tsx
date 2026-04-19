@@ -305,7 +305,7 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
+            gridTemplateColumns: "min(42vw, 780px) minmax(0, 1fr)",
             columnGap: "clamp(40px, 5vw, 100px)",
             rowGap: "clamp(16px, 3vh, 32px)",
             marginTop: "clamp(8px, 1.5vh, 20px)",
