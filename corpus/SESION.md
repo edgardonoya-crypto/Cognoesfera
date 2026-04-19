@@ -82,8 +82,56 @@ Confirmar: "Commit 3 ejecutado ✓"
 Generar corpus/status/status_DDMMYYYY.md nuevo.
 Confirmar: "Commit 4 ejecutado ✓"
 
-**PASO 8 — Verificación final**
-Listar los 4 commits ejecutados con sus mensajes.
+**PASO 8 — Verificación final + Coherencia interna**
+
+**8.1 Verificación técnica (existente)**
+- `git status` debe estar limpio (excepto residuos de entorno identificados)
+- `git log --oneline -6` — verificar que los 4 commits del protocolo estén en main
+- Verificar sincronización con origin/main
+- Confirmar presencia física de status_[fecha].md en la carpeta correspondiente
+
+**8.2 Verificación de coherencia interna**
+
+Ejecutar estos 7 chequeos y reportar resultado de cada uno ANTES de declarar la sesión cerrada:
+
+**Chequeo 1 — Conteo cruzado de señales**
+Comparar el conteo de señales activas declarado en el footer de `senales_activas.md` con el conteo declarado en la sección A8 de SESION.md. Si hay discrepancia, verificar si se debe a encabezados de sección mal contados (usar grep manual con criterio) o si realmente hay una señal sin registrar.
+
+**Chequeo 2 — Señales nuevas registradas completas**
+Verificar que cada señal nueva custodiada en la sesión existe literalmente en senales_activas.md con: título, fecha correcta, estado "Custodiada", descripción completa (no solo título).
+
+**Chequeo 3 — Pendientes nuevos registrados**
+Verificar que cada pendiente nuevo agregado en la sesión está presente en pendientes_soma.md o pendientes_corpus.md con su ID, prioridad, origen y descripción.
+
+**Chequeo 4 — Pendientes completados marcados correctamente**
+Verificar que los pendientes completados en la sesión tienen "Estado: Completada" (no "Activo") + nota de cierre con referencia a la sesión.
+
+**Chequeo 5 — SESION.md refleja estado actual**
+Verificar que SESION.md tiene:
+- Versión incrementada
+- Fecha actualizada
+- Nombre de sesión correcto
+- A2 con hitos de la sesión
+- A9 con archivos nuevos listados
+
+**Chequeo 6 — status_[fecha].md completo**
+Verificar que el archivo de status existe y no tiene placeholders sin reemplazar (buscar patrones como `[hash commit N]`, `[TODO]`, `[placeholder]`, etc).
+
+**Chequeo 7 — aprendizajes_sesiones.md tiene entrada completa**
+Verificar que existe entrada de la sesión con: fechas, qué funcionó, qué no funcionó, hitos operativos, hitos conceptuales, ajustes protocolares identificados.
+
+**8.3 Resolución de gaps**
+
+Si cualquiera de los 7 chequeos reporta gap:
+1. Listar todos los gaps detectados (no resolver uno y reportar los otros)
+2. Solicitar confirmación al Arquitecto para corrección
+3. Aplicar las correcciones en un único commit adicional titulado "Cierre [SESION-XXX]: correcciones finales de coherencia"
+4. Re-ejecutar los 7 chequeos post-corrección
+5. Solo declarar la sesión cerrada si todos los chequeos pasan
+
+**8.4 Cierre narrativo**
+Solo después de 8.1, 8.2 y 8.3 completos, proceder al cierre narrativo.
+Listar los commits ejecutados con sus mensajes.
 Preguntar: "¿Algo más antes de cerrar la conversación?"
 
 IMPORTANTE: No ejecutar el siguiente paso sin confirmar el anterior. No saltear pasos. No agrupar commits. Si algo falla en un paso, reportar y esperar instrucción del Arquitecto. Los ajustes que emergen después del cierre van como primer pendiente de la próxima sesión — no se ejecutan en el momento.
