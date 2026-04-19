@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json();
-    const { triada_id, peso_a, peso_b, peso_c, narrativa, estado_vital } = body;
+    const { triada_id, peso_a, peso_b, peso_c, narrativa, narrativa_pospuesta, estado_vital } = body;
 
     if (
       typeof triada_id !== "number" ||
@@ -35,6 +35,13 @@ export async function POST(req: NextRequest) {
       typeof peso_c !== "number"
     ) {
       return NextResponse.json({ error: "Payload inválido" }, { status: 400 });
+    }
+
+    if (narrativa_pospuesta === true && narrativa) {
+      return NextResponse.json({ error: "narrativa debe ser null si narrativa_pospuesta es true" }, { status: 400 });
+    }
+    if (narrativa && narrativa_pospuesta === true) {
+      return NextResponse.json({ error: "narrativa_pospuesta debe ser false si hay narrativa" }, { status: 400 });
     }
 
     const suma = peso_a + peso_b + peso_c;
@@ -54,7 +61,8 @@ export async function POST(req: NextRequest) {
           peso_a,
           peso_b,
           peso_c,
-          narrativa: narrativa || null,
+          narrativa: narrativa_pospuesta ? null : (narrativa || null),
+          narrativa_pospuesta: narrativa_pospuesta || false,
           estado_vital: estado_vital || null,
           updated_at: new Date().toISOString(),
         },
