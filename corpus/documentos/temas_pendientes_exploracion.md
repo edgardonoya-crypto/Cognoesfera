@@ -66,5 +66,23 @@ La diferencia con `senales_custodiadas.md`: las señales custodiadas ya tienen f
 
 ---
 
+## El protocolo de sintonización del Duende entre tres lugares geométricos situados
+
+**Fecha:** 19/04/2026
+**Origen:** SESION-20260419. El Arquitecto detectó que los ciclos de corrección eran sistémicos — no bugs aislados sino falta de sintonía entre Figma, claude.ai y Claude Code. Emergió la palabra "sintonización" como trabajo mutuo y recíproco que precede a la resonancia.
+**Pregunta central:** ¿Cómo se formaliza el protocolo de sintonización? Elementos identificados a incluir: (a) checklist de medición del mockup (11+ mediciones mínimas), (b) preguntas al Arquitecto sobre viewport real, monitor, zoom, (c) catálogo vivo de defaults silenciosos por herramienta, (d) formato de prompt para Claude Code con mediciones y defaults anticipados, (e) verificación post-commit con medición en el render, (f) definición del vocabulario de zonas al inicio de cada sesión, (g) heurística "cuando una variable no responde, probá la opuesta", (h) acuerdo explícito sobre quién tiene la palabra final en cuestiones de percepción vs. técnica, (i) reconocimiento de la bidireccionalidad: el Arquitecto también puede ajustar el mockup.
+**Estado parcial:** Primer manual operativo redactado como `corpus/documentos/manual_sintonizacion_duende.md` v1.0 en esta sesión. El manual se enriquecerá en sesiones futuras.
+
+---
+
+## Nueva categoría de documentos del paradigma: manuales operativos
+
+**Fecha:** 19/04/2026
+**Origen:** SESION-20260419. Al redactar el manual de sintonización, surgió la necesidad de distinguir entre **protocolos** (rituales de sesión — 01-EN, 02-EN, 03-EN, operaciones puntuales de apertura/cierre/commit) y **manuales operativos** (guías consultables durante el trabajo, con procedimiento detallado, scripts reutilizables y heurísticas de diagnóstico). Los protocolos se ejecutan en momentos específicos; los manuales se consultan a lo largo del trabajo.
+**Pregunta central:** ¿Qué otros manuales operativos merece construir el paradigma? Candidatos identificados: (a) manual de custodia de señales (cómo se reconoce una señal, cómo se redacta, cómo se distingue de observación casual), (b) manual de enriquecimiento de conceptos del Corpus Madre (cómo identificar cuándo una señal merece enriquecer un concepto, cómo hacerlo sin perder trazabilidad), (c) manual de conversación aumentada (cómo opera el concepto 23 en la práctica, con ejemplos situados), (d) otros manuales que emerjan naturalmente en el trabajo. La exploración debe incluir también la convención de nomenclatura: `manual_*.md` vive en `corpus/documentos/` como archivos hermanos de los `protocolos_*.md`.
+**Estado:** Tema abierto para exploración en sesiones futuras cuando el trabajo lo requiera. No corresponde construir los manuales especulativamente sino cuando una necesidad operativa concreta los demande — como ocurrió con el manual de sintonización en esta sesión.
+
+---
+
 *Temas Pendientes de Exploración · Paradigma Aleph · Iniciado Abril 2026*
 *Para señales con forma suficiente, ver: `senales_activas.md`*

@@ -348,6 +348,16 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
+**S-AP-21**
+**Título:** Rediseñar bloque mobile de `TriadaPercepcion.tsx` con paradigma visual de pantalla 1 desktop
+**Descripción:** El bloque mobile (viewport <768px) dentro de `TriadaPercepcion.tsx` conserva la estructura original de SESION-20260418. No porta el rediseño editorial del 19/04: grid 2×2 no aplica en mobile pero sí la paleta tierra (#FDFAF5/#C9A84C/#5C4A1E/#3D2B1A), tipografías Fraunces/Lora, botón outline, subtítulo "El gesto" en Fraunces marrón con ornamento ✦ inline, logo Aleph_vectorial_poweredby.svg como firma superior derecha, balance editorial. Requiere mockup Figma dedicado en frame 390×844 (iPhone típico estándar) con decisiones propias de mobile: gesto táctil, altura reducida, tipografías ajustadas, orden de lectura vertical. Aplicar el protocolo de sintonización (`manual_sintonizacion_duende.md`) desde el inicio del trabajo.
+**Prioridad:** P1 (antes de lanzamiento IAC 2026, noviembre Punta del Este)
+**Estado:** Activo
+**Fecha:** 19/04/2026
+**Dependencias:** Ninguna — bloque separado del desktop
+
+---
+
 ## Archivo histórico
 
 *Pendientes Soma completados · Preservados como registro del proceso*

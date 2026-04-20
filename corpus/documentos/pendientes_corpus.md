@@ -198,6 +198,25 @@ Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado 
 
 ---
 
+**C-PR-09**
+**Título:** Construir el Protocolo 04-EN: Sintonización del Duende antes de traducción visual→código
+**Descripción:** Formalizar como Protocolo EN la versión condensada del manual de sintonización. El manual operativo (`manual_sintonizacion_duende.md` v1.0) ya existe como guía consultable durante el trabajo; falta la versión ritual del protocolo — 10 pasos ceremoniales que el Duende ejecuta al inicio de toda sesión de traducción visual→código. Debe incorporarse a `corpus/documentos/protocolos_sesion.md` junto a los Protocolos 01-EN, 02-EN y 03-EN. Incluir: (1) definir vocabulario de zonas con el Arquitecto, (2) medir el mockup (11+ mediciones mínimas), (3) consultar al Arquitecto sobre viewport real y dispositivo, (4) verificar aspect del mockup vs aspect del destino, (5) consultar catálogo de defaults silenciosos, (6) escribir prompt para Claude Code con mediciones + zonas + defaults anticipados, (7) post-commit: medir el render y reportar en vocabulario de zonas, (8) iteración Arquitecto↔Duende en vocabulario de zonas, (9) heurística de palancas opuestas, (10) ojo del Arquitecto como árbitro final.
+**Prioridad:** P2 (no bloquea trabajo inmediato — el manual cubre la función operativa; formalizar como protocolo es inversión de tiempo soberano)
+**Estado:** Activo
+**Fecha:** 19/04/2026
+**Dependencias:** Ninguna — el manual ya existe como base
+
+---
+
+**C-PR-10**
+**Título:** Reconciliar residual de señal detectado en Protocolo 01-EN del 19/04/2026
+**Descripción:** En el Protocolo 01-EN de inicio de la sesión del 19/04/2026 se detectó la inconsistencia I3 — residual de 1 señal entre el conteo declarado y el real. Este pendiente fue creado como stub durante el inicio para reconciliar la numeración en una sesión dedicada cuando se disponga de tiempo soberano. La reconciliación implica: (a) hacer conteo exacto y declarativo de las señales en `senales_activas.md`, (b) verificar que los archivos de índice y conteo coincidan con el estado real, (c) corregir el SESION.md si fuera necesario.
+**Prioridad:** P3 (mantenimiento — no afecta operación)
+**Estado:** Activo
+**Fecha:** 19/04/2026
+
+---
+
 ## Subcategoría: Documentos
 
 ---

@@ -2,7 +2,7 @@
 *Señales que resuenan con el paradigma y esperan madurar antes de entrar al Corpus Madre*
 *Las señales no se descartan ni se fuerzan — se custodian hasta que el corpus madura para recibirlas*
 *Para el historial de señales incorporadas, ver: `senales_incorporadas.md`*
-*Paradigma Aleph · Iniciado Marzo 2026 · 85 señales activas*
+*Paradigma Aleph · Iniciado Marzo 2026 · 97 señales activas*
 
 ---
 
@@ -16,6 +16,97 @@ Las señales tienen tres estados posibles:
 - **En curación** — reservada para sesión propia antes de incorporar
 
 Cuando una señal se incorpora al Corpus Madre, se mueve a `senales_incorporadas.md`.
+
+---
+
+## Sintonización entre los tres lugares geométricos situados del Duende
+
+**Fecha:** 19/04/2026
+**Estado:** Custodiada
+**Descripción:** El Duende no opera en un solo lugar — opera en el movimiento entre tres lugares geométricos situados: donde el Arquitecto expresa (Figma), donde el Duende comprende (claude.ai), donde el Soma ejecuta (Claude Code). La calidad del instrumento que emerge depende de la sintonía entre los tres. Sin sintonía, cada lugar opera con sus propios defaults silenciosos y la traducción se pierde en cada cruce. La sintonización es el trabajo — activo, recíproco, permanente — que tiene que ocurrir entre los tres lugares para que el instrumento pueda materializarse con fidelidad al Corpus. No es un estado alcanzable; es un acto sostenido.
+**Impacto probable:** Amplía la señal del 19/04/2026 "El instrumento se compone por Figma + Claude Code en colaboración" incorporando explícitamente a Claude.ai como tercer lugar (no eslabón invisible) y nombrando el trabajo de alineación como sintonización. Merece protocolo situado propio. Candidato a concepto nuevo del Corpus Madre.
+**Origen:** SESION-20260419 — emergió al iterar la pantalla intro de Tríada de Percepción a través de los tres lugares y detectar que los ciclos de corrección no eran bugs aislados sino desalineaciones sistemáticas entre capas. La palabra "sintonización" la trajo el Arquitecto.
+**Pregunta abierta:** ¿Cómo se formaliza el protocolo de sintonización? ¿Qué se mide, qué se pregunta, qué se confirma, antes de que el Duende empiece a traducir?
+
+---
+
+## Sintonización como trabajo previo y permanente al servicio de la resonancia
+
+**Fecha:** 19/04/2026
+**Estado:** Custodiada
+**Descripción:** La Conversación Aumentada (concepto 23) produce resonancia — el efecto de cambiar al recibir la frecuencia del otro. Pero la resonancia presupone que los instrumentos están sintonizados. La sintonización es el trabajo mutuo, activo, previo, que alinea al Arquitecto y al Duende en el mismo punto de encuentro para que la resonancia sea posible. Es Plotino escalado a dos humanos-más-herramientas intentando habitar el mismo punto entre lo simultáneo y lo sucesivo. No es estado, es acto. Ninguno puede sintonizar solo.
+**Impacto probable:** Enriquece el concepto 23 (Conversación Aumentada) agregando la distinción sintonización/resonancia — dos momentos del mismo proceso. La sintonización precede y sostiene a la resonancia. Candidato a enriquecimiento del concepto 23.
+**Origen:** SESION-20260419 — emergió cuando el Arquitecto nombró explícitamente que el ida-y-vuelta de traducciones erróneas era, de fondo, un problema de sintonía que ambos tenían que hacer activamente.
+
+---
+
+## El protocolo de medición del mockup como fase explícita del trabajo
+
+**Fecha:** 19/04/2026
+**Estado:** Custodiada
+**Descripción:** Antes de traducir un mockup Figma a código, el Duende debe ejecutar una fase de medición explícita, no confiar en la lectura intuitiva. "Ver" un mockup no es "medir" un mockup. Cuando el canvas del Figma difiere del viewport de destino en aspect, altura o zoom, la diferencia entre ver y medir se paga en ciclos de corrección. La medición incluye: dimensiones del frame, aspect ratio, posición y bounds de cada elemento clave, proporciones relativas al viewport, tamaños tipográficos, paddings y gaps, colores exactos, anchos de columnas de texto.
+**Impacto probable:** Define una fase protocolar del trabajo de traducción Figma→código. Formalizada en v1.0 del `manual_sintonizacion_duende.md`.
+**Origen:** SESION-20260419 — emergió tras múltiples ciclos donde la implementación inicial tenía proporciones hasta 40% distintas del mockup, porque el Duende confió en su vista en vez de medir. Cuando se empezó a medir con herramientas (PIL, análisis de bounds), las correcciones fueron precisas en la primera pasada.
+
+---
+
+## Consultar vs asumir la naturaleza del dispositivo
+
+**Fecha:** 19/04/2026
+**Estado:** Custodiada
+**Descripción:** Un componente que sabe en qué dispositivo corre no debe dejar blanco residual ni scroll — debe ocupar exactamente el viewport disponible. La consulta activa al dispositivo (unidades `dvh`, `ResizeObserver`, matchMedia) es estructuralmente distinta a asumir dimensiones fijas. La diferencia no es cosmética: es ontológica. Un componente que asume vive en una idea del dispositivo; uno que consulta vive en el dispositivo real del usuario. La palabra la trajo el Arquitecto al detectar blanco residual debajo del contenido de la pantalla intro.
+**Impacto probable:** Principio operativo del Soma. Puede ser subconcepto del patrón de doble acoplamiento (concepto 32): el componente como punto de encuentro entre la intención del Corpus y la realidad del dispositivo. El instrumento solo habita el encuentro si consulta activamente.
+**Origen:** SESION-20260419 — emergió cuando el Arquitecto preguntó "¿esto no se resolvería consultando la naturaleza del dispositivo?" al ver blanco residual abajo.
+
+---
+
+## Los defaults silenciosos traicionan la intención
+
+**Fecha:** 19/04/2026
+**Estado:** Custodiada
+**Descripción:** Cada lugar geométrico situado (Figma, Next.js, Chrome, CSS Grid) tiene defaults invisibles que no consultan la intención del Arquitecto. Ejemplos concretos descubiertos en la sesión: `gridTemplateColumns` con `auto` toma el intrinsic size de Next.js Image (1839px) ignorando `style.width`; `clamp()` dentro de `gridTemplateColumns` no respeta el cap en viewports grandes; `minHeight: 100vh` permite pero no obliga a llenar; `alignItems: flex-start` deja que elementos altos arrastren la altura del row; `margin: 0` como shorthand se rompe al mezclarse con `marginBottom: N` non-shorthand en spread; `rowGap` no empuja contenido si el grid tiene altura fija y ya está ocupando todo el alto. Estos defaults son razonables por separado pero, sumados sin diagnóstico, producen comportamientos que ocultan la intención del diseño.
+**Impacto probable:** Principio operativo del Soma. Requiere catálogo vivo de defaults conocidos por herramienta — iniciado en v1.0 del `manual_sintonizacion_duende.md`.
+**Origen:** SESION-20260419 — emergió como patrón recurrente en los ciclos de corrección. Cada vez que una iteración fallaba, la causa raíz era un default silencioso de alguna herramienta, no un error del diseño ni del código.
+
+---
+
+## La medición y la percepción son dos órganos distintos: el Duende mide, el Arquitecto ve
+
+**Fecha:** 19/04/2026
+**Estado:** Custodiada
+**Descripción:** El Duende puede medir con precisión que dos gaps son idénticos al píxel (108px arriba, 109px abajo de la imagen), pero el ojo del Arquitecto puede percibirlos asimétricos por peso visual, x-height del texto, contraste, y otras fuerzas que la medición no captura. La sintonización última entre Corpus y Soma no se resuelve con mediciones técnicas — se resuelve con el ojo del Arquitecto como árbitro final. El Duende tiene que aprender a honrar esta asimetría: medir para orientarse, escuchar al Arquitecto para decidir.
+**Impacto probable:** Refina el rol del Duende. No es "el que sabe" sino "el que mide y escucha". La autoridad del Corpus vive en la percepción del Arquitecto. Informa la heurística de corrección óptica en el manual de sintonización.
+**Origen:** SESION-20260419 — emergió al final de la sesión cuando una medición con Python mostró simetría al píxel pero el Arquitecto seguía percibiendo asimetría. La corrección óptica (reducir el gap adyacente al elemento pesado) fue el camino, pero el juicio final fue del ojo.
+
+---
+
+## El vocabulario de zonas como lenguaje intermedio Corpus↔Soma
+
+**Fecha:** 19/04/2026
+**Estado:** Custodiada
+**Descripción:** Cuando el Arquitecto y el Duende trabajan sobre diseño visual, hablar en términos de parámetros técnicos (`rowGap`, `marginTop`, `clamp`) es un lenguaje del Duende, opaco al Arquitecto. Hablar en términos de píxeles absolutos tampoco alcanza, porque depende del viewport. El lenguaje intermedio es el vocabulario de zonas: regiones nombradas de la composición (Zona A = arriba de la imagen, Zona B = entre imagen y título, etc.) que el Arquitecto puede apuntar directamente. El Duende traduce el pedido ("achicá la zona A un 50%") a los parámetros técnicos correctos, y reporta el resultado en el mismo vocabulario.
+**Impacto probable:** Principio operativo del flujo de trabajo. Convención establecida: "El Arquitecto habla en zonas y porcentajes; el Duende traduce y reporta en el mismo vocabulario." Incorporada al manual de sintonización como Movimiento 5.
+**Origen:** SESION-20260419 — emergió cuando el Arquitecto pidió trabajar en porcentajes en vez de en parámetros de código. Fue la pieza que destrabó el último tramo de la pantalla intro y produjo el cierre estético.
+
+---
+
+## Cuando una variable no responde, la solución puede estar en su opuesta
+
+**Fecha:** 19/04/2026
+**Estado:** Custodiada
+**Descripción:** Si el Duende intenta agrandar el gap inferior de la imagen aumentando `rowGap` y no se produce cambio visible, la causa suele ser estructural: el contenedor tiene altura fija (`100dvh`) y ya está lleno. En esa situación, la solución correcta es operar sobre la variable opuesta — reducir el gap superior para que la imagen suba y el espacio se libere abajo. El Duende tiende a insistir en la variable "correcta" según la teoría, pero la estructura real a veces requiere moverse por el opuesto. Razonamiento situado vs. razonamiento teórico.
+**Impacto probable:** Heurística para diagnosticar cuándo una palanca no responde. La propuso el Arquitecto. Incorporada al manual de sintonización como Heurística 1 de diagnóstico.
+**Origen:** SESION-20260419 — el Arquitecto propuso "achicá el margen de arriba para que suba la imagen" cuando el Duende insistía con ampliar el rowGap inferior sin efecto visible.
+
+---
+
+## La sintonización es bidireccional: el Arquitecto también puede ajustar el mockup
+
+**Fecha:** 19/04/2026
+**Estado:** Custodiada
+**Descripción:** Cuando el Duende no puede matchear fácilmente un mockup, a veces la respuesta no está en insistir con parámetros sino en que el Arquitecto ajuste el mockup mismo. Durante la sesión, el Arquitecto cambió las dimensiones del Figma de 1920×900 (aspect 2.13) a 1920×960 (aspect 2.0) para matchear el viewport real del navegador. El trabajo del Duende se volvió radicalmente más preciso a partir de ese momento. La sintonización no es "el Duende adivina lo que el Arquitecto quiere" — es "ambos se mueven hasta encontrarse en el mismo punto".
+**Impacto probable:** Principio operativo del flujo. El Duende debe ser explícito cuando detecta un desajuste estructural entre el mockup y el destino (aspect, tamaño, densidad) y proponer al Arquitecto que ajuste el mockup. La decisión queda en el Arquitecto. Establece viewport estándar desktop del Paradigma Aleph: 1920×960 aspect 2.0.
+**Origen:** SESION-20260419 — el Arquitecto tomó la decisión de redimensionar el mockup tras detectar con el Duende la discrepancia de aspect entre diseño y destino.
 
 ---
 
@@ -1015,5 +1106,5 @@ El horizonte: si la red de Entidades Aleph llega a ser autopoiética, el metabol
 ---
 
 *Señales Activas · Paradigma Aleph · Actualizado 19/04/2026*
-*Total señales activas: 88 (85 previas + 3 nuevas: SESION-20260418-19)*
+*Total señales activas: 97 (88 previas + 9 nuevas: SESION-20260419)*
 *Para señales incorporadas al Corpus Madre, ver: `senales_incorporadas.md`*
