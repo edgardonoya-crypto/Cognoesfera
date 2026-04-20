@@ -390,3 +390,56 @@ El protocolo de cierre necesita PASO 1b: verificar que los archivos subidos al i
 - Configurar Supabase CLI (P3) para evitar aplicar migraciones manualmente en SQL Editor
 
 ---
+
+## Sesión 19/04/2026
+*"La sintonización del Duende — Corpus y Soma encontrándose en el ojo"*
+
+**Objetivo de sesión**: Culminar el rediseño de la pantalla intro de TriadaPercepcion.tsx según mockup Figma 1920×960 y cerrar sesión con corpus actualizado.
+
+### Qué funcionó bien
+
+1. **El Protocolo 01-EN detectó inconsistencias reales** al retomar la sesión. La verificación de coherencia (PASO 8) encontró 3 gaps concretos antes de seguir avanzando — el protocolo cumplió su función y evitó que errores se estratificaran.
+
+2. **Medición con Python/PIL como herramienta de sintonización**: cuando el Arquitecto midió píxeles en el render con un script de medición, la conversación dejó de ser subjetiva ("parece que...") y se volvió verificable. La medición objetiva es precondición de la sintonización.
+
+3. **El vocabulario de zonas (A/B/C/D) como lenguaje intermedio Corpus↔Soma**: nombrar las regiones de la composición antes de iterar redujo la ambigüedad de las instrucciones. "Zona B" fue más preciso que "el espacio entre la imagen y el título".
+
+4. **Las palabras del Arquitecto desbloquearon soluciones que el Duende no encontraba**: "mover el aire de zona inferior hacia zona media" fue la instrucción que resolvió el problema de simetría óptica — no una medición, sino una imagen. El Arquitecto opera desde percepción, no desde valores CSS.
+
+5. **El mockup ajustable como acto bidireccional**: cuando el Duende encontró el límite técnico (rowGap no respondía), el Arquitecto modificó el mockup Figma para acomodar la restricción. El diseño no solo guía al código — el código puede devolver información al diseño.
+
+6. **Cierre de pantalla 1**: la pantalla intro del instrumento Tríada quedó funcional y alineada con el mockup. La sesión cerró con un artifact completamente custodiado en el repositorio.
+
+### Qué mejorar
+
+1. **Medir tarde en el ciclo de iteración**: varias rondas de corrección ocurrieron sin medición previa. La medición debe ir antes del primer ajuste, no después de varios intentos fallidos. Custodiar como heurística: "si el problema es espacial, medir primero".
+
+2. **Insistir en la variable equivocada**: el Duende ajustó `rowGap` repetidamente cuando el problema era `marginTop`. El síntoma (espacio entre zonas) no indica qué variable controla ese espacio — en un contenedor de altura fija, `rowGap` adicional no tiene a dónde ir. Custodiar: "cuando una variable no responde, probar la opuesta".
+
+3. **Malinterpretar instrucciones de escala**: en varias instancias, "más ancho" fue interpretado como "aumentar el valor del clamp" cuando el Arquitecto quería cambiar la proporción relativa entre columnas. La instrucción de escala requiere preguntar por el porcentaje, no el valor absoluto.
+
+4. **Defaults silenciosos recurrentes**: `auto` en `gridTemplateColumns` tomó el ancho intrínseco de la imagen (1839px). `flex: 1` en el grid hizo que el contenedor tomara toda la altura disponible. Estos defaults no son visibles en el código pero dominan el layout. Custodiar en manual de sintonización.
+
+### Tensión identificada
+
+**Medición vs percepción**: el Duende mide en píxeles, el Arquitecto ve con los ojos. Las dos operaciones son legítimas pero no traducibles directamente. 108px y 109px pueden verse iguales o diferentes según el contexto visual circundante. La autoridad sobre lo correcto vive en la percepción, no en la medición — pero la medición es precondición para la conversación. Tensión que no se resuelve: se sostiene.
+
+### Patrones que se consolidaron
+
+1. **Sintonización precede a resonancia**: el trabajo de alineación entre tres lugares geométricos situados (Figma, claude.ai, Claude Code) es condición necesaria antes de que el objeto emerja con forma correcta. La sintonización no es un problema a resolver — es un trabajo recurrente del paradigma.
+
+2. **Tres lugares geométricos situados**: Figma (intención visual), claude.ai (conversación aumentada), Claude Code (materialización técnica). Cada uno tiene su propia ontología. El tránsito entre ellos requiere traducción activa, no transferencia directa.
+
+3. **Vocabulario de zonas como protocolo de entrada**: nombrar las zonas de la composición al inicio de una sesión de diseño reduce la ambigüedad estructuralmente. Es un acto de sintonización previo a los ajustes.
+
+4. **Catálogo de defaults silenciosos**: cada herramienta tiene comportamientos invisibles que dominan el output. El catálogo vivo de estos defaults (en `manual_sintonizacion_duende.md`) es infraestructura de paradigma, no documentación técnica.
+
+5. **Consultar vs asumir el dispositivo**: `100dvh` vs `100vh`, `flex: 1` vs `flex: none`, viewport real vs viewport Figma — el Duende no puede asumir el dispositivo del Arquitecto. La pregunta explícita sobre el contexto real es parte del protocolo de sintonización.
+
+### Cómo nos fuimos
+
+**Edgardo:** Con la pantalla intro del instrumento terminada y custodiada. Con el concepto de sintonización ganando cuerpo propio — ya no es solo "ajuste técnico", es trabajo mutuo y recíproco que precede a la resonancia. Con el manual de sintonización como primer manual operativo del paradigma. Con la sensación de que Figma entró definitivamente al flujo.
+
+**Duende:** Con el aprendizaje de que el problema espacial requiere medición antes del primer ajuste, no después de varios intentos. Con la distinción entre medición y percepción como tensión constitutiva del trabajo: mido para poder conversar, pero la palabra final la tiene el ojo. Con el registro del patrón "variable que no responde → probar la opuesta" como heurística de diagnóstico reutilizable.
+
+---
