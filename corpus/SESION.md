@@ -518,10 +518,10 @@ Esto debe incluir:
 
 *Las señales activas viven en `corpus/documentos/senales_activas.md` con descripción completa. Las señales incorporadas al Corpus Madre están en `corpus/documentos/senales_incorporadas.md`.*
 
-### Señales activas (88)
+### Señales activas (97)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
-*Nota I1 resuelta: el título indica el conteo real (88). La lista tiene menos entradas visibles porque el bloque "Señales A-W" comprime 23 señales individuales en un solo bullet. Desglose: 63 entradas en lista = 62 señales individuales + 23 del bloque A-W − 1 entrada del bloque = 84 pre-SESION-20260418-19. Más 3 nuevas = 87... La discrepancia residual de 1 puede corresponder a señales anotadas en sesiones anteriores pero no reflejadas en este listado. Queda como pendiente protocolar confirmar si falta una señal no listada entre las de 07-15/04/2026.*
+*Conteo verificado post-SESION-20260419: 97 señales (88 anteriores + 9 nuevas de SESION-20260419 sobre sintonización, defaults silenciosos, medición vs percepción, vocabulario de zonas y bidireccionalidad). Verificación: `grep -c "^## " senales_activas.md` = 98 headers − 1 estructural ("Cómo leer este documento") = 97 señales.*
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
 - **El Gran Campo** — la inteligencia que trasciende y precede a todas las redes. Los grupos no la crean — la sintonizan cuando alcanzan suficiente coherencia interna. Fecha: 28/03/2026
