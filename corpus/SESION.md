@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v31 · 19 Abril 2026 · cierre SESION-20260418-19 "El lugar que se habita — Tríadas y topografía editorial — Figma entra al paradigma"*
+*Versión actual: v32 · Última actualización: 19/04/2026 · Sesión "La sintonización del Duende — Corpus y Soma encontrándose en el ojo"*
 
 ---
 
@@ -175,7 +175,7 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 
 ## A2. Estado actual del paradigma
 
-**Estado vital:** en tránsito entre **E6 (Legible)** y **E7 (Sostenido)**
+**Estado vital:** **E7 (Sostenido)** consolidado
 
 **Fecha límite clave:** IAC 2026, noviembre, Punta del Este
 
@@ -366,6 +366,28 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 - Protocolo de custodia mid-session aplicado: 5 artifacts huérfanos de SESION-20260415 recuperados y commiteados antes de continuar
 - 3 señales conceptuales nuevas custodiadas (total 88 activas)
 
+## Decisiones del Protocolo 01-EN · 19/04/2026
+
+- **I1** — C-CO-11 ratificado como P1 (actualización del Anexo 6 de P2 a P1 aplicada)
+- **I2** — Dashboard P1 desdoblado en dos filas: "P1 activos (archivo)" y "P1 foco próxima sesión"
+- **I3** — Creado stub C-PR-10 para reconciliar residual de 1 señal en sesión dedicada (ver `pendientes_corpus.md`)
+
+---
+
+## Cambios al paradigma · SESION-20260419 · "La sintonización del Duende"
+
+- **Nueva categoría de documentos del paradigma:** manuales operativos (`manual_*.md`) como archivos hermanos de los protocolos (`protocolos_*.md`) en `corpus/documentos/`. Los protocolos son rituales de sesión (01-EN, 02-EN, 03-EN); los manuales son guías consultables durante el trabajo, con procedimiento detallado, scripts reutilizables y heurísticas de diagnóstico
+- **Primer manual del paradigma:** `manual_sintonizacion_duende.md` v1.0 — captura el procedimiento operativo para traducción visual→código entre Figma, Claude.ai y Claude Code. 11 movimientos del trabajo, catálogos reutilizables, 6 heurísticas de diagnóstico
+- **Viewport estándar desktop del Paradigma Aleph:** 1920×960 (aspect 2.0). Toda sesión de diseño visual desktop debe partir de este estándar salvo que el Arquitecto indique otro
+- **Distinción conceptual nueva:** sintonización (trabajo previo mutuo) vs resonancia (efecto de la Conversación Aumentada). Enriquecimiento candidato del concepto 23
+- **9 señales nuevas** incorporadas a `senales_activas.md` sobre sintonización, defaults silenciosos, medición vs percepción, vocabulario de zonas, bidireccionalidad (total: 97 señales activas)
+- **S-AP-14** (pantalla 1 desktop TriadaPercepcion) — cerrado en esta sesión
+- **S-AP-21** (rediseño mobile TriadaPercepcion) — nuevo pendiente P1 para antes de IAC 2026
+- **C-PR-09** (Protocolo 04-EN condensado) — nuevo pendiente P2
+- **C-PR-10** (reconciliación residual señales) — stub de I3 del Protocolo 01-EN
+
+---
+
 **Nomenclatura vigente:**
 - **Corpus Madre** — los fundamentos agnósticos (33 conceptos, 7 secciones). Lo que antes se llamaba "corpus base"
 - **Corpus Universal** — el campo total del conocimiento vivo del paradigma en todos sus niveles y expresiones
@@ -454,15 +476,23 @@ Los pendientes viven en dos archivos con schema completo:
 - ~~S-AP-12: Implementar catálogo de geometrías en Supabase~~ ✓
 - ~~S-AP-13: Implementar Tríada de Percepción (componente + API + schema)~~ ✓
 
-**Prioridades próxima sesión:**
-- **P1 [SOMA]:** Rediseño pantallas 2 (tríada activa) y 3 (completado) con Figma (S-AP-14)
-- **P1 [SOMA]:** Ajustes de viewport pantalla intro — scroll residual (S-AP-15)
+**Completadas en SESION-20260419:**
+- ~~S-AP-14: Pantalla 1 desktop TriadaPercepcion — rediseño editorial con Figma~~ ✓
+
+**P1 activos (archivo):** 5 pendientes P1 — ver listado completo en `pendientes_soma.md` y `pendientes_corpus.md`
+
+**P1 foco próxima sesión:**
+- **P1 [SOMA]:** Rediseño mobile TriadaPercepcion con mockup Figma dedicado 390×844 (S-AP-21) — antes de IAC 2026
 - **P1 [SOMA]:** Integración del instrumento Tríadas en /quanam-ia-2026 (S-AP-18)
 - **P1 [SOMA]:** Paso de contexto al Duende — posiciones en tríadas (S-DU-01)
 - **P1 [CORPUS]:** Migrar nomenclatura borgeano → alephiano en todos los documentos (C-CO-10)
-- **P2 [CORPUS]:** Cambio nomenclatura IAH → IHA en todos los documentos (C-CO-11)
+- **P1 [CORPUS]:** Cambio nomenclatura IAH → IHA en todos los documentos (C-CO-11) — ratificado P1 (antes P2, decisión I1)
+
+**Pendientes P2/P3:**
 - **P2 [CORPUS]:** Articular coherencia entre Campo de atención, Tríada de Percepción, CA e Instante Alephiano (C-CO-09)
+- **P2 [CORPUS]:** Construir Protocolo 04-EN Sintonización (C-PR-09)
 - **P3 [CORPUS]:** Incorporar conceptos nuevos al Corpus Madre — sesión dedicada (C-CO-12)
+- **P3 [CORPUS]:** Reconciliar residual de señal I3 del Protocolo 01-EN (C-PR-10)
 
 ---
 
@@ -730,6 +760,19 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - `/quanam-ia-2026` construida completa: pantalla de bienvenida, seis lentes, drawer contexto, API Supabase
 - `app/api/quanam-respuesta/route.ts` — API route para guardar respuestas en `quanam_respuestas`
 - TypeScript limpio — `tsc --noEmit` sin errores · deployado en Vercel
+
+---
+
+## Foco próxima sesión
+
+### Opción A — continuar con Fase 2 de TriadaPercepcion
+- **S-AP-18** — Integración del componente en `/quanam-ia-2026`
+- **S-DU-01** — Paso de contexto al Duende desde el instrumento
+
+### Opción B — rediseño mobile de TriadaPercepcion
+- **S-AP-21** — Aplicar el manual de sintonización desde el inicio sobre el bloque mobile, con mockup Figma dedicado 390×844
+
+La decisión queda abierta para que el Arquitecto la tome al inicio de la próxima sesión según su tiempo soberano disponible.
 
 ---
 
