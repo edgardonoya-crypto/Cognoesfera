@@ -223,6 +223,59 @@ El aviso es: *"Hay cambios sin commitear desde [descripción]. ¿COMMIT ALEPH an
 
 ---
 
+## PROTOCOLO 05-EN — Addendum post-cierre
+
+### ¿Qué es un addendum?
+
+Un addendum es un trabajo técnico corto que ocurre después de que una sesión del paradigma se cerró formalmente con Protocolo 02-EN, y cuya naturaleza no amerita abrir una sesión nueva completa con Protocolo 01-EN.
+
+Tipo de trabajo que aplica: fix de bug menor, verificación post-despliegue, ajuste puntual de configuración, migración SQL acotada. Duración estimada menor a una hora.
+
+Tipo de trabajo que NO aplica: cualquier trabajo que requiera contexto nuevo del Corpus, exploración conceptual, nueva pantalla visual, o decisiones paradigmáticas. Eso amerita sesión nueva.
+
+### Principio
+
+El addendum se declara explícitamente al comenzar. No se trabaja "informalmente" aprovechando el contexto de una sesión cerrada. La disciplina del paradigma exige nombrar lo que se hace.
+
+### Pasos del protocolo
+
+1. El Arquitecto detecta una necesidad técnica acotada después de que la sesión cerró.
+
+2. El Duende evalúa si realmente es addendum (corto, técnico, sin contexto nuevo) o si es sesión nueva disfrazada (tiene componentes exploratorios, paradigmáticos o largos). Si hay duda, abrir sesión nueva.
+
+3. Declaración explícita de apertura del addendum, especificando:
+   - Sesión a la que corresponde (por ejemplo: "addendum a SESION-20260419")
+   - Trabajo acotado a realizar
+   - Qué NO se modifica (SESION.md y status ya emitidos quedan intactos — son historia custodiada)
+
+4. Trabajo técnico con la misma disciplina que una sesión normal: diagnóstico antes de implementación, validación antes de commit.
+
+5. Commits del addendum usan el prefijo `addendum:` en el mensaje para trazabilidad futura.
+
+6. Cierre del addendum con una entrada nueva en `corpus/documentos/addendums_sesion.md` que registra: trabajo realizado, commits producidos, aprendizaje custodiado si lo hubo.
+
+### Qué NO hace un addendum
+
+- No modifica SESION.md de la sesión original (ya es historia)
+- No modifica el archivo de status de la sesión original
+- No actualiza la numeración de versión del paradigma (la sesión original ya lo hizo)
+- No re-ejecuta Protocolo 01-EN ni 02-EN
+
+### Relación con los otros protocolos
+
+- **Protocolo 01-EN (apertura):** el addendum NO lo ejecuta. Arranca con contexto heredado.
+- **Protocolo 02-EN (cierre):** el addendum NO lo ejecuta. Su cierre es más liviano — solo entrada en `addendums_sesion.md`.
+- **Protocolo 03-EN (commit aleph):** aplica igual que en sesión normal. Los commits del addendum siguen las reglas de 03-EN.
+
+### Trazabilidad
+
+Todo addendum queda trazable en tres lugares:
+1. En los commits de git con prefijo `addendum:`
+2. En `corpus/documentos/addendums_sesion.md` con su entrada registrada
+3. En este protocolo como referencia conceptual
+
+---
+
 ## Registro de cambios
 
 | Versión | Fecha | Cambio |
@@ -233,7 +286,8 @@ El aviso es: *"Hay cambios sin commitear desde [descripción]. ¿COMMIT ALEPH an
 | 2.2 | 13/04/2026 | Protocolo 01-EN ajustado: pasos 2d y 2e agregados. 2d: validación de señales inferidas al inicio de sesión. 2e: chequeo de consistencia entre C-EN en pendientes_corpus.md y entradas en enriquecimientos_corpus.md. |
 | 2.3 | 13/04/2026 | Protocolo 03-EN ajustado: COMMIT ALEPH COMPLETO ahora incluye protocolos_sesion.md cuando fue modificado en la sesión. Nota permanente: protocolo y commit deben evolucionar juntos. |
 | 2.4 | 14/04/2026 | Protocolo 02-EN paso 2 ampliado: tres chequeos nuevos — (a) headers con conteos y fechas vs dashboard status, (b) pendientes nuevos en subcategoría correcta, (c) señales vivas pendientes válidas a la luz de lo incorporado. Origen: 5 inconsistencias post-commit SESION-20260414. |
+| 2.5 | 21/04/2026 | Protocolo 05-EN agregado: Addendum post-cierre. Formaliza la figura del addendum como trabajo técnico acotado post-cierre que no amerita sesión nueva. Primer caso concreto: addendum 21/04/2026 sobre dev-reset de TriadaPercepcion (SESION-20260419). |
 
 ---
 
-*Protocolos de Sesión · Paradigma Aleph · Versión 2.4 · 14/04/2026*
+*Protocolos de Sesión · Paradigma Aleph · Versión 2.5 · 21/04/2026*

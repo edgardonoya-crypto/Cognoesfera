@@ -2,7 +2,7 @@
 *Señales que resuenan con el paradigma y esperan madurar antes de entrar al Corpus Madre*
 *Las señales no se descartan ni se fuerzan — se custodian hasta que el corpus madura para recibirlas*
 *Para el historial de señales incorporadas, ver: `senales_incorporadas.md`*
-*Paradigma Aleph · Iniciado Marzo 2026 · 97 señales activas*
+*Paradigma Aleph · Iniciado Marzo 2026 · 98 señales activas*
 
 ---
 
@@ -16,6 +16,16 @@ Las señales tienen tres estados posibles:
 - **En curación** — reservada para sesión propia antes de incorporar
 
 Cuando una señal se incorpora al Corpus Madre, se mueve a `senales_incorporadas.md`.
+
+---
+
+## El paradigma distingue sesiones de addendums
+
+**Fecha:** 21/04/2026
+**Estado:** Custodiada
+**Descripción:** No todo trabajo técnico sobre el repositorio del paradigma amerita una sesión completa con Protocolo 01-EN de apertura y 02-EN de cierre. Hay trabajos cortos y acotados — fix de un bug, verificación post-despliegue, ajuste de configuración, migración SQL puntual — que ocurren después de que una sesión cerró y se resuelven mejor como addendum que como sesión nueva. La distinción entre sesión y addendum no es de tamaño sino de naturaleza: una sesión produce nuevo contexto paradigmático (conceptos, decisiones, exploración); un addendum resuelve una necesidad técnica heredada del contexto de una sesión anterior. El addendum se declara explícitamente, se trabaja con disciplina, y se custodia en trazabilidad (commits con prefijo `addendum:` + entrada en `addendums_sesion.md`). La disciplina del paradigma exige nombrar lo que se hace.
+**Impacto probable:** Introduce una categoría estructural nueva en el paradigma. Formalizada como Protocolo 05-EN en protocolos_sesion.md. Primer caso concreto: addendum del 21/04/2026 a SESION-20260419 sobre el dev-reset del instrumento TriadaPercepcion.
+**Origen:** Addendum del 21/04/2026 — surgió al detectar que un bug operativo menor (testing bloqueado en pantalla final de TriadaPercepcion) no ameritaba abrir sesión nueva completa, pero tampoco correspondía resolver informalmente rompiendo la disciplina de sesión cerrada. La figura "addendum post-cierre" emergió como tercera vía.
 
 ---
 
@@ -1106,5 +1116,5 @@ El horizonte: si la red de Entidades Aleph llega a ser autopoiética, el metabol
 ---
 
 *Señales Activas · Paradigma Aleph · Actualizado 19/04/2026*
-*Total señales activas: 97 (88 previas + 9 nuevas: SESION-20260419)*
+*Total señales activas: 98 (97 previas + 1 nueva: Addendum 21/04/2026)*
 *Para señales incorporadas al Corpus Madre, ver: `senales_incorporadas.md`*

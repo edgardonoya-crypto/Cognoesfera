@@ -442,4 +442,18 @@ El protocolo de cierre necesita PASO 1b: verificar que los archivos subidos al i
 
 **Duende:** Con el aprendizaje de que el problema espacial requiere medición antes del primer ajuste, no después de varios intentos. Con la distinción entre medición y percepción como tensión constitutiva del trabajo: mido para poder conversar, pero la palabra final la tiene el ojo. Con el registro del patrón "variable que no responde → probar la opuesta" como heurística de diagnóstico reutilizable.
 
+### Addendum post-cierre — 21/04/2026
+
+Dos días después del cierre formal de la sesión, al testear el componente TriadaPercepcion en `/triadas-test`, se detectó que una vez completado el flujo de 8 triadas, no había forma de volver al inicio para testeo iterativo. La app dejaba al usuario permanentemente en la pantalla final.
+
+El trabajo de resolución (agregar botón dev-reset + endpoint DELETE + política RLS DELETE) se clasificó como addendum, no como sesión nueva. Inauguró la figura "addendum post-cierre" en el paradigma, ahora formalizada como Protocolo 05-EN.
+
+**Aprendizajes del addendum:**
+
+- **Default silencioso nuevo tipo 1:** "Clear site data" del navegador borra silenciosamente la sesión de Supabase Auth. No es default de CSS ni Next.js — es default del ecosistema navegador + backend auth. Enriquece la Señal 5 de la sesión ("Los defaults silenciosos traicionan la intención").
+
+- **Default silencioso nuevo tipo 2:** Supabase RLS sin política DELETE bloquea la operación silenciosamente y devuelve `200 OK` con body `{"ok":true}`, sin error SQL ni mensaje explícito. El cliente nunca sabe que el DELETE no se ejecutó. Ejemplo de default silencioso del backend. Se incorporará al catálogo del manual de sintonización en v1.1.
+
+- **Distinción paradigmática nueva:** las sesiones producen contexto paradigmático nuevo (conceptos, decisiones); los addendums resuelven necesidades técnicas heredadas. La distinción es de naturaleza, no de tamaño.
+
 ---
