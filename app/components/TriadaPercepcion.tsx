@@ -416,9 +416,11 @@ function IntroScreen({ onContinue, isDesktop }: { onContinue: () => void; isDesk
 export default function TriadaPercepcion({
   contexto = "convocatoria_quanam",
   onComplete,
+  devMode = false,
 }: {
   contexto?: string;
   onComplete?: () => void;
+  devMode?: boolean;
 }) {
   const isDesktop = useIsDesktop();
   const triangleSize = isDesktop ? 640 : 380;
@@ -430,29 +432,49 @@ export default function TriadaPercepcion({
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [entered, setEntered] = useState(false);
+  const [resetting, setResetting] = useState(false);
+
+  const cargarTriadas = useCallback(async () => {
+    setStage("loading");
+    setStep(0);
+    setSaveError(null);
+    try {
+      const res = await fetch(`/api/triadas/posicion?contexto=${encodeURIComponent(contexto)}`);
+      if (!res.ok) throw new Error("No se pudieron cargar las tríadas");
+      const data: { triadas: TriadaResuelta[]; percepciones: Percepcion[] } = await res.json();
+      const sorted = data.triadas.sort((a, b) => a.orden - b.orden);
+      const pm = new Map(data.percepciones.map((p) => [p.triada_id, p]));
+      const initResp: Respuesta[] = sorted.map((t) => {
+        const e = pm.get(t.triada_id);
+        if (e) return { weights: [e.peso_a, e.peso_b, e.peso_c], narrativa: e.narrativa || "", pospuesta: e.narrativa_pospuesta || false, guardada: true };
+        return { weights: [0.333, 0.333, 0.334], narrativa: "", pospuesta: false, guardada: false };
+      });
+      setTriadas(sorted);
+      setRespuestas(initResp);
+      setStage(initResp.every((r) => r.guardada) ? "completado" : "intro");
+    } catch (err) {
+      console.error("Error cargando tríadas:", err);
+      setSaveError("No se pudieron cargar las tríadas. Recargá la página.");
+    }
+  }, [contexto]);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch(`/api/triadas/posicion?contexto=${encodeURIComponent(contexto)}`);
-        if (!res.ok) throw new Error("No se pudieron cargar las tríadas");
-        const data: { triadas: TriadaResuelta[]; percepciones: Percepcion[] } = await res.json();
-        const sorted = data.triadas.sort((a, b) => a.orden - b.orden);
-        const pm = new Map(data.percepciones.map((p) => [p.triada_id, p]));
-        const initResp: Respuesta[] = sorted.map((t) => {
-          const e = pm.get(t.triada_id);
-          if (e) return { weights: [e.peso_a, e.peso_b, e.peso_c], narrativa: e.narrativa || "", pospuesta: e.narrativa_pospuesta || false, guardada: true };
-          return { weights: [0.333, 0.333, 0.334], narrativa: "", pospuesta: false, guardada: false };
-        });
-        setTriadas(sorted);
-        setRespuestas(initResp);
-        setStage(initResp.every((r) => r.guardada) ? "completado" : "intro");
-      } catch (err) {
-        console.error("Error cargando tríadas:", err);
-        setSaveError("No se pudieron cargar las tríadas. Recargá la página.");
-      }
-    })();
-  }, [contexto]);
+    cargarTriadas();
+  }, [cargarTriadas]);
+
+  const resetProgreso = useCallback(async () => {
+    if (!window.confirm("¿Seguro? Esto borra todo tu progreso en las tríadas.")) return;
+    setResetting(true);
+    try {
+      const res = await fetch("/api/triadas/posicion", { method: "DELETE" });
+      if (!res.ok) throw new Error("Error al resetear");
+      await cargarTriadas();
+    } catch {
+      setSaveError("Error al resetear progreso.");
+    } finally {
+      setResetting(false);
+    }
+  }, [cargarTriadas]);
 
   useEffect(() => {
     const t = setTimeout(() => setEntered(true), 80);
@@ -503,11 +525,37 @@ export default function TriadaPercepcion({
     }
   };
 
+  const devResetEl = devMode ? (
+    <button
+      onClick={resetting ? undefined : resetProgreso}
+      style={{
+        position: "fixed",
+        bottom: 16,
+        right: 16,
+        padding: "6px 12px",
+        fontSize: 11,
+        fontFamily: FB,
+        color: "#999",
+        background: "rgba(255,255,255,0.88)",
+        border: "1px solid #ddd",
+        cursor: resetting ? "wait" : "pointer",
+        letterSpacing: "0.03em",
+        zIndex: 9999,
+        opacity: resetting ? 0.5 : 1,
+      }}
+    >
+      {resetting ? "Reiniciando..." : "Reiniciar progreso (dev)"}
+    </button>
+  ) : null;
+
   if (stage === "loading") {
     return (
-      <div style={{ minHeight: "100vh", background: BG, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FB, color: INK_LIGHT, fontSize: 15 }}>
-        {saveError || "Cargando..."}
-      </div>
+      <>
+        <div style={{ minHeight: "100vh", background: BG, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FB, color: INK_LIGHT, fontSize: 15 }}>
+          {saveError || "Cargando..."}
+        </div>
+        {devResetEl}
+      </>
     );
   }
 
@@ -517,6 +565,7 @@ export default function TriadaPercepcion({
         <Styles />
         <GrainOverlay />
         <IntroScreen onContinue={() => { setEntered(false); setStage("triadas"); }} isDesktop={isDesktop} />
+        {devResetEl}
       </>
     );
   }
@@ -571,6 +620,7 @@ export default function TriadaPercepcion({
             </div>
           </div>
         </div>
+        {devResetEl}
       </>
     );
   }
@@ -735,6 +785,7 @@ export default function TriadaPercepcion({
             </div>
           </div>
         </div>
+        {devResetEl}
       </>
     );
   }
@@ -771,6 +822,7 @@ export default function TriadaPercepcion({
           </div>
         </div>
       </div>
+      {devResetEl}
     </>
   );
 }

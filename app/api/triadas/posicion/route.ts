@@ -83,6 +83,40 @@ export async function POST(req: NextRequest) {
   }
 }
 
+export async function DELETE(_req: NextRequest) {
+  if (process.env.NODE_ENV !== "development") {
+    return NextResponse.json({ error: "Solo disponible en desarrollo" }, { status: 403 });
+  }
+  try {
+    const cookieStore = await cookies();
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll: () => cookieStore.getAll(),
+          setAll: () => {},
+        },
+      }
+    );
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+    }
+    const { error } = await supabase
+      .from("percepciones_triada")
+      .delete()
+      .eq("user_id", user.id);
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+    return NextResponse.json({ ok: true });
+  } catch (err) {
+    console.error("Error en DELETE /api/triadas/posicion:", err);
+    return NextResponse.json({ error: "Error interno" }, { status: 500 });
+  }
+}
+
 export async function GET(req: NextRequest) {
   try {
     const cookieStore = await cookies();

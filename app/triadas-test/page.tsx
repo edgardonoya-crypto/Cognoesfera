@@ -1,5 +1,5 @@
 import TriadaPercepcion from "@/app/components/TriadaPercepcion";
 
 export default function TriadasTestPage() {
-  return <TriadaPercepcion contexto="convocatoria_quanam" />;
+  return <TriadaPercepcion contexto="convocatoria_quanam" devMode={true} />;
 }
