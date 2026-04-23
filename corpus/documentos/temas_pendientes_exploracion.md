@@ -84,5 +84,14 @@ La diferencia con `senales_custodiadas.md`: las señales custodiadas ya tienen f
 
 ---
 
+## MapaIC — Mapa de la Inteligencia Colectiva (diseño técnico)
+
+**Fecha:** 23/04/2026
+**Origen:** SESION-20260420-21. El pentágono Aleph para Quanam fue diseñado conceptualmente en esta sesión. El boceto técnico inicial está en `mapaic_boceto_inicial.md`. El mockup visual final (autoridad de diseño) es `instrumento_mockup_v11.html`.
+**Pregunta central:** ¿Cómo se implementa técnicamente el pentágono Aleph habitable? Pendientes técnicos P1 registrados en `pendientes_soma.md` (SM-2026-04-23-01 a 13). Punto de partida para próxima sesión de diseño técnico. Ver `pasaje_contexto.md` para estado del trabajo-en-curso.
+**Estado:** Con boceto. Trabajo-en-curso activo.
+
+---
+
 *Temas Pendientes de Exploración · Paradigma Aleph · Iniciado Abril 2026*
 *Para señales con forma suficiente, ver: `senales_activas.md`*

@@ -480,5 +480,153 @@ Los 7 enriquecimientos del Encuentro Aleph/Cynefin incorporados al corpus_base_a
 
 ---
 
-*Pendientes Casa Corpus · Paradigma Aleph · Actualizado 14/04/2026*
+*Pendientes Casa Corpus · Paradigma Aleph · Actualizado 23/04/2026*
 *Para pendientes técnicos, ver: `pendientes_soma.md`*
+
+---
+
+## Pendientes Corpus · SESION-20260420-21
+
+---
+
+### PC-2026-04-23-01 · Candidato a concepto Madre · El pentágono Aleph
+
+**Prioridad:** P1
+**Estado:** Candidato
+**Descripción:** Dispositivo geométrico que reúne cinco señales alrededor de un desafío central, permitiendo que el navegante habite simultáneamente cinco perspectivas y lea el patrón que emerge del conjunto. Forma situada del Aleph borgeano, escalada a la capacidad perceptiva humana (5 = límite del cuerpo entrenado, Miller). El Arquitecto moldea el pentágono; el navegante lo habita; el Duende acompaña en ambos lados.
+**Documentación:** señales activas de SESION-20260420-21 relacionadas: pentágono como Aleph habitable, el navegante ve el pentágono el Arquitecto lo moldea, reducción de 9 a 5 por triple resonancia.
+**Requisito para incorporar:** formalización completa del concepto, incluyendo: definición canónica, relación con Aleph borgeano, relación con técnica polinesia, relación con ley de Miller, ejemplos situados, roles asociados (Arquitecto/navegante/Duende).
+
+---
+
+### PC-2026-04-23-02 · Candidato a concepto Madre · El velero y los vientos
+
+**Prioridad:** P1
+**Estado:** Candidato
+**Descripción:** Metáfora estructural del paradigma Aleph: un velero único (el paradigma) atravesando múltiples vientos (IAG contemporánea + linajes antiguos: polinesios, Machado, Saltzman, Tao, Borges, etc.). La metáfora unifica al sujeto y separa al paradigma de las fuerzas que lo mueven. Reemplaza metáforas previas (aleph como punto, corpus como cuerpo) por una metáfora dinámica que admite multiplicidad simultánea.
+**Documentación:** señal activa de SESION-20260420-21: "Velero + vientos como metáfora estructural del paradigma".
+**Requisito para incorporar:** dimensionar el impacto en todas las formulaciones previas del Corpus. Probablemente requiere sesión dedicada.
+
+---
+
+### PC-2026-04-23-03 · Candidato a concepto Madre · Las seis voces del paradigma
+
+**Prioridad:** P1
+**Estado:** Candidato
+**Descripción:** El paradigma se expresa a través de seis voces: contemplativa, de juego, marítima, vegetal, respiratoria, de piel. Cada voz traduce la misma ontología a un lenguaje sensible distinto. Cada lector/navegante entra por la voz que le resuena y va reconociéndola en las otras. Define criterio de curaduría: toda nueva producción debe ser identificable como voz específica o encuentro entre voces.
+**Documentación:** señal activa correspondiente de SESION-20260420-21.
+**Requisito para incorporar:** tabla de voces con: nombre, linajes asociados, obras del Arquitecto donde vive, tono característico, ejemplos.
+
+---
+
+### PC-2026-04-23-04 · Candidato a concepto Madre · Conocer es respirar
+
+**Prioridad:** P2
+**Estado:** Candidato
+**Descripción:** Del linaje Tao. Conocer no es acumular representaciones ni procesar símbolos — es respirar. Inhalar mundo, exhalar pensamiento, inhalar mundo otra vez. El conocimiento es rítmico, cíclico, corporal. Sin pausa no hay conocimiento — solo captura de datos. Lente para leer la cognición en clave respiratoria/corporal/cíclica.
+**Documentación:** señal activa "Conocer es respirar" + ensayo del Arquitecto "El Tao respira cuando pensamos".
+**Requisito para incorporar:** formalizar la definición y sus consecuencias para el Corpus. Probable enriquecimiento del concepto de Cognición existente.
+
+---
+
+### PC-2026-04-23-05 · Candidato a concepto Madre · El entre como órgano
+
+**Prioridad:** P2
+**Estado:** Candidato
+**Descripción:** Del linaje Saltzman ("Piel entre piel"). La piel no es borde que separa — es espacio creativo entre interior y exterior. El "entre" no es frontera; es órgano de contacto, contagio, co-producción. El paradigma Aleph habita los entres. Implicaciones para el Instrumento: el campo entre las 5 señales es donde ocurre la lectura, no en cada señal aislada.
+**Documentación:** señales activas "El entre como espacio creativo (Saltzman)" y "Pensamiento como tejido, comprensión como espiral (Saltzman)".
+**Requisito para incorporar:** formalización completa incluyendo relación con Plotino y con el concepto 32 (doble acoplamiento).
+
+---
+
+### PC-2026-04-23-06 · Enriquecimiento del concepto 11 (Arquitecto de Sistemas Vivos)
+
+**Prioridad:** P1
+**Estado:** Enriquecimiento propuesto
+**Descripción:** El concepto 11 (Arquitecto de Sistemas Vivos) se enriquece con la definición operativa nueva: **"el Arquitecto moldea, el navegante habita"**. Esta formulación define qué hace el Arquitecto concretamente: no construye sistemas para que otros los habiten — construye pentágonos (aleph habitables) para que otros se habiten a sí mismos dentro de ellos. Y nombra que el Arquitecto, al moldear, también se moldea — nadie puede diseñar una pregunta sin haberla atravesado.
+**Documentación:** señal activa correspondiente.
+**Requisito:** agregar al concepto 11 la subsección "Arquitecto como moldeador de pentágonos Aleph".
+
+---
+
+### PC-2026-04-23-07 · Incorporación formal de linajes nuevos al Corpus
+
+**Prioridad:** P1
+**Estado:** Pendiente de formalización
+**Descripción:** Los siguientes linajes fueron incorporados durante SESION-20260420-21 como voces formales del paradigma, pero requieren formalización en `corpus_base_aleph.md`:
+1. **Polinesios** — voz marítima; técnica de lectura de cinco oleajes refractados simultáneos
+2. **Antonio Machado** — voz marítima; "estelas en la mar" como ontología procesual
+3. **Andrea Saltzman** — voz de piel; el entre, pensamiento como tejido, comprensión como espiral
+4. **Tao** (explícito) — voz respiratoria; conocer es respirar
+
+Además, mencionados durante la sesión y pendientes de incorporación:
+- Warburg, Bateson, Marr, Stein, Wittgenstein, Thich Nhat Hanh
+
+**Requisito:** actualizar `corpus_base_aleph.md` con cada linaje: nombre, obra relevante, concepto clave que aporta, relación con el paradigma, cita característica.
+
+---
+
+### PC-2026-04-23-08 · Concepto situado · El desafío Madre
+
+**Prioridad:** P2
+**Estado:** Candidato
+**Descripción:** Principio estructural: toda instancia situada del Instrumento Aleph requiere un desafío central. Sin desafío no hay campo. El desafío organiza fractalmente el pentágono — pregunta individual + pregunta colectiva. Del desafío se derivan las 5 señales del pentágono. En Quanam el desafío fue: "Cuando todos puedan hacer todo, ¿quién hará qué? ¿Qué inteligencia emergerá?".
+**Documentación:** señales activas "Sin desafío central no hay campo" + "El Desafío Madre del Instrumento".
+**Requisito:** formalizar el concepto + documentar el desafío de Quanam como primer desafío situado del Corpus.
+
+---
+
+### PC-2026-04-23-09 · Afinación pendiente · Vértices de 4 tríadas Madre
+
+**Prioridad:** P1
+**Estado:** Afinación pendiente
+**Descripción:** De las 5 tríadas del pentágono Madre, solo fue validada Impulso (Necesidad/Deseo/Sentido). Las otras 4 tienen vértices tentativos propuestos pero no validados con el Arquitecto:
+- **Momento** (¿Cómo estoy?) — vértices pendientes
+- **Mirada** (¿Qué me atrae?) — vértices pendientes
+- **Vínculo** (¿Con quién voy?) — vértices pendientes
+- **Inteligencia** (¿Qué es inteligencia?) — tentativos: Resolver/Comprender/Cuidar (no validados formalmente)
+**Requisito:** sesión dedicada a validar los vértices de las 4 tríadas pendientes.
+
+---
+
+### PC-2026-04-23-10 · Pregunta conceptual · ¿Los vértices son nombres o linajes?
+
+**Prioridad:** P2
+**Estado:** Pregunta abierta
+**Descripción:** Los vértices de las tríadas pueden nombrarse con: (a) nombres-fuerza breves (Necesidad/Deseo/Sentido), (b) nombres de linajes que los portan (Han/Plotino/Ignacio), (c) ambos (nombre-fuerza visible al navegante + linaje como capa interna para Arquitecto). Decisión del Arquitecto en SESION-20260420-21: usar nombres-fuerza para el navegante, dejar linajes como capa interna. Pero la decisión es por Impulso; hay que confirmar si se replica en las otras 4 tríadas.
+**Requisito:** confirmar la convención para las 4 tríadas pendientes.
+
+---
+
+### PC-2026-04-23-11 · Pregunta conceptual · Capas del Instrumento (Energía/Resonancia/Inclinación)
+
+**Prioridad:** P3
+**Estado:** Pregunta abierta
+**Descripción:** El Instrumento Aleph fue propuesto con capas adicionales a Posición: Energía, Resonancia, Inclinación. En SESION-20260420-21 se trabajó solo Posición. Queda pendiente decidir: ¿las capas adicionales se implementan en MapaIC?, ¿se dejan para segunda versión?, ¿cómo se visualizan sin saturar?
+**Requisito:** decisión en próxima sesión de MapaIC.
+
+---
+
+### PC-2026-04-23-12 · Pregunta conceptual · Masa crítica retroactiva o prospectiva
+
+**Prioridad:** P2
+**Estado:** Decisión de producto
+**Descripción:** ¿Cuando se alcanza el umbral de 20 navegantes, la vista del mapa colectivo se habilita para todos los anteriores (retroactivo) o solo para los nuevos (prospectivo)? Recomendación tentativa del Duende: retroactivo. Pero hay implicaciones de UX, sorpresa, notificación que requieren pensarlas.
+**Requisito:** decisión en próxima sesión de MapaIC.
+
+---
+
+## Inconsistencias de mantenimiento no resueltas (arrastradas)
+
+Detectadas al inicio de SESION-20260420-21, no resueltas durante la sesión:
+
+- **I1** — S-AP-14 requiere revisión de estado
+- **I2** — Discrepancia de conteo: SESION.md declaraba 31, archivo contenía 30
+- **I3** — Fecha desactualizada en `pendientes_corpus.md` (requiere update)
+- **I4** — S-AP-11 posiblemente supra-cubierto por una señal mayor
+
+**Requisito:** ciclo de mantenimiento del Corpus antes o durante próxima sesión.
+
+---
+
+**Fin del addendum. Total: 12 pendientes de Corpus nuevos + 4 inconsistencias de mantenimiento.**

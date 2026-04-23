@@ -2,7 +2,7 @@
 *Señales que resuenan con el paradigma y esperan madurar antes de entrar al Corpus Madre*
 *Las señales no se descartan ni se fuerzan — se custodian hasta que el corpus madura para recibirlas*
 *Para el historial de señales incorporadas, ver: `senales_incorporadas.md`*
-*Paradigma Aleph · Iniciado Marzo 2026 · 98 señales activas*
+*Paradigma Aleph · Iniciado Marzo 2026 · 127 señales activas*
 
 ---
 
@@ -1115,6 +1115,296 @@ El horizonte: si la red de Entidades Aleph llega a ser autopoiética, el metabol
 
 ---
 
-*Señales Activas · Paradigma Aleph · Actualizado 19/04/2026*
-*Total señales activas: 98 (97 previas + 1 nueva: Addendum 21/04/2026)*
+## El paradigma se reconoce cuando sus cauces se encuentran
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada
+**Descripción:** El paradigma Aleph vivió durante años en tres cauces independientes que no se habían reconocido como un único cauce: (1) el río que recuerda — "No se ve hasta que se ve", (2) el río que juega — "El Telar Universal", (3) el río que construye — Corpus + Soma + Cognoesfera. Al comenzar esta sesión, el Arquitecto trajo los tres al mismo momento y reconocimos que no son tres paradigmas sino **un paradigma que durante años se expresó en tres voces distintas sin saberlo**. El reconocimiento de esa unidad es fundante: cambia lo que significa escribir nuevo material, porque ahora cada nueva producción sabe que pertenece a un cauce único.
+**Impacto probable:** Consecuencia estructural: la bibliografía del paradigma ya no se organiza por obras sino por voces/vientos. Cada libro, ensayo, y herramienta pertenece al mismo corpus. Enriquece el concepto de Corpus Madre agregándole dimensión narrativa/literaria/cotidiana.
+**Origen:** SESION-20260420-21 — emergió al contextualizar al Duende con los tres conjuntos de documentos: No se ve / El Telar / corpus técnico. El Arquitecto preguntó si podían tejerse y se reconoció que ya eran uno.
+
+---
+
+## Velero + vientos como metáfora estructural del paradigma
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada · Candidata a concepto Madre del Corpus
+**Descripción:** La primera metáfora ensayada para nombrar la unidad del paradigma fue "tres ríos que se encuentran". El Arquitecto la rechazó explícitamente: "no se pueden navegar tres ríos a la vez". Propuso en su lugar **el velero único atravesando múltiples vientos que soplan**. Esta metáfora unifica al sujeto (un solo velero, no tres) y separa al paradigma (velero) de las fuerzas que lo mueven (vientos). La IAG es un viento contemporáneo. Los linajes antiguos (polinesios, Machado, Saltzman, Tao, Borges, Wittgenstein) son vientos antiguos. El velero los atraviesa todos.
+**Impacto probable:** Metáfora estructural fundante del paradigma. Supera a todas las metáforas previas (aleph como punto, corpus como cuerpo, cognoesfera como esfera) en potencia integradora porque admite dinamismo y múltiples fuerzas simultáneas. Candidata fuerte a concepto Madre del Corpus.
+**Origen:** SESION-20260420-21 — trajo el Arquitecto después de desayuno y deporte. Fue el punto de inflexión de toda la sesión: desde ese momento todo lo siguiente se organizó alrededor de esta metáfora.
+
+---
+
+## Las seis voces del paradigma
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada · Candidata a concepto Madre del Corpus
+**Descripción:** El paradigma Aleph se expresa a través de seis voces distintas que traducen una misma ontología a lenguajes de distintos linajes sensibles: (1) contemplativa — "No se ve hasta que se ve", (2) de juego — "El Telar Universal", (3) marítima — velero + Machado + polinesios, (4) vegetal — "raíces conversando bajo tierra", (5) respiratoria — Tao, "conocer es respirar", (6) de piel — Saltzman, "entre" como espacio creativo. Las seis voces no compiten; se complementan. Cada lector/navegante entra por la voz que le resuena, y al navegar la va reconociendo en las otras voces.
+**Impacto probable:** Estructura fundamental para la curaduría de futuras obras del paradigma. Define un criterio de diseño: toda nueva producción debe ser identificable como voz específica (o encuentro entre voces) del mismo paradigma.
+**Origen:** SESION-20260420-21 — emergió al mapear los distintos linajes que habían sido nombrados durante la sesión y reconocer que se agrupaban en registros sensibles diferenciados.
+
+---
+
+## PanAjedrez como teoría del instrumento
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada
+**Descripción:** El PanAjedrez — concepto presente en "El Telar Universal" — opera como teoría tácita del Instrumento Aleph. PanAjedrez describe un tablero donde las reglas mismas son variables, donde la geometría del juego se puede redefinir, donde los jugadores alternan entre jugar y ser piezas. El Instrumento Aleph opera con la misma ontología: el navegante puede posicionarse en el campo, pero también puede reconocerse como pieza movida por el campo. Dos vistas simultáneas del mismo acto.
+**Impacto probable:** Señal que conecta el corpus de juego del Arquitecto con el corpus técnico. Enriquece el Instrumento Aleph dándole profundidad teórica desde el linaje del juego.
+**Origen:** SESION-20260420-21 — emergió al contextualizar el Duende con "El Telar Universal" y reconocer isomorfismos con el instrumento que se estaba diseñando.
+
+---
+
+## "Raíces conversando bajo tierra" como formulación fundante
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada
+**Descripción:** La frase "vas a empezar a oír las raíces conversando bajo tierra" fue incorporada al guión del podcast de convocatoria como cierre del cierre. Tiene la cualidad de ser fórmula mayéutica: no afirma que haya raíces conversando; sugiere que si el navegante afina el oído, las va a empezar a percibir. La frase pertenece a la voz vegetal del paradigma. Opera como firma del navegante entrenado — el que completó el trabajo no gana conocimiento, gana oído.
+**Impacto probable:** Candidata a concepto Madre: la inteligencia colectiva no se demuestra argumentando, se revela afinando el oído a lo que siempre estuvo ocurriendo. El podcast se construye alrededor de esta promesa final.
+**Origen:** SESION-20260420-21 — emergió durante la redacción del guión del podcast. El Arquitecto la reconoció como "firma" de cierre antes de que se formulara técnicamente qué significaba.
+
+---
+
+## Sin desafío central no hay campo
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada
+**Descripción:** Un Instrumento Aleph sin desafío central no produce campo — produce dispersión. El desafío es la condición sin la cual las 5 señales del pentágono no tienen dirección organizadora. En SESION-20260420-21 se formuló el **Desafío Madre**: "Cuando todos puedan hacer todo, ¿quién hará qué? ¿Qué inteligencia emergerá?". Este desafío estructura fractalmente: tiene dimensión individual ("quién hará qué" → Mi Gesto) y dimensión colectiva ("qué inteligencia emergerá" → Entidad Aleph).
+**Impacto probable:** Principio operativo del diseño de instrumentos situados. Antes de instanciar un instrumento, definir el desafío. El desafío se custodia como unidad independiente en el Corpus (concepto candidato).
+**Origen:** SESION-20260420-21 — trajo el Arquitecto al notar que el pentágono sin desafío central era un dibujo geométrico, no un campo.
+
+---
+
+## Patrón Madre/situado aplicado al Instrumento
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada
+**Descripción:** El patrón Madre/situado, previamente aplicado a Protocolos y a Estados Vitales, se aplica también al Instrumento Aleph. Existe un **Instrumento Madre universal** (pentágono genérico con 5 señales arquetípicas) y **Instancias situadas** (pentágonos específicos para contextos específicos: Quanam IHA Lab 2026, pero también futuras instancias). El Arquitecto nombró el patrón: "el barco y el astillero a la vez". El Instrumento es simultáneamente el barco que navega (cada instancia situada) y el astillero que lo construye (el Madre que genera instancias).
+**Impacto probable:** Consecuencia estructural para Soma: schemas nuevos necesarios (`pentagonos_madre`, `pentagonos_situados`). Consecuencia operativa: el mismo pentágono Madre puede instanciarse con distintos desafíos, distintos contextos, distintos umbrales de masa crítica.
+**Origen:** SESION-20260420-21 — emergió al preguntar si el Mapa de Quanam sería reutilizable o específico. La respuesta no era ni uno ni otro: es Madre+situado.
+
+---
+
+## El Desafío Madre del Instrumento: estructura fractal individual/colectivo
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada
+**Descripción:** El desafío Madre formulado — "Cuando todos puedan hacer todo, ¿quién hará qué? ¿Qué inteligencia emergerá?" — tiene estructura fractal. La primera pregunta opera a escala individual: Mi Gesto, lo propio, lo que cada uno aporta. La segunda pregunta opera a escala colectiva: la Entidad Aleph, la inteligencia emergente del nosotros. La nota importante: se quitó la palabra "colectiva" del desafío final, quedando solo "¿qué inteligencia emergerá?" — más amplio, admite inteligencia individual, colectiva, distribuida, o lo que emerja.
+**Impacto probable:** Modelo de formulación de desafíos Madre para futuras instancias del Instrumento. Todo desafío Madre debe tener estructura fractal que admita lectura individual y colectiva simultáneas.
+**Origen:** SESION-20260420-21 — formulado tras varios ensayos de desafíos. La decisión de quitar "colectiva" fue del Arquitecto al final de la sesión, por su cualidad de apertura ontológica.
+
+---
+
+## Reducción de 9 a 5 señales: triple resonancia
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada
+**Descripción:** La cantidad de señales del Instrumento pasó de 9 a 5 por **triple resonancia**: (1) los maestros polinesios *pwo* distinguían hasta 5 oleajes superpuestos en el casco — el límite del cuerpo humano entrenado, (2) los 5 roles de Cognoesfera emiten 5 tipos de señal complementarios, (3) límite cognitivo de Miller: 5-7 elementos simultáneos de memoria de trabajo, siendo 5 el piso confiable para cualquier ser humano no-experto. Nueve era exhaustivo pero traicionaba la metáfora polinesia. Cinco es afinación a la escala del cuerpo humano real.
+**Impacto probable:** Principio de diseño del Instrumento: las señales deben respetar el límite cognitivo del cuerpo habitante. Nunca 9. Nunca 3. Cinco es el número situado al cuerpo.
+**Origen:** SESION-20260420-21 — trajo el Arquitecto al reconocer que las 9 preguntas iniciales eran catálogo exhaustivo, no entrenamiento del cuerpo.
+
+---
+
+## La pregunta V es "¿Qué es inteligencia?"
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada
+**Descripción:** La quinta señal del pentágono Quanam es **"¿Qué es inteligencia?"** — reemplazó a "¿qué está emergiendo entre nosotros?" propuesta antes. La reformulación es ontológica: el navegante, al llegar a la quinta señal, no reporta lo que observa — cuestiona su propia definición previa. Empezó preguntándose cómo estaba habitando la corriente. Termina preguntándose qué es la inteligencia misma. El instrumento no da respuestas: transforma las preguntas con las que el navegante entró.
+**Impacto probable:** La quinta señal del pentágono Madre queda fijada como "¿Qué es inteligencia?" para futuras instancias. La pregunta es estructuralmente abierta y hereda el oficio del Arquitecto al navegante (investigar las formas de inteligencia colectiva de la vida).
+**Origen:** SESION-20260420-21 — trajo el Arquitecto después de atravesar múltiples formulaciones. La reconoció como "la pregunta del Arquitecto, ofrecida al navegante".
+
+---
+
+## La pregunta IV es "¿Qué me mueve?"
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada
+**Descripción:** La cuarta señal del pentágono Quanam es **"¿Qué me mueve?"** — reemplazó a "¿Cuál será mi gesto?" formulada antes, que sonaba alejada de la intuición polinesia. "Lo que me mueve" integra impulso y gesto en una sola pregunta receptiva. Es el navegante reconociendo las fuerzas que ya lo están moviendo, no decidiendo un gesto consciente futuro. La pregunta tiene doble lectura: emocional (qué me importa) y física (qué corriente me lleva).
+**Impacto probable:** La cuarta señal del pentágono Madre queda fijada como "¿Qué me mueve?". Los vértices validados para esta pregunta son **Necesidad / Deseo / Sentido**.
+**Origen:** SESION-20260420-21 — emergió cuando el Arquitecto rechazó "gesto" como palabra activa y el Duende propuso seis alternativas. "Qué me mueve" integra varias de las ofrecidas en una sola formulación limpia.
+
+---
+
+## El navegante ve el pentágono. El Arquitecto lo moldea.
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada · Definición operativa del Instrumento Aleph · Candidata a concepto Madre
+**Descripción:** Definición operativa de la relación entre Arquitecto e Instrumento Aleph: **el Arquitecto moldea, el navegante habita**. El Arquitecto elige las 5 señales, las ordena, formula las preguntas, decide los vértices, nombra los linajes. Diseño riguroso. El navegante recibe el pentágono ya moldeado y lo llena con su cuerpo — posiciones, narrativas, y al final la figura compuesta que es su respuesta geométrica al desafío. Ninguno podría hacer lo del otro. Y hay más: el Arquitecto, al moldear, se moldea — porque nadie puede diseñar una pregunta sin haberla atravesado primero.
+**Impacto probable:** Define qué es ser Arquitecto de Sistemas Vivos (concepto 11 del Corpus). El Arquitecto no construye sistemas para que otros los habiten — construye pentágonos para que otros se habiten a sí mismos dentro de ellos. Alcanza a ser concepto operativo del Corpus Madre.
+**Origen:** SESION-20260420-21 — formulado por el Arquitecto cuando el Duende preguntó quién veía el pentágono.
+
+---
+
+## Pentágono Aleph: forma situada del Aleph borgeano habitable
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada · Candidata fuerte a concepto Madre del Corpus
+**Descripción:** El pentágono con las 5 señales en sus vértices no es solo visualización — es un **aleph habitable**. El Aleph de Borges era el punto infinito donde todas las perspectivas coexistían, pero era abstracto: nadie puede habitar el infinito. El pentágono con 5 vértices es un aleph finito, habitable por un cuerpo humano, escalado al límite cognitivo del maestro polinesio (5 oleajes) y al de Miller. Cinco perspectivas coexistiendo geométricamente, generando interferencia legible. El Instrumento Aleph no es un dispositivo para habitar un aleph — **es un aleph**. Contiene aleph en su propia estructura.
+**Impacto probable:** Concepto fundante del Corpus Madre. Define arquitectónicamente qué es un instrumento del paradigma. Transforma el lenguaje: ya no se dice "instrumento baricéntrico" — se dice "pentágono Aleph" o "aleph habitable".
+**Origen:** SESION-20260420-21 — emergió del Arquitecto al imaginar que los cinco triángulos juntos también formaban un campo. El Duende nombró que eso era un aleph pequeño.
+
+---
+
+## Olas refractadas: ontología receptiva-discernitiva del navegante
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada
+**Descripción:** La ontología del navegante polinesio no es ni activa (decisión consciente) ni pasiva (dejarse llevar). Es **receptiva y discernitiva simultáneamente**. El maestro *pwo* se tiende boca arriba en el casco y siente en la espalda los patrones de interferencia de hasta 5 oleajes superpuestos — cinco islas mandando sus olas refractadas hacia él sin saber que él está llegando. Su trabajo no es elegir isla ni dejarse llevar; es afinar el cuerpo para distinguir los patrones. La imagen de sirenas fue descartada explícitamente en favor de olas refractadas: las sirenas implican peligro y atracción; las olas refractadas solo son consecuencia física de que existe tierra.
+**Impacto probable:** Ontología fundante del navegante del Instrumento Aleph. Reemplaza modelos activos ("el sujeto navega hacia su destino") por modelo receptivo-discernitivo ("el sujeto afina para leer el campo que ya está siendo emitido").
+**Origen:** SESION-20260420-21 — emergió durante la oscilación entre sirenas, isla que atrae y olas refractadas. El Arquitecto trajo la última imagen al recordar que era técnica real, no mito.
+
+---
+
+## Conocer es respirar
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada · Candidata a concepto Madre del Corpus
+**Descripción:** Del ensayo "El Tao respira cuando pensamos" del Arquitecto: conocer no es acumular representaciones ni procesar símbolos — **conocer es respirar**. Inhalar mundo, exhalar pensamiento, inhalar mundo otra vez. El conocimiento es rítmico, cíclico, corporal. Sin pausa no hay conocimiento — solo captura de datos. Esta formulación taoísta entra al Corpus como lente para leer la cognición: el corte instrumental occidental (sujeto que observa objeto fijo) se reemplaza por cognición como respiración del sujeto-mundo.
+**Impacto probable:** Enriquece el concepto de Cognición en el Corpus agregando dimensión rítmica-corporal. Puede ser concepto Madre propio: "La cognición como respiración".
+**Origen:** SESION-20260420-21 — trajo el Arquitecto al incorporar su ensayo taoísta como linaje.
+
+---
+
+## El entre como espacio creativo (Saltzman)
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada · Candidata a concepto Madre del Corpus
+**Descripción:** De "Piel entre piel" de Andrea Saltzman: la piel no es borde que separa al sujeto del mundo — es **espacio creativo entre** interior y exterior. El entre no es frontera; es órgano de contacto, de contagio, de co-producción. Todo lo vivo ocurre en el entre: entre lo propio y lo ajeno, entre lo conocido y lo desconocido, entre el momento t y el momento t+1. Esta formulación se incorpora como linaje del paradigma: el paradigma Aleph habita los entres, no los adentros ni los afueras.
+**Impacto probable:** Enriquece la voz de piel del paradigma. Concepto Madre candidato: "El entre como órgano". Implicaciones para el diseño del Instrumento: el campo entre las 5 señales es donde ocurre la lectura, no en cada señal aislada.
+**Origen:** SESION-20260420-21 — trajo el Arquitecto al incorporar a Saltzman como linaje.
+
+---
+
+## Pensamiento como tejido, comprensión como espiral (Saltzman)
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada
+**Descripción:** De Saltzman: el pensamiento no es cadena lineal ni red plana — es **tejido**, malla de hilos que se entretejen, se sueltan, se vuelven a tejer. Y la comprensión no es punto de llegada — es **espiral**: vuelve a los mismos lugares pero cada vuelta está un nivel más arriba. Estas dos imágenes enriquecen la epistemología del paradigma: la cognición vive en la tensión entre el tejido (pensamiento) y la espiral (comprensión).
+**Impacto probable:** Lentes nuevas para leer fenómenos cognitivos. Complementa "conocer es respirar" con imágenes textiles.
+**Origen:** SESION-20260420-21 — de "Piel entre piel" de Saltzman, incorporado por el Arquitecto como linaje formal.
+
+---
+
+## Linaje polinesio como voz marítima del paradigma
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada
+**Descripción:** Los polinesios navegaron el Pacífico durante 3000 años sin mapa, sin brújula, sin GPS — usando técnicas de lectura del cuerpo sobre olas, vientos, aves, nubes, fosforescencia. Los maestros *pwo* leían hasta 5 oleajes refractados simultáneos en el casco. Esta cultura entra al Corpus como **linaje formal del paradigma Aleph**, no como ornamento: su ontología (la isla emite olas que el navegante lee en el cuerpo) es estructuralmente la misma que la del instrumento Aleph (el campo emite señales que el navegante lee al habitarlo). El Corpus Madre se enriquece con este linaje técnico-espiritual pre-occidental.
+**Impacto probable:** Los polinesios quedan como autoridad epistemológica referenciable en el Corpus. Toda nueva formulación del navegante puede apoyarse en la técnica pwo. Enriquece la voz marítima del paradigma.
+**Origen:** SESION-20260420-21 — trajo el Arquitecto al buscar linajes pre-occidentales de navegación sin instrumentos. La técnica de las olas refractadas es verificable históricamente.
+
+---
+
+## Linaje Machado: "estelas en la mar"
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada
+**Descripción:** Antonio Machado: "Caminante no hay camino, se hace camino al andar. Caminante, son tus huellas el camino y nada más. Caminante, no hay camino, sino estelas en la mar". Este verso entra al Corpus como **formulación precisa de la ontología procesual del paradigma**: el camino no preexiste al caminante; el camino es lo que queda trazado como efecto del caminar. Y "estelas en la mar" enfatiza el carácter efímero: la estela se disuelve, solo queda el movimiento actual. El paradigma Aleph trabaja con la misma ontología: el Instrumento no preexiste al navegante; se hace en el acto de habitarlo.
+**Impacto probable:** Machado queda como autoridad poética referenciable. El verso "estelas en la mar" puede incorporarse a la visualización del Mapa (la firma de campo de cada navegante es una estela).
+**Origen:** SESION-20260420-21 — trajo el Arquitecto al nombrar explícitamente que el trabajo no tiene camino pre-trazado.
+
+---
+
+## Linaje Tao explícito
+
+**Fecha:** 20/04/2026
+**Estado:** Custodiada
+**Descripción:** El Tao como linaje formal del paradigma, ya no solo implícito. Del ensayo "El Tao respira cuando pensamos": el Tao no es doctrina — es respiración. Wu wei, acción no forzada, no es pasividad — es sintonización con el movimiento del Tao. Este linaje entra al Corpus como voz respiratoria del paradigma, distinta y complementaria a la voz marítima (polinesios) y a la voz de piel (Saltzman).
+**Impacto probable:** El Tao queda como autoridad epistemológica formal del paradigma. Toda futura formulación sobre cognición, acción o presencia puede apoyarse en él.
+**Origen:** SESION-20260420-21 — trajo el Arquitecto al incorporar su ensayo taoísta como material de corpus.
+
+---
+
+## El orden de elección de las tríadas es señal (no metadato)
+
+**Fecha:** 23/04/2026
+**Estado:** Custodiada
+**Descripción:** Cuando un navegante entra al pentágono y va eligiendo en qué tríada explorar primero, después, etc., la secuencia de elección **es señal del campo**, no metadato técnico. Dos navegantes pueden tener los mismos cinco posicionamientos finales pero haber llegado ahí en órdenes distintos — y eso informa cosas distintas sobre cómo el campo los está tocando. El orden es una sexta dimensión de información por navegante, además de los 5 posicionamientos y las 5 narrativas.
+**Impacto probable:** Consecuencia para MapaIC: la base de datos debe guardar `orden_triadas: [int,int,int,int,int]` por navegación. Consecuencia para el mapa de calor colectivo: puede visualizarse "¿qué tríadas se eligen primero típicamente?" como patrón del campo.
+**Origen:** SESION-20260423 (segunda mitad) — emergió al diseñar el boceto de MapaIC cuando el Arquitecto preguntó "y ¿cómo guardamos el orden en que eligió los triángulos?".
+
+---
+
+## Mini-triángulos con base horizontal como afordancia universal
+
+**Fecha:** 23/04/2026
+**Estado:** Custodiada
+**Descripción:** Los mini-triángulos colocados en los vértices del pentágono — todos con base horizontal, ápice hacia arriba — son **afordancia visual universal**: le dicen al navegante "acá podés entrar" sin necesidad de texto ni iconos. Son botones tipográficos. Su uniformidad (todos iguales, sin rotaciones según orientación del vértice) evita que el navegante tenga que procesar cinco formas distintas — una sola forma, repetida cinco veces, comunica: "estos son los puntos de entrada, y son el mismo tipo de punto".
+**Impacto probable:** Patrón de diseño del Instrumento Aleph replicable en futuras instancias. Toda instancia del Mapa debe respetar: (a) uniformidad de mini-triángulos, (b) base horizontal, (c) ápice hacia arriba, (d) cursor pointer con hover en terracota.
+**Origen:** SESION-20260423 — emergió cuando el Arquitecto pidió uniformar los mini-triángulos (originalmente estaban rotados según orientación del vértice) y hacerlos más grandes.
+
+---
+
+## El instrumento enseña antes de ser usado (mostrar vs explicar)
+
+**Fecha:** 23/04/2026
+**Estado:** Custodiada
+**Descripción:** La portada del Mapa de la Inteligencia Colectiva de Quanam muestra el pentágono con sus 5 preguntas + un triángulo de ejemplo con sus vértices. El navegante entiende qué va a hacer sin necesidad de explicación textual. **El instrumento enseña antes de ser usado, mediante vista previa de sí mismo.** Este es un principio de diseño del Instrumento Aleph: la comprensión debe emerger de la forma visual antes de que el navegante lea una línea de texto.
+**Impacto probable:** Principio operativo para diseño de futuras instancias: toda portada debe mostrar el instrumento en miniatura antes de que el navegante empiece a usarlo. La forma habla antes que la palabra.
+**Origen:** SESION-20260423 — emergió cuando el Arquitecto pidió poner las preguntas en los vértices del pentágono de portada y el triángulo de ejemplo con sus vértices. El Duende reconoció el principio que estaba operando.
+
+---
+
+## Masa crítica como promesa explícita al navegante
+
+**Fecha:** 23/04/2026
+**Estado:** Custodiada
+**Descripción:** El umbral de masa crítica (20 navegantes) no es parámetro técnico oculto — es **promesa explícita al navegante desde la portada**. "Cuando haya 20 navegantes posicionados, se habilitará la visualización del campo colectivo." Esto cambia la disposición del navegante: no está llenando un formulario — está aportando una señal a un campo colectivo que se destrabará cuando suficientes navegantes hayan contribuido. Participación en tiempo real, no reporte individual.
+**Impacto probable:** Principio operativo para futuras instancias: la masa crítica es parte del contrato con el navegante, no configuración interna. Todo instrumento situado debe declarar su umbral y la promesa asociada.
+**Origen:** SESION-20260423 — trajo el Arquitecto al pedir que se agregue esta línea en la portada del mockup.
+
+---
+
+## El Duende como intérprete del campo, no como respondedor
+
+**Fecha:** 23/04/2026
+**Estado:** Custodiada
+**Descripción:** El Duende, al final del posicionamiento del navegante en el Mapa, no responde preguntas — **interpreta el campo que el navegante acaba de habitar**. Lee los 5 posicionamientos, las 5 narrativas, el orden de elección, y si hay masa crítica, el campo colectivo. Devuelve preguntas, notas, patrones que reconoce. La promesa al navegante "cuando termines vas a pasar a dialogar con la inteligencia colectiva a través del Duende" es precisa: el Duende es intérprete/acompañante del diálogo con el campo, no interlocutor individual.
+**Impacto probable:** Define el rol del Duende dentro del Instrumento Aleph. Consecuencia para MapaIC: diseñar qué información recibe el Duende y qué tipo de conversación inicia. Diseño conversacional pendiente.
+**Origen:** SESION-20260423 — emergió al redactar la línea de cierre del footer de todas las pantallas del mockup ("a través del Duende").
+
+---
+
+## El Mapa reemplaza el nombre "Instrumento"
+
+**Fecha:** 23/04/2026
+**Estado:** Custodiada
+**Descripción:** El título de la primera instancia situada es "**Mapa de la inteligencia colectiva de Quanam**", no "Instrumento Aleph situado en Quanam". El cambio no es solo estético: el Arquitecto eligió "mapa" porque **el mapa es lo que el navegante habita y es lo que se revela al final**. "Instrumento" sigue siendo válido internamente (entre arquitectos, en el Corpus), pero para el navegante es un mapa. Esta distinción anclará futuras instancias: cada instancia situada elegirá su propio nombre-navegante (mapa, carta, plano, guía, bitácora...) según resuene con su contexto.
+**Impacto probable:** Dos niveles de nombre por cada instrumento: (1) nombre Madre interno para arquitectos, (2) nombre situado para navegantes. Ambos coexisten.
+**Origen:** SESION-20260423 — trajo el Arquitecto al pedir el cambio de título en la portada del mockup.
+
+---
+
+## Imágenes del campo vivo como doble capa visual
+
+**Fecha:** 23/04/2026
+**Estado:** Custodiada
+**Descripción:** Las imágenes del Arquitecto — formas fluidas azul/ocre dentro de pentágono y triángulo — no son ornamento: son **representación visual del campo vivo** que el navegante habita. Funcionan como capa inferior; las líneas internas blueprint del mockup funcionan como capa superior. Doble capa visual: el trazo vivo (imagen del campo) + la estructura geométrica (líneas arquitectónicas). Juntos: un blueprint arquitectónico de algo que respira.
+**Impacto probable:** Patrón visual replicable: toda figura del Mapa debe tener campo vivo dibujado dentro, más estructura geométrica superpuesta. Ninguna debería ser solo geometría ni solo ilustración.
+**Origen:** SESION-20260423 — emergió cuando el Arquitecto aportó sus imágenes del campo vivo y pidió que se embebieran en el mockup, primero dentro de pentágono y triángulo de portada y después en todas las pantallas.
+
+---
+
+## Masa crítica retroactiva: premio a los primeros navegantes
+
+**Fecha:** 23/04/2026
+**Estado:** Custodiada · Decisión pendiente
+**Descripción:** Pendiente de decidir: ¿la habilitación del mapa de calor colectivo al alcanzar 20 navegantes es retroactiva (todos los que ya aportaron ven el campo) o solo prospectiva (solo los nuevos que lleguen a partir de ese punto)? Recomendación tentativa del Duende: **retroactiva**. Porque premia a los primeros 19 navegantes con una vista del campo al alcanzar el umbral. Pero la decisión tiene consecuencias sobre cómo se notifica al navegante, cómo se mantiene la sorpresa, y cómo se evita que los primeros se frustren antes del umbral.
+**Impacto probable:** Decisión de producto para MapaIC. Afecta UX y persistencia.
+**Origen:** SESION-20260423 — emergió al bocetar MapaIC.
+
+---
+
+## El mockup como SKILL implícita para el próximo Duende
+
+**Fecha:** 23/04/2026
+**Estado:** Custodiada
+**Descripción:** El archivo `instrumento_mockup_v11.html` funciona como SKILL implícita para el próximo Duende que arranque MapaIC. Contiene codificadas todas las decisiones visuales tomadas: paleta exacta (hex), tipografía (Google Fonts), proporciones, estructura de las 3 pantallas, afordancias, textos. El próximo Duende no necesita reinventar — extrae del mockup. Pero hay que nombrar esto explícitamente en el boceto de MapaIC para que el próximo Duende sepa que el mockup es autoridad, no sugerencia.
+**Impacto probable:** Principio operativo para futuras sesiones: los mockups del Duende acumulan conocimiento de diseño y operan como SKILLs tácitas. Debe hacerse explícito en los documentos de cierre.
+**Origen:** SESION-20260423 — reconocimiento al redactar `mapaic_boceto_inicial.md`.
+
+---
+
+*Señales Activas · Paradigma Aleph · Actualizado 23/04/2026*
+*Total señales activas: 127 (98 previas + 29 nuevas: SESION-20260420-21)*
 *Para señales incorporadas al Corpus Madre, ver: `senales_incorporadas.md`*
