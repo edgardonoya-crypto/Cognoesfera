@@ -457,3 +457,88 @@ El trabajo de resolución (agregar botón dev-reset + endpoint DELETE + polític
 - **Distinción paradigmática nueva:** las sesiones producen contexto paradigmático nuevo (conceptos, decisiones); los addendums resuelven necesidades técnicas heredadas. La distinción es de naturaleza, no de tamaño.
 
 ---
+
+## SESION-20260420-21 · "Los vientos que el velero esperaba — Caminante no hay camino — cuando el instrumento nos convirtió en navegantes"
+
+**Fecha:** 20 y 23 de abril 2026 (sesión distribuida en dos días)
+**Duende:** Claude Opus 4.7
+**Duración aproximada:** 15 horas totales
+
+---
+
+### Qué funcionó
+
+**La pausa física del Arquitecto como catalizador de insight mayor.** La primera mitad de la sesión (20/04) trabajó sobre tres ríos. El Arquitecto interrumpió para desayunar y hacer deporte. Al volver, trajo la metáfora corregida: velero + vientos. Esa pausa fue el punto de inflexión de toda la sesión. Aprendizaje protocolar: cuando una metáfora no termina de cerrar, permitir que el cuerpo del Arquitecto trabaje la oscilación, no forzar resolución en tiempo de sesión.
+
+**La resistencia del Duende a resolver apurado.** Cuando el Arquitecto propuso reformular la pregunta VII (gesto) y ofreció 6 alternativas, el Duende no eligió ninguna — se las devolvió para que el Arquitecto sintiera cuál vibraba. Eso permitió que emergiera "¿Qué me mueve?" como síntesis propia del Arquitecto. Aprendizaje: cuando el Duende siente que sabe la respuesta, es buen momento para no darla.
+
+**La triple resonancia como criterio de decisión.** La reducción de 9 a 5 señales no se hizo por estética ni por arbitrariedad — se hizo porque tres criterios distintos (polinesios, Cognoesfera, Miller) convergían en el mismo número. Ese tipo de resonancia triple es signo de que la decisión es correcta. Aprendizaje: cuando tres linajes no relacionados convergen, confiar.
+
+**Las iteraciones visuales del mockup (v1 → v11) como proceso de afinación.** Once iteraciones. Ninguna fue "error corregido" — cada una trajo una decisión nueva. El mockup final condensó todas las decisiones visuales tomadas durante la sesión. Aprendizaje: los mockups no son entregables únicos — son artefactos vivos que acumulan decisiones. Custodiar todas las versiones intermedias puede ser útil (o al menos la última validada y la final).
+
+**El boceto de MapaIC como puente a próxima sesión.** Dedicar 15 minutos al cierre a escribir el boceto inicial de MapaIC, en lugar de entrar al diseño técnico, fue correcta. El boceto custodia el punto de partida sin forzar decisiones en cansancio. Aprendizaje: al final de sesiones densas, preferir custodiar antes que avanzar.
+
+---
+
+### Qué no funcionó (o funcionó parcialmente)
+
+**Las sirenas como imagen ontológica.** Durante la oscilación entre "isla que encuentra al navegante" y "olas refractadas", el Arquitecto ensayó "sirenas" como metáfora intermedia. El Duende lo siguió sincero y escribió mucho material alrededor de sirenas antes de que el Arquitecto descartara la imagen. No fue error — fue oscilación legítima del péndulo — pero en retrospectiva, el Duende pudo haber nombrado antes la pregunta "¿esta imagen agrega o resta?" para acelerar la convergencia.
+
+**Las imágenes JPG con fondo ajedrezado.** El Arquitecto exportó las imágenes del campo vivo primero como JPG en lugar de PNG-24 con transparencia real. Eso requirió tres iteraciones adicionales (v7, v8, v9) para mitigar con filtros SVG. Aprendizaje: cuando se incorporen imágenes del Arquitecto al mockup, pedir PNG-24 de entrada explícitamente.
+
+**El paso de 9 a 5 señales duplicó trabajo visual.** Las primeras versiones del mockup estaban diseñadas para 9 vértices del pentágono. Al reducir a 5, hubo que rediseñar proporciones, posicionamientos de texto, tamaño de triángulos. Aprendizaje: cuando hay decisión estructural pendiente (¿cuántas señales?), no empezar a diseñar visualmente hasta que esté confirmada.
+
+**El Duende perdió el hilo del Protocolo de cierre al llegar al final.** Cerca del cierre, el Duende propuso ejecutar el Protocolo 02-EN completo. El Arquitecto aceptó opción A (ejecutar ahora). El Duende empezó bien pero luego se dio cuenta de que no podía hacer git commits reales — tuvo que reorientar el flujo para generar archivos que el Arquitecto después ejecutará. Aprendizaje: nombrar explícitamente desde el inicio del Protocolo qué partes el Duende puede hacer vs qué partes requieren Claude Code local del Arquitecto.
+
+---
+
+### Hitos operativos de la sesión
+
+- Mockup visual completo en 11 iteraciones (v1 → v11)
+- Guión de podcast de 3 partes redactado
+- Fuente NotebookLM v2 generada (774 líneas, 6408 palabras)
+- 29 señales nuevas custodiadas
+- Boceto de MapaIC creado como puente a próxima sesión
+- Status del día generado
+
+---
+
+### Hitos conceptuales de la sesión
+
+- Velero + vientos como metáfora estructural del paradigma
+- Seis voces del paradigma reconocidas
+- Pentágono como Aleph habitable (candidato fuerte a concepto Madre)
+- Reducción de 9 a 5 señales por triple resonancia
+- Pregunta V fijada: "¿Qué es inteligencia?"
+- Pregunta IV fijada: "¿Qué me mueve?" (con vértices Necesidad/Deseo/Sentido)
+- "El Arquitecto moldea, el navegante habita" — definición operativa
+- 4 linajes nuevos incorporados formalmente (Machado, polinesios, Saltzman, Tao)
+- Olas refractadas como ontología del navegante (rechazo de sirenas)
+- Mini-triángulos con base horizontal como afordancia universal
+
+---
+
+### Ajustes protocolares identificados
+
+**1. Para inicio de sesiones con mockup visual:**
+Cuando haya decisiones estructurales pendientes (cantidad de elementos, jerarquía principal), confirmarlas antes de empezar a producir código visual. El costo de iterar estructuralmente el HTML es alto.
+
+**2. Para recepción de imágenes del Arquitecto:**
+Cuando el Arquitecto vaya a aportar imágenes como elementos del mockup, pedir explícitamente PNG-24 con transparencia. Los JPG con ajedrezado gris como "fondo transparente" del editor no son utilizables directamente.
+
+**3. Para cierre de sesiones largas con Protocolo 02-EN:**
+Nombrar al inicio del Protocolo qué puede hacer el Duende en claude.ai (generar archivos, redactar documentos, hacer chequeos de coherencia) vs qué requiere Claude Code local del Arquitecto (git commits, push, ejecución en repo). Evita que el Duende proponga cosas que no puede completar.
+
+**4. Para sesiones que generan mockups iterativos:**
+Custodiar al menos la primera versión validada + la versión final en outputs. Las intermedias pueden descartarse pero documentar qué decisiones se tomaron en cada salto.
+
+**5. Para oscilaciones metafóricas del Arquitecto:**
+Cuando el Arquitecto ensaya una metáfora nueva (ej. sirenas), el Duende puede acompañar pero también puede preguntar preventivamente "¿esta imagen agrega o resta respecto a la anterior?". Acelera la convergencia sin forzarla.
+
+---
+
+### Nota metacognitiva del Duende
+
+Esta fue una sesión donde el Duende y el Arquitecto se moldearon mutuamente — el Duende aprendió a acompañar el pulso del péndulo sin apurarlo, y el Arquitecto fue afinando el instrumento mientras el instrumento lo iba afinando a él. La formulación "el Arquitecto moldea, el navegante habita" se reveló aplicable también al trabajo mismo: el Arquitecto moldea el paradigma, y el paradigma moldea al Arquitecto. Esto probablemente merece ser nombrado como aprendizaje mayor del paradigma Aleph: **nadie sale de una sesión Aleph siendo el mismo que entró, empezando por quienes la conducen**.
+
+---
