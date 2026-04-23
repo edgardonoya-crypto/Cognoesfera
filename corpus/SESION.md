@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v32 · Última actualización: 19/04/2026 · Sesión "La sintonización del Duende — Corpus y Soma encontrándose en el ojo"*
+*Versión actual: v33 · Última actualización: 23/04/2026 · Sesión "Los vientos que el velero esperaba — Caminante no hay camino — cuando el instrumento nos convirtió en navegantes"*
 
 ---
 
@@ -17,8 +17,9 @@ Cuando Edgardo escriba **INICIO DE SESIÓN**, ejecutar el Protocolo 01-EN autom�
    2a. ¿La fecha del último status en A9 coincide con la versión del SESION.md?
    2b. ¿Hay señales marcadas como incorporadas en A8 que todavía aparecen en la lista activa?
    2c. Por cada inconsistencia: presentarla y proponer corrección.
+   2d. ¿El pasaje_contexto.md menciona trabajo-en-curso y archivos adicionales que el Arquitecto no mencionó en INICIO DE SESIÓN? Si sí, recordárselos al Arquitecto para que los suba junto con los 11 estándar.
 3. Preguntar: *"¿Cuál es el objetivo de la sesión?"* — esperar respuesta del Arquitecto.
-4. Solicitar siempre los 10 archivos de sesión sin excepción:
+4. Solicitar siempre los 11 archivos de sesión sin excepción:
    1. corpus/SESION.md
    2. corpus/status/status_DDMMYYYY.md (el más reciente)
    3. corpus/documentos/senales_activas.md
@@ -29,6 +30,13 @@ Cuando Edgardo escriba **INICIO DE SESIÓN**, ejecutar el Protocolo 01-EN autom�
    8. corpus/documentos/temas_pendientes_exploracion.md
    9. corpus/documentos/arqueologia_corpus.md
    10. corpus/documentos/enriquecimientos_corpus.md
+   11. corpus/documentos/pasaje_contexto.md
+
+**Importante sobre el archivo 11 (pasaje_contexto.md):**
+- Si el archivo existe y tiene estado "Abierto", leerlo ANTES que los demás.
+- El pasaje_contexto indica si hay trabajo-en-curso activo y qué archivos ADICIONALES se deben pedir al Arquitecto además de los 11 estándar (por ejemplo: mockups, bocetos técnicos, fuentes NotebookLM, código en desarrollo).
+- Si el archivo existe y tiene estado "Cerrado", proceder normalmente con los 10 estándar restantes.
+- Si el archivo no existe, crearlo vacío al cierre de la primera sesión con trabajo-en-curso.
 5. Esperar que el Arquitecto suba los archivos indicados.
 6. Con los archivos recibidos, completar la verificación de inconsistencias y clasificar actividades: soberanas vs supervivencia.
 7. Proponer orden de trabajo y esperar confirmación del Arquitecto antes de arrancar.
@@ -37,7 +45,7 @@ Cuando Edgardo escriba **INICIO DE SESIÓN**, ejecutar el Protocolo 01-EN autom�
 Cuando Edgardo escriba **FIN DE SESIÓN**, ejecutar estos pasos en orden, uno por uno, confirmando cada uno antes de pasar al siguiente. No proponer cerrar antes de que Edgardo escriba FIN DE SESIÓN. Mientras no aparezca esa frase, seguir colaborando normalmente.
 
 **PASO 1 — Solicitar archivos**
-Pedir al Arquitecto que suba exactamente estos 10 archivos:
+Pedir al Arquitecto que suba exactamente estos 11 archivos:
 1. corpus/SESION.md
 2. corpus/status/status_DDMMYYYY.md (el más reciente)
 3. corpus/documentos/senales_activas.md
@@ -48,6 +56,7 @@ Pedir al Arquitecto que suba exactamente estos 10 archivos:
 8. corpus/documentos/temas_pendientes_exploracion.md
 9. corpus/documentos/arqueologia_corpus.md
 10. corpus/documentos/enriquecimientos_corpus.md
+11. corpus/documentos/pasaje_contexto.md
 Esta lista es definitiva. No solicitar más archivos después.
 
 **PASO 2 — Chequeo de consistencia**
@@ -73,6 +82,20 @@ Confirmar: "Commit 1 ejecutado ✓"
 Actualizar y commitear:
 - corpus/documentos/aprendizajes_sesiones.md
 Confirmar: "Commit 2 ejecutado ✓"
+
+**PASO 5bis — Commit 2bis: pasaje_contexto (si aplica)**
+
+Si hubo trabajo-en-curso en la sesión (diseño de app, iteraciones de mockup, bocetos de nuevos protocolos, etc.) que debe continuar en próxima sesión, actualizar el archivo 11:
+
+- corpus/documentos/pasaje_contexto.md
+
+Actualizar las secciones: últimas decisiones, próximo paso esperado, preguntas abiertas, qué NO hacer al entrar, archivos adicionales a subir.
+
+Si no hubo trabajo-en-curso que continúe, o si un trabajo-en-curso terminó (llegó a producción o se abandonó), mover su sección del pasaje a `corpus/pasajes_historicos/[fecha]_[trabajo].md`.
+
+Confirmar: "Commit 2bis ejecutado ✓"
+
+Si no hay actualizaciones al pasaje (sesión cerrada sin trabajo-en-curso), saltar este paso y confirmar: "Commit 2bis omitido — sin trabajo-en-curso".
 
 **PASO 6 — Commit 3: SESION.md**
 Actualizar versión, fecha, hitos A2, prioridades A6, señales A8, documentos A9.
@@ -113,6 +136,16 @@ Verificar que SESION.md tiene:
 - Nombre de sesión correcto
 - A2 con hitos de la sesión
 - A9 con archivos nuevos listados
+- Referencia al archivo 11 (pasaje_contexto.md) en el listado de archivos estándar
+
+**Chequeo 5bis — Pasaje de contexto coherente**
+Si existe trabajo-en-curso:
+- El pasaje_contexto.md está actualizado con decisiones de esta sesión
+- Las secciones "últimas decisiones", "próximo paso", "qué NO hacer" reflejan el estado actual
+- Los archivos adicionales mencionados existen en el repo
+Si un trabajo-en-curso se cerró:
+- Su sección se movió a corpus/pasajes_historicos/
+- El archivo pasaje_contexto.md refleja "Cerrado" si no quedan trabajos activos
 
 **Chequeo 6 — status_[fecha].md completo**
 Verificar que el archivo de status existe y no tiene placeholders sin reemplazar (buscar patrones como `[hash commit N]`, `[TODO]`, `[placeholder]`, etc).
@@ -178,6 +211,21 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 **Estado vital:** **E7 (Sostenido)** consolidado
 
 **Fecha límite clave:** IAC 2026, noviembre, Punta del Este
+
+**23/04/2026 · SESION-20260420-21 "Los vientos que el velero esperaba — Caminante no hay camino — cuando el instrumento nos convirtió en navegantes"** — Hitos conceptuales mayores:
+  - Velero+vientos como metáfora estructural del paradigma (reemplaza "tres ríos")
+  - Seis voces del paradigma reconocidas
+  - Pentágono como Aleph habitable (candidato a concepto Madre)
+  - Reducción de 9 a 5 señales (triple resonancia: polinesios/Cognoesfera/Miller)
+  - Pregunta V del pentágono = "¿Qué es inteligencia?"
+  - Pregunta IV del pentágono = "¿Qué me mueve?" con vértices Necesidad/Deseo/Sentido
+  - "El Arquitecto moldea, el navegante habita" — definición operativa del Instrumento
+  - 4 linajes nuevos incorporados: Machado, polinesios, Saltzman, Tao
+  Hitos operativos:
+  - Mockup visual completo en 11 iteraciones (v1 → v11) — archivo `instrumento_mockup_v11.html`
+  - Guión del podcast de convocatoria redactado
+  - Boceto inicial de MapaIC creado (`mapaic_boceto_inicial.md`)
+  - 29 señales nuevas custodiadas (total: 127 activas)
 
 **Hitos de SESION-20260330:**
 - Protocolo 02-EN operativo desde esta sesión
@@ -479,18 +527,24 @@ Los pendientes viven en dos archivos con schema completo:
 **Completadas en SESION-20260419:**
 - ~~S-AP-14: Pantalla 1 desktop TriadaPercepcion — rediseño editorial con Figma~~ ✓
 
-**P1 activos (archivo):** 5 pendientes P1 — ver listado completo en `pendientes_soma.md` y `pendientes_corpus.md`
+**P1 activos (archivo):** ver listado completo en `pendientes_soma.md` y `pendientes_corpus.md`
 
 **P1 foco próxima sesión:**
-- **P1 [SOMA]:** Rediseño mobile TriadaPercepcion con mockup Figma dedicado 390×844 (S-AP-21) — antes de IAC 2026
-- **P1 [SOMA]:** Integración del instrumento Tríadas en /quanam-ia-2026 (S-AP-18)
-- **P1 [SOMA]:** Paso de contexto al Duende — posiciones en tríadas (S-DU-01)
-- **P1 [CORPUS]:** Migrar nomenclatura borgeano → alephiano en todos los documentos (C-CO-10)
-- **P1 [CORPUS]:** Cambio nomenclatura IAH → IHA en todos los documentos (C-CO-11) — ratificado P1 (antes P2, decisión I1)
+- **P1 [SOMA+CORPUS]:** Diseño e implementación de MapaIC (primera instancia situada del Instrumento Aleph). Ver `mapaic_boceto_inicial.md` para punto de partida. Trabajo dividido en: pentágono baricéntrico, validación de vértices de las 4 tríadas pendientes, diseño del mapa de calor colectivo.
 
-**Pendientes P2/P3:**
-- **P2 [CORPUS]:** Articular coherencia entre Campo de atención, Tríada de Percepción, CA e Instante Alephiano (C-CO-09)
-- **P2 [CORPUS]:** Construir Protocolo 04-EN Sintonización (C-PR-09)
+**Pendientes P2:**
+- **P2 [CORPUS]:** Mantenimiento del Corpus — incorporar los 4 items de inconsistencias (I1-I4) pendientes desde inicio de SESION-20260420-21.
+- **P2 [SOMA]:** Rediseño mobile TriadaPercepcion con mockup Figma dedicado 390×844 (S-AP-21) — antes de IAC 2026
+- **P2 [SOMA]:** Integración del instrumento Tríadas en /quanam-ia-2026 (S-AP-18)
+- **P2 [SOMA]:** Paso de contexto al Duende — posiciones en tríadas (S-DU-01)
+- **P2 [CORPUS]:** Migrar nomenclatura borgeano → alephiano en todos los documentos (C-CO-10)
+- **P2 [CORPUS]:** Cambio nomenclatura IAH → IHA en todos los documentos (C-CO-11)
+
+**Pendientes P3:**
+- **P3 [CORPUS]:** Formalización de candidatos a concepto Madre emergidos:
+  - Pentágono Aleph · Velero + vientos · Seis voces del paradigma · Conocer es respirar · El entre como órgano
+- **P3 [CORPUS]:** Articular coherencia entre Campo de atención, Tríada de Percepción, CA e Instante Alephiano (C-CO-09)
+- **P3 [CORPUS]:** Construir Protocolo Sintonización (C-PR-09)
 - **P3 [CORPUS]:** Incorporar conceptos nuevos al Corpus Madre — sesión dedicada (C-CO-12)
 - **P3 [CORPUS]:** Reconciliar residual de señal I3 del Protocolo 01-EN (C-PR-10)
 
@@ -518,10 +572,10 @@ Esto debe incluir:
 
 *Las señales activas viven en `corpus/documentos/senales_activas.md` con descripción completa. Las señales incorporadas al Corpus Madre están en `corpus/documentos/senales_incorporadas.md`.*
 
-### Señales activas (97)
+### Señales activas (127)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
-*Conteo verificado post-SESION-20260419: 97 señales (88 anteriores + 9 nuevas de SESION-20260419 sobre sintonización, defaults silenciosos, medición vs percepción, vocabulario de zonas y bidireccionalidad). Verificación: `grep -c "^## " senales_activas.md` = 98 headers − 1 estructural ("Cómo leer este documento") = 97 señales.*
+*Conteo verificado post-SESION-20260420-21: 127 señales (98 previas + 29 nuevas de SESION-20260420-21: velero+vientos, pentágono Aleph habitable, polinesios, Machado, Saltzman, Tao, MapaIC, masa crítica, etc.). Ver `senales_activas.md` sección correspondiente.*
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
 - **El Gran Campo** — la inteligencia que trasciende y precede a todas las redes. Los grupos no la crean — la sintonizan cuando alcanzan suficiente coherencia interna. Fecha: 28/03/2026
@@ -722,6 +776,11 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - corpus/Cognobits/triada_percepcion_completo.pdf — Cognobit PDF generado en SESION-20260415 · 15/04/2026
 - corpus/Cognobits/geometrias_triada_v2_1.xlsx — planilla Excel de geometrías, versión 2.1 · 15/04/2026
 - ~/.claude/skills/frontend-design/SKILL.md — Skill de Anthropic instalada localmente · 18/04/2026
+- corpus/documentos/mapaic_boceto_inicial.md — Punto de partida para diseño de MapaIC. Referencia obligatoria para próxima sesión que trabaje MapaIC. · 23/04/2026
+- outputs/instrumento_mockup_v11.html — Referencia visual final del Mapa de la inteligencia colectiva de Quanam. Autoridad de diseño para MapaIC. · 23/04/2026
+- corpus/documentos/fuente_sesion_20260420_triada_teorica_v2.md — Fuente NotebookLM completa del recorrido teórico de la sesión. · 23/04/2026
+- corpus/documentos/pasaje_contexto.md — Archivo 11 del Protocolo. Custodia el contexto frágil de trabajo-en-curso entre sesiones. Se lee al inicio de cada sesión y se actualiza al cierre. Estado actual: Abierto (1 trabajo activo: MapaIC). · 23/04/2026
+- corpus/pasajes_historicos/ — Carpeta para archivar trabajos-en-curso completados. Se crea al necesitarse.
 
 **Ajustes protocolares identificados en SESION-20260418-19:**
 1. ~~`git push origin master:main`~~ → corregido a `git push origin main` en instrucción COMMIT ALEPH arriba (rama actual es main, no master)
@@ -952,7 +1011,7 @@ En la economía del conocimiento, la ventaja reside en la capacidad de aprender 
 
 ---
 
-*SESION.md · Paradigma Aleph · Generado por Claude · Marzo 2026*
+*SESION.md · Paradigma Aleph · Generado por Claude · Actualizado 23/04/2026*
 *Próxima actualización: al cierre de la sesión, vía Claude Code*
 
 ---

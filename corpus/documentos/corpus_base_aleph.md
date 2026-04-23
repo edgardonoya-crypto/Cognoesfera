@@ -420,4 +420,91 @@ En la economía del conocimiento, la ventaja competitiva no reside en los activo
 
 ---
 
-*Corpus Madre · Paradigma Aleph · Marzo 2026*
+---
+
+## Linajes formales del paradigma
+
+*Voces que el paradigma reconoce como autoridades epistemológicas. Cada linaje aporta un concepto, una imagen o una práctica que el paradigma habita — no como ornamento sino como fundamento.*
+
+---
+
+### Linaje · Los polinesios (voz marítima)
+
+**Relación con el paradigma:** Los polinesios navegaron el Pacífico durante 3000 años sin mapa, brújula ni GPS. Usaban técnicas de lectura del cuerpo sobre olas, vientos, aves, nubes, fosforescencia. Los maestros *pwo* leían hasta **5 oleajes refractados simultáneos** en el casco de sus canoas — las islas lejanas, por existir, modificaban el mar a su alrededor, y ese patrón de interferencia llegaba al cuerpo del navegante como información.
+
+**Concepto clave que aporta:** La ontología del navegante no es activa (decisión) ni pasiva (dejarse llevar) — es **receptiva y discernitiva simultáneamente**. El trabajo no es elegir rumbo; es afinar el cuerpo para leer el campo que ya está siendo emitido.
+
+**Conexión directa con el Instrumento Aleph:** El navegante del Instrumento lee 5 señales (no 9, no 3) porque 5 es el límite del cuerpo humano entrenado, según la técnica pwo. Esta convergencia con la ley de Miller y los 5 roles de Cognoesfera funda la estructura pentagonal del Instrumento.
+
+**Cita característica:** No hay texto canónico único — el conocimiento pwo es corporal, transmitido por aprendizaje directo. Reconstrucción moderna: "The wayfinder reads the ocean's signs in his body, not in the stars." (Nainoa Thompson, Polynesian Voyaging Society).
+
+---
+
+### Linaje · Antonio Machado (voz marítima-caminante)
+
+**Obra relevante:** *Proverbios y cantares* (en *Campos de Castilla*, 1912).
+
+**Concepto clave:** *"Caminante no hay camino, se hace camino al andar. Caminante, son tus huellas el camino y nada más. Caminante, no hay camino, sino estelas en la mar."*
+
+**Relación con el paradigma:** Formulación precisa de la **ontología procesual** del paradigma Aleph. El camino no preexiste al caminante; el camino es lo que queda trazado como efecto del caminar. Y "estelas en la mar" enfatiza el carácter efímero: la estela se disuelve, solo queda el movimiento actual.
+
+**Conexión directa con el Instrumento Aleph:** El Instrumento no preexiste al navegante; se hace en el acto de habitarlo. Cada navegante traza su propia firma de campo — estela que puede superponerse con la de otros (masa crítica colectiva) pero que se disuelve si no se habita.
+
+---
+
+### Linaje · Andrea Saltzman (voz de piel)
+
+**Obra relevante:** *Piel entre piel: En la espiral de la vida* (libro aportado por el Arquitecto).
+
+**Conceptos clave que aporta:**
+
+1. **El entre como órgano.** La piel no es borde que separa interior y exterior — es *espacio creativo entre* ambos. El "entre" no es frontera; es órgano de contacto, contagio, co-producción.
+
+2. **Pensamiento como tejido.** El pensamiento no es cadena lineal ni red plana — es malla de hilos que se entretejen, se sueltan, se vuelven a tejer.
+
+3. **Comprensión como espiral.** La comprensión no es punto de llegada — vuelve a los mismos lugares, pero cada vuelta está un nivel más arriba.
+
+**Relación con el paradigma:** Las tres formulaciones de Saltzman enriquecen la voz de piel del paradigma Aleph. El paradigma habita los entres (no los adentros ni los afueras). La cognición vive en la tensión entre el tejido (pensamiento) y la espiral (comprensión).
+
+**Conexión directa con el Instrumento Aleph:** El campo entre las 5 señales del pentágono es donde ocurre la lectura, no en cada señal aislada. El Instrumento opera en el entre.
+
+---
+
+### Linaje · El Tao (voz respiratoria)
+
+**Obra relevante:** *Tao Te Ching* (Lao Tse) + ensayo del Arquitecto *"El cosmos respira cuando pensamos"*.
+
+**Conceptos clave que aporta:**
+
+1. **Conocer es respirar.** Conocer no es acumular representaciones ni procesar símbolos — es respirar. Inhalar mundo, exhalar pensamiento, inhalar mundo otra vez. Conocimiento rítmico, cíclico, corporal.
+
+2. **Wu wei.** Acción no forzada. No pasividad — sintonización con el movimiento del Tao.
+
+3. **El vacío habitado.** El Tao no es cosa — es el vacío que permite que las cosas sean.
+
+**Relación con el paradigma:** Voz respiratoria del paradigma Aleph. Complementaria (no contradictoria) a la voz marítima (polinesios) y a la voz de piel (Saltzman). Lente para leer la cognición en clave rítmica-corporal-cíclica.
+
+**Conexión directa con el Instrumento Aleph:** El pentágono no es un mapa fijo a completar — es un patrón de respiración. El navegante inhala campo (lee señales), exhala pensamiento (escribe narrativas), inhala otra vez (lee el pentágono completo).
+
+---
+
+> **Linajes nombrados pero pendientes de formalización en futuras sesiones:** Warburg, Bateson, Marr, Gertrude Stein, Wittgenstein, Thich Nhat Hanh. Estos linajes fueron mencionados durante SESION-20260420-21 y forman parte del corpus del Arquitecto, pero no fueron formalizados con definición/cita/conexión directa. Incorporación en sesiones futuras.
+
+---
+
+## Candidatos a concepto Madre
+
+### Candidatos a concepto Madre · SESION-20260420-21
+
+- **El pentágono Aleph** (P1)
+- **El velero y los vientos** (P1)
+- **Las seis voces del paradigma** (P1)
+- **Conocer es respirar** (P2)
+- **El entre como órgano** (P2)
+- **El desafío Madre del Instrumento** (P2)
+
+Ver detalles en `pendientes_corpus.md` secciones PC-2026-04-23-01 a PC-2026-04-23-08.
+
+---
+
+*Corpus Madre · Paradigma Aleph · Actualizado 23/04/2026*
