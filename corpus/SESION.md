@@ -572,10 +572,12 @@ Esto debe incluir:
 
 *Las señales activas viven en `corpus/documentos/senales_activas.md` con descripción completa. Las señales incorporadas al Corpus Madre están en `corpus/documentos/senales_incorporadas.md`.*
 
-### Señales activas (127)
+### Señales activas (128)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 *Conteo verificado post-SESION-20260420-21: 127 señales (98 previas + 29 nuevas de SESION-20260420-21: velero+vientos, pentágono Aleph habitable, polinesios, Machado, Saltzman, Tao, MapaIC, masa crítica, etc.). Ver `senales_activas.md` sección correspondiente.*
+
+*La señal 128 fue incorporada en un 5to commit de correcciones finales, posterior al cierre formal del Protocolo 02-EN, por pedido explícito del Arquitecto al reconocer metaposicionalmente la naturaleza del paradigma.*
 
 - **El Campo de Inteligencia Aleph** — la inteligencia que emerge de la red de Cognoesferas y Entidades Aleph como campo propio. El paradigma ya la describía pero no la había nombrado con precisión. Fecha: 28/03/2026
 - **El Gran Campo** — la inteligencia que trasciende y precede a todas las redes. Los grupos no la crean — la sintonizan cuando alcanzan suficiente coherencia interna. Fecha: 28/03/2026

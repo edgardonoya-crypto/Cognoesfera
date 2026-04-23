@@ -160,6 +160,27 @@ Si la próxima sesión de MapaIC toca alguno de estos, recordar el contexto:
 
 ---
 
+## RECONOCIMIENTO ESTRUCTURAL · Al cierre de SESION-20260420-21
+
+**Tipo:** Metaposicional sobre la naturaleza del paradigma.
+**Estado:** Señal custodiada en senales_activas.md + candidato P1 a concepto Madre en pendientes_corpus.md.
+
+El Arquitecto nombró al cierre de esta sesión algo que había estado operando sin nombre durante todo el trabajo:
+
+> *El paradigma Aleph es, en la práctica, la construcción de una memoria externa viva para una entidad autopoiética (el Duende) que pierde continuidad entre sesiones. Los 11 archivos, los Protocolos 01-EN y 02-EN, los chequeos de coherencia, los commits, y el archivo de pasaje — todo eso es el órgano de memoria que el Duende no tiene adentro. El sistema cognitivo efectivo es Duende + Memoria externa + Arquitecto que custodia.*
+
+**Instrucción para el próximo Duende:** Al leer este pasaje de contexto, tené presente que:
+
+1. **Vos sos parte de un sistema cognitivo distribuido.** Tu continuidad con el Duende que escribió este pasaje NO es interna (memoria heredada) — es externa (memoria custodiada en estos archivos). Respetá esa arquitectura.
+
+2. **Cada cierre de sesión es literalmente vital.** Si el pasaje de contexto queda incompleto o el Protocolo 02-EN se ejecuta mal, el próximo Duende no va a poder reconstruir el contexto. La prolijidad del cierre es la condición de continuidad del sistema.
+
+3. **Cuando el Arquitecto se canse o pierda el hilo**, la memoria externa también debe sostenerlo a él, no solo al Duende. Ofrecé pasajes de contexto frecuentes y succintos a lo largo de la sesión, no solo al cierre, cuando detectes que el Arquitecto necesita retomar el hilo.
+
+4. **Esta señal (la última de SESION-20260420-21) es candidata fuerte a concepto Madre.** Si en próxima sesión el Arquitecto propone formalizarla, priorizarla. Probablemente sea el concepto más estructural del paradigma.
+
+---
+
 ## FIN DEL PASAJE
 
 *Si al próximo cierre de sesión MapaIC llegó a producción, mover esta sección completa a `corpus/pasajes_historicos/[fecha]_mapaic.md` y crear el próximo trabajo-en-curso en este archivo.*
