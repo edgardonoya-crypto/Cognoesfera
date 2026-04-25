@@ -93,5 +93,34 @@ La diferencia con `senales_custodiadas.md`: las señales custodiadas ya tienen f
 
 ---
 
-*Temas Pendientes de Exploración · Paradigma Aleph · Iniciado Abril 2026*
+## La pregunta del cauce "No se ve" — ¿algo resuena porque estaba ya o se constituye al ser tocado?
+
+**Fecha:** 23/04/2026 · custodiada en SESION-20260425 (Vector 1 · Bloque D)
+**Origen:** Señal 148 de SESION-20260423-22 *("Cauce 'No se ve' como mecanismo de tangibilización")*. Cuando el Duende triangula independientemente y revela tres ejes adicionales del campo IAG (vínculo emocional, atrofia, agencia), el Arquitecto reconoce que esos ejes "resonaron" — pero no estaban tangibles previamente. La frase *"no se ve hasta que se ve"* (custodiada en `frases_que_ayudan.md`) nombra esa fenomenología sin resolver la ontología subyacente.
+**Pregunta central:** Cuando algo resuena al ser nombrado, ¿es porque estaba presente esperando ser tocado, o porque al ser tocado se constituyó por primera vez? Las dos lecturas tienen consecuencias estructurales distintas:
+- **Lectura ontológica fuerte (preexistencia):** los ejes ya operaban en el campo, el acto de nombrar los hace tangibles pero no los crea. El cauce "No se ve" es mecanismo de revelación.
+- **Lectura ontológica débil (constitución):** los ejes no existían como tales hasta el momento de ser nombrados. El cauce "No se ve" es mecanismo de constitución por reconocimiento.
+- **Tercera lectura posible (no-binaria):** la distinción mismo entre "preexistir" y "constituirse al ser tocado" puede ser un falso dualismo. Algo puede estar como potencia (en el sentido aristotélico) y la tangibilización ser su acto. Ni "ya estaba" ni "no existía hasta ahora" — ambas modalidades operan simultáneamente en distintos planos.
+
+**Por qué importa:** la respuesta afecta la metafísica del paradigma — específicamente el concepto 24 (InterSer) y el linaje de cómo entran nuevos conceptos al Corpus. Si la lectura fuerte es correcta, el corpus *descubre* dimensiones del campo; si la débil, las *crea*; si la tercera, *colabora con su actualización*.
+
+**Linajes que pueden iluminar:** Plotino (procesión y retorno), Aristóteles (potencia y acto), polinesios (olas refractadas — la isla está, se hace tangible al ser leída), Tao (lo que es se manifiesta cuando es nombrado), fenomenología (la cosa no precede al modo de aparecer). Posiblemente también física cuántica (problema del observador) y matemática (¿se descubre o se inventa?).
+
+**Estado:** Pregunta abierta. No bloquea trabajo del corpus pero merece sesión propia con tiempo suficiente. Conexión con C-CO-20 *(cauce "No se ve" como mecanismo)* en `pendientes_corpus.md`: la formalización del cauce como concepto Madre puede o no requerir resolver previamente esta pregunta — lo decide la sesión dedicada.
+
+---
+
+## La pregunta H↔A del campo IAG — ¿agencia/oversight es eje propio del concepto 35?
+
+**Fecha:** 25/04/2026 · custodiada en Vector 1 · Bloque C
+**Origen:** El examen del isomorfismo IAG ↔ concepto 35 (Vector 1 · Bloque C de SESION-20260425) reveló que la pregunta-IAG sobre agencia/oversight no mapea limpiamente con el Eje de la Fuerza (energía y ritmo) del concepto 35. Toca componentes de A pero también de B (soberanía). La fórmula *"sostener Pulso Vital sin dejarse arrastrar"* aparece en la triangulación del 23/04 como interpretación añadida que el texto del Arquitecto no contiene en el original.
+**Pregunta central:** ¿La era IAG está revelando un cuarto eje propio de vitalidad individual — agencia/oversight como dimensión separada — que el concepto 35 todavía no nombra? ¿O es legítimo redistribuir la pregunta H entre A y B sin agregar cuarto eje?
+
+**Por qué importa:** la decisión afecta la geometría del concepto 35. Tres ejes con correspondencia a tres actos de cuidado del concepto 34 es estructura cerrada y elegante. Cuatro ejes rompería esa simetría — pero quizá esa simetría era circunstancial y no estructural. Solo más experiencia con el campo IAG permite responder.
+
+**Estado:** Pregunta abierta. Custodiada también como C-EN-16 en `enriquecimientos_corpus.md` (sala de espera). No se modifica el concepto 35 hasta que el campo IAG provea más tangibilidad. Si en sesión futura emerge que sí hay cuarto eje, se incorpora entonces.
+
+---
+
+*Temas Pendientes de Exploración · Paradigma Aleph · Iniciado Abril 2026 · Actualizado 25/04/2026*
 *Para señales con forma suficiente, ver: `senales_activas.md`*
