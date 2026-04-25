@@ -289,5 +289,5 @@ El vocabulario de "rendimiento" y "productividad" del lenguaje corporativo domin
 
 ---
 
-*Arqueología del Corpus · Paradigma Aleph · Iniciado 13/04/2026*
-*Próxima actualización: cuando emerja nuevo material de este encuentro o se inicie un encuentro nuevo*
+*Arqueología del Corpus · Paradigma Aleph · Iniciado 13/04/2026 · Última actualización: 25/04/2026 (Encuentro II — paradigma ↔ campo IAG vía MapaIC — registrado)*
+*Próxima actualización: cuando emerja nuevo material de los encuentros existentes o se inicie un encuentro nuevo*
