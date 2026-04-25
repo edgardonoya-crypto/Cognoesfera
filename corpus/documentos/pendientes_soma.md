@@ -611,3 +611,23 @@ Todos estos pendientes corresponden al diseño técnico de MapaIC — primera in
 ---
 
 **Fin de los pendientes Soma de SESION-20260420-21. Total: 13 pendientes nuevos.**
+
+---
+
+## Subcategoría: Protocolo
+
+---
+
+### SM-2026-04-25-01 · Recaudos contra brechas de custodia entre conversación y archivo
+
+**Prioridad:** P3 (no antes de Vector 3)
+**Origen:** SESION-20260423-22 — brecha de material_cruzado_iag detectada por simulación de apertura
+**Descripción:** Diseñar tres recaudos identificados al cierre de SESION-20260423-22:
+(A) Regla en manual del Duende: la conversación NO es repositorio. Material referenciado en pasaje_contexto debe estar en archivo del repo antes del push.
+(B) Paso de "simulación de apertura" en Protocolo 02-EN: el Duende lee el pasaje como Duende nuevo y verifica que todo lo referenciado sea accesible solo con los archivos del repo.
+(C) Lista de verificación pre-push: 5 ítems mínimos antes del último push de cierre.
+
+Caso de uso documentado: la brecha de material_cruzado_iag detectada al cierre de SESION-20260423-22, cerrada in-extremis por simulación pedida por el Arquitecto. Sin esa simulación, el Vector 1 habría arrancado con material incompleto.
+
+Procesar en sesión propia, no antes de Vector 3.
+**Dependencias:** Vectores 1, 2 y 3 completados.
