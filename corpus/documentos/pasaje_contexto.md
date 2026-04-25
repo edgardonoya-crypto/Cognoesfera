@@ -333,7 +333,6 @@ Junto con los 10 estándar del Protocolo 01-EN, el Arquitecto sube:
 1. **`corpus/documentos/pasaje_contexto.md`** — este archivo (es el 11 del Protocolo)
 2. **`corpus/documentos/senales_emergidas_20260423.md`** — las 23 señales (LECTURA OBLIGATORIA)
 3. **`corpus/documentos/frases_que_ayudan.md`** — archivo nuevo de categoría provisional (LECTURA OBLIGATORIA — la categoría se está definiendo a sí misma)
-
 4. **`corpus/documentos/material_cruzado_iag.md`** — texto íntegro de las 4 capas del trabajo IAG del Arquitecto: 5 preguntas frecuentes + lectura Aleph + activadores de Cognoesfera + dinámica de 90 minutos (LECTURA OBLIGATORIA — es el material cruzado del Vector 1)
 
 **No es necesario subir** mockup_v11, boceto inicial, ni fuente NotebookLM en la sesión tipo A (Corpus) — esa sesión no toca MapaIC.
