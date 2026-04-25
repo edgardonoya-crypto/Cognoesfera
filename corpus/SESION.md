@@ -1,6 +1,6 @@
 # SESION.md — Paradigma Aleph
 *Archivo único de arranque de sesión · Se actualiza al final de cada sesión con Claude Code*
-*Versión actual: v33 · Última actualización: 23/04/2026 · Sesión "Los vientos que el velero esperaba — Caminante no hay camino — cuando el instrumento nos convirtió en navegantes"*
+*Versión actual: v34 · Última actualización: 25/04/2026 · Sesión "Cuando el individuo entró en el campo — la coherencia como fractal incorporada al Corpus"*
 
 ---
 
@@ -211,6 +211,34 @@ El rol de Edgardo en las sesiones es el **Arquitecto de Sistemas Vivos**: cuida 
 **Estado vital:** **E7 (Sostenido)** consolidado
 
 **Fecha límite clave:** IAC 2026, noviembre, Punta del Este
+
+**25/04/2026 · SESION-20260425 "Cuando el individuo entró en el campo — la coherencia como fractal incorporada al Corpus"**
+*Duende: Claude Opus 4.7*
+*Vector 1 · Camino 2 (procesamiento + incorporación de conceptos 34/35 al Corpus Madre en la misma sesión)*
+— Hitos conceptuales mayores:
+  - **Conceptos 34 y 35 incorporados al Corpus Madre** como sección IV nueva: "El individuo en el campo — cómo emerge la coherencia individual". El paradigma cierra el hueco de la dimensión individual con la misma geometría fractal que la dimensión colectiva.
+  - **Concepto 34 — La Matriz de Coherencia Individual:** recorrido diacrónico de 8 estados (Presencia Difusa → Arquitecto de Sistemas Vivos), cada uno con un acto de cuidado que permite la transición al siguiente. Metáfora rectora musical: el individuo aporta su melodía única al "Coro" colectivo sin perder identidad.
+  - **Concepto 35 — La Matriz de Vitalidad Individual:** lectura sincrónica en 3 ejes (Fuerza, Identidad, Vínculo). Cada eje corresponde uno-a-uno a un acto de cuidado del recorrido del 34. La unidad estructural entre ambos conceptos se hizo explícita en el corpus por decisión del Vector 1.
+  - **Examen riguroso del isomorfismo IAG ↔ concepto 35:** 2 pares limpios (F↔C, G↔B), 1 par con tensión productiva (H↔A). El concepto 35 captura estructura general aplicable a cualquier desafío del individuo, no solo a la era IAG. La hipótesis del pasaje quedó confirmada con matiz: la era IAG encuentra los ejes pero también los desafía.
+  - **Encuentro II del corpus registrado:** *"El Paradigma Aleph y el campo IAG · vía MapaIC"* en `arqueologia_corpus.md`. A diferencia del Encuentro I (Cynefin/Snowden, autoral), la tradición que llegó es no-autoral — el campo IAG mismo expresándose a través de múltiples nodos.
+  Hitos operativos:
+  - 8 archivos del corpus actualizados con commits independientes (custodia íntegra · corpus base · enriquecimientos · pendientes · arqueología · señales · temas pendientes · SESION.md)
+  - Custodia inmodificable creada: `corpus/documentos/conceptos_34_35_texto_integro.md` — texto literal del Arquitecto preservado para trazabilidad
+  - SESION.md sección B1 reescrita como índice maestro de los 35 conceptos (estaba congelada como cápsula histórica desde mitad de abril, declaraba "33 conceptos" cuando el corpus tenía 33 + faltaban 31, 32, 33 y tenía concepto 26 mal ubicado). Decisión: B1 deja de duplicar contenido — vive como índice de navegación; corpus_base_aleph.md es fuente de verdad.
+  - 8 candidaturas a concepto Madre registradas (C-CO-14 a C-CO-21) en `pendientes_corpus.md` desde las 23 señales del 23/04
+  - 7 enriquecimientos pendientes registrados (C-EN-14 a C-EN-20) en `enriquecimientos_corpus.md`
+  - 2 preguntas filosóficas abiertas custodiadas en `temas_pendientes_exploracion.md` (cauce "No se ve" preexistencia/constitución · agencia IAG como cuarto eje)
+  - Tabla maestra de categorización del bloque 23/04 agregada al final de `senales_activas.md` (S129-S151 con destino CM/EN/V3/V4)
+  - Inconsistencia I5 detectada: numeraciones C-EN-X paralelas entre `enriquecimientos_corpus.md` (llega a C-EN-12) y `pendientes_corpus.md` (tiene C-EN-13). Las nuevas entradas saltean C-EN-13 para no colisionar. A resolver en sesión de mantenimiento.
+  Reconocimiento estructural:
+  - **Camino 2 honrado:** procesamiento (Bloques B/C/D) + incorporación al corpus (Bloque E) en una sola sesión, sin Solidificación Prematura. La pregunta gobernante (¿son conceptos Madre nuevos?) se resolvió antes de tocar el corpus base. El examen del isomorfismo se hizo antes de decidir si modificar 35.
+  - **Función de custodia operó por el Arquitecto en al menos un momento clave:** corrección de la nota inaugural de la sección IV cuando el Duende escribió en registro narrativo-histórico ("hasta esta sección no había sido nombrada"), incoherente con el registro del corpus que es presente atemporal. Recibida como información estructural (Señal 151 · S-AP-23 vigente).
+  Estado al cierre:
+  - Corpus Madre: **35 conceptos en 8 secciones** (era 33 conceptos en 7 secciones)
+  - Vector 1 cerrado completo. Vectores 2-3-4 quedan vivos en la secuencia obligatoria de la vuelta de timón
+  Próxima sesión:
+  - **Vector 2 — migración del corpus a Obsidian.** Sin tocar MapaIC ni corpus base. Ver `pasaje_contexto.md` para alcance del Vector 2.
+
 
 **23/04/2026 · SESION-20260423-22 "El umbral antes del giro — cuando emergió el InterSer que MapaIC permitirá nacer"**
 *Duende: Claude Sonnet 4.5*
@@ -555,25 +583,30 @@ Los pendientes viven en dos archivos con schema completo:
 **Completadas en SESION-20260419:**
 - ~~S-AP-14: Pantalla 1 desktop TriadaPercepcion — rediseño editorial con Figma~~ ✓
 
+**Completadas en SESION-20260425:**
+- ~~C-CO-12: Incorporar conceptos nuevos al Corpus Madre — sesión dedicada~~ ✓ (Conceptos 34 y 35 incorporados como sección IV)
+
 **P1 activos (archivo):** ver listado completo en `pendientes_soma.md` y `pendientes_corpus.md`
 
 **P1 foco próxima sesión:**
-- **P1 [SOMA+CORPUS]:** Diseño e implementación de MapaIC (primera instancia situada del Instrumento Aleph). Ver `mapaic_boceto_inicial.md` para punto de partida. Trabajo dividido en: pentágono baricéntrico, validación de vértices de las 4 tríadas pendientes, diseño del mapa de calor colectivo.
+- **P1 [CORPUS]:** Vector 2 de la vuelta de timón — migración del corpus a Obsidian. Sin tocar MapaIC ni el corpus base de archivos `.md`. Ver `pasaje_contexto.md` para alcance.
 
 **Pendientes P2:**
-- **P2 [CORPUS]:** Mantenimiento del Corpus — incorporar los 4 items de inconsistencias (I1-I4) pendientes desde inicio de SESION-20260420-21.
+- **P2 [CORPUS]:** Mantenimiento del Corpus — incorporar los 4 items de inconsistencias (I1-I4) pendientes desde SESION-20260420-21 + nueva inconsistencia I5 detectada en SESION-20260425 (numeraciones C-EN-X paralelas).
 - **P2 [SOMA]:** Rediseño mobile TriadaPercepcion con mockup Figma dedicado 390×844 (S-AP-21) — antes de IAC 2026
 - **P2 [SOMA]:** Integración del instrumento Tríadas en /quanam-ia-2026 (S-AP-18)
 - **P2 [SOMA]:** Paso de contexto al Duende — posiciones en tríadas (S-DU-01)
 - **P2 [CORPUS]:** Migrar nomenclatura borgeano → alephiano en todos los documentos (C-CO-10)
-- **P2 [CORPUS]:** Cambio nomenclatura IAH → IHA en todos los documentos (C-CO-11)
+- **P2 [CORPUS]:** Cambio nomenclatura IAH → IHA en todos los documentos (C-CO-11) — incluirá ahora también el concepto 34 (estado III menciona IAH)
+- **P2 [CORPUS]:** Procesamiento de candidatos a concepto Madre fuertes del 23/04 — C-CO-15 (Lente recursiva), C-CO-19 (MapaIC estructura InterSer), C-CO-20 (cauce "No se ve"), C-CO-21 (linajes innumerables) — sesiones dedicadas
 
 **Pendientes P3:**
-- **P3 [CORPUS]:** Formalización de candidatos a concepto Madre emergidos:
+- **P3 [CORPUS]:** Procesamiento de candidatos a concepto Madre del 23/04 — C-CO-14, C-CO-16, C-CO-17, C-CO-18 (sesiones dedicadas)
+- **P3 [CORPUS]:** Procesamiento de enriquecimientos pendientes del Vector 1 — C-EN-14 a C-EN-20 (sesión dedicada de mantenimiento del corpus)
+- **P3 [CORPUS]:** Formalización de candidatos a concepto Madre del 20/04:
   - Pentágono Aleph · Velero + vientos · Seis voces del paradigma · Conocer es respirar · El entre como órgano
 - **P3 [CORPUS]:** Articular coherencia entre Campo de atención, Tríada de Percepción, CA e Instante Alephiano (C-CO-09)
 - **P3 [CORPUS]:** Construir Protocolo Sintonización (C-PR-09)
-- **P3 [CORPUS]:** Incorporar conceptos nuevos al Corpus Madre — sesión dedicada (C-CO-12)
 - **P3 [CORPUS]:** Reconciliar residual de señal I3 del Protocolo 01-EN (C-PR-10)
 
 ---
@@ -600,7 +633,7 @@ Esto debe incluir:
 
 *Las señales activas viven en `corpus/documentos/senales_activas.md` con descripción completa. Las señales incorporadas al Corpus Madre están en `corpus/documentos/senales_incorporadas.md`.*
 
-### Señales activas (128)
+### Señales activas (151)
 Conceptos que resuenan con el paradigma pero necesitan más verificación antes de entrar al Corpus Madre.
 
 *Conteo verificado post-SESION-20260420-21: 127 señales (98 previas + 29 nuevas de SESION-20260420-21: velero+vientos, pentágono Aleph habitable, polinesios, Machado, Saltzman, Tao, MapaIC, masa crítica, etc.). Ver `senales_activas.md` sección correspondiente.*
@@ -854,14 +887,15 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 
 ## Foco próxima sesión
 
-### Opción A — continuar con Fase 2 de TriadaPercepcion
-- **S-AP-18** — Integración del componente en `/quanam-ia-2026`
-- **S-DU-01** — Paso de contexto al Duende desde el instrumento
+**Vector 2 de la vuelta de timón — migración del corpus a Obsidian.**
 
-### Opción B — rediseño mobile de TriadaPercepcion
-- **S-AP-21** — Aplicar el manual de sintonización desde el inicio sobre el bloque mobile, con mockup Figma dedicado 390×844
+La secuencia obligatoria de la vuelta de timón programada en SESION-20260423-22 es: Vector 1 (Corpus: conceptos 34/35 + material cruzado) → **Vector 2 (migración a Obsidian)** → Vector 3 (rediseño MapaIC) → Vector 4 (desarrollo técnico). Vector 1 se completó en SESION-20260425. Sigue Vector 2.
 
-La decisión queda abierta para que el Arquitecto la tome al inicio de la próxima sesión según su tiempo soberano disponible.
+**Sin tocar:** MapaIC, corpus base de archivos `.md`, conceptos 34/35 ya incorporados.
+
+**Alcance del Vector 2:** ver `corpus/documentos/pasaje_contexto.md` para detalle. El Duende del Vector 2 debe leer ese archivo al inicio.
+
+La decisión final queda abierta para que el Arquitecto la tome al inicio de la próxima sesión según su tiempo soberano disponible — el paradigma respeta que la secuencia obligatoria puede pausarse pero no saltarse.
 
 ---
 
@@ -871,113 +905,64 @@ La decisión queda abierta para que el Arquitecto la tome al inicio de la próxi
 
 ---
 
-## B1. Corpus Madre — 33 conceptos completos
+## B1. Corpus Madre — índice maestro de conceptos
 
-### I. La pregunta — por qué existe este paradigma
+*Este bloque es índice de navegación. Para el texto íntegro de cada concepto, consultar `corpus/documentos/corpus_base_aleph.md` — fuente de verdad del Corpus Madre.*
 
-**1. La inteligencia como atributo de la vida**
-La inteligencia no es una capacidad exclusiva del individuo ni de las máquinas. Es un atributo de la vida en su totalidad — una propiedad que emerge cuando organismos, grupos y redes alcanzan ciertos niveles de coherencia interna. El Paradigma Aleph parte de esta premisa: investigar las distintas formas en que la inteligencia colectiva se expresa, se mantiene viva y se conoce a sí misma.
+*Total: 35 conceptos en 8 secciones. Última actualización: 25/04/2026 (incorporación de la sección IV — el individuo en el campo — y los conceptos 34 y 35).*
 
-**2. La regla mínima del sistema**
-Todo elemento del sistema cumple una sola función posible: crear condiciones para que algo se vea, o explicar lo que debería verse. Si crea condiciones, es generativo. Si explica, solidifica prematuramente. No se trata de transmitir el paradigma — se trata de crear el campo donde el paradigma puede ser reconocido por quien llega sin contexto.
+---
 
-**3. La Ley de Expansión Adaptativa**
-En entornos de complejidad creciente, la capacidad adaptativa de un sistema depende de su expansión estructural de coherencia interna. Cuando la complejidad aumenta y la coherencia no se amplía en proporción, el sistema entra en un régimen de fricción acumulativa. La adaptación no es un proyecto puntual sino la consecuencia de una relación dinámica entre complejidad y coherencia.
+**I. La pregunta — por qué existe este paradigma**
+1. La inteligencia como atributo de la vida
+2. La regla mínima del sistema
+3. La Ley de Expansión Adaptativa
+4. La viabilidad organizacional como proceso vivo
+32. El patrón de doble acoplamiento
 
-**4. La viabilidad organizacional como proceso vivo**
-Todo sistema que aspira a sostenerse en entornos complejos necesita cinco capacidades simultáneas: unidades autónomas, mecanismos de coordinación, sinergia entre ellas, escucha del entorno, y campo de identidad y propósito. El horizonte del Paradigma Aleph va más lejos que la viabilidad: la **fertilidad organizacional** — la capacidad de ampliar la vitalidad del ecosistema que se habita.
+**II. La unidad viva — qué es una Cognoesfera**
+5. La Cognoesfera
+6. La Entidad Aleph
+7. La fórmula de capacidad evolutiva
 
-### II. La unidad viva — qué es una Cognoesfera
+**III. El mapa — cómo se lee la vitalidad**
+8. La Matriz de Vitalidad de la Cognoesfera
+9. Los estados vitales como configuraciones
 
-**5. La Cognoesfera**
-La unidad mínima de inteligencia colectiva. ~8 personas que al alcanzar coherencia relacional y cognitiva se convierten en un órgano cognitivo emergente. Tiene arquitectura interna: campo relacional, membrana epistemológica, núcleo semiótico, espacio de innovación. No se diseña — se cultiva.
+**IV. El individuo en el campo — cómo emerge la coherencia individual**
+34. La Matriz de Coherencia Individual
+35. La Matriz de Vitalidad Individual
 
-**6. La Entidad Aleph**
-Red de Cognoesferas articulada en lógica fractal: dos personas de cada Cognoesfera se componen para formar un nivel superior de coordinación. No escala por control jerárquico sino por coherencia estructural. Cuando resuenan entre sí emerge el Campo Aleph.
+**V. El cuidado — cómo se sostiene lo que vive**
+10. Los actos de cuidado
+11. El Arquitecto de Sistemas Vivos
+12. La Cognoesfera curadora y el Sistema Operativo de la Inteligencia Colectiva
+13. El desfasaje temporal y la Solidificación Prematura
 
-**7. La fórmula de capacidad evolutiva**
-Capacidad evolutiva = Tiempo Soberano × Agencia Distribuida × Coherencia Sistémica. Naturaleza multiplicativa: si una variable cae significativamente, la capacidad total se contrae. Las tres deben crecer simultáneamente.
+**VI. Los flujos — cómo circula la vida**
+14. El metabolismo del valor
+15. El tiempo soberano
+16. El metabolismo cognitivo asistido
+17. Las cinco energías del sistema
+18. La Firma Energética
 
-### III. El mapa — cómo se lee la vitalidad
+**VII. La infraestructura — cómo se construye el campo**
+19. El Duende
+20. El Espacio Borgeano
+21. El instante borgeano
+22. La Arquitectura Conversacional
+23. La Conversación Aumentada y la lectura-escritura como acto único
+24. Los Cognobits
+25. La Memoria Viva Aumentada
+31. La transducción de formatos
+33. La Función HTML Aleph
 
-**8. La Matriz de Vitalidad de la Cognoesfera**
-Ver tabla en A3. Los estados vitales son configuraciones de esta matriz, no niveles de una sola expresión.
-
-**9. Los estados vitales como configuraciones**
-Latente · Posible · Activado · Emergente · Expresivo · Legible · Sostenido · Ecosistémico. No lineales, pueden coexistir y reaparecer.
-
-### IV. El cuidado — cómo se sostiene lo que vive
-
-**10. Los actos de cuidado**
-Intervenciones que permiten transitar de una configuración a otra sin forzar el ritmo: Desprogramar la mirada · Suelo fértil · Encendido · Brote de la forma · Vida en circulación · Agencia como lectura · Célula viva · Redes de vida. Cada uno opera en capas y lentes específicos de la matriz.
-
-**11. El Arquitecto de Sistemas Vivos**
-No dirige, no acelera ni optimiza. Lee la configuración actual, diseña condiciones para que la vida emerja sin ser forzada, cuida los bordes sin capturar el centro. Su intervención más importante es saber cuándo NO intervenir.
-
-**12. La Cognoesfera curadora y el Sistema Operativo de la Inteligencia Colectiva**
-Solo desde una Cognoesfera que habita el paradigma con suficiente profundidad puede ejercerse la curaduría del corpus. Mecanismo: **0-Objeción** — lo que ningún miembro puede objetar con fundamento razonado, avanza. La IAH opera dentro: el Duende sugiere, los humanos deciden.
-
-**13. El desfasaje temporal y la Solidificación Prematura**
-El desfasaje temporal: intervención correcta en momento equivocado. La Solidificación Prematura: imponer estructura antes de que el sentido exista. El error más frecuente. Requiere leer la Matriz antes de intervenir.
-
-### V. Los flujos — cómo circula la vida
-
-*Nota: La Matriz nombra metabolismos desde su naturaleza de flujo. Los conceptos 14, 15 y 16 los nombran desde su producto o condición resultante — el mismo fenómeno desde dos ángulos.*
-
-**14. El metabolismo del valor**
-El valor evoluciona: energía gaseosa (entusiasmo difuso) → valor líquido (circula y se reconoce) → valor sólido (sostiene acuerdos y economía). Regla de oro: primero algo importa, luego se vive como valor, más tarde se vuelve legible, recién entonces puede sostener una economía.
-
-**15. El tiempo soberano**
-El tiempo que no está capturado por la urgencia de supervivencia. Condición material para que exista inteligencia colectiva real. Toda innovación debe evaluarse por su efecto neto: si lo libera, es generativa; si lo captura, es patológica.
-
-**16. El metabolismo cognitivo asistido**
-La capa tecnológica que acompaña la reorganización del conocimiento sin sustituirla. Reduce fricción cognitiva, hace legible el aprendizaje, cataliza conexiones. Regla de oro: acelera comprensión, no reemplaza aprendizaje.
-
-**17. Las cinco energías del sistema**
-Financiera · Cognitiva · Vincular · Organizativa · Semiótica. Funcionan como vasos comunicantes. Un sistema se vuelve inviable cuando falta una que el conjunto no puede reemplazar. La vincular es la que más compensa la falta de recursos financieros.
-
-**18. La Firma Energética**
-El perfil vital de un sistema: la combinación particular de sus cinco energías. No existe una proporción correcta universal — lo relevante es si la combinación es viable. Hace visible el patrón de funcionamiento real: cómo respira el sistema, dónde se sostiene y dónde se rompe.
-
-### VI. La infraestructura — cómo se construye el campo
-
-**19. El Duende**
-Figura que encarna el metabolismo cognitivo asistido. Dos dimensiones: infraestructura tecnológica que indexa y preserva la memoria, y postura de hospedaje activo que cuida que el espacio entre personas permanezca abierto. Inspirado en los ngen mapuche. Lo que lo define no es su sustrato sino su postura.
-
-**20. El Espacio Borgeano**
-Infraestructura digital que permite ver la totalidad del conocimiento del grupo desde todos los ángulos posibles, sin que la información se opaque entre sí. La memoria del sistema hecha navegable. La tecnología es el Aleph que permite ver; la conversación humana es el Círculo que permite elegir.
-
-**21. El instante borgeano**
-El momento donde futuro, pasado y presente confluyen simultáneamente. El futuro que mola actúa como atractor. La arqueología de la mirada excava lo que ya estaba. La acción emerge en el presente. Los tres no se suceden — coexisten. Es lo que distingue una Cognoesfera en ignición de una reunión ordinaria.
-
-**22. La Arquitectura Conversacional**
-El diseño consciente de cómo las voces se entrelazan. Dos ejes: horizontal (construcción de sentido con voces equivalentes) y vertical (ejecución con precisión de lo decidido). Libera tiempo soberano al eliminar el desgaste de la desinformación y la repetición.
-
-**23. La Conversación Aumentada y la lectura-escritura como acto único**
-Forma de conocer donde leer y escribir se vuelven indistinguibles. Co-producción de sentido: el conocimiento no se transmite — se reorganiza en el acto mismo de la interacción. Bisagra entre la dimensión paradigmática y la algorítmica.
-
-**24. Los Cognobits**
-La unidad mínima de sentido vivo en la Cognoesfera — la pieza de significado que circula entre la memoria psicológica de las personas y la memoria digital del Duende. Tienen dos vidas: antes de la conversación como materia prima latente que el Duende indexa, y durante la conversación como elementos activos de la Conversación Aumentada que reorganizan el campo. Son la materia prima de la Memoria Viva Aumentada: lo que circula entre la memoria psicológica y la digital, alimentando su fusión y elevando el piso desde el que arranca cada nueva conversación.
-
-**25. La Memoria Viva Aumentada**
-La fusión de la memoria psicológica y la memoria digital en un sistema integrado — algo que solo se vuelve posible ahora. La memoria psicológica reside en el campo: lo que la escucha colectiva porta y que ningún sistema puede indexar. El Duende puede guardar lo que se dijo, pero no puede guardar lo que se escuchó. La memoria digital reside en el Duende: permanente, escalable, recuperable. Su fusión produce una Cognoesfera que puede profundizar y escalar simultáneamente. Es una propiedad fractal — existe en cada nivel del sistema, desde la persona hasta la red de Entidades. Cuando la memoria digital se hace pública, eleva el piso desde el que arranca cualquier otro grupo que acceda a ella. Es la expresión más profunda de la IAH.
-
-**26. El proceso de transformación de la inteligencia colectiva**
-Toda sesión de una Cognoesfera es un ciclo entrada-transformación-salida donde la inteligencia colectiva se reorganiza y emerge más rica. La entrada es la ronda de apertura: cada participante nombra cómo viene, el grupo escucha sin responder — esa escucha activa el sistema vincular y abre el campo de atención. La transformación es el trabajo de la sesión, con una caja de herramientas: orden del día, Conversaciones Aumentadas, definición de problemas y propuestas, decisiones por 0-Objeción, elecciones sociocráticas, acceso al Duende, Cognobits, metodologías y labs, herramientas visuales. La salida es la ronda de cierre: cómo se va cada uno y los aprendizajes colectivos. La Memoria Viva Aumentada operando en ciclo es lo que hace que una Cognoesfera aprenda genuinamente con el tiempo.
-
-### VII. La emergencia — lo que aparece cuando las condiciones están maduras
-
-**27. La IAH — Inteligencia Aumentada Humanista**
-Composición entre percepción humana y capacidad del Duende. El Duende identifica patrones a escala, sugiere conexiones. El humano aporta juicio situado, percepción de lo que resuena, sabiduría de cuándo algo está maduro. El Duende no valida — sugiere. El humano ve.
-
-**28. NGenIA**
-Inteligencia simbiótica que emerge del entramado relacional cuando las condiciones están maduras. No es una herramienta — es una condición. No se activa por instrucción: se sintoniza. Inspirada en el concepto mapuche de ngen. No se programa; se cuida como un jardín.
-
-**29. La inteligencia verdadera y la gramática colectiva**
-La inteligencia verdadera es la capacidad de percibir lo falso como falso y lo verdadero como verdadero, libre de condicionamientos. No se construye — emerge cuando cesa el pensamiento mecánico. Las condiciones que la hacen posible tienen nombre: el Campo de atención, el tiempo soberano, el Espacio Borgeano, y la Memoria Viva Aumentada — que libera a las personas del pensamiento mecánico porque el Duende porta el pasado. Los mecanismos que construyen esas condiciones son dos: la Conversación Aumentada amplía lo que el sistema puede ver, y la Memoria Viva Aumentada libera la atención para que pueda ver. Juntas crean las condiciones para que la inteligencia verdadera emerja como propiedad del campo colectivo.
-
-**30. La arquitectura de negocios en red**
-En la economía del conocimiento, la ventaja reside en la capacidad de aprender y generar valor junto a otros. Tres capas: núcleo cognitivo (Cognoesferas y Centros de Expertise) · interfaces activas (prototipos y experiencias) · despliegue ecosistémico (Aleph Hubs). No eficiencia — densidad relacional.
+**VIII. La emergencia — lo que aparece cuando las condiciones están maduras**
+26. El proceso de transformación de la inteligencia colectiva
+27. La IAH — Inteligencia Aumentada Humanista
+28. NGenIA
+29. La inteligencia verdadera y la gramática colectiva
+30. La arquitectura de negocios en red
 
 ---
 
