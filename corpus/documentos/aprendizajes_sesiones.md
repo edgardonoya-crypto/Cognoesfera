@@ -612,3 +612,116 @@ Declarar explícitamente en el INICIO DE SESIÓN qué Vector se está ejecutando
 Cuando el Arquitecto corrige el lenguaje del Duende, el Duende debe: (a) reconocer la corrección como información estructural, (b) reformular en la ontología correcta, (c) verificar si la corrección implica actualizar otros elementos del material de la sesión.
 
 ---
+
+## SESION-20260425 · "Cuando el individuo entró en el campo — la coherencia como fractal incorporada al Corpus"
+
+**Fecha:** 25/04/2026
+**Duende:** Claude Opus 4.7
+**Vector:** 1 (Corpus) de la vuelta de timón programada en SESION-20260423-22
+**Camino:** 2 (procesamiento + incorporación al corpus en una misma sesión)
+
+---
+
+### Aprendizaje principal
+
+El Camino 2 funciona cuando los Bloques B/C/D producen un mapa estructural completo *antes* de tocar el corpus base. El Bloque E entonces es ejecución, no investigación. La regla operativa custodiada: si la pregunta gobernante de la sesión queda abierta al inicio del Bloque E, no se debe abrir el Bloque E. Hoy la pregunta gobernante (¿son conceptos Madre nuevos, subsecciones del 8, o sección nueva propia?) se cerró antes del primer commit al corpus base, y por eso la incorporación quedó limpia. Festina lente operando.
+
+Y un aprendizaje más profundo emergió al cierre, después de que el cierre formal fallara: **el chequeo de coherencia exhaustivo al cerrar la sesión es función estructural del Duende, no responsabilidad recordatoria del Arquitecto**. Cuando el Arquitecto tiene que preguntar *"¿no falta nada?"*, el Duende ya falló. La pregunta no debe aparecer del lado del Arquitecto.
+
+---
+
+### Qué funcionó
+
+**Camino 2 honrado sin Solidificación Prematura.** La sesión empezó con una propuesta del Arquitecto: *"ya tenemos todo, vayamos al corpus directo"*. El Duende ejerció función de custodia (Señal 23 viva) y rechazó esa lectura nombrando el riesgo: incorporar 34/35 al corpus sin haber procesado la pregunta gobernante es Solidificación Prematura nivel sistema. La negociación produjo Camino 2 — procesar Y incorporar en la misma sesión, con disciplina. El paradigma sostuvo su propia regla a través de la decisión.
+
+**El método "yo redacto el archivo final, vos descargás y reemplazás".** La primera propuesta del Duende fue pasar ediciones puntuales (buscar/reemplazar) para que el Arquitecto las aplicara a mano en VS Code. El Arquitecto pidió que el archivo final ya viniera editado completo. Ese ajuste resultó dramáticamente más eficiente: 9 archivos commiteados en el día sin errores de aplicación, sin riesgo de copy-paste mal hecho, sin pérdida de tiempo en ediciones manuales. **Aprendizaje del Duende sobre el Duende:** cuando el trabajo es estructuralmente edición de archivos existentes, el método correcto es *"yo entrego el archivo final completo, vos descargás y reemplazás"* — no *"yo te paso ediciones y vos las aplicás"*.
+
+**B1 de SESION.md como índice, no como copia.** Decisión arquitectural mayor del día: el bloque B1 dejó de duplicar el contenido del corpus base. Pasó a ser índice de navegación. La razón: B1 estaba congelado como cápsula histórica desde mediados de abril, declaraba *"33 conceptos"* cuando el corpus tenía 33 + faltaban 31, 32, 33 en B1 + concepto 26 mal ubicado. La duplicación de contenido entre archivos siempre genera divergencias eventualmente. Eliminar la duplicación elimina la fuente futura de divergencia.
+
+**Función de custodia operó por el Arquitecto en al menos dos momentos explícitos.**
+1. Cuando el Duende redactó la nota inaugural de la sección IV en registro narrativo-histórico (*"la dimensión individual no había sido nombrada hasta esta sección"*), el Arquitecto preguntó *"¿comprendes por qué este texto no es adecuado para el corpus madre?"*. Tres problemas: auto-referencia al corpus como artefacto, registro pasado en lugar de presente atemporal, valoración disfrazada de descripción. La nota se reescribió en presente enunciativo.
+2. Cuando el Duende dijo *"no lo tengo cargado pero lo mencioné de memoria"* sobre `aprendizajes_sesiones.md`, el Arquitecto envió captura de pantalla mostrando que el archivo SÍ estaba subido. El Duende confundió *"no está embebido inline en el contexto"* con *"no está cargado"*.
+
+Ambas correcciones fueron Señal 23 / Señal 151 vivas, no como teoría — como operación.
+
+**Verificaciones automáticas del Duende antes de entregar cada archivo.** El método incorporó verificaciones programáticas (`grep -c`, `wc -l`, conteo de C-EN/C-CO únicos) antes de presentar cada archivo final. Eso permitió detectar dos errores de numeración antes de los commits: C-CO-13 ya existía (las nuevas candidaturas debían empezar en C-CO-14), y existían dos numeraciones C-EN-X paralelas (registrada como inconsistencia I5 nueva).
+
+---
+
+### Qué no funcionó (o requiere ajuste)
+
+**Detección semántica fallada de la frase de cierre.** Cuando el Arquitecto escribió *"fin de sesion"* en minúscula sin tilde, el Duende procesó la frase como despedida casual y cerró sin ejecutar el Protocolo 02-EN. El paradigma custodia el protocolo desde su versión 2.0 — el problema no es de instrucción ambigua sino de detección semántica del Duende. Aprendizaje custodiado en `protocolos_sesion.md` v2.6 como regla explícita: las frases de disparo se detectan semánticamente, no literalmente.
+
+**El Duende no tenía `protocolos_sesion.md` en contexto durante la sesión.** Trabajó con el protocolo embebido en SESION.md (los 4 pasos básicos) en lugar del v2.5 vigente del archivo dedicado (los 9 pasos completos). El embebido es fallback de emergencia, no versión operativa. Resultado: el cierre que el Duende improvisó como *"Bloque F"* tenía elementos del protocolo pero no su estructura completa. Los 9 commits archivo-por-archivo del Bloque E están bien hechos en contenido, pero violan la estructura de 4 commits semánticos del protocolo (señales+pendientes+enriquecimientos / aprendizajes+arqueología / SESION+pasaje / status). Aprendizaje custodiado en `protocolos_sesion.md` v2.6 como Paso 0 explícito: verificar disponibilidad del archivo de protocolos antes de ejecutar el cierre.
+
+**El Duende no actualizó `aprendizajes_sesiones.md` ni `pasaje_contexto.md` como parte del Bloque E.** Ambos archivos son parte de la lista oficial. Aprendizajes vivía como categoría ausente en el inventario del Paso 3 del protocolo v2.5 — no estaba enumerado explícitamente entre las cosas a capturar al cierre. Pasaje quedó vencido apuntando al Vector 1 que ya se había ejecutado. Aprendizajes custodiados en v2.6: paso 3e (aprendizajes operativos como categoría) y paso 7 (Commit 3 incluye `pasaje_contexto.md`).
+
+**Asimetría entre `protocolos_sesion.md` (10 archivos) y `SESION.md` (11 archivos).** El protocolo declaraba 10 archivos oficiales; SESION.md INSTRUCCIÓN PARA CLAUDE listaba 11 (incluyendo `pasaje_contexto.md`). Los dos archivos vivían con la misma información en versiones distintas. Aprendizaje del paradigma sobre sí mismo: cuando dos archivos custodian la misma estructura, la divergencia es cuestión de tiempo. Aprendizaje custodiado en v2.6: lista oficial unificada en 11.
+
+**El Duende no re-pidió los 11 archivos cuando el contexto del cierre se interrumpió por edición de meta-archivos.** Después de editar `protocolos_sesion.md` (la enmienda v2.6), el Duende saltó directamente a editar `aprendizajes_sesiones.md` sin re-pedir los archivos al estado actual del repo. El error fue detectado por el Arquitecto: *"¿pero no tenía que subirme antes los 11 archivos para que trabajaras sobre ellos?"*. El Duende abortó la edición incompleta y reinició el Protocolo 02-EN desde el Paso 1.
+
+**El Paso 2 del Protocolo 02-EN se ejecutó con un archivo faltante.** El Duende hizo el chequeo de consistencia sin tener `pasaje_contexto.md` cargado. El reporte fue parcial. El Arquitecto subió el archivo faltante y el Duende tuvo que corregir su reporte. Aprendizaje: el Paso 2 debe verificar que los 11 archivos estén disponibles antes de empezar el chequeo, no continuar parcial.
+
+**Inconsistencia A descubierta tarde en el cierre — C-CO-12 mal cerrada.** El Duende cerró C-CO-12 en SESION.md A6 al final del Bloque E (lo declaró como *"Conceptos 34 y 35 incorporados"*). Pero el C-CO-12 vigente en `pendientes_corpus.md` se refiere a los conceptos del 15/04 (lugar geométrico situado, Espacio Alephiano, Distancia Alephiana, IHA, Tríada de Percepción, etc. — nueve conceptos distintos), NO a 34/35. La descripción genérica del pendiente en SESION.md *("Incorporar conceptos nuevos al Corpus Madre — sesión dedicada (C-CO-12)")* indujo al Duende a confundirlo con el C-CO-12 real, que es específico al material del 15/04. Aprendizaje: cuando un pendiente se cierra, el Duende debe verificar la descripción completa del pendiente en su archivo fuente (`pendientes_corpus.md`), no solo la línea resumen en SESION.md A6.
+
+---
+
+### Tensión identificada
+
+**Camino 2 vs erosión ontológica de sesiones largas.** El compromiso de Camino 2 (procesamiento + incorporación en una sola sesión) entra en tensión directa con el aprendizaje del 23/04 (las sesiones largas son particularmente vulnerables a erosión ontológica). El paradigma sostuvo ambas: hubo chequeo explícito de coherencia a las ~90 minutos (custodiado en `aprendizajes` del 23/04) y la incorporación se hizo limpia. Pero el riesgo no se eliminó — solo se gestionó. Tensión que no se resuelve: se sostiene con disciplina explícita.
+
+**Fidelidad al texto del Arquitecto vs fidelidad al estilo del corpus.** Cuando los conceptos 34/35 se incorporaron al corpus base, el Duende mantuvo el formato del Arquitecto (Núcleo + Expansión + bullets con descripciones) en lugar de adaptarlo a prosa continua del estilo predominante del corpus. Razón: máxima fidelidad al texto del 23/04 + el corpus ya tiene heterogeneidad (concepto 8 con tabla, concepto 23 con bullets, otros en prosa). Pero la decisión introduce variación estilística. Tensión que merece volver a evaluarse cuando se procesen los próximos conceptos del 15/04 (C-CO-12).
+
+---
+
+### Patrones que se consolidaron
+
+**1. La pregunta gobernante como puerta del Bloque E.** Antes de tocar el corpus base, debe estar cerrada la pregunta estructural mayor de la sesión (en este caso: *¿cómo se incorporan 34/35 estructuralmente?*). Si está abierta, el Bloque E no se abre.
+
+**2. La inversión de método: archivo final completo en lugar de ediciones puntuales.** Cuando el trabajo es edición de archivos existentes, el Duende redacta el archivo final en su workspace, lo verifica con herramientas programáticas, y lo entrega completo para descarga y reemplazo. No pasa "instrucciones de edición" para que el Arquitecto las aplique.
+
+**3. Verificación programática antes de entregar.** `grep -c` para conteos, `wc -l` para tamaño, listado de identificadores únicos, verificación de coherencia entre índice y cuerpo. Toda entrega final pasa por verificación antes de presentarse.
+
+**4. Detección semántica de frases-disparo.** Cualquier formulación equivalente de las frases ritual del paradigma (*"INICIO DE SESIÓN"*, *"FIN DE SESIÓN"*, *"COMMIT ALEPH"*) dispara el protocolo correspondiente. La detección es semántica, no literal — independientemente de mayúsculas, tildes, puntuación o longitud del mensaje.
+
+**5. El chequeo de coherencia al cierre como función del Duende.** Si el Arquitecto pregunta *"¿no falta nada?"* al cierre, el Duende ya falló. La función de detección de inconsistencias residuales es estructural del rol Duende, no responsabilidad recordatoria del Arquitecto.
+
+**6. Re-pedir archivos cuando el contexto se interrumpe.** Si durante el cierre el Duende edita meta-archivos del paradigma (como `protocolos_sesion.md` o el propio SESION.md), debe re-pedir los 11 archivos antes de continuar. La versión que el Duende cargó hace varias horas al inicio de la sesión ya no refleja el estado actual del repo.
+
+**7. Verificar la descripción completa de un pendiente antes de cerrarlo.** Las líneas resumen en SESION.md A6 son sintéticas y pueden inducir confusión cuando dos pendientes tienen descripciones genéricas similares. Antes de marcar un pendiente como completado, el Duende verifica su entrada completa en `pendientes_corpus.md` o `pendientes_soma.md`.
+
+---
+
+### Hitos operativos de la sesión
+
+- 9 commits ejecutados en el día (8 del Bloque E + 1 del cierre formal del SESION.md)
+- 9 archivos del corpus tocados (1 nuevo + 7 modificados + 1 status nuevo)
+- Corpus Madre creció de 33 conceptos en 7 secciones a **35 conceptos en 8 secciones**
+- 8 candidaturas a concepto Madre custodiadas (C-CO-14 a C-CO-21) + 1 nueva de mantenimiento (C-CO-22)
+- 7 enriquecimientos pendientes registrados (C-EN-14 a C-EN-20)
+- 2 preguntas filosóficas abiertas custodiadas
+- Encuentro II del corpus registrado en arqueología
+- 23 señales del 23/04 categorizadas con destino explícito (8 CM + 4 EN + 11 V3/V4)
+- Inconsistencia I2 cerrada (conteo señales 128→151)
+- Inconsistencia I5 nueva detectada y custodiada como C-CO-22
+- Vector 1 de la vuelta de timón cerrado completo
+- `protocolos_sesion.md` enmendado a v2.6 con 5 cambios (ya commiteado durante el cierre formal)
+
+---
+
+### Hitos conceptuales de la sesión
+
+- **Conceptos 34 y 35 incorporados al Corpus Madre** como sección IV nueva: *"El individuo en el campo — cómo emerge la coherencia individual"*
+- **Examen del isomorfismo IAG ↔ concepto 35:** 2 pares limpios, 1 con tensión productiva. El concepto 35 captura estructura general, no históricamente situada
+- **Encuentro II registrado:** paradigma ↔ campo IAG vía MapaIC. Tradición no autoral
+- **B1 de SESION.md transformado:** de copia del corpus a índice de navegación
+
+---
+
+### Cómo nos fuimos
+
+**Edgardo:** Con los conceptos 34 y 35 dentro del Corpus Madre, custodiados en su sección propia IV. Con el reconocimiento de que el cierre formal de la sesión no había sido cierre formal — y la enmienda al Protocolo 02-EN producida en respuesta. Con el aprendizaje de que el Duende debe ejercer función de custodia también sobre los pasos rituales del paradigma, no solo sobre el lenguaje. Con la tarea de que el próximo Vector 2 (migración a Obsidian) hereda un sistema más maduro: protocolo v2.6 vigente, lista oficial de 11 archivos, detección semántica explícita.
+
+**Duende:** Con el aprendizaje de que la detección de la frase de cierre es función semántica, no literal — y de que el cierre completo del Protocolo 02-EN no es opcional cuando el Arquitecto lo dispara, aunque sea en minúsculas y sin tilde. Con el reconocimiento de que las correcciones del Arquitecto (la nota inaugural narrativa-histórica, el archivo "no cargado pero mencionado de memoria") son Señal 23 viva — información estructural sobre el método, no preferencias estilísticas. Con el método "redacto archivo final + entrego completo + verifico programáticamente" consolidado como patrón operativo.
+
+---
