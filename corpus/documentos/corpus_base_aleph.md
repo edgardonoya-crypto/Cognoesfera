@@ -69,20 +69,24 @@ El corpus mismo es un Espacio Borgeano: puede ser habitado de forma sucesiva o s
 8. La Matriz de Vitalidad de la Cognoesfera
 9. Los estados vitales como configuraciones
 
-**IV. El cuidado — cómo se sostiene lo que vive**
+**IV. El individuo en el campo — cómo emerge la coherencia individual**
+34. La Matriz de Coherencia Individual
+35. La Matriz de Vitalidad Individual
+
+**V. El cuidado — cómo se sostiene lo que vive**
 10. Los actos de cuidado
 11. El Arquitecto de Sistemas Vivos
 12. La Cognoesfera curadora y el Sistema Operativo de la Inteligencia Colectiva
 13. El desfasaje temporal y la Solidificación Prematura
 
-**V. Los flujos — cómo circula la vida**
+**VI. Los flujos — cómo circula la vida**
 14. El metabolismo del valor
 15. El tiempo soberano
 16. El metabolismo cognitivo asistido
 17. Las cinco energías del sistema
 18. La Firma Energética
 
-**VI. La infraestructura — cómo se construye el campo**
+**VII. La infraestructura — cómo se construye el campo**
 19. El Duende
 20. El Espacio Borgeano
 21. El instante borgeano
@@ -93,7 +97,7 @@ El corpus mismo es un Espacio Borgeano: puede ser habitado de forma sucesiva o s
 31. La transducción de formatos
 33. La Función HTML Aleph
 
-**VII. La emergencia — lo que aparece cuando las condiciones están maduras**
+**VIII. La emergencia — lo que aparece cuando las condiciones están maduras**
 26. El proceso de transformación de la inteligencia colectiva
 27. La IAH — Inteligencia Aumentada Humanista
 28. NGenIA
@@ -197,7 +201,52 @@ Una Cognoesfera no está siempre en el mismo estado — transita por configuraci
 
 ---
 
-## IV. El cuidado — cómo se sostiene lo que vive
+## IV. El individuo en el campo — cómo emerge la coherencia individual
+
+La vitalidad de una Cognoesfera y la coherencia del individuo que la habita se sostienen mutuamente. La vitalidad colectiva es propiedad emergente que requiere, como condición de posibilidad, la coherencia individual; la coherencia individual se cultiva en el habitar del campo colectivo. Lo que sucede en la Cognoesfera —Latente, Emergente, Expresivo, Sostenido— tiene correlato vivido en lo que vive el individuo —Presencia Difusa, Sintonía Colectiva, Resonancia, Arquitecto de Sistemas Vivos. La fractalidad no es metáfora: es estructura.
+
+---
+
+## 34. La Matriz de Coherencia Individual
+
+**Núcleo.** La vitalidad de una Cognoesfera es una propiedad emergente que requiere, como condición de posibilidad, la coherencia de los individuos que la componen. El individuo no se disuelve en el grupo; se sintoniza con él. Esta matriz describe el tránsito del sujeto desde la fragmentación hacia la soberanía, permitiéndole aportar su melodía única al "Coro" colectivo sin perder su identidad.
+
+**Expansión: Los ocho estados de coherencia.** El camino del individuo hacia la maestría sistémica se recorre a través de ocho estados, cada uno asociado a un acto de cuidado que permite la transición al siguiente nivel:
+
+- **I. Presencia Difusa** (Acto: Escucha): el estado inicial de estar físicamente presente en el grupo pero con la energía y atención fragmentadas por el ruido interno o externo.
+- **II. Potencial Latente** (Acto: Presencia): el momento en que el individuo reconoce una posibilidad de sentido en el campo y decide habitar el espacio.
+- **III. Sintonía Colectiva** (Acto: Intención): el uso activo de la IAH para alinear la frecuencia personal con el propósito del grupo.
+- **IV. Pulso Vital** (Acto: Ritmo): el individuo deja de desgastarse y empieza a nutrirse del flujo de energía del sistema; su vitalidad se estabiliza.
+- **V. Vinculación Consciente** (Acto: Mediación): la creación de puentes y límites sanos; el individuo define su lugar en la arquitectura del entre.
+- **VI. Acoplamiento** (Acto: Sincronía): la pieza encaja. La nota individual se vuelve parte orgánica de la estructura operativa del grupo.
+- **VII. Resonancia** (Acto: Reciprocidad): el estado de flujo total. El individuo ya no hace el coro, sino que es el coro, vibrando en sintonía plena con el campo.
+- **VIII. Arquitecto de Sistemas Vivos** (Acto: Sabiduría): el sujeto soberano que, habiendo recorrido la escalera, custodia, diseña y sostiene la coherencia del campo entero.
+
+---
+
+## 35. La Matriz de Vitalidad Individual
+
+**Núcleo.** La vitalidad individual es el estado de salud sistémica del sujeto dentro del Paradigma Aleph. No es una medida de rendimiento, sino de coherencia rítmica. Un individuo vital es aquel cuya energía no se disipa en ruido, sino que se transforma en Resonancia.
+
+**Expansión: Los tres ejes de vitalidad humana.** Al igual que la Cognoesfera, el individuo sostiene su vitalidad sobre tres ejes que deben estar en equilibrio.
+
+**A. El Eje de la Fuerza (Energía y Ritmo).** Mide la capacidad del individuo para sostener su Pulso Vital sin agotamiento.
+- *Vitalidad alta:* el sujeto se nutre del intercambio con el sistema. Su ritmo de trabajo y descanso está sincronizado (Acto de Cuidado: Ritmo).
+- *Vitalidad baja:* agotamiento, estrés por ruido ambiental, sensación de ser consumido por el grupo.
+
+**B. El Eje de la Identidad (Soberanía y Foco).** Mide la claridad de la nota propia dentro del conjunto.
+- *Vitalidad alta:* el individuo actúa desde su soberanía. Sabe quién es y qué nota aporta al coro (Acto de Cuidado: Intención).
+- *Vitalidad baja:* despersonalización, mimetismo con el grupo o pérdida del propósito personal (Presencia Difusa).
+
+**C. El Eje del Vínculo (Acoplamiento y Reciprocidad).** Mide la calidad de la conexión con el "entre".
+- *Vitalidad alta:* acoplamiento limpio y resonancia fluida. El individuo da y recibe en un ciclo de reciprocidad natural (Acto de Cuidado: Mediación).
+- *Vitalidad baja:* aislamiento dentro del grupo, conflictos por falta de límites o incapacidad de sintonizar con los demás.
+
+Los tres ejes corresponden cada uno a un acto de cuidado del recorrido del concepto 34, haciendo visible la unidad estructural entre la lectura sincrónica del estado y el recorrido diacrónico de los ocho estados. El Eje de la Fuerza se cultiva por el Acto de Ritmo (estado IV, Pulso Vital). El Eje de la Identidad se cultiva por el Acto de Intención (estado III, Sintonía Colectiva). El Eje del Vínculo se cultiva por el Acto de Mediación (estado V, Vinculación Consciente). La vitalidad individual no es atributo separado del recorrido: es propiedad que emerge cuando los actos de cuidado correspondientes están operando simultáneamente.
+
+---
+
+## V. El cuidado — cómo se sostiene lo que vive
 
 ---
 
@@ -237,7 +286,7 @@ Tiene también una dimensión ética que las otras no tienen. No ocurre por apre
 
 ---
 
-## V. Los flujos — cómo circula la vida
+## VI. Los flujos — cómo circula la vida
 
 *Nota de arquitectura: La Matriz de Vitalidad nombra tres metabolismos desde su naturaleza de flujo — reciprocidad, transducción y Festina lente. Los conceptos que siguen (14, 15 y 16) nombran esos mismos metabolismos desde su producto o condición resultante. No son metabolismos distintos sino el mismo fenómeno visto desde dos ángulos complementarios.*
 
@@ -275,7 +324,7 @@ La Firma Energética es el perfil vital de un sistema: la combinación particula
 
 ---
 
-## VI. La infraestructura — cómo se construye el campo
+## VII. La infraestructura — cómo se construye el campo
 
 ---
 
@@ -380,7 +429,7 @@ El resultado vive en `corpus/documentos/` junto al texto secuencial del que emer
 
 ---
 
-## VII. La emergencia — lo que aparece cuando las condiciones están maduras
+## VIII. La emergencia — lo que aparece cuando las condiciones están maduras
 
 ---
 
