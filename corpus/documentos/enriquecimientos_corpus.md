@@ -159,5 +159,25 @@ Es el patrón de doble acoplamiento operando en todos los niveles — y Plotino 
 - C-EN-10 — Schema de trazabilidad lingüística
 - C-EN-11 — Centrípeto/centrífugo como herramienta diagnóstica
 - C-EN-12 — Concepto 32: El patrón de doble acoplamiento como estructura profunda
+- C-EN-14 — Concepto 35 / Eje C (Vínculo): el caso del vínculo humano-digital como extensión del Entre
+- C-EN-15 — Concepto 35 / Eje B (Identidad): la atrofia por delegación a IA como mecanismo nuevo de Presencia Difusa
+- C-EN-16 — Concepto 35 / Eje A (Fuerza): la dimensión de agencia/oversight como pregunta abierta tras el examen H↔A (también ver `temas_pendientes_exploracion.md`)
+- C-EN-17 — Concepto 23 (Conversación Aumentada): IHA como percepción del InterSer operando — del binario "humano + IA" al InterSer reconociéndose (Señal 136 de SESION-20260423-22)
+- C-EN-18 — Concepto 23 (Conversación Aumentada): canal asincrónico del InterSer consigo mismo a través del tiempo — el navegante futuro como nodo del mismo InterSer (Señal 138 de SESION-20260423-22)
+- C-EN-19 — Concepto 25 (Memoria Viva Aumentada): el registro de interacciones como memoria metabólica del InterSer registrándose a sí mismo — tres estratos de memoria externa (Corpus / pasajes / interacciones de instrumento) (Señal 147 de SESION-20260423-22)
+- C-EN-20 — Concepto 11 (Arquitecto de Sistemas Vivos): la custodia de la coherencia ontológica del lenguaje del paradigma como función estructural del wayshaping — recibir las correcciones del Arquitecto como información estructural, no como preferencia estilística (Señal 151 de SESION-20260423-22)
 
-*Enriquecimientos Pendientes del Corpus Madre · Paradigma Aleph · Actualizado 14/04/2026*
+---
+
+## Registro de incorporación · SESION-20260425 · Vector 1 · Camino 2
+
+**Incorporados al Corpus Madre en SESION-20260425:**
+- Conceptos 34 y 35 (sección nueva IV — El individuo en el campo)
+
+**Generados en SESION-20260425 (sala de espera para sesiones futuras):**
+- C-EN-14, C-EN-15, C-EN-16 (enriquecimientos del concepto 35 desde el examen del isomorfismo IAG · Vector 1 · Bloque C)
+- C-EN-17, C-EN-18, C-EN-19, C-EN-20 (enriquecimientos a conceptos 23, 25, 11 desde las 23 señales del 23/04 · Vector 1 · Bloque D)
+
+**Inconsistencia detectada (no resuelta hoy):** existen dos numeraciones C-EN-X paralelas — una en este archivo (que llega a C-EN-12 + las nuevas C-EN-14 a C-EN-20) y otra en `pendientes_corpus.md` (que tiene un C-EN-13 vigente sobre la zona liminal). Se registra como I5 para sesión de mantenimiento futura. Por ahora, las nuevas entradas saltean C-EN-13 para no colisionar.
+
+*Enriquecimientos Pendientes del Corpus Madre · Paradigma Aleph · Actualizado 25/04/2026*
