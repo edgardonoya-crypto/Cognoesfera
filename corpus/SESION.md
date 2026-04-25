@@ -584,7 +584,12 @@ Los pendientes viven en dos archivos con schema completo:
 - ~~S-AP-14: Pantalla 1 desktop TriadaPercepcion — rediseño editorial con Figma~~ ✓
 
 **Completadas en SESION-20260425:**
-- ~~C-CO-12: Incorporar conceptos nuevos al Corpus Madre — sesión dedicada~~ ✓ (Conceptos 34 y 35 incorporados como sección IV)
+- ~~Incorporar conceptos 34 y 35 al Corpus Madre como sección IV~~ ✓ (sin C-CO específico — emergió como decisión del Vector 1; los conceptos vinieron del Arquitecto el 23/04, no estaban pre-codificados como pendiente del Corpus)
+- I2 cerrada — conteo de señales activas A8 alineado al real (128→151)
+- I3 cerrada — fecha del pie de `pendientes_corpus.md` actualizada a 25/04/2026
+
+**Detectadas en SESION-20260425 (a resolver en sesión de mantenimiento):**
+- **I5** — Numeraciones C-EN-X paralelas entre `enriquecimientos_corpus.md` (llega a C-EN-12 + C-EN-14 a C-EN-20 nuevas) y `pendientes_corpus.md` (C-EN-13 vigente sobre zona liminal). Custodiada como **C-CO-22** en `pendientes_corpus.md`.
 
 **P1 activos (archivo):** ver listado completo en `pendientes_soma.md` y `pendientes_corpus.md`
 
@@ -603,6 +608,8 @@ Los pendientes viven en dos archivos con schema completo:
 **Pendientes P3:**
 - **P3 [CORPUS]:** Procesamiento de candidatos a concepto Madre del 23/04 — C-CO-14, C-CO-16, C-CO-17, C-CO-18 (sesiones dedicadas)
 - **P3 [CORPUS]:** Procesamiento de enriquecimientos pendientes del Vector 1 — C-EN-14 a C-EN-20 (sesión dedicada de mantenimiento del corpus)
+- **P3 [CORPUS]:** Incorporar al Corpus Madre los 9 conceptos emergidos en SESION-20260415 (C-CO-12) — lugar geométrico situado, Espacio Alephiano, Distancia Alephiana, Instante Alephiano, condicionantes generativas, andamiaje topológico, adyacentes posibles, Tríada de Percepción, IHA. Restaurado al detectar Inconsistencia A en SESION-20260425.
+- **P3 [CORPUS]:** Reconciliar numeraciones C-EN-X paralelas (C-CO-22, I5) — sesión de mantenimiento.
 - **P3 [CORPUS]:** Formalización de candidatos a concepto Madre del 20/04:
   - Pentágono Aleph · Velero + vientos · Seis voces del paradigma · Conocer es respirar · El entre como órgano
 - **P3 [CORPUS]:** Articular coherencia entre Campo de atención, Tríada de Percepción, CA e Instante Alephiano (C-CO-09)

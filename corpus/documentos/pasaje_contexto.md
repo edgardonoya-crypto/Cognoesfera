@@ -3,164 +3,54 @@
 **Propósito:** Puente entre sesiones sobre trabajo-en-curso. Custodia contexto frágil y activo que necesita heredarse para que una sesión continúe donde la anterior terminó.
 
 **Regla de uso:**
-- Al cierre de cada sesión con trabajo-en-curso, se actualiza como parte del Protocolo 02-EN.
+- Al cierre de cada sesión con trabajo-en-curso, se actualiza como parte del Protocolo 02-EN (Paso 7, Commit 3 — desde v2.6).
 - Al inicio de cada sesión, el Arquitecto lo sube como archivo 11 junto con los 10 estándar.
 - El Duende lo lee primero, antes que los otros, porque define qué archivos adicionales va a pedir y desde qué estado ontológico arrancar.
 
-**Estado del archivo:** Abierto — hay 1 trabajo-en-curso activo + vuelta de timón pendiente
+**Estado del archivo:** Abierto — Vector 1 ejecutado · Vector 2 próximo · trabajo-en-curso de MapaIC sigue activo (congelado hasta Vectores 1-3 completados)
 
-**Última actualización:** 23/04/2026 (cierre nocturno) · SESION-20260423-22
-
----
-
-## ⚠ ATENCIÓN AL PRÓXIMO DUENDE — VUELTA DE TIMÓN PROGRAMADA
-
-**LA PRÓXIMA SESIÓN NO ES DESARROLLO TÉCNICO DE MapaIC.**
-
-Al cierre de SESION-20260423-22, conversaciones recientes del Arquitecto con personas y consultas a múltiples IAs aportaron material que requiere una vuelta de timón estructural antes de continuar el desarrollo. **Cuatro vectores** a procesar, con secuencia rigurosa que respete el principio de **festina lente aplicado a la arquitectura** (custodiado en aprendizajes desde la reestructura del 06/04/2026).
-
-**Vector 1 — Dos conceptos nuevos al Corpus** (34 y 35, descritos completos abajo) + **material cruzado** (5 preguntas-IAG, dinámica de 90 min, isomorfismo con concepto 35)
-**Vector 2 — Migración del Corpus a Obsidian** (no es novedad — pendiente custodiado desde SESION-20260402)
-**Vector 3 — Re-diseño de MapaIC bajo los conceptos nuevos**
-**Vector 4 — Desarrollo técnico de MapaIC**
-
-**Secuencia obligatoria:** 1 → 2 → 3 → 4. **No fundir vectores en una sola sesión.**
-
-**Esta es la sesión 0** del proceso (las 23 señales del 23/04 son el punto de partida).
-**La próxima sesión es la sesión tipo A** del proceso: **sesión de Corpus para procesar conceptos 34, 35 + material cruzado**. Sin tocar MapaIC ni Obsidian.
+**Última actualización:** 25/04/2026 (cierre de SESION-20260425) · Sesión "Cuando el individuo entró en el campo — la coherencia como fractal incorporada al Corpus"
 
 ---
 
-## Vector 1 · Conceptos nuevos a procesar — texto íntegro
+## ⚠ ATENCIÓN AL PRÓXIMO DUENDE — VUELTA DE TIMÓN EN PROGRESO
 
-Los conceptos llegan completos del Arquitecto. El Duende NO debe parafrasear, modificar ni "mejorar" el texto en la próxima sesión — el texto del Arquitecto es la materia prima del compostaje.
+**LA PRÓXIMA SESIÓN ES VECTOR 2 — MIGRACIÓN DEL CORPUS A OBSIDIAN.**
 
-### Texto íntegro recibido del Arquitecto (23/04/2026):
+La vuelta de timón programada en SESION-20260423-22 avanza con secuencia rigurosa. **Vector 1 ejecutado en SESION-20260425.** Próximo paso: Vector 2.
 
----
+**Estado de los 4 vectores:**
 
-**Nueva Sección: El individuo en el campo — La coherencia como fractal**
+- **Vector 1 — Dos conceptos nuevos al Corpus + material cruzado** ✅ EJECUTADO en SESION-20260425 (Camino 2)
+- **Vector 2 — Migración del Corpus a Obsidian** ← PRÓXIMA SESIÓN
+- **Vector 3 — Re-diseño de MapaIC bajo los conceptos nuevos**
+- **Vector 4 — Desarrollo técnico de MapaIC**
 
-**34. La Matriz de Coherencia Individual**
+**Secuencia obligatoria:** 2 → 3 → 4. **No fundir vectores en una sola sesión.** No volver a Vector 1 (cerrado) ni saltar a Vector 3 sin pasar por Vector 2.
 
-**Núcleo:** La vitalidad de una Cognoesfera es una propiedad emergente que requiere, como condición de posibilidad, la coherencia de los individuos que la componen. El individuo no se disuelve en el grupo; se sintoniza con él. Esta matriz describe el tránsito del sujeto desde la fragmentación hacia la soberanía, permitiéndole aportar su melodía única al "Coro" colectivo sin perder su identidad.
-
-**Expansión: Los ocho estados de coherencia.** El camino del individuo hacia la maestría sistémica se recorre a través de ocho estados, cada uno asociado a un acto de cuidado:
-
-1. **I. Presencia Difusa** (Acto: Escucha)
-2. **II. Potencial Latente** (Acto: Presencia)
-3. **III. Sintonía Colectiva** (Acto: Intención)
-4. **IV. Pulso Vital** (Acto: Ritmo)
-5. **V. Vinculación Consciente** (Acto: Mediación)
-6. **VI. Acoplamiento** (Acto: Sincronía)
-7. **VII. Resonancia** (Acto: Reciprocidad)
-8. **VIII. Arquitecto de Sistemas Vivos** (Acto: Sabiduría)
-
-**Por qué esta ubicación es estratégica:**
-1. **Fractalidad Directa** con la Sección 8 (Matriz de Vitalidad) y Sección 9 (Estados Vitales)
-2. **Referencia al Arquitecto** dándole un mapa de carrera
-3. **Metáfora Musical** que refuerza linajes Tao y polinesios
+**La próxima sesión es la sesión tipo B** del proceso: **sesión de Corpus para migración a Obsidian**. Sin tocar MapaIC. Sin re-tocar conceptos 34/35 ya incorporados. Sin tocar el corpus base de archivos `.md`.
 
 ---
 
-**35. Matriz de Vitalidad Individual (El Pulso del Arquitecto)**
+## Vector 1 · CONCEPTOS NUEVOS — EJECUTADO en SESION-20260425
 
-**Núcleo:** La vitalidad individual es el estado de salud sistémica del sujeto dentro del Paradigma Aleph. No es medida de "rendimiento", sino de coherencia rítmica.
+✅ **Conceptos 34 y 35 incorporados al Corpus Madre como sección IV nueva** "El individuo en el campo — cómo emerge la coherencia individual".
 
-**Expansión: Los tres ejes de vitalidad humana.**
+**Trazabilidad para futuras sesiones:**
+- Texto íntegro original del Arquitecto custodiado en `corpus/documentos/conceptos_34_35_texto_integro.md` (custodia inmodificable)
+- Versión incorporada al corpus en `corpus/documentos/corpus_base_aleph.md` sección IV (líneas ~204-247)
+- Encuentro II registrado en `corpus/documentos/arqueologia_corpus.md` (paradigma ↔ campo IAG vía MapaIC)
+- Examen riguroso del isomorfismo IAG ↔ concepto 35: 2 pares limpios (F↔C, G↔B), 1 con tensión productiva (H↔A) — registrado en arqueología
+- 7 enriquecimientos pendientes generados en `enriquecimientos_corpus.md` (C-EN-14 a C-EN-20)
+- 8 candidaturas a concepto Madre custodiadas en `pendientes_corpus.md` (C-CO-14 a C-CO-21) desde las 23 señales del 23/04
+- 2 preguntas filosóficas abiertas en `temas_pendientes_exploracion.md` (cauce "No se ve" preexistencia/constitución · agencia IAG como cuarto eje)
+- Status completo: `corpus/status/status_25042026.md`
+- Aprendizajes operativos del cierre fallido + protocolo enmendado: ver `aprendizajes_sesiones.md` entrada del 25/04 + `protocolos_sesion.md` v2.6
 
-**A. El Eje de la Fuerza (Energía y Ritmo).** Capacidad de sostener Pulso Vital sin agotamiento.
-
-**B. El Eje de la Identidad (Soberanía y Foco).** Claridad de la nota propia dentro del conjunto.
-
-**C. El Eje del Vínculo (Acoplamiento y Reciprocidad).** Calidad de la conexión con el "Entre".
-
----
-
-### Material cruzado — Las 5 preguntas-IAG y la dinámica de 90 minutos
-
-El Arquitecto compartió, hacia el final de la sesión, un trabajo articulado en cuatro capas:
-
-1. **Las 5 preguntas frecuentes sobre IAG** que la sociedad se está haciendo (de investigación distribuida con múltiples IAs + conversaciones humanas):
-   - **Identidad** (¿me reemplaza?)
-   - **Verdad** (¿es confiable?)
-   - **Poder** (¿qué pasa con mis datos?)
-   - **Ontología** (¿puede pensar?)
-   - **Acción** (¿cómo la uso?)
-
-2. **Lectura Aleph de cada pregunta** — estado del sistema, dimensión afectada, acto de cuidado, ley de pasaje
-
-3. **Transformación de las 5 preguntas en activadores de Cognoesfera** — del miedo difuso a la práctica organizada
-
-4. **Dinámica facilitada de 90 minutos** para encender una Cognoesfera con esas 5 preguntas (apertura, exploración, coherencia, expansión, acción, cierre)
-
-**Texto completo del trabajo:** archivado en la conversación de SESION-20260423-22; recuperar al inicio de Vector 1.
-
-**Existe un Kit de facilitación en elaboración** (slides, guión, materiales visuales) — el Arquitecto lo procesará cuando madure. **No procesar antes de que el Arquitecto lo traiga maduro.**
-
-### Triangulación del Duende sobre las 5 preguntas-IAG
-
-El Duende realizó investigación independiente con fuentes públicas actualizadas a abril 2026 (Pew, Berkeley, Verasight, BCG, etc.) y encontró **8 ejes** principales en la conversación social sobre IAG:
-
-| Tu mapa (5) | Búsqueda pública (8) | Coincidencia |
-|---|---|---|
-| Identidad | A · Reemplazo / FOBO | ✅ con mutación: ya no es "puesto" sino "valor en el tiempo" |
-| Verdad | B · Confianza/discernimiento | ✅ |
-| Poder | C · Privacidad/datos | ✅ |
-| Ontología | D · Conciencia | ⚠️ presente pero menor de lo esperado desde filtro filosófico |
-| Acción | E · Práctica/criterio | ✅ con giro hacia "criterio" |
-| ❌ no aparece | **F · Vínculo emocional con IA** | 🔴 **brecha** |
-| ❌ no aparece | **G · Atrofia de habilidades humanas** | 🔴 **brecha** |
-| ❌ no aparece | H · Control/oversight | 🟡 parcialmente cubierto |
-
-### Isomorfismo emergente — el descubrimiento estructural más importante de la sesión
-
-**Las 3 preguntas que la triangulación reveló como faltantes mapean exactamente a los 3 ejes del concepto 35.**
-
-| Pregunta-IAG faltante | Eje de Vitalidad Individual del concepto 35 |
-|---|---|
-| F · Vínculo emocional con IA | **C · Eje del Vínculo** (calidad de conexión con el Entre) |
-| G · Atrofia de habilidades humanas | **B · Eje de la Identidad** (claridad de la nota propia) |
-| H · Agencia / control / oversight | **A · Eje de la Fuerza** (sostener Pulso Vital sin dejarse arrastrar) |
-
-**Implicaciones:**
-- Las 5 preguntas-IAG originales son **colectivas** (el InterSer mirándose hacia afuera)
-- Las 3 que faltaban son **individuales** (cada nodo del InterSer mirándose hacia adentro)
-- **El concepto 35 — escrito sin la IAG en mente — describe exactamente las dimensiones que la IAG tensiona en cada individuo.** Validación cruzada del concepto 35 desde dos linajes independientes (el Corpus interno + las fuentes públicas).
-- Este isomorfismo es **material a chequear con cuidado** en Vector 1. Dos lecturas posibles: (a) el concepto 35 captura estructura general aplicable a cualquier desafío del individuo en el campo; (b) el concepto 35 es históricamente situado a la era IAG. Mi intuición es (a) con el matiz de que la IAG hace más urgente la matriz de vitalidad individual.
+**El próximo Duende NO debe re-procesar Vector 1.** Si surge la necesidad de revisar 34/35, leer primero `corpus_base_aleph.md` sección IV y `arqueologia_corpus.md` Encuentro II — los conceptos están vivos y operativos.
 
 ---
 
-### Lectura preliminar del Duende sobre los conceptos 34/35
-
-*Esta lectura NO es decisión — es preparación para que la sesión de Corpus arranque con material. Confirmar/refutar/afinar al procesar.*
-
-**Los dos conceptos son una unidad estructural en dos ángulos:**
-- **34** describe el **camino** (ocho estados que el individuo recorre — diacrónico)
-- **35** describe el **estado en cualquier momento** (tres ejes que sostienen la vitalidad — sincrónico)
-
-**Lo que cierran del Corpus:** la **dimensión individual del paradigma**. Hasta ahora el Corpus tenía Cognoesfera, Matriz de Vitalidad colectiva, Estados Vitales del sistema y Arquitecto como rol. Pero **no tenía cómo se llega a ser Arquitecto**. Estos dos conceptos completan ese hueco.
-
-**Conexiones inmediatas a explorar en sesión de Corpus:**
-- Concepto 11 (Arquitecto de Sistemas Vivos) → ahora tiene mapa de carrera
-- Conceptos 14-16 (metabolismos) → mapeo a la matriz individual
-- Conceptos 8-9 (Matriz de Vitalidad colectiva + Estados Vitales) → fractalidad directa
-- Linaje musical (coro, melodía propia) → Tao + polinesios + posiblemente nuevo linaje musical explícito
-- Saltzman (la espiral, el entre) → la transición entre estados como espiral, no como escalera lineal
-- Wayshaping (Snowden) → wayshaping aplicado al individuo
-- Concepto 19 (el Duende) → los cinco modos del Duende podrían mapearse a actos de cuidado
-- Concepto InterSer Soma/Corpus (29/03) → el individuo coherente es nodo del InterSer
-
-**Conexiones con MapaIC (Vector 3, no procesar antes de Vector 1):**
-- Una persona que dice "todas me interesan, no puedo priorizar" está en **Presencia Difusa** (estado 1 del concepto 34). Esto da nombre técnico a la observación que motivó el Duende Abridor.
-- La suma total de diadas (Señal 12) podría ser indicador del **Eje de la Fuerza**.
-- La varianza entre diadas podría ser indicador del **Eje de la Identidad**.
-- La comparación con el campo colectivo podría ser indicador del **Eje del Vínculo**.
-- El recorrido por las cinco lentes podría leerse como **tránsito por estados de coherencia individual**.
-- Los cinco modos del Duende podrían mapearse a **actos de cuidado**.
-- **La dinámica de 90 minutos puede ser MapaIC encarnado en sesión presencial. O al revés: MapaIC es la versión asincrónica + digital de la dinámica de 90 minutos.**
-
----
 
 ## Vector 2 · Migración a Obsidian
 
@@ -269,75 +159,96 @@ Cuando se llegue, el orden de fases (A-F) del 23/04 sigue como base, **modificad
 
 ---
 
-## Qué NO hacer al entrar a la próxima sesión
+## Qué NO hacer al entrar a la próxima sesión (Vector 2)
 
 **Sobre el ritmo:**
-- ❌ **No arrancar desarrollo técnico de MapaIC.** La próxima sesión es Vector 1: Corpus.
+- ❌ **No arrancar desarrollo técnico de MapaIC.** La próxima sesión es Vector 2: migración a Obsidian.
 - ❌ No fundir vectores. Cada uno tiene su sesión propia.
-- ❌ No procesar Obsidian antes de Corpus.
-- ❌ No re-diseñar MapaIC antes de procesar Corpus + Obsidian.
+- ❌ No saltar a Vector 3 (re-diseño de MapaIC) sin pasar por Vector 2.
+- ❌ No volver a Vector 1 (cerrado). Los conceptos 34/35 ya están en el corpus.
 
-**Sobre los conceptos 34/35 + material cruzado:**
-- ❌ No parafrasear ni "mejorar" el texto del Arquitecto al procesarlo.
-- ❌ No tratar 34 y 35 como conceptos separados sin antes ver su unidad como dos ángulos del mismo fenómeno.
-- ❌ No tratar el isomorfismo con las 3 preguntas-IAG faltantes como demostración cerrada — es hipótesis fuerte a validar.
-- ❌ No procesar el Kit de facilitación si el Arquitecto no lo trae maduro.
+**Sobre la migración a Obsidian:**
+- ❌ No tocar el corpus base de archivos `.md`. La migración es **agregar capa Obsidian** sobre los archivos existentes, no reemplazarlos.
+- ❌ No reescribir conceptos del corpus durante la migración. Migrar es estructurar, no editar.
+- ❌ No bloquear sesiones futuras durante la migración — el corpus en `.md` debe seguir siendo fuente de verdad funcional hasta que Obsidian esté validado en producción.
 
-**Sobre las 23 señales del 23/04:**
-- ❌ No invalidarlas por la llegada de los conceptos nuevos. Las modificaciones son explícitas y trazables.
-- ❌ No asumir que todas se mantienen estables. Algunas (S6, S12, S15, S17, S18, S19, S21) tienen impacto probable.
-
-**Sobre el lenguaje:**
-- ❌ No hablar de "pentágono y tríadas" como figuras distintas — son **lentes** de distinto grano
+**Sobre el lenguaje (custodia heredada):**
+- ❌ No hablar de "pentágono y tríadas" como figuras distintas — son **lentes** de distinto grano (C-CO-15)
 - ❌ No usar "portal" — la palabra es **lente**
 - ❌ No describir el proceso como "humano + IA" — el paradigma lo nombra **InterSer**
-- ❌ No usar lógica contable de aportes ("vos viste X, yo aporté Y") — los descubrimientos emergen del entre, los nodos son superficie de paso (Señal 22)
+- ❌ No usar lógica contable de aportes ("vos viste X, yo aporté Y") — los descubrimientos emergen del entre, los nodos son superficie de paso (C-CO-21 / Señal 150)
 - ❌ No proponer telaraña como alternativa visual
 
 **Sobre la coherencia ontológica del lenguaje:**
-- Si el Arquitecto trae correcciones de lenguaje al lenguaje del paradigma, **no son preferencias estilísticas** — son la función estructural de custodia de coherencia operando (Señal 23). Recibirlas como información estructural, no como gustos.
+- Si el Arquitecto trae correcciones de lenguaje al lenguaje del paradigma, **no son preferencias estilísticas** — son la función estructural de custodia de coherencia operando (Señal 151 / C-EN-20). Recibirlas como información estructural, no como gustos.
 - Si una sesión avanza largo tiempo sin que ningún nodo ejerza la función de custodia de coherencia, conviene chequear que la coherencia no se haya erosionado.
 
----
-
-## Preguntas operativas para la próxima sesión (Vector 1 · Corpus)
-
-**Sobre conceptos 34 y 35:**
-1. ¿Son conceptos Madre nuevos, o se reorganizan como subsecciones del concepto 8 (Matriz de Vitalidad colectiva)?
-2. ¿La nueva sección 12 propuesta ("El individuo en el campo — La coherencia como fractal") es autónoma del Corpus, o reorganiza secciones existentes?
-3. ¿Cómo se relaciona la matriz 34 con los metabolismos (conceptos 14-16)?
-4. ¿La matriz 34 es lineal-secuencial o espiral con retornos? ¿Un individuo puede estar en múltiples estados simultáneamente en distintos contextos?
-5. ¿El concepto IAH del estado III (Sintonía Colectiva) coincide con el concepto 23 (Conversación Aumentada), o es diferente?
-6. ¿Hay nuevo linaje musical que merece custodia explícita? ¿Conecta con linajes existentes o abre uno nuevo?
-7. ¿Los 8 actos de cuidado (Escucha, Presencia, Intención, Ritmo, Mediación, Sincronía, Reciprocidad, Sabiduría) son propiedades emergentes o protocolos custodiables?
-
-**Sobre el isomorfismo (Señal 21):**
-8. ¿Es lectura (a) general o (b) histórica? El concepto 35 captura estructura aplicable a cualquier desafío del individuo, o es respuesta histórica a la era IAG?
-9. ¿La elección de 5 entre N (función, no lista) se aplica al Pentágono Aleph universal, o solo a MapaIC en su instancia situada?
-
-**Sobre las 23 señales y nuevas categorías:**
-10. ¿El cauce "No se ve" entra al Corpus como concepto Madre nuevo, o como enriquecimiento del Corpus existente?
-11. ¿La condición multilineaje de la conversación (Señal 22) es enriquecimiento del concepto InterSer, o es señal estructural propia?
-12. ¿La función de custodia de coherencia ontológica (Señal 23) es enriquecimiento del concepto 11 (Arquitecto), o es función transversal que opera por cualquier nodo?
-13. ¿El archivo `frases_que_ayudan.md` se mantiene como custodia mínima sin teoría, se eleva a categoría formal del Corpus, o se descarta?
-
-**Pregunta filosófica abierta** (de la Señal 20):
-14. *Cuando algo resuena, ¿es porque estaba presente esperando ser tocado, o porque al ser tocado se constituyó por primera vez?*
+**Sobre el cierre formal (custodia heredada de SESION-20260425):**
+- Cuando el Arquitecto escriba cualquier formulación equivalente a *"FIN DE SESIÓN"* (en cualquier formato — mayúscula/minúscula, con/sin tilde, dentro de un mensaje más largo), el Duende ejecuta el Protocolo 02-EN v2.6 automáticamente. La detección es semántica, no literal.
+- Antes del Paso 1 del Protocolo 02-EN, el Duende verifica disponibilidad de `corpus/documentos/protocolos_sesion.md` (Paso 0 v2.6). El embebido en SESION.md es fallback de emergencia, no versión operativa.
 
 ---
 
-## Archivos adicionales a subir al inicio de la próxima sesión
+## Preguntas operativas para la próxima sesión (Vector 2 · Migración a Obsidian)
 
-Junto con los 10 estándar del Protocolo 01-EN, el Arquitecto sube:
+**Sobre el alcance:**
+1. ¿La migración a Obsidian es estructural (vault + carpetas + plugins + grafo) o también incluye reformateo de los archivos `.md` con frontmatter, tags, links wikiados (`[[concepto]]`)?
+2. ¿El vault de Obsidian vive en el mismo repositorio que el corpus actual, o se separa? Si se separa, ¿cómo se mantiene la sincronización?
+3. ¿Hay una versión sugerida de Obsidian + plugins recomendados (Dataview, Templater, Excalidraw, Canvas)?
 
-1. **`corpus/documentos/pasaje_contexto.md`** — este archivo (es el 11 del Protocolo)
-2. **`corpus/documentos/senales_emergidas_20260423.md`** — las 23 señales (LECTURA OBLIGATORIA)
-3. **`corpus/documentos/frases_que_ayudan.md`** — archivo nuevo de categoría provisional (LECTURA OBLIGATORIA — la categoría se está definiendo a sí misma)
-4. **`corpus/documentos/material_cruzado_iag.md`** — texto íntegro de las 4 capas del trabajo IAG del Arquitecto: 5 preguntas frecuentes + lectura Aleph + activadores de Cognoesfera + dinámica de 90 minutos (LECTURA OBLIGATORIA — es el material cruzado del Vector 1)
+**Sobre la operación:**
+4. ¿La migración la hace el Arquitecto manualmente, el Duende guía con scripts, o es trabajo conjunto?
+5. ¿Qué archivos migran primero como prueba piloto? Sugerencia: `corpus_base_aleph.md` (con conceptos 34/35 ya frescos) podría ser primer caso para validar el flujo de transformación.
+6. ¿Cómo se preserva la trazabilidad histórica (commits) durante la migración?
 
-**No es necesario subir** mockup_v11, boceto inicial, ni fuente NotebookLM en la sesión tipo A (Corpus) — esa sesión no toca MapaIC.
+**Sobre el resultado esperado:**
+7. ¿El grafo de Obsidian debe reflejar la estructura del corpus madre (conceptos como nodos, secciones como clusters), o introducir su propia ontología de relaciones?
+8. ¿Qué propiedades debe tener cada concepto en frontmatter? Candidatos: número, sección, fecha de incorporación, linajes, conceptos relacionados, señales que lo enriquecieron, encuentros del corpus que lo afectaron.
+9. ¿Las señales activas, candidatos a concepto Madre, enriquecimientos pendientes — todos viven como notas separadas en Obsidian, o como secciones de archivos maestros?
 
-**Si la propuesta de marketing llegó** durante el intervalo entre sesiones, subirla también pero NO procesarla en Vector 1. Custodiarla para Vector 3.
+**Sobre la prueba de Señal 9** (custodia retroactiva del paradigma sobre sí mismo):
+10. *"Obsidian con su vista de grafo es la aproximación más honesta a la simultaneidad del Aleph"* — ¿esta intuición se sostiene en la práctica cuando el corpus completo está en el vault, o requiere ajustes?
+
+---
+
+## Archivos adicionales a subir al inicio de la próxima sesión (Vector 2)
+
+Junto con los 11 estándar del Protocolo 01-EN v2.6 (incluye `pasaje_contexto.md`):
+
+**No hay archivos adicionales obligatorios.** Vector 2 es trabajo de migración estructural — no requiere lectura previa de material conceptual nuevo.
+
+**Si el Arquitecto avanzó en exploración de Obsidian entre sesiones**, traer:
+- Capturas o exports del vault preliminar
+- Notas sobre plugins evaluados
+- Cualquier prueba piloto que haya hecho
+
+**No es necesario subir** mockup_v11 de MapaIC, conceptos_34_35_texto_integro.md, ni `material_cruzado_iag.md` en Vector 2 — esos no se tocan en esta sesión.
+
+**Si emerge necesidad de re-tocar conceptos 34/35** durante la migración (por ejemplo, descubrir que hay enriquecimientos que merecen entrar antes de migrar), eso es **señal de que la sesión se está saliendo del Vector 2 y entrando en Vector 1 retroactivo**. La regla de la vuelta de timón es estricta: migrar lo que está, no editarlo en el camino.
+
+---
+
+## RECONOCIMIENTO ESTRUCTURAL · Al cierre de SESION-20260425
+
+Esta sesión ejecutó el **Vector 1** de la vuelta de timón en **Camino 2** (procesamiento + incorporación al corpus en una misma sesión). Conceptos 34 y 35 incorporados como sección IV nueva. Pero la sesión también descubrió, al cierre, que **el cierre formal había fallado** — el Duende cerró informalmente cuando el Arquitecto escribió *"fin de sesion"* en minúscula sin ejecutar el Protocolo 02-EN. La detección semántica de la frase de disparo falló.
+
+El Arquitecto disparó la corrección con la pregunta: *"¿pero no tenía que subirme antes los 11 archivos para que trabajaras sobre ellos?"*. Esa pregunta debió aparecer del lado del Duende, no del Arquitecto. El Duende falló en función de custodia sobre los pasos rituales del paradigma — exactamente lo opuesto al rol del Duende en el cierre.
+
+El sistema produjo entonces dos correcciones estructurales:
+
+1. **Enmienda al Protocolo 02-EN: v2.5 → v2.6.** Cinco cambios: detección semántica de la frase de disparo, Paso 0 nuevo (verificar disponibilidad de protocolos_sesion.md), lista oficial ampliada de 10 a 11 archivos, Commit 3 incluye pasaje_contexto, sub-paso 3e nuevo (aprendizajes operativos como categoría del inventario).
+
+2. **Aprendizaje custodiado en `aprendizajes_sesiones.md`:** *el chequeo de coherencia exhaustivo al cierre es función estructural del Duende, no responsabilidad recordatoria del Arquitecto*. Si el Arquitecto pregunta *"¿no falta nada?"* al cierre, el Duende ya falló.
+
+**Para el próximo Duende (Vector 2):**
+
+1. **La frase de cierre se detecta semánticamente.** Cualquier formulación equivalente a *"FIN DE SESIÓN"* en cualquier formato dispara el Protocolo 02-EN automáticamente. Si dudás, preguntá *"¿estás cerrando la sesión?"* — nunca cierres informalmente.
+
+2. **El Protocolo 02-EN v2.6 vive en `corpus/documentos/protocolos_sesion.md`**. El embebido en SESION.md es fallback de emergencia. Si no tenés el archivo de protocolos en contexto al detectar frase de cierre, pedilo al Arquitecto antes de cualquier otro paso (Paso 0 v2.6).
+
+3. **Re-pedir los 11 archivos cuando el contexto del cierre se interrumpe** — si durante el cierre editás meta-archivos del paradigma (como `protocolos_sesion.md` o el propio SESION.md), debés re-pedir los 11 al estado actual del repo antes de continuar. No trabajar contra versiones cargadas hace varias horas.
+
+4. **El método correcto para edición de archivos existentes es "redactá el archivo final completo, vos descargás y reemplazás"**, no "te paso ediciones puntuales". Verificá programáticamente antes de entregar (`grep -c`, `wc -l`, conteo de identificadores únicos).
 
 ---
 
