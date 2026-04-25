@@ -6,6 +6,23 @@
 
 ---
 
+## ⚠ AVISO DE CONGELAMIENTO · 23/04/2026
+
+**Pendientes congelados al cierre de SESION-20260423-22.**
+
+Los pendientes técnicos de MapaIC quedan suspendidos hasta procesar la vuelta de timón programada en `pasaje_contexto.md`. Específicamente:
+
+- **Vector 1** (sesión de Corpus) — procesar conceptos 34, 35 + material cruzado
+- **Vector 2** (sesión técnica) — migración a Obsidian
+- **Vector 3** (sesión de re-diseño) — MapaIC reorganizado bajo conceptos nuevos
+- **Vector 4** — recién aquí se reanuda el desarrollo técnico
+
+Cualquier pendiente listado abajo puede haber quedado obsoleto, modificado o ampliado por las decisiones de los Vectores 1-3. **No ejecutar ninguno de estos pendientes sin antes haber procesado los tres vectores en orden.**
+
+Ver `corpus/documentos/pasaje_contexto.md` para el detalle de la vuelta de timón.
+
+---
+
 ## Schema
 
 Cada pendiente registra: **ID · Título · Descripción · Prioridad · Estado · Fecha · Dependencias**
