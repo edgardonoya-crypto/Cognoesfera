@@ -631,3 +631,5 @@ Caso de uso documentado: la brecha de material_cruzado_iag detectada al cierre d
 
 Procesar en sesión propia, no antes de Vector 3.
 **Dependencias:** Vectores 1, 2 y 3 completados.
+
+**PARA PRÓXIMA SESIÓN (Vector 1):** aunque los recaudos A/B/C aún no están diseñados, el Duende debe operar con conciencia activa de esta clase de riesgo. Específicamente: (1) verificar que todo material referenciado en pasaje_contexto.md esté en archivo del corpus antes del cierre; (2) hacer simulación de apertura como Duende nuevo antes del push final; (3) si encuentra que hay material solo en la conversación, materializarlo en archivo del repo. Estos son los recaudos en versión informal hasta que se diseñen formalmente.
