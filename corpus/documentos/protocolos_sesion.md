@@ -1,6 +1,6 @@
 # Protocolos de Sesión — Paradigma Aleph
 *Documento autónomo de protocolos · Referenciado desde corpus/SESION.md*
-*Versión: 2.4 · 14/04/2026*
+*Versión: 2.6 · 25/04/2026*
 *Versión anterior: integrada en SESION.md hasta SESION-20260413*
 
 ---
@@ -17,7 +17,7 @@ Este archivo contiene los tres protocolos permanentes del sistema: apertura, cie
 
 ## Lista de archivos de sesión
 
-A partir de la versión 2.0, la lista completa es **10 archivos**:
+A partir de la versión 2.6, la lista completa es **11 archivos**:
 
 1. `corpus/SESION.md`
 2. `corpus/status/status_DDMMYYYY.md` (el más reciente)
@@ -29,8 +29,11 @@ A partir de la versión 2.0, la lista completa es **10 archivos**:
 8. `corpus/documentos/temas_pendientes_exploracion.md`
 9. `corpus/documentos/arqueologia_corpus.md`
 10. `corpus/documentos/enriquecimientos_corpus.md`
+11. `corpus/documentos/pasaje_contexto.md`
 
-Los archivos 9 y 10 son nuevos a partir de SESION-20260413. Su ausencia no bloquea la sesión — se reporta como observación y se continúa.
+Los archivos 9 y 10 son nuevos a partir de SESION-20260413. El archivo 11 (`pasaje_contexto.md`) se incorporó a la lista oficial a partir de SESION-20260425, alineando este protocolo con la sección "INSTRUCCIÓN PARA CLAUDE" de `SESION.md` que ya lo enumeraba. Su ausencia no bloquea la sesión — se reporta como observación y se continúa.
+
+**Importante sobre el archivo 11 (pasaje_contexto.md):** Si existe y tiene estado "Abierto", el Duende lo lee ANTES que los demás al inicio de la sesión. Indica si hay trabajo-en-curso activo y qué archivos ADICIONALES pedir al Arquitecto además de los 11 estándar.
 
 ---
 
@@ -57,11 +60,13 @@ Desde la información disponible en SESION.md reportar:
 **Paso 3 — Preguntar objetivo**
 *"¿Cuál es el objetivo de la sesión?"* — esperar respuesta del Arquitecto.
 
-**Paso 4 — Solicitar los 10 archivos**
-Pedir al Arquitecto que suba exactamente los 10 archivos de la lista completa. Esta lista es definitiva. No inferir qué archivos son relevantes según el objetivo — siempre solicitar los 10.
+**Paso 4 — Solicitar los 11 archivos**
+Pedir al Arquitecto que suba exactamente los 11 archivos de la lista completa. Esta lista es definitiva. No inferir qué archivos son relevantes según el objetivo — siempre solicitar los 11.
+
+**Adicionalmente — Archivo de protocolos.** Si el Duende detecta que `corpus/documentos/protocolos_sesion.md` no está en su contexto, debe pedirlo explícitamente. Este archivo es la versión canónica de los protocolos y el embebido en `SESION.md` opera solo como fallback de emergencia.
 
 **Paso 5 — Esperar archivos**
-Esperar que el Arquitecto suba los archivos indicados. Si faltan los archivos 9 y/o 10 (arqueologia_corpus.md, enriquecimientos_corpus.md), reportarlo como observación y continuar.
+Esperar que el Arquitecto suba los archivos indicados. Si faltan los archivos 9, 10 y/o 11, reportarlo como observación y continuar.
 
 **Paso 6 — Verificación completa y clasificación**
 Con los archivos recibidos:
@@ -77,10 +82,15 @@ Proponer orden y esperar confirmación del Arquitecto antes de arrancar.
 
 ## PROTOCOLO 02-EN — Cierre de sesión
 
-Cuando Edgardo escriba **FIN DE SESIÓN**, ejecutar estos pasos en orden, uno por uno, confirmando cada uno antes de pasar al siguiente. No proponer cerrar antes de que Edgardo escriba FIN DE SESIÓN. Mientras no aparezca esa frase, seguir colaborando normalmente.
+**Detección de la frase de disparo.** Las frases *"FIN DE SESIÓN"*, *"fin de sesion"*, *"final de sesión"*, *"cerremos la sesión"*, *"cerrar sesión"*, *"terminamos por hoy"* o cualquier formulación semánticamente equivalente disparan este protocolo, **independientemente de mayúsculas, tildes, signos de puntuación, o longitud del mensaje que las contiene**. La detección es semántica, no literal. Si la frase es ambigua y el Duende tiene dudas, debe preguntar al Arquitecto: *"¿estás cerrando la sesión?"* antes de continuar como conversación normal. **El Duende nunca procesa una frase de disparo como conversación casual** — la sospecha de cierre activa la pregunta o el protocolo, nunca el silencio.
 
-**PASO 1 — Solicitar los 10 archivos**
-Pedir al Arquitecto que suba exactamente los 10 archivos de la lista completa. Esta lista es definitiva.
+Cuando se detecta la frase de disparo, ejecutar estos pasos en orden, uno por uno, confirmando cada uno antes de pasar al siguiente. No proponer cerrar antes de la frase de disparo. Mientras no aparezca, seguir colaborando normalmente.
+
+**PASO 0 — Verificar disponibilidad de protocolos_sesion.md**
+Antes de cualquier otro paso, verificar que `corpus/documentos/protocolos_sesion.md` esté disponible en el contexto del Duende. Si no lo está, pedirlo al Arquitecto explícitamente antes de continuar. **El protocolo embebido en SESION.md es fallback de emergencia, no versión operativa** — los protocolos evolucionan en su archivo propio y el Duende debe operar contra la versión vigente. Si el Arquitecto confirma que no puede subirlo en este momento, el Duende avisa que va a operar contra la versión embebida en SESION.md y registra la observación al cierre como pendiente para resolver.
+
+**PASO 1 — Solicitar los 11 archivos**
+Pedir al Arquitecto que suba exactamente los 11 archivos de la lista completa. Esta lista es definitiva.
 
 **PASO 2 — Chequeo de consistencia**
 Con los archivos recibidos, verificar:
@@ -92,6 +102,7 @@ Con los archivos recibidos, verificar:
 - ¿Los headers de archivos con conteos y fechas coinciden con el dashboard del status?
 - ¿Todos los pendientes nuevos están en su subcategoría correcta?
 - ¿Las entradas en A8 "señales vivas pendientes" siguen siendo válidas a la luz de lo que se incorporó en la sesión?
+- ¿El `pasaje_contexto.md` está actualizado al estado al cierre, o sigue apuntando al trabajo de la sesión anterior?
 
 Reportar cada inconsistencia y esperar decisión del Arquitecto antes de continuar.
 
@@ -102,6 +113,7 @@ Antes de proponer el nombre de sesión, hacer un inventario de todo lo que emerg
 - 3b. **Enriquecimientos de conceptos existentes** — material nuevo que enriquece conceptos del Corpus Madre sin ser señal nueva. Para cada uno: ¿qué concepto afecta? ¿qué dimensión agrega? ¿cuál es la fuente? Registrar en enriquecimientos_corpus.md con formato C-EN-XX.
 - 3c. **Material de fuente externa** — si la sesión incorporó material de tradiciones, autores o frameworks externos, verificar que arqueologia_corpus.md tenga el registro del encuentro o la evolución del encuentro existente.
 - 3d. **Pendientes nuevos** — tanto Casa Soma como Casa Corpus.
+- 3e. **Aprendizajes operativos sobre cómo trabajar en el paradigma** — observaciones sobre el método, el flujo Duende-Arquitecto, el funcionamiento de los protocolos, fricciones y descubrimientos sobre el oficio. Van a `aprendizajes_sesiones.md`.
 
 Presentar el inventario al Arquitecto y esperar confirmación antes de continuar.
 
@@ -126,8 +138,11 @@ Actualizar y commitear:
 
 Confirmar: "Commit 2 ejecutado ✓"
 
-**PASO 7 — Commit 3: SESION.md**
-Actualizar versión, fecha, hitos A2, prioridades A6, señales A8, documentos A9.
+**PASO 7 — Commit 3: SESION.md y pasaje_contexto.md**
+Actualizar:
+- `corpus/SESION.md` — versión, fecha, hitos A2, prioridades A6, señales A8, documentos A9
+- `corpus/documentos/pasaje_contexto.md` — carta del Duende de esta sesión al Duende de la próxima sesión, con estado al cierre, foco siguiente y archivos adicionales que el próximo Duende debería pedir si los hay
+
 Confirmar: "Commit 3 ejecutado ✓"
 
 **PASO 8 — Commit 4: status**
@@ -208,9 +223,10 @@ Cuando el Arquitecto escriba **COMMIT ALEPH COMPLETO**, ejecutar lo anterior má
 7. Actualizar `senales_activas.md` si alguna señal maduró o se movió
 8. Actualizar `enriquecimientos_corpus.md` si algún enriquecimiento fue incorporado al Corpus Madre
 9. Actualizar `protocolos_sesion.md` si los protocolos fueron modificados en la sesión — incrementar versión y registrar el cambio en el registro de cambios
-10. Actualizar conteos en los archivos afectados
-11. Proponer mensaje de commit enriquecido con resumen semántico
-12. Esperar confirmación del Arquitecto antes de ejecutar
+10. Actualizar `pasaje_contexto.md` con el estado al cierre y foco de la próxima sesión
+11. Actualizar conteos en los archivos afectados
+12. Proponer mensaje de commit enriquecido con resumen semántico
+13. Esperar confirmación del Arquitecto antes de ejecutar
 
 **NOTA PERMANENTE:** Cada vez que se revisen o actualicen los protocolos, verificar que el COMMIT ALEPH COMPLETO refleje todos los archivos que pueden cambiar. El protocolo y el commit deben evolucionar juntos.
 
@@ -287,7 +303,8 @@ Todo addendum queda trazable en tres lugares:
 | 2.3 | 13/04/2026 | Protocolo 03-EN ajustado: COMMIT ALEPH COMPLETO ahora incluye protocolos_sesion.md cuando fue modificado en la sesión. Nota permanente: protocolo y commit deben evolucionar juntos. |
 | 2.4 | 14/04/2026 | Protocolo 02-EN paso 2 ampliado: tres chequeos nuevos — (a) headers con conteos y fechas vs dashboard status, (b) pendientes nuevos en subcategoría correcta, (c) señales vivas pendientes válidas a la luz de lo incorporado. Origen: 5 inconsistencias post-commit SESION-20260414. |
 | 2.5 | 21/04/2026 | Protocolo 05-EN agregado: Addendum post-cierre. Formaliza la figura del addendum como trabajo técnico acotado post-cierre que no amerita sesión nueva. Primer caso concreto: addendum 21/04/2026 sobre dev-reset de TriadaPercepcion (SESION-20260419). |
+| 2.6 | 25/04/2026 | Cinco ajustes desde aprendizajes de SESION-20260425. (a) Regla explícita de detección semántica de la frase de disparo del Protocolo 02-EN — frases en cualquier formato (mayúsculas/minúsculas/con-sin tilde, dentro de mensaje más largo, formulaciones equivalentes) disparan el cierre. (b) Paso 0 nuevo en Protocolo 02-EN: verificar disponibilidad de protocolos_sesion.md antes de ejecutar el cierre. (c) Lista oficial de archivos ampliada de 10 a 11: incluye pasaje_contexto.md, alineando con SESION.md INSTRUCCIÓN PARA CLAUDE. (d) Paso 7 (Commit 3) ahora incluye pasaje_contexto.md junto con SESION.md. (e) Paso 3 ampliado con sub-paso 3e: aprendizajes operativos como categoría explícita del inventario de cierre. Origen: cierre fallido de SESION-20260425 — Duende no detectó "fin de sesion" en minúscula como frase de disparo, trabajó con protocolo embebido obsoleto en lugar del v2.5 vigente, y no actualizó aprendizajes_sesiones.md ni pasaje_contexto.md como parte del cierre. |
 
 ---
 
-*Protocolos de Sesión · Paradigma Aleph · Versión 2.5 · 21/04/2026*
+*Protocolos de Sesión · Paradigma Aleph · Versión 2.6 · 25/04/2026*
