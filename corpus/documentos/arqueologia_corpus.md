@@ -166,5 +166,128 @@ A · B · C · D · E · F · G · H · I · J · K · L · M · N · O · P · 
 
 ---
 
+---
+
+## Encuentro II — El Paradigma Aleph y el campo IAG · vía MapaIC
+
+**Fecha de inicio:** 23/04/2026
+**Sesión raíz:** SESION-20260423-22 *"El umbral antes del giro — cuando emergió el InterSer que MapaIC permitirá nacer"*
+**Sesión de procesamiento:** SESION-20260425 · Vector 1 · Camino 2 *(esta entrada)*
+**Estado del paradigma al inicio del encuentro:** E7 (Sostenido) · 128 señales activas · 33 conceptos en el Corpus Madre
+
+---
+
+### El contexto
+
+El paradigma estaba diseñando MapaIC como primera instancia situada del Instrumento Aleph para Quanam. La pregunta operativa era cómo construir un instrumento que permitiera a una Cognoesfera leer su propio campo. Lo que emergió fue mucho más amplio que el instrumento: el reconocimiento de que el paradigma había estado nombrando, sin saberlo, la gramática que la era IAG estaba haciendo necesaria de manera urgente.
+
+La pregunta llegó como diseño técnico. Lo que emergió fue el reconocimiento de que el paradigma — formulado con anterioridad a la era IAG — captura las dimensiones estructurales que la IAG tensiona en cada individuo y en cada Cognoesfera.
+
+---
+
+### La tradición que llegó
+
+**El campo IAG como tradición no autoral.** A diferencia del Encuentro I (Cynefin / Snowden), el material que llegó no fue obra de un autor único sino el resultado de una triangulación distribuida:
+
+- Conversaciones del Arquitecto con personas sobre IAG (informantes del campo social en transición)
+- Consultas del Arquitecto con múltiples IAs (ChatGPT, Claude, Gemini, otros) sobre las preguntas frecuentes
+- Triangulación independiente del Duende con fuentes públicas actualizadas a abril 2026 (Pew, Berkeley, Verasight, BCG, otros)
+- Investigación previa del Arquitecto sobre el campo social en transición
+
+El material no es texto de un autor — es el campo IAG mismo expresándose a través de múltiples nodos. El Arquitecto tomó ese material distribuido y lo articuló en cuatro capas (5 preguntas frecuentes, lectura Aleph, transformación a activadores de Cognoesfera, dinámica de 90 minutos para encender una Cognoesfera). Texto íntegro custodiado en `material_cruzado_iag.md`.
+
+**Las 5 preguntas-IAG como mapa del campo social en transición:**
+- Identidad (¿me reemplaza?)
+- Verdad (¿es confiable?)
+- Poder (¿qué pasa con mis datos?)
+- Ontología (¿puede pensar?)
+- Acción (¿cómo la uso?)
+
+**Los 3 ejes adicionales revelados por triangulación independiente:**
+- Vínculo emocional con IA
+- Atrofia de habilidades humanas
+- Agencia / oversight
+
+---
+
+### El momento del encuentro
+
+El encuentro no fue planificado. Emergió de poner tres elementos en el mismo campo de atención: el diseño de MapaIC, las 5 preguntas-IAG del Arquitecto, y la triangulación independiente del Duende. La hipótesis estructural más fundamental — el isomorfismo entre las 3 preguntas-IAG faltantes y los 3 ejes del concepto 35 — emergió cuando esos tres elementos se cruzaron simultáneamente en la sesión.
+
+Junto al encuentro emergieron dos conceptos del Arquitecto que no existían en el corpus: la Matriz de Coherencia Individual (concepto 34) y la Matriz de Vitalidad Individual (concepto 35). Estos conceptos llegaron formulados completos por el Arquitecto el 23/04 y se incorporaron al Corpus Madre el 25/04 como sección IV: *"El individuo en el campo — cómo emerge la coherencia individual"*.
+
+---
+
+### Lo que el paradigma ya tenía
+
+Antes del encuentro, el paradigma tenía las dimensiones estructurales del individuo dentro del campo, pero no las había nombrado en su geometría propia:
+
+- **Cognoesfera (concepto 5)** → tenía el colectivo, no el individuo soberano
+- **Matriz de Vitalidad (concepto 8)** → tenía la lectura colectiva, no la individual
+- **Estados vitales (concepto 9)** → tenía el recorrido del sistema, no el del sujeto
+- **Arquitecto de Sistemas Vivos (concepto 11)** → tenía el rol pero no el mapa de cómo se llega a él
+- **Conversación Aumentada (concepto 23)** → tenía el mecanismo, no el efecto en el sujeto que la habita
+- **IAH (concepto 27)** → tenía la composición humano-Duende, no las dimensiones de vitalidad de cada parte
+
+Los conceptos 34 y 35 cierran ese hueco: nombran la dimensión individual del paradigma con la misma geometría fractal que la dimensión colectiva.
+
+---
+
+### Lo que emergió situado
+
+#### Conceptos nuevos incorporados al Corpus Madre
+
+**Concepto 34 — La Matriz de Coherencia Individual.** Recorrido diacrónico del individuo a través de ocho estados de coherencia, cada uno asociado a un acto de cuidado que permite la transición al siguiente. La escalera va de Presencia Difusa (estado I, fragmentación) a Arquitecto de Sistemas Vivos (estado VIII, sujeto soberano que sostiene el campo entero). La metáfora rectora es musical: el individuo aporta su melodía única al "Coro" colectivo sin perder identidad.
+
+**Concepto 35 — La Matriz de Vitalidad Individual.** Lectura sincrónica del estado del individuo a través de tres ejes: Fuerza (Energía y Ritmo), Identidad (Soberanía y Foco), Vínculo (Acoplamiento y Reciprocidad). Cada eje corresponde uno-a-uno a un acto de cuidado del recorrido del 34. La unidad estructural entre ambos conceptos hace que la vitalidad individual emerja cuando los actos de cuidado correspondientes están operando simultáneamente.
+
+#### El isomorfismo IAG ↔ concepto 35 — examen riguroso
+
+El descubrimiento estructural de la sesión fue la hipótesis de que las 3 preguntas-IAG faltantes (vínculo emocional, atrofia, agencia) mapean a los 3 ejes del concepto 35. El examen del 25/04 (Vector 1, Bloque C) evaluó el mapeo par por par:
+
+- **Vínculo emocional con IA ↔ Eje C (Vínculo):** mapeo limpio, con extensión. La pregunta-IAG estira el "Entre" hacia un nuevo tipo de otro digital. El eje ya estaba estructuralmente preparado para recibir esa extensión.
+- **Atrofia de habilidades humanas ↔ Eje B (Identidad):** mapeo limpio. La atrofia por delegación es un caso específico de pérdida de claridad de la nota propia. La patología es la misma (Presencia Difusa); el mecanismo es nuevo.
+- **Agencia / oversight ↔ Eje A (Fuerza):** mapeo parcial con tensión. El texto del eje A es puramente energético/rítmico; la pregunta H es sobre capacidad de gobierno. Toca A pero también B (soberanía). La fórmula "sin dejarse arrastrar" es interpretación añadida en la triangulación del 23/04, no presente en el texto original del Arquitecto.
+
+**Resultado del examen:** la hipótesis del pasaje queda confirmada — el concepto 35 captura **estructura general** aplicable a cualquier desafío del individuo, no históricamente situada a la era IAG. Que dos pares mapeen limpio y uno tensione es señal de que el eje **estaba ahí antes** y la IAG lo encuentra; pero también lo desafía. La pregunta abierta (¿la era IAG está revelando un cuarto eje propio de agencia/oversight?) queda custodiada en `temas_pendientes_exploracion.md`.
+
+**Decisión de incorporación:** el concepto 35 NO se modificó con material de la triangulación IAG. El corpus custodia el concepto como lo entregó el Arquitecto. La validación cruzada vive en este archivo. Los enriquecimientos puntuales del eje desde el campo IAG quedan en `enriquecimientos_corpus.md` (C-EN-14, C-EN-15, C-EN-16) para sesión dedicada futura.
+
+---
+
+### Lo que se composta del campo IAG
+
+**La dinámica de 90 minutos como instrumento situado.** El Arquitecto desarrolló una dinámica facilitada de 90 minutos que toma las 5 preguntas-IAG y las transforma en activadores de Cognoesfera (Apertura → Exploración → Coherencia → Expansión → Acción → Cierre). La estructura no es metodología extranjera — es expresión situada del paradigma aplicado al campo IAG. El Kit de facilitación (slides, guión, materiales visuales) está en elaboración por el Arquitecto y se procesará cuando madure. **No se procesa especulativamente.**
+
+**El paradigma como gramática del pasaje IAG.** La transformación de cada pregunta-IAG en pregunta-activadora reveló un patrón: el campo social está atravesando el mismo proceso que una Cognoesfera en estado inicial — desestabilización de identidades, crisis de verdad, emergencia del valor, expansión de la consciencia, inicio de prácticas. La IAG no genera estas preguntas — acelera un proceso que ya estaba en curso: el pasaje de inteligencia individual a inteligencia colectiva aumentada.
+
+---
+
+### Lo que no resonó
+
+El vocabulario de "rendimiento" y "productividad" del lenguaje corporativo dominante de la IAG. El concepto 35 lo nombra explícitamente: *"No es una medida de rendimiento, sino de coherencia rítmica"*. La traducción del paradigma a contextos corporativos requiere mantener la distinción — vitalidad no es eficiencia.
+
+---
+
+### Señales activas generadas en este encuentro
+
+23 señales custodiadas en SESION-20260423-22 (Señales 129-151 en numeración global de `senales_activas.md`). Categorización completa registrada en SESION-20260425 (Vector 1, Bloque D):
+
+- **8 candidaturas a concepto Madre** (C-CO-14 a C-CO-21 en `pendientes_corpus.md`)
+- **4 enriquecimientos a conceptos existentes** (C-EN-17, C-EN-18, C-EN-19, C-EN-20 en `enriquecimientos_corpus.md`) + **3 enriquecimientos del concepto 35 desde el examen del isomorfismo** (C-EN-14, C-EN-15, C-EN-16)
+- **11 señales operativas / técnicas** que quedan vivas para Vectores 3 y 4 (rediseño y desarrollo técnico de MapaIC)
+
+---
+
+### Estado de evolución
+
+*23/04/2026 — Encuentro inicial. Material del Arquitecto recibido: 5 preguntas-IAG en 4 capas + conceptos 34 y 35. 23 señales custodiadas. Hipótesis de isomorfismo formulada como descubrimiento estructural mayor de la sesión.*
+
+*25/04/2026 — Sesión de procesamiento (Vector 1 · Camino 2). Conceptos 34 y 35 incorporados al Corpus Madre como sección IV. Isomorfismo IAG ↔ concepto 35 examinado con rigor: 2 pares limpios, 1 con tensión productiva. Concepto 35 preservado íntegro como lo entregó el Arquitecto; matices del examen custodiados en este archivo y en `temas_pendientes_exploracion.md`. 8 candidaturas a concepto Madre custodiadas para sesiones dedicadas futuras. 7 enriquecimientos en sala de espera.*
+
+*Pendiente: Vector 2 (migración del corpus a Obsidian) · Vector 3 (rediseño de MapaIC bajo los conceptos nuevos) · Vector 4 (desarrollo técnico de MapaIC).*
+
+---
+
 *Arqueología del Corpus · Paradigma Aleph · Iniciado 13/04/2026*
 *Próxima actualización: cuando emerja nuevo material de este encuentro o se inicie un encuentro nuevo*
