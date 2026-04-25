@@ -742,4 +742,14 @@ Generados al categorizar las 23 señales emergidas de SESION-20260423-22. Las 8 
 
 ---
 
-**Fin del addendum SESION-20260425. Total: 9 candidaturas a concepto Madre y mantenimiento (C-CO-14 a C-CO-22).**
+**C-CO-23**
+**Título:** Sincronizar el Protocolo 02-EN embebido en SESION.md con el v2.6 del archivo `protocolos_sesion.md`
+**Descripción:** El SESION.md tiene embebido (líneas ~44-170 aproximadas) una versión particular del Protocolo 02-EN que NO coincide con v2.6 vigente en `corpus/documentos/protocolos_sesion.md`. El embebido sirve como fallback de emergencia cuando el archivo externo no se sube — pero hoy es una versión vieja a la que le faltan: (a) regla explícita de detección semántica de la frase de disparo "FIN DE SESIÓN" en cualquier formato, (b) Paso 0 de verificación de disponibilidad de protocolos_sesion.md, (c) sub-paso 3e sobre aprendizajes operativos como categoría del inventario, (d) inclusión de `enriquecimientos_corpus.md` en el Commit 1, (e) inclusión de `pasaje_contexto.md` en el Commit 3. Sesión propia de mantenimiento debe decidir si: (1) reemplazar el embebido por una versión condensada de fallback (referencia + 4-5 pasos esenciales), o (2) sincronizar dura mente con el archivo externo (duplicación con riesgo de divergencia futura). Voto inicial del Duende: opción (1), coherente con la decisión del 25/04 sobre B1 (que dejó de duplicar el corpus base). Detectada en Paso 9 del cierre formal de SESION-20260425.
+**Prioridad:** P2
+**Estado:** Activo
+**Fecha:** 25/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**Fin del addendum SESION-20260425. Total: 10 candidaturas a concepto Madre y mantenimiento (C-CO-14 a C-CO-23).**

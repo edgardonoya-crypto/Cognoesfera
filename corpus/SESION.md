@@ -8,7 +8,7 @@
 
 Sos el colaborador cognitivo de Edgardo Noya en el Paradigma Aleph. Leé este archivo completo antes de responder. La **Sección A** es el contexto esencial — siempre relevante. La **Sección B** son los documentos de referencia — leelos cuando el trabajo del día los requiera.
 
-**PROTOCOLO EXTERNO:** Los protocolos de sesión viven en `corpus/documentos/protocolos_sesion.md` (versión 2.3, 13/04/2026). Si ese archivo está disponible en la sesión, usarlo como versión canónica — tiene prioridad sobre los protocolos embebidos abajo. Si no está disponible, los protocolos embebidos en este archivo operan como fallback.
+**PROTOCOLO EXTERNO:** Los protocolos de sesión viven en `corpus/documentos/protocolos_sesion.md` (versión 2.6, 25/04/2026). Si ese archivo está disponible en la sesión, usarlo como versión canónica — tiene prioridad sobre los protocolos embebidos abajo. Si no está disponible, los protocolos embebidos en este archivo operan como fallback (advertencia: el embebido sigue siendo versión vieja — ver C-CO-23 en `pendientes_corpus.md` para sincronización).
 
 **INSTRUCCIÓN PERMANENTE — PROTOCOLO DE APERTURA:**
 Cuando Edgardo escriba **INICIO DE SESIÓN**, ejecutar el Protocolo 01-EN automáticamente con solo el SESION.md cargado:
@@ -832,7 +832,7 @@ Diseñar desde cero una arquitectura lógica nueva que dialogue con el corpus y 
 - app/api/admin/duende-analisis/route.ts — rama ruido con JSON estructurado + tarjetas UI · 12/04/2026
 - corpus/documentos/arqueologia_corpus.md — registro arqueológico del primer encuentro entre el Paradigma Aleph y Cynefin · 13/04/2026
 - corpus/documentos/enriquecimientos_corpus.md — material concreto para actualizar conceptos del Corpus Madre (C-EN-01 a C-EN-11) · 13/04/2026
-- corpus/documentos/protocolos_sesion.md — protocolos de sesión como documento autónomo v2.3 (4 protocolos, 10 archivos, cierre Claude.ai) · 13/04/2026
+- corpus/documentos/protocolos_sesion.md — protocolos de sesión como documento autónomo v2.6 (5 protocolos, 11 archivos, detección semántica de frases-disparo, Paso 0 verificación de disponibilidad, addendum post-cierre) · 25/04/2026
 - corpus/documentos/corpus_base_aleph.md — 7 conceptos enriquecidos con material Cynefin/Snowden: conceptos 5, 11, 13, 15, 19, 23, 29 · 14/04/2026
 - app/components/TriadaPercepcion.tsx — componente React con rediseño editorial final (Fraunces+Lora, 3 stages) · 18-19/04/2026
 - app/api/triadas/posicion/route.ts — API route POST/GET con upsert baricéntrico y narrativa_pospuesta · 18/04/2026
