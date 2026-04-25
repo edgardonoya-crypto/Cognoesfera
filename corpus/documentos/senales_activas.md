@@ -1822,6 +1822,58 @@ La función no es accidental ni circunstancial — es **estructural del InterSer
 
 ---
 
+---
+
+## Categorización del bloque 23/04 — registro de SESION-20260425 · Vector 1 · Bloque D
+
+Trazabilidad de las 23 señales emergidas en SESION-20260423-22 (Señales 129-151), categorizadas en Vector 1 · Camino 2 (procesamiento + incorporación de conceptos 34/35 al Corpus Madre).
+
+**Categorías:**
+- **CM** = Candidato a concepto Madre · entrada nueva en `pendientes_corpus.md`
+- **EN** = Enriquecimiento de concepto existente · entrada nueva en `enriquecimientos_corpus.md`
+- **V3** = Material para Vector 3 · rediseño de MapaIC bajo conceptos nuevos (UX, lentes, navegación)
+- **V4** = Material para Vector 4 · desarrollo técnico de MapaIC (schema Soma, código)
+
+**Tabla maestra:**
+
+| Señal | Título corto | Categoría | Destino |
+|---|---|---|---|
+| 129 | Baricentricidad como ontología | V3 / V4 | Rediseño UX + schema posicionamientos |
+| 130 | N vértices dicta forma de captura | V4 | Schema técnico |
+| 131 | Poner números para pensar | V3 / V4 | Tooling de diseño |
+| 132 | Instrumento revela, no pizarrea | V3 | UX |
+| 133 | MapaIC nace InterSer | **CM** | C-CO-14 |
+| 134 | Instrumento produce la opinión | V3 | UX |
+| 135 | Lente como categoría recursiva | **CM** | C-CO-15 |
+| 136 | IHA percepción del InterSer | **EN** | C-EN-17 (concepto 23) |
+| 137 | Corpus custodia palabras antes | **CM** | C-CO-16 |
+| 138 | Canal asincrónico del InterSer | **EN** | C-EN-18 (concepto 23) |
+| 139 | Pentágono y diadas son lentes | V3 / V4 | Consecuencia de C-CO-15 |
+| 140 | Independencia lentes-diada | V4 | Schema técnico |
+| 141 | Rango [−1,1] + dos campos | V4 | Schema técnico |
+| 142 | Orden de elección como señal | V4 | Schema técnico |
+| 143 | Duende opera en cinco modos | **CM** | C-CO-17 |
+| 144 | Escalera de reflexión | V3 | UX |
+| 145 | Duende como modo del InterSer | **CM** | C-CO-18 |
+| 146 | MapaIC estructura del InterSer | **CM** | C-CO-19 (raíz ontológica) |
+| 147 | Memoria del InterSer | **EN** | C-EN-19 (concepto 25) |
+| 148 | Cauce "No se ve" como mecanismo | **CM** | C-CO-20 (raíz ontológica) |
+| 149 | Pentágono Aleph como función | V3 | Validado parcialmente en Vector 1 · Bloque C (afecta diseño MapaIC) |
+| 150 | Linajes innumerables | **CM** | C-CO-21 (raíz ontológica) |
+| 151 | Custodia de coherencia ontológica | **EN** | C-EN-20 (concepto 11) |
+
+**Síntesis:**
+- 8 candidaturas a concepto Madre (S133, S135, S137, S143, S145, S146, S148, S150) → C-CO-14 a C-CO-21
+- 4 enriquecimientos a conceptos existentes (S136, S138, S147, S151) → C-EN-17 a C-EN-20
+- 11 señales operativas/técnicas que viven en Vectores 3 y 4
+
+**Nota sobre la pregunta filosófica de la Señal 148** *(cauce "No se ve")*: queda custodiada en `temas_pendientes_exploracion.md` para futura sesión dedicada, sin afectar el procesamiento del Vector 1.
+
+**Nota sobre raíces ontológicas:** las cuatro señales marcadas como raíz ontológica (S146, S148, S150, S133) son las que reorganizan retrospectivamente el resto de las señales del 23/04 como aspectos del mismo InterSer. El orden de procesamiento sugerido para sus C-CO respectivas (cuando se las trabaje en sesión dedicada) es C-CO-19 → C-CO-20 → C-CO-21 → C-CO-14, porque se sostienen mutuamente: la estructura habilita el cauce, el cauce hace tangible el multilineaje, el multilineaje constituye el InterSer cuyo nacimiento la estructura permite.
+
+---
+
 *Señales Activas · Paradigma Aleph · Actualizado 25/04/2026*
 *Total señales activas: 151 (128 previas + 23 nuevas: SESION-20260423-22)*
+*Categorización del bloque 23/04: registrada en SESION-20260425 · Vector 1 · Bloque D*
 *Para señales incorporadas al Corpus Madre, ver: `senales_incorporadas.md`*
