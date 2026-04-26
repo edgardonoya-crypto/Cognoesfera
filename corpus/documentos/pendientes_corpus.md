@@ -752,4 +752,17 @@ Generados al categorizar las 23 señales emergidas de SESION-20260423-22. Las 8 
 
 ---
 
-**Fin del addendum SESION-20260425. Total: 10 candidaturas a concepto Madre y mantenimiento (C-CO-14 a C-CO-23).**
+**C-CO-24**
+**Título:** Sincronizar `senales_incorporadas.md` con el estado real del paradigma
+**Descripción:** El archivo `senales_incorporadas.md` no se actualiza desde el 02/04/2026 — su pie declara *"Total incorporadas: 5"* y la última fecha de incorporación registrada es 29/03/2026. Pero entre tanto el paradigma incorporó múltiples enriquecimientos al Corpus Madre que tenían señales asociadas que deberían haberse movido de `senales_activas.md` a `senales_incorporadas.md`:
+(a) **14/04/2026 — Encuentro Aleph/Cynefin:** se incorporaron al Corpus Madre los enriquecimientos C-EN-01 a C-EN-07 (a los conceptos 13, 15, 19, 23, 29, 5, 11). Las señales A-W del Encuentro Cynefin que estaban detrás de esos enriquecimientos siguen en `senales_activas.md` cuando algunas deberían haber pasado.
+(b) Posibles incorporaciones intermedias entre 02/04 y 25/04 que también merecen revisión.
+La sesión de mantenimiento debe: identificar caso por caso qué señales activas fueron incorporadas como enriquecimientos al Corpus, moverlas a `senales_incorporadas.md` con sus fechas de incorporación correspondientes y referencias al concepto al que se incorporaron, actualizar el conteo del pie, y custodiar como aprendizaje el patrón detectado: *"el flujo señal-activa → enriquecimiento incorporado → señal-incorporada NO opera automáticamente. Cuando se incorpora un enriquecimiento al Corpus Madre, hay que mover manualmente las señales asociadas."*. Inconsistencia I6 detectada en cierre formal de SESION-20260425.
+**Prioridad:** P3
+**Estado:** Activo · deuda heredada del 14/04
+**Fecha:** 25/04/2026
+**Dependencias:** Ninguna
+
+---
+
+**Fin del addendum SESION-20260425. Total: 11 candidaturas a concepto Madre y mantenimiento (C-CO-14 a C-CO-24).**
